@@ -163,7 +163,7 @@ export function baseTrips(l: BLine, p: TPeriod, day: DayType = 'wkd'): number {
   return ps[p]?.trips ?? 0;
 }
 
-function groupKey(l: BLine) {
+export function groupKey(l: BLine) {
   if (l.feed === 'bart') return `bart:${l.route.replace(/-[NS]$/, '')}`;
   return `${l.feed}:${l.route}`;
 }

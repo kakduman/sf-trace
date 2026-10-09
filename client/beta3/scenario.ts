@@ -750,6 +750,33 @@ export function dayFromHash(): DayType | null {
 /** put the scenario (and the run mode it is to be run in) in the address, for sharing */
 export function writeHash(s: Scenario, mode?: RunMode): void {
   const day = s.day ?? 'wkd';
-  const hash = hasChanges(s) ? `#s=${encodeScenario(mode ? { ...s, runMode: mode } : s)}` : day !== 'wkd' ? `#d=${day}` : '';
-  history.replaceState(null, '', `${location.pathname}${location.search}${hash}`);
+  scenarioPart = hasChanges(s) ? `s=${encodeScenario(mode ? { ...s, runMode: mode } : s)}` : day !== 'wkd' ? `d=${day}` : '';
+  history.replaceState(history.state, '', addressFor(navPart()));
+}
+
+/**
+ * The address is the scenario part (s= or d=, kept current by writeHash) plus the navigation part
+ * (t= tab, r= route), which is what the back button walks through. Older history entries carry an
+ * older scenario part, so going back restores only their navigation.
+ */
+let scenarioPart = '';
+const NAV_KEYS = ['t', 'r'];
+export function navPart(hash = location.hash): string {
+  return hash
+    .replace(/^#/, '')
+    .split('&')
+    .filter((kv) => NAV_KEYS.includes(kv.split('=')[0]))
+    .join('&');
+}
+export function addressFor(nav: string): string {
+  const parts = [scenarioPart, nav].filter(Boolean);
+  return `${location.pathname}${location.search}${parts.length ? `#${parts.join('&')}` : ''}`;
+}
+/** the navigation in an address: the tab (t=) and the selected route (r=) */
+export function navFromHash(hash = location.hash): { tab: string | null; route: string | null } {
+  const get = (k: string) => {
+    const kv = hash.replace(/^#/, '').split('&').find((x) => x.startsWith(`${k}=`));
+    return kv ? decodeURIComponent(kv.slice(k.length + 1)) : null;
+  };
+  return { tab: get('t'), route: get('r') };
 }

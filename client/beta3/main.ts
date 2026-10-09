@@ -6,10 +6,10 @@
 import './tokens.css';
 import './style.css';
 import type { DayType, Edit, Scenario } from '../../shared/beta3/types';
-import { buildModel, DAY_LABEL, DAY_PHRASE, DAY_TYPES, PERIOD_SHORT, PERIOD_HOURS_TEXT } from './derive';
+import { buildModel, DAY_LABEL, DAY_PHRASE, DAY_TYPES, PERIOD_SHORT, PERIOD_HOURS_TEXT, groupKey } from './derive';
 import { CancelledError, Engine } from './engine';
 import { TransitMap } from './map';
-import { addStopEdits, dayFromHash, editGroups, draftRemoveStop, hasChanges, scenarioFromHash, writeHash } from './scenario';
+import { addressFor, addStopEdits, dayFromHash, editGroups, draftRemoveStop, hasChanges, navFromHash, scenarioFromHash, writeHash } from './scenario';
 import { bases, editsKey, quickBases, resultCurrent, resultDay, saveRunMode, saveWeekends, set, state, subscribe, touch, type AppState, type PeriodSel, type Tab } from './state';
 import type { RunMode } from '../../shared/beta3/runmode';
 import type { Ctx } from './ui/common';
@@ -458,6 +458,40 @@ function start(engine: Engine) {
   };
   restore();
   window.addEventListener('hashchange', restore);
+
+  // browser history: each tab and each selected route is a step the back button returns to, kept in
+  // the address (t=, r=) so a reload or a link opens the same view
+  // the About tab's id is 'method'; the address says 'about'
+  const tabName = (t: Tab) => (t === 'method' ? 'about' : t);
+  const navOf = () => [state.tab !== 'overview' ? `t=${tabName(state.tab)}` : '', state.route ? `r=${encodeURIComponent(state.route)}` : ''].filter(Boolean).join('&');
+  const applyNav = () => {
+    const { tab, route } = navFromHash();
+    const id = tab === 'about' ? 'method' : tab;
+    const t = (TABS.some((x) => x.id === id) ? id : 'overview') as Tab;
+    const r = route && m.bundle.header.lines.some((l) => groupKey(l) === route) ? route : null;
+    lastNav = [t !== 'overview' ? `t=${tabName(t)}` : '', r ? `r=${encodeURIComponent(r)}` : ''].filter(Boolean).join('&');
+    // set directly: selectRoute would also switch to the Routes tab
+    if (r !== state.route) {
+      set({ route: r });
+      if (r) map.fitRoute(r);
+    }
+    set({ tab: t });
+  };
+  let lastNav = '';
+  applyNav();
+  history.replaceState({ nav: lastNav }, '', addressFor(lastNav));
+  subscribe((changed) => {
+    if (!changed.has('tab') && !changed.has('route')) return;
+    const nav = navOf();
+    if (nav === lastNav) return;
+    lastNav = nav;
+    history.pushState({ nav }, '', addressFor(nav));
+  });
+  window.addEventListener('popstate', () => {
+    applyNav();
+    // older entries carry the scenario as it was then; keep today's in the address
+    history.replaceState(history.state, '', addressFor(lastNav));
+  });
   let resizeTimer = 0;
   window.addEventListener('resize', () => {
     app.classList.toggle('phone', isPhone());
