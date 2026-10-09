@@ -2,8 +2,8 @@
 
 SF-TRACE (San Francisco Transit Ridership And Choice Estimator) is an open model of transit ridership and travel choices in San Francisco. It runs in the browser: it estimates ridership on every route, compares it with passenger counts, and runs scenarios you build.
 
-- App: [link to be added]
-- Methodology: [link to be added]
+- App: https://kakduman.github.io/sf-trace/
+- Methodology: https://kakduman.github.io/sf-trace/method/
 
 ## Run locally
 
@@ -37,7 +37,7 @@ The raw downloads are not in the repository; `npm run model:fetch` fetches them 
 
 ## Deploying
 
-`.github/workflows/pages.yml` builds the site and deploys it to GitHub Pages on each push to `main`. Pages has to be enabled first, under Settings → Pages → Source: GitHub Actions. That is available once the repository is public, or for private repositories on a paid plan.
+`.github/workflows/pages.yml` builds the site and deploys it to GitHub Pages on each push to `main`.
 
 ## Author
 
@@ -50,3 +50,7 @@ The raw downloads are not in the repository; `npm run model:fetch` fetches them 
 The methodology page has a "How to cite" section with the current version, and a BibTeX entry:
 
 > Koray Akduman. SF-TRACE 1.0: San Francisco Transit Ridership And Choice Estimator. An open model of transit ridership and travel choices in San Francisco. Version 1.0, 2026. [URL to be added]
+
+## License
+
+MIT. See [LICENSE](LICENSE).
