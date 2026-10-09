@@ -689,6 +689,7 @@ export const MODEL_VERSION = '1.0';
 export const MODEL_YEAR = 2026;
 export const MODEL_AUTHOR = 'Koray Akduman';
 export const MODEL_AUTHOR_URL = 'https://korayakduman.com';
+export const MODEL_REPO_URL = 'https://github.com/kakduman/sf-trace';
 /** the author footnote on the byline (About and the article) */
 export const MODEL_AUTHOR_NOTE = 'With substantial help from AI systems. Not peer reviewed.';
 export const MODEL_URL = 'https://kakduman.github.io/sf-trace/';

@@ -901,3 +901,15 @@ pre.bibtex code {
   font-size: 0.75em;
 }
 
+
+/* the GitHub link in the article's top bar */
+.sign-gh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.sign-gh .gh-mark {
+  width: 14px;
+  height: 14px;
+}

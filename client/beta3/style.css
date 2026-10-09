@@ -2454,3 +2454,15 @@ details.sources[open] summary {
     grid-template-columns: 112px 1fr 64px;
   }
 }
+
+/* the GitHub link in the top bar: the mark, with the word on wider screens */
+.gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.gh-mark {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}

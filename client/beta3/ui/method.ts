@@ -1,5 +1,5 @@
 /** About: what the model is and isn't, the words the app uses, its key assumptions, and its sources. The methodology page has the depth. */
-import { COST_PER_HOUR, PATH, IVT_FACTOR, MODEL_AUTHOR, MODEL_AUTHOR_NOTE, MODEL_AUTHOR_URL, MODEL_CITATION, MODEL_LONG_NAME, MODEL_NAME, MODEL_VERSION, PURPOSE_HELP, PURPOSE_LABEL, transferPenalty } from '../../../shared/beta3/params';
+import { COST_PER_HOUR, PATH, IVT_FACTOR, MODEL_AUTHOR, MODEL_AUTHOR_NOTE, MODEL_AUTHOR_URL, MODEL_CITATION, MODEL_REPO_URL, MODEL_LONG_NAME, MODEL_NAME, MODEL_VERSION, PURPOSE_HELP, PURPOSE_LABEL, transferPenalty } from '../../../shared/beta3/params';
 import { esc } from '../format';
 import { state } from '../state';
 import { bindWeekendSwitch, RUNS_HELP, SERVICE_HOURS_HELP, section, weekendSwitch, type Ctx } from './common';
@@ -56,7 +56,7 @@ export function renderMethod(ctx: Ctx, el: HTMLElement): void {
   );
   h += section('Weekends', weekendSwitch(state.weekends));
   h += section('Sources', `<details class="sources"><summary>Data sources (${H.sources.length + 1})</summary><ul class="plain">${H.sources.map((s) => `<li>${esc(s)}</li>`).join('')}<li>Basemap: OpenFreeMap, © OpenMapTiles, © OpenStreetMap contributors</li></ul></details>`);
-  h += section('Credits', `<p>Created by <a href="${MODEL_AUTHOR_URL}" target="_blank" rel="noopener">${esc(MODEL_AUTHOR)}</a><sup>*</sup>.</p><p class="note"><sup>*</sup> ${esc(MODEL_AUTHOR_NOTE)}</p>`);
+  h += section('Credits', `<p>Created by <a href="${MODEL_AUTHOR_URL}" target="_blank" rel="noopener">${esc(MODEL_AUTHOR)}</a><sup>*</sup>. Source code on <a href="${MODEL_REPO_URL}" target="_blank" rel="noopener">GitHub</a>.</p><p class="note"><sup>*</sup> ${esc(MODEL_AUTHOR_NOTE)}</p>`);
   h += section('How to cite', `<p class="cite-line">${esc(MODEL_CITATION)}</p>`);
   h += `<p class="note">Model data built ${esc(new Date(H.built).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }))} · ${H.zones.length} block groups, ${H.ext.length} outside zones, ${H.stops.length.toLocaleString()} stops, ${H.lines.length} route patterns.</p>`;
   el.innerHTML = h;

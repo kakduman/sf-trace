@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
-import { MODEL_LONG_NAME, MODEL_NAME, MODEL_TAGLINE, MODEL_VERSION } from './shared/beta3/params';
+import { MODEL_LONG_NAME, MODEL_NAME, MODEL_REPO_URL, MODEL_TAGLINE, MODEL_VERSION } from './shared/beta3/params';
 
 /** %MODEL_NAME% and the like in the HTML pages, from the model's constants in params.ts */
 const modelName = (): Plugin => ({
@@ -12,7 +12,8 @@ const modelName = (): Plugin => ({
         .replace(/%MODEL_NAME%/g, MODEL_NAME)
         .replace(/%MODEL_LONG_NAME%/g, MODEL_LONG_NAME)
         .replace(/%MODEL_TAGLINE%/g, MODEL_TAGLINE)
-        .replace(/%MODEL_VERSION%/g, MODEL_VERSION),
+        .replace(/%MODEL_VERSION%/g, MODEL_VERSION)
+        .replace(/%MODEL_REPO_URL%/g, MODEL_REPO_URL),
   },
 });
 
