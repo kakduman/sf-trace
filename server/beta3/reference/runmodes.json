@@ -1,35 +1,16 @@
 {
- "browser": {
-  "note": "Wall-clock seconds for one run in Chrome with six workers, on a 10-core Apple Silicon Mac with other model runs alongside (load 4 to 8) and the tab hidden, so on the slow side; the workers had the model and the streets loaded and no skims made ahead. Precise's fare-free Muni, 19th Avenue, Geary, and 14 runs were timed before the time savings were taken apart, which adds one demand (about 15 s).",
-  "quick": {
-   "free": 48.6,
-   "geary": 47.9,
-   "cut14": 47.4,
-   "portal": 45.5,
-   "bus19": 130.6,
-   "cordon": 129.7
-  },
-  "precise": {
-   "free": 289.3,
-   "bus19": 430.8,
-   "geary": 272.4,
-   "cut14": 116.3,
-   "portal": 267.5,
-   "cordon": 585.2
-  }
- },
  "note": "Quick against Precise on the run-mode test scenarios (server/beta3/pipeline/runmodes.ts). Each mode is compared with today’s network run in the same mode. Seconds are Node CPU seconds on one thread (wall-clock in parentheses in the log); the browser splits the work over its workers.",
- "bundle": "2026-10-06T03:23:34.598Z",
+ "bundle": "2026-10-09T03:19:11.843Z",
  "summary": {
   "scenarios": 4,
   "transitTripsPct": 6,
-  "muniBoardingsPct": 3,
-  "timeSavingsPct": 10,
+  "muniBoardingsPct": 4,
+  "timeSavingsPct": 17,
   "streets": {
    "scenarios": 2,
-   "transitTripsPct": 71,
-   "muniBoardingsPct": 44,
-   "timeSavingsPct": 81
+   "transitTripsPct": 9,
+   "muniBoardingsPct": 3,
+   "timeSavingsPct": 48
   }
  },
  "scenarios": {
@@ -37,12 +18,12 @@
    "name": "No change",
    "seconds": {
     "precise": {
-     "cpu": 547.4,
-     "wall": 688.2
+     "cpu": 292.5,
+     "wall": 289.3
     },
     "quick": {
-     "cpu": 187.8,
-     "wall": 242.7
+     "cpu": 81.6,
+     "wall": 79.9
     }
    },
    "transitTrips": {
@@ -175,48 +156,48 @@
    "name": "Fare-free Muni",
    "seconds": {
     "precise": {
-     "cpu": 943.6,
-     "wall": 995.7
+     "cpu": 961.6,
+     "wall": 961.1
     },
     "quick": {
-     "cpu": 216.6,
-     "wall": 276.2
+     "cpu": 82.7,
+     "wall": 81.9
     }
    },
    "transitTrips": {
-    "precise": 81598,
-    "quick": 82764,
+    "precise": 106642,
+    "quick": 108152,
     "errPct": 1.4
    },
    "muniBoardings": {
-    "precise": 107632,
-    "quick": 106583,
-    "errPct": -1
+    "precise": 134072,
+    "quick": 133253,
+    "errPct": -0.6
    },
    "sharesPP": {
     "da": {
-     "precise": -0.76,
-     "quick": -0.786
+     "precise": -0.932,
+     "quick": -0.959
     },
     "sr": {
-     "precise": -0.557,
-     "quick": -0.572
+     "precise": -0.628,
+     "quick": -0.642
     },
     "tnc": {
-     "precise": -0.056,
-     "quick": -0.062
+     "precise": -0.023,
+     "quick": -0.029
     },
     "transit": {
-     "precise": 2.39,
-     "quick": 2.424
+     "precise": 2.94,
+     "quick": 2.982
     },
     "walk": {
-     "precise": -0.807,
-     "quick": -0.795
+     "precise": -0.971,
+     "quick": -0.967
     },
     "bike": {
-     "precise": -0.21,
-     "quick": -0.209
+     "precise": -0.387,
+     "quick": -0.386
     }
    },
    "routes": {
@@ -224,19 +205,19 @@
     "r": 1,
     "largestMisses": [
      {
-      "route": "49",
-      "precise": 5553,
-      "quick": 5738
+      "route": "22",
+      "precise": 5751,
+      "quick": 6097
+     },
+     {
+      "route": "PH",
+      "precise": 11627,
+      "quick": 11426
      },
      {
       "route": "CA",
-      "precise": 2625,
-      "quick": 2454
-     },
-     {
-      "route": "M",
-      "precise": 3716,
-      "quick": 3564
+      "precise": 3944,
+      "quick": 3765
      }
     ]
    },
@@ -245,20 +226,20 @@
     "quick": "fixed"
    },
    "vmtPct": {
-    "precise": -1.386,
+    "precise": -1.489,
     "quick": null
    },
    "vktPct": {
-    "precise": -1.921,
-    "quick": -2.048
+    "precise": -1.717,
+    "quick": -1.869
    },
    "mph": {
-    "precise": 0.194,
+    "precise": 0.149,
     "quick": 0
    },
    "driveMin": {
-    "precise": 0.019,
-    "quick": 0.137
+    "precise": 0.142,
+    "quick": 0.327
    },
    "knownDrives": [
     {
@@ -268,7 +249,7 @@
     },
     {
      "name": "The Mission to the Financial District",
-     "precise": 0,
+     "precise": -0.1,
      "quick": 0
     },
     {
@@ -278,32 +259,32 @@
     },
     {
      "name": "Oakland to the Financial District",
-     "precise": -0.4,
+     "precise": -0.7,
      "quick": 0
     },
     {
      "name": "The Marina to Mission Bay",
-     "precise": -0.1,
+     "precise": 0,
      "quick": 0
     },
     {
      "name": "The Financial District to the Outer Richmond",
-     "precise": -0.2,
+     "precise": -0.1,
      "quick": 0
     }
    ],
    "timeSavingsH": {
     "total": {
-     "precise": 71338,
-     "quick": 69161
+     "precise": 112140,
+     "quick": 108861
     },
     "drivers": {
-     "precise": 2419,
+     "precise": 3413,
      "quick": 0
     },
     "transit": {
-     "precise": 68919,
-     "quick": 69161
+     "precise": 108481,
+     "quick": 108861
     },
     "others": {
      "precise": 0,
@@ -315,44 +296,44 @@
    "name": "19th Avenue bus lanes",
    "seconds": {
     "precise": {
-     "cpu": 1309.6,
-     "wall": 1394.1
+     "cpu": 1042.7,
+     "wall": 1045.5
     },
     "quick": {
-     "cpu": 340.8,
-     "wall": 346.1
+     "cpu": 213.7,
+     "wall": 211.6
     }
    },
    "transitTrips": {
-    "precise": 207,
-    "quick": 352,
-    "errPct": 70.1
+    "precise": 301,
+    "quick": 274,
+    "errPct": -8.7
    },
    "muniBoardings": {
-    "precise": 268,
-    "quick": 384,
-    "errPct": 43.3
+    "precise": 325,
+    "quick": 318,
+    "errPct": -2.1
    },
    "sharesPP": {
     "da": {
-     "precise": -0.005,
-     "quick": -0.008
+     "precise": -0.006,
+     "quick": -0.006
     },
     "sr": {
-     "precise": -0.003,
-     "quick": -0.005
+     "precise": -0.004,
+     "quick": -0.004
     },
     "tnc": {
      "precise": -0.001,
-     "quick": -0.002
+     "quick": -0.001
     },
     "transit": {
-     "precise": 0.006,
-     "quick": 0.01
+     "precise": 0.008,
+     "quick": 0.008
     },
     "walk": {
-     "precise": 0.004,
-     "quick": 0.004
+     "precise": 0.002,
+     "quick": 0.003
     },
     "bike": {
      "precise": 0,
@@ -361,22 +342,22 @@
    },
    "routes": {
     "n": 67,
-    "r": 0.987,
+    "r": 0.997,
     "largestMisses": [
      {
       "route": "28",
-      "precise": 275,
-      "quick": 327
+      "precise": 277,
+      "quick": 253
      },
      {
-      "route": "45",
-      "precise": -10,
-      "quick": -49
+      "route": "44",
+      "precise": -58,
+      "quick": -37
      },
      {
-      "route": "30",
-      "precise": -6,
-      "quick": 14
+      "route": "28R",
+      "precise": 179,
+      "quick": 166
      }
     ]
    },
@@ -385,31 +366,31 @@
     "quick": "approximate"
    },
    "vmtPct": {
-    "precise": -0.024,
-    "quick": 0.053
+    "precise": -0.03,
+    "quick": 0.023
    },
    "vktPct": {
-    "precise": -0.02,
-    "quick": -0.039
+    "precise": -0.028,
+    "quick": -0.02
    },
    "mph": {
-    "precise": -0.034,
-    "quick": -0.037
+    "precise": -0.031,
+    "quick": -0.033
    },
    "driveMin": {
-    "precise": 0.02,
-    "quick": 0.035
+    "precise": 0.028,
+    "quick": 0.025
    },
    "knownDrives": [
     {
      "name": "Outer Sunset to the Financial District",
      "precise": 0,
-     "quick": -0.1
+     "quick": -0.2
     },
     {
      "name": "The Mission to the Financial District",
      "precise": 0,
-     "quick": 0
+     "quick": -0.1
     },
     {
      "name": "Bayview to SoMa",
@@ -419,7 +400,7 @@
     {
      "name": "Oakland to the Financial District",
      "precise": 0,
-     "quick": 0
+     "quick": 0.1
     },
     {
      "name": "The Marina to Mission Bay",
@@ -434,16 +415,16 @@
    ],
    "timeSavingsH": {
     "total": {
-     "precise": -372,
-     "quick": -670
+     "precise": -743,
+     "quick": -388
     },
     "drivers": {
-     "precise": -456,
-     "quick": -757
+     "precise": -566,
+     "quick": -501
     },
     "transit": {
-     "precise": 84,
-     "quick": 87
+     "precise": 116,
+     "quick": 113
     },
     "others": {
      "precise": 0,
@@ -455,48 +436,48 @@
    "name": "A Geary subway",
    "seconds": {
     "precise": {
-     "cpu": 799.8,
-     "wall": 1023.2
+     "cpu": 591.8,
+     "wall": 591.4
     },
     "quick": {
-     "cpu": 137.9,
-     "wall": 144.9
+     "cpu": 82.2,
+     "wall": 81.3
     }
    },
    "transitTrips": {
-    "precise": 5071,
-    "quick": 5220,
-    "errPct": 2.9
+    "precise": 4420,
+    "quick": 4666,
+    "errPct": 5.6
    },
    "muniBoardings": {
-    "precise": -21894,
-    "quick": -22146,
-    "errPct": -1.2
+    "precise": -21889,
+    "quick": -22171,
+    "errPct": -1.3
    },
    "sharesPP": {
     "da": {
-     "precise": -0.064,
-     "quick": -0.068
+     "precise": -0.054,
+     "quick": -0.058
     },
     "sr": {
-     "precise": -0.037,
-     "quick": -0.039
+     "precise": -0.032,
+     "quick": -0.034
     },
     "tnc": {
-     "precise": -0.009,
-     "quick": -0.01
+     "precise": -0.003,
+     "quick": -0.003
     },
     "transit": {
-     "precise": 0.148,
-     "quick": 0.153
+     "precise": 0.122,
+     "quick": 0.129
     },
     "walk": {
-     "precise": -0.027,
-     "quick": -0.024
+     "precise": -0.021,
+     "quick": -0.021
     },
     "bike": {
-     "precise": -0.011,
-     "quick": -0.011
+     "precise": -0.013,
+     "quick": -0.013
     }
    },
    "routes": {
@@ -504,19 +485,19 @@
     "r": 1,
     "largestMisses": [
      {
-      "route": "38R",
-      "precise": -11891,
-      "quick": -12075
-     },
-     {
       "route": "22",
-      "precise": 47,
-      "quick": -128
+      "precise": 82,
+      "quick": -38
      },
      {
-      "route": "1",
-      "precise": -1774,
-      "quick": -1649
+      "route": "49",
+      "precise": 66,
+      "quick": -20
+     },
+     {
+      "route": "38R",
+      "precise": -11032,
+      "quick": -11117
      }
     ]
    },
@@ -525,25 +506,25 @@
     "quick": "fixed"
    },
    "vmtPct": {
-    "precise": -0.164,
+    "precise": -0.143,
     "quick": null
    },
    "vktPct": {
-    "precise": -0.289,
-    "quick": -0.311
+    "precise": -0.194,
+    "quick": -0.221
    },
    "mph": {
-    "precise": 0.032,
+    "precise": 0.021,
     "quick": 0
    },
    "driveMin": {
-    "precise": -0.048,
-    "quick": -0.023
+    "precise": -0.042,
+    "quick": -0.011
    },
    "knownDrives": [
     {
      "name": "Outer Sunset to the Financial District",
-     "precise": -0.1,
+     "precise": 0,
      "quick": 0
     },
     {
@@ -558,7 +539,7 @@
     },
     {
      "name": "Oakland to the Financial District",
-     "precise": -0.2,
+     "precise": -0.1,
      "quick": 0
     },
     {
@@ -568,22 +549,22 @@
     },
     {
      "name": "The Financial District to the Outer Richmond",
-     "precise": -0.1,
+     "precise": 0,
      "quick": 0
     }
    ],
    "timeSavingsH": {
     "total": {
-     "precise": 5896,
-     "quick": 5358
+     "precise": 5359,
+     "quick": 4921
     },
     "drivers": {
-     "precise": 513,
+     "precise": 601,
      "quick": 0
     },
     "transit": {
-     "precise": 5383,
-     "quick": 5358
+     "precise": 4867,
+     "quick": 4921
     },
     "others": {
      "precise": 0,
@@ -595,44 +576,44 @@
    "name": "The 14 Mission at half its frequency",
    "seconds": {
     "precise": {
-     "cpu": 262.9,
-     "wall": 261.7
+     "cpu": 298,
+     "wall": 296.6
     },
     "quick": {
-     "cpu": 112.7,
-     "wall": 113.6
+     "cpu": 81.9,
+     "wall": 81.4
     }
    },
    "transitTrips": {
-    "precise": -328,
-    "quick": -347,
-    "errPct": -5.6
+    "precise": -488,
+    "quick": -511,
+    "errPct": -4.7
    },
    "muniBoardings": {
-    "precise": -1268,
-    "quick": -1236,
-    "errPct": 2.6
+    "precise": -1619,
+    "quick": -1601,
+    "errPct": 1.1
    },
    "sharesPP": {
     "da": {
-     "precise": 0.003,
-     "quick": 0.004
+     "precise": 0.005,
+     "quick": 0.005
     },
     "sr": {
      "precise": 0.003,
-     "quick": 0.003
+     "quick": 0.004
     },
     "tnc": {
      "precise": 0,
      "quick": 0
     },
     "transit": {
-     "precise": -0.01,
-     "quick": -0.01
+     "precise": -0.013,
+     "quick": -0.014
     },
     "walk": {
-     "precise": 0.003,
-     "quick": 0.003
+     "precise": 0.004,
+     "quick": 0.004
     },
     "bike": {
      "precise": 0.001,
@@ -644,19 +625,19 @@
     "r": 1,
     "largestMisses": [
      {
-      "route": "F",
-      "precise": 378,
-      "quick": 320
-     },
-     {
-      "route": "14R",
-      "precise": 930,
-      "quick": 971
-     },
-     {
       "route": "14",
-      "precise": -4532,
-      "quick": -4513
+      "precise": -6299,
+      "quick": -6234
+     },
+     {
+      "route": "49",
+      "precise": 1099,
+      "quick": 1077
+     },
+     {
+      "route": "24",
+      "precise": -9,
+      "quick": 3
      }
     ]
    },
@@ -669,16 +650,16 @@
     "quick": null
    },
    "vktPct": {
-    "precise": 0.008,
-    "quick": 0.009
+    "precise": 0.005,
+    "quick": 0.006
    },
    "mph": {
-    "precise": -0.003,
+    "precise": -0.001,
     "quick": 0
    },
    "driveMin": {
-    "precise": 0,
-    "quick": -0.001
+    "precise": -0.003,
+    "quick": -0.003
    },
    "knownDrives": [
     {
@@ -714,16 +695,16 @@
    ],
    "timeSavingsH": {
     "total": {
-     "precise": -225,
-     "quick": -223
+     "precise": -439,
+     "quick": -450
     },
     "drivers": {
-     "precise": -16,
+     "precise": -8,
      "quick": 0
     },
     "transit": {
-     "precise": -209,
-     "quick": -223
+     "precise": -429,
+     "quick": -450
     },
     "others": {
      "precise": 0,
@@ -735,68 +716,68 @@
    "name": "Downtown congestion charge",
    "seconds": {
     "precise": {
-     "cpu": 1700.3,
-     "wall": 1757.6
+     "cpu": 1962.8,
+     "wall": 1970.1
     },
     "quick": {
-     "cpu": 358.4,
-     "wall": 359.6
+     "cpu": 234.2,
+     "wall": 232.4
     }
    },
    "transitTrips": {
-    "precise": 27947,
-    "quick": 28559,
-    "errPct": 2.2
+    "precise": 29695,
+    "quick": 29948,
+    "errPct": 0.9
    },
    "muniBoardings": {
-    "precise": 18937,
-    "quick": 19575,
-    "errPct": 3.4
+    "precise": 19178,
+    "quick": 19613,
+    "errPct": 2.3
    },
    "sharesPP": {
     "da": {
-     "precise": -1.268,
-     "quick": -1.296
+     "precise": -1.061,
+     "quick": -1.079
     },
     "sr": {
-     "precise": -0.133,
-     "quick": -0.148
+     "precise": -0.067,
+     "quick": -0.071
     },
     "tnc": {
-     "precise": -0.075,
-     "quick": -0.078
+     "precise": -0.097,
+     "quick": -0.103
     },
     "transit": {
-     "precise": 0.824,
-     "quick": 0.842
+     "precise": 0.823,
+     "quick": 0.83
     },
     "walk": {
-     "precise": 0.571,
-     "quick": 0.597
+     "precise": 0.326,
+     "quick": 0.345
     },
     "bike": {
-     "precise": 0.082,
-     "quick": 0.083
+     "precise": 0.076,
+     "quick": 0.078
     }
    },
    "routes": {
     "n": 67,
-    "r": 0.988,
+    "r": 0.993,
     "largestMisses": [
      {
-      "route": "7",
-      "precise": 834,
-      "quick": 1131
-     },
-     {
       "route": "22",
-      "precise": -23,
-      "quick": 240
+      "precise": -106,
+      "quick": 195
      },
      {
-      "route": "44",
-      "precise": 318,
-      "quick": 103
+      "route": "29",
+      "precise": 451,
+      "quick": 565
+     },
+     {
+      "route": "28",
+      "precise": 189,
+      "quick": 282
      }
     ]
    },
@@ -805,31 +786,31 @@
     "quick": "approximate"
    },
    "vmtPct": {
-    "precise": -2.852,
-    "quick": -2.556
+    "precise": -2.62,
+    "quick": -2.493
    },
    "vktPct": {
-    "precise": -4.289,
-    "quick": -4.358
+    "precise": -4.45,
+    "quick": -4.435
    },
    "mph": {
-    "precise": 0.724,
-    "quick": 0.596
+    "precise": 1.088,
+    "quick": 1.039
    },
    "driveMin": {
-    "precise": -0.364,
-    "quick": -0.327
+    "precise": -1.028,
+    "quick": -1.148
    },
    "knownDrives": [
     {
      "name": "Outer Sunset to the Financial District",
      "precise": 0,
-     "quick": -0.2
+     "quick": -0.3
     },
     {
      "name": "The Mission to the Financial District",
-     "precise": -0.3,
-     "quick": -0.3
+     "precise": 0,
+     "quick": -0.1
     },
     {
      "name": "Bayview to SoMa",
@@ -838,31 +819,31 @@
     },
     {
      "name": "Oakland to the Financial District",
-     "precise": -7.7,
-     "quick": -7.7
+     "precise": -13.5,
+     "quick": -13.8
     },
     {
      "name": "The Marina to Mission Bay",
      "precise": 0,
-     "quick": -0.1
+     "quick": 0
     },
     {
      "name": "The Financial District to the Outer Richmond",
-     "precise": -0.4,
+     "precise": -0.3,
      "quick": -0.3
     }
    ],
    "timeSavingsH": {
     "total": {
-     "precise": -69102,
-     "quick": -70731
+     "precise": -56244,
+     "quick": -56251
     },
     "drivers": {
-     "precise": -69051,
-     "quick": -70731
+     "precise": -57134,
+     "quick": -56251
     },
     "transit": {
-     "precise": -51,
+     "precise": -285,
      "quick": 0
     },
     "others": {
@@ -875,48 +856,48 @@
    "name": "The Portal: Caltrain to the Salesforce Transit Center",
    "seconds": {
     "precise": {
-     "cpu": 553.8,
-     "wall": 555.4
+     "cpu": 453.5,
+     "wall": 451.6
     },
     "quick": {
-     "cpu": 147,
-     "wall": 149.8
+     "cpu": 82.3,
+     "wall": 81.5
     }
    },
    "transitTrips": {
-    "precise": 2476,
-    "quick": 2592,
-    "errPct": 4.7
+    "precise": 2259,
+    "quick": 2385,
+    "errPct": 5.6
    },
    "muniBoardings": {
-    "precise": -5008,
-    "quick": -5041,
-    "errPct": -0.7
+    "precise": -2915,
+    "quick": -2801,
+    "errPct": 3.9
    },
    "sharesPP": {
     "da": {
-     "precise": -0.052,
-     "quick": -0.055
+     "precise": -0.043,
+     "quick": -0.046
     },
     "sr": {
-     "precise": -0.016,
-     "quick": -0.017
+     "precise": -0.018,
+     "quick": -0.019
     },
     "tnc": {
-     "precise": -0.002,
-     "quick": -0.003
+     "precise": -0.001,
+     "quick": -0.001
     },
     "transit": {
-     "precise": 0.072,
-     "quick": 0.076
+     "precise": 0.062,
+     "quick": 0.066
     },
     "walk": {
-     "precise": -0.001,
+     "precise": 0,
      "quick": 0
     },
     "bike": {
-     "precise": -0.001,
-     "quick": -0.001
+     "precise": 0,
+     "quick": 0
     }
    },
    "routes": {
@@ -925,18 +906,18 @@
     "largestMisses": [
      {
       "route": "N",
-      "precise": -2458,
-      "quick": -2561
+      "precise": -2353,
+      "quick": -2478
      },
      {
       "route": "45",
-      "precise": -845,
-      "quick": -897
+      "precise": -993,
+      "quick": -947
      },
      {
-      "route": "55",
-      "precise": -74,
-      "quick": -103
+      "route": "M",
+      "precise": 454,
+      "quick": 497
      }
     ]
    },
@@ -945,20 +926,20 @@
     "quick": "fixed"
    },
    "vmtPct": {
-    "precise": -0.147,
+    "precise": -0.148,
     "quick": null
    },
    "vktPct": {
-    "precise": -0.53,
-    "quick": -0.551
+    "precise": -0.467,
+    "quick": -0.491
    },
    "mph": {
-    "precise": 0.022,
+    "precise": 0.006,
     "quick": 0
    },
    "driveMin": {
-    "precise": -0.122,
-    "quick": -0.109
+    "precise": -0.07,
+    "quick": -0.052
    },
    "knownDrives": [
     {
@@ -978,7 +959,7 @@
     },
     {
      "name": "Oakland to the Financial District",
-     "precise": -0.1,
+     "precise": 0,
      "quick": 0
     },
     {
@@ -994,16 +975,16 @@
    ],
    "timeSavingsH": {
     "total": {
-     "precise": 3586,
-     "quick": 3300
+     "precise": 3616,
+     "quick": 3023
     },
     "drivers": {
-     "precise": 289,
+     "precise": 363,
      "quick": 0
     },
     "transit": {
-     "precise": 3297,
-     "quick": 3300
+     "precise": 2994,
+     "quick": 3023
     },
     "others": {
      "precise": 0,

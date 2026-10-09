@@ -22,7 +22,7 @@ import { visitorTarget } from '../../../server/beta3/pipeline/visitor-target';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(here, '../../..');
 const PIPE = path.join(ROOT, 'server/beta3/pipeline');
-const RAW = path.join(ROOT, 'data/beta3/raw');
+const RAW = process.env.BETA3_RAW ?? path.join(ROOT, 'data/beta3/raw');
 const src = (f: string) => fs.readFileSync(path.join(PIPE, f), 'utf8');
 
 function need<T>(v: T | null | undefined, what: string): T {

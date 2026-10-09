@@ -38,7 +38,7 @@ const DAY_SHORT: Record<DayType, string> = { wkd: 'Weekday', sat: 'Sat', sun: 'S
 const bar = $('load-bar'), text = $('load-text');
 Engine.load((f) => {
   bar.style.width = `${(f * 92).toFixed(1)}%`;
-  text.textContent = `Downloading the model (about 10 MB)… ${Math.round(f * 100)}%`;
+  text.textContent = `Downloading the model… ${Math.round(f * 100)}%`;
 })
   .then((engine) => {
     text.textContent = 'Preparing the map…';

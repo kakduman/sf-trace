@@ -1,12 +1,13 @@
 {
- "generated": "2026-10-06T03:42:37.403Z",
- "bundleBuilt": "2026-10-05T23:24:37.284Z",
+ "generated": "2026-10-09T19:29:21.579Z",
+ "bundleBuilt": "2026-10-09T03:19:11.843Z",
  "sources": [
   "U.S. Census Bureau: 2020 Census blocks (TIGERweb), ACS 2020–24 5-year and 2024 1-year, LEHD LODES 2023",
   "OpenStreetMap contributors (streets, schools, hotels, attractions), © OpenStreetMap, ODbL",
   "Terrain Tiles on AWS (USGS 3DEP elevation)",
-  "GTFS schedules: SFMTA (Muni), BART, Caltrain, Golden Gate Transit, San Francisco Bay Ferry, AC Transit, SamTrans, Mission Bay TMA; UCSF and PresidiGo shuttle timetables",
+  "GTFS schedules: SFMTA (Muni), BART, Caltrain, Golden Gate Transit, San Francisco Bay Ferry, AC Transit, SamTrans, Mission Bay TMA, PresidiGo; UCSF shuttle timetables",
   "MTC Travel Model One / Two parameters; NHTS 2017; BATS 2023",
+  "Synthetic population: ACS 2020–24 5-year PUMS, balanced to ACS 2020–24 block-group and tract tables and 2020 census group quarters (P.L. 94-171)",
   "Observed: SFMTA ridership by route, BART monthly ridership, Caltrain annual ridership, ACS commute"
  ],
  "counts": {
@@ -15,7 +16,7 @@
   "external": 223,
   "externalCounties": 18,
   "externalSplitParts": 24,
-  "stops": 5070,
+  "stops": 5074,
   "patterns": 440,
   "routes": 149,
   "byFeed": {
@@ -72,9 +73,9 @@
    "caltrain": 16,
    "ferry": 38
   },
-  "accessLinks": 38539,
+  "accessLinks": 39854,
   "externalAccessLinks": 5801,
-  "walkTransfers": 44619,
+  "walkTransfers": 49185,
   "commuteFlows": 149579,
   "inCommuteFlows": 48203,
   "zonesByAreaType": [
@@ -104,7 +105,7 @@
   "lodesJobs": 747999,
   "jobsMovedOut": 132549,
   "hotelRoomsOsm": 44203,
-  "inCommuters": 236707,
+  "inCommuters": 267641,
   "age5to17": 79362,
   "college": 57295.3,
   "collegeEnroll": 61722,
@@ -384,6 +385,288 @@
   "steps": 2803,
   "kmSteps": 35.2833
  },
+ "walkNet": {
+  "now": {
+   "pieces": {
+    "count": 619,
+    "largest": 89306,
+    "mainShare": 0.9791,
+    "over10": 28,
+    "blocksOff": 124,
+    "popOff": 21155,
+    "jobsOff": 30310,
+    "where": [
+     "Inner Sunset 9484",
+     "Financial District/South Beach 6780",
+     "South of Market 4354",
+     "Lincoln Park 3223",
+     "Mission 2912",
+     "Western Addition 2839",
+     "Lakeshore 2636",
+     "Outer Richmond 2198"
+    ]
+   },
+   "circuity": {
+    "pairs": 370534,
+    "median": 1.375,
+    "p75": 1.512,
+    "p90": 1.683,
+    "p95": 1.837,
+    "over1_5": 0.2671,
+    "over2": 0.0267,
+    "over3": 0.0023
+   },
+   "hot": [
+    {
+     "nh": "Twin Peaks",
+     "over2": 0.323
+    },
+    {
+     "nh": "Treasure Island",
+     "over2": 0.314
+    },
+    {
+     "nh": "Lakeshore",
+     "over2": 0.204
+    },
+    {
+     "nh": "Glen Park",
+     "over2": 0.159
+    },
+    {
+     "nh": "Inner Sunset",
+     "over2": 0.15
+    },
+    {
+     "nh": "Portola",
+     "over2": 0.14
+    },
+    {
+     "nh": "Bayview Hunters Point",
+     "over2": 0.115
+    },
+    {
+     "nh": "West of Twin Peaks",
+     "over2": 0.078
+    },
+    {
+     "nh": "Oceanview/Merced/Ingleside",
+     "over2": 0.075
+    },
+    {
+     "nh": "Noe Valley",
+     "over2": 0.067
+    },
+    {
+     "nh": "Visitacion Valley",
+     "over2": 0.061
+    },
+    {
+     "nh": "Presidio",
+     "over2": 0.057
+    }
+   ],
+   "access": {
+    "pop400": 0.9302,
+    "pop800": 0.995,
+    "jobs400": 0.9493,
+    "jobs800": 0.9986,
+    "zonesUnderHalf400": 23
+   },
+   "known": [
+    {
+     "name": "City College (Science Hall) to Balboa Park BART",
+     "straight": 545,
+     "network": 749,
+     "ratio": 1.37,
+     "min": 9.3
+    },
+    {
+     "name": "City College (Science Hall) to City College Terminal",
+     "straight": 256,
+     "network": 372,
+     "ratio": 1.45,
+     "min": 4.4
+    },
+    {
+     "name": "City College (Cloud Hall) to Ocean Ave/Balboa Park",
+     "straight": 458,
+     "network": 635,
+     "ratio": 1.39,
+     "min": 7.8
+    },
+    {
+     "name": "SF State (Cesar Chavez Center) to 19th Ave & Holloway",
+     "straight": 312,
+     "network": 457,
+     "ratio": 1.46,
+     "min": 6.4
+    },
+    {
+     "name": "Ferry Building to Embarcadero BART",
+     "straight": 440,
+     "network": 457,
+     "ratio": 1.04,
+     "min": 5.8
+    },
+    {
+     "name": "UCSF Mission Bay (Genentech Hall) to UCSF/Chase Center",
+     "straight": 367,
+     "network": 575,
+     "ratio": 1.57,
+     "min": 7.2
+    },
+    {
+     "name": "Presidio Main Post to Lombard Gate",
+     "straight": 1037,
+     "network": 1383,
+     "ratio": 1.33,
+     "min": 17.2
+    },
+    {
+     "name": "Golden Gate Park: de Young to 9th Ave & Lincoln",
+     "straight": 642,
+     "network": 789,
+     "ratio": 1.23,
+     "min": 10.1
+    },
+    {
+     "name": "Filbert Steps: Sansome St to Coit Tower",
+     "straight": 230,
+     "network": 427,
+     "ratio": 1.86,
+     "min": 8.9
+    },
+    {
+     "name": "Glen Park village to Glen Park BART",
+     "straight": 86,
+     "network": 144,
+     "ratio": 1.69,
+     "min": 1.8
+    }
+   ],
+   "stairs": {
+    "km": 35.3,
+    "onMain": 0.94
+   },
+   "zones": {
+    "car": {
+     "over2_5": 0,
+     "worst": [
+      [
+       "060750217001",
+       "Glen Park",
+       1.62
+      ],
+      [
+       "060750305003",
+       "Twin Peaks",
+       1.6
+      ],
+      [
+       "060750311003",
+       "West of Twin Peaks",
+       1.54
+      ],
+      [
+       "060750217002",
+       "Glen Park",
+       1.52
+      ],
+      [
+       "060750307003",
+       "West of Twin Peaks",
+       1.52
+      ]
+     ]
+    },
+    "bike": {
+     "over2_5": 0,
+     "worst": [
+      [
+       "060750605022",
+       "Visitacion Valley",
+       1.73
+      ],
+      [
+       "060750605023",
+       "Visitacion Valley",
+       1.62
+      ],
+      [
+       "060750230011",
+       "Bayview Hunters Point",
+       1.62
+      ],
+      [
+       "060750217001",
+       "Glen Park",
+       1.59
+      ],
+      [
+       "060750610003",
+       "Bayview Hunters Point",
+       1.59
+      ]
+     ]
+    },
+    "walk": {
+     "over2_5": 1,
+     "worst": [
+      [
+       "060750179031",
+       "Treasure Island",
+       17.07
+      ],
+      [
+       "060750604001",
+       "Lakeshore",
+       1.74
+      ],
+      [
+       "060750610002",
+       "Bayview Hunters Point",
+       1.56
+      ],
+      [
+       "060750230033",
+       "Bayview Hunters Point",
+       1.48
+      ],
+      [
+       "060750204021",
+       "Twin Peaks",
+       1.46
+      ]
+     ]
+    }
+   }
+  },
+  "before": null
+ },
+ "walkRules": {
+  "nearMissM": 2,
+  "stepRiseM": 0.18,
+  "stair": {
+   "upSecPerM": 2,
+   "downSecPerM": 1.25,
+   "minFactor": 1.15
+  }
+ },
+ "streetJoins": {
+  "ways": 66953,
+  "crossings": 36,
+  "apartLevels": 797,
+  "apartRoads": 0,
+  "nearMisses": 424,
+  "nearMissesBarred": 8,
+  "areas": 358,
+  "areaLinks": 3841,
+  "gates": 287,
+  "steps": 2803,
+  "stepsWithCount": 847,
+  "short": 265
+ },
  "elevationZoom": 14,
  "areaTypeRadiusM": 800,
  "sfoRadiusM": 2500,
@@ -493,19 +776,14 @@
     "other": 6664
    }
   },
-  "ext": {
-   "da": 0.57,
-   "sr": 0.1,
-   "transit": 0.31,
-   "tnc": 0.02
-  },
+  "ext": {},
   "visitor": {
-   "walk": 0.42,
-   "transit": 0.27,
-   "tnc": 0.19,
-   "da": 0.05,
-   "sr": 0.05,
-   "bike": 0.02
+   "da": 0.0644876,
+   "sr": 0.130888,
+   "walk": 0.5397,
+   "tnc": 0.193481,
+   "bike": 0,
+   "transit": 0.0714429
   },
   "airport": {
    "tnc": 0.48,
@@ -520,33 +798,50 @@
    "tnc": 0.03
   },
   "tripKm": {
-   "shop": 3.7969,
-   "other": 4.89771,
-   "social": 3.13694,
-   "school": 4.36324,
-   "nhb": 3.41438,
    "univ": 5,
-   "visitor": 3
-  },
-  "autoSplit": {
-   "da": 0.55,
-   "sr": 0.45
+   "visitor": 3,
+   "nhb": 1.96711,
+   "shop": 2.36472,
+   "other": 2.51258,
+   "social": 2.33335
   },
   "stopKm": {
-   "transit": 1.55349,
-   "car": 3.41491,
-   "walk": 0.874923,
+   "car": 2.28431,
+   "transit": 1.03636,
+   "walk": 0.753429,
    "bike": 1.45495
   },
-  "residentAll": {
-   "walk": 0.34,
-   "transit": 0.12,
-   "tnc": 0.026,
-   "bike": 0.029,
-   "da": 0.26675,
-   "sr": 0.21825
+  "tripNear": {
+   "nhb": 0.362627,
+   "shop": 0.178695,
+   "other": 0.177301,
+   "social": 0.339485
   },
-  "residentTrips": 2714310,
+  "stopNear": {
+   "car": 0.246227,
+   "transit": 0.683559,
+   "walk": 0.764598
+  },
+  "lengthSample": {
+   "nhb": 1469,
+   "shop": 144,
+   "other": 142,
+   "social": 293,
+   "school": 59,
+   "stop:car": 740,
+   "stop:transit": 126,
+   "stop:walk": 446,
+   "stop:bike": 36
+  },
+  "residentAll": {
+   "bike": 0.034809,
+   "da": 0.247109,
+   "sr": 0.217271,
+   "tnc": 0.021787,
+   "walk": 0.341141,
+   "transit": 0.137882
+  },
+  "residentTrips": 2857330,
   "county": {
    "minCommuters": 3000,
    "in": {
@@ -649,225 +944,618 @@
   "asc": {
    "work": {
     "car0": {
-     "sr": -1.58428,
-     "tnc": -0.256931,
-     "transit": 2.682,
-     "walk": 4.68723,
-     "bike": 1.41956
+     "sr": -1.27088,
+     "tnc": 0.0104079,
+     "transit": 3.10215,
+     "walk": 7.08959,
+     "bike": 1.81809
     },
     "car1": {
-     "sr": -1.65829,
-     "tnc": -2.71351,
-     "transit": 0.0973514,
-     "walk": 1.48577,
-     "bike": -1.0986
+     "sr": -1.55177,
+     "tnc": -2.35548,
+     "transit": 0.455117,
+     "walk": 3.57718,
+     "bike": -0.868644
     },
     "car2": {
-     "sr": -1.42321,
-     "tnc": -3.74537,
-     "transit": -0.673494,
-     "walk": 0.253476,
-     "bike": -1.86448
+     "sr": -1.38575,
+     "tnc": -3.39422,
+     "transit": -0.551701,
+     "walk": 2.09692,
+     "bike": -1.78001
     },
     "ext": {
-     "sr": -2.10151,
-     "tnc": -1.00723,
-     "transit": -0.960469,
-     "walk": -0.858907,
-     "bike": -0.858907
+     "sr": -2.15105,
+     "tnc": -1.67406,
+     "transit": -1.20965,
+     "walk": -0.974468,
+     "bike": -0.974468
     }
    },
    "nonwork": {
     "car0": {
-     "sr": -0.153856,
-     "tnc": -0.832169,
-     "transit": -0.388894,
-     "walk": 3.00663,
-     "bike": -0.747188
+     "sr": -2.34798,
+     "tnc": 1.16628,
+     "transit": 4.12556,
+     "walk": 6.28754,
+     "bike": 1.93351
     },
     "car1": {
-     "sr": -0.310035,
-     "tnc": -1.59585,
-     "transit": -0.688007,
-     "walk": 2.46187,
-     "bike": -1.31427
+     "sr": -0.447324,
+     "tnc": -2.3608,
+     "transit": 0.420771,
+     "walk": 3.76386,
+     "bike": -0.626948
     },
     "car2": {
-     "sr": -0.227643,
-     "tnc": -1.90113,
-     "transit": -0.831179,
-     "walk": 2.22594,
-     "bike": -1.52135
+     "sr": -0.489178,
+     "tnc": -3.01564,
+     "transit": -0.247553,
+     "walk": 2.65337,
+     "bike": -1.82289
     }
    },
    "nhb": {
     "car1": {
-     "sr": -0.286378,
-     "tnc": -2.18792,
-     "transit": -1.31009,
-     "walk": 0.997848,
-     "bike": -2.30465
+     "sr": -0.229418,
+     "tnc": -2.19535,
+     "transit": -0.620335,
+     "walk": 0.680986,
+     "bike": -3.31086
     }
    },
    "visitor": {
     "visitor": {
-     "sr": -0.142084,
-     "tnc": 1.45069,
-     "transit": 1.78983,
-     "walk": 2.94244,
-     "bike": -0.366762
+     "sr": 0.424174,
+     "tnc": 1.60799,
+     "transit": 0.888669,
+     "walk": 4.50792,
+     "bike": -88.7125
     }
    },
    "airport": {
     "visitor": {
-     "sr": 0.227159,
-     "tnc": 2.95177,
-     "transit": 1.51162,
-     "walk": 1.14283,
-     "bike": 1.14283
+     "sr": 0.367794,
+     "tnc": 4.86819,
+     "transit": 2.23021,
+     "walk": 2.15565,
+     "bike": 2.15565
     }
    },
    "regional": {
     "ext": {
-     "sr": -0.8677,
-     "tnc": 0.599477,
-     "transit": 0.793365,
-     "walk": -0.167608,
-     "bike": -0.167608
+     "sr": -0.508974,
+     "tnc": 0.0539758,
+     "transit": 0.924742,
+     "walk": -0.0713001,
+     "bike": -0.0713001
     }
    }
   },
   "modeBias": {
    "caltrain": 0,
    "lightrail": 0,
-   "bus": 0.631131,
-   "rapid": 0.631131,
-   "trolley": 0.631131
+   "bus": 0,
+   "rapid": 0,
+   "trolley": 0
   },
   "distCoef": {
-   "shop": -0.214948,
-   "other": -0.0404256,
-   "social": -0.315847,
+   "shop": -0.234877,
+   "other": -0.149567,
+   "social": 0,
    "school": -0.0845603,
-   "univ": -0.08981,
-   "nhb": -0.158628,
-   "visitor": -0.211743
+   "univ": -0.144967,
+   "nhb": 0,
+   "visitor": -0.288963
   },
-  "regionalRate": 0.265841,
+  "regionalRate": 0.152713,
   "outShare": 0.05,
   "airportTrips": 30000,
-  "tourRateFactor": 1.43838,
+  "tourRateFactor": 1.61678,
   "residentCorrection": {
-   "da": -0.00405768,
-   "sr": 0.102518,
-   "tnc": 0.0147905,
-   "transit": 0.143305,
-   "walk": -0.00981425,
-   "bike": 0.0398213
+   "da": 0.020989,
+   "sr": -0.095099,
+   "tnc": -0.66726,
+   "transit": 0.446948,
+   "walk": -0.118563,
+   "bike": 0.117986
   },
   "incomeTransit": [
-   0.551812,
-   -0.343358
+   0.331381,
+   -0.155665
   ],
   "incomeFit": [
    [
-    0.194579,
-    0.195287
+    0.296174,
+    0.288498
    ],
    [
-    0.120917,
-    0.121397
+    0.184764,
+    0.179341
    ]
   ],
   "countyFit": {
    "in": {
     "Alameda": [
-     0.538281,
-     0.523734
+     0.539186,
+     0.54498
     ],
     "Contra Costa": [
-     0.394208,
-     0.380343
+     0.395007,
+     0.400666
     ],
     "Marin": [
-     0.181038,
-     0.172552
+     0.181667,
+     0.185088
     ],
     "San Mateo": [
-     0.188501,
-     0.179707
+     0.209704,
+     0.21356
     ],
     "Santa Clara": [
-     0.242587,
-     0.23195
+     0.261317,
+     0.265742
     ],
     "Solano": [
-     0.176757,
-     0.168458
+     0.177131,
+     0.180762
     ],
     "Sonoma": [
-     4.83163e-51,
-     0.0797777
+     0.165018,
+     0.0862766
     ]
    },
    "out": {
     "Alameda": [
-     0.261251,
-     0.261267
+     0.304609,
+     0.304529
     ],
     "Marin": [
-     0.0594725,
-     0.0214978
+     0.029279,
+     0.0264807
     ],
     "San Mateo": [
-     0.189265,
-     0.150883
+     0.180129,
+     0.180329
     ],
     "Santa Clara": [
-     0.343979,
-     0.343811
+     0.393072,
+     0.393462
     ]
    }
   },
   "countyTransit": {
    "in": {
-    "Alameda": 0.741782,
-    "Contra Costa": -0.0156263,
-    "Marin": -0.607797,
-    "San Mateo": -0.444258,
-    "Santa Clara": -1.24218,
-    "Solano": 0.132759,
-    "Sonoma": 3
+    "Alameda": 1.11183,
+    "Contra Costa": -0.0459929,
+    "Marin": -1.60639,
+    "San Mateo": -0.28774,
+    "Santa Clara": -1.23708,
+    "Solano": 0.379062,
+    "Sonoma": -3
    },
    "out": {
-    "Alameda": -1.17612,
+    "Alameda": -0.0960143,
     "Marin": -3,
-    "San Mateo": -3,
-    "Santa Clara": -2.21014
+    "San Mateo": -0.564076,
+    "Santa Clara": 1.20433
    }
   },
-  "stopDistCoefs": {
-   "car": -0.336978,
-   "transit": -0.790395,
-   "walk": -2.04407,
-   "bike": -0.904128
+  "pumaFit": {
+   "00101": [
+    0.619493,
+    0.635991
+   ],
+   "00111": [
+    0.660382,
+    0.675979
+   ],
+   "00112": [
+    0.499486,
+    0.517343
+   ],
+   "00113": [
+    0.430564,
+    0.448014
+   ],
+   "00114": [
+    0.497636,
+    0.515345
+   ],
+   "00115": [
+    0.394089,
+    0.39522
+   ],
+   "00119": [
+    0.54455,
+    0.56212
+   ],
+   "00121": [
+    0.700067,
+    0.714727
+   ],
+   "00122": [
+    0.392101,
+    0.262182
+   ],
+   "00123": [
+    0.552681,
+    0.570045
+   ],
+   "01301": [
+    0.275638,
+    0.290274
+   ],
+   "01305": [
+    0.514684,
+    0.532307
+   ],
+   "01308": [
+    0.303439,
+    0.254877
+   ],
+   "01309": [
+    0.185402,
+    0.196116
+   ],
+   "01310": [
+    0.387236,
+    0.404391
+   ],
+   "01311": [
+    0.39245,
+    0.40948
+   ],
+   "01312": [
+    0.506646,
+    0.524331
+   ],
+   "01313": [
+    0.509658,
+    0.527324
+   ],
+   "01314": [
+    0.354339,
+    0.370693
+   ],
+   "04103": [
+    0.205228,
+    0.209808
+   ],
+   "04104": [
+    0.168981,
+    0.172873
+   ],
+   "08101": [
+    0.229837,
+    0.209808
+   ],
+   "08102": [
+    0.162705,
+    0.147414
+   ],
+   "08103": [
+    0.209642,
+    0.190841
+   ],
+   "08104": [
+    0.197027,
+    0.17922
+   ],
+   "08105": [
+    0.332447,
+    0.306859
+   ],
+   "08106": [
+    0.180087,
+    0.163338
+   ],
+   "08505": [
+    0.313566,
+    0.0390841
+   ],
+   "08521": [
+    0.323479,
+    0.087589
+   ],
+   "09501": [
+    0.245815,
+    0.227667
+   ],
+   "09502": [
+    0.101634,
+    0.158035
+   ],
+   "09702": [
+    0.13496,
+    0.0789942
+   ]
   },
-  "parkWeight": 57.4442,
-  "parkExponent": 0.918036,
+  "pumaTransit": {
+   "00101": 0.950991,
+   "00111": 0.598082,
+   "00112": -0.43163,
+   "00113": -0.48932,
+   "00114": -0.0412633,
+   "00115": -1.54956,
+   "00119": -0.822851,
+   "00121": 0.642221,
+   "00122": -1.54956,
+   "00123": 0.598267,
+   "01301": -0.351886,
+   "01305": 1.17404,
+   "01308": -1.5498,
+   "01309": -0.896919,
+   "01310": 0.882523,
+   "01311": -0.523547,
+   "01312": 0.797265,
+   "01313": 0.601049,
+   "01314": -1.22168,
+   "04103": 0.375143,
+   "04104": -0.201498,
+   "08101": 0.263399,
+   "08102": -0.504192,
+   "08103": 0.0577676,
+   "08104": -0.124735,
+   "08105": 1.11828,
+   "08106": -0.575779,
+   "08505": -0.376187,
+   "08521": 0.276246,
+   "09501": -0.957217,
+   "09502": 1.57018,
+   "09702": 0
+  },
+  "stopDistCoefs": {
+   "car": -0.0469321,
+   "transit": 0,
+   "walk": 0,
+   "bike": -0.853157
+  },
+  "schoolDistScale": 0.7706,
+  "schoolAsc": {
+   "transit": -0.501,
+   "walk": -0.5861,
+   "bike": -1.4092
+  },
+  "schoolFit": {
+   "modes": {
+    "sr": [
+     0.639,
+     0.636
+    ],
+    "transit": [
+     0.0763,
+     0.0782
+    ],
+    "walk": [
+     0.2685,
+     0.2696
+    ],
+    "bike": [
+     0.0162,
+     0.0162
+    ]
+   },
+   "under1mi": [
+    0.5062,
+    0.506
+   ]
+  },
+  "schoolLevelTransit": [
+   0,
+   0.7807,
+   1.8204
+  ],
+  "schoolLevelFit": [
+   null,
+   [
+    0.3261,
+    0.33
+   ],
+   [
+    0.5462,
+    0.55
+   ]
+  ],
+  "youthTransitInterval": [
+   0.05926,
+   0.14852
+  ],
+  "outCommuteFactor": {
+   "San Mateo": 1.40978,
+   "Santa Clara": 1.24021,
+   "Alameda": 0.546316,
+   "*": 0.57326
+  },
+  "outCommuteFit": {
+   "San Mateo": [
+    0.1355,
+    0.1355
+   ],
+   "Santa Clara": [
+    0.0778,
+    0.0778
+   ],
+   "Alameda": [
+    0.0369,
+    0.0369
+   ],
+   "*": [
+    0.0322,
+    0.0322
+   ]
+  },
+  "schoolSwitch": {
+   "sr>transit": 1.9233
+  },
+  "schoolReturnFit": [
+   1.6336,
+   1.6036
+  ],
+  "caltrainEnd": 0,
+  "caltrainAct": 4.95826,
+  "caltrainDirFit": {
+   "arrivalsAM": [
+    2191.68,
+    3547.13
+   ],
+   "departuresAM": [
+    3746.73,
+    3477.35
+   ],
+   "departAmShare": [
+    0.365076,
+    0.340578
+   ]
+  },
+  "eventTransit": {
+   "Oracle Park": -0.295926,
+   "Chase Center": -0.766318
+  },
+  "eventSouthTransit": -3.57476,
+  "eventCaltrainFit": [
+   878.529,
+   878.376
+  ],
+  "collegeDa": -0.7086,
+  "collegeFit": [
+   0.4099,
+   0.41
+  ],
+  "youthAsc": {
+   "transit": -4,
+   "walk": -1.33609,
+   "bike": -0.809877
+  },
+  "youthFit": {
+   "sr": [
+    0.553529,
+    0.58306
+   ],
+   "transit": [
+    0.151802,
+    0.10389
+   ],
+   "walk": [
+    0.262294,
+    0.27878
+   ],
+   "bike": [
+    0.0323759,
+    0.03427
+   ]
+  },
+  "distLogCoef": {
+   "nhb": -1.13485,
+   "shop": -0.235939,
+   "other": -0.232892,
+   "social": -1.20199
+  },
+  "stopLogCoefs": {
+   "car": -1.02113,
+   "transit": -2.29196,
+   "walk": -2.44092
+  },
+  "walkTimeFactor": 3.04941,
+  "walkFit": [
+   0.152704,
+   0.171634
+  ],
+  "walkFitNear": [
+   0.85527,
+   0.871565
+  ],
+  "parkWeight": 103.846,
+  "parkExponent": 0.777121,
   "parkFactor": {
-   "Golden Gate Park": 0.900157,
-   "Presidio of San Francisco": 1.10148,
-   "Fort Funston": 0.17186
+   "Golden Gate Park": 1.4717,
+   "Presidio of San Francisco": 0.703619,
+   "Fort Funston": 0.192932
   },
   "ivtFactor": {
-   "ferry": 0.300806,
-   "caltrain": 0.777922
+   "ferry": 0.446457,
+   "caltrain": 1.06775,
+   "feed:ac": 0.15
+  },
+  "abmOn": false,
+  "autoOwn": {
+   "asc": [
+    0.7167,
+    -2.2058,
+    -4.5541,
+    -6.9611
+   ],
+   "fit": {
+    "city": [
+     [
+      0.3015,
+      0.3016
+     ],
+     [
+      0.4413,
+      0.4412
+     ],
+     [
+      0.1886,
+      0.1886
+     ],
+     [
+      0.0477,
+      0.0477
+     ],
+     [
+      0.0208,
+      0.0208
+     ]
+    ],
+    "zonePctRmse": [
+     36.9,
+     29.1,
+     39
+    ],
+    "nhoodPctRmse": [
+     0.4,
+     0.2,
+     0
+    ],
+    "zoneCityOnly": [
+     42.8,
+     34.5,
+     44.3
+    ],
+    "nhoodCityOnly": [
+     21.3,
+     19.2,
+     20.5
+    ],
+    "zoneTM1": [
+     76.4,
+     50.7,
+     69.6
+    ],
+    "cityTM1": [
+     0.1463,
+     0.4878,
+     0.2795,
+     0.0641,
+     0.0223
+    ],
+    "samplingFloor": [
+     40.3,
+     31.6,
+     42.2
+    ],
+    "elasticity": -0.0854
+   },
+   "nhoods": 42,
+   "classes": 12800,
+   "retailOutside": 258287
   },
   "ferryFloor": 0.15,
   "ivtFit": {
    "caltrain": {
     "floor": 0.35,
-    "ceil": 1,
+    "ceil": 1.5,
     "start": 0.7,
     "power": 0.6
    },
@@ -878,33 +1566,70 @@
     "power": 0.6
    }
   },
-  "xferFactor": 0.6,
+  "xferFactor": 0.574873,
+  "residentTransitLevel": 1.1461,
+  "nonResTransitLevel": 2,
+  "muniLevelFit": {
+   "residents": [
+    405460,
+    404417
+   ],
+   "nonResidents": [
+    79089.4,
+    111209
+   ]
+  },
+  "muniByResidence": {
+   "residents": [
+    405309,
+    404417
+   ],
+   "nonResidents": [
+    79067.4,
+    111209
+   ]
+  },
+  "regionalFit": {
+   "exitsOffPeak": [
+    30859.7,
+    29751.7
+   ],
+   "exitsDay": [
+    94446.5,
+    93545
+   ]
+  },
+  "extAccessBias": {
+   "walk": 0,
+   "bus": 2.2232,
+   "drive": 18.1637
+  },
   "touristRides": {
-   "PM": 3551,
-   "PH": 5923,
-   "CA": 2557,
+   "PM": 3430,
+   "PH": 5652,
+   "CA": 2534,
    "E": 1506,
-   "F": 1989
+   "F": 5815
   },
   "days": {
    "sat": {
-    "transitAsc": -0.173484,
-    "regionalRate": 1.06904,
+    "transitAsc": -0.524887,
+    "regionalRate": 0.886145,
     "touristFactor": 1.3
    },
    "sun": {
-    "transitAsc": -0.274361,
-    "regionalRate": 0.691115,
+    "transitAsc": -0.718714,
+    "regionalRate": 0.616195,
     "touristFactor": 1.3
    }
   },
-  "iterations": 336,
+  "iterations": 425,
   "nhood": {
    "n": 37,
-   "min": -2.00951,
-   "max": 1.4991,
-   "sd": 0.656883,
-   "atBound": 2
+   "min": -1.45984,
+   "max": 1.5856,
+   "sd": 0.539446,
+   "atBound": 0
   },
   "workModel": {
    "car0": {
@@ -913,14 +1638,14 @@
     "tnc": 0.02,
     "transit": 0.51,
     "walk": 0.25,
-    "bike": 0.08
+    "bike": 0.07
    },
    "car1": {
     "da": 0.43,
     "sr": 0.07,
     "tnc": 0.02,
     "transit": 0.3,
-    "walk": 0.12,
+    "walk": 0.13,
     "bike": 0.06
    },
    "car2": {
@@ -932,38 +1657,72 @@
     "bike": 0.03
    },
    "ext": {
-    "da": 0.57,
+    "da": 0.54,
     "sr": 0.1,
     "tnc": 0.02,
-    "transit": 0.31,
+    "transit": 0.34,
     "walk": 0,
     "bike": 0
    }
   },
   "meanKm": {
-   "work": 13.3,
-   "school": 4.4,
+   "work": 5.9,
+   "shop": 2.5,
+   "other": 2.9,
+   "social": 2.7,
+   "school": 3.5,
    "univ": 5,
-   "shop": 3.8,
-   "other": 4.9,
-   "social": 3.1,
-   "nhb": 3.4,
+   "nhb": 2.5,
    "visitor": 3,
-   "stop:car": 3.4,
-   "stop:transit": 1.6,
-   "stop:walk": 0.9,
+   "event": 4.7,
+   "stop:car": 2.9,
+   "stop:transit": 0.9,
+   "stop:walk": 0.6,
    "stop:bike": 1.5
   },
+  "meanKm5": {
+   "to": 5,
+   "work": 3.89,
+   "shop": 2.36,
+   "other": 2.51,
+   "social": 2.11,
+   "school": 2.76,
+   "univ": 3.37,
+   "nhb": 1.92,
+   "visitor": 2.29,
+   "event": 3.18,
+   "stop:car": 2.28,
+   "stop:transit": 0.83,
+   "stop:walk": 0.58,
+   "stop:bike": 1.45
+  },
+  "nearShare": {
+   "work": 0.059,
+   "shop": 0.179,
+   "other": 0.177,
+   "social": 0.34,
+   "school": 0.157,
+   "univ": 0.098,
+   "nhb": 0.362,
+   "visitor": 0.246,
+   "event": 0.042,
+   "stop:car": 0.246,
+   "stop:transit": 0.684,
+   "stop:walk": 0.765,
+   "stop:bike": 0.237
+  },
   "report": [
-   "trips/day 3,460,412 (residents 2,714,331)",
-   "resident shares: da 26.7%, sr 21.8%, tnc 2.6%, transit 12.0%, walk 34.0%, bike 2.9%",
-   "boardings: muni 533,587, bart 160,451, caltrain 21,709, ggt 11,889, ferry 7,929, ac 15, samtrans 2,032; linked transit trips 502,373",
-   "Muni routes: observed 515,626 vs model 506,760; %RMSE 35%, r² 0.87",
-   "  N 35.1k/33.7k, 49 35.0k/31.0k, 38R 27.8k/30.1k, T 25.0k/8.3k, 14R 22.7k/16.2k, 14 22.1k/15.3k, 22 21.6k/24.5k, M 19.8k/19.5k, 1 18.6k/22.1k, 8 18.4k/16.9k, 38 18.0k/18.1k, L 17.7k/22.8k, 29 16.0k/17.4k, 30 14.9k/14.4k, K 14.4k/16.8k, 7 13.1k/13.1k",
-   "BART SF exits: observed 93,545 vs model 93,999: EMBR 23.4k/22.4k, MONT 18.4k/20.7k, POWL 13.4k/8.8k, CIVC 11.2k/10.5k, 16TH 6.7k/9.6k, 24TH 6.4k/6.7k, GLEN 3.7k/4.8k, BALB 4.6k/6.3k, DALY 5.8k/4.2k",
-   "Caltrain SF boardings: San Francisco 9714/8673, 22nd Street 1800/1613, Bayshore 257/466",
-   "work by segment: car0: da 12 sr 3 tnc 2 transit 51 walk 25 bike 8 | car1: da 43 sr 7 tnc 2 transit 30 walk 12 bike 6 | car2: da 58 sr 13 tnc 1 transit 20 walk 5 bike 3 | ext: da 57 sr 10 tnc 2 transit 31 walk 0 bike 0",
-   "mean km: work 13.3, school 4.4, univ 5.0, shop 3.8, other 4.9, social 3.1, nhb 3.4, visitor 3.0, stop:car 3.4, stop:transit 1.6, stop:walk 0.9, stop:bike 1.5; avg transit trip 49 min; VKT 25,369,934"
+   "trips/day 3,638,877 (residents 2,857,454)",
+   "resident shares: da 24.9%, sr 21.9%, tnc 2.0%, transit 15.2%, walk 32.6%, bike 3.3%",
+   "boardings: muni 502,507, bart 168,827, caltrain 19,945, ggt 14,285, ferry 5,046, ac 4,704, samtrans 1,591, tma 1,699, shuttle 3,315, smart 3,682; linked transit trips 634,640",
+   "Muni routes: observed 515,626 vs model 481,687; %RMSE 38%, r² 0.86",
+   "  N 35.1k/28.2k, 49 35.0k/28.8k, 38R 27.8k/24.9k, T 25.0k/11.6k, 14R 22.7k/11.2k, 14 22.1k/14.4k, 22 21.6k/21.2k, M 19.8k/16.1k, 1 18.6k/23.5k, 8 18.4k/12.7k, 38 18.0k/24.5k, L 17.7k/17.5k, 29 16.0k/18.2k, 30 14.9k/13.8k, K 14.4k/11.1k, 7 13.1k/14.6k",
+   "BART SF exits: observed 93,545 vs model 94,813: EMBR 23.4k/16.5k, MONT 18.4k/23.8k, POWL 13.4k/11.5k, CIVC 11.2k/15.8k, 16TH 6.7k/7.7k, 24TH 6.4k/4.8k, GLEN 3.7k/3.5k, BALB 4.6k/4.7k, DALY 5.8k/6.4k",
+   "Caltrain SF boardings: San Francisco 9714/8553, 22nd Street 1800/1698, Bayshore 257/485",
+   "work by segment: car0: da 12 sr 3 tnc 2 transit 51 walk 25 bike 7 | car1: da 43 sr 7 tnc 2 transit 30 walk 13 bike 6 | car2: da 58 sr 13 tnc 1 transit 20 walk 5 bike 3 | ext: da 54 sr 10 tnc 2 transit 34 walk 0 bike 0",
+   "mean km: work 5.9, shop 2.5, other 2.9, social 2.7, school 3.5, univ 5.0, nhb 2.5, visitor 3.0, event 4.7, stop:car 2.9, stop:transit 0.9, stop:walk 0.6, stop:bike 1.5; avg transit trip 48 min; VKT 23,897,460",
+   "mean km up to 5 mi: work 3.89, shop 2.36, other 2.51, social 2.11, school 2.76, univ 3.37, nhb 1.92, visitor 2.29, event 3.18, stop:car 2.28, stop:transit 0.83, stop:walk 0.58, stop:bike 1.45",
+   "within half a mile: work 5.9%, shop 17.9%, other 17.7%, social 34.0%, school 15.7%, univ 9.8%, nhb 36.2%, visitor 24.6%, event 4.2%, stop:car 24.6%, stop:transit 68.4%, stop:walk 76.5%, stop:bike 23.7%"
   ]
  },
  "observed": {
@@ -1728,545 +2487,8 @@
   ]
  },
  "shapeRatio": {
-  "bus": 1.06746,
-  "metro": 1.02387
+  "bus": 1.06843,
+  "metro": 1.02388
  },
- "bundleBytes": 11351700,
- "walkNet": {
-  "now": {
-   "pieces": {
-    "count": 619,
-    "largest": 89306,
-    "mainShare": 0.9791,
-    "over10": 28,
-    "blocksOff": 124,
-    "popOff": 21155,
-    "jobsOff": 30310,
-    "where": [
-     "Inner Sunset 9484",
-     "Financial District/South Beach 6780",
-     "South of Market 4354",
-     "Lincoln Park 3223",
-     "Mission 2912",
-     "Western Addition 2839",
-     "Lakeshore 2636",
-     "Outer Richmond 2198"
-    ]
-   },
-   "circuity": {
-    "pairs": 370534,
-    "median": 1.375,
-    "p75": 1.512,
-    "p90": 1.683,
-    "p95": 1.837,
-    "over1_5": 0.2671,
-    "over2": 0.0267,
-    "over3": 0.0023
-   },
-   "hot": [
-    {
-     "nh": "Twin Peaks",
-     "over2": 0.323
-    },
-    {
-     "nh": "Treasure Island",
-     "over2": 0.314
-    },
-    {
-     "nh": "Lakeshore",
-     "over2": 0.204
-    },
-    {
-     "nh": "Glen Park",
-     "over2": 0.159
-    },
-    {
-     "nh": "Inner Sunset",
-     "over2": 0.15
-    },
-    {
-     "nh": "Portola",
-     "over2": 0.14
-    },
-    {
-     "nh": "Bayview Hunters Point",
-     "over2": 0.115
-    },
-    {
-     "nh": "West of Twin Peaks",
-     "over2": 0.078
-    },
-    {
-     "nh": "Oceanview/Merced/Ingleside",
-     "over2": 0.075
-    },
-    {
-     "nh": "Noe Valley",
-     "over2": 0.067
-    },
-    {
-     "nh": "Visitacion Valley",
-     "over2": 0.061
-    },
-    {
-     "nh": "Presidio",
-     "over2": 0.057
-    }
-   ],
-   "access": {
-    "pop400": 0.9302,
-    "pop800": 0.995,
-    "jobs400": 0.9493,
-    "jobs800": 0.9986,
-    "zonesUnderHalf400": 23
-   },
-   "known": [
-    {
-     "name": "City College (Science Hall) to Balboa Park BART",
-     "straight": 545,
-     "network": 749,
-     "ratio": 1.37,
-     "min": 9.3
-    },
-    {
-     "name": "City College (Science Hall) to City College Terminal",
-     "straight": 256,
-     "network": 372,
-     "ratio": 1.45,
-     "min": 4.4
-    },
-    {
-     "name": "City College (Cloud Hall) to Ocean Ave/Balboa Park",
-     "straight": 458,
-     "network": 635,
-     "ratio": 1.39,
-     "min": 7.8
-    },
-    {
-     "name": "SF State (Cesar Chavez Center) to 19th Ave & Holloway",
-     "straight": 312,
-     "network": 457,
-     "ratio": 1.46,
-     "min": 6.4
-    },
-    {
-     "name": "Ferry Building to Embarcadero BART",
-     "straight": 440,
-     "network": 457,
-     "ratio": 1.04,
-     "min": 5.8
-    },
-    {
-     "name": "UCSF Mission Bay (Genentech Hall) to UCSF/Chase Center",
-     "straight": 367,
-     "network": 575,
-     "ratio": 1.57,
-     "min": 7.2
-    },
-    {
-     "name": "Presidio Main Post to Lombard Gate",
-     "straight": 1037,
-     "network": 1383,
-     "ratio": 1.33,
-     "min": 17.2
-    },
-    {
-     "name": "Golden Gate Park: de Young to 9th Ave & Lincoln",
-     "straight": 642,
-     "network": 789,
-     "ratio": 1.23,
-     "min": 10.1
-    },
-    {
-     "name": "Filbert Steps: Sansome St to Coit Tower",
-     "straight": 230,
-     "network": 427,
-     "ratio": 1.86,
-     "min": 8.9
-    },
-    {
-     "name": "Glen Park village to Glen Park BART",
-     "straight": 86,
-     "network": 144,
-     "ratio": 1.69,
-     "min": 1.8
-    }
-   ],
-   "stairs": {
-    "km": 35.3,
-    "onMain": 0.94
-   },
-   "zones": {
-    "car": {
-     "over2_5": 0,
-     "worst": [
-      [
-       "060750217001",
-       "Glen Park",
-       1.62
-      ],
-      [
-       "060750305003",
-       "Twin Peaks",
-       1.6
-      ],
-      [
-       "060750311003",
-       "West of Twin Peaks",
-       1.54
-      ],
-      [
-       "060750217002",
-       "Glen Park",
-       1.52
-      ],
-      [
-       "060750307003",
-       "West of Twin Peaks",
-       1.52
-      ]
-     ]
-    },
-    "bike": {
-     "over2_5": 0,
-     "worst": [
-      [
-       "060750605022",
-       "Visitacion Valley",
-       1.73
-      ],
-      [
-       "060750605023",
-       "Visitacion Valley",
-       1.62
-      ],
-      [
-       "060750230011",
-       "Bayview Hunters Point",
-       1.62
-      ],
-      [
-       "060750217001",
-       "Glen Park",
-       1.59
-      ],
-      [
-       "060750610003",
-       "Bayview Hunters Point",
-       1.59
-      ]
-     ]
-    },
-    "walk": {
-     "over2_5": 1,
-     "worst": [
-      [
-       "060750179031",
-       "Treasure Island",
-       17.07
-      ],
-      [
-       "060750604001",
-       "Lakeshore",
-       1.74
-      ],
-      [
-       "060750610002",
-       "Bayview Hunters Point",
-       1.56
-      ],
-      [
-       "060750230033",
-       "Bayview Hunters Point",
-       1.48
-      ],
-      [
-       "060750204021",
-       "Twin Peaks",
-       1.46
-      ]
-     ]
-    }
-   }
-  },
-  "before": {
-   "pieces": {
-    "count": 2412,
-    "largest": 33469,
-    "mainShare": 0.7993,
-    "over10": 105,
-    "blocksOff": 485,
-    "popOff": 70090,
-    "jobsOff": 160957,
-    "where": [
-     "Financial District/South Beach 92016",
-     "South of Market 22644",
-     "Chinatown 15842",
-     "Mission 11852",
-     "Inner Sunset 10210",
-     "Mission Bay 7759",
-     "Tenderloin 6600",
-     "Lakeshore 5799"
-    ]
-   },
-   "circuity": {
-    "pairs": 370534,
-    "median": 1.435,
-    "p75": 1.614,
-    "p90": 1.875,
-    "p95": 2.135,
-    "over1_5": 0.3933,
-    "over2": 0.0715,
-    "over3": 0.0112
-   },
-   "hot": [
-    {
-     "nh": "Presidio",
-     "over2": 0.427
-    },
-    {
-     "nh": "Twin Peaks",
-     "over2": 0.384
-    },
-    {
-     "nh": "Lakeshore",
-     "over2": 0.34
-    },
-    {
-     "nh": "Golden Gate Park",
-     "over2": 0.29
-    },
-    {
-     "nh": "Treasure Island",
-     "over2": 0.282
-    },
-    {
-     "nh": "Portola",
-     "over2": 0.209
-    },
-    {
-     "nh": "Inner Sunset",
-     "over2": 0.198
-    },
-    {
-     "nh": "Glen Park",
-     "over2": 0.169
-    },
-    {
-     "nh": "Oceanview/Merced/Ingleside",
-     "over2": 0.145
-    },
-    {
-     "nh": "West of Twin Peaks",
-     "over2": 0.14
-    },
-    {
-     "nh": "Bayview Hunters Point",
-     "over2": 0.14
-    },
-    {
-     "nh": "Potrero Hill",
-     "over2": 0.126
-    }
-   ],
-   "access": {
-    "pop400": 0.9063,
-    "pop800": 0.9948,
-    "jobs400": 0.9204,
-    "jobs800": 0.9965,
-    "zonesUnderHalf400": 30
-   },
-   "known": [
-    {
-     "name": "City College (Science Hall) to Balboa Park BART",
-     "straight": 545,
-     "network": 1309,
-     "ratio": 2.4,
-     "min": 15.6
-    },
-    {
-     "name": "City College (Science Hall) to City College Terminal",
-     "straight": 256,
-     "network": 879,
-     "ratio": 3.43,
-     "min": 10.6
-    },
-    {
-     "name": "City College (Cloud Hall) to Ocean Ave/Balboa Park",
-     "straight": 458,
-     "network": 725,
-     "ratio": 1.58,
-     "min": 8.4
-    },
-    {
-     "name": "SF State (Cesar Chavez Center) to 19th Ave & Holloway",
-     "straight": 312,
-     "network": 599,
-     "ratio": 1.92,
-     "min": 8
-    },
-    {
-     "name": "Ferry Building to Embarcadero BART",
-     "straight": 440,
-     "network": 867,
-     "ratio": 1.97,
-     "min": 10.9
-    },
-    {
-     "name": "UCSF Mission Bay (Genentech Hall) to UCSF/Chase Center",
-     "straight": 367,
-     "network": 495,
-     "ratio": 1.35,
-     "min": 6.2
-    },
-    {
-     "name": "Presidio Main Post to Lombard Gate",
-     "straight": 1037,
-     "network": 1435,
-     "ratio": 1.38,
-     "min": 17.8
-    },
-    {
-     "name": "Golden Gate Park: de Young to 9th Ave & Lincoln",
-     "straight": 642,
-     "network": 844,
-     "ratio": 1.31,
-     "min": 10.6
-    },
-    {
-     "name": "Filbert Steps: Sansome St to Coit Tower",
-     "straight": 230,
-     "network": 530,
-     "ratio": 2.31,
-     "min": 9.9
-    },
-    {
-     "name": "Glen Park village to Glen Park BART",
-     "straight": 86,
-     "network": 136,
-     "ratio": 1.59,
-     "min": 1.7
-    }
-   ],
-   "stairs": {
-    "km": 35.1,
-    "onMain": 0.737
-   },
-   "zones": {
-    "car": {
-     "over2_5": 4,
-     "worst": [
-      [
-       "060750159004",
-       "Western Addition",
-       173.21
-      ],
-      [
-       "060750601002",
-       "Presidio",
-       130.27
-      ],
-      [
-       "060750329014",
-       "Sunset/Parkside",
-       103.41
-      ],
-      [
-       "060750332031",
-       "Lakeshore",
-       91.98
-      ],
-      [
-       "060750217001",
-       "Glen Park",
-       1.62
-      ]
-     ]
-    },
-    "bike": {
-     "over2_5": 39,
-     "worst": [
-      [
-       "060750112001",
-       "Nob Hill",
-       29.5
-      ],
-      [
-       "060750122041",
-       "Tenderloin",
-       29.08
-      ],
-      [
-       "060750125021",
-       "Tenderloin",
-       28.3
-      ],
-      [
-       "060750159002",
-       "Western Addition",
-       28.1
-      ],
-      [
-       "060750103003",
-       "Russian Hill",
-       27.89
-      ]
-     ]
-    },
-    "walk": {
-     "over2_5": 1,
-     "worst": [
-      [
-       "060750179031",
-       "Treasure Island",
-       17.07
-      ],
-      [
-       "060750604001",
-       "Lakeshore",
-       1.85
-      ],
-      [
-       "060750610002",
-       "Bayview Hunters Point",
-       1.61
-      ],
-      [
-       "060750604002",
-       "Lakeshore",
-       1.53
-      ],
-      [
-       "060750305003",
-       "Twin Peaks",
-       1.52
-      ]
-     ]
-    }
-   }
-  }
- },
- "walkRules": {
-  "nearMissM": 2,
-  "stepRiseM": 0.18,
-  "stair": {
-   "upSecPerM": 2,
-   "downSecPerM": 1.25,
-   "minFactor": 1.15
-  }
- },
- "streetJoins": {
-  "ways": 66953,
-  "crossings": 36,
-  "apartLevels": 797,
-  "apartRoads": 0,
-  "nearMisses": 424,
-  "nearMissesBarred": 8,
-  "areas": 358,
-  "areaLinks": 3841,
-  "gates": 287,
-  "steps": 2803,
-  "stepsWithCount": 847,
-  "short": 265
- }
+ "bundleBytes": 13652100
 }

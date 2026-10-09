@@ -14,6 +14,9 @@
  *  - crowding: maximum seated/standing weights ×0.8–1.2 (TM2)
  * Writes server/beta3/reference/uncertainty.json (+ app copy).
  * Run: NODE_OPTIONS=--max-old-space-size=3072 npx tsx server/beta3/pipeline/uncertainty.ts [draws]
+ * In parallel: `uncertainty.ts 12 --only 4-7 --part work/unc-b.json` runs draws 4 to 7 (0-based; the
+ * parameters are the serial run's, the generator stepped past the draws skipped), writing each draw to
+ * the part file as it finishes; `uncertainty.ts combine 12 <part files>` writes the summary.
  */
 import fs from 'node:fs';
 import zlib from 'node:zlib';
@@ -28,8 +31,42 @@ function rng(seed: number) {
   return () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
 }
 
+type Metrics = Record<string, { transitTrips: number; routeBoardings: number; benefitHours: number; caltrain: number }>;
+interface Part { k: number; params: Record<string, number>; metrics: Metrics }
+
+/** the summary over all draws (k = 0 the model as calibrated), written beside the bundle and in the references */
+function writeSummary(draws: number, parts: Part[]) {
+  parts.sort((a, b) => a.k - b.k);
+  if (parts.length !== draws || parts.some((p, i) => p.k !== i)) throw new Error(`draws ${parts.map((p) => p.k).join(',')} do not cover 0..${draws - 1}`);
+  const results: Record<string, Record<string, number[]>> = {};
+  for (const p of parts)
+    for (const [id, m] of Object.entries(p.metrics)) for (const [k, v] of Object.entries(m)) ((results[id] ??= {})[k] ??= []).push(v);
+  const q = (xs: number[], p: number) => {
+    const s = xs.slice().sort((a, b2) => a - b2);
+    const i = (s.length - 1) * p;
+    return s[Math.floor(i)] + (s[Math.ceil(i)] - s[Math.floor(i)]) * (i - Math.floor(i));
+  };
+  const summary = Object.fromEntries(
+    Object.entries(results).map(([id, o]) => [
+      id,
+      Object.fromEntries(Object.entries(o).map(([m, xs]) => [m, { calibrated: Math.round(xs[0]), p10: Math.round(q(xs, 0.1)), p50: Math.round(q(xs, 0.5)), p90: Math.round(q(xs, 0.9)) }])),
+    ]),
+  );
+  const out = { draws, ranges: 'see server/beta3/pipeline/uncertainty.ts header', parameterDraws: parts.map((p) => p.params), summary };
+  fs.writeFileSync(`${REFERENCE}/uncertainty.json`, JSON.stringify(out, null, 1));
+  fs.writeFileSync(`${BUNDLE}/uncertainty.json`, JSON.stringify(out));
+  console.log(JSON.stringify(summary, null, 1));
+}
+
 async function main() {
+  if (process.argv[2] === 'combine') {
+    const parts = process.argv.slice(4).flatMap((f) => JSON.parse(fs.readFileSync(f, 'utf8')) as Part[]);
+    return writeSummary(Number(process.argv[3]), parts);
+  }
   const draws = Number(process.argv[2] ?? 12);
+  const arg = (k: string) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : undefined; };
+  const only = arg('--only')?.split('-').map(Number), partFile = arg('--part');
+  const parts: Part[] = [];
   const b = loadBundle();
   const H = b.header;
   const calib = H.calibration!;
@@ -47,15 +84,13 @@ async function main() {
   const xfer0 = transferPenalty(calib);
   const R = rng(20261004);
   const routeB = (r: Awaited<ReturnType<typeof runModel>>, routes: string[]) => r.lines.filter((l) => l.line >= 0 && H.lines[l.line].feed === 'muni' && routes.includes(H.lines[l.line].route)).reduce((a, l) => a + Object.values(l.boardings).reduce((x, v) => x + v, 0), 0);
-  const results: Record<string, { transitTrips: number[]; routeBoardings: number[]; benefitHours: number[]; caltrain: number[] }> = {};
-  for (const s of scenarios) results[s.id] = { transitTrips: [], routeBoardings: [], benefitHours: [], caltrain: [] };
-  const drawsOut: Record<string, number>[] = [];
   for (let k = 0; k < draws; k++) {
     // k = 0 is the model as calibrated
     const u = () => (k === 0 ? 0.5 : R());
     const ivtScale = 0.8 + 0.4 * u(), wait = 1.5 + u(), walk = 1.5 + u(), xfer = xfer0 * (0.5 + u()), dest = 0.5 + 0.5 * u(), theta = 0.15 + 0.35 * u(), crowd = 0.8 + 0.4 * u();
     const d = k === 0 ? { ivtScale: 1, wait: orig.path.waitWeight, walk: orig.path.walkWeight, xfer: xfer0, dest: orig.dest, theta: orig.path.accessTheta, crowd: 1 } : { ivtScale, wait, walk, xfer, dest, theta, crowd };
-    drawsOut.push(d);
+    // (the generator has stepped past this draw's parameters either way, so later draws are the serial run's)
+    if (only && (k < only[0] || k > (only[1] ?? only[0]))) continue;
     for (const p of PURPOSES) for (const key of Object.keys(orig.ivt[p]) as (keyof (typeof COEFFS)[typeof p])[]) COEFFS[p][key] = orig.ivt[p][key] * d.ivtScale;
     // walkThresh is minutes, not a coefficient
     for (const p of PURPOSES) (COEFFS[p].walkThresh = orig.ivt[p].walkThresh);
@@ -71,31 +106,22 @@ async function main() {
     // portal.ts runs the Portal, so the draws and its point estimate are alike)
     const run = (sc: Scenario) => runModel(b, sc, calib, new LocalExecutor(b, sc, calib), { iterations: 3, warmCrowd: base0.finalCrowd }, prep);
     const base = await run({ name: 'Today', edits: [] });
+    const metrics: Metrics = {};
     for (const s of scenarios) {
       const r = await run(s.scenario);
-      const o = results[s.id];
-      o.transitTrips.push(r.summary.transitTrips - base.summary.transitTrips);
-      o.routeBoardings.push(routeB(r, s.routes) - routeB(base, s.routes));
-      o.benefitHours.push((r.summary.logsum - base.summary.logsum) / 60);
-      o.caltrain.push((r.summary.boardings.caltrain ?? 0) - (base.summary.boardings.caltrain ?? 0));
+      metrics[s.id] = {
+        transitTrips: r.summary.transitTrips - base.summary.transitTrips,
+        routeBoardings: routeB(r, s.routes) - routeB(base, s.routes),
+        benefitHours: (r.summary.logsum - base.summary.logsum) / 60,
+        caltrain: (r.summary.boardings.caltrain ?? 0) - (base.summary.boardings.caltrain ?? 0),
+      };
     }
-    console.log(`draw ${k + 1}/${draws}: ${scenarios.map((s) => `${s.id} Δtransit ${Math.round(results[s.id].transitTrips[k])}`).join(', ')}`);
+    parts.push({ k, params: d, metrics });
+    // each draw kept as it finishes, so a stopped run loses only the draw under way
+    if (partFile) fs.writeFileSync(partFile, JSON.stringify(parts));
+    console.log(`draw ${k + 1}/${draws}: ${scenarios.map((s) => `${s.id} Δtransit ${Math.round(metrics[s.id].transitTrips)}`).join(', ')}`);
   }
-  const q = (xs: number[], p: number) => {
-    const s = xs.slice().sort((a, b2) => a - b2);
-    const i = (s.length - 1) * p;
-    return s[Math.floor(i)] + (s[Math.ceil(i)] - s[Math.floor(i)]) * (i - Math.floor(i));
-  };
-  const summary = Object.fromEntries(
-    Object.entries(results).map(([id, o]) => [
-      id,
-      Object.fromEntries(Object.entries(o).map(([m, xs]) => [m, { calibrated: Math.round(xs[0]), p10: Math.round(q(xs, 0.1)), p50: Math.round(q(xs, 0.5)), p90: Math.round(q(xs, 0.9)) }])),
-    ]),
-  );
-  const out = { draws, ranges: 'see server/beta3/pipeline/uncertainty.ts header', parameterDraws: drawsOut, summary };
-  fs.writeFileSync(`${REFERENCE}/uncertainty.json`, JSON.stringify(out, null, 1));
-  fs.writeFileSync(`${BUNDLE}/uncertainty.json`, JSON.stringify(out));
-  console.log(JSON.stringify(summary, null, 1));
+  if (!only) writeSummary(draws, parts);
 }
 
 main();

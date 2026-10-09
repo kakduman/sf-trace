@@ -28,61 +28,60 @@
  },
  "model": {
   "today": {
-   "built": "2026-10-08T17:57:39.502Z",
-   "note": "The model's own cars across the counted crossings by market (gateways.ts): today's run, one pass from the saved crowding; each car trip on its least-cost path at today's congested times (roads.bin.gz). Trucks are Caltrans' truck AADT share at the count; through trips as roads-base.ts. 'left' is what the background fills: light commercial vehicles and any market the model misses. Today's model: the committed calibration on the rebuilt skims (cf6f66f), residents' trips out at the assumed 5%, paths at free-flow times on roads-net.bin (the road bundle predated the Peninsula freeways); trucks recomputed at the final truck shares.",
-   "corridorFactor": null,
+   "built": "2026-10-09T09:03:38.641Z",
+   "note": "The model's own cars across the counted crossings by market (gateways.ts): today's run, one pass from the saved crowding; each car trip on its least-cost path at today's congested times (roads.bin.gz). Trucks are Caltrans' truck AADT share at the count; through trips as roads-base.ts. 'left' is what the background fills: light commercial vehicles and any market the model misses.",
    "markets": [
     {
      "market": "in-commuters",
      "key": "work",
      "byGateway": {
-      "Bay Bridge": 108966,
-      "Golden Gate": 20328,
-      "US-101": 48033,
-      "I-280": 19386,
-      "SR-35": 147,
-      "SR-82": 4145
+      "Bay Bridge": 88853,
+      "Golden Gate": 25266,
+      "US-101": 41405,
+      "I-280": 19703,
+      "SR-35": 281,
+      "SR-82": 5394
      },
-     "uncounted": 20215
-    },
-    {
-     "market": "regional visitors",
-     "key": "regional",
-     "byGateway": {
-      "Bay Bridge": 42427,
-      "Golden Gate": 6082,
-      "US-101": 16921,
-      "I-280": 2631,
-      "SR-35": 66,
-      "SR-82": 1487
-     },
-     "uncounted": 22469
+     "uncounted": 26202
     },
     {
      "market": "residents' commutes out",
      "key": "res work",
      "byGateway": {
-      "Bay Bridge": 28522,
-      "Golden Gate": 4733,
-      "US-101": 38275,
-      "I-280": 3557,
-      "SR-35": 33,
-      "SR-82": 910
+      "Bay Bridge": 15331,
+      "Golden Gate": 2685,
+      "US-101": 35741,
+      "I-280": 8478,
+      "SR-35": 52,
+      "SR-82": 1926
      },
-     "uncounted": 14720
+     "uncounted": 20782
     },
     {
      "market": "residents' other trips out",
      "key": "res social",
      "byGateway": {
-      "Bay Bridge": 26521,
-      "Golden Gate": 3953,
-      "US-101": 13131,
-      "I-280": 3263,
-      "SR-35": 105,
-      "SR-82": 1643
+      "Bay Bridge": 24254,
+      "Golden Gate": 3995,
+      "US-101": 11579,
+      "I-280": 3828,
+      "SR-35": 129,
+      "SR-82": 2173
      },
-     "uncounted": 10479
+     "uncounted": 11540
+    },
+    {
+     "market": "regional visitors",
+     "key": "regional",
+     "byGateway": {
+      "Bay Bridge": 11730,
+      "Golden Gate": 2279,
+      "US-101": 4239,
+      "I-280": 1431,
+      "SR-35": 29,
+      "SR-82": 596
+     },
+     "uncounted": 7618
     },
     {
      "market": "air travelers (SFO)",
@@ -90,38 +89,38 @@
      "byGateway": {
       "Bay Bridge": 0,
       "Golden Gate": 0,
-      "US-101": 17605,
-      "I-280": 173,
+      "US-101": 16864,
+      "I-280": 388,
       "SR-35": 0,
-      "SR-82": 45
+      "SR-82": 38
      },
-     "uncounted": 3222
+     "uncounted": 3316
     },
     {
      "market": "college students from outside",
      "key": "univ",
      "byGateway": {
-      "Bay Bridge": 4216,
-      "Golden Gate": 445,
-      "US-101": 1602,
-      "I-280": 742,
+      "Bay Bridge": 3576,
+      "Golden Gate": 670,
+      "US-101": 1149,
+      "I-280": 843,
       "SR-35": 0,
-      "SR-82": 192
+      "SR-82": 257
      },
-     "uncounted": 2070
+     "uncounted": 2649
     },
     {
      "market": "event-goers",
      "key": "event",
      "byGateway": {
-      "Bay Bridge": 3367,
-      "Golden Gate": 801,
-      "US-101": 1586,
-      "I-280": 545,
+      "Bay Bridge": 2927,
+      "Golden Gate": 715,
+      "US-101": 2377,
+      "I-280": 929,
       "SR-35": 0,
-      "SR-82": 133
+      "SR-82": 220
      },
-     "uncounted": 297
+     "uncounted": 599
     }
    ],
    "gateways": [
@@ -131,8 +130,8 @@
      "truckPct": 2.55,
      "trucks": 6185,
      "through": 16493,
-     "model": 214019,
-     "left": 5853
+     "model": 146670,
+     "left": 73202
     },
     {
      "name": "Golden Gate",
@@ -140,8 +139,8 @@
      "truckPct": 1.33,
      "trucks": 1299,
      "through": 16796,
-     "model": 36342,
-     "left": 43213
+     "model": 35612,
+     "left": 43944
     },
     {
      "name": "US-101",
@@ -149,8 +148,8 @@
      "truckPct": 4.62,
      "trucks": 9071,
      "through": 20211,
-     "model": 137154,
-     "left": 29914
+     "model": 113353,
+     "left": 53714
     },
     {
      "name": "I-280",
@@ -158,8 +157,8 @@
      "truckPct": 1.6,
      "trucks": 2033,
      "through": 13078,
-     "model": 30297,
-     "left": 81642
+     "model": 35601,
+     "left": 76339
     },
     {
      "name": "SR-35",
@@ -167,8 +166,8 @@
      "truckPct": 1.04,
      "trucks": 328,
      "through": 0,
-     "model": 351,
-     "left": 30821
+     "model": 491,
+     "left": 30682
     },
     {
      "name": "SR-82",
@@ -176,111 +175,111 @@
      "truckPct": 0.71,
      "trucks": 122,
      "through": 0,
-     "model": 8556,
-     "left": 8437
+     "model": 10605,
+     "left": 6389
     }
    ],
    "personsByCorridor": {
     "in-commuters": {
      "east": {
-      "da": 100036,
-      "sr": 19043,
-      "tnc": 3906,
-      "transit": 79664,
+      "da": 93924,
+      "sr": 18408,
+      "tnc": 2648,
+      "transit": 87669,
       "walk": 0,
       "bike": 0
      },
      "south": {
-      "da": 75106,
-      "sr": 12346,
-      "tnc": 3525,
-      "transit": 16952,
+      "da": 70897,
+      "sr": 10756,
+      "tnc": 2535,
+      "transit": 23741,
       "walk": 0,
       "bike": 0
      },
      "north": {
-      "da": 22070,
-      "sr": 5466,
-      "tnc": 553,
-      "transit": 5143,
-      "walk": 0,
-      "bike": 0
-     }
-    },
-    "regional visitors": {
-     "east": {
-      "da": 30301,
-      "sr": 29528,
-      "tnc": 2290,
-      "transit": 26893,
-      "walk": 0,
-      "bike": 0
-     },
-     "south": {
-      "da": 27393,
-      "sr": 16450,
-      "tnc": 2513,
-      "transit": 9905,
-      "walk": 0,
-      "bike": 0
-     },
-     "north": {
-      "da": 6413,
-      "sr": 6198,
-      "tnc": 490,
-      "transit": 3704,
+      "da": 21635,
+      "sr": 5463,
+      "tnc": 411,
+      "transit": 5723,
       "walk": 0,
       "bike": 0
      }
     },
     "residents' commutes out": {
      "east": {
-      "da": 25663,
-      "sr": 9936,
-      "tnc": 154,
-      "transit": 10057,
+      "da": 13822,
+      "sr": 5205,
+      "tnc": 83,
+      "transit": 6357,
       "walk": 0,
       "bike": 0
      },
      "south": {
-      "da": 47700,
-      "sr": 12006,
-      "tnc": 342,
-      "transit": 3923,
+      "da": 57803,
+      "sr": 14860,
+      "tnc": 364,
+      "transit": 15226,
       "walk": 0,
       "bike": 0
      },
      "north": {
-      "da": 6246,
-      "sr": 2425,
-      "tnc": 51,
-      "transit": 743,
+      "da": 3564,
+      "sr": 1390,
+      "tnc": 31,
+      "transit": 455,
       "walk": 0,
       "bike": 0
      }
     },
     "residents' other trips out": {
      "east": {
-      "da": 18967,
-      "sr": 19351,
-      "tnc": 450,
-      "transit": 9231,
+      "da": 18697,
+      "sr": 17765,
+      "tnc": 200,
+      "transit": 11788,
       "walk": 0,
       "bike": 0
      },
      "south": {
-      "da": 19646,
-      "sr": 12529,
-      "tnc": 490,
-      "transit": 4709,
+      "da": 20042,
+      "sr": 11591,
+      "tnc": 234,
+      "transit": 5857,
       "walk": 0,
       "bike": 0
      },
      "north": {
-      "da": 3886,
-      "sr": 3884,
-      "tnc": 106,
-      "transit": 1026,
+      "da": 3914,
+      "sr": 3666,
+      "tnc": 53,
+      "transit": 1353,
+      "walk": 0,
+      "bike": 0
+     }
+    },
+    "regional visitors": {
+     "east": {
+      "da": 9569,
+      "sr": 8172,
+      "tnc": 611,
+      "transit": 8082,
+      "walk": 0,
+      "bike": 0
+     },
+     "south": {
+      "da": 8622,
+      "sr": 4543,
+      "tnc": 696,
+      "transit": 2846,
+      "walk": 0,
+      "bike": 0
+     },
+     "north": {
+      "da": 2015,
+      "sr": 1715,
+      "tnc": 136,
+      "transit": 1124,
       "walk": 0,
       "bike": 0
      }
@@ -295,10 +294,10 @@
       "bike": 0
      },
      "south": {
-      "da": 3636,
-      "sr": 6061,
-      "tnc": 14774,
-      "transit": 5529,
+      "da": 3600,
+      "sr": 6000,
+      "tnc": 14399,
+      "transit": 6002,
       "walk": 0,
       "bike": 0
      },
@@ -313,52 +312,52 @@
     },
     "college students from outside": {
      "east": {
-      "da": 3644,
-      "sr": 1623,
-      "tnc": 71,
-      "transit": 2837,
+      "da": 3718,
+      "sr": 1313,
+      "tnc": 43,
+      "transit": 3101,
       "walk": 0,
       "bike": 0
      },
      "south": {
-      "da": 3406,
-      "sr": 825,
-      "tnc": 125,
-      "transit": 811,
+      "da": 3500,
+      "sr": 670,
+      "tnc": 77,
+      "transit": 919,
       "walk": 0,
       "bike": 0
      },
      "north": {
-      "da": 808,
-      "sr": 325,
-      "tnc": 9,
-      "transit": 401,
+      "da": 826,
+      "sr": 260,
+      "tnc": 6,
+      "transit": 452,
       "walk": 0,
       "bike": 0
      }
     },
     "event-goers": {
      "east": {
-      "da": 1515,
-      "sr": 2518,
-      "tnc": 793,
-      "transit": 4477,
+      "da": 1427,
+      "sr": 1942,
+      "tnc": 675,
+      "transit": 5259,
       "walk": 0,
       "bike": 0
      },
      "south": {
-      "da": 1130,
-      "sr": 1587,
-      "tnc": 552,
-      "transit": 4129,
+      "da": 1698,
+      "sr": 3529,
+      "tnc": 727,
+      "transit": 1443,
       "walk": 0,
       "bike": 0
      },
      "north": {
-      "da": 475,
-      "sr": 801,
-      "tnc": 130,
-      "transit": 1140,
+      "da": 464,
+      "sr": 649,
+      "tnc": 114,
+      "transit": 1320,
       "walk": 0,
       "bike": 0
      }
@@ -463,8 +462,8 @@
    "count": 11800
   },
   "modelCarKm": {
-   "today": 28800000.0,
-   "trial": 46100000.0
+   "today": 28800000,
+   "trial": 46100000
   }
  }
 }

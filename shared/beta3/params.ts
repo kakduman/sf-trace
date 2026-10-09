@@ -691,7 +691,7 @@ export const MODEL_AUTHOR = 'Koray Akduman';
 export const MODEL_AUTHOR_URL = 'https://korayakduman.com';
 /** the author footnote on the byline (About and the article) */
 export const MODEL_AUTHOR_NOTE = 'With substantial help from AI systems. Not peer reviewed.';
-export const MODEL_URL = '';
+export const MODEL_URL = 'https://kakduman.github.io/sf-trace/';
 /** the suggested citation, plain text (the URL is a placeholder until MODEL_URL is set) */
 export const MODEL_CITATION = `${MODEL_AUTHOR}. ${MODEL_NAME} ${MODEL_VERSION}: ${MODEL_LONG_NAME}. ${MODEL_TAGLINE}. Version ${MODEL_VERSION}, ${MODEL_YEAR}. ${MODEL_URL || '[URL to be added]'}`;
 export const MUNI_FARE = 2.85;

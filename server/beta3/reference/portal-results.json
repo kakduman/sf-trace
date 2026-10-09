@@ -2,13 +2,13 @@
  "description": "The Portal: Caltrain to the Salesforce Transit Center",
  "assumptions": "All Caltrain trains extended (FTA forecast: 4 of 6 peak trains per hour per direction); 60 s + 180 s run times (not published); weekday; today’s population and jobs.",
  "model": {
-  "tunnelRidersPerDay": 23676,
-  "transitCenterOnOff": 23676,
-  "townsendOnOff": 9877,
-  "caltrainBoardingsChange": 12818,
-  "caltrainBoardingsBase": 21861,
-  "transitTripsChange": 5452,
-  "travelerMinutesSavedPerDay": 343592,
+  "tunnelRidersPerDay": 18666,
+  "transitCenterOnOff": 18666,
+  "townsendOnOff": 6975,
+  "caltrainBoardingsChange": 8412,
+  "caltrainBoardingsBase": 19987,
+  "transitTripsChange": 2419,
+  "travelerMinutesSavedPerDay": 189632,
   "operatingCostChangePerDay": 37693
  },
  "official": {
