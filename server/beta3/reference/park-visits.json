@@ -1,0 +1,103 @@
+{
+ "source": "SF Recreation and Park: about 24 million visitors a year to Golden Gate Park (https://sfrecpark.org/1159/Getting-to-Golden-Gate-Park)",
+ "observedPerDayAverage": 65753,
+ "modelAverageDay": 74100,
+ "byDay": {
+  "wkd": {
+   "Golden Gate Park": {
+    "park": 53064,
+    "visits": 115753,
+    "leisure": 107961,
+    "acres": 1023
+   },
+   "Presidio": {
+    "park": 24772,
+    "visits": 57155,
+    "leisure": 48472,
+    "acres": 1514
+   },
+   "McLaren Park": {
+    "park": 0,
+    "visits": 50445,
+    "leisure": 48862,
+    "acres": 324
+   },
+   "Lincoln Park": {
+    "park": 5595,
+    "visits": 20237,
+    "leisure": 11091,
+    "acres": 109
+   },
+   "Lakeshore": {
+    "park": 0,
+    "visits": 130209,
+    "leisure": 60920,
+    "acres": 927
+   }
+  },
+  "sat": {
+   "Golden Gate Park": {
+    "park": 128129,
+    "visits": 270428,
+    "leisure": 260222,
+    "acres": 1023
+   },
+   "Presidio": {
+    "park": 61424,
+    "visits": 126205,
+    "leisure": 120391,
+    "acres": 1514
+   },
+   "McLaren Park": {
+    "park": 0,
+    "visits": 124799,
+    "leisure": 123223,
+    "acres": 324
+   },
+   "Lincoln Park": {
+    "park": 13805,
+    "visits": 34987,
+    "leisure": 27360,
+    "acres": 109
+   },
+   "Lakeshore": {
+    "park": 0,
+    "visits": 223423,
+    "leisure": 165269,
+    "acres": 927
+   }
+  },
+  "sun": {
+   "Golden Gate Park": {
+    "park": 118145,
+    "visits": 249641,
+    "leisure": 239799,
+    "acres": 1023
+   },
+   "Presidio": {
+    "park": 54087,
+    "visits": 110977,
+    "leisure": 105726,
+    "acres": 1514
+   },
+   "McLaren Park": {
+    "park": 0,
+    "visits": 114440,
+    "leisure": 112848,
+    "acres": 324
+   },
+   "Lincoln Park": {
+    "park": 12577,
+    "visits": 32482,
+    "leisure": 24897,
+    "acres": 109
+   },
+   "Lakeshore": {
+    "park": 0,
+    "visits": 202295,
+    "leisure": 145438,
+    "acres": 927
+   }
+  }
+ }
+}

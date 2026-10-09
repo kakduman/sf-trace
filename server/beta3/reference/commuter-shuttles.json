@@ -1,0 +1,953 @@
+{
+ "accessed": "2026-10-04",
+ "scope": "Private commuter shuttles that load/unload in San Francisco: regional tech/employer shuttles (SF <-> San Mateo / Santa Clara) and intra-city employer/institutional shuttles. Hospital/institutional shuttles that do not use the SFMTA program are mostly outside these counts.",
+ "headline": {
+  "mostRecentPublishedRidership": "No SFMTA ridership figure has been published since the 2017 Annual Status Report (Dec 2017 data). Permittees must report average daily boardings monthly (FY26-27 permit terms, Sec. IX.F.3), but the SFMTA does not publish them; the SF Chronicle (May 2026) says operators 'only have to report stop events'. Recent trend data are stop events and vehicles only.",
+  "preCOVIDRidership": {
+   "peopleBoardingDailyAtProgramStops_Dec2017": 8900,
+   "regionalShuttleBoardings_Dec2017": 8500,
+   "intraCityCirculatorBoardings_Dec2017": 384,
+   "note": "SFMTA counts 'people who board' at SF program stops each day (one direction, roughly one boarding per commuter per day). The 2015 pilot figure of 17,000 'boardings' counts both directions (= ~8,500 people round-trip), so 8,500 people (2015) and 8,900 people (2017) are the comparable series. No 2019 ridership figure was found."
+  },
+  "trend": "Vehicles: 469 AM / 463 PM average pre-COVID -> 172 AM / 132 PM in Nov 2021 (SFMTA FAQ); 415 AM / 385 PM in Feb 2020 -> 255 AM / 236 PM in July 2022 (-38%, SFMTA data via SF Examiner). Stop events: about 3,470/day Dec 2017 -> 1,503/day Oct 2021; 2026 year-to-date monthly stop events (article dated May 23, 2026) were 40% below 2019 (SFMTA data via SF Chronicle, May 2026) and had 'leveled off'.",
+  "suggestedModelUse": "Not a published number: if ridership scales with stop events, 2026 regional riders would be about 0.6 x the 2019 level. 2019 ridership itself is unpublished; Dec 2017 = 8,900 people/day."
+ },
+ "sources": [
+  {
+   "id": "sfmta2018",
+   "publisher": "SFMTA (Sustainable Streets, Parking & Curb Management)",
+   "title": "Commuter Shuttle Program 2017 Annual Status Report",
+   "date": "May 2018",
+   "period": "October 2016 - December 2017 (ridership: operator data for December 6, 2017)",
+   "url": "https://www.sfmta.com/media/12887/download?inline",
+   "altUrl": "https://www.sfmta.com/sites/default/files/reports-and-documents/2018/05/commuter_shuttle_program_annual_status_report.pdf",
+   "rawFile": "data/beta3/raw/shuttles/sfmta_annual_status_report.pdf",
+   "values": {
+    "peopleBoardingDailyAtProgramStops": {
+     "Dec2017": 8900,
+     "spring2016_revised": 8100,
+     "page": "PDF p.4-5 (exec summary) and p.17 (report p.14)"
+    },
+    "regionalShuttleDailyBoardings": {
+     "Dec2017": 8500,
+     "spring2016": 7500,
+     "page": "PDF p.17"
+    },
+    "intraCityCirculatorDailyBoardings": {
+     "Dec2017": 384,
+     "spring2016": 528,
+     "page": "PDF p.17"
+    },
+    "shareOfDailyShuttleTripsIntercity": {
+     "Aug2017": 0.92,
+     "2016StatusReport": 0.85,
+     "definition": "intercity = one end in SF, other end outside SF; intracity = both ends in SF; share of daily shuttle trips (vehicle trips), route data from operators Aug 2017",
+     "page": "PDF p.17"
+    },
+    "uniqueVehiclesPerDay": {
+     "Dec2017": 450,
+     "2016StatusReport": "360-390",
+     "Dec2017_AM_5to11": 390,
+     "Dec2017_PM_4to10": 400,
+     "page": "PDF p.4, p.15"
+    },
+    "dailyStopEvents": {
+     "Sep2016": 3150,
+     "Dec2017": 3470,
+     "page": "PDF p.4, p.14"
+    },
+    "zones": {
+     "Sep2016": 109,
+     "Dec2017": 100,
+     "page": "PDF p.4"
+    },
+    "busiestStops": "Van Ness & Filbert (AM) >600 daily boardings; Mission St between Steuart and Spear ~600; Gough & Geary <500; 24th & Church >400; top 15 stops > 60% of daily boardings (PDF p.17)",
+    "caveat": "Some operators' sensors do not separate boardings from alightings, so SFMTA estimated boardings from time of day and direction (footnote 4, p.17)."
+   }
+  },
+  {
+   "id": "sfmta2015",
+   "publisher": "SFMTA (Sustainable Streets, Urban Planning Initiatives)",
+   "title": "Commuter Shuttle Pilot Program Evaluation Report",
+   "date": "2015-10-05",
+   "period": "Pilot Aug 2014 - Jan 2016; data through July 2015; rider survey June 2015",
+   "url": "https://www.sfmta.com/media/1867/download?inline",
+   "pageUrl": "https://www.sfmta.com/project-updates/commuter-shuttles-pilot-program-evaluation-complete",
+   "rawFile": "data/beta3/raw/shuttles/sfmta_pilot_evaluation_2015.pdf",
+   "values": {
+    "monthlyBoardings": 356998,
+    "avgWeekdayBoardings": 17000,
+    "peopleRidingRoundTripDaily": 8500,
+    "boardingDefinition": "one person riding a shuttle in one direction, with origin or destination in San Francisco (p.12)",
+    "monthlyBoardingsIntercityRegional": 270253,
+    "monthlyBoardingsIntraSF": 86745,
+    "shareIntercity": 0.76,
+    "shareIntraSF": 0.24,
+    "avgOneWayTripMiles": {
+     "intercity": 47,
+     "intracity": 2
+    },
+    "dailyStopEvents": {
+     "Jun2014_prePilot": 2302,
+     "Jul2015": 2978
+    },
+    "loadingLocations": 124,
+    "avgPeoplePerStopEvent": 5.7,
+    "shuttleVMT": {
+     "perWeekday": 47484,
+     "perYear": 11965877
+    },
+    "page": "PDF p.6 (summary), p.12 (boardings)",
+    "riderSurveyJune2015": {
+     "n": 546,
+     "nIntercity": 418,
+     "nIntracity": 128,
+     "page": "PDF p.15-17",
+     "workplace": {
+      "MenloPark": 298,
+      "SanFrancisco": 128,
+      "MountainView": 42,
+      "Sunnyvale": 41,
+      "Cupertino": 19,
+      "other": 18
+     },
+     "workplaceNote": "Counts of respondents. Menlo Park + Mountain View + Sunnyvale + Cupertino = 400 of 546 (73%) work in San Mateo/Santa Clara; 128 (23%) work in SF. Survey distributed via operators/employers, so not a random sample (report notes many Facebook employees responded).",
+     "frequency": {
+      "everyDay": 0.716,
+      "fewTimesWeek": 0.174,
+      "fewTimesMonth": 0.073,
+      "lessThanMonthly": 0.037
+     },
+     "noCarOwnership": 0.45,
+     "alternativeWithoutShuttle": {
+      "driveAlone": 0.472,
+      "publicTransit": 0.29,
+      "getJobCloserToHome": 0.138,
+      "carpool": 0.052,
+      "moveCloserToWork": 0.048
+     },
+     "alternativeNote": "Public transit is not split into Caltrain vs others in this survey."
+    }
+   }
+  },
+  {
+   "id": "sfmtaFAQ",
+   "publisher": "SFMTA",
+   "title": "Commuter Shuttle Program FAQs",
+   "date": "page undated; data points as of Oct-Nov 2021",
+   "url": "https://www.sfmta.com/commuter-shuttle-program-faqs",
+   "rawFile": "data/beta3/raw/shuttles/sfmta_commuter_shuttle_faqs.html",
+   "method": "copied from page text",
+   "values": {
+    "avgShuttleVehicles": {
+     "preCOVID": {
+      "AM": 469,
+      "PM": 463
+     },
+     "Nov2021": {
+      "AM": 172,
+      "PM": 132
+     }
+    },
+    "dailyStopEvents_Oct2021": 1503,
+    "zones": {
+     "total": 99,
+     "sharedMuni": 52,
+     "shuttleOnlyWhite": 41,
+     "peakExtension": 6,
+     "programMax": 125
+    },
+    "feePerStopEvent_USD": 9.35
+   }
+  },
+  {
+   "id": "datasfStops",
+   "publisher": "SFMTA via DataSF",
+   "title": "Commuter Shuttle Stops (dataset hnxa-ebrb; map view 9czp-ya6v)",
+   "date": "rows loaded 2025-03-08; latest row data_as_of 2025-03-07",
+   "url": "https://data.sfgov.org/resource/hnxa-ebrb.json",
+   "rawFile": "data/beta3/raw/shuttles/datasf_commuter_shuttle_stops.json",
+   "method": "Downloaded all 164 rows and counted by status and bus_zone_t",
+   "values": {
+    "approvedStops": 99,
+    "approvedByType": {
+     "MuniZone": 52,
+     "WhiteZone": 42,
+     "PeakExtensionZone": 5
+    },
+    "rescindedStops": 65,
+    "note": "Has stop locations (lat/lon), zone type and hours; no ridership. Small type split differs from the FAQ (41 white / 6 peak extension)."
+   }
+  },
+  {
+   "id": "sfmtaPermits",
+   "publisher": "SFMTA",
+   "title": "Commuter Shuttle Program Permits FY2026-2027 and FY26-27 Terms and Conditions",
+   "date": "2026",
+   "url": "https://www.sfmta.com/projects/commuter-shuttle-program",
+   "termsUrl": "https://www.sfmta.com/media/45371/download?inline",
+   "rawFiles": [
+    "data/beta3/raw/shuttles/sfmta_commuter_shuttle_program.html",
+    "data/beta3/raw/shuttles/sfmta_fy26-27_terms.pdf"
+   ],
+   "values": {
+    "permitLettersFY26_27": 12,
+    "permittees": [
+     "Bauer",
+     "Corinthian",
+     "Code3",
+     "Hallcon",
+     "Kaiser",
+     "Lux Bus America",
+     "Lux Leasing",
+     "MV",
+     "MV Transportation",
+     "Storer",
+     "We Drive U",
+     "Transwest"
+    ],
+    "monthlyReportingRequired": [
+     "daily stop-events by zone",
+     "monthly VMT in SF",
+     "average daily boardings in SF",
+     "average daily occupancy on arrival",
+     "typical routes and runs",
+     "average daily vehicles in operation"
+    ],
+    "termsSection": "IX.F (PDF p.5-6)"
+   }
+  },
+  {
+   "id": "examiner2022",
+   "publisher": "San Francisco Examiner (Benjamin Schneider)",
+   "title": "Google buses are back as tech returns to the office",
+   "date": "2022-08-02",
+   "url": "https://www.sfexaminer.com/news/google-buses-are-back-as-tech-returns-to-the-office/article_fae2ffa2-11ca-11ed-aa67-fb2bbebd522e.html",
+   "rawFile": "data/beta3/raw/shuttles/sfexaminer_google_buses_back_2022.html",
+   "method": "news article quoting SFMTA data",
+   "values": {
+    "avgShuttles": {
+     "Feb2020": {
+      "AM": 415,
+      "PM": 385
+     },
+     "Jul2022": {
+      "AM": 255,
+      "PM": 236
+     }
+    },
+    "declineFeb2020toJul2022": 0.38
+   }
+  },
+  {
+   "id": "chronicle2026",
+   "publisher": "San Francisco Chronicle (Danielle Echeverria, Sriharsha Devulapalli), syndicated on Yahoo News",
+   "title": "Tech buses were once ubiquitous on S.F. streets. Here's how frequency has changed",
+   "date": "2026-05-23",
+   "url": "https://www.yahoo.com/news/us/articles/tech-buses-were-once-ubiquitous-120000887.html",
+   "rawFile": "data/beta3/raw/shuttles/chronicle_yahoo_tech_buses_2026-05-23.html",
+   "method": "news article analysing SFMTA stop-event data",
+   "values": {
+    "monthlyStopEvents2026YTDvs2019": -0.4,
+    "text": "Commuter shuttles so far this year had 40% less pickups and dropoffs on average each month than they did in 2019",
+    "busiestStop2024": "Lombard & Scott, then Geary & Park Presidio",
+    "note": "SFMTA did not give the reporters 2025 or 2026 data by stop."
+   }
+  },
+  {
+   "id": "bla2014",
+   "publisher": "SF Board of Supervisors, Budget and Legislative Analyst",
+   "title": "Policy Analysis Report: Regional (private commuter) shuttles, memo to Supervisor Mar",
+   "date": "2014-03-31",
+   "url": "https://sfbos.org/sites/default/files/FileCenter/Documents/48498-BLA.RegionalShuttles.033114.pdf",
+   "rawFile": "data/beta3/raw/shuttles/sfbos_bla_regional_shuttles_2014.pdf",
+   "values": {
+    "allShuttlesAvgWeekdayBoardings_SFMTA": 35000,
+    "allShuttlesNote": "'Current SFMTA data about all known shuttle service, including both regional and intra-city shuttles' (p.7). Broader than the later permit-program counts.",
+    "sevenRegionalEmployers2012": {
+     "vehicles": 131,
+     "weekdayBoardings": 8030,
+     "runs": 273,
+     "byCompany": {
+      "Google": {
+       "vehicles": 57,
+       "boardings": 4400
+      },
+      "Apple": {
+       "vehicles": 15,
+       "boardings": 1568,
+       "note": "ICF estimate from seats"
+      },
+      "Genentech": {
+       "vehicles": 40,
+       "boardings": 1332
+      },
+      "Facebook": {
+       "vehicles": 9,
+       "boardings": 400
+      },
+      "Yahoo": {
+       "vehicles": 5,
+       "boardings": 200
+      },
+      "Netflix": {
+       "vehicles": 3,
+       "boardings": 130
+      }
+     },
+     "source": "ICF International survey for MTC 2012 + BLA March 2014",
+     "page": "PDF p.6-7"
+    },
+    "alternativeWithoutShuttle": {
+     "driveAlone": 0.48,
+     "source": "Dai & Weinzimmer, UC Berkeley working paper UCB-ITS-WP-2014-01 (cited p.31; original not fetched, HTTP 403)"
+    },
+    "icf2012RiderSurvey": {
+     "n": 396,
+     "wouldNotHaveSiliconValleyJob": 0.31,
+     "wouldMoveOutOfSF_writeIn": 0.04,
+     "page": "PDF p.23"
+    }
+   }
+  },
+  {
+   "id": "sfcta2011",
+   "publisher": "San Francisco County Transportation Authority",
+   "title": "Strategic Analysis Report 08/09-2: The Role of Shuttle Services in San Francisco's Transportation System",
+   "date": "2011-06-28",
+   "url": "https://www.sfcta.org/sites/default/files/2019-06/SAR%2008:09-2%20-%20The%20Role%20of%20Shuttle%20Services%20in%20San%20Francisco's%20Transportation%20System.pdf",
+   "rawFile": "data/beta3/raw/shuttles/sfcta_sar_2011_role_of_shuttles.pdf",
+   "method": "fetched through WebFetch (curl got HTTP 403); text extracted",
+   "values": {
+    "fourRegionalEmployersEmployeesPerDay": 2000,
+    "employers": [
+     "Genentech",
+     "Apple",
+     "Yahoo!",
+     "Google"
+    ],
+    "stopsInSF": 50,
+    "page": "PDF p.4",
+    "note": "Data collected around 2009-2010."
+   }
+  },
+  {
+   "id": "mtcCensus2016",
+   "publisher": "MTC and Bay Area Council",
+   "title": "2016 Bay Area Shuttle Census (MTC Operations Committee item, Sept 2016)",
+   "date": "2016-09",
+   "period": "2012-2014, regional (not SF-only)",
+   "url": "https://mtc.ca.gov/sites/default/files/2016%20Bay%20Area%20Shuttle%20Census.pdf",
+   "rawFile": "data/beta3/raw/shuttles/mtc_bac_2016_bay_area_shuttle_census.pdf",
+   "values": {
+    "participatingSponsorsOperators": 35,
+    "annualBoardings_millions": {
+     "2012": 6.6,
+     "2013": 8.2,
+     "2014": 9.6
+    },
+    "dailyCapacity_thousands": {
+     "2012": 18,
+     "2013": 23,
+     "2014": 34
+    },
+    "vehicles": {
+     "2012": 473,
+     "2013": 536,
+     "2014": 765
+    },
+    "vmt_millions": {
+     "2012": 16,
+     "2013": 20,
+     "2014": 25
+    },
+    "page": "PDF p.3",
+    "note": "Region-wide and incomplete (only participants); includes university, local and transit-connector shuttles. The county-to-county flow map (p.4) has no numeric values."
+   }
+  },
+  {
+   "id": "ucsf2011",
+   "publisher": "UCSF",
+   "title": "UCSF Shuttle Factsheet (archive)",
+   "date": "2011-08-05",
+   "url": "https://www.ucsf.edu/news/2011/08/103860/ucsf-shuttle-factsheet",
+   "rawFile": "data/beta3/raw/shuttles/ucsf_shuttle_factsheet_2011.html",
+   "values": {
+    "annualPassengers": 2300000,
+    "annualMiles": 1100000,
+    "shuttles": 53,
+    "note": "Institutional intra-SF shuttle (largely outside the commuter program counts). No newer UCSF figure found."
+   }
+  }
+ ],
+ "shareToSanMateoSantaClaraVsWithinSF": {
+  "byBoardings2015": {
+   "intercityRegional": 0.76,
+   "intraSF": 0.24,
+   "source": "sfmta2015"
+  },
+  "byBoardings2017": {
+   "regional": 8500,
+   "intraCityCirculator": 384,
+   "regionalShare": 0.957,
+   "method": "derived: 8,500 / (8,500 + 384); the two parts sum to 8,884, close to the 8,900 total",
+   "source": "sfmta2018"
+  },
+  "byVehicleTrips2017": {
+   "intercity": 0.92,
+   "intraSF": 0.08,
+   "source": "sfmta2018"
+  },
+  "byRiderWorkplace2015": {
+   "SanMateoSantaClara_MenloPark_MountainView_Sunnyvale_Cupertino": 0.73,
+   "SanFrancisco": 0.23,
+   "other": 0.03,
+   "source": "sfmta2015 rider survey (n=546; not a random sample)"
+  },
+  "note": "No published split between San Mateo and Santa Clara counties. 2015 respondent counts: Menlo Park (San Mateo Co.) 298; Mountain View + Sunnyvale + Cupertino (Santa Clara Co.) 102. Intercity can also include East Bay; not separated."
+ },
+ "whatRidersWouldOtherwiseUse": {
+  "sfmta2015": {
+   "driveAlone": 0.472,
+   "publicTransit": 0.29,
+   "jobCloserToHome": 0.138,
+   "carpool": 0.052,
+   "moveCloserToWork": 0.048,
+   "n": 546
+  },
+  "daiWeinzimmer2014_viaBLA": {
+   "driveAlone": 0.48
+  },
+  "caltrainShare": "Not found as a separate category in any fetched source (SFMTA 2015 groups all public transit together)."
+ },
+ "acsClassification": {
+  "finding": "The Census Bureau gives no rule for employer or private shuttles. ACS Q32 (2023) asks for the ONE box 'for the method of transportation used for most of the distance', with options Car, truck, or van; Bus; Subway or elevated rail; Long-distance train or commuter rail; Light rail, streetcar, or trolley; Ferryboat; Taxicab; Motorcycle; Bicycle; Walked; Worked from home; Other method (questionnaire p.16). Subject definitions (2023, p.104) say 'Car, truck, or van' includes company cars but excluding taxicabs, and 'Public transportation' includes workers who used a bus, subway... or ferryboat. Neither mentions shuttles. So a shuttle rider classifies themself: most likely 'Bus' (counted under Public transportation in B08301), possibly 'Other method'. This is an inference, not stated by the Census Bureau.",
+  "sources": [
+   {
+    "title": "2023 ACS questionnaire",
+    "url": "https://www2.census.gov/programs-surveys/acs/methodology/questionnaires/2023/quest23.pdf",
+    "rawFile": "data/beta3/raw/shuttles/acs_2023_questionnaire.pdf",
+    "page": 16
+   },
+   {
+    "title": "2023 ACS Subject Definitions",
+    "url": "https://www2.census.gov/programs-surveys/acs/tech_docs/subject_definitions/2023_ACSSubjectDefinitions.pdf",
+    "rawFile": "data/beta3/raw/shuttles/acs_2023_subject_definitions.pdf",
+    "page": 104
+   },
+   {
+    "title": "Census FAQ about Commuting (no shuttle guidance found)",
+    "url": "https://www.census.gov/topics/employment/commuting/about/faq.html",
+    "rawFile": "data/beta3/raw/shuttles/census_commuting_faq.html"
+   }
+  ]
+ },
+ "notFound": [
+  "Any published 2019, 2023, 2024, 2025 or 2026 commuter-shuttle ridership (boardings) for SF.",
+  "San Mateo vs Santa Clara split of riders.",
+  "A survey separating Caltrain from other transit as the alternative mode.",
+  "Current hospital shuttle ridership (UCSF 2011 only; Kaiser holds a program permit but no ridership is published).",
+  "SFCTA Downtown Travel Study 2025 (HTTP 403 to curl; not checked for shuttle content).",
+  "Dai & Weinzimmer 2014 original paper (HTTP 403); its 48% drive-alone figure is taken from the BLA citation."
+ ],
+ "approvedStops": {
+  "source": "SFMTA via DataSF, Commuter Shuttle Stops (hnxa-ebrb), rows with status Approved; data_as_of 2024-10-17",
+  "stops": [
+   [
+    37.748335,
+    -122.414057,
+    "Cesar Chavez St&Folsom St NW corner, far-side stop"
+   ],
+   [
+    37.798789,
+    -122.400043,
+    "Broadway & Front St NW corner, far-side stop"
+   ],
+   [
+    37.780225,
+    -122.438947,
+    "Divisadero St&Eddy St SW corner, far-side stop"
+   ],
+   [
+    37.783165,
+    -122.439557,
+    "Divisadero St&Geary Blvd SW corner, shuttle zone south of stop, 6-10am"
+   ],
+   [
+    37.775495,
+    -122.426417,
+    "Fell St&Laguna St NW corner, white zone, 4-8pm"
+   ],
+   [
+    37.737335,
+    -122.475137,
+    "19th Ave & Wawona St SE corner, near-side stop"
+   ],
+   [
+    37.787168,
+    -122.418159,
+    "Larkin St & Post St NE corner, far-side, 4-10pm"
+   ],
+   [
+    37.784145,
+    -122.395497,
+    "Harrison St&2nd St NW corner, far-side stop"
+   ],
+   [
+    37.798261,
+    -122.402917,
+    "Broadway & Osgood Pl SE corner, far-side stop"
+   ],
+   [
+    37.777475,
+    -122.416257,
+    "9th St&Market St SE corner, near-side stop"
+   ],
+   [
+    37.760005,
+    -122.476943,
+    "19th Ave & Kirkham St NW corner, near-side stop"
+   ],
+   [
+    37.775665,
+    -122.406247,
+    "Harrison St&7th St NW corner, far-side stop"
+   ],
+   [
+    37.777255,
+    -122.394897,
+    "Townsend St&4th St NE corner, near-side stop"
+   ],
+   [
+    37.755995,
+    -122.476479,
+    "Northbound 19th Ave & Moraga St SE corner, near-side stop"
+   ],
+   [
+    37.748145,
+    -122.413807,
+    "Cesar Chavez St&Folsom St SW corner, far-side stop"
+   ],
+   [
+    37.751657,
+    -122.427276,
+    "24th St & Church St SE corner, far-side, 6-10am"
+   ],
+   [
+    37.799265,
+    -122.441347,
+    "Lombard St&Scott St NW corner, white zone, 4-8pm"
+   ],
+   [
+    37.748235,
+    -122.419477,
+    "Cesar Chavez St&Bartlett St NW corner, white zone, 6-10am, 4-8pm"
+   ],
+   [
+    37.783675,
+    -122.439437,
+    "Divisadero St&Geary Blvd NE corner, far-side stop"
+   ],
+   [
+    37.777765,
+    -122.423327,
+    "Gough St&Grove St SW corner, white zone, 6-10am"
+   ],
+   [
+    37.76435,
+    -122.432468,
+    "16th St, north side, east of Market St, white zone, 4-10pm"
+   ],
+   [
+    37.776025,
+    -122.396207,
+    "Townsend St&4th St south side, mid-block"
+   ],
+   [
+    37.744385,
+    -122.450587,
+    "100 O'Shaughnessy Blvd east side, mid-block"
+   ],
+   [
+    37.761665,
+    -122.410027,
+    "Bryant St&18th St SE corner, near-side stop"
+   ],
+   [
+    37.781085,
+    -122.422037,
+    "Franklin St&Golden Gate Ave NE corner, white zone, 4-8pm"
+   ],
+   [
+    37.764985,
+    -122.399967,
+    "17th St&Wisconsin St NW corner, white zone, 6-10am, 4-8pm"
+   ],
+   [
+    37.786564,
+    -122.439888,
+    "Divisadero St&Bush St NE corner, far-side stop"
+   ],
+   [
+    37.75999,
+    -122.476756,
+    "19th Ave & Kirkham St NE corner, near-side stop"
+   ],
+   [
+    37.742307,
+    -122.422193,
+    "30th St & Mission St, SW Corner near-side stop, UNDER 35 FT ONLY"
+   ],
+   [
+    37.765015,
+    -122.419267,
+    "16th St&Mission SE corner, far-side stop"
+   ],
+   [
+    37.776705,
+    -122.398437,
+    "Brannan St&5th St SE corner, white zone, 6-10am, 4-8pm"
+   ],
+   [
+    37.788295,
+    -122.407917,
+    "Post St&Powell St SE corner, far-side stop"
+   ],
+   [
+    37.780245,
+    -122.472407,
+    "Park Presidio&Geary Blvd SW corner, shuttle zone south of stop"
+   ],
+   [
+    37.799155,
+    -122.440547,
+    "Lombard St&Scott St SE corner, white zone, 6-10am"
+   ],
+   [
+    37.750965,
+    -122.406267,
+    "Potrero Ave&25th St, SW corner, white zone, 6-10am"
+   ],
+   [
+    37.743245,
+    -122.422857,
+    "San Jose Ave&29th St SE corner, white zone, 4-8pm"
+   ],
+   [
+    37.788515,
+    -122.423556,
+    "Franklin St&Bush St NE corner, white zone, 4-8pm"
+   ],
+   [
+    37.781075,
+    -122.458757,
+    "Arguello Blvd&Geary Blvd SE corner, near-side stop"
+   ],
+   [
+    37.789445,
+    -122.388677,
+    "Harrison St&The Embarcadero SW corner, near-side stop"
+   ],
+   [
+    37.771045,
+    -122.437087,
+    "Divisadero St&Haight St SW corner, far-side stop"
+   ],
+   [
+    37.755715,
+    -122.409477,
+    "Bryant St&22nd St SW corner, far-side stop"
+   ],
+   [
+    37.784024,
+    -122.408243,
+    "Cyril Magnin St & Market St, NW corner, near-side stop"
+   ],
+   [
+    37.806525,
+    -122.413468,
+    "North Point St & Mason St SE corner, far-side stop"
+   ],
+   [
+    37.761865,
+    -122.410187,
+    "Bryant St&18th St NW corner, near-side stop"
+   ],
+   [
+    37.780746,
+    -122.412727,
+    "Charles J Brenham Pl & Market St NE corner, far-side stop"
+   ],
+   [
+    37.786981,
+    -122.440293,
+    "Divisadero St & Pine St SW corner, far-side"
+   ],
+   [
+    37.751856,
+    -122.425463,
+    "24th St & Dolores St NW corner, far-side stop"
+   ],
+   [
+    37.748055,
+    -122.420047,
+    "Cesar Chavez St&Valencia St SE corner, far-side stop"
+   ],
+   [
+    37.751635,
+    -122.406067,
+    "Potrero Ave&25th St, SE corner, near-side stop"
+   ],
+   [
+    37.778314,
+    -122.414434,
+    "8th St & Market St SW corner, far-side stop"
+   ],
+   [
+    37.777685,
+    -122.397427,
+    "Brannan St&4th St NW corner, white zone, 6-10am, 4-8pm"
+   ],
+   [
+    37.765106,
+    -122.394731,
+    "Mississippi St&17th St SE corner, white zone, 6-10am, 4-8pm"
+   ],
+   [
+    37.764142,
+    -122.417294,
+    "South Van Ness Ave, east side, mid-block north of 17th St, white zone, 4-10pm"
+   ],
+   [
+    37.745015,
+    -122.451257,
+    "O'Shaughnessy Blvd&Portola Dr SW corner, far-side stop"
+   ],
+   [
+    37.749805,
+    -122.434027,
+    "Castro St&25th NW corner, near-side stop"
+   ],
+   [
+    37.798751,
+    -122.423822,
+    "Van Ness Avenue & Union St, far-side, 100 feet north of Union Street, 4PM To 8PM"
+   ],
+   [
+    37.748095,
+    -122.418067,
+    "Cesar Chavez St&Mission St SE corner, far-side stop"
+   ],
+   [
+    37.748725,
+    -122.420377,
+    "Valencia St&26th St SW corner, far-side stop"
+   ],
+   [
+    37.752015,
+    -122.422717,
+    "24th St&Guerrero St NE corner, near-side stop"
+   ],
+   [
+    37.788199,
+    -122.423289,
+    "Bush St & Franklin St SE corner, far-side, 6-10am"
+   ],
+   [
+    37.806555,
+    -122.414227,
+    "North Point St&Mason St NW corner, far-side stop"
+   ],
+   [
+    37.778705,
+    -122.416577,
+    "Larkin St&Grove St NE corner, far-side stop"
+   ],
+   [
+    37.792829,
+    -122.393508,
+    "Mission St & Steuart St SE corner, mid-block"
+   ],
+   [
+    37.801113,
+    -122.42557,
+    "Lombard Street, midblock, E of Franklin St, white zone, 6-10am"
+   ],
+   [
+    37.764335,
+    -122.430567,
+    "16th St&Sanchez St SE corner, white zone, 6-10am"
+   ],
+   [
+    37.781445,
+    -122.458957,
+    "Arguello Blvd&Geary Blvd NW corner, near-side stop"
+   ],
+   [
+    37.756277,
+    -122.476654,
+    "19th Ave & Moraga St NW corner, near-side stop"
+   ],
+   [
+    37.764515,
+    -122.452877,
+    "Parnassus Ave&Stanyan St NW corner, far-side stop"
+   ],
+   [
+    37.773745,
+    -122.432317,
+    "Oak St&Steiner St SE corner, white zone, 6-10am"
+   ],
+   [
+    37.748421,
+    -122.409495,
+    "Cesar Chavez St&Florida ST NE corner, near-side stop"
+   ],
+   [
+    37.727069,
+    -122.474758,
+    "19th Ave& Winston Dr NE corner, far-side stop"
+   ],
+   [
+    37.749595,
+    -122.433817,
+    "Castro St&25th SE corner, near-side stop"
+   ],
+   [
+    37.774375,
+    -122.404477,
+    "Bryant St&7th St SE corner, far-side stop"
+   ],
+   [
+    37.768405,
+    -122.453467,
+    "Stanyan St&Waller St NW corner, near-side stop"
+   ],
+   [
+    37.761135,
+    -122.435127,
+    "Castro St&18th St NW corner, white zone, 6-10am"
+   ],
+   [
+    37.754305,
+    -122.409177,
+    "Bryant St&23rd St SE corner, near-side stop"
+   ],
+   [
+    37.751475,
+    -122.431707,
+    "24th St&Noe St NE corner, near-side stop"
+   ],
+   [
+    37.798885,
+    -122.442777,
+    "Lombard St&Divisadero St NW corner, far-side stop"
+   ],
+   [
+    37.762825,
+    -122.393457,
+    "18th St&Pennsylvania Ave NE corner, near-side stop"
+   ],
+   [
+    37.748225,
+    -122.409747,
+    "Cesar Chavez St&Florida St SW corner, near-side stop"
+   ],
+   [
+    37.778675,
+    -122.393097,
+    "Townsend St&3rd St, NW corner, far-side stop"
+   ],
+   [
+    37.784875,
+    -122.424677,
+    "Gough St&Geary Blvd SW corner, white zone, 6-10am"
+   ],
+   [
+    37.773455,
+    -122.437367,
+    "Divisadero St&Oak St NE corner, far-side stop"
+   ],
+   [
+    37.788827,
+    -122.418374,
+    "Bush St & Larkin St SE corner, far-side, 6-10am"
+   ],
+   [
+    37.738545,
+    -122.475477,
+    "19th Ave&Wawona St, W side, mid-block, white zone, 6-10am"
+   ],
+   [
+    37.762935,
+    -122.435127,
+    "Castro St&Market St NE corner, white zone, 4-8pm"
+   ],
+   [
+    37.744355,
+    -122.422677,
+    "San Jose Ave&Valley St SW corner, white zone, 6-10am"
+   ],
+   [
+    37.780495,
+    -122.438797,
+    "Divisadero St&Eddy St SE corner, near-side stop"
+   ],
+   [
+    37.772945,
+    -122.446217,
+    "Fell St&Masonic St NW corner, white zone, 6-10am, 4-8pm"
+   ],
+   [
+    37.750275,
+    -122.420577,
+    "Valencia St&25th St SW corner, far-side stop"
+   ],
+   [
+    37.725865,
+    -122.475187,
+    "19th Ave&Buckingham St NW corner, near-side stop"
+   ],
+   [
+    37.781155,
+    -122.472197,
+    "Park Presidio&Geary Blvd NE corner, shuttle zone north of stop"
+   ],
+   [
+    37.751635,
+    -122.427577,
+    "24th St&Church St SW corner, near-side stop, OFF-PEAK ONLY"
+   ],
+   [
+    37.780605,
+    -122.399977,
+    "Harrison St&4th St NW corner, far-side stop"
+   ],
+   [
+    37.763341,
+    -122.417403,
+    "South Van Ness Ave & 17th St, SE corner, white zone, 6-10am"
+   ],
+   [
+    37.778925,
+    -122.392517,
+    "Townsend St&3rd St, SE corner, far-side stop"
+   ],
+   [
+    37.764445,
+    -122.452687,
+    "Parnassus Ave&Stanyan St SW corner, near-side stop"
+   ],
+   [
+    37.774515,
+    -122.434167,
+    "Fell St&Pierce St NE corner, white zone, 9:30am - 8pm"
+   ],
+   [
+    37.771565,
+    -122.418367,
+    "South Van NessAve&Mission St SW corner, white zone, 6-10am"
+   ]
+  ]
+ }
+}

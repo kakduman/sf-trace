@@ -1,0 +1,1408 @@
+{
+ "title": "Muni vehicle type by route (weekday) and Metro train length, with SFMTA vehicle capacity standards",
+ "accessed": "2026-10-05",
+ "rawDir": "data/beta3/raw/fleet/",
+ "sources": [
+  {
+   "id": "calitp_vl_2026-06-10",
+   "publisher": "Cal-ITP (California Integrated Travel Project), public GCS bucket calitp-publish-data-analysis (UC Davis transit priority 2026 extract)",
+   "url": "https://storage.googleapis.com/calitp-publish-data-analysis/ucd_transit_priority_2026/fct_vehicle_locations_2026-06-10/fct_vehicle_locations_2026-06-10_000000000000.jsonl.gz",
+   "urlPattern": "…/fct_vehicle_locations_2026-06-10/fct_vehicle_locations_2026-06-10_{000000000000..000000000399}.jsonl.gz (400 shards, 2.83 GB, statewide)",
+   "date": "2026-06-10 (Wed). The dt partition is a UTC day, so it covers 17:00 PDT Tue 2026-06-09 to 17:00 PDT Wed 2026-06-10. AM peak and midday come from Wed; PM peak and evening come from Tue. Both are weekdays.",
+   "rawFile": "muni_vl_2026-06-10.jsonl.gz (1,533,895 Muni rows; fields hour, vehicle_id, vehicle_label, trip_id, trip_route_id, direction, occupancy, location_timestamp)",
+   "method": "Streamed every shard and kept gtfs_dataset_name = 'Bay Area 511 Muni VehiclePositions'. Each (service day, trip_id) is treated as a trip, and each vehicle seen on it in at least 3 distinct minutes counts as one trip-vehicle assignment. The vehicle type comes from the fleet number range (vehicleNumberRanges). Shares are trip-weighted, over the whole day and over the peak (trip median time 06:00-09:00 or 16:00-19:00 PT). weekdayVehicle is the length class if it covers 90% or more of bus assignments, otherwise 'mixed'. trolley is true if trolley coaches cover 50% or more of assignments. The feed carries one vehicle_id per train, so it cannot show consist length."
+  },
+  {
+   "id": "sfmta_srtp_fy19-30",
+   "publisher": "SFMTA",
+   "title": "Short Range Transit Plan FY2019-FY2030 (SFMTA Board 2019-12-03, Item 15)",
+   "url": "https://www.sfmta.com/sites/default/files/reports-and-documents/2019/11/12-3-19_item_15_short_range_transit_plan_fy19-30.pdf",
+   "date": "2019-12-03",
+   "rawFile": "data/beta3/raw/params/sfmta_SRTP_FY19-30.pdf (+ .txt), already in repo raw",
+   "method": "Table 4-5, Passenger Load Standards - Rail (from the 2019 Rail Fleet Management Plan). Table 4-6, Passenger Load Standards - Bus (from the 2017 Bus FMP). Table 6-8, Fleet Inventory, with fleet ID ranges and crowding capacity by type. Chapter 2 division/yard table (vehicle counts by yard)."
+  },
+  {
+   "id": "sfmta_bus_fmp_2017",
+   "publisher": "SFMTA (hosted by SF Controller, Muni Reliability Working Group)",
+   "title": "SFMTA Bus Fleet Management Plan 2017-2030",
+   "url": "https://sfcontroller.org/sites/default/files/Muni%20Reliability%20Working%20Group/2017%20Bus%20Fleet%20Plan.pdf",
+   "date": "2017",
+   "rawFile": "bus_fmp_2017.pdf (+ .txt)",
+   "method": "Table 2: Average Maximum and Crowding Loads by bus length (4.5 and 3.0 sq ft per standee). Footnote: crush load is 1.5 sq ft per passenger (APTA gross load)."
+  },
+  {
+   "id": "sfmta_mewg_2024-09-19",
+   "publisher": "SFMTA",
+   "title": "Muni Equity Working Group, 2024-09-19 slides (p.31, capacity thresholds)",
+   "url": "https://www.sfmta.com/media/40553/download",
+   "date": "2024-09-19",
+   "rawFile": "data/beta3/raw/reliability/muni_equity_wg_2024-09-19.pdf (+ .txt), already in repo raw",
+   "method": "Three capacity thresholds. Planning: 4.5 sq ft per standee (bus), 3.7 (rail). Crowding: 3.0 (bus), 2.7 (rail). Crush: 1.5 (bus), 1.8 (rail). Worked example for a 40 ft motor coach: planning 44, crowding 51, crush 71."
+  },
+  {
+   "id": "sfmta_mses_2026",
+   "publisher": "SFMTA",
+   "title": "Muni Service Equity Strategy FY26-27 & FY27-28 (Board 2026-04-07)",
+   "url": "https://www.sfmta.com/media/44786/download?inline",
+   "date": "2026-04-07",
+   "rawFile": "data/beta3/raw/reliability/mse_report_fy27-28_2026-04-07.pdf (+ .txt), already in repo raw",
+   "method": "Crowding definition: a stop is crowded when the load is at or above the vehicle's crowding capacity, and a trip is crowded when 5% or more of its stops are. Figure 7 lists the K Ingleside Rapid Project with 2-car trains on Ocean Ave as partly done and partly in progress."
+  },
+  {
+   "id": "sfmta_svc_2025-02-01",
+   "publisher": "SFMTA",
+   "title": "Muni Service Changes: February 1, 2025",
+   "url": "https://www.sfmta.com/travel-updates/muni-service-changes-february-1-2025",
+   "date": "2025-01 (effective 2025-02-01)",
+   "rawFile": "muni-service-changes-february-1-2025.html",
+   "method": "States that the K Ingleside and M Ocean View lines will run one-car trains on weekends, which implies two-car trains on weekdays."
+  },
+  {
+   "id": "sfmta_svc_2025-02-01_detail",
+   "publisher": "SFMTA",
+   "title": "Muni Service Changes: Effective Saturday, February 1, 2025 (K/L/M detail)",
+   "url": "https://www.sfmta.com/travel-updates/muni-service-changes-effective-saturday-february-1-2025",
+   "date": "2025-01",
+   "rawFile": "muni-service-changes-effective-saturday-february-1-2025.html",
+   "method": "States that the K Ingleside will operate two-car trains westbound as far as the City College pedestrian bridge, where the second car is taken out of service."
+  },
+  {
+   "id": "sfmta_blog_k_return_2021",
+   "publisher": "SFMTA",
+   "title": "Welcome Back to the Westside, K Ingleside Trains! (2021-04-16)",
+   "url": "https://www.sfmta.com/blog/welcome-back-westside-k-ingleside-trains",
+   "date": "2021-04-16",
+   "rawFile": "welcome-back-westside-k-ingleside-trains.html",
+   "method": "Says 'the two-car train increases the N Judah's capacity'."
+  },
+  {
+   "id": "sfmta_blog_two_car_2018",
+   "publisher": "SFMTA",
+   "title": "Two Car Trains On The Move (2018-06-05)",
+   "url": "https://www.sfmta.com/blog/two-car-trains-move",
+   "date": "2018-06-05",
+   "rawFile": "two-car-trains-move.html",
+   "method": "First LRV4 two-car trains, on the N Judah."
+  },
+  {
+   "id": "wiki_muni_fleet",
+   "publisher": "Wikipedia, San Francisco Municipal Railway fleet (cites SFMTA and the trade press)",
+   "url": "https://en.wikipedia.org/wiki/San_Francisco_Municipal_Railway_fleet",
+   "date": "accessed 2026-10-05",
+   "rawFile": "wiki_muni_fleet.html (+ .txt)",
+   "method": "Current fleet number series by model and yard, including the ENC 32-ft 8531-8560 (2021), XT40 5701-5885, and battery test buses 5001-5012. Also: 'only around 130 LRVs are scheduled for service during rush hour', citing Tramways & Urban Transit (Dec 2025) and Passenger Train Journal (Nov 2025), neither available online."
+  },
+  {
+   "id": "wiki_metro_lines",
+   "publisher": "Wikipedia, J Church / N Judah / K Ingleside / T Third Street articles",
+   "url": "https://en.wikipedia.org/wiki/J_Church",
+   "date": "accessed 2026-10-05",
+   "rawFile": "J_Church.html, N_Judah.html, K_Ingleside.html, T_Third_Street.html, L_Taraval.html, M_Ocean_View.html, S_Shuttle.html",
+   "method": "J: 'almost always run with a single car' because stops in the right-of-way are too short. N: 'largely uses two-car (150-foot) trains'. K/T: permanent two-car trains since 2018-08-25 (SFMTA press release, cited)."
+  },
+  {
+   "id": "sfmta_zeb_rollout_2022",
+   "publisher": "SFMTA",
+   "title": "Zero-Emission Bus Rollout Plan (2022)",
+   "url": "https://www.sfmta.com/sites/default/files/reports-and-documents/2022/07/sfmta_rollout_plan_final_2022.pdf",
+   "date": "2022",
+   "rawFile": "zeb_rollout_2022.pdf (+ .txt)",
+   "method": "Table 5-2 gives routes by yard (DAC-serving routes only), used as a cross-check: Potrero (trolley) 5, 5R, 6, 14, 30; Presidio (trolley) 21, 24, 31, 45; Flynn (60 ft) 9R, 14R, 14X, 38R; Islais Creek (40/60 ft) 7, 8, 38."
+  }
+ ],
+ "vehicleNumberRanges": {
+  "mc32": {
+   "ids": "8531-8560",
+   "model": "ENC E-Z Rider II 32-ft hybrid (2021)",
+   "source": "wiki_muni_fleet"
+  },
+  "mc40": {
+   "ids": "8601-8662, 8701-8780, 8800-8969",
+   "model": "New Flyer Xcelsior XDE40 (2013-2019)",
+   "source": "wiki_muni_fleet; sfmta_srtp_fy19-30 Table 6-8"
+  },
+  "mc60": {
+   "ids": "6500-6730",
+   "model": "New Flyer Xcelsior XDE60 (2015-2018)",
+   "source": "wiki_muni_fleet; sfmta_srtp_fy19-30 Table 6-8"
+  },
+  "tc40": {
+   "ids": "5701-5885",
+   "model": "New Flyer Xcelsior XT40 (2017-2019)",
+   "source": "wiki_muni_fleet"
+  },
+  "tc60": {
+   "ids": "7201-7293",
+   "model": "New Flyer Xcelsior XT60 (2015-2018)",
+   "source": "wiki_muni_fleet; sfmta_srtp_fy19-30 Table 6-8"
+  },
+  "beb40": {
+   "ids": "5001-5012",
+   "model": "40-ft battery-electric test buses (New Flyer XE40, BYD K9, Proterra ZX5, Nova LFSe+)",
+   "source": "wiki_muni_fleet"
+  },
+  "lrv4": {
+   "ids": "2001-2219",
+   "model": "Siemens S200 SF (LRV4)",
+   "source": "wiki_muni_fleet"
+  },
+  "observedOn2026-06-10": {
+   "mc40": 227,
+   "mc60": 194,
+   "tc40": 111,
+   "lrv4": 88,
+   "tc60": 30,
+   "streetcar": 19,
+   "cablecar": 27,
+   "mc32": 13,
+   "beb40": 5,
+   "note": "Distinct vehicle_ids seen. Every Muni vehicle_id fell in a known range, with no unclassified IDs. vehicle_label always equals vehicle_id."
+  }
+ },
+ "vehicleTypes": {
+  "32ft": {
+   "models": [
+    "ENC E-Z Rider II hybrid"
+   ],
+   "planningCapacity": 33,
+   "crowdingCapacity": 38,
+   "crushCapacity": null,
+   "seats": null,
+   "seatsImplied": 23,
+   "loadFactorPlanning": 1.4,
+   "loadFactorCrowding": 1.6,
+   "source": "sfmta_bus_fmp_2017 Table 2; sfmta_srtp_fy19-30 Table 4-6",
+   "derivation": "Seats and standing area solved from planning = seats + A/4.5 and crowding = seats + A/3.0. That gives A = 45 sq ft and seats about 23, so crush (1.5 sq ft) is about 53. The derived values are not published."
+  },
+  "40ft": {
+   "models": [
+    "New Flyer XDE40 (motor)",
+    "New Flyer XT40 (trolley)",
+    "40-ft battery test buses"
+   ],
+   "planningCapacity": 44,
+   "crowdingCapacity": 51,
+   "crushCapacity": 71,
+   "seats": null,
+   "seatsImplied": 30,
+   "loadFactorPlanning": 1.45,
+   "loadFactorCrowding": 1.65,
+   "source": "sfmta_bus_fmp_2017 Table 2; sfmta_srtp_fy19-30 Table 4-6 and Table 6-8 (crowding 51 for both 40-ft MC and TC); sfmta_mewg_2024-09-19 p.31 (44 / 51 / 71)",
+   "derivation": "A = 63 sq ft standing and seats = 30 from the planning and crowding equations. The resulting crush of 30 + 63/1.5 = 72 is consistent with SFMTA's published 71."
+  },
+  "60ft": {
+   "models": [
+    "New Flyer XDE60 (motor)",
+    "New Flyer XT60 (trolley)"
+   ],
+   "planningCapacity": 69,
+   "crowdingCapacity": 81,
+   "crushCapacity": null,
+   "seats": null,
+   "seatsImplied": 45,
+   "loadFactorPlanning": 1.55,
+   "loadFactorCrowding": 1.85,
+   "source": "sfmta_bus_fmp_2017 Table 2; sfmta_srtp_fy19-30 Table 4-6 and Table 6-8 (crowding 81 for both 60-ft MC and TC)",
+   "derivation": "A = 108 sq ft and seats about 45, so crush is about 117. Not published."
+  },
+  "lrv": {
+   "models": [
+    "Siemens S200 SF (LRV4), per car"
+   ],
+   "planningCapacity": 139,
+   "crowdingCapacity": 168,
+   "crushCapacity": null,
+   "seats": null,
+   "seatsImplied": 60,
+   "loadFactorPlanning": 2.3,
+   "loadFactorCrowding": 2.8,
+   "perCar": true,
+   "source": "sfmta_srtp_fy19-30 Table 4-5 (from the 2019 Rail Fleet Management Plan: 3.7 sq ft planning, 2.7 sq ft crowding); Table 6-8 (crowding 168 for Breda and Siemens cars)",
+   "derivation": "Seats about 60 (139/2.3 = 60.4 and 168/2.8 = 60), with about 290 sq ft standing, so crush (1.8 sq ft) is about 220 per car. Not published. A 2-car train is twice these figures."
+  },
+  "streetcar": {
+   "planningCapacity": 69,
+   "crowdingCapacity": 82,
+   "loadFactorPlanning": 2.1,
+   "loadFactorCrowding": 2.5,
+   "source": "sfmta_srtp_fy19-30 Table 4-5"
+  },
+  "cablecarPowell": {
+   "planningCapacity": 52,
+   "crowdingCapacity": 55,
+   "source": "sfmta_srtp_fy19-30 Table 4-5"
+  },
+  "cablecarCalifornia": {
+   "planningCapacity": 60,
+   "crowdingCapacity": 63,
+   "source": "sfmta_srtp_fy19-30 Table 4-5"
+  }
+ },
+ "routes": [
+  {
+   "route": "1",
+   "tripsObserved": 399,
+   "weekdayVehicle": "40ft",
+   "trolley": true,
+   "trolleyShare": 1.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "tc40": 1.0
+   },
+   "typeSharesPeak": {
+    "tc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "1X",
+   "tripsObserved": 10,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 1.0,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 1.0
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "2",
+   "tripsObserved": 79,
+   "weekdayVehicle": "40ft",
+   "trolley": true,
+   "trolleyShare": 1.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "tc40": 1.0
+   },
+   "typeSharesPeak": {
+    "tc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "5",
+   "tripsObserved": 248,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.488,
+   "share60": 0.093,
+   "share60Peak": 0.079,
+   "shareBattery": 0.02,
+   "typeShares": {
+    "mc40": 0.492,
+    "tc40": 0.395,
+    "tc60": 0.093,
+    "beb40": 0.02
+   },
+   "typeSharesPeak": {
+    "mc40": 0.697,
+    "tc40": 0.171,
+    "tc60": 0.079,
+    "beb40": 0.053
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "5R",
+   "tripsObserved": 180,
+   "weekdayVehicle": "mixed",
+   "mix": "40ft/60ft",
+   "trolley": true,
+   "trolleyShare": 0.978,
+   "share60": 0.456,
+   "share60Peak": 0.411,
+   "typeShares": {
+    "tc40": 0.522,
+    "tc60": 0.456,
+    "mc40": 0.022
+   },
+   "typeSharesPeak": {
+    "tc40": 0.556,
+    "tc60": 0.411,
+    "mc40": 0.033
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "6",
+   "tripsObserved": 127,
+   "weekdayVehicle": "40ft",
+   "trolley": true,
+   "trolleyShare": 1.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "tc40": 1.0
+   },
+   "typeSharesPeak": {
+    "tc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "7",
+   "tripsObserved": 185,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 1.0,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 1.0
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "8",
+   "tripsObserved": 223,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.982,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 0.982,
+    "mc40": 0.018
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "8AX",
+   "tripsObserved": 56,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 1.0,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 1.0
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "8BX",
+   "tripsObserved": 50,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 1.0,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 1.0
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "9",
+   "tripsObserved": 174,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "shareBattery": 0.057,
+   "typeShares": {
+    "mc40": 0.943,
+    "beb40": 0.057
+   },
+   "typeSharesPeak": {
+    "mc40": 0.951,
+    "beb40": 0.049
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "9R",
+   "tripsObserved": 124,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 1.0,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 1.0
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "12",
+   "tripsObserved": 169,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "14",
+   "tripsObserved": 303,
+   "weekdayVehicle": "mixed",
+   "mix": "60ft/40ft",
+   "trolley": false,
+   "trolleyShare": 0.294,
+   "share60": 0.706,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 0.706,
+    "tc40": 0.294
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "14R",
+   "tripsObserved": 275,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.993,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 0.993,
+    "mc40": 0.007
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "15",
+   "tripsObserved": 165,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "18",
+   "tripsObserved": 102,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "19",
+   "tripsObserved": 140,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "22",
+   "tripsObserved": 373,
+   "weekdayVehicle": "40ft",
+   "trolley": true,
+   "trolleyShare": 1.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "tc40": 1.0
+   },
+   "typeSharesPeak": {
+    "tc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "23",
+   "tripsObserved": 103,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "24",
+   "tripsObserved": 240,
+   "weekdayVehicle": "40ft",
+   "trolley": true,
+   "trolleyShare": 1.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "tc40": 1.0
+   },
+   "typeSharesPeak": {
+    "tc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "25",
+   "tripsObserved": 135,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "shareBattery": 0.156,
+   "typeShares": {
+    "mc40": 0.844,
+    "beb40": 0.156
+   },
+   "typeSharesPeak": {
+    "mc40": 0.816,
+    "beb40": 0.184
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "27",
+   "tripsObserved": 129,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "shareBattery": 0.031,
+   "typeShares": {
+    "mc40": 0.969,
+    "beb40": 0.031
+   },
+   "typeSharesPeak": {
+    "mc40": 0.961,
+    "beb40": 0.039
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "28",
+   "tripsObserved": 192,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "28R",
+   "tripsObserved": 130,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "29",
+   "tripsObserved": 250,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "shareBattery": 0.004,
+   "typeShares": {
+    "mc40": 0.996,
+    "beb40": 0.004
+   },
+   "typeSharesPeak": {
+    "mc40": 0.99,
+    "beb40": 0.01
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "30",
+   "tripsObserved": 244,
+   "weekdayVehicle": "60ft",
+   "trolley": true,
+   "trolleyShare": 0.706,
+   "share60": 0.976,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "tc60": 0.706,
+    "mc60": 0.269,
+    "mc40": 0.024
+   },
+   "typeSharesPeak": {
+    "tc60": 0.872,
+    "mc60": 0.128
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "30X",
+   "tripsObserved": 3,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 1.0,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 1.0
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "31",
+   "tripsObserved": 114,
+   "weekdayVehicle": "40ft",
+   "trolley": true,
+   "trolleyShare": 1.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "tc40": 1.0
+   },
+   "typeSharesPeak": {
+    "tc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "33",
+   "tripsObserved": 113,
+   "weekdayVehicle": "40ft",
+   "trolley": true,
+   "trolleyShare": 1.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "tc40": 1.0
+   },
+   "typeSharesPeak": {
+    "tc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "35",
+   "tripsObserved": 58,
+   "weekdayVehicle": "32ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "share32": 1.0,
+   "typeShares": {
+    "mc32": 1.0
+   },
+   "typeSharesPeak": {
+    "mc32": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "36",
+   "tripsObserved": 70,
+   "weekdayVehicle": "mixed",
+   "mix": "40ft/32ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "share32": 0.343,
+   "typeShares": {
+    "mc40": 0.657,
+    "mc32": 0.343
+   },
+   "typeSharesPeak": {
+    "mc40": 0.615,
+    "mc32": 0.385
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "37",
+   "tripsObserved": 92,
+   "weekdayVehicle": "mixed",
+   "mix": "32ft/40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "share32": 0.624,
+   "typeShares": {
+    "mc32": 0.624,
+    "mc40": 0.376
+   },
+   "typeSharesPeak": {
+    "mc32": 0.611,
+    "mc40": 0.389
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "38",
+   "tripsObserved": 264,
+   "weekdayVehicle": "mixed",
+   "mix": "60ft/40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.86,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 0.86,
+    "mc40": 0.14
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "38R",
+   "tripsObserved": 322,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.991,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 0.991,
+    "mc40": 0.009
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "39",
+   "tripsObserved": 62,
+   "weekdayVehicle": "32ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "share32": 1.0,
+   "typeShares": {
+    "mc32": 1.0
+   },
+   "typeSharesPeak": {
+    "mc32": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "43",
+   "tripsObserved": 182,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "44",
+   "tripsObserved": 235,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "45",
+   "tripsObserved": 211,
+   "weekdayVehicle": "40ft",
+   "trolley": true,
+   "trolleyShare": 1.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "tc40": 1.0
+   },
+   "typeSharesPeak": {
+    "tc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "48",
+   "tripsObserved": 191,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "49",
+   "tripsObserved": 349,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.991,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc60": 0.991,
+    "mc40": 0.009
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "52",
+   "tripsObserved": 98,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "54",
+   "tripsObserved": 103,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "shareBattery": 0.087,
+   "typeShares": {
+    "mc40": 0.913,
+    "beb40": 0.087
+   },
+   "typeSharesPeak": {
+    "mc40": 0.93,
+    "beb40": 0.07
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "55",
+   "tripsObserved": 108,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "56",
+   "tripsObserved": 87,
+   "weekdayVehicle": "32ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "share32": 1.0,
+   "typeShares": {
+    "mc32": 1.0
+   },
+   "typeSharesPeak": {
+    "mc32": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "57",
+   "tripsObserved": 106,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "58",
+   "tripsObserved": 73,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "66",
+   "tripsObserved": 102,
+   "weekdayVehicle": "mixed",
+   "mix": "40ft/32ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "share32": 0.196,
+   "typeShares": {
+    "mc40": 0.804,
+    "mc32": 0.196
+   },
+   "typeSharesPeak": {
+    "mc40": 0.757,
+    "mc32": 0.243
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "67",
+   "tripsObserved": 96,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "90",
+   "tripsObserved": 24,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {},
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "91",
+   "tripsObserved": 33,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "714",
+   "tripsObserved": 3,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {},
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "CA",
+   "tripsObserved": 72,
+   "weekdayVehicle": "cablecar",
+   "trolley": false,
+   "typeShares": {
+    "cablecar": 1.0
+   },
+   "typeSharesPeak": {
+    "cablecar": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "F",
+   "tripsObserved": 153,
+   "weekdayVehicle": "streetcar",
+   "trolley": false,
+   "typeShares": {
+    "streetcar": 1.0
+   },
+   "typeSharesPeak": {
+    "streetcar": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "FBUS",
+   "tripsObserved": 6,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {},
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "J",
+   "tripsObserved": 159,
+   "weekdayVehicle": "lrv",
+   "trolley": false,
+   "typeShares": {
+    "lrv4": 1.0
+   },
+   "typeSharesPeak": {
+    "lrv4": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "K",
+   "tripsObserved": 199,
+   "weekdayVehicle": "lrv",
+   "trolley": false,
+   "typeShares": {
+    "lrv4": 1.0
+   },
+   "typeSharesPeak": {
+    "lrv4": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "KBUS",
+   "tripsObserved": 8,
+   "weekdayVehicle": "mixed",
+   "mix": "60ft/40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.875,
+   "typeShares": {
+    "mc60": 0.875,
+    "mc40": 0.125
+   },
+   "typeSharesPeak": {},
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "L",
+   "tripsObserved": 217,
+   "weekdayVehicle": "lrv",
+   "trolley": false,
+   "typeShares": {
+    "lrv4": 1.0
+   },
+   "typeSharesPeak": {
+    "lrv4": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "LOWL",
+   "tripsObserved": 39,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "share60Peak": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {
+    "mc40": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "M",
+   "tripsObserved": 205,
+   "weekdayVehicle": "lrv",
+   "trolley": false,
+   "typeShares": {
+    "lrv4": 1.0
+   },
+   "typeSharesPeak": {
+    "lrv4": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "N",
+   "tripsObserved": 245,
+   "weekdayVehicle": "lrv",
+   "trolley": false,
+   "typeShares": {
+    "lrv4": 1.0
+   },
+   "typeSharesPeak": {
+    "lrv4": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "NBUS",
+   "tripsObserved": 3,
+   "weekdayVehicle": "60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 1.0,
+   "typeShares": {
+    "mc60": 1.0
+   },
+   "typeSharesPeak": {},
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "NOWL",
+   "tripsObserved": 27,
+   "weekdayVehicle": "40ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.0,
+   "typeShares": {
+    "mc40": 1.0
+   },
+   "typeSharesPeak": {},
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "PH",
+   "tripsObserved": 85,
+   "weekdayVehicle": "cablecar",
+   "trolley": false,
+   "typeShares": {
+    "cablecar": 1.0
+   },
+   "typeSharesPeak": {
+    "cablecar": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "PM",
+   "tripsObserved": 77,
+   "weekdayVehicle": "cablecar",
+   "trolley": false,
+   "typeShares": {
+    "cablecar": 0.91,
+    "lrv4": 0.064,
+    "mc40": 0.013,
+    "mc60": 0.013
+   },
+   "typeSharesPeak": {
+    "cablecar": 0.778,
+    "lrv4": 0.185,
+    "mc60": 0.037
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "T",
+   "tripsObserved": 244,
+   "weekdayVehicle": "lrv",
+   "trolley": false,
+   "typeShares": {
+    "lrv4": 1.0
+   },
+   "typeSharesPeak": {
+    "lrv4": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  },
+  {
+   "route": "TBUS",
+   "tripsObserved": 7,
+   "weekdayVehicle": "mixed",
+   "mix": "40ft/60ft",
+   "trolley": false,
+   "trolleyShare": 0.0,
+   "share60": 0.143,
+   "share60Peak": 1.0,
+   "typeShares": {
+    "mc40": 0.857,
+    "mc60": 0.143
+   },
+   "typeSharesPeak": {
+    "mc60": 1.0
+   },
+   "source": "calitp_vl_2026-06-10"
+  }
+ ],
+ "metro": {
+  "J": {
+   "peakCars": 1,
+   "confidence": "documented",
+   "observedPeakTrains0800": 7,
+   "source": "wiki_metro_lines (J Church: almost always a single car because of short stops)"
+  },
+  "K": {
+   "peakCars": 2,
+   "confidence": "documented",
+   "observedPeakTrains0800": 10,
+   "source": "sfmta_svc_2025-02-01 (K and M one-car on weekends); sfmta_svc_2025-02-01_detail (K two-car westbound to City College, second car then taken out of service); sfmta_mses_2026 Fig. 7"
+  },
+  "L": {
+   "peakCars": 2,
+   "confidence": "inferred",
+   "observedPeakTrains0800": 10,
+   "source": "No SFMTA statement found for L consist length. Inferred from fleet arithmetic: at 08:00 there are 66 trains (J7 K10 L10 M11 N15 T13). With J at 1 car and K/M/N/T at 2, a 2-car L gives 125 cars and a 1-car L gives 115, against about 130 LRVs scheduled in rush hour (wiki_muni_fleet). Not definitive."
+  },
+  "M": {
+   "peakCars": 2,
+   "confidence": "documented (implied)",
+   "observedPeakTrains0800": 11,
+   "source": "sfmta_svc_2025-02-01 (K and M lines run one-car trains on weekends, so weekdays are 2-car)"
+  },
+  "N": {
+   "peakCars": 2,
+   "confidence": "documented",
+   "observedPeakTrains0800": 15,
+   "source": "wiki_metro_lines (N Judah largely uses two-car trains); sfmta_blog_k_return_2021; sfmta_blog_two_car_2018"
+  },
+  "T": {
+   "peakCars": 2,
+   "confidence": "documented (2018; not reconfirmed after the 2022 Central Subway opening)",
+   "observedPeakTrains0800": 13,
+   "source": "wiki_metro_lines (permanent two-car K/T trains since 2018-08-25)"
+  },
+  "S": {
+   "peakCars": null,
+   "confidence": "not found",
+   "observedPeakTrains0800": 0,
+   "source": "No S trips in the June 2026 GTFS (data/beta3/raw/gtfs/muni.zip) or in the 2026-06-10 vehicle positions. The last documented form is a pair of single-car trains, West Portal to Embarcadero, from 2016 (wiki_metro_lines S_Shuttle)."
+  }
+ },
+ "notes": [
+  "Vehicle assignment is observed for one weekday (Cal-ITP 2026-06-10 extract). Shares are trip-weighted. typeShares and typeSharesPeak list each type's share of trip-vehicle assignments: mc = motor coach, tc = trolley coach, beb = battery bus.",
+  "Peak shares can differ from all-day shares. On the 14 Mission, 60-ft motor coaches ran 100% of peak trips, while 40-ft trolleys ran off-peak (all-day share60 = 0.71). The 38 Geary is 86% 60-ft all day and 100% in the peak. The 5 Fulton is a trolley route, but on that day it was 49% motor coach (40-ft XDE40), 39% XT40, 9% XT60 and 2% battery. The 5R is 52% XT40, 46% XT60 and 2% XDE40.",
+  "The 30 Stockton is 71% XT60 trolley plus 27% 60-ft motor coaches. The 1 California is 100% XT40 (40-ft trolley). The 49 Van Ness-Mission is 60-ft motor coach, not trolley.",
+  "The 32-ft class (ENC, 8531-8560) runs on 35, 39 and 56 (100%), mostly on 37 (62%), and partly on 36 (34%) and 66 (20%). The task's '30-foot' class is SFMTA's 32-ft class.",
+  "SFMTA's crowding standard is not '85% of planning capacity'. SFMTA publishes three per-vehicle thresholds: planning (4.5 sq ft per standee for bus, 3.7 for rail), crowding (3.0 bus, 2.7 rail) and crush (1.5 bus, 1.8 rail). A trip is 'crowded' when 5% or more of its stops are at or above crowding capacity, and the target is under 10% of trips crowded. Planning capacity, also called average maximum load, is used to schedule service. For buses, crowding equals about 116-117% of planning capacity (51/44, 81/69), and for LRVs about 121% (168/139).",
+  "Seats are not published per vehicle in any fetched SFMTA source. seatsImplied solves SFMTA's own planning and crowding capacities and per-standee areas for seats and standing area. Treat it as derived.",
+  "The Muni GTFS-RT feed reports one vehicle_id per train (88 distinct LRV4 IDs all day out of 219 cars, with about 66 trains running at once), so consist length is not observable from it. Metro peakCars comes from SFMTA documents. L is inferred.",
+  "Trips with a median time in the PM peak come from Tue 2026-06-09 (UTC-day partition). The 90 and 91 owl routes and the FBUS/KBUS/NBUS/TBUS/LOWL/NOWL bus substitutions are early-morning or late-night service and have little or no peak.",
+  "A few cross-route stray assignments appear (for example 5 LRV4 trips tagged PM, which is likely an AVL/trip-matching error). They are kept in typeShares but do not affect weekdayVehicle."
+ ],
+ "notFound": [
+  "Seat counts per vehicle type stated directly by SFMTA. Only implied values are given.",
+  "Published crush capacity for the 32-ft, 60-ft and LRV classes (only the 40-ft example of 71 is published).",
+  "An SFMTA statement of current L Taraval and T Third weekday consist length.",
+  "S Shuttle current operation (not in the June 2026 GTFS).",
+  "An SFMTA route-by-route fleet assignment table. The 2017 Bus FMP and SRTP give division or yard assignments only, not routes. The ZEB rollout Table 5-2 lists DAC-serving routes by yard only.",
+  "The 21 Hayes and other suspended routes are absent from the June 2026 GTFS and from the vehicle data."
+ ]
+}

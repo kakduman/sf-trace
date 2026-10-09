@@ -1,0 +1,85 @@
+{
+ "description": "How San Francisco's students travel to school and college, and how many of Muni's riders are traveling to or from school or college. Calibration target for the transit constant on school and college tours (calibrate.ts SCHOOL_SHARE, from od-validation.json snapshot) and the evidence behind dropping BATS's under-18 transit share as a target. Numbers copied from the sources.",
+ "accessed": "2026-10-06",
+ "sources": [
+  {
+   "id": "sfcta-child-transportation-2016",
+   "title": "Findings of the Child Transportation Survey: Final Report (SFCTA and SFMTA; survey by Fall Line Analytics), 2016",
+   "url": "https://www.sfcta.org/sites/default/files/2019-03/Child_Transportation_FINAL.pdf",
+   "sample": "1,746 valid completed surveys of San Francisco parents of children in kindergarten through grade 5 (public, private, and parochial schools), spring 2016",
+   "use": "Mode to and from elementary school (Table 3, p. 9) and the SFUSD Student Commute Study summary (p. 5)"
+  },
+  {
+   "id": "mtc-snapshot-2023-24",
+   "title": "2023-2024 Regional Transit Passenger Snapshot Survey dashboard (weekday)",
+   "url": "https://mtc.ca.gov/2023-2024-regional-transit-passenger-snapshot-survey",
+   "sample": "Muni light rail 304 and local bus 1,266 riders answering trip purpose; the questionnaire's age groups start at under 13",
+   "use": "Share of Muni riders whose trip purpose group is School (K-12 and college)"
+  },
+  {
+   "id": "bats-2023-dashboard",
+   "title": "BATS 2023 dashboard extract, San Francisco residents under 18, weekday linked trips",
+   "url": "https://mtc.ca.gov/tools-resources/survey-program",
+   "sample": "482 trips, 40 of them by transit",
+   "use": "Under-18 transit share 10.4% (now a test, not a target)"
+  },
+  {
+   "id": "sfbos-bla-2014",
+   "title": "SF Board of Supervisors Budget and Legislative Analyst, Policy Analysis Report: Free Muni for Youth, February 18, 2014",
+   "url": "https://sfbos.archive.sf.gov/sites/default/files/FileCenter/Documents/47980-BLA%20FMFY%20021814.pdf",
+   "use": "Youth Clipper tags as a share of all Muni Clipper tags (via muni-stop-ridership.json youth)"
+  }
+ ],
+ "elementarySchoolMode2016": {
+  "source": "sfcta-child-transportation-2016",
+  "table": "Table 3, percent mode share by pickup type",
+  "dropoffAtSchool": {
+   "familyCar": 0.565,
+   "publicTransit": 0.14,
+   "carpool": 0.082,
+   "walk": 0.078,
+   "schoolBus": 0.076,
+   "bike": 0.033
+  },
+  "pickupAtTheBell": {
+   "familyCar": 0.521,
+   "publicTransit": 0.267,
+   "carpool": 0.016,
+   "walk": 0.106,
+   "schoolBus": 0.068,
+   "bike": 0.007
+  },
+  "pickupFromAftercare": {
+   "familyCar": 0.7,
+   "publicTransit": 0.182,
+   "carpool": 0.03,
+   "walk": 0.041,
+   "schoolBus": 0.019,
+   "bike": 0.015
+  },
+  "sfusdCommuteStudy": "SFUSD's regular survey of how students in grades K, 5, 6, and 9 arrive at school: a little over half of public elementary students are driven, about a quarter walk, about 10% take public transit, and another 10% ride yellow school buses (as summarized on p. 5)",
+  "aftercareShareOfParents": {
+   "value": 0.5,
+   "text": "Over 50% of parents have children in aftercare (summary of findings); taken as half for the weight of aftercare pickups among trips home",
+   "use": "params.ts SCHOOL_RETURN"
+  }
+ },
+ "muniRidersSchoolShare2023_24": {
+  "source": "mtc-snapshot-2023-24",
+  "lightRail": 0.128,
+  "localBus": 0.156,
+  "note": "Weighted share of weekday riders by trip purpose group (od-validation.json snapshot). The calibration weights the two by the counted boardings on the subway lines and the T and on the buses."
+ },
+ "batsUnder18": {
+  "source": "bats-2023-dashboard",
+  "transitShare": 0.104,
+  "transitTripsSampled": 40,
+  "tripsSampled": 482
+ },
+ "youthClipperTags2013": {
+  "source": "sfbos-bla-2014",
+  "shareOfMuniClipperTags": 0.092,
+  "period": "May 2013 (7.1% in May 2012)",
+  "caveat": "Clipper tags only, during the pilot for low- and moderate-income youth; since August 2021 all youth ride free without tapping, so fare data no longer count them."
+ }
+}

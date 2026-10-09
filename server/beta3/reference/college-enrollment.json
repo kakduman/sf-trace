@@ -1,0 +1,17 @@
+{
+  "title": "College enrollment at named campuses, replacing MTC's 2023 land-use figure for their block group",
+  "accessed": "2026-10-06",
+  "why": "MTC's 2023 land use (TM1 TAZ1454: COLLFTE + 0.5 COLLPTE, shared out by education jobs in zones.ts) puts 27,269 students at San Francisco State's block group, more than the university's own headcount in any recent year; SF State has shrunk every year since 2019.",
+  "campuses": [
+    {
+      "name": "San Francisco State University",
+      "zone": "060750332011",
+      "enrollment": 20713,
+      "measure": "fall 2025 headcount",
+      "source": "California State University, Enrollment by Campus, fall 2025 (https://www.calstate.edu/csu-system/about-the-csu/facts-about-the-csu/enrollment), as reported in the Golden Gate Xpress (https://goldengatexpress.org/113580/news/campus/a-one-sided-enrollment-battle-sjsu-booms-while-sfsu-shrinks/): 20,713, 7.4% below fall 2024",
+      "residentShare": 0.41,
+      "residentShareSource": "SF State 2018 Transportation Survey Results (Nelson\\Nygaard), Figure 3-4: 41% of affiliates live in San Francisco (student-travel.json)",
+      "pass": "Gator Pass: unlimited rides on all Bay Area operators that take Clipper (Clipper BayPass) since August 26, 2024; unlimited Muni since 2017-18. A mandatory fee of $130 a semester, so no fare per ride (student-travel.json)"
+    }
+  ]
+}

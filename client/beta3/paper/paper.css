@@ -1,0 +1,903 @@
+/*
+ * The methodology article (/beta3/method): a research paper set for the screen, in the app's
+ * identity (tokens.css). Ink on paper, one dark sign band, color only in the figures.
+ * Order: base, sign band, layout and contents, front matter, prose, equations, tables, figures,
+ * chart marks, references, responsive, print.
+ */
+@import '../tokens.css';
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-padding-top: 72px;
+}
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font: 400 var(--text-prose) / var(--lh-prose) var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a {
+  color: var(--link);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--surface-sunk);
+  padding: 0.05em 0.3em;
+  border-radius: var(--radius-sm);
+  overflow-wrap: anywhere;
+}
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 20;
+  background: var(--surface-raised);
+  padding: var(--space-2) var(--space-3);
+}
+.skip:focus {
+  left: var(--space-3);
+  top: var(--space-2);
+}
+
+/* ---------- sign band ---------- */
+.signbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: 52px;
+  padding: 0 var(--space-5);
+  background: var(--sign);
+  color: var(--sign-ink);
+  border-bottom: 1px solid var(--sign-rule);
+  font-size: var(--text-md);
+}
+.sign-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--sign-ink);
+  text-decoration: none;
+  font-weight: 700;
+}
+.brand-mark {
+  width: 34px;
+  height: 17px;
+  flex: none;
+  overflow: visible;
+}
+.brand-mark path {
+  stroke: currentColor;
+  stroke-width: 3;
+}
+.brand-mark circle {
+  fill: var(--sign);
+  stroke: currentColor;
+  stroke-width: 2.4;
+}
+.sign-t,
+.sign-page,
+.sign-btn {
+  white-space: nowrap;
+}
+.sign-page {
+  color: var(--sign-ink-2);
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--sign-rule);
+}
+.sign-gap {
+  flex: 1;
+}
+.sign-btn {
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--sign-ink-2);
+  background: none;
+  border: 1px solid var(--sign-rule);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px 3px;
+  cursor: pointer;
+}
+.sign-btn:hover {
+  color: var(--sign-ink);
+}
+.sign-open {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--sign);
+  background: var(--sign-ink);
+  border-radius: var(--radius-sm);
+  padding: 7px 14px 5px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.sign-open::after {
+  content: ' →';
+}
+
+/* ---------- layout and contents ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 236px minmax(0, 1fr);
+  gap: var(--space-7);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+.toc {
+  position: sticky;
+  top: 52px;
+  align-self: start;
+  max-height: calc(100vh - 52px);
+  overflow-y: auto;
+  padding: var(--space-7) 0 var(--space-6);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+}
+.toc-h {
+  margin: 0 0 var(--space-3);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc-list li {
+  margin: 0;
+}
+.toc-list a {
+  display: flex;
+  gap: var(--space-2);
+  padding: 4px 8px 3px;
+  border-left: 2px solid transparent;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.toc-list a:hover {
+  color: var(--ink);
+  background: var(--surface-hover);
+}
+.toc-list a[aria-current] {
+  color: var(--ink);
+  border-left-color: var(--ink);
+  font-weight: 600;
+}
+.toc-list li.sub a {
+  padding-left: 22px;
+  color: var(--ink-3);
+}
+.toc-num {
+  flex: none;
+  min-width: 2.2em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+.toc-mobile {
+  display: none;
+}
+
+.article {
+  --measure: 68ch;
+  min-width: 0;
+  padding: var(--space-7) 0 var(--space-8);
+  outline: none;
+}
+.article > *,
+.article section > * {
+  max-width: var(--measure);
+}
+.article section {
+  max-width: none;
+}
+.article .wide {
+  max-width: min(100%, 960px);
+}
+
+/* ---------- front matter ---------- */
+.front {
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--space-6);
+}
+.kicker {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+h1 {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-2xl);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  max-width: 34ch;
+  text-wrap: balance;
+}
+.byline {
+  margin: 0;
+  font-weight: 600;
+}
+.meta {
+  margin: var(--space-1) 0 var(--space-5);
+  font-size: var(--text-md);
+  color: var(--ink-3);
+}
+.notice {
+  margin: 0 0 var(--space-5);
+  padding: var(--space-3) var(--space-4) var(--space-2);
+  background: var(--caution-wash);
+  border: 1px solid var(--caution-rule);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-md);
+  max-width: 68ch;
+}
+.app-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--ink-2);
+}
+.btn {
+  display: inline-block;
+  background: var(--action);
+  color: var(--action-ink);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 9px 16px 7px;
+  border-radius: var(--radius-sm);
+}
+.btn:hover {
+  background: var(--action-hover);
+}
+.btn::after {
+  content: ' →';
+}
+.abstract {
+  margin: 0 0 var(--space-7);
+  padding: var(--space-4) var(--space-5) var(--space-2);
+  background: var(--surface-raised);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--ink);
+}
+.abstract h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-md);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.abstract p {
+  font-size: 16px;
+}
+.keywords span {
+  font-weight: 700;
+  margin-right: var(--space-2);
+}
+
+/* ---------- prose ---------- */
+h2,
+h3 {
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+h2 {
+  margin: var(--space-8) 0 var(--space-4);
+  font-size: var(--text-xl);
+}
+h3 {
+  margin: var(--space-7) 0 var(--space-3);
+  font-size: var(--text-lg);
+}
+.sec-num {
+  display: inline-block;
+  min-width: 1.9em;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+h3 .sec-num {
+  min-width: 2.6em;
+}
+p {
+  margin: 0 0 1em;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.cites {
+  white-space: nowrap;
+}
+.cite,
+.xref {
+  text-decoration: none;
+}
+.cite:hover,
+.xref:hover {
+  text-decoration: underline;
+}
+:target {
+  scroll-margin-top: 72px;
+}
+li:target,
+.table-block:target,
+.fig:target,
+.equation:target {
+  background: var(--select-wash);
+}
+
+/* ---------- equations ---------- */
+.equation {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: var(--space-4) 0 var(--space-5);
+}
+.eq-body {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0;
+}
+.eq-body .katex-display {
+  margin: 0;
+  text-align: left;
+}
+.eq-body .katex-display > .katex {
+  text-align: left;
+}
+.eq-num {
+  flex: none;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.katex {
+  font-size: 1.05em;
+}
+
+/* ---------- tables ---------- */
+.table-block {
+  margin: var(--space-6) 0 var(--space-7);
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.4;
+}
+caption {
+  caption-side: top;
+  text-align: left;
+  font-size: 14.5px;
+  color: var(--ink-2);
+  padding-bottom: var(--space-2);
+}
+.cap-label {
+  font-weight: 700;
+  color: var(--ink);
+}
+thead th {
+  text-align: left;
+  font-weight: 600;
+  vertical-align: bottom;
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 7px 10px 5px;
+}
+tbody th,
+tbody td {
+  text-align: left;
+  font-weight: 400;
+  vertical-align: top;
+  padding: 6px 10px 4px;
+  border-bottom: 1px solid var(--rule);
+}
+tbody tr:last-child th,
+tbody tr:last-child td {
+  border-bottom: 1.5px solid var(--ink);
+}
+th:first-child,
+td:first-child {
+  padding-left: 0;
+}
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.table-notes {
+  margin: var(--space-2) 0 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+.status {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  padding: 2px 8px 0;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--rule-strong);
+  white-space: nowrap;
+}
+.status.warn {
+  background: var(--caution-wash);
+  border-color: var(--caution-rule);
+}
+.status.fail {
+  color: var(--warn-text);
+  border-color: currentColor;
+}
+.scorecard td:nth-child(4) {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+.compare td:nth-child(3),
+.compare td:nth-child(4) {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+.compare table {
+  min-width: 880px;
+}
+.commands td:first-child,
+.commands th:first-child {
+  white-space: nowrap;
+}
+
+/* ---------- figures ---------- */
+.fig {
+  margin: var(--space-6) 0 var(--space-7);
+  padding: var(--space-4) 0 0;
+  border-top: 1px solid var(--rule);
+}
+.fig-art {
+  min-width: 0;
+}
+.chart-slot {
+  width: 100%;
+  min-height: 40px;
+}
+.chart {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--space-5);
+}
+.panel-h {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-md);
+  font-weight: 700;
+}
+.panel-h span {
+  display: block;
+  font-weight: 400;
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+figcaption {
+  margin-top: var(--space-3);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+.key {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: -6px;
+  vertical-align: -1px;
+}
+.key.dot {
+  border-radius: 50%;
+  background: var(--c-model);
+}
+.key.dot.out {
+  background: transparent;
+  border: 2px solid var(--c-model);
+}
+.key.dot.hl {
+  background: var(--c-model);
+}
+.key.dot.muted {
+  background: var(--c-today);
+  opacity: 0.6;
+}
+.key.band {
+  background: color-mix(in srgb, var(--c-model) 14%, transparent);
+}
+.key.band-acc {
+  background: color-mix(in srgb, var(--c-obs) 7%, transparent);
+  outline: 1px solid var(--rule);
+}
+.key.band-pref {
+  background: color-mix(in srgb, var(--c-obs) 16%, transparent);
+}
+.key.one {
+  height: 0;
+  border-top: 1.5px dashed var(--ink-3);
+}
+.key.obs {
+  background: var(--c-obs);
+  border-radius: 1.5px;
+}
+.key.mod {
+  background: var(--c-model);
+  border-radius: 1.5px;
+}
+.key.part {
+  background: repeating-linear-gradient(45deg, var(--c-obs) 0 2px, var(--surface) 2px 4px);
+}
+.key.modpart {
+  background: repeating-linear-gradient(45deg, var(--c-model) 0 2px, var(--surface) 2px 4px);
+}
+.key.range {
+  background: color-mix(in srgb, var(--c-obs) 20%, transparent);
+  border-radius: 2px;
+}
+.key.central {
+  width: 2px;
+  background: var(--ink-2);
+  margin-right: 0;
+}
+.fig-data {
+  margin-top: var(--space-3);
+  font-size: 13.5px;
+}
+.fig-data summary {
+  cursor: pointer;
+  color: var(--link);
+  font-size: var(--text-md);
+}
+.data-scroll {
+  max-height: 420px;
+  overflow: auto;
+  margin-top: var(--space-2);
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+}
+table.data {
+  font-size: 13px;
+}
+table.data thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  border-top: 0;
+}
+table.data td {
+  padding: 3px 10px 2px;
+}
+
+/* ---------- chart marks ---------- */
+.chart text {
+  font-family: var(--font-sans);
+}
+.chart .tick {
+  fill: var(--ink-3);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.chart .tick.sub {
+  font-size: 10.5px;
+}
+.chart .axis {
+  fill: var(--ink-2);
+  font-size: 12px;
+}
+.chart .row-lbl {
+  fill: var(--ink-2);
+  font-size: 12px;
+}
+.chart .val {
+  fill: var(--ink-2);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+.chart .pt-lbl {
+  fill: var(--ink-2);
+  font-size: 11px;
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+}
+.chart .pt-lbl.strong {
+  fill: var(--ink);
+  font-weight: 700;
+}
+.chart .grid {
+  stroke: var(--grid);
+  stroke-width: 1;
+}
+.chart .frame {
+  fill: none;
+  stroke: var(--axis);
+}
+.chart .axis-line {
+  stroke: var(--axis);
+  stroke-width: 1;
+}
+.chart .band {
+  fill: var(--c-model);
+  fill-opacity: 0.12;
+}
+.chart .one {
+  stroke: var(--ink-3);
+  stroke-width: 1.25;
+  stroke-dasharray: 4 3;
+}
+.chart .dot {
+  fill: var(--c-model);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+.chart .dot.out {
+  fill: var(--surface);
+  stroke: var(--c-model);
+  stroke-width: 2;
+}
+.chart .dot.hl {
+  fill: var(--c-model);
+  fill-opacity: 0.9;
+}
+.chart .dot.muted {
+  fill: var(--c-today);
+  fill-opacity: 0.45;
+  stroke: var(--surface);
+}
+.chart .band-acc {
+  fill: var(--c-obs);
+  fill-opacity: 0.07;
+}
+.chart .band-pref {
+  fill: var(--c-obs);
+  fill-opacity: 0.09;
+  pointer-events: none;
+}
+.chart .bar-obs {
+  fill: var(--c-obs);
+}
+.chart .bar-mod {
+  fill: var(--c-model);
+}
+.chart .bar-part {
+  fill: url(#hatch);
+}
+.chart .bar-modpart {
+  fill: url(#hatch-mod);
+}
+.chart .hatch {
+  fill: var(--surface);
+}
+.chart .range {
+  fill: var(--c-obs);
+  fill-opacity: 0.2;
+}
+.chart .central {
+  stroke: var(--ink-2);
+  stroke-width: 2;
+}
+.chart .node {
+  fill: var(--surface-raised);
+  stroke: var(--rule-strong);
+}
+.chart .node-t {
+  fill: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+.chart .node-s {
+  fill: var(--ink-3);
+  font-size: 11.5px;
+}
+.chart .flow {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+}
+.chart .flow.fb {
+  stroke-dasharray: 5 3;
+}
+.chart .arrowhead {
+  fill: var(--ink-3);
+}
+.chart circle:hover,
+.chart rect[class^='bar']:hover {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+/* ---------- how to cite ---------- */
+.citation {
+  border-left: 3px solid var(--rule);
+  padding-left: var(--space-3);
+}
+pre.bibtex {
+  background: var(--surface-sunk);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  overflow-x: auto;
+  max-width: 100%;
+}
+pre.bibtex code {
+  background: none;
+  padding: 0;
+  overflow-wrap: normal;
+}
+
+/* ---------- references ---------- */
+.refs {
+  margin: 0;
+  padding-left: 2.4em;
+  font-size: 14.5px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.refs li {
+  margin: 0 0 var(--space-2);
+  padding-left: var(--space-1);
+}
+.refs li::marker {
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0 var(--space-5);
+  }
+  .toc {
+    display: none;
+  }
+  .toc-mobile {
+    display: block;
+    margin: 0 0 var(--space-6);
+    font-size: var(--text-md);
+  }
+  .toc-mobile summary {
+    cursor: pointer;
+    font-weight: 700;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc-mobile .toc-list {
+    padding: var(--space-2) 0;
+    columns: 2 260px;
+  }
+  .article {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 960px;
+  }
+}
+@media (max-width: 900px) {
+  .sign-page {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+  .layout {
+    padding: 0 var(--space-4);
+  }
+  .signbar {
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+  }
+  .sign-t,
+  .sign-page {
+    display: none;
+  }
+  .sign-btn {
+    font-size: var(--text-xs);
+  }
+  .article {
+    padding-top: var(--space-6);
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: var(--space-7);
+  }
+  .abstract {
+    padding: var(--space-3) var(--space-4) var(--space-1);
+  }
+  .abstract p {
+    font-size: 15px;
+  }
+  table {
+    font-size: 13px;
+  }
+  .equation {
+    gap: var(--space-2);
+  }
+  .eq-num {
+    font-size: 14px;
+  }
+  .equation .katex {
+    font-size: 0.92em;
+  }
+}
+
+/* ---------- print ---------- */
+@media print {
+  .signbar,
+  .toc,
+  .toc-mobile,
+  .app-link,
+  .fig-data {
+    display: none;
+  }
+  .layout {
+    display: block;
+    padding: 0;
+  }
+  body {
+    background: #fff;
+    font-size: 11pt;
+  }
+  .fig,
+  .table-block,
+  .equation {
+    break-inside: avoid;
+  }
+}
+
+/* the author footnote under the byline */
+.author-note {
+  margin: 2px 0 0;
+  font-size: 0.72em;
+  color: var(--ink-3, #666);
+}
+.byline sup,
+.author-note sup {
+  font-size: 0.75em;
+}
+

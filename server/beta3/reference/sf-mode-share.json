@@ -1,0 +1,215 @@
+{
+ "source": "(1) MTC/SFCTA 2023 Bay Area Travel Study (BATS 2023) Consultant Final Report, Table 36; (2) SFMTA 2021 Travel Decisions Survey summary report; (3) SFMTA 2019 Travel Decisions Survey summary report; (4) SFMTA performance metric \"Sustainable transportation mode share\" (Transtat CSV)",
+ "url": "https://mtc.ca.gov/sites/default/files/documents/2026-02/BATS2023ConsultantFinalReport.pdf",
+ "period": "BATS 2023: weekday travel, May 9 2023 - Jan 19 2024 (main fall wave Oct 2023 - Jan 2024). TDS 2021: May-Sep 2021. TDS 2019: May-Aug 2019.",
+ "accessed": "2026-10-04",
+ "notes": [
+  "No SFMTA Travel Decision Survey newer than 2021 was found (SFMTA mode-share metric series ends FY 20-21). The most recent all-trip, SF-resident mode share found is BATS 2023, a regional household travel survey (8,258 households, SF oversampled).",
+  "IMPORTANT: BATS 2023 Table 36 is computed from UNLINKED trips (each leg separately; walk access/egress legs and transfers count as separate trips with purpose \"Change mode\"), as the report states. This inflates Walk and Transit trip counts relative to linked-trip mode shares. MTC said linked-trip results would follow (e.g. in SFCTA Downtown Travel Study); that SFCTA PDF (https://www.sfcta.org/sites/default/files/2025-05/Downtown_Travel_Study_Report_250513.pdf) could not be fetched (HTTP 403 to scripted download; >10MB to WebFetch).",
+  "TDS surveys are small telephone samples (2021: n=756 respondents, 470 SF residents; 2019: n=841) of Bay Area residents aged 18+, covering trips to/from/within SF; excludes visitors from outside the Bay Area, through trips and commercial trips. \"All trips in SF\" figures combine SF-resident and non-SF-resident trips assuming 73%/27% (SF-CHAMP). 2021 is during COVID; 2019 is pre-COVID. Values are published rounded to whole percent.",
+  "All numbers transcribed from text extracted from the PDFs (raw files kept); no values estimated."
+ ],
+ "bats2023_sfResidents_allTrips_unlinked": {
+  "table": "TABLE 36. WEIGHTED SHARE OF TRIPS BY TRIP MODES GROUPED BY HOME COUNTY (column SAN FRANCISCO COUNTY), report page 59",
+  "population": "Trips made by residents of San Francisco County on an average weekday (anywhere in the region), weighted",
+  "sharesPercent": {
+   "Walk": 44.0,
+   "School bus": 0.1,
+   "Shuttle/vanpool": 0.4,
+   "Ferry": 0.0,
+   "Transit": 12.2,
+   "Long distance passenger": 0.2,
+   "Bike": 1.8,
+   "Bikeshare": 0.4,
+   "Scootershare": 0.1,
+   "Taxi": 0.3,
+   "TNC": 1.7,
+   "Other": 0.6,
+   "Car": 37.8,
+   "Carshare": 0.3
+  },
+  "modeNote": "\"Car\" in this table is a single category (driver and passenger; no drive-alone/carpool split). Sum of published shares = 99.9% (rounding). Values parsed from the PDF text; cells empty in the source for other counties do not affect the SF column.",
+  "unweightedTrips": 112778.0,
+  "weightedTrips": 3482642.0,
+  "otherFinding": "\"In San Francisco County, roughly 34% of households have zero vehicles.\""
+ },
+ "tds2021": {
+  "url": "https://www.sfmta.com/sites/default/files/reports-and-documents/2022/04/sfmta_td2021_rpt_v2.pdf",
+  "allTripsInSF_percent": {
+   "driveAlone_inclMotorcycle": 36,
+   "carpool": 25,
+   "tnc": 2,
+   "walk": 24,
+   "bike": 3,
+   "publicTransit": 10,
+   "taxi": 1,
+   "other": 1,
+   "dontKnow": 1,
+   "privatelyOwnedVehiclesTotal": 62,
+   "priorityModesTotal": 38,
+   "note": "\"Includes both SF residents and residents of other Bay Area counties\". Public transit unrounded = 9.9%."
+  },
+  "sfResidents_percent": {
+   "droveAlone": 31,
+   "driveWithOthers": 24,
+   "tnc": 2,
+   "walk": 29,
+   "bike": 4,
+   "publicTransit": 10,
+   "taxi": 1,
+   "other": 1,
+   "dontKnow": "<0.5",
+   "privatelyOwnedVehiclesTotal": 56,
+   "priorityModesTotal": 44,
+   "basis": "2,451 trips by SF respondents over previous two days"
+  },
+  "nonSfResidents_tripsToFromSF_percent": {
+   "droveAlone": 49,
+   "driveWithOthers": 28,
+   "tnc": 1,
+   "walk": 9,
+   "bike": 1,
+   "publicTransit": 11,
+   "taxi": "<0.5",
+   "other": 1,
+   "privatelyOwnedVehiclesTotal": 78,
+   "priorityModesTotal": 22
+  },
+  "totalDailyTripsAssumed": 4380121,
+  "totalDailyTripsSource": "SF-CHAMP Year 2015 (CHAMP 6.0) run, not a survey value"
+ },
+ "tds2019_preCOVID": {
+  "url": "https://www.sfmta.com/sites/default/files/reports-and-documents/2020/01/sfmta_travel_decision_survey_2019.pdf",
+  "allTripsInSF_percent": {
+   "droveAlone": 31,
+   "driveWithOthers": 17,
+   "walk": 22,
+   "transitTotal": 22,
+   "transitPublic": 21,
+   "transitPrivateShuttle": 1,
+   "taxiOrTnc": 5,
+   "tnc": 5,
+   "taxi": "<0.5",
+   "bike": 2,
+   "carshare": 1,
+   "scooter": "<0.5",
+   "dontKnow": "<0.5",
+   "note": "Page 6 table (n=10,437 trips). Page 5 summary rounds public transit to 17% + private 1%; the page 6 table shows public 21% - inconsistent in the source; transitTotal 22% is consistent in both. Transit unrounded = 21.7%."
+  },
+  "sfResidents_percent": {
+   "droveAlone": 32,
+   "driveWithOthers": 16,
+   "walk": 25,
+   "transitTotal": 18,
+   "transitPublic": 17,
+   "transitPrivateShuttle": 1,
+   "bike": 3,
+   "taxiOrTnc": 6,
+   "tnc": 5,
+   "taxi": "<0.5",
+   "carshare": "<0.5",
+   "scooter": "<0.5",
+   "dontKnow": 1,
+   "basis": "2,798 trips by SF respondents over previous two days"
+  },
+  "nonSfResidents_tripsToFromSF_percent": {
+   "droveAlone": 29,
+   "driveWithOthers": 19,
+   "walk": 16,
+   "transitTotal": 32,
+   "transitPublic": 31,
+   "transitPrivateShuttle": 1,
+   "bike": 1,
+   "taxiOrTnc": 2,
+   "tnc": 2,
+   "carshare": 2
+  },
+  "totalDailyTripsAssumed": 4457310
+ },
+ "sfmtaModeShareSeries": {
+  "url": "https://www.sfmta.com/reports/sustainable-transportation-mode-share",
+  "dataUrl": "https://transtat.sfmta.com/t/public/views/Goal2Dashboards/2_2_2Table.csv",
+  "rawFile": "data/beta3/raw/obs/sfmta_sustainable_mode_share.csv",
+  "definition": "Share of all trips (Travel Decision Survey), city-wide. Fractions, as published (2 decimals).",
+  "byFiscalYear": {
+   "FY 10-11": {
+    "All other": 0.02,
+    "Drove alone": 0.36,
+    "Drove with others": 0.23,
+    "Taxi": 0.07,
+    "Bicycle": 0.04,
+    "Walk": 0.18,
+    "Transit": 0.47
+   },
+   "FY 13-14": {
+    "TNC": 0.01,
+    "Drove alone": 0.3,
+    "Drove with others": 0.16,
+    "Taxi": 0.01,
+    "Bicycle": 0.02,
+    "Walk": 0.24,
+    "Transit": 0.26
+   },
+   "FY 14-15": {
+    "TNC": 0.01,
+    "Drove alone": 0.27,
+    "Drove with others": 0.21,
+    "Taxi": 0.01,
+    "Bicycle": 0.02,
+    "Walk": 0.23,
+    "Transit": 0.25
+   },
+   "FY 15-16": {
+    "TNC": 0.02,
+    "Drove alone": 0.3,
+    "Drove with others": 0.16,
+    "Taxi": 0.01,
+    "Bicycle": 0.02,
+    "Walk": 0.25,
+    "Transit": 0.24
+   },
+   "FY 16-17": {
+    "TNC": 0.04,
+    "Drove alone": 0.28,
+    "Drove with others": 0.15,
+    "Taxi": 0.01,
+    "Bicycle": 0.02,
+    "Walk": 0.25,
+    "Transit": 0.26
+   },
+   "FY 18-19": {
+    "TNC": 0.05,
+    "Drove alone": 0.31,
+    "Drove with others": 0.17,
+    "Taxi": 0.01,
+    "Bicycle": 0.02,
+    "Walk": 0.22,
+    "Transit": 0.22
+   },
+   "FY 20-21": {
+    "TNC": 0.02,
+    "Drove alone": 0.36,
+    "Drove with others": 0.25,
+    "Taxi": 0.01,
+    "Bicycle": 0.03,
+    "Walk": 0.24,
+    "Transit": 0.1
+   },
+   "FY 12-13": {
+    "Drove alone": 0.28,
+    "Drove with others": 0.22,
+    "Taxi": 0.01,
+    "Bicycle": 0.03,
+    "Walk": 0.22,
+    "Transit": 0.24
+   }
+  },
+  "note": "FY 10-11 row sums to well over 1.0 in the source (transit 0.47) - treat as unreliable. FY 20-21 = 2021 TDS (COVID)."
+ },
+ "rawFiles": [
+  "data/beta3/raw/obs/mtc_BATS2023_ConsultantFinalReport.pdf",
+  "data/beta3/raw/obs/sfmta_travel_decision_survey_2021.pdf",
+  "data/beta3/raw/obs/sfmta_travel_decision_survey_2019.pdf",
+  "data/beta3/raw/obs/sfmta_sustainable_mode_share.csv"
+ ]
+}

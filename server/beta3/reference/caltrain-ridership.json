@@ -1,0 +1,258 @@
+{
+ "source": "Caltrain (Peninsula Corridor JPB): \"FY2026 Annual Ridership Report\" presentation to the JPB Board, October 1, 2026; and \"Caltrain Ridership Fiscal Year 2025 Annual Report\" (Caltrain Planning, September 2025)",
+ "url": "https://www.caltrain.com/media/37894/download",
+ "otherUrls": {
+  "fy2025Report": "https://www.caltrain.com/media/35885/download",
+  "fy2026PressRelease": "https://www.caltrain.com/news/caltrain-weekend-ridership-climbs-past-2019-levels-while-weekday-ridership-continues-rise",
+  "reportsIndex": "https://www.caltrain.com/about-caltrain/statistics-reports/ridership/annual-reports"
+ },
+ "period": "Fiscal Year 2026 = July 2025 - June 2026 (primary); FY2025 = July 2024 - June 2025; 2019 = pre-COVID annual passenger count (winter 2019)",
+ "accessed": "2026-10-04",
+ "rawFiles": [
+  "data/beta3/raw/obs/caltrain_media37894.pdf",
+  "data/beta3/raw/obs/caltrain_FY2025_Annual_Ridership_Report.pdf",
+  "data/beta3/raw/obs/caltrain_ED_report_2026-09-03.pdf"
+ ],
+ "systemwide": {
+  "avgWeekdayRidershipFY2026": 40800,
+  "avgWeekdayRidershipFY2026_note": "Published rounded (\"FY2026 Average Weekday Ridership was 40,800\"). All weekdays (Mon-Fri), systemwide, unlinked boardings.",
+  "avgWeekendRidershipFY2026": 21200,
+  "avgWeekendRidershipFY2026_pressRelease": 21210,
+  "totalRidershipFY2026": "12.6 million (published rounded)",
+  "avgWeekdayRidershipJune2026": 48856,
+  "avgWeekdayRidershipJune2026_source": "FY2026 press release, 2026-09-30",
+  "weekdayRecoveryEndFY2026_pctOf2019": 81.6,
+  "avgWeekdayRidershipFY2025": 29754,
+  "totalRidershipFY2025": "9.1 million",
+  "giantsGameDayFY2026": {
+   "weekdayAway": 41603,
+   "weekdayHome": 45864
+  },
+  "amwrByCountyFY2025": {
+   "San Francisco": 8303,
+   "San Mateo": 10682,
+   "Santa Clara": 13463,
+   "total": 32448,
+   "note": "FY2025 report Table 4. The SF county figure 8,303 = San Francisco 6,874 + 22nd Street 1,261 + Bayshore 168, i.e. Caltrain counts Bayshore (physically in Brisbane, San Mateo County) under San Francisco. 2019 equivalents: SF 17,159; total 63,606."
+  }
+ },
+ "sanFranciscoStationsAmwrFY2026": {
+  "San Francisco": 9714,
+  "22nd Street": 1800,
+  "Bayshore": 257
+ },
+ "sanFranciscoStationsAmwrFY2026Sum_derived": 11771,
+ "notes": [
+  "Station figures are AMWR = Average Mid-Week Ridership (Tuesday-Thursday) by ORIGIN station, i.e. boardings, not alightings. Caltrain says the fare model cannot yet estimate destination stations. Mid-week is ~20% above Mon/Fri in FY2026 (presentation p.9), so AMWR overstates an all-weekday average; systemwide AWR (all weekdays) is 40,800 vs sum of station AMWR 44262 (sum computed here).",
+  "Method: Caltrain has no fare gates or APCs (yet); FY2025/FY2026 numbers are model estimates from the Fare Media Sales-Based Ridership Estimation Model (ticket and pass sales, with assumed trips per pass: monthly pass = 37 trips/month from Jan 2025). Does not count fare evasion. NTD-reported ridership has historically been higher than this model.",
+  "The annual passenger count (full on-board census) was discontinued in 2020; 2019 values are from the 2019 Annual Passenger Count (pre-COVID, secondary only).",
+  "\"San Francisco\" station = 4th & King. inSanFranciscoCity marks San Francisco and 22nd Street; Bayshore is just south of the city line in Brisbane but is grouped with SF county by Caltrain.",
+  "The full written FY2026 Annual Ridership Report was not yet posted when accessed (the presentation says it is \"to be posted on the ridership webpage\"); figures here come from the board presentation, which matches the 2026-09-30 press release (SF station 9,714; AWR 40,800).",
+  "Most recent monthly: Executive Director report (JPB board, 2026-09-03) says July 2026 weekday ridership +18.7% vs July 2025 and 67.3% of 2019 (weekday); a chart label of 1,321,627 total riders, consistent with the press-release figure of 1.32 million for July 2026. The July 2026 AWR value is only in a chart and was not extractable."
+ ],
+ "stations": [
+  {
+   "name": "San Francisco",
+   "inSanFranciscoCity": true,
+   "amwrFY2026": 9714,
+   "amwrFY2025": 6874,
+   "amwr2019Count_preCOVID": 15027
+  },
+  {
+   "name": "Palo Alto",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 4486,
+   "amwrFY2025": 3603,
+   "amwr2019Count_preCOVID": 7384
+  },
+  {
+   "name": "Mountain View",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 3048,
+   "amwrFY2025": 2288,
+   "amwr2019Count_preCOVID": 4560
+  },
+  {
+   "name": "San Jose Diridon",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 2936,
+   "amwrFY2025": 2136,
+   "amwr2019Count_preCOVID": 4795
+  },
+  {
+   "name": "Redwood City",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 2732,
+   "amwrFY2025": 2111,
+   "amwr2019Count_preCOVID": 4220
+  },
+  {
+   "name": "Sunnyvale",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 2484,
+   "amwrFY2025": 1770,
+   "amwr2019Count_preCOVID": 3208
+  },
+  {
+   "name": "Hillsdale",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 2215,
+   "amwrFY2025": 1596,
+   "amwr2019Count_preCOVID": 3217
+  },
+  {
+   "name": "Millbrae",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 1921,
+   "amwrFY2025": 1489,
+   "amwr2019Count_preCOVID": 3194
+  },
+  {
+   "name": "22nd Street",
+   "inSanFranciscoCity": true,
+   "amwrFY2026": 1800,
+   "amwrFY2025": 1261,
+   "amwr2019Count_preCOVID": 1872
+  },
+  {
+   "name": "San Mateo",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 1720,
+   "amwrFY2025": 1270,
+   "amwr2019Count_preCOVID": 2324
+  },
+  {
+   "name": "Santa Clara",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 1215,
+   "amwrFY2025": 839,
+   "amwr2019Count_preCOVID": 1074
+  },
+  {
+   "name": "California Ave",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 1201,
+   "amwrFY2025": 817,
+   "amwr2019Count_preCOVID": 1634
+  },
+  {
+   "name": "Menlo Park",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 1116,
+   "amwrFY2025": 863,
+   "amwr2019Count_preCOVID": 1639
+  },
+  {
+   "name": "South San Francisco",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 1050,
+   "amwrFY2025": 692,
+   "amwr2019Count_preCOVID": 453
+  },
+  {
+   "name": "Lawrence",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 1026,
+   "amwrFY2025": 686,
+   "amwr2019Count_preCOVID": 1004
+  },
+  {
+   "name": "San Antonio",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 954,
+   "amwrFY2025": 655,
+   "amwr2019Count_preCOVID": 1017
+  },
+  {
+   "name": "Burlingame",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 901,
+   "amwrFY2025": 620,
+   "amwr2019Count_preCOVID": 1131
+  },
+  {
+   "name": "San Carlos",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 885,
+   "amwrFY2025": 644,
+   "amwr2019Count_preCOVID": 1341
+  },
+  {
+   "name": "Belmont",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 883,
+   "amwrFY2025": 654,
+   "amwr2019Count_preCOVID": 718
+  },
+  {
+   "name": "Hayward Park",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 518,
+   "amwrFY2025": 366,
+   "amwr2019Count_preCOVID": 506
+  },
+  {
+   "name": "San Bruno",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 517,
+   "amwrFY2025": 377,
+   "amwr2019Count_preCOVID": 751
+  },
+  {
+   "name": "Bayshore",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 257,
+   "amwrFY2025": 168,
+   "amwr2019Count_preCOVID": 260
+  },
+  {
+   "name": "Morgan Hill",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 155,
+   "amwrFY2025": 130,
+   "amwr2019Count_preCOVID": 251
+  },
+  {
+   "name": "Tamien",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 153,
+   "amwrFY2025": 243,
+   "amwr2019Count_preCOVID": 1422
+  },
+  {
+   "name": "Gilroy",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 139,
+   "amwrFY2025": 110,
+   "amwr2019Count_preCOVID": 187
+  },
+  {
+   "name": "Blossom Hill",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 94,
+   "amwrFY2025": 71,
+   "amwr2019Count_preCOVID": 159
+  },
+  {
+   "name": "Capitol",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 56,
+   "amwrFY2025": 49,
+   "amwr2019Count_preCOVID": 71
+  },
+  {
+   "name": "College Park",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 45,
+   "amwrFY2025": 41,
+   "amwr2019Count_preCOVID": 103
+  },
+  {
+   "name": "San Martin",
+   "inSanFranciscoCity": false,
+   "amwrFY2026": 41,
+   "amwrFY2025": 25,
+   "amwr2019Count_preCOVID": 84
+  }
+ ]
+}

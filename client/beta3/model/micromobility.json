@@ -1,0 +1,1938 @@
+{
+ "label": "after",
+ "compare": {
+  "without": {
+   "muni": {
+    "r": 0.9459768698575731,
+    "pctRmse": 35.09436200514442,
+    "total": 0.8827981397637542,
+    "model": 455193.6736138256,
+    "observed": 515626
+   },
+   "bart": {
+    "r": 0.932758338001034,
+    "total": 0.923967424393006,
+    "pctRmse": 23.872664235120485
+   },
+   "caltrain": {
+    "obs": 11771,
+    "mod": 10619.524475097656
+   },
+   "residentShares": {
+    "da": 0.26596774029831516,
+    "sr": 0.21617264187279903,
+    "tnc": 0.025878256293584267,
+    "transit": 0.1214725979920445,
+    "walk": 0.3414162263079336,
+    "bike": 0.02909253723532351
+   }
+  },
+  "with": {
+   "muni": {
+    "r": 0.9470458822983049,
+    "pctRmse": 35.067743867458304,
+    "total": 0.8781232898991524,
+    "model": 452783.19947754045,
+    "observed": 515626
+   },
+   "bart": {
+    "r": 0.9315333003673306,
+    "total": 0.9262326537361698,
+    "pctRmse": 23.988366434822293
+   },
+   "caltrain": {
+    "obs": 11771,
+    "mod": 10612.628601074219
+   },
+   "residentShares": {
+    "da": 0.2663183042790434,
+    "sr": 0.2161431192320673,
+    "tnc": 0.025893564629797982,
+    "transit": 0.1213598334467788,
+    "walk": 0.34060588841906464,
+    "bike": 0.029679289993247836
+   }
+  }
+ },
+ "calibration": {
+  "asc": {
+   "bayWheels": -1.6123177286679806,
+   "ebike": 2.3322569350968796,
+   "scooter": 0.8647442311598319
+  },
+  "accessBias": 12.1584588087392,
+  "fit": {
+   "bayWheels": [
+    16760.539640782834,
+    14938.3
+   ],
+   "ebikeShare": [
+    0.7982713514641427,
+    0.8137472135383544
+   ],
+   "scooter": [
+    12564.845540808716,
+    13135
+   ],
+   "meanKm": [
+    2.7538095875439663,
+    2.766857487130396
+   ],
+   "accessAM": [
+    60.439212864056465,
+    59.03595375632783
+   ],
+   "egressAM": [
+    267.9301852849579,
+    260.84844793316563
+   ]
+  },
+  "kmCoef": -0.28474847743965076,
+  "climb": {
+   "own": 0
+  },
+  "egressBias": 15.917964681041994
+ },
+ "muni": {
+  "r": 0.9470458822983049,
+  "pctRmse": 35.067743867458304,
+  "total": 0.8781232898991524
+ },
+ "bart": {
+  "r": 0.9315333003673306,
+  "total": 0.9262326537361698
+ },
+ "residentShares": {
+  "da": 0.2663183042790434,
+  "sr": 0.2161431192320673,
+  "tnc": 0.025893564629797982,
+  "transit": 0.1213598334467788,
+  "walk": 0.34060588841906464,
+  "bike": 0.029679289993247836
+ },
+ "targets": {
+  "bayWheels": 14938.3,
+  "ebikeShare": 0.8137472135383544,
+  "scooter": 13135,
+  "accessAM": 59.03595375632783,
+  "egressAM": 260.84844793316563,
+  "atStation": 0.8621864603067284,
+  "meanKm": 2.766857487130396
+ },
+ "trips": {
+  "mode": [
+   309.46211002499416,
+   11256.421635590836,
+   12148.506627260951
+  ],
+  "station": [
+   3116.888873166694,
+   1664.0960744984088,
+   1161.0092271809556
+  ],
+  "total": [
+   3426.350983191688,
+   12920.517710089245,
+   13309.515854441906
+  ],
+  "residents": [
+   218.1501161047848,
+   8610.815191747082,
+   10133.404653460444
+  ],
+  "byPurpose": {
+   "work": [
+    81.70101770048574,
+    3170.249152213235,
+    3533.504797582806
+   ],
+   "shop": [
+    31.96103334980287,
+    1341.390249470955,
+    1555.88110512185
+   ],
+   "other": [
+    34.25117080600291,
+    1503.4226337422515,
+    1755.4168238198272
+   ],
+   "social": [
+    43.1149344596494,
+    1808.6538588612896,
+    2693.8448758282902
+   ],
+   "univ": [
+    7.500921906441049,
+    282.93523806676086,
+    292.3893933849653
+   ],
+   "nhb": [
+    49.10034720897939,
+    1329.8977679795091,
+    930.8174010866192
+   ],
+   "visitor": [
+    31.44768953152216,
+    1052.6098833298615,
+    925.6369635166172
+   ],
+   "event": [
+    30.384995062130496,
+    767.2628519277193,
+    461.01526692047355
+   ]
+  }
+ },
+ "tod": {
+  "model": {
+   "AM": 0.23465757429375012,
+   "MD": 0.19430919710468458,
+   "PM": 0.3804738579235724,
+   "NT": 0.1905593706779929
+  },
+  "observed": {
+   "AM": 0.24787795212338676,
+   "MD": 0.1976784662346704,
+   "PM": 0.35970385047930165,
+   "NT": 0.19473973116264123
+  }
+ },
+ "tripKm": {
+  "model": {
+   "classic": 2.5093125065182167,
+   "ebike": 2.7791311342080665,
+   "scooter": 2.747738438394584
+  },
+  "observed": {
+   "classic": 2.076,
+   "ebike": 2.925
+  }
+ },
+ "od": {
+  "n": 1595,
+  "r": 0.8965851762458925,
+  "pctRmse": 189.74618476688445,
+  "total": 1.0000000000000089,
+  "big": {
+   "n": 146,
+   "r": 0.8720485014945262,
+   "pctRmse": 71.76545998102428,
+   "total": 0.8548456509407514
+  },
+  "byNeighborhood": {
+   "n": 42,
+   "r": 0.9407536920417133,
+   "pctRmse": 57.19370584763332,
+   "total": 1.0000000000000075
+  },
+  "hills": {
+   "n": 29,
+   "r": 0.6222028385454133,
+   "pctRmse": 103.83456755651149,
+   "total": -0.004254131567123908
+  },
+  "hillSlopes": {
+   "classic": {
+    "slope": 0.08117093465197481,
+    "intercept": -3.144106117896837,
+    "r": 0.617792503388751,
+    "n": 26,
+    "rows": [
+     {
+      "name": "Bernal Heights",
+      "climb": 47,
+      "logRatio": 0.122
+     },
+     {
+      "name": "Castro/Upper Market",
+      "climb": 44.5,
+      "logRatio": -0.551
+     },
+     {
+      "name": "Chinatown",
+      "climb": 41.1,
+      "logRatio": 0.685
+     },
+     {
+      "name": "Financial District/South Beach",
+      "climb": 36,
+      "logRatio": -0.164
+     },
+     {
+      "name": "Golden Gate Park",
+      "climb": 0,
+      "logRatio": -6.692
+     },
+     {
+      "name": "Haight Ashbury",
+      "climb": 35.9,
+      "logRatio": -0.303
+     },
+     {
+      "name": "Hayes Valley",
+      "climb": 37.3,
+      "logRatio": -0.049
+     },
+     {
+      "name": "Inner Richmond",
+      "climb": 36.9,
+      "logRatio": 0.622
+     },
+     {
+      "name": "Inner Sunset",
+      "climb": 38.5,
+      "logRatio": 0.16
+     },
+     {
+      "name": "Japantown",
+      "climb": 35.3,
+      "logRatio": 0.414
+     },
+     {
+      "name": "Lone Mountain/USF",
+      "climb": 33.8,
+      "logRatio": -0.167
+     },
+     {
+      "name": "Marina",
+      "climb": 63,
+      "logRatio": 0.681
+     },
+     {
+      "name": "Mission",
+      "climb": 39.9,
+      "logRatio": -0.251
+     },
+     {
+      "name": "Mission Bay",
+      "climb": 29.6,
+      "logRatio": -0.427
+     },
+     {
+      "name": "Nob Hill",
+      "climb": 24.5,
+      "logRatio": 0.905
+     },
+     {
+      "name": "Noe Valley",
+      "climb": 50.6,
+      "logRatio": 0.5
+     },
+     {
+      "name": "North Beach",
+      "climb": 45.3,
+      "logRatio": 0.241
+     },
+     {
+      "name": "Outer Richmond",
+      "climb": 33.9,
+      "logRatio": 0.878
+     },
+     {
+      "name": "Pacific Heights",
+      "climb": 30.3,
+      "logRatio": 1.565
+     },
+     {
+      "name": "Potrero Hill",
+      "climb": 29.8,
+      "logRatio": -0.887
+     },
+     {
+      "name": "Presidio",
+      "climb": 50.8,
+      "logRatio": -1.786
+     },
+     {
+      "name": "Russian Hill",
+      "climb": 31.5,
+      "logRatio": 0.413
+     },
+     {
+      "name": "South of Market",
+      "climb": 35,
+      "logRatio": 0.029
+     },
+     {
+      "name": "Sunset/Parkside",
+      "climb": 46.3,
+      "logRatio": 0.296
+     },
+     {
+      "name": "Tenderloin",
+      "climb": 32.9,
+      "logRatio": 0.857
+     },
+     {
+      "name": "Western Addition",
+      "climb": 36,
+      "logRatio": 0.434
+     }
+    ]
+   },
+   "ebike": {
+    "slope": 0.06079565514798004,
+    "intercept": -2.472397910020165,
+    "r": 0.5185637303703834,
+    "n": 34,
+    "rows": [
+     {
+      "name": "Bayview Hunters Point",
+      "climb": 50.1,
+      "logRatio": 1.332
+     },
+     {
+      "name": "Bernal Heights",
+      "climb": 47,
+      "logRatio": 0.599
+     },
+     {
+      "name": "Castro/Upper Market",
+      "climb": 44.5,
+      "logRatio": -0.663
+     },
+     {
+      "name": "Chinatown",
+      "climb": 41.1,
+      "logRatio": 0.154
+     },
+     {
+      "name": "Excelsior",
+      "climb": 46.2,
+      "logRatio": 2.444
+     },
+     {
+      "name": "Financial District/South Beach",
+      "climb": 36,
+      "logRatio": -0.221
+     },
+     {
+      "name": "Glen Park",
+      "climb": 47.6,
+      "logRatio": 1.283
+     },
+     {
+      "name": "Golden Gate Park",
+      "climb": 0,
+      "logRatio": -7.143
+     },
+     {
+      "name": "Haight Ashbury",
+      "climb": 35.9,
+      "logRatio": -0.756
+     },
+     {
+      "name": "Hayes Valley",
+      "climb": 37.3,
+      "logRatio": -0.261
+     },
+     {
+      "name": "Inner Richmond",
+      "climb": 36.9,
+      "logRatio": 0.211
+     },
+     {
+      "name": "Inner Sunset",
+      "climb": 38.5,
+      "logRatio": 0.304
+     },
+     {
+      "name": "Japantown",
+      "climb": 35.3,
+      "logRatio": -0.005
+     },
+     {
+      "name": "Lakeshore",
+      "climb": 61.3,
+      "logRatio": 1.477
+     },
+     {
+      "name": "Lone Mountain/USF",
+      "climb": 33.8,
+      "logRatio": -0.919
+     },
+     {
+      "name": "Marina",
+      "climb": 63,
+      "logRatio": 0.002
+     },
+     {
+      "name": "Mission",
+      "climb": 39.9,
+      "logRatio": -0.128
+     },
+     {
+      "name": "Mission Bay",
+      "climb": 29.6,
+      "logRatio": -0.212
+     },
+     {
+      "name": "Nob Hill",
+      "climb": 24.5,
+      "logRatio": 0.199
+     },
+     {
+      "name": "Noe Valley",
+      "climb": 50.6,
+      "logRatio": 0.105
+     },
+     {
+      "name": "North Beach",
+      "climb": 45.3,
+      "logRatio": 0.022
+     },
+     {
+      "name": "Oceanview/Merced/Ingleside",
+      "climb": 38.2,
+      "logRatio": 2.004
+     },
+     {
+      "name": "Outer Mission",
+      "climb": 52.9,
+      "logRatio": 1.62
+     },
+     {
+      "name": "Outer Richmond",
+      "climb": 33.9,
+      "logRatio": 0.371
+     },
+     {
+      "name": "Pacific Heights",
+      "climb": 30.3,
+      "logRatio": 0.461
+     },
+     {
+      "name": "Potrero Hill",
+      "climb": 29.8,
+      "logRatio": -0.602
+     },
+     {
+      "name": "Presidio",
+      "climb": 50.8,
+      "logRatio": -1.736
+     },
+     {
+      "name": "Presidio Heights",
+      "climb": 33,
+      "logRatio": 0.134
+     },
+     {
+      "name": "Russian Hill",
+      "climb": 31.5,
+      "logRatio": -0.26
+     },
+     {
+      "name": "South of Market",
+      "climb": 35,
+      "logRatio": 0.301
+     },
+     {
+      "name": "Sunset/Parkside",
+      "climb": 46.3,
+      "logRatio": 0.828
+     },
+     {
+      "name": "Tenderloin",
+      "climb": 32.9,
+      "logRatio": 0.865
+     },
+     {
+      "name": "West of Twin Peaks",
+      "climb": 45,
+      "logRatio": 0.983
+     },
+     {
+      "name": "Western Addition",
+      "climb": 36,
+      "logRatio": 0.146
+     }
+    ]
+   },
+   "own": {
+    "slope": -0.006107497675736565,
+    "intercept": 0.16466360424057747,
+    "r": -0.1124497022953342,
+    "n": 32,
+    "rows": [
+     {
+      "name": "Bayview Hunters Point",
+      "climb": 50.1,
+      "logRatio": 0.903
+     },
+     {
+      "name": "Bernal Heights",
+      "climb": 47,
+      "logRatio": -0.322
+     },
+     {
+      "name": "Castro/Upper Market",
+      "climb": 44.5,
+      "logRatio": -0.257
+     },
+     {
+      "name": "Excelsior",
+      "climb": 46.2,
+      "logRatio": 1.034
+     },
+     {
+      "name": "Financial District/South Beach",
+      "climb": 36,
+      "logRatio": 0.638
+     },
+     {
+      "name": "Glen Park",
+      "climb": 47.6,
+      "logRatio": -0.67
+     },
+     {
+      "name": "Haight Ashbury",
+      "climb": 35.9,
+      "logRatio": -0.45
+     },
+     {
+      "name": "Hayes Valley",
+      "climb": 37.3,
+      "logRatio": -0.522
+     },
+     {
+      "name": "Inner Richmond",
+      "climb": 36.9,
+      "logRatio": -0.164
+     },
+     {
+      "name": "Inner Sunset",
+      "climb": 38.5,
+      "logRatio": -0.047
+     },
+     {
+      "name": "Lakeshore",
+      "climb": 61.3,
+      "logRatio": -0.374
+     },
+     {
+      "name": "Lone Mountain/USF",
+      "climb": 33.8,
+      "logRatio": 0.108
+     },
+     {
+      "name": "Marina",
+      "climb": 63,
+      "logRatio": 0.547
+     },
+     {
+      "name": "Mission",
+      "climb": 39.9,
+      "logRatio": -0.124
+     },
+     {
+      "name": "Mission Bay",
+      "climb": 29.6,
+      "logRatio": 0.748
+     },
+     {
+      "name": "Nob Hill",
+      "climb": 24.5,
+      "logRatio": 0.255
+     },
+     {
+      "name": "Noe Valley",
+      "climb": 50.6,
+      "logRatio": -0.432
+     },
+     {
+      "name": "North Beach",
+      "climb": 45.3,
+      "logRatio": 0.596
+     },
+     {
+      "name": "Oceanview/Merced/Ingleside",
+      "climb": 38.2,
+      "logRatio": 0.177
+     },
+     {
+      "name": "Outer Mission",
+      "climb": 52.9,
+      "logRatio": -0.123
+     },
+     {
+      "name": "Outer Richmond",
+      "climb": 33.9,
+      "logRatio": -0.153
+     },
+     {
+      "name": "Pacific Heights",
+      "climb": 30.3,
+      "logRatio": 1.163
+     },
+     {
+      "name": "Portola",
+      "climb": 56,
+      "logRatio": 0.482
+     },
+     {
+      "name": "Potrero Hill",
+      "climb": 29.8,
+      "logRatio": 0.024
+     },
+     {
+      "name": "Presidio",
+      "climb": 50.8,
+      "logRatio": -1.529
+     },
+     {
+      "name": "Presidio Heights",
+      "climb": 33,
+      "logRatio": 0.566
+     },
+     {
+      "name": "Russian Hill",
+      "climb": 31.5,
+      "logRatio": 0.471
+     },
+     {
+      "name": "South of Market",
+      "climb": 35,
+      "logRatio": -0.184
+     },
+     {
+      "name": "Sunset/Parkside",
+      "climb": 46.3,
+      "logRatio": -0.602
+     },
+     {
+      "name": "Tenderloin",
+      "climb": 32.9,
+      "logRatio": -0.476
+     },
+     {
+      "name": "West of Twin Peaks",
+      "climb": 45,
+      "logRatio": -0.176
+     },
+     {
+      "name": "Western Addition",
+      "climb": 36,
+      "logRatio": 0.402
+     }
+    ]
+   }
+  },
+  "areas": {
+   "downtown": {
+    "neighborhoods": [
+     "Financial District/South Beach",
+     "South of Market",
+     "Tenderloin",
+     "Chinatown"
+    ],
+    "obs": 0.33040814276626224,
+    "mod": 0.3472249606065415,
+    "ratio": 1.0508971047126276
+   },
+   "waterfront": {
+    "neighborhoods": [
+     "Financial District/South Beach",
+     "Mission Bay",
+     "Marina",
+     "Russian Hill",
+     "North Beach"
+    ],
+    "obs": 0.3866206850369956,
+    "mod": 0.31644884635036724,
+    "ratio": 0.8184995231698127
+   },
+   "hills": {
+    "neighborhoods": [
+     "Potrero Hill",
+     "Haight Ashbury",
+     "Russian Hill",
+     "Nob Hill",
+     "Pacific Heights",
+     "Noe Valley",
+     "Inner Sunset",
+     "Bernal Heights",
+     "West of Twin Peaks",
+     "Glen Park",
+     "Twin Peaks"
+    ],
+    "obs": 0.18252921284360588,
+    "mod": 0.1930094830170437,
+    "ratio": 1.0574169471843256
+   },
+   "flatEast": {
+    "neighborhoods": [
+     "Financial District/South Beach",
+     "Mission",
+     "Mission Bay",
+     "South of Market",
+     "Hayes Valley",
+     "Western Addition"
+    ],
+    "obs": 0.5582482338366734,
+    "mod": 0.47757766247832295,
+    "ratio": 0.8554933693136372
+   }
+  },
+  "neighborhoods": [
+   {
+    "name": "Financial District/South Beach",
+    "obs": 0.2062410017745328,
+    "mod": 0.1624315651387798,
+    "ratio": 0.7875813429007368,
+    "climbM": 36.0276752767529
+   },
+   {
+    "name": "Mission",
+    "obs": 0.11754109887166385,
+    "mod": 0.09763769277498174,
+    "ratio": 0.8306685381730738,
+    "climbM": 39.87495376791496
+   },
+   {
+    "name": "Mission Bay",
+    "obs": 0.09777346234975011,
+    "mod": 0.07028424915171459,
+    "ratio": 0.7188479109014004,
+    "climbM": 29.573547717842317
+   },
+   {
+    "name": "South of Market",
+    "obs": 0.07181504670706768,
+    "mod": 0.08782393393589549,
+    "ratio": 1.2229182875021691,
+    "climbM": 34.96859688195993
+   },
+   {
+    "name": "Hayes Valley",
+    "obs": 0.045153513911674895,
+    "mod": 0.03560857294059975,
+    "ratio": 0.7886113362130338,
+    "climbM": 37.33978936552789
+   },
+   {
+    "name": "Potrero Hill",
+    "obs": 0.041721632571064884,
+    "mod": 0.022373136218940565,
+    "ratio": 0.5362478608868474,
+    "climbM": 29.845875937286973
+   },
+   {
+    "name": "Castro/Upper Market",
+    "obs": 0.03615026618006479,
+    "mod": 0.019542233405590522,
+    "ratio": 0.5405833890198896,
+    "climbM": 44.53584083647975
+   },
+   {
+    "name": "Haight Ashbury",
+    "obs": 0.034365687882947596,
+    "mod": 0.01769557962713409,
+    "ratio": 0.5149199890136555,
+    "climbM": 35.92239292364998
+   },
+   {
+    "name": "Marina",
+    "obs": 0.03399069206816874,
+    "mod": 0.03801215951660723,
+    "ratio": 1.1183108434618922,
+    "climbM": 62.98800133689859
+   },
+   {
+    "name": "Tenderloin",
+    "obs": 0.030063280543743815,
+    "mod": 0.06905519513094432,
+    "ratio": 2.2969946686445284,
+    "climbM": 32.90102156640199
+   },
+   {
+    "name": "Russian Hill",
+    "obs": 0.027424917132621164,
+    "mod": 0.023545292680426492,
+    "ratio": 0.8585365113982434,
+    "climbM": 31.508562254727007
+   },
+   {
+    "name": "Nob Hill",
+    "obs": 0.02586466668898773,
+    "mod": 0.03511818981194291,
+    "ratio": 1.3577669580754739,
+    "climbM": 24.54374374374382
+   },
+   {
+    "name": "Lone Mountain/USF",
+    "obs": 0.022586801486590452,
+    "mod": 0.010027387865905332,
+    "ratio": 0.4439489970219328,
+    "climbM": 33.79812949640285
+   },
+   {
+    "name": "Chinatown",
+    "obs": 0.02228881374091797,
+    "mod": 0.027914266400921955,
+    "ratio": 1.252389056025747,
+    "climbM": 41.09968911917089
+   },
+   {
+    "name": "North Beach",
+    "obs": 0.02119061171192277,
+    "mod": 0.02217557986283916,
+    "ratio": 1.046481345810428,
+    "climbM": 45.269490358126674
+   },
+   {
+    "name": "Western Addition",
+    "obs": 0.019724110221984045,
+    "mod": 0.023791648536351535,
+    "ratio": 1.2062216378122803,
+    "climbM": 35.98916180534237
+   },
+   {
+    "name": "Golden Gate Park",
+    "obs": 0.018793317038872253,
+    "mod": 0.000014886592463047692,
+    "ratio": 0.0007921216053694056,
+    "climbM": 0
+   },
+   {
+    "name": "Pacific Heights",
+    "obs": 0.017246459302909495,
+    "mod": 0.03147195105949466,
+    "ratio": 1.8248354927080777,
+    "climbM": 30.3351504946327
+   },
+   {
+    "name": "Presidio",
+    "obs": 0.01449090969966847,
+    "mod": 0.002580433699491296,
+    "ratio": 0.17807258156817665,
+    "climbM": 50.77388059701493
+   },
+   {
+    "name": "Sunset/Parkside",
+    "obs": 0.012686242341045241,
+    "mod": 0.02925270924564507,
+    "ratio": 2.3058608261802203,
+    "climbM": 46.280986185725205
+   },
+   {
+    "name": "Outer Richmond",
+    "obs": 0.012291157464760385,
+    "mod": 0.019598359578261816,
+    "ratio": 1.594508868221052,
+    "climbM": 33.88654181184663
+   },
+   {
+    "name": "Noe Valley",
+    "obs": 0.010757692436468298,
+    "mod": 0.013234778063989863,
+    "ratio": 1.2302618003024801,
+    "climbM": 50.59469118667596
+   },
+   {
+    "name": "Inner Sunset",
+    "obs": 0.010155020591288,
+    "mod": 0.014961311531973866,
+    "ratio": 1.4732920920720916,
+    "climbM": 38.543260188087906
+   },
+   {
+    "name": "Bernal Heights",
+    "obs": 0.010041182576087276,
+    "mod": 0.018190475867738795,
+    "ratio": 1.8115870048074592,
+    "climbM": 47.02312871287128
+   },
+   {
+    "name": "Inner Richmond",
+    "obs": 0.00980011383801516,
+    "mod": 0.013066174659740554,
+    "ratio": 1.3332676411427151,
+    "climbM": 36.89930434782614
+   },
+   {
+    "name": "Japantown",
+    "obs": 0.009234271938929211,
+    "mod": 0.009851287304809588,
+    "ratio": 1.0668179765509402,
+    "climbM": 35.28744897959183
+   },
+   {
+    "name": "Presidio Heights",
+    "obs": 0.0057756051829778434,
+    "mod": 0.007613573122087473,
+    "ratio": 1.3182294981877538,
+    "climbM": 32.954617036506846
+   },
+   {
+    "name": "Bayview Hunters Point",
+    "obs": 0.004031205008872652,
+    "mod": 0.01585966399727716,
+    "ratio": 3.93422412464019,
+    "climbM": 50.08187221396733
+   },
+   {
+    "name": "West of Twin Peaks",
+    "obs": 0.0035624602403990877,
+    "mod": 0.01040773155064172,
+    "ratio": 2.921501111118586,
+    "climbM": 45.031715006305184
+   },
+   {
+    "name": "Lakeshore",
+    "obs": 0.00190846084307094,
+    "mod": 0.008343279454225519,
+    "ratio": 4.371732060690432,
+    "climbM": 61.262051282051274
+   },
+   {
+    "name": "Outer Mission",
+    "obs": 0.0013727525362440096,
+    "mod": 0.007222988956077208,
+    "ratio": 5.261683198808752,
+    "climbM": 52.94904942965782
+   },
+   {
+    "name": "Glen Park",
+    "obs": 0.0008906150600997717,
+    "mod": 0.003557192310842847,
+    "ratio": 3.9940850657121723,
+    "climbM": 47.566532258064505
+   },
+   {
+    "name": "Excelsior",
+    "obs": 0.0008671778216760934,
+    "mod": 0.011579798344384678,
+    "ratio": 13.35343000585864,
+    "climbM": 46.16649436090227
+   },
+   {
+    "name": "Oceanview/Merced/Ingleside",
+    "obs": 0.0007667325141460442,
+    "mod": 0.0064971717634620604,
+    "ratio": 8.47384406372586,
+    "climbM": 38.15945499587117
+   },
+   {
+    "name": "Twin Peaks",
+    "obs": 0.0004988783607325788,
+    "mod": 0.002453844293917907,
+    "ratio": 4.918722652781642,
+    "climbM": 28.617771084337367
+   },
+   {
+    "name": "Seacliff",
+    "obs": 0.0003482103994375048,
+    "mod": 0.0007788970792650495,
+    "ratio": 2.236857602539359,
+    "climbM": 34.76021505376344
+   },
+   {
+    "name": "Portola",
+    "obs": 0.00029798774567247997,
+    "mod": 0.005812827051041725,
+    "ratio": 19.50693320600719,
+    "climbM": 56.00523321956777
+   },
+   {
+    "name": "Lincoln Park",
+    "obs": 0.0001573643151304108,
+    "mod": 0.001428754819138316,
+    "ratio": 9.07928089004346,
+    "climbM": 12.28913043478261
+   },
+   {
+    "name": "McLaren Park",
+    "obs": 0.00007700806910637125,
+    "mod": 0.0000019611387065966595,
+    "ratio": 0.025466665108662034,
+    "climbM": 34.098550724637676
+   },
+   {
+    "name": "Visitacion Valley",
+    "obs": 0.00005357083068269304,
+    "mod": 0.0031830272961150888,
+    "ratio": 59.41717265816861,
+    "climbM": 66.26034782608697
+   },
+   {
+    "name": "",
+    "obs": 0,
+    "mod": 2.3821963596518126e-7,
+    "ratio": null,
+    "climbM": 43.012499999999996
+   },
+   {
+    "name": "Treasure Island",
+    "obs": 0,
+    "mod": 0,
+    "ratio": null,
+    "climbM": null
+   }
+  ]
+ },
+ "access": {
+  "bayWheelsAM": 62.710703701071,
+  "bayWheelsEgressAM": 275.13471895265786,
+  "downtownStations": [
+   "Embarcadero",
+   "Montgomery Street",
+   "Powell Street",
+   "Civic Center / UN Plaza"
+  ],
+  "accessStations": [
+   "16th Street / Mission",
+   "24th Street / Mission",
+   "Glen Park",
+   "Balboa Park"
+  ],
+  "totalAccess": [
+   2413.780227845713,
+   1399.5912470626752,
+   997.0038628980622
+  ],
+  "totalEgress": [
+   703.1086453209808,
+   264.5048274357337,
+   164.0053642828935
+  ],
+  "bart": [
+   {
+    "name": "Glen Park",
+    "model": {
+     "bayWheels": 0.009341446144026688,
+     "scooter": 0.013279229894339079,
+     "riders": 2232.9926617541237
+    },
+    "profile": {
+     "bike": 0.02,
+     "scooter": 0.01,
+     "homeOriginEntries": 2716
+    }
+   },
+   {
+    "name": "Embarcadero",
+    "model": {
+     "bayWheels": 0.049574061052690896,
+     "scooter": 0.006856837124119362,
+     "riders": 11525.353929879613
+    },
+    "profile": {
+     "bike": 0.07,
+     "scooter": 0.02,
+     "homeOriginEntries": 1581
+    }
+   },
+   {
+    "name": "Montgomery Street",
+    "model": {
+     "bayWheels": 0.022886449202562675,
+     "scooter": 0.004191417337505425,
+     "riders": 14930.629066806769
+    },
+    "profile": {
+     "bike": 0.03,
+     "scooter": 0.02,
+     "homeOriginEntries": 907
+    }
+   },
+   {
+    "name": "Powell Street",
+    "model": {
+     "bayWheels": 0.0423811340753675,
+     "scooter": 0.005664757415306971,
+     "riders": 7047.316434056581
+    },
+    "profile": {
+     "bike": 0.03,
+     "scooter": 0.005,
+     "homeOriginEntries": 2114
+    }
+   },
+   {
+    "name": "Civic Center / UN Plaza",
+    "model": {
+     "bayWheels": 0.03575966064311509,
+     "scooter": 0.009963242925318727,
+     "riders": 8516.762508576427
+    },
+    "profile": {
+     "bike": 0.1,
+     "scooter": 0.03,
+     "homeOriginEntries": 2043
+    }
+   },
+   {
+    "name": "16th Street / Mission",
+    "model": {
+     "bayWheels": 0.02844319255740613,
+     "scooter": 0.005959388216126435,
+     "riders": 4004.21141576626
+    },
+    "profile": {
+     "bike": 0.06,
+     "scooter": 0.02,
+     "homeOriginEntries": 2358
+    }
+   },
+   {
+    "name": "24th Street / Mission",
+    "model": {
+     "bayWheels": 0.019910578854865083,
+     "scooter": 0.008282557135053244,
+     "riders": 3952.6654832563718
+    },
+    "profile": {
+     "bike": 0.05,
+     "scooter": 0.01,
+     "homeOriginEntries": 3494
+    }
+   },
+   {
+    "name": "Balboa Park",
+    "model": {
+     "bayWheels": 0.00618684849603532,
+     "scooter": 0.02759406408726197,
+     "riders": 2951.632058007348
+    },
+    "profile": null
+   }
+  ],
+  "stations": [
+   {
+    "name": "Glen Park",
+    "kinds": [
+     "metro",
+     "bart"
+    ],
+    "model": {
+     "accessAM": [
+      0.46745715341358635,
+      7.294217107644428,
+      9.322941444312614
+     ],
+     "egressAM": [
+      0,
+      0.1469437183644197,
+      0.17893690246437632
+     ],
+     "access": [
+      1.1678517317643362,
+      20.109612941328972,
+      30.1794463355085
+     ],
+     "egress": [
+      0.000005346784639277478,
+      1.6541485111436738,
+      1.411268168505565
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 6.4,
+     "startsAM": 2.7,
+     "ends": 14.4,
+     "starts": 16
+    }
+   },
+   {
+    "name": "Embarcadero",
+    "kinds": [
+     "metro",
+     "bart"
+    ],
+    "model": {
+     "accessAM": [
+      42.22356992379069,
+      16.138250438007756,
+      6.7835860370400285
+     ],
+     "egressAM": [
+      89.69332309713258,
+      40.30538711124881,
+      30.010927876537014
+     ],
+     "access": [
+      662.8329912797423,
+      186.44003275015382,
+      114.66422781760856
+     ],
+     "egress": [
+      145.22592108549878,
+      66.89491543791401,
+      49.37808941842295
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 171.1,
+     "startsAM": 105.3,
+     "ends": 403.8,
+     "starts": 386.6
+    }
+   },
+   {
+    "name": "Montgomery Street",
+    "kinds": [
+     "metro",
+     "bart"
+    ],
+    "model": {
+     "accessAM": [
+      32.81499483204755,
+      14.863336326035498,
+      7.499526524791989
+     ],
+     "egressAM": [
+      38.8233454234356,
+      22.61166820701918,
+      13.204382173042339
+     ],
+     "access": [
+      375.9110895307308,
+      184.59009047011807,
+      107.07421672437168
+     ],
+     "egress": [
+      79.65585463961517,
+      47.224625742698,
+      26.019277575374613
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 172.9,
+     "startsAM": 52.6,
+     "ends": 339.6,
+     "starts": 319.6
+    }
+   },
+   {
+    "name": "Powell Street",
+    "kinds": [
+     "metro",
+     "bart"
+    ],
+    "model": {
+     "accessAM": [
+      51.1378015313449,
+      16.745667043818724,
+      8.444623570520307
+     ],
+     "egressAM": [
+      33.85916096865377,
+      9.400687089414179,
+      5.484896315635008
+     ],
+     "access": [
+      332.71146354914924,
+      109.9341949792756,
+      61.800622600181995
+     ],
+     "egress": [
+      67.00906016500099,
+      20.897018278187232,
+      12.725449422672554
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 58.8,
+     "startsAM": 30.4,
+     "ends": 227.6,
+     "starts": 220.4
+    }
+   },
+   {
+    "name": "Civic Center / UN Plaza",
+    "kinds": [
+     "metro",
+     "bart"
+    ],
+    "model": {
+     "accessAM": [
+      36.33589334367444,
+      17.995580921561466,
+      11.609920522830157
+     ],
+     "egressAM": [
+      27.091479809128355,
+      13.349667246625536,
+      14.456840335486786
+     ],
+     "access": [
+      247.28003113226055,
+      130.65915016986565,
+      106.13576833879067
+     ],
+     "egress": [
+      54.69910777317871,
+      28.70611033127608,
+      30.95102475407346
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 39.8,
+     "startsAM": 36.6,
+     "ends": 159.4,
+     "starts": 157.4
+    }
+   },
+   {
+    "name": "Metro Van Ness Station",
+    "kinds": [
+     "metro"
+    ],
+    "model": {
+     "accessAM": [
+      25.059322974299583,
+      6.025040583418023,
+      4.519143711026234
+     ],
+     "egressAM": [
+      5.582182160847836,
+      2.905470028895441,
+      1.5807089085431516
+     ],
+     "access": [
+      84.68241340585021,
+      22.37889628761248,
+      16.847660342008428
+     ],
+     "egress": [
+      16.598041145928256,
+      8.170033557342643,
+      4.799781644798949
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 22.5,
+     "startsAM": 22.8,
+     "ends": 76.2,
+     "starts": 76.5
+    }
+   },
+   {
+    "name": "Metro Church Station/Downtown",
+    "kinds": [
+     "metro"
+    ],
+    "model": {
+     "accessAM": [
+      5.2686982374790166,
+      5.448405094963488,
+      5.162204651675517
+     ],
+     "egressAM": [
+      0.2786511610070889,
+      0.2545378166052011,
+      0.3144407773107881
+     ],
+     "access": [
+      11.820320128943038,
+      15.20924724294161,
+      13.820356189328463
+     ],
+     "egress": [
+      1.398526702968298,
+      1.5064834789005879,
+      1.8379680539995256
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 0,
+     "startsAM": 0,
+     "ends": 0,
+     "starts": 0
+    }
+   },
+   {
+    "name": "Metro Castro Station/Downtown",
+    "kinds": [
+     "metro"
+    ],
+    "model": {
+     "accessAM": [
+      0,
+      26.57677112002721,
+      46.31661428619568
+     ],
+     "egressAM": [
+      0.016983761656458467,
+      0.12458457918069696,
+      0.5541502078432801
+     ],
+     "access": [
+      0,
+      92.20721291867862,
+      167.04508013794685
+     ],
+     "egress": [
+      0.08469764439210453,
+      0.7706518438903404,
+      4.836489839339379
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 0,
+     "startsAM": 0,
+     "ends": 0,
+     "starts": 0
+    }
+   },
+   {
+    "name": "Metro Forest Hill Station/Downtown",
+    "kinds": [
+     "metro"
+    ],
+    "model": {
+     "accessAM": [
+      0,
+      4.775511518215176,
+      8.637098567082177
+     ],
+     "egressAM": [
+      0,
+      0.002077691268649565,
+      0.08432844828294796
+     ],
+     "access": [
+      0,
+      23.791170904804474,
+      38.07912975838793
+     ],
+     "egress": [
+      0,
+      0.014496423368290998,
+      0.5603023960116206
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 0,
+     "startsAM": 0,
+     "ends": 0,
+     "starts": 0
+    }
+   },
+   {
+    "name": "West Portal Station",
+    "kinds": [
+     "metro"
+    ],
+    "model": {
+     "accessAM": [
+      0.037480442974081,
+      3.3799462746852695,
+      11.603563144449117
+     ],
+     "egressAM": [
+      0,
+      0.12875957781873512,
+      0.06060020434149364
+     ],
+     "access": [
+      0.08261717103638679,
+      7.277808368387829,
+      58.145937567152885
+     ],
+     "egress": [
+      0,
+      1.4158726274119242,
+      0.4351761636390804
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 0.9,
+     "startsAM": 0.5,
+     "ends": 5.6,
+     "starts": 6.4
+    }
+   },
+   {
+    "name": "Yerba Buena/Moscone Station Southbound",
+    "kinds": [
+     "metro"
+    ],
+    "model": {
+     "accessAM": [
+      0.3071313281770146,
+      0.1991224749385322,
+      0.079585168456228
+     ],
+     "egressAM": [
+      0.08588497719958425,
+      0.21379383833961407,
+      0.13245256008538092
+     ],
+     "access": [
+      4.656371757955265,
+      3.42698374381281,
+      1.4758715640239743
+     ],
+     "egress": [
+      0.35731420846824297,
+      0.6442099335519906,
+      0.40234631879787375
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 10.2,
+     "startsAM": 8.2,
+     "ends": 35.7,
+     "starts": 33
+    }
+   },
+   {
+    "name": "Union Square/Market St Station Southbound",
+    "kinds": [
+     "metro"
+    ],
+    "model": {
+     "accessAM": [
+      0.3080311043623025,
+      0.6403850524139059,
+      0.35028566495472524
+     ],
+     "egressAM": [
+      0.20169415963194087,
+      0.22553074091715095,
+      0.16116177234186763
+     ],
+     "access": [
+      1.6464737131119995,
+      6.701785668266584,
+      3.2624688429909625
+     ],
+     "egress": [
+      0.4239516169351318,
+      0.8539680949026509,
+      0.766050654620108
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 12.1,
+     "startsAM": 12.3,
+     "ends": 60.3,
+     "starts": 60
+    }
+   },
+   {
+    "name": "Chinatown - Rose Pak Station",
+    "kinds": [
+     "metro"
+    ],
+    "model": {
+     "accessAM": [
+      0,
+      32.55045264525772,
+      7.332420088418137
+     ],
+     "egressAM": [
+      0.09985911724450665,
+      0.43512498761672336,
+      0.30693284760204265
+     ],
+     "access": [
+      0,
+      295.91566195904517,
+      62.32953366761298
+     ],
+     "egress": [
+      0.33341074404680365,
+      1.5909549813464576,
+      1.2782063121642098
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 0,
+     "startsAM": 0,
+     "ends": 0,
+     "starts": 0
+    }
+   },
+   {
+    "name": "16th Street / Mission",
+    "kinds": [
+     "bart"
+    ],
+    "model": {
+     "accessAM": [
+      15.691592765781497,
+      4.732058077085831,
+      4.042799512613935
+     ],
+     "egressAM": [
+      8.184874599742448,
+      2.7431333013898325,
+      1.9016167255205467
+     ],
+     "access": [
+      82.5540186763289,
+      31.338537662874657,
+      23.8626503259964
+     ],
+     "egress": [
+      16.18136602807319,
+      6.928688330999242,
+      4.684083549218906
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 21,
+     "startsAM": 15.4,
+     "ends": 67.4,
+     "starts": 59.8
+    }
+   },
+   {
+    "name": "24th Street / Mission",
+    "kinds": [
+     "bart"
+    ],
+    "model": {
+     "accessAM": [
+      16.061373688607002,
+      9.630823633294874,
+      9.611571279244982
+     ],
+     "egressAM": [
+      3.3546137425753186,
+      1.8800007405371915,
+      1.0808636066863702
+     ],
+     "access": [
+      44.116587898902594,
+      34.5832698923768,
+      32.73817770082374
+     ],
+     "egress": [
+      10.677318984357992,
+      11.211881902456232,
+      5.373076303459475
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 21.1,
+     "startsAM": 15.6,
+     "ends": 63.2,
+     "starts": 63.4
+    }
+   },
+   {
+    "name": "Balboa Park",
+    "kinds": [
+     "bart"
+    ],
+    "model": {
+     "accessAM": [
+      0.02936538377281888,
+      8.803815891470927,
+      17.695889244200924
+     ],
+     "egressAM": [
+      0.010726277443067117,
+      0.12274400837829172,
+      0.3084205096276885
+     ],
+     "access": [
+      0.06722498231546446,
+      18.19407537661693,
+      81.4475241706717
+     ],
+     "egress": [
+      0.07791349629510722,
+      1.0319582057587278,
+      3.0144499638141444
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 2.4,
+     "startsAM": 1,
+     "ends": 5.9,
+     "starts": 7.3
+    }
+   },
+   {
+    "name": "22nd Street Station",
+    "kinds": [
+     "caltrain"
+    ],
+    "model": {
+     "accessAM": [
+      0.3524722032406542,
+      2.2418845746320097,
+      2.1642324500896346
+     ],
+     "egressAM": [
+      0.26361095637249055,
+      0.07775217718480758,
+      0.1495460759232161
+     ],
+     "access": [
+      4.592460961568437,
+      11.329844755739611,
+      9.051583113473429
+     ],
+     "egress": [
+      0.735069890819602,
+      0.31883525161857107,
+      0.655240482628871
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 48.4,
+     "startsAM": 42.4,
+     "ends": 122.5,
+     "starts": 123
+    }
+   },
+   {
+    "name": "San Francisco Caltrain Station",
+    "kinds": [
+     "caltrain"
+    ],
+    "model": {
+     "accessAM": [
+      31.507237877692628,
+      10.255050724460723,
+      1.7237659885481074
+     ],
+     "egressAM": [
+      8.094824266627208,
+      2.7619328304877557,
+      0.7040662342858582
+     ],
+     "access": [
+      198.55575409892273,
+      73.24332622655983,
+      19.040595025227326
+     ],
+     "egress": [
+      29.31156544403811,
+      6.5084876730512,
+      2.617409892222423
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 105.1,
+     "startsAM": 87.4,
+     "ends": 302.7,
+     "starts": 285.6
+    }
+   },
+   {
+    "name": "Ferry Building Gate B (Treasure Island Ferry)",
+    "kinds": [
+     "ferry"
+    ],
+    "model": {
+     "accessAM": [
+      22.837674289274084,
+      10.632873479176473,
+      1.7558813177971035
+     ],
+     "egressAM": [
+      18.268594436764104,
+      10.194122413284273,
+      2.8039739845711127
+     ],
+     "access": [
+      361.1025578271284,
+      132.26034474424017,
+      32.503102532702286
+     ],
+     "egress": [
+      280.33952040457535,
+      58.1614868299152,
+      12.206572662865222
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 35,
+     "startsAM": 35.7,
+     "ends": 159.3,
+     "starts": 152.7
+    }
+   },
+   {
+    "name": "Treasure Island Ferry Terminal",
+    "kinds": [
+     "ferry"
+    ],
+    "model": {
+     "accessAM": [
+      0,
+      0,
+      7.1587528347163945
+     ],
+     "egressAM": [
+      0,
+      0,
+      0.0008920912017214775
+     ],
+     "access": [
+      0,
+      0,
+      17.499910143265158
+     ],
+     "egress": [
+      0,
+      0,
+      0.053100706264798334
+     ]
+    },
+    "bayWheelsDocked": {
+     "endsAM": 0,
+     "startsAM": 0,
+     "ends": 0,
+     "starts": 0
+    }
+   }
+  ]
+ },
+ "params": {
+  "speed": {
+   "classic": {
+    "start": 32,
+    "perM": 0.2369,
+    "perMClimbed": 4.35
+   },
+   "ebike": {
+    "start": 57.8,
+    "perM": 0.1748,
+    "perMClimbed": 1.01
+   },
+   "scooter": {
+    "start": 57.8,
+    "perM": 0.22701298701298703,
+    "perMClimbed": 1.3116883116883116
+   }
+  },
+  "price": {
+   "unlock": 1,
+   "casualPerMin": {
+    "classic": 0.19,
+    "ebike": 0.49
+   },
+   "member": {
+    "classicFreeMin": 45,
+    "classicPerMin": 0.17,
+    "ebikePerMin": 0.17
+   },
+   "bsfa": {
+    "classicFreeMin": 60,
+    "classicPerMin": 0.13,
+    "ebikePerMin": 0.05,
+    "ebikeMax": 1
+   },
+   "rackFee": 2,
+   "scooterUnlock": 1.4833,
+   "scooterPerMin": 0.55
+  },
+  "riders": {
+   "casual": 0.185,
+   "bsfa": 0.072
+  },
+  "fleet": {
+   "scooter": 4738,
+   "ebikeAway": 649
+  },
+  "nest": 0.72,
+  "reachMin": 10
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "description": "Changes of vehicle before and after the transfer fix (experiment.ts, 2 passes from the base run's crowding, each on its own 6- or 9-iteration weekday calibration; transfers.ts trace). 'before' runs the old 9-minute change penalty (--set transferPenalty=9) on a bundle calibrated with it; 'after' the code as committed on its own calibration (transfer factor 0.764, 22.9 minutes a change).",
+ "generated": "2026-10-06",
+ "survey": {
+  "system": 0.123,
+  "byVehicleBefore": {
+   "muni": 0.0797,
+   "bart": 0.0308,
+   "caltrain": 0.0046,
+   "other": 0.0078
+  },
+  "metroByLine2017": {
+   "J": 0.06,
+   "KT": 0.15,
+   "L": 0.07,
+   "M": 0.1,
+   "N": 0.07
+  }
+ },
+ "before": {
+  "muniAfterVehicle": 0.2025,
+  "metro": 0.1947,
+  "bus": 0.206,
+  "byVehicleBefore": {
+   "muniSame": 0.0012,
+   "muniOther": 0.1422,
+   "bart": 0.0411,
+   "caltrain": 0.0101,
+   "other": 0.0079
+  },
+  "byRoute": {
+   "J": 0.1109,
+   "K": 0.2172,
+   "L": 0.1963,
+   "M": 0.1897,
+   "N": 0.2018,
+   "T": 0.1965
+  },
+  "boardingsPerTrip": 1.2717,
+  "linkedTransitTrips": 519674,
+  "bartMuniChanges": 48218,
+  "bartBoardings": 143928,
+  "muniRoutes": {
+   "r": 0.9443,
+   "pctRmse": 35.53,
+   "model": 456592,
+   "observed": 515626
+  },
+  "groups": {
+   "subway": [
+    94783,
+    86603.53826653585
+   ],
+   "T": [
+    24967,
+    9970.357248432934
+   ],
+   "bus": [
+    395876,
+    360018.3175966012
+   ]
+  },
+  "bartCityExits": {
+   "r": 0.9415,
+   "pctRmse": 22.69,
+   "total": 0.9214
+  },
+  "tripMiles": {
+   "bus": 1.9113253638042103,
+   "metro": 2.900333445563886
+  },
+  "direct": {
+   "changeTrips": 141200.50095027284,
+   "withDirectLine": 87744.94326469803,
+   "gap": {
+    "bins": [
+     0,
+     2,
+     5,
+     10,
+     20,
+     null
+    ],
+    "vol": [
+     5072.162610785706,
+     21795.777663342724,
+     16230.709027239069,
+     15792.256179194137,
+     14048.414884705595,
+     14724.961726166626
+    ]
+   },
+   "noDirectPath": 53536.218858840235
+  }
+ },
+ "after": {
+  "muniAfterVehicle": 0.1238,
+  "metro": 0.088,
+  "bus": 0.1355,
+  "byVehicleBefore": {
+   "muniSame": 0.0001,
+   "muniOther": 0.0779,
+   "bart": 0.0298,
+   "caltrain": 0.009,
+   "other": 0.0071
+  },
+  "byRoute": {
+   "J": 0.0231,
+   "K": 0.0768,
+   "L": 0.0803,
+   "M": 0.0691,
+   "N": 0.1146,
+   "T": 0.1118
+  },
+  "boardingsPerTrip": 1.1565,
+  "linkedTransitTrips": 519229,
+  "bartMuniChanges": 27616,
+  "bartBoardings": 143724,
+  "muniRoutes": {
+   "r": 0.945,
+   "pctRmse": 43.83,
+   "model": 396617,
+   "observed": 515626
+  },
+  "groups": {
+   "subway": [
+    94783,
+    81866.02571947873
+   ],
+   "T": [
+    24967,
+    10479.774589911103
+   ],
+   "bus": [
+    395876,
+    304271.0915918007
+   ]
+  },
+  "bartCityExits": {
+   "r": 0.9081,
+   "pctRmse": 27.73,
+   "total": 0.9129
+  },
+  "tripMiles": {
+   "bus": 2.12677780458115,
+   "metro": 3.0922187876796317
+  },
+  "direct": {
+   "changeTrips": 81271.09190956804,
+   "withDirectLine": 31033.8657159591,
+   "gap": {
+    "bins": [
+     0,
+     2,
+     5,
+     10,
+     20,
+     null
+    ],
+    "vol": [
+     7461.386413489754,
+     4723.640340105933,
+     3821.2734339425247,
+     3819.2473468209078,
+     4436.596066600598,
+     6688.56227549118
+    ]
+   },
+   "noDirectPath": 50320.38603312245
+  }
+ }
+}

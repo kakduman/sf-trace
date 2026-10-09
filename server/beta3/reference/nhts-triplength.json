@@ -1,0 +1,52 @@
+{
+ "source": "NHTS 2017 public microdata (FHWA), weekday trips by residents of the San Francisco\u2013Oakland\u2013Hayward CBSA (41860) living in tracts of 10,000+ people per square mile (HTPPOPDN classes 17000 and 30000: 10,000-24,999 and 25,000+); computed by server/beta3/pipeline/nhts_triplength.py",
+ "url": "https://nhts.ornl.gov/",
+ "method": "Weighted (WTTRDFIN) mean TRPMILES by purpose, trips of 0\u201312 miles; untrimmed means also given.",
+ "homeTractDensitySample": {
+  "50": 58,
+  "300": 280,
+  "750": 393,
+  "1500": 875,
+  "3000": 1885,
+  "7000": 4381,
+  "17000": 3138,
+  "30000": 1607
+ },
+ "byPurpose": {
+  "NHB": {
+   "meanKm": 3.4143823139884915,
+   "meanKmUntrimmed": 25.676057674504445,
+   "n_trips_sample": 1469
+  },
+  "HBSHOP": {
+   "meanKm": 3.1778173647931545,
+   "meanKmUntrimmed": 5.055209173158256,
+   "n_trips_sample": 734
+  },
+  "HBW": {
+   "meanKm": 6.598528403655212,
+   "meanKmUntrimmed": 17.392399472213725,
+   "n_trips_sample": 519
+  },
+  "HBSOCREC": {
+   "meanKm": 3.6199085192722102,
+   "meanKmUntrimmed": 15.586141770544689,
+   "n_trips_sample": 539
+  },
+  "HBO": {
+   "meanKm": 4.788747994171303,
+   "meanKmUntrimmed": 9.879595632425882,
+   "n_trips_sample": 634
+  },
+  "HBSCH_K12": {
+   "meanKm": 4.224851272565544,
+   "meanKmUntrimmed": 4.9678783528121295,
+   "n_trips_sample": 101
+  },
+  "HBUNIV": {
+   "meanKm": 2.7341615593141344,
+   "meanKmUntrimmed": 8.428881817658331,
+   "n_trips_sample": 34
+  }
+ }
+}

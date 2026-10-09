@@ -1,0 +1,245 @@
+{
+ "description": "BATS 2023's two readings of commuting, each with the aggregate rates and the person-level choices, each recalibrated (calibrate.ts 3 iterations; the person-level constants by abm-calibrate.ts), from experiment.ts runs. BART's morning count: each downtown station's August 2026 weekday exits times its share of exits by entry hour 6–10am in BART's October 2025 hourly counts. Caltrain publishes no counts by direction or time of day (FY2026 figures are fare-model boardings by origin station), so its morning northbound flow cannot be checked.",
+ "runs": {
+  "agg-stated": {
+   "commuteBasis": "stated",
+   "bartAmDowntown": {
+    "model": 30920,
+    "count": 36530,
+    "ratio": 0.846,
+    "stations": [
+     {
+      "code": "EMBR",
+      "obs": 13963,
+      "mod": 11354,
+      "obsShare": 0.5970025896743623,
+      "modShare": 0.6141855958216065
+     },
+     {
+      "code": "MONT",
+      "obs": 11412,
+      "mod": 10415,
+      "obsShare": 0.6208228834813259,
+      "modShare": 0.517667384688477
+     },
+     {
+      "code": "POWL",
+      "obs": 5495,
+      "mod": 3944,
+      "obsShare": 0.4098550209018945,
+      "modShare": 0.4747078003092804
+     },
+     {
+      "code": "CIVC",
+      "obs": 5660,
+      "mod": 5207,
+      "obsShare": 0.5057926829268292,
+      "modShare": 0.4852789401707068
+     }
+    ]
+   },
+   "bartCityExitsAmShare": 0.4533,
+   "bartCityExits": {
+    "r": 0.93,
+    "pctRmse": 24.5,
+    "total": 0.919
+   },
+   "bartOutsideEntries": {
+    "r": 0.445,
+    "pctRmse": 50.4
+   },
+   "muni": {
+    "r": 0.945,
+    "pctRmse": 33.5,
+    "within25": 0.509,
+    "total": 0.926
+   },
+   "T": 0.414,
+   "caltrainSf": 0.846,
+   "residentTransitShare": 0.1308,
+   "regionalVisitorRate": 0.272,
+   "transferFactor": 0.6,
+   "tourRateFactor": 1.43
+  },
+  "agg-diary": {
+   "commuteBasis": "diary",
+   "bartAmDowntown": {
+    "model": 22065,
+    "count": 36530,
+    "ratio": 0.604,
+    "stations": [
+     {
+      "code": "EMBR",
+      "obs": 13963,
+      "mod": 7937,
+      "obsShare": 0.5970025896743623,
+      "modShare": 0.5624852851921801
+     },
+     {
+      "code": "MONT",
+      "obs": 11412,
+      "mod": 7471,
+      "obsShare": 0.6208228834813259,
+      "modShare": 0.4559250982530474
+     },
+     {
+      "code": "POWL",
+      "obs": 5495,
+      "mod": 2868,
+      "obsShare": 0.4098550209018945,
+      "modShare": 0.4110197842917435
+     },
+     {
+      "code": "CIVC",
+      "obs": 5660,
+      "mod": 3789,
+      "obsShare": 0.5057926829268292,
+      "modShare": 0.4309173680744427
+     }
+    ]
+   },
+   "bartCityExitsAmShare": 0.398,
+   "bartCityExits": {
+    "r": 0.904,
+    "pctRmse": 38.2,
+    "total": 0.779
+   },
+   "bartOutsideEntries": {
+    "r": 0.422,
+    "pctRmse": 56.5
+   },
+   "muni": {
+    "r": 0.942,
+    "pctRmse": 33.6,
+    "within25": 0.491,
+    "total": 0.944
+   },
+   "T": 0.413,
+   "caltrainSf": 0.821,
+   "residentTransitShare": 0.1355,
+   "regionalVisitorRate": 0.373,
+   "transferFactor": 0.6,
+   "tourRateFactor": 1.581
+  },
+  "abm-stated": {
+   "commuteBasis": "stated",
+   "bartAmDowntown": {
+    "model": 29412,
+    "count": 36530,
+    "ratio": 0.805,
+    "stations": [
+     {
+      "code": "EMBR",
+      "obs": 13963,
+      "mod": 11071,
+      "obsShare": 0.5970025896743623,
+      "modShare": 0.60608224578914
+     },
+     {
+      "code": "MONT",
+      "obs": 11412,
+      "mod": 9880,
+      "obsShare": 0.6208228834813259,
+      "modShare": 0.5083849965652766
+     },
+     {
+      "code": "POWL",
+      "obs": 5495,
+      "mod": 3655,
+      "obsShare": 0.4098550209018945,
+      "modShare": 0.47704647499710545
+     },
+     {
+      "code": "CIVC",
+      "obs": 5660,
+      "mod": 4806,
+      "obsShare": 0.5057926829268292,
+      "modShare": 0.4866782527007985
+     }
+    ]
+   },
+   "bartCityExitsAmShare": 0.4517,
+   "bartCityExits": {
+    "r": 0.93,
+    "pctRmse": 26.2,
+    "total": 0.879
+   },
+   "bartOutsideEntries": {
+    "r": 0.506,
+    "pctRmse": 47.7
+   },
+   "muni": {
+    "r": 0.942,
+    "pctRmse": 36.2,
+    "within25": 0.491,
+    "total": 0.88
+   },
+   "T": 0.399,
+   "caltrainSf": 0.927,
+   "residentTransitShare": 0.1215,
+   "regionalVisitorRate": 0.351,
+   "transferFactor": 0.6,
+   "tourRateFactor": 1.284
+  },
+  "abm-diary": {
+   "commuteBasis": "diary",
+   "bartAmDowntown": {
+    "model": 21414,
+    "count": 36530,
+    "ratio": 0.586,
+    "stations": [
+     {
+      "code": "EMBR",
+      "obs": 13963,
+      "mod": 7912,
+      "obsShare": 0.5970025896743623,
+      "modShare": 0.5494784617624875
+     },
+     {
+      "code": "MONT",
+      "obs": 11412,
+      "mod": 7238,
+      "obsShare": 0.6208228834813259,
+      "modShare": 0.4398140999385077
+     },
+     {
+      "code": "POWL",
+      "obs": 5495,
+      "mod": 2713,
+      "obsShare": 0.4098550209018945,
+      "modShare": 0.41309982213449753
+     },
+     {
+      "code": "CIVC",
+      "obs": 5660,
+      "mod": 3551,
+      "obsShare": 0.5057926829268292,
+      "modShare": 0.4297840415498474
+     }
+    ]
+   },
+   "bartCityExitsAmShare": 0.3943,
+   "bartCityExits": {
+    "r": 0.901,
+    "pctRmse": 38.6,
+    "total": 0.77
+   },
+   "bartOutsideEntries": {
+    "r": 0.481,
+    "pctRmse": 52.9
+   },
+   "muni": {
+    "r": 0.941,
+    "pctRmse": 36.2,
+    "within25": 0.509,
+    "total": 0.888
+   },
+   "T": 0.399,
+   "caltrainSf": 0.959,
+   "residentTransitShare": 0.1217,
+   "regionalVisitorRate": 0.526,
+   "transferFactor": 0.6,
+   "tourRateFactor": 1.267
+  }
+ }
+}

@@ -1,0 +1,1097 @@
+{
+ "description": "Exogenous inputs and historical networks for Beta3 backcasts: BART exits, SF office attendance (Kastle), SF hotel occupancy, Caltrain AWR, historical Muni GTFS, and Muni service changes, for Oct-Nov 2022, Feb-Mar 2023, Jul-Aug 2024 and Jul-Aug 2026.",
+ "accessed": "2026-10-05",
+ "sources": [
+  {
+   "url": "https://www.bart.gov/about/reports/ridership",
+   "publisher": "BART",
+   "date": "accessed 2026-10-05",
+   "period": "monthly 2022-2026",
+   "method": "Index page listing monthly/annual ridership Excel files"
+  },
+  {
+   "url": "https://www.bart.gov/sites/default/files/docs/Ridership_2022.zip",
+   "publisher": "BART",
+   "date": "2023-01-12 (zip member dates)",
+   "period": "Jan-Dec 2022 (used Oct, Nov)",
+   "method": "Monthly OD workbooks; sheet \"Avg Weekday OD\", rows = exit station, last column = exits; summed rows = systemwide (matches \"Entries\" total row)"
+  },
+  {
+   "url": "https://www.bart.gov/sites/default/files/2024-02/ridership_2023.zip",
+   "publisher": "BART",
+   "date": "2024-01-25",
+   "period": "Jan-Dec 2023 (used Feb, Mar)",
+   "method": "as above"
+  },
+  {
+   "url": "https://www.bart.gov/sites/default/files/2025-02/ridership_2024.zip",
+   "publisher": "BART",
+   "date": "2024-08-08 / 2024-10-15 (file dates)",
+   "period": "2024 (used Jul, Aug)",
+   "method": "sheet \"Average Weekday\", rows = exit station (cell A4 \"Exit Station Two-Letter Code\"), last column = row total; matches \"Grand Total\""
+  },
+  {
+   "url": "https://www.bart.gov/sites/default/files/2026-08/Ridership_202607.xlsx",
+   "publisher": "BART",
+   "date": "2026-08",
+   "period": "Jul 2026",
+   "method": "already in data/beta3/raw/obs (not refetched); same parsing"
+  },
+  {
+   "url": "https://www.bart.gov/sites/default/files/2026-09/Ridership_202608.xlsx",
+   "publisher": "BART",
+   "date": "2026-09",
+   "period": "Aug 2026",
+   "method": "already in data/beta3/raw/obs; SF 8-station sum 87,741 matches server/beta3/reference/bart-ridership.json"
+  },
+  {
+   "url": "https://web.archive.org/web/2022*/https://www.kastle.com/safety-wellness/getting-america-back-to-work/",
+   "publisher": "Kastle Systems (via Internet Archive)",
+   "date": "captures 2022-10-01 to 2026-09-23",
+   "period": "weekly, Sep 2022-Sep 2026",
+   "method": "Archived barometer pages; weekly city table images (Kastle_dashboard_separate-1_*.jpg, chart3_*.jpg) transcribed by eye, plus 2026 page text \"Weekly Average\" paragraphs. Images saved in data/beta3/raw/backcast/kastle_wayback/"
+  },
+  {
+   "url": "https://www.kastle.com/safety-wellness/getting-america-back-to-work/",
+   "publisher": "Kastle Systems",
+   "date": "accessed 2026-10-05 (live page: week ending 2026-09-23, SF 47.6%)",
+   "period": "latest week",
+   "method": "Live page text; later direct requests to kastle.com got HTTP 429 / Cloudflare challenge, so kastle.com was not used further"
+  },
+  {
+   "url": "https://data.sf.gov/resource/kc49-udxn.json?measure_title=Hotel Occupancy Rate - 4 Week Moving Average",
+   "publisher": "City and County of San Francisco, Controller (City Performance Scorecard Measures, DataSF kc49-udxn)",
+   "date": "data_as_of 2026-10-04",
+   "period": "weekly Oct 2020 - week ending 2026-08-01",
+   "method": "SODA API; 301 weekly rows; saved as data/beta3/raw/backcast/datasf_kc49-udxn_hotel_occupancy.json"
+  },
+  {
+   "url": "https://www.sf.gov/data--hotel-occupancy-rate",
+   "publisher": "SF.gov",
+   "date": "accessed 2026-10-05",
+   "period": "-",
+   "method": "Page that points to the Scorecard Measures dataset"
+  },
+  {
+   "url": "https://www.hotelnewsresource.com/article143099.html",
+   "publisher": "Hotel News Resource (CoStar release)",
+   "date": "2026-09-29",
+   "period": "Aug 2026",
+   "method": "CoStar monthly US hotel performance; SF occupancy 79.3%"
+  },
+  {
+   "url": "https://media.api.sf.gov/documents/Status_of_the_San_Francisco_Economy_2026Q2.pdf",
+   "publisher": "SF Controller, Office of Economic Analysis",
+   "date": "2026-08-03",
+   "period": "through Jul 2026",
+   "method": "Charts only (Kastle 4-wk MA, STR hotel 4-wk MA, Placer.ai foot traffic, BART downtown exits); used for context, no numbers taken"
+  },
+  {
+   "url": "https://www.caltrain.com/media/32592/download",
+   "publisher": "Caltrain",
+   "date": "Dec 2023 (dashboard snapshot)",
+   "period": "FY2019-Dec 2023 monthly AWR and totals",
+   "method": "\"Caltrain Ridership Dashboard Introduction\" PDF with monthly AWR tables"
+  },
+  {
+   "url": "https://www.caltrain.com/about-caltrain/statistics-reports/ridership/annual-reports",
+   "publisher": "Caltrain Planning",
+   "date": "Sep 2025",
+   "period": "FY2025 (Jul 2024-Jun 2025)",
+   "method": "FY2025 Annual Ridership Report, Figure 1 monthly AWR (local copy data/beta3/raw/obs/caltrain_FY2025_Annual_Ridership_Report.pdf)"
+  },
+  {
+   "url": "https://www.caltrain.com/media/37718/download",
+   "publisher": "Caltrain (JPB)",
+   "date": "2026-09-03",
+   "period": "Jul 2025-Jul 2026",
+   "method": "Report of the Executive Director, slide 3 AWR bar labels (local copy data/beta3/raw/obs/caltrain_ED_report_2026-09-03.pdf)"
+  },
+  {
+   "url": "https://www.caltrain.com/news/august-marks-third-consecutive-month-1m-riders-caltrain",
+   "publisher": "Caltrain",
+   "date": "2025-09-10",
+   "period": "Aug 2025 vs Aug 2024",
+   "method": "press release (Aug 2024 total ~643,000; consistent with FY2025 report 643,143)"
+  },
+  {
+   "url": "https://web.archive.org/web/20221226083451id_/https://gtfs.sfmta.com/transitdata/google_transit.zip",
+   "publisher": "SFMTA (via Internet Archive)",
+   "date": "captured 2022-12-26",
+   "period": "2022-07-30 to 2023-01-06",
+   "method": "GTFS zip"
+  },
+  {
+   "url": "https://openmobilitydata-data.s3-us-west-1.amazonaws.com/public/feeds/sfmta/60/20220926/gtfs.zip",
+   "publisher": "OpenMobilityData (transitfeeds) archive",
+   "date": "2022-09-26",
+   "period": "2022-07-30 to 2023-01-06",
+   "method": "HEAD/ETag check only (identical to the Wayback copy)"
+  },
+  {
+   "url": "https://www.sfmta.com/travel-updates/january-7-2023-service-changes",
+   "publisher": "SFMTA",
+   "date": "Jan 2023",
+   "period": "2023-01-07",
+   "method": "service notice"
+  },
+  {
+   "url": "https://www.sfmta.com/blog/your-questions-answered-central-subway-special-weekend-service",
+   "publisher": "SFMTA",
+   "date": "2022-11-23",
+   "period": "2022-11-19",
+   "method": "blog"
+  }
+ ],
+ "bartExits": {
+  "metric": "BART average weekday exits by exit station (all entry stations), from BART monthly ridership workbooks",
+  "periods": {
+   "2022-10": {
+    "EMBR": 15314,
+    "MONT": 12828,
+    "POWL": 10312,
+    "CIVC": 8675,
+    "16TH": 5288,
+    "24TH": 5073,
+    "GLEN": 2888,
+    "BALB": 3902,
+    "sfEightStationsSum": 64281,
+    "systemwide": 154932
+   },
+   "2022-11": {
+    "EMBR": 13728,
+    "MONT": 11504,
+    "POWL": 9827,
+    "CIVC": 7659,
+    "16TH": 4706,
+    "24TH": 4585,
+    "GLEN": 2596,
+    "BALB": 3496,
+    "sfEightStationsSum": 58102,
+    "systemwide": 138853
+   },
+   "2023-02": {
+    "EMBR": 14426,
+    "MONT": 12385,
+    "POWL": 9919,
+    "CIVC": 8097,
+    "16TH": 5009,
+    "24TH": 4907,
+    "GLEN": 2798,
+    "BALB": 3668,
+    "sfEightStationsSum": 61208,
+    "systemwide": 145265
+   },
+   "2023-03": {
+    "EMBR": 15194,
+    "MONT": 12870,
+    "POWL": 10256,
+    "CIVC": 8251,
+    "16TH": 5196,
+    "24TH": 4972,
+    "GLEN": 2848,
+    "BALB": 3564,
+    "sfEightStationsSum": 63152,
+    "systemwide": 149051
+   },
+   "2024-07": {
+    "EMBR": 16996,
+    "MONT": 13430,
+    "POWL": 10247,
+    "CIVC": 8248,
+    "16TH": 5228,
+    "24TH": 4987,
+    "GLEN": 2970,
+    "BALB": 3403,
+    "sfEightStationsSum": 65509,
+    "systemwide": 159219
+   },
+   "2024-08": {
+    "EMBR": 17192,
+    "MONT": 13764,
+    "POWL": 10784,
+    "CIVC": 8460,
+    "16TH": 5462,
+    "24TH": 5223,
+    "GLEN": 3143,
+    "BALB": 3904,
+    "sfEightStationsSum": 67932,
+    "systemwide": 165764
+   },
+   "2026-07": {
+    "EMBR": 22871,
+    "MONT": 17962,
+    "POWL": 12117,
+    "CIVC": 10931,
+    "16TH": 6439,
+    "24TH": 6150,
+    "GLEN": 3570,
+    "BALB": 4175,
+    "sfEightStationsSum": 84216,
+    "systemwide": 203470
+   },
+   "2026-08": {
+    "EMBR": 23388,
+    "MONT": 18382,
+    "POWL": 13405,
+    "CIVC": 11190,
+    "16TH": 6679,
+    "24TH": 6378,
+    "GLEN": 3704,
+    "BALB": 4615,
+    "sfEightStationsSum": 87741,
+    "systemwide": 212716
+   },
+   "2022-10/11": {
+    "EMBR": 14521,
+    "MONT": 12166,
+    "POWL": 10070,
+    "CIVC": 8167,
+    "16TH": 4997,
+    "24TH": 4829,
+    "GLEN": 2742,
+    "BALB": 3699,
+    "sfEightStationsSum": 61192,
+    "systemwide": 146892
+   },
+   "2023-02/03": {
+    "EMBR": 14810,
+    "MONT": 12628,
+    "POWL": 10088,
+    "CIVC": 8174,
+    "16TH": 5102,
+    "24TH": 4940,
+    "GLEN": 2823,
+    "BALB": 3616,
+    "sfEightStationsSum": 62180,
+    "systemwide": 147158
+   },
+   "2024-07/08": {
+    "EMBR": 17094,
+    "MONT": 13597,
+    "POWL": 10516,
+    "CIVC": 8354,
+    "16TH": 5345,
+    "24TH": 5105,
+    "GLEN": 3056,
+    "BALB": 3654,
+    "sfEightStationsSum": 66720,
+    "systemwide": 162492
+   },
+   "2026-07/08": {
+    "EMBR": 23130,
+    "MONT": 18172,
+    "POWL": 12761,
+    "CIVC": 11060,
+    "16TH": 6559,
+    "24TH": 6264,
+    "GLEN": 3637,
+    "BALB": 4395,
+    "sfEightStationsSum": 85978,
+    "systemwide": 208093
+   }
+  },
+  "ratio_2026JulAug_over_2024JulAug": {
+   "EMBR": 1.3531,
+   "MONT": 1.3365,
+   "POWL": 1.2135,
+   "CIVC": 1.3239,
+   "16TH": 1.2271,
+   "24TH": 1.227,
+   "GLEN": 1.1901,
+   "BALB": 1.2028,
+   "sfEightStationsSum": 1.2886,
+   "systemwide": 1.2806
+  },
+  "ratio_2023FebMar_over_2022OctNov": {
+   "EMBR": 1.0199,
+   "MONT": 1.038,
+   "POWL": 1.0018,
+   "CIVC": 1.0009,
+   "16TH": 1.021,
+   "24TH": 1.023,
+   "GLEN": 1.0295,
+   "BALB": 0.9776,
+   "sfEightStationsSum": 1.0161,
+   "systemwide": 1.0018
+  },
+  "rawFiles": [
+   "data/beta3/raw/backcast/bart/Ridership_202210.xlsx",
+   "data/beta3/raw/backcast/bart/Ridership_202211.xlsx",
+   "data/beta3/raw/backcast/bart/Ridership_202302.xlsx",
+   "data/beta3/raw/backcast/bart/Ridership_202303.xlsx",
+   "data/beta3/raw/backcast/bart/Ridership_202407.xlsx",
+   "data/beta3/raw/backcast/bart/Ridership_202408.xlsx",
+   "data/beta3/raw/obs/bart_Ridership_202607.xlsx",
+   "data/beta3/raw/obs/bart_Ridership_202608.xlsx"
+  ]
+ },
+ "officeAttendance": {
+  "metric": "Kastle Back to Work Barometer, San Francisco metro, weekly average occupancy (unique first-entry keycard/app swipes Thu-Wed vs. a Feb-2020 three-week baseline = 100%), percent",
+  "weekKey": "week-ending Wednesday as labelled by Kastle",
+  "weekly": {
+   "2022-09-28": {
+    "pct": 39.7,
+    "from": "10.3.22 dashboard"
+   },
+   "2022-10-05": {
+    "pct": 40.1,
+    "from": "10.10.22 dashboard"
+   },
+   "2022-10-12": {
+    "pct": 42.0,
+    "from": "10.17.22 dashboard"
+   },
+   "2022-10-19": {
+    "pct": 41.2,
+    "from": "10.31.22 dashboard (prior-week column)"
+   },
+   "2022-10-26": {
+    "pct": 40.9,
+    "from": "10.31.22 dashboard"
+   },
+   "2022-11-02": {
+    "pct": 40.6,
+    "from": "11.7.22 dashboard"
+   },
+   "2022-11-09": {
+    "pct": 41.6,
+    "from": "11.14.22 dashboard"
+   },
+   "2022-11-16": {
+    "pct": 43.1,
+    "from": "11.21.22 dashboard"
+   },
+   "2022-11-23": {
+    "pct": 32.7,
+    "from": "11.28.22 dashboard (Thanksgiving week)"
+   },
+   "2022-11-30": {
+    "pct": 42.2,
+    "from": "12.5.22 dashboard"
+   },
+   "2023-01-25": {
+    "pct": 45.9,
+    "from": "2.6.23 dashboard (prior-week column)"
+   },
+   "2023-02-01": {
+    "pct": 46.1,
+    "from": "2.6.23 dashboard"
+   },
+   "2023-02-08": {
+    "pct": 46.1,
+    "from": "2.13.23 dashboard"
+   },
+   "2023-02-15": {
+    "pct": 44.6,
+    "from": "2.20.23 dashboard"
+   },
+   "2023-02-22": {
+    "pct": 43.9,
+    "from": "2.27.23 dashboard"
+   },
+   "2023-03-01": {
+    "pct": 43.5,
+    "from": "3.6.23 dashboard"
+   },
+   "2023-03-08": {
+    "pct": 46.0,
+    "from": "3.13.23 dashboard"
+   },
+   "2023-03-15": {
+    "pct": 42.1,
+    "from": "3.20.23 dashboard"
+   },
+   "2023-03-22": {
+    "pct": 43.3,
+    "from": "3.27.23 dashboard"
+   },
+   "2023-03-29": {
+    "pct": 41.6,
+    "from": "4.3.23 dashboard"
+   },
+   "2024-06-26": {
+    "pct": 44.9,
+    "from": "7.1.24 dashboard"
+   },
+   "2024-07-03": {
+    "pct": 38.7,
+    "from": "7.15.24 dashboard (prior-week column; July 4 week, Thu 7/4 excluded by Kastle)"
+   },
+   "2024-07-10": {
+    "pct": 38.8,
+    "from": "7.15.24 dashboard"
+   },
+   "2024-07-17": {
+    "pct": 44.7,
+    "from": "7.29.24 dashboard (prior-week column)"
+   },
+   "2024-07-24": {
+    "pct": 45.8,
+    "from": "7.29.24 dashboard"
+   },
+   "2024-07-31": {
+    "pct": 42.6,
+    "from": "8.5.24 dashboard"
+   },
+   "2024-08-07": {
+    "pct": 42.7,
+    "from": "8.19.24 dashboard (prior-week column)"
+   },
+   "2024-08-14": {
+    "pct": 42.3,
+    "from": "8.19.24 dashboard"
+   },
+   "2024-08-21": {
+    "pct": 42.8,
+    "from": "8.26.24 dashboard"
+   },
+   "2024-08-28": {
+    "pct": 42.5,
+    "from": "9.2.24 dashboard"
+   },
+   "2026-06-24": {
+    "pct": 47.7,
+    "from": "07.06.26 dashboard (prior-week column)"
+   },
+   "2026-07-01": {
+    "pct": 45.2,
+    "from": "07.06.26 dashboard"
+   },
+   "2026-07-08": {
+    "pct": 42.7,
+    "from": "derived: page text week ending 7/15 says SF +5.8 to 48.5 (July 4 holiday week)"
+   },
+   "2026-07-15": {
+    "pct": 48.5,
+    "from": "page text (capture 2026-07-23)"
+   },
+   "2026-07-22": {
+    "pct": 48.7,
+    "from": "derived: page text week ending 7/29 says SF -0.9 to 47.8"
+   },
+   "2026-07-29": {
+    "pct": 47.8,
+    "from": "page text (captures 2026-08-07, 2026-08-12)"
+   },
+   "2026-08-26": {
+    "pct": 45.2,
+    "from": "09.06.26 dashboard (prior-week column)"
+   },
+   "2026-09-02": {
+    "pct": 45.4,
+    "from": "09.06.26 dashboard and page text"
+   },
+   "2026-09-09": {
+    "pct": 44.7,
+    "from": "page text (capture 2026-09-23)"
+   }
+  },
+  "monthlyMeanOfWeeks": {
+   "2022-10": {
+    "mean": 41.05,
+    "nWeeks": 4,
+    "weeksEnding": [
+     "2022-10-05",
+     "2022-10-12",
+     "2022-10-19",
+     "2022-10-26"
+    ]
+   },
+   "2022-11": {
+    "mean": 40.04,
+    "nWeeks": 5,
+    "weeksEnding": [
+     "2022-11-02",
+     "2022-11-09",
+     "2022-11-16",
+     "2022-11-23",
+     "2022-11-30"
+    ]
+   },
+   "2022-11_exThanksgiving": {
+    "mean": 41.88,
+    "nWeeks": 4,
+    "weeksEnding": [
+     "2022-11-02",
+     "2022-11-09",
+     "2022-11-16",
+     "2022-11-30"
+    ]
+   },
+   "2023-02": {
+    "mean": 45.17,
+    "nWeeks": 4,
+    "weeksEnding": [
+     "2023-02-01",
+     "2023-02-08",
+     "2023-02-15",
+     "2023-02-22"
+    ]
+   },
+   "2023-03": {
+    "mean": 43.3,
+    "nWeeks": 5,
+    "weeksEnding": [
+     "2023-03-01",
+     "2023-03-08",
+     "2023-03-15",
+     "2023-03-22",
+     "2023-03-29"
+    ]
+   },
+   "2024-07": {
+    "mean": 42.12,
+    "nWeeks": 5,
+    "weeksEnding": [
+     "2024-07-03",
+     "2024-07-10",
+     "2024-07-17",
+     "2024-07-24",
+     "2024-07-31"
+    ]
+   },
+   "2024-08": {
+    "mean": 42.58,
+    "nWeeks": 4,
+    "weeksEnding": [
+     "2024-08-07",
+     "2024-08-14",
+     "2024-08-21",
+     "2024-08-28"
+    ]
+   },
+   "2026-07": {
+    "mean": 46.58,
+    "nWeeks": 5,
+    "weeksEnding": [
+     "2026-07-01",
+     "2026-07-08",
+     "2026-07-15",
+     "2026-07-22",
+     "2026-07-29"
+    ]
+   },
+   "2026-08": {
+    "mean": 45.2,
+    "nWeeks": 1,
+    "weeksEnding": [
+     "2026-08-26"
+    ],
+    "note": "Only the week ending 2026-08-26 was recoverable; weeks ending 8/5, 8/12, 8/19 not found (no archived copy; kastle.com began returning HTTP 429/Cloudflare challenge, so it was not used further)."
+   }
+  },
+  "periodMeanOfWeeks": {
+   "2022-10/11": 40.49,
+   "2023-02/03": 44.13,
+   "2024-07/08": 42.32,
+   "2026-07/08_available": 46.35
+  },
+  "ratio_2026JulAug_to_2024JulAug": 1.0952,
+  "ratio_2023FebMar_to_2022OctNov": 1.0899,
+  "ratioNote": "2026 Jul/Aug mean uses 6 of ~9 weeks (5 July weeks + week ending 8/26). July-only comparison: 2026-07 mean 46.58 vs 2024-07 mean 42.12. Each July includes a July 4 holiday week (2024: week ending 7/3 and 7/10 both low; 2026: week ending 7/8)."
+ },
+ "hotelOccupancy": {
+  "metric": "San Francisco hotel occupancy rate, 4-week moving average (percent), weekly; City Performance Scorecard measure 7188 \"Hotel Occupancy Rate - 4 Week Moving Average\" (department \"Multiple Departments\"; the Controller's Status of the SF Economy cites STR for the same weekly 4-week MA series)",
+  "weekKey": "week-ending Saturday (category_1)",
+  "weekly4wkMA": {
+   "2022-09-03": 67.1,
+   "2022-09-10": 65.975,
+   "2022-09-17": 68.925,
+   "2022-09-24": 73.875,
+   "2022-10-01": 75.65,
+   "2022-10-08": 76.7,
+   "2022-10-15": 74.225,
+   "2022-10-22": 71.9,
+   "2022-10-29": 69.45,
+   "2022-11-05": 68.525,
+   "2022-11-12": 68.4,
+   "2022-11-19": 66.025,
+   "2022-11-26": 60.125,
+   "2022-12-03": 55.8,
+   "2022-12-10": 55.2,
+   "2022-12-17": 51.075,
+   "2022-12-24": 49.775,
+   "2022-12-31": 50.575,
+   "2023-01-07": 43.375,
+   "2023-01-14": 47.35,
+   "2023-01-21": 50.325,
+   "2023-01-28": 51.1,
+   "2023-02-04": 57.2,
+   "2023-02-11": 54.725,
+   "2023-02-18": 57.525,
+   "2023-02-25": 56.725,
+   "2023-03-04": 54.475,
+   "2023-03-11": 57.1,
+   "2023-03-18": 58.5,
+   "2023-03-25": 64.825,
+   "2023-04-01": 65.825,
+   "2023-04-08": 64.425,
+   "2023-04-15": 62.85,
+   "2023-04-22": 59.725,
+   "2023-04-29": 65.55,
+   "2024-06-01": 71.95,
+   "2024-06-08": 71.08,
+   "2024-06-15": 67.6,
+   "2024-06-22": 70.25,
+   "2024-06-29": 69.78,
+   "2024-07-06": 68.13,
+   "2024-07-13": 66.78,
+   "2024-07-20": 68.55,
+   "2024-07-27": 66.13,
+   "2024-08-03": 68.98,
+   "2024-08-10": 69.6,
+   "2024-08-17": 70.48,
+   "2024-08-24": 70.93,
+   "2024-08-31": 69.08,
+   "2024-09-07": 67.05,
+   "2024-09-14": 74.33,
+   "2024-09-21": 70.58,
+   "2024-09-28": 67.83,
+   "2026-06-06": 77.9,
+   "2026-06-13": 76.3,
+   "2026-06-20": 76.9,
+   "2026-06-27": 80.68,
+   "2026-07-04": 76.75,
+   "2026-07-11": 74.0,
+   "2026-07-18": 70.88,
+   "2026-07-25": 70.78,
+   "2026-08-01": 73.53
+  },
+  "monthly": {
+   "2022-10": {
+    "meanOf4wkMA": 73.59,
+    "weeksEnding": [
+     "2022-10-01",
+     "2022-10-08",
+     "2022-10-15",
+     "2022-10-22",
+     "2022-10-29"
+    ],
+    "last4wkMAInMonth": {
+     "weekEnding": "2022-10-29",
+     "pct": 69.45
+    }
+   },
+   "2022-11": {
+    "meanOf4wkMA": 65.77,
+    "weeksEnding": [
+     "2022-11-05",
+     "2022-11-12",
+     "2022-11-19",
+     "2022-11-26"
+    ],
+    "last4wkMAInMonth": {
+     "weekEnding": "2022-11-26",
+     "pct": 60.125
+    }
+   },
+   "2023-02": {
+    "meanOf4wkMA": 56.54,
+    "weeksEnding": [
+     "2023-02-04",
+     "2023-02-11",
+     "2023-02-18",
+     "2023-02-25"
+    ],
+    "last4wkMAInMonth": {
+     "weekEnding": "2023-02-25",
+     "pct": 56.725
+    }
+   },
+   "2023-03": {
+    "meanOf4wkMA": 58.73,
+    "weeksEnding": [
+     "2023-03-04",
+     "2023-03-11",
+     "2023-03-18",
+     "2023-03-25"
+    ],
+    "last4wkMAInMonth": {
+     "weekEnding": "2023-03-25",
+     "pct": 64.825
+    }
+   },
+   "2024-07": {
+    "meanOf4wkMA": 67.4,
+    "weeksEnding": [
+     "2024-07-06",
+     "2024-07-13",
+     "2024-07-20",
+     "2024-07-27"
+    ],
+    "last4wkMAInMonth": {
+     "weekEnding": "2024-07-27",
+     "pct": 66.13
+    }
+   },
+   "2024-08": {
+    "meanOf4wkMA": 69.81,
+    "weeksEnding": [
+     "2024-08-03",
+     "2024-08-10",
+     "2024-08-17",
+     "2024-08-24",
+     "2024-08-31"
+    ],
+    "last4wkMAInMonth": {
+     "weekEnding": "2024-08-31",
+     "pct": 69.08
+    }
+   },
+   "2026-07": {
+    "meanOf4wkMA": 73.1,
+    "weeksEnding": [
+     "2026-07-04",
+     "2026-07-11",
+     "2026-07-18",
+     "2026-07-25"
+    ],
+    "last4wkMAInMonth": {
+     "weekEnding": "2026-07-25",
+     "pct": 70.78
+    }
+   },
+   "2026-08": {
+    "meanOf4wkMA": 73.53,
+    "weeksEnding": [
+     "2026-08-01"
+    ],
+    "last4wkMAInMonth": {
+     "weekEnding": "2026-08-01",
+     "pct": 73.53
+    },
+    "note": "DataSF series ends at week ending 2026-08-01 (accessed 2026-10-05); see costarAug2026."
+   }
+  },
+  "costarAug2026": {
+   "occupancyPct": 79.3,
+   "yoyPct": 6.6,
+   "adrUSD": 216.77,
+   "adrYoYPct": 8.7,
+   "revparUSD": 171.84,
+   "revparYoYPct": 15.8,
+   "geography": "CoStar \"San Francisco\" market among the 25 largest US markets (CoStar market definition; may include San Mateo County, not the same footprint as the city series)",
+   "source": "https://www.hotelnewsresource.com/article143099.html"
+  },
+  "notes": [
+   "The scorecard categories category_2 / category_3 are undocumented percent changes (likely vs. prior year and vs. 2019 or prior period); not used.",
+   "A 4-week moving average ending on the last Saturday of a month approximates that calendar month; \"last4wkMAInMonth\" is that value. \"meanOf4wkMA\" averages all in-month weekly MA values and so lags by ~1.5 weeks."
+  ]
+ },
+ "caltrain": {
+  "metric": "Caltrain systemwide average weekday ridership (AWR, unlinked boardings, Mon-Fri excluding holidays)",
+  "monthly": {
+   "2022-10": {
+    "awr": 18565,
+    "total": 478084,
+    "method": "Clipper taps + limited conductor counts (Apr 2020-Oct 2023 method)"
+   },
+   "2022-11": {
+    "awr": 16429,
+    "total": 406101,
+    "method": "Clipper taps + limited conductor counts"
+   },
+   "2023-02": {
+    "awr": 16829,
+    "total": 364508,
+    "method": "Clipper taps + limited conductor counts"
+   },
+   "2023-03": {
+    "awr": 16628,
+    "total": 418830,
+    "method": "Clipper taps + limited conductor counts"
+   },
+   "2024-07": {
+    "awr": 23291,
+    "total": 604018,
+    "method": "Fare Media Sales-Based model (monthly pass = 26 trips/month assumption, pre-Jan 2025)"
+   },
+   "2024-08": {
+    "awr": 24762,
+    "total": 643143,
+    "method": "Fare Media Sales-Based model (26 trips/pass)"
+   },
+   "2025-07": {
+    "awr": 39987,
+    "method": "Fare Media model (37 trips/pass from Jan 2025)"
+   },
+   "2025-08": {
+    "awr": 39986,
+    "method": "Fare Media model (37 trips/pass)"
+   },
+   "2026-07": {
+    "awr": 47459,
+    "totalChartLabel": 1321627,
+    "method": "Fare Media model (37 trips/pass)",
+    "pctOf2019Weekday": 67.3,
+    "weekdayYoYPct": 18.7
+   },
+   "2026-08": null
+  },
+  "notes": [
+   "Three different estimation regimes: pre-Nov 2023 (Clipper + conductor counts), Nov 2023-Dec 2024 fare-media model with 26 trips per monthly pass, Jan 2025 on with 37 trips per monthly pass. The Jan 2025 revision raises estimates for pass-heavy markets, so part of the 2024->2026 AWR growth (23,291/24,762 -> 47,459) is methodological; Caltrain gives no back-cast of 2024 under the new assumption.",
+   "Electrified service began 2024-09-21 (20% more weekday service, faster trips, weekend trains 32 -> 66), so Jul/Aug 2024 is the diesel timetable and Jul/Aug 2026 the electric one: the Caltrain change is partly a supply change, not only a demand driver.",
+   "August 2026 AWR was not yet published (it will be in the October 2026 JPB Executive Director report)."
+  ]
+ },
+ "gtfsHistory": [
+  {
+   "file": "data/beta3/raw/gtfs/history/muni-20220730-20230106.zip",
+   "validFrom": "20220730",
+   "validTo": "20230106",
+   "servicePeriods": [
+    {
+     "from": "20220730",
+     "to": "20220930",
+     "serviceIds": [
+      "1_merged_11239963 (weekday)",
+      "2_merged_11239965 (Sat)",
+      "3_merged_11239964 (Sun)"
+     ]
+    },
+    {
+     "from": "20221001",
+     "to": "20230106",
+     "serviceIds": [
+      "1_merged_11239966 (weekday)",
+      "2_merged_11239968 (Sat)",
+      "3_merged_11239967 (Sun)"
+     ]
+    }
+   ],
+   "calendarDates": "holiday swaps 2022-09-05, 2022-11-24, 2022-12-26, 2023-01-02 (weekday removed, Sunday service added)",
+   "feedInfo": "no feed_info.txt in this feed",
+   "useFor": "Oct - mid-Nov 2022 (pre-Central Subway). Uses the 20221001-20230106 service_ids. Routes in that period include KT (INGLESIDE-THIRD), LBUS (L Taraval bus substitution), TBUS, S-less; no Chinatown/Union Square/Yerba Buena/4th & Brannan stops. The Nov 19-20 2022 weekend Central Subway shuttle is NOT in this feed.",
+   "routesOct2022Period": 64,
+   "sha1": "c67dbfdf4cdf32a0a722f875c610302fc0496c22",
+   "md5": "ed99385a0cb180181388208b277cc3ab",
+   "bytes": 17422769,
+   "source": "Internet Archive capture of https://gtfs.sfmta.com/transitdata/google_transit.zip at 2022-12-26 08:34:51 UTC: https://web.archive.org/web/20221226083451id_/https://gtfs.sfmta.com/transitdata/google_transit.zip",
+   "sourceCorroboration": "Byte-identical (MD5 equals S3 ETag ed99385a0cb180181388208b277cc3ab, same 17,422,769 bytes) to OpenMobilityData/transitfeeds version 20220926: https://openmobilitydata-data.s3-us-west-1.amazonaws.com/public/feeds/sfmta/60/20220926/gtfs.zip (Last-Modified 2022-09-26)"
+  },
+  {
+   "file": null,
+   "validFrom": null,
+   "validTo": null,
+   "wanted": "Muni GTFS valid Feb-Mar 2023 (post-Central Subway, service from 2023-01-07)",
+   "source": "NOT FOUND from allowed sources - see notFound"
+  }
+ ],
+ "serviceChanges": [
+  {
+   "date": "2022-10-01",
+   "routes": [
+    "all"
+   ],
+   "description": "New Muni service period (GTFS calendar 2022-10-01 to 2023-01-06 replaces 2022-07-30 to 2022-09-30). No SFMTA notice found describing route changes for this date; treat as a schedule refresh.",
+   "source": "GTFS calendar.txt in muni-20220730-20230106.zip"
+  },
+  {
+   "date": "2022-11-19",
+   "routes": [
+    "Central Subway weekend shuttle"
+   ],
+   "description": "Central Subway opened with a special weekend-only shuttle between 4th & Brannan and Chinatown-Rose Pak (stopping Yerba Buena/Moscone, Union Square/Market St), Sat-Sun Nov 19-20 and following weekends through 2022, 8 a.m.-12 a.m., free in Nov-Dec 2022. KT Ingleside-Third unchanged on weekdays.",
+   "source": "https://www.sfmta.com/blog/your-questions-answered-central-subway-special-weekend-service ; https://www.sfmta.com/blog/chinatown-connects-muni-metro ; https://www.sfmta.com/press-releases/sfmta-announces-opening-schedule-central-subway-project"
+  },
+  {
+   "date": "2023-01-07",
+   "routes": [
+    "T",
+    "K",
+    "KT",
+    "T Bus (owl)"
+   ],
+   "description": "Full Central Subway service: T Third runs Chinatown-Rose Pak to Sunnydale via 4th & Brannan, Yerba Buena/Moscone, Union Square/Market St; T no longer runs on King St, The Embarcadero or the Market St subway. KT Ingleside-Third interline ended; K Ingleside runs Balboa Park-Embarcadero. T Third span weekdays 6 a.m.-12 a.m., weekends 8 a.m.-12 a.m.; early-morning/late-night T Third Bus rerouted via 3rd/4th Streets to Chinatown.",
+   "source": "https://www.sfmta.com/travel-updates/january-7-2023-service-changes"
+  },
+  {
+   "date": "2023-01-07",
+   "routes": [
+    "6",
+    "21",
+    "28",
+    "38R",
+    "12",
+    "36"
+   ],
+   "description": "Same-day changes: 6 Haight/Parnassus runs until 12 a.m. daily (was 10 p.m.); 21 Hayes extended to Fulton St & 8th Ave weekdays after 7 p.m. and all day weekends; service added on 28 19th Avenue and 38R Geary Rapid (crowding); 12 Folsom/Pacific and 36 Teresita terminal changes/minor reroutes near Cesar Chavez & Valencia; 4th & Folsom / 4th & Howard stops consolidated. No changes to 8 Bayshore, 30 Stockton, 45 Union/Stockton or 15 Bayview Hunters Point Express were listed in the notice.",
+   "source": "https://www.sfmta.com/travel-updates/january-7-2023-service-changes"
+  },
+  {
+   "date": "2023-02-21",
+   "routes": [
+    "1X"
+   ],
+   "description": "New weekday-only 1X California Express: inbound mornings, outbound late afternoon/evening, 33rd Ave-Arguello express segment to relieve the 1 California east of Arguello.",
+   "source": "https://www.sfmta.com/travel-updates/1x-california-express-route-service-february-21-2023"
+  },
+  {
+   "date": "2024-08-17",
+   "routes": [
+    "1",
+    "9",
+    "28R",
+    "48",
+    "15",
+    "67"
+   ],
+   "description": "1 California every 5 min (was 6) on Clay & Drumm-Presidio & California segment from Aug 19, every 10 min weekdays west of Presidio; 9 San Bruno uses 60-ft buses on weekends; extra morning school trips on 28R and 48 (from Aug 19); 15 Bayview Hunters Point Express outbound terminal loop via Newhall/Palou; 67 Bernal Heights outbound via 26th St.",
+   "source": "https://www.sfmta.com/travel-updates/muni-service-changes-beginning-saturday-august-17-2024"
+  },
+  {
+   "date": "2024-09-28",
+   "routes": [
+    "L",
+    "L Bus"
+   ],
+   "description": "L Taraval trains resume Embarcadero-SF Zoo after the L Taraval Improvement Project; L Bus discontinued (10-min weekday, 12-min weekend train frequency).",
+   "source": "https://www.sfmta.com/project-updates/l-taraval-project-completed-l-trains-return-september-28-2024 ; https://www.sfmta.com/blog/l-taraval-trains-return-month-learn-details-and-all-about-corridors-upgrades"
+  },
+  {
+   "date": "2025-02-01",
+   "routes": [
+    "K",
+    "M",
+    "30X",
+    "1X",
+    "24",
+    "38",
+    "43",
+    "L",
+    "L Owl"
+   ],
+   "description": "K Ingleside and M Ocean View one-car trains on weekends; 30X Marina Express restored (two inbound AM trips 7:15 and 7:45 from Beach & Divisadero); 1X loses its 7:15 and 7:45 AM trips; midday (10 a.m.-1 p.m.) weekday headways widened: 24 Divisadero 10->12 min, 38 Geary 8->10, 43 Masonic 12->15; stop changes on many routes. (An SFMTA page with URL slug ...effective-saturday-september-28-2024 now carries this Feb 1, 2025 notice and also describes L Taraval rail Zoo-Embarcadero with a new Ulloa & 14th Ave stop.)",
+   "source": "https://www.sfmta.com/travel-updates/muni-service-changes-february-1-2025 ; https://www.sfmta.com/travel-updates/muni-service-changes-effective-saturday-september-28-2024 ; https://www.sfmta.com/blog/new-downtown-express-service-and-other-route-changes-start-feb-1"
+  },
+  {
+   "date": "2025-03-15",
+   "routes": [
+    "30S"
+   ],
+   "description": "30S Stockton short-turn narrowed to Van Ness & North Point - Union Square.",
+   "source": "https://www.sfmta.com/travel-updates/changes-30s-stockton-short-route-effective-march-15-2025"
+  },
+  {
+   "date": "2025-06-21",
+   "routes": [
+    "5",
+    "9",
+    "31",
+    "6",
+    "21",
+    "7",
+    "48"
+   ],
+   "description": "Budget cuts (~2% of service, ~$7M, FY2026 deficit): 5 Fulton (weekday 7a-7p) and 9 San Bruno (weekday 7a-7p) turn back at McAllister/Civic Center and 11th & Market/Van Ness; 31 Balboa runs Cabrillo & La Playa - 5th & Market/Powell all day; 6 Haight/Parnassus and 21 Hayes consolidated into new 6 Hayes/Parnassus (Inner Sunset-Civic Center, 6 alignment west of Masonic, 21 alignment east of Masonic, 5 a.m.-12 a.m., 20-min); 7 Haight/Noriega span 5 a.m.-midnight; 48 Hoffman St by-request segment dropped. 5R and 9R unchanged.",
+   "source": "https://www.sfmta.com/travel-updates/muni-service-changes-beginning-saturday-june-21-2025 ; https://www.sfmta.com/projects/summer-2025-muni-service-cuts"
+  },
+  {
+   "date": "2025-08-30",
+   "routes": [
+    "1X",
+    "30X",
+    "49",
+    "8",
+    "29",
+    "6",
+    "56"
+   ],
+   "description": "1X 7:15 and 7:45 AM trips restored (from Sep 2); 30X adds an 8:15 AM trip and terminal/stop changes (from Sep 2); 49 Van Ness/Mission extra inbound peak frequency 7:30-8:15 a.m.; 8 and 29 schedule adjustments; 6 Hayes/Parnassus new stop at Masonic & Oak; 56 stop relocation.",
+   "source": "https://www.sfmta.com/travel-updates/muni-service-changes-beginning-saturday-august-30-2025"
+  },
+  {
+   "date": "2026-02-14",
+   "routes": [
+    "5",
+    "5R",
+    "14",
+    "6",
+    "15",
+    "27",
+    "35",
+    "37",
+    "K Bus",
+    "L Owl",
+    "48",
+    "54",
+    "57",
+    "58",
+    "1",
+    "1X",
+    "90",
+    "91"
+   ],
+   "description": "Potrero Yard closed for rebuild; bus mix changes: 5 Fulton weekends every 7 min (was 10), 5R every 8 min (was 10) at busy times; 14 Mission weekends every 8 min (was 7); 15 adds Stockton & Geary stop toward Bayview; 48 outbound via Ulloa instead of Vicente/West Portal; stop relocations (1, 35, 37, K Bus, L Owl, 58) and schedule tweaks (1X, 27, 54, 57, 90, 91).",
+   "source": "https://www.sfmta.com/travel-updates/muni-service-changes-february-14-2026"
+  },
+  {
+   "date": "2026-06-06",
+   "routes": [
+    "5R",
+    "14",
+    "14 Owl",
+    "31",
+    "35",
+    "48",
+    "19",
+    "28",
+    "30",
+    "91"
+   ],
+   "description": "5R schedule tightened; 14 Mission/14 Owl late-night trips added ~10:15 p.m.-1:15 a.m.; some 31 inbound trips end with drop-off at Geary & Masonic; 35 Eureka terminal back to Market & Castro; stop removals on 48 (23rd & Vermont) and 28/30/91 (North Point & Larkin).",
+   "source": "https://www.sfmta.com/travel-updates/muni-service-changes-effective-june-6-2026"
+  },
+  {
+   "date": "2026-06 to 2026-09-28",
+   "routes": [
+    "36",
+    "37"
+   ],
+   "description": "30-foot bus fleet withdrawn for safety inspections after a June 2026 vehicle issue; 40-foot substitutions: 37 Corbett inbound rerouted via Roosevelt Way (four Buena Vista/Upper Terrace stops missed) until 2026-09-28; 36 Teresita substituted, regular routing resumed 2026-07-06.",
+   "source": "https://www.sfmta.com/travel-updates/40-foot-bus-service-substitutions-updated-july-6-2026 ; https://www.sfmta.com/travel-updates/37-corbett-resumes-30-foot-bus-service-monday-september-28-2026"
+  },
+  {
+   "date": "2026-08-29",
+   "routes": [
+    "1",
+    "N",
+    "5R",
+    "8AX"
+   ],
+   "description": "After the Jul-Aug 2026 window except Aug 29-31: 1 California every 9 min (was 10); N Judah peak every 9 min (was 10); all 5R trips on 60-ft buses every 10 min; 8AX one-seat ride Visitacion Valley-Francisco Middle School.",
+   "source": "https://www.sfmta.com/travel-updates/muni-service-changes-effective-saturday-august-29-2026 ; https://www.sfmta.com/press-releases/press-release-sfmta-announces-systemwide-muni-improvements-starting-august-29"
+  }
+ ],
+ "muniRidershipMonthsPresent": {
+  "file": "data/beta3/raw/obs/muni_ridership_by_route.csv",
+  "range": "January 2019 - September 2026 (93 months, none missing)",
+  "targetMonthsWeekdayRouteRows": {
+   "2022-10": 54,
+   "2022-11": 55,
+   "2023-02": 57,
+   "2023-03": 57,
+   "2024-07": 58,
+   "2024-08": 58,
+   "2026-07": 58,
+   "2026-08": 58
+  }
+ },
+ "notes": [
+  "BART exits: average weekday exits (all entry stations) by exit station from BART monthly OD workbooks. The Oct/Nov 2022 and Feb/Mar 2023 workbooks use sheet \"Avg Weekday OD\" with header \"Exit stations\" (rows) / \"Entry stations->\" (columns); 2024/2026 use sheet \"Average Weekday\" with A4 \"Exit Station Two-Letter Code\". Row totals were recomputed and match the published last column for all 50 stations. Codes: EMBR=EM, MONT=MT, POWL=PL, CIVC=CC, 16TH=16, 24TH=24, GLEN=GP, BALB=BP.",
+  "BART 8 SF stations, Jul/Aug mean: 2024 = 66720, 2026 = 85978 (ratio 1.2886); systemwide ratio 1.2806; downtown 4 (EMBR+MONT+POWL+CIVC) ratio 1.314.",
+  "BART Central Subway window: Feb/Mar 2023 vs Oct/Nov 2022 SF 8-station ratio 1.0161, systemwide 1.0018; Powell (Union Square/Market St transfer) 1.0018. Seasonal (fall vs late winter) and Thanksgiving effects are mixed in.",
+  "Kastle values are transcribed from Kastle's own weekly table images; each table shows two consecutive weeks, so weeks without a captured report were taken from the next report's prior-week column. Holiday weeks are not excluded except where noted (Nov 2022 also given ex-Thanksgiving).",
+  "Hotel occupancy series is a 4-week moving average reported weekly by the City; no monthly STR figures were reachable.",
+  "Muni ridership (item D): data/beta3/raw/obs/muni_ridership_by_route.csv has every month Jan 2019 - Sep 2026 (93 months), with Weekday/Saturday/Sunday rows. Target months present with weekday route rows: Oct 2022 (54), Nov 2022 (55), Feb 2023 (57), Mar 2023 (57), Jul 2024 (58), Aug 2024 (58), Jul 2026 (58), Aug 2026 (58). Route naming changes across the window: \"KT Ingleside/Third\" (Oct-Nov 2022) becomes \"K Ingleside\" + \"T Third\" (from Jan 2023); \"1X California Express\" appears from Feb 2023; \"L Taraval\" rail row in 2026 (L bus in 2024); \"30X Marina Express\" in 2026.",
+  "Existing data/beta3/raw/gtfs/muni-2024.zip (2024-06-22..2024-08-16) already covers the Jul/Aug 2024 backcast network."
+ ],
+ "notFound": [
+  "Muni GTFS valid Feb-Mar 2023 (post-Central Subway). Checked: Internet Archive CDX for gtfs.sfmta.com/transitdata/google_transit.zip (only captures 2022-04-03, 2022-12-26, and a 2023-05-28 303 redirect to www.sfmta.com/GTFS/google_transit.zip, which itself has no captures); OpenMobilityData S3 for every date 2022-09-20..2023-06-30 (only version 20220926 exists; next archived transitfeeds version is 20231206); Wayback copies of transitfeeds.com version pages (none in 2023 before 20231206); Mobility Database mdb-50 page lists datasets only from 2024-02-08 on (mdb-50-202402080012 ... -202406240012) and the API needs a token; DataSF dni7-qpv3 blob holds only the current file and has no archived captures; Internet Archive item search; GitHub code search for committed Muni feeds containing \"Rose Pak\" stops (earliest is 2023-08-19..2024-02-02). transitfeeds.com itself returns a Cloudflare challenge and was not used. Transitland and 511.org have the feed but need an API key, which was not requested.",
+  "Kastle SF weekly values for weeks ending 2026-08-05, 2026-08-12, 2026-08-19 (no archived copy; kastle.com rate-limited).",
+  "Placer.ai / Controller \"Downtown recovery\" foot-traffic monthly values: available only as charts in Controller PDFs (no data table); not transcribed.",
+  "SF hotel occupancy for August 2026 in the city scorecard series (ends week of 2026-08-01); CoStar market value used instead. CoStar monthly SF values for Jul 2024, Aug 2024, Jul 2026 and the 2022-23 months: costar.com returns 403.",
+  "Caltrain August 2026 AWR (not yet published as of 2026-10-05)."
+ ]
+}

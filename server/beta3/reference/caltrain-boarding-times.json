@@ -1,0 +1,278 @@
+{
+ "source": "2025 Caltrain Customer Satisfaction Survey, respondent file (weekdays, May 6-29, 2025): boarding station, direction and train; train times at each station from the Caltrain GTFS weekday timetable (January 2026)",
+ "url": "https://www.caltrain.com/media/36020",
+ "rawFile": "data/beta3/raw/caltrain/caltrain_css_2025_raw.xlsx",
+ "note": "Unweighted respondent counts; the survey sampled trains in proportion to peak and off-peak ridership. Times are the timetable time of each train at the boarding station; trains whose number no longer stops there get their first departure.",
+ "periods": {
+  "AM": "06:00-09:59",
+  "MD": "10:00-14:59",
+  "PM": "15:00-18:59",
+  "NT": "19:00-05:59"
+ },
+ "respondentsTimedApproximately": 65,
+ "counts": {
+  "22nd Street|NB": {
+   "PM": 7,
+   "NT": 3,
+   "MD": 1
+  },
+  "22nd Street|SB": {
+   "AM": 46,
+   "PM": 25,
+   "MD": 7,
+   "NT": 16
+  },
+  "Bayshore|NB": {
+   "NT": 1,
+   "PM": 1
+  },
+  "Bayshore|SB": {
+   "AM": 6,
+   "PM": 2
+  },
+  "Belmont|NB": {
+   "NT": 2,
+   "AM": 4,
+   "PM": 5,
+   "MD": 1
+  },
+  "Belmont|SB": {
+   "PM": 6,
+   "AM": 6,
+   "MD": 1,
+   "NT": 1
+  },
+  "Blossom Hill|NB": {
+   "AM": 15
+  },
+  "Blossom Hill|SB": {
+   "PM": 1
+  },
+  "Burlingame|NB": {
+   "AM": 5,
+   "PM": 1,
+   "MD": 2
+  },
+  "Burlingame|SB": {
+   "MD": 3,
+   "AM": 3,
+   "PM": 6,
+   "NT": 3
+  },
+  "California Ave|NB": {
+   "PM": 9,
+   "AM": 11,
+   "NT": 9,
+   "MD": 2
+  },
+  "California Ave|SB": {
+   "AM": 3,
+   "NT": 1,
+   "PM": 13,
+   "MD": 1
+  },
+  "Capitol|NB": {
+   "AM": 6
+  },
+  "Gilroy|NB": {
+   "AM": 40
+  },
+  "Hayward Park|NB": {
+   "AM": 3,
+   "PM": 2
+  },
+  "Hayward Park|SB": {
+   "PM": 6,
+   "AM": 1,
+   "NT": 4
+  },
+  "Hillsdale|NB": {
+   "PM": 9,
+   "NT": 10,
+   "MD": 2,
+   "AM": 6
+  },
+  "Hillsdale|SB": {
+   "PM": 22,
+   "AM": 5,
+   "MD": 2,
+   "NT": 3
+  },
+  "Lawrence|NB": {
+   "AM": 17,
+   "PM": 13,
+   "MD": 9,
+   "NT": 4
+  },
+  "Lawrence|SB": {
+   "PM": 10,
+   "NT": 4
+  },
+  "Menlo Park|NB": {
+   "NT": 11,
+   "AM": 5,
+   "PM": 7,
+   "MD": 3
+  },
+  "Menlo Park|SB": {
+   "AM": 2,
+   "PM": 10,
+   "MD": 1,
+   "NT": 5
+  },
+  "Millbrae|NB": {
+   "AM": 5,
+   "PM": 5,
+   "MD": 2,
+   "NT": 6
+  },
+  "Millbrae|SB": {
+   "PM": 27,
+   "NT": 16,
+   "MD": 8,
+   "AM": 8
+  },
+  "Morgan Hill|NB": {
+   "AM": 48
+  },
+  "Morgan Hill|SB": {
+   "PM": 9
+  },
+  "Mountain View|NB": {
+   "NT": 15,
+   "MD": 8,
+   "PM": 26,
+   "AM": 39
+  },
+  "Mountain View|SB": {
+   "PM": 32,
+   "NT": 8,
+   "MD": 2
+  },
+  "Palo Alto|NB": {
+   "MD": 14,
+   "AM": 20,
+   "PM": 28,
+   "NT": 27
+  },
+  "Palo Alto|SB": {
+   "PM": 69,
+   "AM": 1,
+   "NT": 13,
+   "MD": 1
+  },
+  "Redwood City|NB": {
+   "PM": 13,
+   "AM": 10,
+   "NT": 10,
+   "MD": 6
+  },
+  "Redwood City|SB": {
+   "AM": 7,
+   "PM": 30,
+   "MD": 1,
+   "NT": 1
+  },
+  "San Antonio|NB": {
+   "PM": 3,
+   "AM": 8,
+   "MD": 4,
+   "NT": 1
+  },
+  "San Antonio|SB": {
+   "PM": 9,
+   "AM": 1,
+   "NT": 1
+  },
+  "San Bruno|NB": {
+   "AM": 1
+  },
+  "San Bruno|SB": {
+   "MD": 6,
+   "PM": 6,
+   "NT": 2,
+   "AM": 1
+  },
+  "San Carlos|NB": {
+   "AM": 10,
+   "PM": 1,
+   "NT": 1,
+   "MD": 1
+  },
+  "San Carlos|SB": {
+   "PM": 15,
+   "AM": 3,
+   "NT": 2,
+   "MD": 1
+  },
+  "San Francisco|SB": {
+   "PM": 202,
+   "AM": 109,
+   "MD": 56,
+   "NT": 79
+  },
+  "San Jose Diridon|NB": {
+   "AM": 97,
+   "PM": 37,
+   "NT": 16,
+   "MD": 26
+  },
+  "San Jose Diridon|SB": {
+   "PM": 4
+  },
+  "San Martin|NB": {
+   "AM": 17
+  },
+  "San Mateo|NB": {
+   "PM": 4,
+   "AM": 6,
+   "MD": 1,
+   "NT": 4
+  },
+  "San Mateo|SB": {
+   "MD": 7,
+   "AM": 2,
+   "PM": 15,
+   "NT": 3
+  },
+  "Santa Clara|NB": {
+   "NT": 11,
+   "AM": 33,
+   "MD": 14,
+   "PM": 9
+  },
+  "Santa Clara|SB": {
+   "PM": 7,
+   "NT": 5
+  },
+  "South San Francisco|NB": {
+   "NT": 2,
+   "AM": 2,
+   "PM": 4,
+   "MD": 2
+  },
+  "South San Francisco|SB": {
+   "PM": 22,
+   "AM": 2,
+   "NT": 1
+  },
+  "Sunnyvale|NB": {
+   "AM": 52,
+   "PM": 24,
+   "NT": 16,
+   "MD": 13
+  },
+  "Sunnyvale|SB": {
+   "PM": 29,
+   "MD": 2,
+   "NT": 1
+  },
+  "Tamien|NB": {
+   "AM": 23,
+   "PM": 3
+  },
+  "Tamien|SB": {
+   "PM": 3
+  }
+ }
+}

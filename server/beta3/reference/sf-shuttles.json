@@ -1,0 +1,453 @@
+{
+  "title": "Free shuttles and other scheduled services within San Francisco missing from the operators' GTFS: which are modeled, their schedules and sources, and which are left out",
+  "accessed": "2026-10-05",
+  "built": "server/beta3/pipeline/shuttles.ts writes data/beta3/raw/shuttle/shuttles.gtfs.zip from this file, the saved UCSF schedule pages, and the PresidiGo GTFS; transit.ts reads it and the Mission Bay TMA GTFS as the feeds 'shuttle' and 'tma'",
+  "modeled": {
+    "missionBayTMA": {
+      "operator": "Mission Bay Transportation Management Association",
+      "routes": "East (Civic Center/Powell BART, 4th & King Caltrain, Mission Bay, Chase Center), West (Civic Center/Powell BART, Caltrain, Mission Bay west), Transbay-Caltrain (Salesforce Transit Center, Embarcadero, Caltrain, Mission Bay), CCA/Adobe (Civic Center BART to 8th & Hooper)",
+      "eligibility": "free and open to the public (GTFS routes.txt eligibility_restricted 0; missionbaytma.org)",
+      "headways": "about every 15-30 minutes on weekdays, 6am-7:45pm, from the GTFS",
+      "source": "GTFS published by the TMA through Trillium, Mobility Database source 51 (mdb-latest mirror), feed version 09-Dec-2025, valid 2025-12-09 to 2026-07-12; the model reads a Wednesday inside it (2026-04-08)",
+      "url": "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-california-mission-bay-transportation-management-association-tma-gtfs-51.zip?alt=media",
+      "rawFile": "data/beta3/raw/shuttle/missionbaytma.zip"
+    },
+    "ucsf": {
+      "operator": "UCSF Transportation (Campus Life Services)",
+      "eligibility": "UCSF faculty, staff, students, trainees, patients, and visitors ride free; not open to the general public. Modeled as: anyone may board at a UCSF site (campus stops below), but at BART, Castro, Japan Center, UC Law, and Rincon Center stops only riders bound for a zone within 450 m of a UCSF site may board (BLine.restrict; build.ts).",
+      "use": "UCSF 2026 Commute Survey (9,000 respondents): 12.1% of UCSF commuters use the UCSF shuttle (10.2% in 2024), and the shuttle carries 55% of trips between UCSF sites. No boardings are published.",
+      "useSource": "https://campuslifeserviceshome.ucsf.edu/transportation/news/more-ucsf-employees-are-choosing-alternatives-driving-alone",
+      "schedules": "each route's published weekday timetable (Monday-Friday; pages revised June 2025 to July 2026), saved as data/beta3/raw/shuttle/ucsf-<route>.html",
+      "routes": [
+        {
+          "route": "Gold",
+          "url": "https://campuslifeserviceshome.ucsf.edu/transportation/gold-route-shuttle-schedule",
+          "revised": "June 2025",
+          "description": "loop Mission Bay - ZSFG - Castro - Parnassus - Stanyan - Geary - Mount Zion - Civic Center BART - Mission Bay, about every 21 minutes 4:50am-9:30pm"
+        },
+        {
+          "route": "Blue",
+          "url": "https://campuslifeserviceshome.ucsf.edu/transportation/blue-route-shuttle-schedule",
+          "revised": "June 2025",
+          "description": "the Gold loop the other way round, about every 21 minutes"
+        },
+        {
+          "route": "Red",
+          "url": "https://campuslifeserviceshome.ucsf.edu/transportation/red-route-shuttle-schedule",
+          "revised": "June 2025",
+          "description": "Mission Bay - 16th St BART, every 18 minutes in the peaks, 36 midday"
+        },
+        {
+          "route": "Grey",
+          "url": "https://campuslifeserviceshome.ucsf.edu/transportation/grey-route-shuttle-schedule",
+          "revised": "June 2025",
+          "description": "Mission Bay - Parnassus direct, every 12 minutes in the peaks, 24 midday"
+        },
+        {
+          "route": "Bronze",
+          "url": "https://campuslifeserviceshome.ucsf.edu/transportation/bronze-route-shuttle-schedule",
+          "revised": "February 2026",
+          "description": "Parnassus - Aldea housing (Behr Ave, Johnstone Dr), every 35 minutes"
+        },
+        {
+          "route": "Lime",
+          "url": "https://campuslifeserviceshome.ucsf.edu/transportation/lime-route-shuttle-service",
+          "revised": "page undated (2026)",
+          "description": "Mission Center Building - 16th St BART - Parnassus, every 13 minutes in the peaks"
+        },
+        {
+          "route": "Cherry",
+          "url": "https://campuslifeserviceshome.ucsf.edu/transportation/cherry-route-shuttle-schedule",
+          "revised": "July 2026",
+          "description": "Japan Center - Parnassus - Hyde Hospital (1199 Bush), every 30 minutes in the peaks"
+        },
+        {
+          "route": "Lilac",
+          "url": "https://campuslifeserviceshome.ucsf.edu/transportation/lilac-route-shuttle-schedule",
+          "revised": "July 2026",
+          "description": "Rincon Center - Mission Bay, every 20 minutes in the morning peak (the afternoon trips were canceled August 25, 2026)"
+        }
+      ],
+      "notModeled": [
+        {
+          "route": "Navy",
+          "why": "UCSF is discontinuing it (from October 19) for low ridership; its riders are directed to the Lime route",
+          "source": "https://campuslifeserviceshome.ucsf.edu/transportation/news/shuttle-schedule-improvements-impacting-lime-cherry-and-navy-routes"
+        },
+        {
+          "route": "Pink",
+          "why": "a commuter run from the Colma SamTrans park-and-ride (San Mateo County) to Parnassus, 8 trips each peak; the model has no park-and-ride lot there",
+          "source": "https://campuslifeserviceshome.ucsf.edu/transportation/pink-route-shuttle-schedule"
+        },
+        {
+          "route": "Uber Commute Shuttles and on-demand shuttles",
+          "why": "reserved commuter rides and on-demand service, not scheduled lines",
+          "source": "https://www.ucsf.edu/news/2025/04/429871/ucsf-employees-can-now-take-uber-shuttles-mission-bay-heres-how-ride"
+        }
+      ],
+      "stops": [
+        {
+          "key": "MBW",
+          "name": "UCSF Mission Bay West Side (1650 4th St)",
+          "lat": 37.76826,
+          "lon": -122.39065,
+          "campus": true,
+          "match": "1650 4th",
+          "geocode": "1651 4th St (Nominatim), moved to the west curb"
+        },
+        {
+          "key": "MBE",
+          "name": "UCSF Mission Bay East Side (1651 4th St)",
+          "lat": 37.76826,
+          "lon": -122.39039,
+          "campus": true,
+          "match": "1651 4th",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "ZSFG",
+          "name": "UCSF ZSFG (23rd St at San Bruno Ave)",
+          "lat": 37.7546,
+          "lon": -122.4044,
+          "campus": true,
+          "match": "2499 23rd",
+          "geocode": "23rd St at San Bruno Ave, by hand"
+        },
+        {
+          "key": "CASN",
+          "name": "UCSF shuttle Castro North Side (2390 Market St)",
+          "lat": 37.76306,
+          "lon": -122.43498,
+          "campus": false,
+          "match": "2390 Market",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "CASS",
+          "name": "UCSF shuttle Castro South Side (2375 Market St)",
+          "lat": 37.76295,
+          "lon": -122.4344,
+          "campus": false,
+          "match": "2375 Market",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "PLIB",
+          "name": "UCSF Parnassus Library (530 Parnassus Ave)",
+          "lat": 37.76353,
+          "lon": -122.45916,
+          "campus": true,
+          "match": "530 Parnassus",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "PCS",
+          "name": "UCSF Parnassus Clinical Sciences (521 Parnassus Ave)",
+          "lat": 37.76283,
+          "lon": -122.45933,
+          "campus": true,
+          "match": "521 Parnassus",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "STAN",
+          "name": "UCSF Health Stanyan Hospital (500 Stanyan St)",
+          "lat": 37.7728,
+          "lon": -122.45394,
+          "campus": true,
+          "match": "500 Stanyan",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "G3221",
+          "name": "UCSF shuttle 3221 Geary Blvd",
+          "lat": 37.78132,
+          "lon": -122.45365,
+          "campus": true,
+          "match": "3221 Geary",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "G3360",
+          "name": "UCSF shuttle 3360 Geary Blvd",
+          "lat": 37.78172,
+          "lon": -122.45523,
+          "campus": true,
+          "match": "3360 Geary",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "MTZ",
+          "name": "UCSF Mount Zion (2356 Sutter St)",
+          "lat": 37.78567,
+          "lon": -122.4393,
+          "campus": true,
+          "match": "2356 Sutter",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "LAW200",
+          "name": "UCSF shuttle UC Law (200 McAllister St)",
+          "lat": 37.78104,
+          "lon": -122.41573,
+          "campus": false,
+          "match": "200 McAllister",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "LAW198",
+          "name": "UCSF shuttle UC Law (198 McAllister St)",
+          "lat": 37.7812,
+          "lon": -122.41502,
+          "campus": false,
+          "match": "198 McAllister",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "CCH",
+          "name": "UCSF shuttle Civic Center BART (Hyde St at Grove St)",
+          "lat": 37.77906,
+          "lon": -122.41511,
+          "campus": false,
+          "match": "13 Hyde",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "CC7",
+          "name": "UCSF shuttle Civic Center BART (7th St at Market St)",
+          "lat": 37.77965,
+          "lon": -122.413,
+          "campus": false,
+          "match": "7th Street at Market",
+          "geocode": "7th St at Market St, by hand"
+        },
+        {
+          "key": "B16N",
+          "name": "UCSF shuttle 16th St BART (2970 16th St)",
+          "lat": 37.76524,
+          "lon": -122.41901,
+          "campus": false,
+          "match": "2970 16th",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "B16S",
+          "name": "UCSF shuttle 16th St BART (3001 16th St)",
+          "lat": 37.76496,
+          "lon": -122.41982,
+          "campus": false,
+          "match": "3001 16th",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "ALD75",
+          "name": "UCSF Aldea Housing (75 Behr Ave)",
+          "lat": 37.75787,
+          "lon": -122.45465,
+          "campus": true,
+          "match": "75 Behr",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "ALD90",
+          "name": "UCSF Aldea Housing (90 Behr Ave)",
+          "lat": 37.75792,
+          "lon": -122.45491,
+          "campus": true,
+          "match": "90 Behr",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "JOH160",
+          "name": "UCSF Aldea Housing (160 Johnstone Dr)",
+          "lat": 37.758,
+          "lon": -122.45579,
+          "campus": true,
+          "match": "160 Johnstone",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "MCB",
+          "name": "UCSF Mission Center Building (1855 Folsom St)",
+          "lat": 37.76767,
+          "lon": -122.41543,
+          "campus": true,
+          "match": "1855 Folsom",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "JCN",
+          "name": "UCSF shuttle Japan Center North Side (1630 Geary Blvd)",
+          "lat": 37.78488,
+          "lon": -122.43042,
+          "campus": false,
+          "match": "1630 Geary",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "JCS",
+          "name": "UCSF shuttle Japan Center South Side (1755 Geary Blvd)",
+          "lat": 37.78459,
+          "lon": -122.43221,
+          "campus": false,
+          "match": "1755 Geary",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "HYDE",
+          "name": "UCSF Health Hyde Hospital (1199 Bush St)",
+          "lat": 37.78894,
+          "lon": -122.41669,
+          "campus": true,
+          "match": "1199 Bush",
+          "geocode": "Nominatim"
+        },
+        {
+          "key": "RIN",
+          "name": "UCSF shuttle Rincon Center",
+          "lat": 37.79227,
+          "lon": -122.39286,
+          "campus": false,
+          "match": "Rincon",
+          "geocode": "Nominatim (Rincon Center)"
+        }
+      ],
+      "campusReachMeters": 450
+    },
+    "presidiGo": {
+      "operator": "Presidio Trust (PresidiGo / Presidio GO Shuttle)",
+      "route": "Downtown",
+      "eligibility": "free and open to all, except that weekday trips before 9:30am and every other trip 4:30-6pm need a Presidio GO pass (Presidio residents and employees). Downtown stops are set-down only toward downtown and pick-up only toward the Presidio, so the route carries only trips to and from the Presidio; its peak riders are the pass holders it is restricted to.",
+      "source": "The Trust's GTFS, https://presidiobus.com/gtfs (published by GMV Syncromatics; Transitland feed f-presidigo~ca~us), fetched 2026-10-07 by fetch-data.ts into data/beta3/raw/presidigo/presidigo-gtfs.zip: feed version 6/27/2026, weekday and weekend calendars from 2026-06-27 with no end. Stops, the route's shape, and every trip come from it. The pass rule is the Trust's: https://presidio.gov/visit/getting-to-and-around-the-park/presidio-go-shuttle/presidio-go-downtown-shuttle-schedule/",
+      "license": "Neither the feed (feed_info names GMV Syncromatics as publisher; no license file) nor Transitland's listing states a license. It is the Trust's public feed for trip planners, used here for research with attribution.",
+      "routeId": "66",
+      "stopKeys": {
+        "31734": "PTC",
+        "31925": "YMCA",
+        "31928": "TIDES",
+        "31930": "LDAC",
+        "31933": "LOMB",
+        "41492": "VNU",
+        "5296569": "DAVCAL",
+        "8894813": "BEALE",
+        "839326": "DRUMM",
+        "41520": "VNU_PU",
+        "31980": "LDAC_IN",
+        "31983": "TIDES_IN",
+        "31986": "YMCA_IN"
+      },
+      "pickUpOnly": [
+        "DRUMM",
+        "VNU_PU"
+      ],
+      "pickUpOnlyNote": "the feed marks the downtown set-downs (pickup_type 1) but not the pick-ups toward the Presidio; the Trust's rule makes those pick-up only, so the route carries no trips within downtown",
+      "passBefore": 9.5,
+      "downtownStop": "DRUMM",
+      "passDowntown": [
+        16.5,
+        17,
+        17.5,
+        18
+      ],
+      "passTrips": "trips needing a pass are modeled as route 'PresidiGo DT pass': weekday loops leaving the Presidio Transit Center before 9:30am, and those leaving downtown (Drumm and California) within 5 minutes of 4:30, 5, 5:30, and 6pm, the trips the Trust names. Anyone may board them at the Presidio stops; downtown and at Van Ness only riders bound for a zone within 450 m of a Presidio stop (pass holders work or live there).",
+      "openStops": [
+        "PTC",
+        "YMCA",
+        "YMCA_IN",
+        "TIDES",
+        "TIDES_IN",
+        "LDAC",
+        "LDAC_IN",
+        "LOMB"
+      ],
+      "before": "Before October 2026 the route was written from the Trust's web pages: 39 weekday loops from the Presidio Transit Center (every 15 minutes 6:00-9:15am and 3:30-6:30pm, every 30 minutes 9:30am-3:00pm), a 55-minute loop, no weekend service, stops geocoded with Nominatim (Lombard Gate by hand), one stop each for Van Ness/Union and Letterman Digital Arts Center, and 18 pass trips.",
+      "ridership": {
+        "value": "more than 300,000 rides in 2025 on all routes, all days (12% more than 2024); 635,000 in 2019; in 2014 the Downtown route averaged 991 riders a weekday and the Around the Park routes 444",
+        "source": "Presidio Trust press releases via search (https://presidio.gov/about/press/presidio-trust-modernizes-presidio-go-shuttle-fleet); Wikipedia Presidio Go Shuttle; PresidiGo Capital Plan Final Report (https://rosap.ntl.bts.gov/view/dot/38691/dot_38691_DS1.pdf)"
+      }
+    },
+    "tiFerry": {
+      "operator": "Treasure Island Ferry (Prop SF for the Treasure Island Development Authority)",
+      "route": "Treasure Island - Ferry Building Gate B, 8 minutes",
+      "fare": "$5 a ride (cash, card, or app; no Clipper), so no Clipper transfer discount",
+      "eligibility": "public",
+      "source": "https://www.tisf.com/ferry (weekday timetable, read 2026-10-05); SF Bay Ferry is to take the service over in 2026 (https://www.seamlessbayarea.org/blog/2024/12/5/sf-bay-ferry-to-take-over-treasure-island-ferry-service-by-2026), but its GTFS does not have it yet",
+      "rawFile": "data/beta3/raw/shuttle/tisf-ferry.html",
+      "runMinutes": 8,
+      "departTreasureIsland": [
+        "7:30",
+        "8:10",
+        "8:45",
+        "10:20",
+        "11:30",
+        "12:15",
+        "13:00",
+        "15:00",
+        "15:55",
+        "16:35",
+        "17:50",
+        "18:30",
+        "19:15",
+        "20:00"
+      ],
+      "departFerryBuilding": [
+        "7:50",
+        "8:25",
+        "9:05",
+        "10:40",
+        "11:50",
+        "12:35",
+        "13:20",
+        "15:20",
+        "16:15",
+        "16:55",
+        "18:10",
+        "18:50",
+        "19:35",
+        "20:20"
+      ],
+      "stops": [
+        {
+          "key": "TI",
+          "name": "Treasure Island Ferry Terminal",
+          "lat": 37.81618,
+          "lon": -122.37305
+        },
+        {
+          "key": "FB",
+          "name": "Ferry Building Gate B (Treasure Island Ferry)",
+          "lat": 37.79679,
+          "lon": -122.39332
+        }
+      ],
+      "geocode": "Nominatim"
+    }
+  },
+  "notAdded": [
+    {
+      "service": "SF State shuttle (Daly City BART - SFSU)",
+      "why": "discontinued from fall 2024 (ridership 80% below pre-pandemic, about $800,000 a year); SFSU points riders to Muni's 28, 28R, and 57",
+      "source": "https://www.sfmta.com/muni-service-connecting-sf-state-university-and-daly-city-bart; https://goldengatexpress.org/107178/campus/sfsu-shuttle-service-will-be-discontinued-in-the-fall/"
+    },
+    {
+      "service": "CPMC (Sutter Health) campus shuttles (B: Civic Center BART - Van Ness campus; M: Mission Bernal - Davies - Van Ness; P/PB: Pacific campus)",
+      "why": "patients, visitors, and staff only, every 10-30 minutes; no published timetable data or counts. Left out; the routes they parallel (49, 47, 38, 1, 24) are not among the over-predicted ones",
+      "source": "transit.wiki California Pacific Medical Center Shuttle (search summary, 2026-10-05)"
+    },
+    {
+      "service": "Kaiser Permanente San Francisco shuttles",
+      "why": "staff and patient shuttles with no public schedule found",
+      "source": "none found"
+    },
+    {
+      "service": "PresidiGo South Hills route",
+      "why": "circulates inside the Presidio (Baker Beach, Mountain Lake, Officers' Club); trips within the park are few and walkable",
+      "source": "https://presidio.gov/visit/getting-to-and-around-the-park/presidio-go-shuttle"
+    },
+    {
+      "service": "Private commuter (tech) shuttles",
+      "why": "already modeled for residents' commutes to San Mateo and Santa Clara counties (commuter-shuttles.json); SFMTA counted only 384 intra-city circulator boardings a day in its program in 2017",
+      "source": "commuter-shuttles.json"
+    }
+  ]
+}

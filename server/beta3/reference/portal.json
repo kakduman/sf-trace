@@ -1,0 +1,403 @@
+{
+ "project": "The Portal (formerly the Downtown Rail Extension, DTX), Transbay Program Phase 2",
+ "sponsor": "Transbay Joint Powers Authority (TJPA); initial operator Caltrain (Peninsula Corridor JPB); future operator California High-Speed Rail Authority (CHSRA)",
+ "accessed": "2026-10-04",
+ "note": "Every value below is copied from the cited official document. Nothing is estimated or derived here except where a field is explicitly labelled 'interpretation' or 'geocode'. pdfPage = page index in the PDF file; printedPage = page label printed on the page, where one exists.",
+ "rawDir": "data/beta3/raw/portal/",
+
+ "sources": {
+  "ftaProfileAR26": {
+   "title": "Transbay Downtown Rail Extension Project, San Francisco, California. New Starts Engineering (Rating Assigned February 2024)",
+   "publisher": "Federal Transit Administration, Capital Investment Grants project profile, FY2026 Annual Report",
+   "date": "2025-11-19 (posted file date); information from TJPA's August 2023 Engineering request",
+   "url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2025-11/CA-San-Francisco-Transbay-Program-Downtown-Extension-Eng-Profile-AR26-11-19-25.pdf",
+   "retrievedVia": "transit.dot.gov returns HTTP 403 to scripted clients; copy retrieved from the Internet Archive snapshot http://web.archive.org/web/20260607020837/<url> (byte-identical archive of the FTA file)",
+   "rawFile": "data/beta3/raw/portal/fta_profile_AR26_2025-11-19.pdf"
+  },
+  "ftaProfileEng2024": {
+   "title": "Transbay Downtown Rail Extension Project. New Starts Engineering (Rating Assigned February 2024)",
+   "publisher": "FTA",
+   "date": "2024-04-12",
+   "url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2024-05/CA-San-Francisco-Downtown-Rail-Extension-Eng-Profile-2024-0412.pdf",
+   "retrievedVia": "Internet Archive snapshot 20250321183006",
+   "rawFile": "data/beta3/raw/portal/fta_profile_2024-04-12.pdf"
+  },
+  "ftaProfileFY25": {
+   "title": "Transbay Downtown Rail Extension Project. New Starts Project Development (Rating Assigned February 2024)",
+   "publisher": "FTA, FY2025 Annual Report on Funding Recommendations",
+   "date": "2024-03",
+   "url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2024-03/CA-SanFrancisco-TransbayDowntownRailExtension-Profile-FY25.pdf",
+   "retrievedVia": "Internet Archive snapshot 20250711074919",
+   "rawFile": "data/beta3/raw/portal/fta_profile_FY25_2024-03.pdf"
+  },
+  "ftaProfileAR23": {
+   "title": "Transbay Downtown Rail Extension Project. New Starts Project Development (Information Prepared December 2021)",
+   "publisher": "FTA, FY2023 Annual Report",
+   "date": "2021-12 (posted 2022-03)",
+   "url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2022-03/CA-San-Francisco-Transbay-Downtown-Rail-Extension-Project-Profile-AR23.pdf",
+   "retrievedVia": "Internet Archive snapshot 20230327140727",
+   "rawFile": "data/beta3/raw/portal/fta_profile_AR23_2022-03.pdf"
+  },
+  "ftaCigDashboard": {
+   "title": "Capital Investment Grants Dashboard (Last updated: 04/06/2026)",
+   "publisher": "FTA",
+   "date": "2026-04-06",
+   "url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/2026-04/Public-CIG-Dashboard-04-03-2026.pdf",
+   "retrievedVia": "Internet Archive snapshot 20260422043730",
+   "rawFile": "data/beta3/raw/portal/fta_cig_dashboard_2026-04-03.pdf"
+  },
+  "seis2018": {
+   "title": "Transbay Transit Center Program Final Supplemental Environmental Impact Statement/Environmental Impact Report, Volume 1: Final SEIS/EIR",
+   "publisher": "TJPA (with FTA/FRA); certified by TJPA December 2018; FTA Amended ROD July 2019",
+   "date": "2018-11",
+   "url": "https://www.tjpa.org/files/2015/12/Vol-1-TJPA-Final-SEIS-EIR_11-18.pdf",
+   "rawFile": "data/beta3/raw/portal/tjpa_SEIS_EIR_final_vol1_2018.pdf"
+  },
+  "feis2004ch3": {
+   "title": "Transbay Terminal / Caltrain Downtown Extension / Redevelopment Project Final EIS/EIR, Chapter 3: Transportation Analysis",
+   "publisher": "FTA / City and County of San Francisco / Peninsula Corridor JPB / San Francisco Redevelopment Agency; certified April 2004, FTA ROD February 2005",
+   "date": "2004 (Final); ridership model runs August-September 2001",
+   "url": "https://www.tjpa.org/files/2009/11/FEIS_Ch3.pdf",
+   "rawFile": "data/beta3/raw/portal/tjpa_FEIS_2004_Ch3.pdf",
+   "draftVersion": {
+    "note": "Draft EIS/EIR Chapter 3 (same tables, numbered 3.1-14 and 3.1-15; FEIS renumbered them 3.1-15 and 3.1-16). The Final text says ridership numbers were not changed from the Draft.",
+    "url": "https://www.tjpa.org/media/30695/download",
+    "rawFile": "data/beta3/raw/portal/tjpa_media30695_seis_ch3_transportation.pdf"
+   }
+  },
+  "escMemo2023_07": {
+   "title": "San Francisco Peninsula Rail Program Memorandum to Executive Steering Committee, Item 5: Update on DTX/The Portal Capital Investment Grant Request for Project Rating and Updated 20-Year Financial Plan (TJPA, Caltrain, SFCTA)",
+   "date": "2023-07-21",
+   "url": "https://www.tjpa.org/media/39147/download?inline=",
+   "rawFile": "data/beta3/raw/portal/tjpa_media39147.pdf"
+  },
+  "escMemo2023_01": {
+   "title": "San Francisco Peninsula Rail Program Memorandum to Executive Steering Committee, Item 6: DTX 20-Year Financial Plan and Project Cost Estimate",
+   "date": "2023-01-20",
+   "url": "https://www.tjpa.org/files/2023/01/Item6_-DTX-20-Year-Financial-Plan-DTX-Cost-Update.pdf",
+   "rawFile": "data/beta3/raw/portal/tjpa_2023-01_Item6_financial_plan.pdf"
+  },
+  "tjpaBoard2023_08_item9": {
+   "title": "TJPA Staff Report, Calendar Item 9, Board meeting of August 10, 2023: updated DTX Project Scope, Project Schedule, and 20-Year Financial Plan; authorization to request entry into CIG Engineering",
+   "date": "2023-08-10",
+   "url": "https://www.tjpa.org/media/38923/download?inline",
+   "rawFile": "data/beta3/raw/portal/tjpa_media38923_2023-08-10_item9_financial_plan.pdf"
+  },
+  "tjpaBoard2025_07_item11": {
+   "title": "TJPA Staff Report, Calendar Item 11, Board meeting of July 10, 2025: The Portal key performance metrics, updated indicative capital cost estimate",
+   "date": "2025-07-10",
+   "url": "https://www.tjpa.org/media/39999/download?inline",
+   "rawFile": "data/beta3/raw/portal/tjpa_media39999_2025-07-10_portal_update.pdf"
+  },
+  "tjpaMonthly2025_12": {
+   "title": "TJPA Board of Directors, The Portal Monthly Report, December 11, 2025",
+   "date": "2025-12-11",
+   "url": "https://tjpa.org/media/40259/download?inline=",
+   "rawFile": "data/beta3/raw/portal/tjpa_media40259_2025-12-11_portal_monthly_report.pdf"
+  },
+  "tjpaBrochure2025_07": {
+   "title": "The Portal to San Francisco's Future (TJPA project overview)",
+   "date": "2025-07",
+   "url": "https://tjpa.org/media/40136/download?inline=",
+   "rawFile": "data/beta3/raw/portal/tjpa_media40136_portal_brochure.pdf"
+  },
+  "tjpaFactSheet2023_08": {
+   "title": "Transbay Program / The Portal fact sheet (TJPA, dated August 2023; copy hosted by SPUR)",
+   "date": "2023-08",
+   "url": "https://www.spur.org/sites/default/files/2024-03/The%20Portal%20Factsheet%20by%20TJPA.pdf",
+   "rawFile": "data/beta3/raw/portal/tjpa_portal_factsheet_spur_2024-03.pdf"
+  },
+  "tjpaStcFactSheet2019": {
+   "title": "Fact Sheet: Salesforce Transit Center & Salesforce Park (TJPA)",
+   "date": "2019-10",
+   "url": "https://www.tjpa.org/files/2019/10/Fact-Sheet-Salesforce-Transit-Center.pdf",
+   "rawFile": "data/beta3/raw/portal/tjpa_fact_sheet_STC_2019-10.pdf"
+  },
+  "tjpaWebAbout": {
+   "title": "About The Portal (tjpa.org web page)",
+   "url": "https://www.tjpa.org/portaldtx/about-portal",
+   "rawFile": "data/beta3/raw/portal/tjpa_about_portal.html"
+  },
+  "tjpaWebFaq": {
+   "title": "The Portal: Frequently Asked Questions (tjpa.org web page)",
+   "url": "https://www.tjpa.org/portaldtx/frequently-asked-questions",
+   "rawFile": "data/beta3/raw/portal/tjpa_portaldtx_frequently-asked-questions.html"
+  },
+  "cambridge2009": {
+   "title": "Caltrain Downtown Extension Study: Ridership Forecast Summary, presented to TJPA by Cambridge Systematics",
+   "date": "2009-03-12 (summarizes the November 2008 'Caltrain Downtown Extension and Transbay Ridership Analysis')",
+   "url": "https://www.tjpa.org/files/2009/11/EDUpdate-CambridgeRidershipUpdate03-12-09.pdf",
+   "rawFile": "data/beta3/raw/portal/tjpa_2009-03-12_cambridge_ridership_update.pdf"
+  },
+  "tjpaKeyInvestment2015": {
+   "title": "Transbay Transit Center: Key Investment in San Francisco's Future as a World Class City (TJPA economic report)",
+   "date": "2015 (file posted 2015-09)",
+   "url": "https://www.tjpa.org/files/2015/09/Transbay_Transit_Center_Key_Investment_Report.pdf",
+   "rawFile": "data/beta3/raw/portal/tjpa_2015-09_TTC_key_investment_report.pdf"
+  },
+  "phasingStudy2021": {
+   "title": "Transbay Program Downtown Rail Extension Phasing Study (Rev. 0, for ESC concurrence), SFCTA Board Item 8 enclosure",
+   "date": "2021-08-20",
+   "url": "https://www.sfcta.org/sites/default/files/2021-09/Item%208%20-%20DTX%20Phasing%20Study%20Final%20Report%20ENCLOSURE.pdf",
+   "retrievedVia": "Internet Archive snapshot 20260210171908 (sfcta.org blocks scripted clients)",
+   "rawFile": "data/beta3/raw/portal/sfcta_2021-08_DTX_phasing_study_final_report.pdf"
+  },
+  "caltrainDtxUpdate2022": {
+   "title": "Downtown Rail Extension (DTX) Update, May 2022 (Caltrain presentation)",
+   "date": "2022-05",
+   "url": "https://www.caltrain.com/media/17998/download",
+   "rawFile": "data/beta3/raw/portal/caltrain_media17998_DTX_update_2022-05.pdf"
+  },
+  "sfctaCacMemo2026_01": {
+   "title": "SFCTA Memorandum, Agenda Item 9: Allocate $12,500,000 in Prop L Funds to TJPA for The Portal Project Engineering Phase Activities for FY2025/26 (with allocation request form)",
+   "date": "2026-01-23 (for 2026-02-10 Board)",
+   "url": "https://www.sfcta.org/sites/default/files/2026-01/SFCTA_CAC_Item9_TJPAPortalProjectFiscalYear2026MEMO_2026-01-28.pdf",
+   "rawFile": "data/beta3/raw/portal/sfcta_2026-01-28_CAC_item9_portal_memo.pdf"
+  },
+  "sfctaBoard2026_02": {
+   "title": "The Portal / Downtown Rail Extension (DTX), Transportation Authority Board Agenda Item 5 presentation",
+   "date": "2026-02-10",
+   "url": "https://www.sfcta.org/sites/default/files/2026-02/SFCTA_Board_Item5_TJPAPortalProjectFiscalYear2026PRESENTATION_2026-02-10.pdf",
+   "rawFile": "data/beta3/raw/portal/sfcta_2026-02-10_board_item5_portal_presentation.pdf"
+  },
+  "mtcStageGate2025": {
+   "title": "Major Project Advancement Policy (MAP) Stage Gate Evaluation for The Transbay Joint Powers Authority - The Portal Project (MTC staff presentation, Programming and Allocations Committee item 3b, file 25-0151)",
+   "date": "2025-03 (Programming and Allocations Committee; meeting attachment folder 6248)",
+   "url": "https://mtc.ca.gov/sites/default/files/meetings/attachments/6248/3b_25_0151_4_Presentation_TJPA_Portal_Stage_Gate_0.pdf",
+   "rawFile": "data/beta3/raw/portal/mtc_MAP_stage_gate_TJPA_portal.pdf"
+  },
+  "jointAdHoc2024_09": {
+   "title": "TJPA and Peninsula Corridor JPB Joint Ad Hoc Committee Staff Report, Item 5: The Portal Operations and Maintenance Funding Gap",
+   "date": "2024-09-06",
+   "url": "https://tjpa.org/media/39517/download?inline=",
+   "rawFile": "data/beta3/raw/portal/tjpa_media39517_2024-09-06_joint_adhoc.pdf"
+  },
+  "osm": {
+   "title": "OpenStreetMap via Overpass API (data (c) OpenStreetMap contributors, ODbL)",
+   "date": "OSM base 2026-10-05T03:09Z",
+   "url": "https://overpass-api.de/api/interpreter",
+   "rawFiles": ["data/beta3/raw/portal/osm_stc_overpass.json", "data/beta3/raw/portal/osm_4th_townsend_overpass.json"]
+  },
+  "caltrainGtfs": {
+   "title": "Caltrain GTFS (feed_version UTC 29-Jan-2026, valid 2026-01-31 to 2026-08-31), stops.txt",
+   "rawFile": "data/beta3/raw/gtfs/caltrain.zip"
+  }
+ },
+
+ "alignment": {
+  "lengths": {
+   "projectLengthMiles_FTA": 2.2,
+   "projectLengthMiles_FTA_source": "ftaProfileAR26 p.1 'Commuter Rail 2.2 Miles, 2 Stations'; same in ftaCigDashboard ('Eng 2.2 2')",
+   "tunnelMiles_TJPA": 1.3,
+   "tunnelMiles_TJPA_source": "tjpaWebFaq: 'The project consists of 1.3 miles of tunnel that will connect two new rail stations'; tjpaBrochure2025_07 p.1: 'this long-awaited 1.3-mile tunnel (over 2 miles in project length)'; sfctaCacMemo2026_01 p.6: 'extend Caltrain 1.3 miles from its current terminus at Fourth and King streets to the Salesforce Transit Center at First and Mission streets'",
+   "seisLengthDefinitions": "seis2018 pdfPage 92, printedPage 2-40, footnote 3: 'The total project length is 2.7 miles from the end of the turnback track at Mariposa Street ... Excluding the turnback segment, which is about 0.5 mile, the project length is 2 miles from the western end of the Caltrain railyard to the eastern end of the train box. ... The 1.3 miles is the length of the DTX from the Fourth and King Station to the Transit Center.'",
+   "otherPublishedFigures": [
+    {"value": "2.4 miles of right of way construction; 1.5 miles of tunnel", "source": "caltrainDtxUpdate2022 slide 6"},
+    {"value": "2.4 miles from the China Basin/South Park neighborhood near the current Caltrain terminus", "source": "ftaProfileAR23 p.1 (Dec 2021)"},
+    {"value": "2.2 miles in length, consisting of 1.7 miles of tunnel", "source": "mtcStageGate2025 slide 3"},
+    {"value": "approximately 2.2 miles total planned construction length", "source": "tjpaWebAbout"}
+   ],
+   "forModel": "Use 1.3 mi as the 4th & King to Transit Center rail distance (the SEIS definition); the 2.2 mi FTA figure includes trackwork south of the railyard."
+  },
+  "route": "seis2018 pdfPage 92-93, printedPage 2-40 to 2-41: from the new underground station beneath Townsend Street, three tracks continue east under Townsend Street, curve north at about Clarence Place just east of Third Street, run under Second Street for approximately 0.4 mile, and enter the train box beneath the Transit Center, which extends to the east side of Beale Street. Construction by cut-and-cover and mined tunneling (ftaProfileAR26 p.1).",
+  "tracksInTunnel": "3 tracks between Fourth and Townsend Street Station and Salesforce Transit Center (seis2018 printedPage 2-41; phasingStudy2021 p.7)",
+  "stations": [
+   {
+    "name": "Fourth and Townsend Street Station (new, underground)",
+    "description": "Realigned in the 2018 SEIS to lie 'along and underneath Townsend Street' at Fourth Street, lowered with a mezzanine added, beneath the Muni Metro T-Line on Fourth Street; station facilities (entrances, vents) within the Townsend Street right-of-way (seis2018 pdfPage 110, printedPage 2-58; pdfPage 247, printedPage 2-195). Previously approved (No Action) station was 'beneath Townsend Street between Fourth and Fifth Streets' (seis2018 printedPage 2-40).",
+    "platforms": "Two tracks with one center platform and two side platforms (tjpaWebAbout)",
+    "hsrStop": "No. The 'Fourth and Townsend CHSRA Platform Elimination' secondary mitigation ($101m reduction) was adopted in the 2025 cost update (tjpaBoard2025_07_item11 slide 4, pdfPage 13); HSR would stop only at the Transit Center.",
+    "connections": "Direct transfer to Muni Central Subway / T-Third (phasingStudy2021 p.48 of 83, section 6.4.3)",
+    "publishedCoordinates": null,
+    "geocode": {
+     "lat": 37.7770727,
+     "lon": -122.3950705,
+     "method": "geocode: OSM node 65334473, the 4th Street / Townsend Street intersection (traffic_signals). Not a published station centroid; the station box runs along Townsend Street from about this corner (exact extent not published in the documents read).",
+     "rawFile": "data/beta3/raw/portal/osm_4th_townsend_overpass.json"
+    }
+   },
+   {
+    "name": "Salesforce Transit Center (train box fit-out)",
+    "description": "Existing two-level train box beneath the Transit Center, about 60 ft below ground, 1,500 ft long by about 190 ft wide, built 2010 with up to $400 million ARRA funds, extending easterly to the east side of Beale Street; tracks narrow from six to three at the west end just east of Second Street (seis2018 pdfPage 98, printedPage 2-46). Six tracks with three center platforms (tjpaWebAbout).",
+    "address": "425 Mission Street, San Francisco 94105 (OSM addr tags); SFCTA describes the location as 'First and Mission Streets' (sfctaCacMemo2026_01 p.6)",
+    "publishedCoordinates": null,
+    "osm": {
+     "stationNode": {"id": 7221455729, "lat": 37.7891641, "lon": -122.3967838, "tags": "public_transport=station, amenity=bus_station, name=Salesforce Transit Center, operator=Transbay Joint Powers Authority"},
+     "buildingWayCenter": {"id": 542375290, "lat": 37.7891164, "lon": -122.3968714, "tags": "building=transportation, building:levels:underground=2, min_level=-2"},
+     "rawFile": "data/beta3/raw/portal/osm_stc_overpass.json"
+    }
+   }
+  ],
+  "fourthAndKingSurfaceStation": {
+   "remains": true,
+   "evidence": [
+    "seis2018 printedPage 2-40: 'The existing Fourth and King Streets terminus station will continue to function as a Caltrain terminal and storage and maintenance facility.'",
+    "escMemo2023_07 p.2 and escMemo2023_01 p.3: opening service plan has two trains pphpd to the surface 4th and King Station, with four EMU trains pphpd continuing to the Transit Center via the new underground Fourth and Townsend Station (six pphpd total on the corridor).",
+    "seis2018 printedPage 2-58: realignment would not affect use of the at-grade tracks at Fourth and King 'for an interim HSR terminal station, if needed'; City Rail Alignment and Benefits study of reconfiguring or replacing the station is described as speculative."
+   ],
+   "existingStationCoordinates": {"lat": 37.776404, "lon": -122.394911, "source": "caltrainGtfs stops.txt parent station 'san_francisco' (San Francisco Caltrain Station)"}
+  }
+ },
+
+ "service": {
+  "openingPlanAssumedForFtaForecast": {
+   "trainsPerPeakHourPerDirectionToTransitCenter": 4,
+   "trainsPerPeakHourPerDirectionToSurface4thAndKing": 2,
+   "trainsPerPeakHourPerDirectionCorridorTotal": 6,
+   "shareOfPeakTrainsToTransitCenter": "4 of 6 (all Caltrain trains continue via Fourth and Townsend to the Transit Center except the 2 pphpd that terminate at surface 4th & King)",
+   "source": "tjpaBoard2023_08_item9 pdfPage 8 ('Ridership forecasts assume the same DTX service level as the February submission with four trains per direction in the peak hour to the Transit Center, as well as completion of PCEP in 2024') and pdfPage 49 (O&M assumptions slide); escMemo2023_01 pdfPage 3 and slide 16 (pdfPage 27); escMemo2023_07 p.2",
+   "optionConsidered": "One additional EMU trainset (~$55 million) would allow 6 pphpd to the Transit Center on opening day (escMemo2023_07 p.3, slide 4); the August 2023 submittal forecasts still used 4 pphpd (tjpaBoard2023_08_item9 pdfPage 8).",
+   "caltrainOnly": "FTA evaluation based on initial condition during which Caltrain will be sole rail operator; future CHSRA operations not reflected (tjpaBoard2023_08_item9 pdfPage 49; escMemo2023_01 pdfPage 27)"
+  },
+  "ftaServiceDescription": "Service planned 4:30 am to 1:30 am weekdays and 6:00 am to 1:30 am weekends, trains every 10 to 15 minutes in weekday peak periods and every 30 minutes off-peak and weekends (ftaProfileAR26 p.1).",
+  "longRange": {
+   "seis2018": "Blended system envisions up to 10 trains per peak hour per direction to and from San Francisco: six Caltrain and four HSR tpph/d; how many proceed to the Transit Center to be determined later (seis2018 pdfPage 99, printedPage 2-47).",
+   "phasingStudy2021": "Integrated peak service in 2040 of eight Caltrain and four high-speed trains per hour per direction on the DTX (8+4); 3 tunnel tracks support 12 tph/direction (phasingStudy2021 p.7; section 4, page 11 of 83).",
+   "sfctaScope2026": "Traction power simulation for a 2035 scenario of 6 (8-car) Caltrain trains and 4 (8-car) CHSRA trains (sfctaCacMemo2026_01, GEC scope, pdf text line ~1526)"
+  }
+ },
+
+ "travelTime": {
+  "scheduledRunTime4thKingToTransitCenter": null,
+  "scheduledRunTime_note": "No published Caltrain or TJPA run time for the 4th & Townsend to Transit Center tunnel segment was found. The SEIS gives only the non-revenue move between the railyard and the below-grade Fourth and Townsend station: 'approximately 10 minutes' including the turnback (seis2018 pdfPage 120, printedPage 2-68). A model should compute run time from the 1.3 mi distance.",
+  "savingsClaims": [
+   {"value": "10-15 minutes of travel time savings and a one-seat ride between downtown San Francisco and the Peninsula", "source": "caltrainDtxUpdate2022 slide 3"},
+   {"value": "13 to 15 minutes vs. 2020 No-Project for selected Peninsula-downtown trips (10 min from SFO); door-to-door peak-direction times including access, wait, transfer, ride; Muni assumed for downtown connections in No-Project", "source": "feis2004ch3 pdfPage 33-34, printedPage 3-33 to 3-34, Table 3.1-16 (Parsons Ridership Model, September 2001)",
+    "table3_1_16": [
+     {"origin": "Downtown San Jose", "destination": "Downtown San Francisco", "y2001": "2:05", "y2020NoProject": "1:39", "y2020Extension": "1:24", "savingsMin": 15},
+     {"origin": "Sunnyvale", "destination": "Downtown San Francisco", "y2001": "1:51", "y2020NoProject": "1:40", "y2020Extension": "1:26", "savingsMin": 14},
+     {"origin": "Palo Alto", "destination": "Downtown San Francisco", "y2001": "1:36", "y2020NoProject": "1:17", "y2020Extension": "1:02", "savingsMin": 15},
+     {"origin": "Millbrae", "destination": "Downtown San Francisco", "y2001": "1:08", "y2020NoProject": "0:52", "y2020Extension": "0:37", "savingsMin": 15},
+     {"origin": "San Bruno", "destination": "Downtown San Francisco", "y2001": "1:04", "y2020NoProject": "0:54", "y2020Extension": "0:40", "savingsMin": 14},
+     {"origin": "Downtown San Francisco", "destination": "San Francisco Airport", "y2001": "1:11", "y2020NoProject": "0:56", "y2020Extension": "0:47", "savingsMin": 10},
+     {"origin": "Redwood City", "destination": "Concord", "y2001": "2:26", "y2020NoProject": "2:13", "y2020Extension": "1:59", "savingsMin": 14},
+     {"origin": "Downtown Oakland", "destination": "San Carlos", "y2001": "1:41", "y2020NoProject": "1:28", "y2020Extension": "1:15", "savingsMin": 13}
+    ]
+   },
+   {"value": "Mountain View to SF Financial District: Caltrain to 4th & King + bus/Muni 65 min; + walk 70 min; Caltrain to Millbrae + BART 75 min; drive alone 80 min; direct Caltrain to TTC 50 min; '15-30 minutes travel time savings'", "source": "cambridge2009 slide 4 (2030 model)"},
+   {"value": "reduce commute times into downtown San Francisco by up to 30 minutes and avoid the current need to transfer from Caltrain to a bus or light rail", "source": "tjpaKeyInvestment2015 pdfPage 14, printedPage 10 (Property Value Enhancement, 1. Transit Premiums), endnote 10 citing Cambridge Systematics 2008 p.6-2 Table 6.1"},
+   {"value": "passengers can cut between 30 and 45 minutes off their daily regional commute (i.e. per round trip/day)", "source": "tjpaStcFactSheet2019"},
+   {"value": "directly save commuters almost an hour a day in travel time", "source": "tjpaWebAbout"}
+  ],
+  "interpretation": "The per-trip saving with model-based support is 13-15 min (2004 FEIS) or 15-30 min (2008 Cambridge, Mountain View example) for downtown-bound riders versus a 4th & King + Muni/walk connection; the 30-45 min and 'almost an hour' figures are per-day (two-way) promotional statements without a cited model run."
+ },
+
+ "ridership": {
+  "ftaCig2023Submittal": {
+   "currentYear": 2023,
+   "currentYearDailyLinkedTrips": 16500,
+   "currentYearAnnualLinkedTrips": 5130400,
+   "horizonYear": 2045,
+   "horizonYearDailyLinkedTrips": 48000,
+   "horizonYearAnnualLinkedTrips": 14111000,
+   "source": "ftaProfileAR26 p.1 Summary Description (identical in ftaProfileEng2024 p.1 and ftaProfileFY25 p.1)",
+   "model": "FTA STOPS (tjpaBoard2023_08_item9 pdfPage 49: 'Long-term (~2045) forecast consistent with FTA \"STOPS\" model and FTA May 2023 Guidance considering both pre- and post-pandemic ridership'); prepared by SFCTA with Caltrain and TJPA under FTA guidance",
+   "currentYearDefinition": "Per FTA May 2023 guidance as summarized by the sponsors: two forecasts, 'pre-covid' baselined from 2019 and 'post-covid' baselined from 2022 or 2023; FTA rates the project using 'Base year to equal post-Covid, plus a defined bump-up' and 'Horizon year (2045) to be average of pre and post' (escMemo2023_07 slide 9, pdfPage 15; memo p.4). The 2023 figure is therefore a current-year (no land-use growth) forecast on modified post-COVID conditions, not observed ridership.",
+   "assumptions": "4 Caltrain trains pphpd to Transit Center, PCEP electrification complete, Caltrain sole rail operator (no HSR) (tjpaBoard2023_08_item9 pdfPage 8, 49). MTC consultant notes the 2023 STOPS analysis 'uses pre-pandemic data and is underpinned by PBA2040 forecasts (as opposed to the more recent PBA2050)' (mtcStageGate2025 slide 12).",
+   "interpretation": "'Daily linked trips' on an FTA profile are trips that use the project (here, rider trips using the Portal segment/its two stations), counted once per linked trip; they are neither Caltrain systemwide ridership nor new riders. This is the number most comparable to a model run on today's population and jobs.",
+   "notPublished": "The profiles do not publish the mobility/cost-effectiveness/congestion/environmental measures (trips on the project by transit-dependent persons, new/auto-diverted trips, travel-time savings hours). Only Land Use (High) and Economic Development (Medium-High) detail pages (rating assigned May 2023) are printed (ftaProfileAR26 p.6)."
+  },
+  "ftaRatings": {
+   "overall": "Medium-High",
+   "projectJustification": "Medium (ftaProfileFY25 and ftaProfileEng2024); Medium-High printed in ftaProfileAR26 (same Feb 2024 rating date; discrepancy in FTA's own documents)",
+   "localFinancialCommitment": "Medium-High",
+   "landUse": "High: 26,288 persons/sq mi within 1/2 mile of stations; 404,017 jobs served (one-seat ride); average daily parking $44; LBAR housing ratio 2.20",
+   "economicDevelopment": "Medium-High",
+   "source": "ftaProfileAR26 p.1, p.4, p.6"
+  },
+  "feis2004": {
+   "forecastYear": 2020,
+   "model": "Parsons Ridership Forecast, August 2001; base Caltrain February 2001 ridership survey",
+   "serviceAssumed": "132 weekday trains in 2020 (Final); Draft analyzed 170 with <0.1% difference",
+   "stationDailyBoardingsPlusAlightings": {
+    "TransbayTerminal": {"y2001": 0, "y2020NoProject": 0, "y2020Extension": 29307},
+    "FourthAndTownsend": {"y2001": 13611, "y2020NoProject": 12950, "y2020Extension": 3098},
+    "Millbrae": {"y2001": 1801, "y2020NoProject": 8370, "y2020Extension": 5948},
+    "systemTotalEntriesPlusExits": {"y2001": 71206, "y2020NoProject": 100115, "y2020Extension": 127921},
+    "systemEntries": {"y2001": 35603, "y2020NoProject": 50057, "y2020Extension": 63960}
+   },
+   "systemwideIncrement": "Extension increases Caltrain to 64,000 trips/day, +13,900 over 2020 No-Project",
+   "source": "feis2004ch3 pdfPage 32-33, printedPage 3-32 to 3-33, Table 3.1-15 and section 3.1.6.2",
+   "units": "daily boardings + alightings (ons + offs) per station; 'System Entries' = daily riders"
+  },
+  "cambridge2008": {
+   "forecastYear": 2030,
+   "table": [
+    {"scenario": "2005 Observed", "fourthAndKing": 14200, "transbayTerminal": null, "total": 14200, "growthFrom2005": null},
+    {"scenario": "2030 No Project", "fourthAndKing": 30900, "transbayTerminal": null, "total": 30900, "growthFrom2005": "125%"},
+    {"scenario": "2030 TTC Extension (6 trains to TTC)*", "fourthAndKing": 17100, "transbayTerminal": 31500, "total": 48500, "growthFrom2005": "242%"},
+    {"scenario": "2030 TTC + $8 gas", "fourthAndKing": 21300, "transbayTerminal": 37600, "total": 58900, "growthFrom2005": "315%"}
+   ],
+   "tableNote": "*'TTX extension trips are interpolated from forecasts of 5- and 7-train scenarios.' Units are not labelled on the slide (SF-station Caltrain ridership; the 2018 SEIS cites the 4th & King figures as 'number of passengers using the Fourth and King Caltrain Station').",
+   "otherFigures": "8,700 daily vehicles off highways; daily VMT reduced 300,000; 'Brings 31,500 daily riders to the Transbay Transit Center'; 'Over 26,500 daily HSR riders at TTC in 2030'",
+   "newRiders": "approximately 13,000 new riders (31,550 with 6 tph to DTX vs 18,540 No Project adjusted to 6 tph) (tjpaKeyInvestment2015 pdfPage 21, printedPage 17, and endnote 18, citing Cambridge 2008 p.6-9 Table 6.8)",
+   "source": "cambridge2009 slides 3-6",
+   "seisCitation": "seis2018 pdfPage 223, printedPage 2-171: 2030 4th & King passengers 16,300 to 20,900 with DTX (alternatives) vs 30,900 without; seis2018 printedPage 2-343: '29,700 passengers arriving and departing at the Transit Center would reduce VMT in San Francisco by 122,800 miles (TJPA 2008)'"
+  },
+  "pcepEir2040_4thAndKing": {
+   "value": "2040 4th & King boardings: 15,230 with DTX vs 16,560 without DTX",
+   "source": "seis2018 pdfPage 223, printedPage 2-171, citing the Caltrain PCEP EIR"
+  },
+  "systemwideEffect": [
+   {"value": "DTX could increase Caltrain's projected ridership by up to 25%", "source": "caltrainDtxUpdate2022 slide 3"},
+   {"value": "+13,900 daily trips in 2020 (50,057 to 63,960 system entries)", "source": "feis2004ch3 Table 3.1-15"},
+   {"value": "~13,000 new riders (2030)", "source": "tjpaKeyInvestment2015 endnote 18"}
+  ],
+  "promotionalTotals": [
+   {"value": "over 125,000 average daily riders", "source": "tjpaBrochure2025_07 p.1", "note": "basis not stated; appears to include HSR and transfers"},
+   {"value": "seamless transfers of up to 90,000 daily riders through 11 transit systems (*Average of Caltrain, CHSRA, and TJPA ridership estimates)", "source": "tjpaFactSheet2023_08 p.2"},
+   {"value": "Divert over 19,000 auto trips daily (in its first year of full operation)", "source": "tjpaFactSheet2023_08 p.2"},
+   {"value": "Reduction of over 76 million VMT annually by 2045; over 30,000 metric tons CO2 annually (2045)", "source": "tjpaBrochure2025_07 p.2"},
+   {"value": "serving fully one-third of all systemwide HSR ridership and half of all Caltrain ridership", "source": "tjpaBrochure2025_07 p.2"}
+  ],
+  "stationBoardings2023Forecast": null,
+  "stationBoardings2023Forecast_note": "No station-level boardings (Transit Center vs 4th & Townsend) from the 2023 STOPS/CIG forecasts were found in any published TJPA, SFCTA, Caltrain, MTC, or FTA document. SFCTA says it 'will lead ridership forecasting efforts, at such time as FTA requires these forecasts to be updated in support of seeking the FFGA' (sfctaCacMemo2026_01 p.2)."
+ },
+
+ "currentYearEstimate": {
+  "value": 16500,
+  "unit": "daily linked trips on the project",
+  "year": 2023,
+  "source": "ftaProfileAR26 p.1",
+  "caveat": "FTA current-year scenario = today's population/jobs and network with the project added, using a modified post-COVID 2023 base 'plus a defined bump-up' (escMemo2023_07 slide 9). It is a weekday-type daily figure from STOPS; the profile states 5,130,400 annual linked trips (ratio 310.9). No other published no-growth estimate was found."
+ },
+
+ "cost": {
+  "summary": "$8.255 billion YOE (FTA Engineering entry, incl. $375.4M finance charges and $728.5M already-built train box); indicative update $7.57 billion (July 2025); FTA CIG maximum $3,384,462,235 (41%).",
+  "ftaTotalCapitalCostMillionsYOE": 8254.79,
+  "ftaFinanceChargesMillions": 375.4,
+  "ftaCigRequestedMillions": 4077.86,
+  "ftaCigMaximumDollars": 3384462235,
+  "ftaCigMaximumShare": "41 percent",
+  "annualOperatingCostOpeningYear2035Millions": 50.80,
+  "indicativeEstimate2025Billions": 7.57,
+  "localFundingGap2025Millions": 713,
+  "sources": "ftaProfileAR26 p.1; tjpaBoard2025_07_item11 pdfPage 1-2 and slide 3; sfctaBoard2026_02 slide 5 (total $7,572M; $8.25B approved August 2023; both include $729M train box). MTC stage gate (2025) cites 'over approximately $8.8 billion' with scope reductions and a $2.5B shortfall (mtcStageGate2025 slide 3); TJPA brochure July 2025 cites $2,131 million remaining gap (tjpaBrochure2025_07 p.1)."
+ },
+
+ "schedule": {
+  "summary": "Environmentally cleared (FEIS/EIR 2004, ROD Feb 2005; SEIS/EIR certified Dec 2018, amended ROD July 2019); CIG Project Development Dec 2021; Engineering April/May 2024; FFGA target July 2027 ('Summer 2027' on FTA dashboard); start of civil/tunnel construction Apr-Jun 2029; open for use Jan-Mar 2036 (SFCTA, Sept 2025 master schedule); earlier TJPA July 2025 deck showed 'Target Ready for Service Fall 2035'; FTA profile says revenue service 2035.",
+  "milestones": {
+   "feisEirCertified": "April 2004 (tjpa.org Environmental Review page)",
+   "rodOriginal": "February 2005 (ftaProfileAR26 p.1-2)",
+   "seisEirCertified": "December 2018",
+   "rodAmended": "July 2019",
+   "ftaReEvaluation": "June 2023",
+   "cigProjectDevelopment": "December 2021 (dashboard: 12/06/2021)",
+   "cigEngineering": "April 2024 per ftaProfileAR26 p.2; dashboard ENG entry 05/03/2024; TJPA: May 2024",
+   "ffgaTarget": "July 2027 (sfctaCacMemo2026_01 GEC scope 1.1.1; tjpaBoard2025_07_item11 slide 5); FTA dashboard 'Estimated Grant Date: Summer 2027'",
+   "startConstruction": "Apr-May-Jun 2029 (sfctaCacMemo2026_01 allocation request form, Project Delivery Milestones, 'September 2025 data date Master Schedule')",
+   "openForUse": "Jan-Feb-Mar 2036 (sfctaCacMemo2026_01); 'Ready for Service 2036' (sfctaBoard2026_02 slide 4)",
+   "earlierTargets": "Revenue service 2031 (ftaProfileAR23, Dec 2021); 2035 (ftaProfileAR26); Fall 2035 (tjpaBoard2025_07_item11 slide 5, Feb 2025 master schedule); 'Anticipated to open for passenger service in 2035' (tjpaBrochure2025_07)"
+  }
+ },
+
+ "notFound": [
+  "Published station coordinates for either new station (geocodes from OSM provided instead).",
+  "A scheduled or simulated run time between 4th & Townsend (or 4th & King) and the Transit Center.",
+  "Station-level boardings (Transit Center, 4th & Townsend, surface 4th & King) from the 2023 STOPS forecast used for the FTA rating.",
+  "FTA project-justification measures from the 2023 submittal: transit-dependent trips, new (non-transit) trips, travel-time savings hours, VMT change, cost per trip. The FTA profiles omit them.",
+  "The 2018 SEIS/EIR did not publish new Caltrain station ridership; it relies on the 2004 FEIS/EIR, Cambridge Systematics 2008, and the PCEP EIR.",
+  "The SFCTA project page (sfcta.org/projects/portal) and the full Cambridge Systematics 2008 report were not retrieved (Cloudflare block / not located)."
+ ]
+}

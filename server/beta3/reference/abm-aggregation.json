@@ -1,0 +1,109 @@
+{
+ "description": "Aggregation error of the person-level choices (abm-check.ts): expected tours by kind when tour frequency is solved for person segments at their mean characteristics, against the same models solved person by person (same CDAP, same inputs). diffPct: segments against persons, citywide; pctRmse: across the 678 zones, relative to the mean zone; maxAbsPct: the largest zone difference among zones with more than 20 tours of the kind.",
+ "segments": 171464,
+ "householdSegments": 219732,
+ "persons": 827195,
+ "households": 386504,
+ "secondsSegments": 1.52,
+ "secondsPersons": 7.04,
+ "citywide": {
+  "work": {
+   "segments": 228159,
+   "persons": 228213,
+   "diffPct": -0.02
+  },
+  "school": {
+   "segments": 92975,
+   "persons": 93052,
+   "diffPct": -0.08
+  },
+  "shop": {
+   "segments": 96322,
+   "persons": 96827,
+   "diffPct": -0.52
+  },
+  "other": {
+   "segments": 174927,
+   "persons": 177722,
+   "diffPct": -1.57
+  },
+  "social": {
+   "segments": 268032,
+   "persons": 269991,
+   "diffPct": -0.73
+  }
+ },
+ "zones": {
+  "work": {
+   "pctRmse": 0.03,
+   "maxAbsPct": 0.1
+  },
+  "school": {
+   "pctRmse": 0.14,
+   "maxAbsPct": 0.5
+  },
+  "shop": {
+   "pctRmse": 0.64,
+   "maxAbsPct": 2
+  },
+  "other": {
+   "pctRmse": 2.16,
+   "maxAbsPct": 4.3
+  },
+  "social": {
+   "pctRmse": 0.99,
+   "maxAbsPct": 3.3
+  }
+ },
+ "byPtype": {
+  "1": {
+   "work": -0.03,
+   "school": 0.01,
+   "shop": 0.32,
+   "other": -1.89,
+   "social": -0.32
+  },
+  "2": {
+   "work": -0.01,
+   "shop": -0.89,
+   "other": -1.99,
+   "social": -1.23
+  },
+  "3": {
+   "work": 0,
+   "school": -0.25,
+   "shop": -1.61,
+   "other": -4.82,
+   "social": -2.16
+  },
+  "4": {
+   "shop": -0.27,
+   "other": -1.21,
+   "social": -0.64
+  },
+  "5": {
+   "shop": -1.16,
+   "other": -1.03,
+   "social": -1.07
+  },
+  "6": {
+   "work": -0.23,
+   "school": -0.04,
+   "shop": -0.99,
+   "other": -1.42,
+   "social": -1.8
+  },
+  "7": {
+   "school": -0.07,
+   "shop": -1.23,
+   "other": -0.21,
+   "social": -0.85
+  },
+  "8": {
+   "school": 0,
+   "shop": -2.47,
+   "other": -1.67,
+   "social": 0.03
+  }
+ }
+}

@@ -1,0 +1,693 @@
+{
+ "description": "The missing commute trips (October 2026). Before: the model of muniarea-results.json's 'after' (transit tours' stop legs with constants of their own, six-iteration weekday calibration). After: residents' commutes leaving the city, in-commuters, and their transit shares on the ACS 2024 1-year tables (build.ts commuteSplit, calibrate.ts), on an eight-iteration weekday calibration from it. Experiment runs: two passes from the base run's crowding. Riders by market: each market assigned alone at the base crowding (od-checks.ts riders, diag-commutes.ts).",
+ "generated": "2026-10-08",
+ "evidence": {
+  "acs": {
+   "fiveYear": {
+    "inCommuters": 236707,
+    "outShare": 0.2196634650975962,
+    "inTransitTarget": 0.31,
+    "inTransitPums": 0.31690042747320674,
+    "wfhResidents": 144584
+   },
+   "oneYear2024": {
+    "inCommuters": 267641,
+    "outShare": 0.2824,
+    "commutersOutside": 103942,
+    "commutersInside": 264141,
+    "inTransit": 0.33977983408944556,
+    "outTransit": 0.23674741682861597,
+    "wfhResidents": 100347,
+    "workersResidents": 468430,
+    "workplaceCommuters": 531782
+   }
+  },
+  "checks": {
+   "description": "Independent evidence on San Francisco's commute trips and on how many of its transit trips are commutes (commute_checks.py). Not fitted.",
+   "generated": "2026-10-08",
+   "bats2023": {
+    "table45WeightedTotalSF": 365855,
+    "table20PersonsSF": 689506,
+    "table20EmployedSF": {
+     "fullTime": 0.533,
+     "partTime": 0.119,
+     "selfEmployed": 0.025
+    },
+    "note": "BATS 2023 Final Report: Table 45 (typical commute frequency by home county, p. 68) has a weighted total of 365,855 San Francisco workers; Table 20 (employment status by county, p. 44) has 689,506 San Francisco persons, 53.3% employed full time, 11.9% part time, and 2.5% self-employed. Table 45 therefore covers about 78% of the county's workers: those who do not work only from home, the ACS's 78.6% not working from home in 2024. Its 65% of weekdays applies to all of them, part-time workers included.",
+    "diaryTripsToWork": {
+     "2019": 376996,
+     "2023": 180303
+    },
+    "diaryAdultTrips": {
+     "2019": 2963604,
+     "2023": 2183382
+    },
+    "diarySource": "MTC BATS 2019-2023 dashboard extract (mtc_bats_dashboard_tripshare.csv): weighted weekday trips of San Francisco adults by destination purpose (Tuesday-Thursday diaries in 2023)."
+   },
+   "tds": {
+    "2019": {
+     "trips": 2759,
+     "transitTrips": 455,
+     "workShareOfTrips": 0.3036,
+     "transitShare": 0.172,
+     "workTransitShare": 0.2235,
+     "nonWorkTransitShare": 0.1496,
+     "workShareOfTransitTrips": 0.3945
+    },
+    "2021": {
+     "trips": 2400,
+     "transitTrips": 231,
+     "workShareOfTrips": 0.1666,
+     "transitShare": 0.0963,
+     "workTransitShare": 0.21,
+     "nonWorkTransitShare": 0.0735,
+     "workShareOfTransitTrips": 0.3636
+    }
+   },
+   "tdsNote": "SFMTA Travel Decision Survey respondent files (DataSF qmdj-wtj2, 2019; b7eg-vqw2, 2021): San Francisco residents' trips yesterday and two days before, respondent weights. A work trip goes to work, or home from work, as MTC's Snapshot codes it; transit if any leg was public transit.",
+   "jobs": {
+    "lodes": {
+     "total": 747954,
+     "downtown": 363277
+    },
+    "model": {
+     "total": 668723,
+     "downtown": 281903
+    },
+    "note": "Downtown: the Financial District/South Beach, Chinatown, Nob Hill, and the Tenderloin (od-checks.ts). LODES 2023 WAC, all jobs (JT00), blocks in the model's zones; the model's jobs after UCSF's sites and the rebalancing to MTC's 2023 employment (zones.ts)."
+   },
+   "muni2017": {
+    "boardings": 703947,
+    "originWork": 0.26,
+    "destinationWork": 0.30000000000000004,
+    "note": "SFMTA 2017 on-board survey (ETC Institute for MTC, draft final report), expanded weekday boardings: coming from the usual workplace 24% and work-related 2% (Table 15), going to it 28% and work-related 2% (Table 19). Neither table gives both ends of a trip."
+   }
+  },
+  "commuteDays": {
+   "description": "Evidence on how often San Francisco's commuters go to work on an average weekday: BATS 2023's stated frequency against its travel diaries, with BART's day-of-week counts and office-attendance series. Assembled for the choice of the model's commuting rate (METHOD.md, Commuting days).",
+   "accessed": "2026-10-06",
+   "bats2023Stated": {
+    "source": "BATS 2023 Final Report Table 45 (reference/bats-commute-frequency.json)",
+    "sfShareOfWeekdaysCommuted": 0.6511,
+    "note": "Typical days a week, workers who commute; the model applies it with the ACS 2024 share working from home (21.4%) and a 7% absence allowance: 0.606 per worker not working from home, 0.470 per full-time worker of the synthetic population (22.5% of them work from home)."
+   },
+   "bats2023Diary": {
+    "source": "MTC BATS 2019-2023 dashboard (Tableau workbook mtc_BATS_2019_2023_Dashboard.twbx, extract Summary_TripRate_TripDistance, 'By Commute Category and County'); full-time workers' weighted travel days by commute category",
+    "weightedDays": "Tuesday-Thursday only (BATS 2023 Final Report, Notes for data users: 'only Tuesday, Wednesday, and Thursday days were weighted')",
+    "sanFrancisco": {
+     "2019": {
+      "commuted": 246488,
+      "telecommuted6plus": 41942,
+      "telecommutedUnder6": 26768,
+      "didNotWork": 128123,
+      "commutedShare": 0.556,
+      "didNotWorkShare": 0.289
+     },
+     "2023": {
+      "commuted": 119141,
+      "telecommuted6plus": 151857,
+      "telecommutedUnder6": 31392,
+      "didNotWork": 67680,
+      "commutedShare": 0.322,
+      "didNotWorkShare": 0.183
+     }
+    },
+    "commutedShare2023ByHomeCounty": {
+     "San Francisco": 0.322,
+     "Alameda": 0.314,
+     "Contra Costa": 0.364,
+     "San Mateo": 0.304,
+     "Santa Clara": 0.36,
+     "Solano": 0.356,
+     "Sonoma": 0.433,
+     "Marin and Napa": 0.402
+    },
+    "bayArea": {
+     "2019": {
+      "commutedShare": 0.633
+     },
+     "2023": {
+      "commutedShare": 0.346
+     }
+    },
+    "note": "In 2019 the diaries put 29% of San Francisco's full-time workers' Tuesday-Thursday days in 'did not work', when the ACS put 7% of them working from home: the category undercounts commuting even before the pandemic."
+   },
+   "bartDayOfWeek2025": {
+    "source": "BART hourly origin-destination file date-hour-soo-dest-2025.csv.gz (data/beta3/raw/obs), weekday dates of 2025 excluding holidays; exits at Embarcadero, Montgomery, Powell, and Civic Center by entry hour 6-10am",
+    "amExitsDowntownByWeekday": {
+     "Mon": 26104,
+     "Tue": 34394,
+     "Wed": 33961,
+     "Thu": 32418,
+     "Fri": 18501
+    },
+    "tueThuOverMonFriMean": 1.155,
+    "note": "Tuesday-Thursday mornings carry 16% more commuters into downtown than the average weekday; Friday 37% fewer. A Tuesday-Thursday diary therefore overstates an average weekday's commuting, not understates it."
+   },
+   "officeAttendance": {
+    "kastleSF": {
+     "source": "Kastle Back to Work Barometer, SF metro, weekly occupancy vs Feb 2020 (reference/backcast-inputs.json)",
+     "2023FebMar": 0.44,
+     "2024JulAug": 0.43,
+     "2026JulSep": 0.47
+    },
+    "sfControllerQ1_2026": "Office of the Controller, Status of the San Francisco Economy, May 15, 2026: 2026 office attendance slightly above 2025 levels (Kastle); downtown BART exits at a post-pandemic high (charts only).",
+    "bayAreaCouncil": "Bay Area Council Economic Institute, Bay Area Return to Office survey (employers), February 2025: 25% of employees in the office five days a week, 63% hybrid (most three to four days), 11% fully remote; 3.0 days a week on average, against 2.3 in late 2021.",
+    "bartGrowth": "BART exits at the city's eight stations, July-August 2024 to 2026: +28.9% (downtown four +31.4%) (reference/backcast-inputs.json)"
+   },
+   "reading": "The diaries' 32% is a Tuesday-Thursday figure, the busiest days, and their own 2019 figure (56%) shows the category undercounting commutes; corrected by the 2019 ratio to a plausible pre-pandemic rate (about 86% of full-time workers' days: ACS 2019 working from home 7%, absence 7%) and spread over Monday-Friday by BART's day-of-week pattern, it gives about 0.43 for fall 2023, against the stated frequency's 0.47; office attendance and BART have risen since. The model's counts are the other test (commute-basis.json)."
+  },
+  "batsResidents": {
+   "bike": 0.03480903012380923,
+   "da": 0.24710948871446625,
+   "sr": 0.21727109344160644,
+   "tnc": 0.02178698036822399,
+   "walk": 0.34114123010471636,
+   "transit": 0.13788217724717777
+  }
+ },
+ "before": {
+  "muniRoutes": {
+   "r": 0.9251607794499046,
+   "pctRmse": 46.48131263616353,
+   "pctRmseScaled": 37.42945432382181,
+   "model": 411340,
+   "observed": 515626,
+   "within25": 0.47368421052631576
+  },
+  "routes": {
+   "8": {
+    "observed": 18367,
+    "model": 11471
+   },
+   "14": {
+    "observed": 22150,
+    "model": 12139
+   },
+   "22": {
+    "observed": 21617,
+    "model": 16500
+   },
+   "49": {
+    "observed": 35033,
+    "model": 23735
+   },
+   "T": {
+    "observed": 24967,
+    "model": 8887
+   },
+   "14R": {
+    "observed": 22725,
+    "model": 9850
+   },
+   "N": {
+    "observed": 35125,
+    "model": 24750
+   },
+   "J": {
+    "observed": 7667,
+    "model": 5686
+   },
+   "K": {
+    "observed": 14433,
+    "model": 10551
+   },
+   "L": {
+    "observed": 17725,
+    "model": 16261
+   },
+   "M": {
+    "observed": 19833,
+    "model": 14439
+   },
+   "38R": {
+    "observed": 27842,
+    "model": 22121
+   }
+  },
+  "bartCityExits": {
+   "r": 0.8404290910663169,
+   "pctRmse": 33.98122080051589,
+   "total": 0.9894275064808381
+  },
+  "bartAmDowntown": {
+   "model": 33223,
+   "count": 36530,
+   "stations": [
+    {
+     "code": "EMBR",
+     "observed": 13963,
+     "model": 8917
+    },
+    {
+     "code": "MONT",
+     "observed": 11412,
+     "model": 12226
+    },
+    {
+     "code": "POWL",
+     "observed": 5495,
+     "model": 5144
+    },
+    {
+     "code": "CIVC",
+     "observed": 5660,
+     "model": 6936
+    }
+   ]
+  },
+  "caltrainArrivalsAM": {
+   "model": 2844,
+   "observed": 3547
+  },
+  "residentShares": {
+   "da": 0.24660987295463552,
+   "sr": 0.21993639525479,
+   "tnc": 0.024538589460418567,
+   "transit": 0.12930458956046367,
+   "walk": 0.34510519024031905,
+   "bike": 0.034505362529373404
+  },
+  "residentTrips": 2856870.8324123872,
+  "muniTimeOfDay": {
+   "AM": 0.2643,
+   "MD": 0.2951,
+   "PM": 0.2983,
+   "NT": 0.1422
+  },
+  "calib": {
+   "regionalRate": 0.5158652605536754,
+   "xferFactor": 0.6670426623338339,
+   "tourRateFactor": 1.6016222928747945,
+   "commuteBasis": "stated"
+  },
+  "commute": {
+   "observed": 0.403,
+   "observed2024": 0.35289482935281535,
+   "model": 0.334,
+   "downtown": {
+    "observed": 0.575,
+    "observed2024": 0.5222160303430877,
+    "model": 0.472,
+    "observedShareOfCommuters": 0.4385,
+    "modelShareOfCommuters": 0.4006
+   }
+  },
+  "commuters": {
+   "residentTrips": 444867.84381172026,
+   "residentsAtWork": 222433.92190586013,
+   "residentsAtWorkOutside": 45456.06349123625,
+   "residentTransitShare": 0.3079750120420838,
+   "inCommuterTrips": 304041.6719973928,
+   "inCommutersAtWork": 152020.8359986964,
+   "inCommuterTransitShare": 0.31668891055520376,
+   "shuttleTrips": 9070.73452786926
+  },
+  "residentTransitTrips": 372931.4026118478,
+  "residentWorkShareOfTransitTrips": 0.26568938978636925,
+  "workTrips": 748969.7149454284,
+  "workTransitTrips": 202388.7052974939,
+  "muniBoardings": 414684,
+  "muniWorkBoardings": {
+   "residentsDirect": 79372,
+   "inCommuters": 8373,
+   "stopLegs": 97381
+  },
+  "muniNightShare": 0.14117737843755726,
+  "purposeBus": [
+   {
+    "purpose": "Other Purposes",
+    "observed": 0.151,
+    "model": 0.249,
+    "modelSchoolDay": 0.242,
+    "modelByTour": 0.212,
+    "modelSurveyed": 0.253,
+    "modelSurveyedByTour": 0.215
+   },
+   {
+    "purpose": "School",
+    "observed": 0.156,
+    "model": 0.056,
+    "modelSchoolDay": 0.082,
+    "modelByTour": 0.067,
+    "modelSurveyed": 0.09,
+    "modelSurveyedByTour": 0.107
+   },
+   {
+    "purpose": "Social/Recreation/Shopping",
+    "observed": 0.249,
+    "model": 0.48,
+    "modelSchoolDay": 0.467,
+    "modelByTour": 0.428,
+    "modelSurveyed": 0.445,
+    "modelSurveyedByTour": 0.391
+   },
+   {
+    "purpose": "Work",
+    "observed": 0.445,
+    "model": 0.215,
+    "modelSchoolDay": 0.209,
+    "modelByTour": 0.294,
+    "modelSurveyed": 0.212,
+    "modelSurveyedByTour": 0.287
+   }
+  ],
+  "purposeLightRail": [
+   {
+    "purpose": "Other Purposes",
+    "observed": 0.135,
+    "model": 0.198,
+    "modelSchoolDay": 0.194,
+    "modelByTour": 0.165,
+    "modelSurveyed": 0.204,
+    "modelSurveyedByTour": 0.17
+   },
+   {
+    "purpose": "School",
+    "observed": 0.128,
+    "model": 0.045,
+    "modelSchoolDay": 0.068,
+    "modelByTour": 0.054,
+    "modelSurveyed": 0.074,
+    "modelSurveyedByTour": 0.088
+   },
+   {
+    "purpose": "Social/Recreation/Shopping",
+    "observed": 0.224,
+    "model": 0.422,
+    "modelSchoolDay": 0.412,
+    "modelByTour": 0.376,
+    "modelSurveyed": 0.389,
+    "modelSurveyedByTour": 0.341
+   },
+   {
+    "purpose": "Work",
+    "observed": 0.513,
+    "model": 0.335,
+    "modelSchoolDay": 0.327,
+    "modelByTour": 0.404,
+    "modelSurveyed": 0.334,
+    "modelSurveyedByTour": 0.401
+   }
+  ],
+  "routeGroups": [
+   {
+    "group": "Mission St (14, 14R, 49)",
+    "counted": 79908,
+    "model": 46043
+   },
+   {
+    "group": "8 Bayshore",
+    "counted": 25775,
+    "model": 16788
+   },
+   {
+    "group": "T Third",
+    "counted": 24967,
+    "model": 8951
+   },
+   {
+    "group": "9, 9R San Bruno",
+    "counted": 16458,
+    "model": 13783
+   },
+   {
+    "group": "38, 38R Geary",
+    "counted": 45859,
+    "model": 42824
+   },
+   {
+    "group": "5, 5R Fulton",
+    "counted": 14250,
+    "model": 20327
+   },
+   {
+    "group": "N Judah",
+    "counted": 35125,
+    "model": 25052
+   }
+  ]
+ },
+ "after": {
+  "muniRoutes": {
+   "r": 0.9228993882668781,
+   "pctRmse": 44.62375747063834,
+   "pctRmseScaled": 37.971495206099696,
+   "model": 427485,
+   "observed": 515626,
+   "within25": 0.5263157894736842
+  },
+  "routes": {
+   "8": {
+    "observed": 18367,
+    "model": 11829
+   },
+   "14": {
+    "observed": 22150,
+    "model": 12622
+   },
+   "22": {
+    "observed": 21617,
+    "model": 17502
+   },
+   "49": {
+    "observed": 35033,
+    "model": 24983
+   },
+   "T": {
+    "observed": 24967,
+    "model": 9298
+   },
+   "14R": {
+    "observed": 22725,
+    "model": 9955
+   },
+   "N": {
+    "observed": 35125,
+    "model": 25147
+   },
+   "J": {
+    "observed": 7667,
+    "model": 5858
+   },
+   "K": {
+    "observed": 14433,
+    "model": 10638
+   },
+   "L": {
+    "observed": 17725,
+    "model": 16263
+   },
+   "M": {
+    "observed": 19833,
+    "model": 14537
+   },
+   "38R": {
+    "observed": 27842,
+    "model": 22800
+   }
+  },
+  "bartCityExits": {
+   "r": 0.8494820211394255,
+   "pctRmse": 36.05891708388362,
+   "total": 1.070528143415268
+  },
+  "bartAmDowntown": {
+   "model": 38237,
+   "count": 36530,
+   "stations": [
+    {
+     "code": "EMBR",
+     "observed": 13963,
+     "model": 10395
+    },
+    {
+     "code": "MONT",
+     "observed": 11412,
+     "model": 14125
+    },
+    {
+     "code": "POWL",
+     "observed": 5495,
+     "model": 5794
+    },
+    {
+     "code": "CIVC",
+     "observed": 5660,
+     "model": 7923
+    }
+   ]
+  },
+  "caltrainArrivalsAM": {
+   "model": 2617,
+   "observed": 3547
+  },
+  "residentShares": {
+   "da": 0.2475139092536799,
+   "sr": 0.21786277201594165,
+   "tnc": 0.02232934377081112,
+   "transit": 0.1372079193665737,
+   "walk": 0.3401725920075345,
+   "bike": 0.03491346358545923
+  },
+  "residentTrips": 2857280.067554735,
+  "muniTimeOfDay": {
+   "AM": 0.2617,
+   "MD": 0.2987,
+   "PM": 0.2984,
+   "NT": 0.1411
+  },
+  "calib": {
+   "regionalRate": 0.34637074746675744,
+   "xferFactor": 0.668971971319671,
+   "tourRateFactor": 1.6165410598753134,
+   "commuteBasis": "stated"
+  },
+  "commute": {
+   "observed": 0.403,
+   "observed2024": 0.35289482935281535,
+   "model": 0.352,
+   "downtown": {
+    "observed": 0.575,
+    "observed2024": 0.5222160303430877,
+    "model": 0.495,
+    "observedShareOfCommuters": 0.4385,
+    "modelShareOfCommuters": 0.4043
+   }
+  },
+  "commuters": {
+   "residentTrips": 444868.3911818134,
+   "residentsAtWork": 222434.1955909067,
+   "residentsAtWorkOutside": 59616.427239530116,
+   "residentTransitShare": 0.3139369674220118,
+   "inCommuterTrips": 343775.28816498385,
+   "inCommutersAtWork": 171887.64408249193,
+   "inCommuterTransitShare": 0.34266651508271384,
+   "shuttleTrips": 9070.734527928176
+  },
+  "residentTransitTrips": 395716.1661107829,
+  "residentWorkShareOfTransitTrips": 0.2603269779923389,
+  "workTrips": 788708.7965309789,
+  "workTransitTrips": 227208.24141790645,
+  "muniBoardings": 431183,
+  "muniWorkBoardings": {
+   "residentsDirect": 80921,
+   "inCommuters": 10722,
+   "stopLegs": 95160
+  },
+  "muniNightShare": 0.13994522047483318,
+  "purposeBus": [
+   {
+    "purpose": "Other Purposes",
+    "observed": 0.151,
+    "model": 0.259,
+    "modelSchoolDay": 0.252,
+    "modelByTour": 0.226,
+    "modelSurveyed": 0.264,
+    "modelSurveyedByTour": 0.23
+   },
+   {
+    "purpose": "School",
+    "observed": 0.156,
+    "model": 0.054,
+    "modelSchoolDay": 0.079,
+    "modelByTour": 0.064,
+    "modelSurveyed": 0.087,
+    "modelSurveyedByTour": 0.102
+   },
+   {
+    "purpose": "Social/Recreation/Shopping",
+    "observed": 0.249,
+    "model": 0.477,
+    "modelSchoolDay": 0.464,
+    "modelByTour": 0.433,
+    "modelSurveyed": 0.441,
+    "modelSurveyedByTour": 0.396
+   },
+   {
+    "purpose": "Work",
+    "observed": 0.445,
+    "model": 0.211,
+    "modelSchoolDay": 0.206,
+    "modelByTour": 0.278,
+    "modelSurveyed": 0.208,
+    "modelSurveyedByTour": 0.272
+   }
+  ],
+  "purposeLightRail": [
+   {
+    "purpose": "Other Purposes",
+    "observed": 0.135,
+    "model": 0.209,
+    "modelSchoolDay": 0.204,
+    "modelByTour": 0.18,
+    "modelSurveyed": 0.215,
+    "modelSurveyedByTour": 0.185
+   },
+   {
+    "purpose": "School",
+    "observed": 0.128,
+    "model": 0.043,
+    "modelSchoolDay": 0.066,
+    "modelByTour": 0.052,
+    "modelSurveyed": 0.071,
+    "modelSurveyedByTour": 0.084
+   },
+   {
+    "purpose": "Social/Recreation/Shopping",
+    "observed": 0.224,
+    "model": 0.409,
+    "modelSchoolDay": 0.4,
+    "modelByTour": 0.371,
+    "modelSurveyed": 0.376,
+    "modelSurveyedByTour": 0.336
+   },
+   {
+    "purpose": "Work",
+    "observed": 0.513,
+    "model": 0.339,
+    "modelSchoolDay": 0.331,
+    "modelByTour": 0.397,
+    "modelSurveyed": 0.338,
+    "modelSurveyedByTour": 0.395
+   }
+  ],
+  "routeGroups": [
+   {
+    "group": "Mission St (14, 14R, 49)",
+    "counted": 79908,
+    "model": 47972
+   },
+   {
+    "group": "8 Bayshore",
+    "counted": 25775,
+    "model": 17103
+   },
+   {
+    "group": "T Third",
+    "counted": 24967,
+    "model": 9368
+   },
+   {
+    "group": "9, 9R San Bruno",
+    "counted": 16458,
+    "model": 14163
+   },
+   {
+    "group": "38, 38R Geary",
+    "counted": 45859,
+    "model": 44549
+   },
+   {
+    "group": "5, 5R Fulton",
+    "counted": 14250,
+    "model": 20971
+   },
+   {
+    "group": "N Judah",
+    "counted": 35125,
+    "model": 25500
+   }
+  ]
+ }
+}

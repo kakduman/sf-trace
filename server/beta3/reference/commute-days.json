@@ -1,0 +1,74 @@
+{
+ "description": "Evidence on how often San Francisco's commuters go to work on an average weekday: BATS 2023's stated frequency against its travel diaries, with BART's day-of-week counts and office-attendance series. Assembled for the choice of the model's commuting rate (METHOD.md, Commuting days).",
+ "accessed": "2026-10-06",
+ "bats2023Stated": {
+  "source": "BATS 2023 Final Report Table 45 (reference/bats-commute-frequency.json)",
+  "sfShareOfWeekdaysCommuted": 0.6511,
+  "note": "Typical days a week, workers who commute; the model applies it with the ACS 2024 share working from home (21.4%) and a 7% absence allowance: 0.606 per worker not working from home, 0.470 per full-time worker of the synthetic population (22.5% of them work from home)."
+ },
+ "bats2023Diary": {
+  "source": "MTC BATS 2019-2023 dashboard (Tableau workbook mtc_BATS_2019_2023_Dashboard.twbx, extract Summary_TripRate_TripDistance, 'By Commute Category and County'); full-time workers' weighted travel days by commute category",
+  "weightedDays": "Tuesday-Thursday only (BATS 2023 Final Report, Notes for data users: 'only Tuesday, Wednesday, and Thursday days were weighted')",
+  "sanFrancisco": {
+   "2023": {
+    "commuted": 119141,
+    "telecommuted6plus": 151857,
+    "telecommutedUnder6": 31392,
+    "didNotWork": 67680,
+    "commutedShare": 0.322,
+    "didNotWorkShare": 0.183
+   },
+   "2019": {
+    "commuted": 246488,
+    "telecommuted6plus": 41942,
+    "telecommutedUnder6": 26768,
+    "didNotWork": 128123,
+    "commutedShare": 0.556,
+    "didNotWorkShare": 0.289
+   }
+  },
+  "commutedShare2023ByHomeCounty": {
+   "San Francisco": 0.322,
+   "Alameda": 0.314,
+   "Contra Costa": 0.364,
+   "San Mateo": 0.304,
+   "Santa Clara": 0.36,
+   "Solano": 0.356,
+   "Sonoma": 0.433,
+   "Marin and Napa": 0.402
+  },
+  "bayArea": {
+   "2019": {
+    "commutedShare": 0.633
+   },
+   "2023": {
+    "commutedShare": 0.346
+   }
+  },
+  "note": "In 2019 the diaries put 29% of San Francisco's full-time workers' Tuesday-Thursday days in 'did not work', when the ACS put 7% of them working from home: the category undercounts commuting even before the pandemic."
+ },
+ "bartDayOfWeek2025": {
+  "source": "BART hourly origin-destination file date-hour-soo-dest-2025.csv.gz (data/beta3/raw/obs), weekday dates of 2025 excluding holidays; exits at Embarcadero, Montgomery, Powell, and Civic Center by entry hour 6-10am",
+  "amExitsDowntownByWeekday": {
+   "Mon": 26104,
+   "Tue": 34394,
+   "Wed": 33961,
+   "Thu": 32418,
+   "Fri": 18501
+  },
+  "tueThuOverMonFriMean": 1.155,
+  "note": "Tuesday-Thursday mornings carry 16% more commuters into downtown than the average weekday; Friday 37% fewer. A Tuesday-Thursday diary therefore overstates an average weekday's commuting, not understates it."
+ },
+ "officeAttendance": {
+  "kastleSF": {
+   "source": "Kastle Back to Work Barometer, SF metro, weekly occupancy vs Feb 2020 (reference/backcast-inputs.json)",
+   "2023FebMar": 0.44,
+   "2024JulAug": 0.43,
+   "2026JulSep": 0.47
+  },
+  "sfControllerQ1_2026": "Office of the Controller, Status of the San Francisco Economy, May 15, 2026: 2026 office attendance slightly above 2025 levels (Kastle); downtown BART exits at a post-pandemic high (charts only).",
+  "bayAreaCouncil": "Bay Area Council Economic Institute, Bay Area Return to Office survey (employers), February 2025: 25% of employees in the office five days a week, 63% hybrid (most three to four days), 11% fully remote; 3.0 days a week on average, against 2.3 in late 2021.",
+  "bartGrowth": "BART exits at the city's eight stations, July-August 2024 to 2026: +28.9% (downtown four +31.4%) (reference/backcast-inputs.json)"
+ },
+ "reading": "The diaries' 32% is a Tuesday-Thursday figure, the busiest days, and their own 2019 figure (56%) shows the category undercounting commutes; corrected by the 2019 ratio to a plausible pre-pandemic rate (about 86% of full-time workers' days: ACS 2019 working from home 7%, absence 7%) and spread over Monday-Friday by BART's day-of-week pattern, it gives about 0.43 for fall 2023, against the stated frequency's 0.47; office attendance and BART have risen since. The model's counts are the other test (commute-basis.json)."
+}

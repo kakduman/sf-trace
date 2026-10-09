@@ -1,0 +1,38 @@
+{
+ "source": "NHTS 2017 public microdata (FHWA), weekday trips by residents of the San Francisco\u2013Oakland\u2013Hayward CBSA (41860); computed by server/beta3/pipeline/nhts_persontypes.py",
+ "url": "https://nhts.ornl.gov/",
+ "method": "Trips per person per weekday by age group (youth 5\u201317 as NHTS records trips from age 5, adults 18\u201364, seniors 65+), relative to all persons; home-based school trips excluded from HBO.",
+ "personShare": {
+  "youth": 0.156718527177684,
+  "adult": 0.7110140375873751,
+  "senior": 0.13226743523493933
+ },
+ "relativeRate": {
+  "HBSHOP": {
+   "youth": 0.5934567431791246,
+   "adult": 0.9752685862248253,
+   "senior": 1.6146429214576603
+  },
+  "HBSOCREC": {
+   "youth": 1.0601443252766813,
+   "adult": 0.9048282624849305,
+   "senior": 1.4403405205210686
+  },
+  "HBO": {
+   "youth": 0.6083618701144157,
+   "adult": 1.071455284885689,
+   "senior": 1.0799232272855899
+  }
+ },
+ "n_trips_sample": {
+  "adult:HBSOCREC": 936,
+  "senior:HBSHOP": 680,
+  "senior:HBO": 536,
+  "adult:HBSHOP": 1269,
+  "senior:HBSOCREC": 478,
+  "youth:HBO": 179,
+  "adult:HBO": 1438,
+  "youth:HBSOCREC": 178,
+  "youth:HBSHOP": 156
+ }
+}

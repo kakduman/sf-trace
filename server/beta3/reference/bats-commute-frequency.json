@@ -1,0 +1,106 @@
+{
+ "source": "MTC, BATS 2023 Consultant Final Report, Table 45 \"Reported typical commute frequency by home county\" (report p. 68), workers who commute; data/beta3/raw/params/mtc_BATS2023_ConsultantFinalReport.txt",
+ "method": "Expected share of weekdays a commuter commutes: 5+ days a week = every weekday, 4 = 0.8, 3 = 0.6, 2 = 0.4, 1 = 0.2, 1-3 days a month = 2/21.7, less than monthly = 0.5/21.7, never = 0.",
+ "table45Percent": {
+  "6-7 days a week": {
+   "Alameda": 5.3,
+   "Contra Costa": 7.6,
+   "San Francisco": 4.0,
+   "San Mateo": 4.5,
+   "Santa Clara": 5.5,
+   "Solano": 3.5,
+   "Sonoma": 8.4,
+   "Marin and Napa": 10.1
+  },
+  "5 days a week": {
+   "Alameda": 36.7,
+   "Contra Costa": 41.0,
+   "San Francisco": 30.6,
+   "San Mateo": 37.2,
+   "Santa Clara": 39.6,
+   "Solano": 47.6,
+   "Sonoma": 36.5,
+   "Marin and Napa": 30.3
+  },
+  "4 days a week": {
+   "Alameda": 12.2,
+   "Contra Costa": 13.7,
+   "San Francisco": 12.2,
+   "San Mateo": 9.1,
+   "Santa Clara": 11.1,
+   "Solano": 14.9,
+   "Sonoma": 7.7,
+   "Marin and Napa": 15.6
+  },
+  "3 days a week": {
+   "Alameda": 17.7,
+   "Contra Costa": 15.7,
+   "San Francisco": 22.8,
+   "San Mateo": 16.7,
+   "Santa Clara": 20.3,
+   "Solano": 14.0,
+   "Sonoma": 18.8,
+   "Marin and Napa": 15.4
+  },
+  "2 days a week": {
+   "Alameda": 9.3,
+   "Contra Costa": 8.2,
+   "San Francisco": 11.9,
+   "San Mateo": 10.5,
+   "Santa Clara": 11.2,
+   "Solano": 11.0,
+   "Sonoma": 5.5,
+   "Marin and Napa": 7.4
+  },
+  "1 day a week": {
+   "Alameda": 7.3,
+   "Contra Costa": 2.9,
+   "San Francisco": 8.0,
+   "San Mateo": 7.0,
+   "Santa Clara": 5.3,
+   "Solano": 1.4,
+   "Sonoma": 8.8,
+   "Marin and Napa": 6.5
+  },
+  "1-3 days a month": {
+   "Alameda": 5.0,
+   "Contra Costa": 6.1,
+   "San Francisco": 7.2,
+   "San Mateo": 8.1,
+   "Santa Clara": 2.8,
+   "Solano": 3.8,
+   "Sonoma": 6.5,
+   "Marin and Napa": 4.2
+  },
+  "Less than monthly": {
+   "Alameda": 4.1,
+   "Contra Costa": 2.5,
+   "San Francisco": 2.2,
+   "San Mateo": 4.2,
+   "Santa Clara": 1.8,
+   "Solano": 2.0,
+   "Sonoma": 3.5,
+   "Marin and Napa": 4.0
+  },
+  "Never": {
+   "Alameda": 2.3,
+   "Contra Costa": 2.2,
+   "San Francisco": 1.1,
+   "San Mateo": 2.8,
+   "Santa Clara": 2.4,
+   "Solano": 1.8,
+   "Sonoma": 4.3,
+   "Marin and Napa": 6.5
+  }
+ },
+ "weekdayAttendance": {
+  "Alameda": 0.6812,
+  "Contra Costa": 0.7346,
+  "San Francisco": 0.6511,
+  "San Mateo": 0.6544,
+  "Santa Clara": 0.72,
+  "Solano": 0.765,
+  "Sonoma": 0.6698,
+  "Marin and Napa": 0.6686
+ }
+}

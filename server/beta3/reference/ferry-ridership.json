@@ -1,0 +1,1665 @@
+{
+ "accessed": "2026-10-04",
+ "notes": [
+  "Fiscal years end June 30 (FY2026 = July 2025 - June 2026).",
+  "Ridership values are unlinked boardings. Survey shares are as published (percent of respondents); WETA's report does not say whether results are weighted.",
+  "Values read from bar charts are marked method 'read from chart' and are approximate (about +/-2 percentage points)."
+ ],
+ "sfBayFerry": {
+  "publisher": "San Francisco Bay Area Water Emergency Transportation Authority (WETA) / San Francisco Bay Ferry",
+  "title": "Public Ridership Data (open data portal) - daily boardings by route",
+  "pageUrl": "https://www.sfbayferry.com/ridership-data/",
+  "apiUrl": "https://data.sanfranciscobayferry.com/api/ridership?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD&page=N",
+  "faqUrl": "https://www.sfbayferry.com/ridership-data-faqs/",
+  "license": "CC BY 4.0 (per data FAQ); cite San Francisco Bay Ferry and download date",
+  "accessed": "2026-10-04",
+  "rawFiles": [
+   "data/beta3/raw/ferry/sfbf_api_FY2019.json",
+   "data/beta3/raw/ferry/sfbf_api_FY2024.json",
+   "data/beta3/raw/ferry/sfbf_api_FY2025.json",
+   "data/beta3/raw/ferry/sfbf_api_FY2026.json",
+   "data/beta3/raw/ferry/sfbf_api_FY2027_partial.json",
+   "data/beta3/raw/ferry/sfbf_embed.js (route code list uR)",
+   "data/beta3/raw/ferry/sfbf_widgets.json"
+  ],
+  "definitions": "Boardings = one passenger getting on a vessel (unlinked); one row per route per calendar day, with trips operated, bike boardings, passenger miles (FAQ).",
+  "method": "Downloaded every daily route row for each fiscal year (Jul 1 - Jun 30) from the public API used by the dashboard. avgWeekday = mean of daily boardings over Mon-Fri days the route operated, excluding reduced-service weekdays. Reduced-service weekdays were detected as Mon-Fri dates where Vallejo trips operated < 75% of that FY's median weekday Vallejo trips (catches holidays run on weekend/holiday schedule plus a few disruption days; the list is in reducedServiceWeekdaysExcluded). avgSaturday/avgSunday = mean over Saturdays/Sundays the route operated (holidays falling on weekdays are excluded from all three). The API day-of-week is the calendar day, not the service type. For event routes (OAB, VB, P48, ...) the averages are per operating day, not per calendar weekday. systemAvgWeekday sums all routes on each typical weekday. These are agency daily counts aggregated by this project, not agency-published averages.",
+  "crossChecks": [
+   "FY2026 system total from API = 3,259,406; WETA press release (blog.bayareametro.gov, Aug 2026) says \"3.25 million passengers from July 2025 through the end of June\". Consistent.",
+   "NTD 2024 (other-operators.json) avg typical weekday UPT 6,987 vs this FY2024 systemAvgWeekday 7,204 (NTD uses its own typical-weekday definition); annual NTD 2,388,379 vs API FY2024 2,407,383 (+0.8%; the FAQ says values can be revised).",
+   "Widget /api/widgets (accessed 2026-10-04): total_ridership_2019 = 3,215,500 (calendar 2019); last 12 months to August 2026 = 3,307,565."
+  ],
+  "routeMeta": {
+   "VJO": {
+    "name": "Vallejo",
+    "servesSF": true,
+    "sfTerminal": "Downtown SF Ferry Building",
+    "core": true,
+    "note": "Vallejo - SF; select trips also serve Mare Island (no separate route code: Mare Island boardings are inside VJO)."
+   },
+   "OA": {
+    "name": "Oakland & Alameda",
+    "servesSF": true,
+    "sfTerminal": "Downtown SF Ferry Building (Pier 41 on some trips in earlier years)",
+    "core": true,
+    "note": "Oakland Jack London Square + Alameda Main Street - SF. In FY2019 this code also covered Alameda service before the Seaplane route existed."
+   },
+   "SEA": {
+    "name": "Alameda Seaplane",
+    "servesSF": true,
+    "sfTerminal": "Downtown SF Ferry Building",
+    "core": true,
+    "note": "Weekday-only in all fiscal years shown (no weekend rows in the data)."
+   },
+   "HB": {
+    "name": "Harbor Bay",
+    "servesSF": true,
+    "sfTerminal": "Downtown SF Ferry Building",
+    "core": true,
+    "note": "Weekday-only."
+   },
+   "RCH": {
+    "name": "Richmond",
+    "servesSF": true,
+    "sfTerminal": "Downtown SF Ferry Building",
+    "core": true,
+    "note": "Weekend service added after FY2019."
+   },
+   "SSF": {
+    "name": "South San Francisco",
+    "servesSF": false,
+    "sfTerminal": null,
+    "core": true,
+    "note": "Does NOT serve a San Francisco terminal: directions are \"South San Francisco to Oakland/Alameda\" and back (Oyster Point - Alameda Main St - Oakland). Weekday-only. 2025 survey: 95% of SSF-route respondents ended trips in San Mateo County, 0% in SF County."
+   },
+   "OAS": {
+    "name": "Oakland Alameda Water Shuttle",
+    "servesSF": false,
+    "sfTerminal": null,
+    "core": false,
+    "note": "Does NOT serve SF: Alameda - Oakland short crossing (avg 0.25 mi). Started in FY2025."
+   },
+   "P41": {
+    "name": "San Francisco Pier 41 Short Hop",
+    "servesSF": true,
+    "sfTerminal": "Ferry Building <-> Pier 41 (both ends in SF)",
+    "core": false,
+    "note": "Intra-SF short hop; data FAQ lists it as defunct with date October 12, 2025. Mostly weekend."
+   },
+   "OPL": {
+    "name": "Oyster Point Limited",
+    "servesSF": true,
+    "sfTerminal": "Pier 48 Mission Bay",
+    "core": false,
+    "note": "Pilot Oct 23 - Dec 29, 2023, Mission Bay - South SF; negligible ridership."
+   },
+   "P48": {
+    "name": "Chase Center",
+    "servesSF": true,
+    "sfTerminal": "Pier 48 Mission Bay",
+    "core": false,
+    "note": "Event service Oakland/Alameda <-> Chase Center; only on event days."
+   },
+   "OAB": {
+    "name": "Ballpark (Oakland & Alameda)",
+    "servesSF": true,
+    "sfTerminal": "Oracle Park",
+    "core": false,
+    "note": "Giants game-day service; only on game days."
+   },
+   "VB": {
+    "name": "Ballpark (Vallejo)",
+    "servesSF": true,
+    "sfTerminal": "Oracle Park",
+    "core": false,
+    "note": "Giants game-day service."
+   },
+   "RB": {
+    "name": "Ballpark (Richmond)",
+    "servesSF": true,
+    "sfTerminal": "Oracle Park / Pier 48",
+    "core": false,
+    "note": "Pilot May 4 - Sep 14, 2025."
+   },
+   "BSH": {
+    "name": "Ballpark Short Hop",
+    "servesSF": true,
+    "sfTerminal": "Ferry Building <-> Oracle Park (both ends in SF)",
+    "core": false,
+    "note": "Intra-SF; FAQ lists date June 16, 2024."
+   },
+   "RCB": {
+    "name": "Ballpark (Redwood City)",
+    "servesSF": true,
+    "sfTerminal": "Pier 48",
+    "core": false,
+    "note": "Pilot Jul 28 - Sep 16, 2024."
+   }
+  },
+  "FY2026": {
+   "period": "July 2025 - June 2026",
+   "dateRange": [
+    "2025-07-01",
+    "2026-06-30"
+   ],
+   "typicalWeekdaysUsed": 252,
+   "reducedServiceWeekdaysExcluded": [
+    "2025-07-04",
+    "2025-09-01",
+    "2025-11-28",
+    "2025-12-25",
+    "2026-01-19",
+    "2026-02-16",
+    "2026-05-25"
+   ],
+   "systemAvgWeekday": 9581,
+   "systemAvgSaturday": 8804,
+   "systemAvgSunday": 6740,
+   "systemAnnualBoardings": 3259406,
+   "coreSFRoutesAvgWeekdaySum": 8600,
+   "coreSFRoutesIncluded": [
+    "VJO",
+    "OA",
+    "SEA",
+    "HB",
+    "RCH"
+   ],
+   "routes": {
+    "HB": {
+     "name": "Harbor Bay",
+     "avgWeekday": 1189,
+     "weekdayDaysOperated": 252,
+     "medianWeekday": 1252,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 299556,
+     "medianWeekdayTrips": 20.0,
+     "avgWeekdayBikeBoardings": 170,
+     "avgPassengerMilesPerBoarding": 8.6
+    },
+    "OA": {
+     "name": "Oakland & Alameda",
+     "avgWeekday": 1583,
+     "weekdayDaysOperated": 252,
+     "medianWeekday": 1530,
+     "avgSaturday": 4270,
+     "saturdayDaysOperated": 52,
+     "avgSunday": 3106,
+     "sundayDaysOperated": 52,
+     "annualBoardings": 800797,
+     "medianWeekdayTrips": 38.0,
+     "avgWeekdayBikeBoardings": 183,
+     "avgPassengerMilesPerBoarding": 6.34
+    },
+    "OAB": {
+     "name": "Ballpark (Oakland & Alameda)",
+     "avgWeekday": 498,
+     "weekdayDaysOperated": 40,
+     "medianWeekday": 534,
+     "avgSaturday": 606,
+     "saturdayDaysOperated": 17,
+     "avgSunday": 625,
+     "sundayDaysOperated": 13,
+     "annualBoardings": 39005,
+     "medianWeekdayTrips": 2.0,
+     "avgWeekdayBikeBoardings": 2,
+     "avgPassengerMilesPerBoarding": 6.01
+    },
+    "OAS": {
+     "name": "Oakland Alameda Water Shuttle",
+     "avgWeekday": 379,
+     "weekdayDaysOperated": 198,
+     "medianWeekday": 379,
+     "avgSaturday": 688,
+     "saturdayDaysOperated": 51,
+     "avgSunday": 714,
+     "sundayDaysOperated": 50,
+     "annualBoardings": 146650,
+     "medianWeekdayTrips": 48.0,
+     "avgWeekdayBikeBoardings": 125,
+     "avgPassengerMilesPerBoarding": 0.25
+    },
+    "P41": {
+     "name": "San Francisco Pier 41 Short Hop",
+     "avgWeekday": null,
+     "weekdayDaysOperated": 0,
+     "medianWeekday": null,
+     "avgSaturday": 784,
+     "saturdayDaysOperated": 1,
+     "avgSunday": 1027,
+     "sundayDaysOperated": 1,
+     "annualBoardings": 2021,
+     "medianWeekdayTrips": null,
+     "avgWeekdayBikeBoardings": null,
+     "avgPassengerMilesPerBoarding": 3.63
+    },
+    "P48": {
+     "name": "Chase Center",
+     "avgWeekday": 411,
+     "weekdayDaysOperated": 44,
+     "medianWeekday": 402,
+     "avgSaturday": 507,
+     "saturdayDaysOperated": 8,
+     "avgSunday": 513,
+     "sundayDaysOperated": 9,
+     "annualBoardings": 27915,
+     "medianWeekdayTrips": 2.0,
+     "avgWeekdayBikeBoardings": 2,
+     "avgPassengerMilesPerBoarding": 6.57
+    },
+    "RB": {
+     "name": "Ballpark (Richmond)",
+     "avgWeekday": null,
+     "weekdayDaysOperated": 0,
+     "medianWeekday": null,
+     "avgSaturday": 126,
+     "saturdayDaysOperated": 3,
+     "avgSunday": 360,
+     "sundayDaysOperated": 1,
+     "annualBoardings": 739,
+     "medianWeekdayTrips": null,
+     "avgWeekdayBikeBoardings": null,
+     "avgPassengerMilesPerBoarding": 13.0
+    },
+    "RCH": {
+     "name": "Richmond",
+     "avgWeekday": 1222,
+     "weekdayDaysOperated": 252,
+     "medianWeekday": 1243,
+     "avgSaturday": 975,
+     "saturdayDaysOperated": 52,
+     "avgSunday": 707,
+     "sundayDaysOperated": 52,
+     "annualBoardings": 399449,
+     "medianWeekdayTrips": 27.0,
+     "avgWeekdayBikeBoardings": 125,
+     "avgPassengerMilesPerBoarding": 10.6
+    },
+    "SEA": {
+     "name": "Alameda Seaplane",
+     "avgWeekday": 1938,
+     "weekdayDaysOperated": 252,
+     "medianWeekday": 2030,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 488420,
+     "medianWeekdayTrips": 35.0,
+     "avgWeekdayBikeBoardings": 308,
+     "avgPassengerMilesPerBoarding": 5.6
+    },
+    "SSF": {
+     "name": "South San Francisco",
+     "avgWeekday": 469,
+     "weekdayDaysOperated": 252,
+     "medianWeekday": 510,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 118181,
+     "medianWeekdayTrips": 8.0,
+     "avgWeekdayBikeBoardings": 100,
+     "avgPassengerMilesPerBoarding": 13.48
+    },
+    "VB": {
+     "name": "Ballpark (Vallejo)",
+     "avgWeekday": 315,
+     "weekdayDaysOperated": 51,
+     "medianWeekday": 245,
+     "avgSaturday": 528,
+     "saturdayDaysOperated": 16,
+     "avgSunday": 643,
+     "sundayDaysOperated": 13,
+     "annualBoardings": 33477,
+     "medianWeekdayTrips": 1,
+     "avgWeekdayBikeBoardings": 0,
+     "avgPassengerMilesPerBoarding": 29.8
+    },
+    "VJO": {
+     "name": "Vallejo",
+     "avgWeekday": 2668,
+     "weekdayDaysOperated": 252,
+     "medianWeekday": 2684,
+     "avgSaturday": 2423,
+     "saturdayDaysOperated": 52,
+     "avgSunday": 1808,
+     "sundayDaysOperated": 52,
+     "annualBoardings": 903196,
+     "medianWeekdayTrips": 27.0,
+     "avgWeekdayBikeBoardings": 143,
+     "avgPassengerMilesPerBoarding": 28.09
+    }
+   }
+  },
+  "FY2025": {
+   "period": "July 2024 - June 2025",
+   "dateRange": [
+    "2024-07-01",
+    "2025-06-30"
+   ],
+   "typicalWeekdaysUsed": 250,
+   "reducedServiceWeekdaysExcluded": [
+    "2024-07-04",
+    "2024-07-05",
+    "2024-09-02",
+    "2024-11-11",
+    "2024-11-29",
+    "2024-12-25",
+    "2025-01-20",
+    "2025-02-17",
+    "2025-05-26"
+   ],
+   "systemAvgWeekday": 8351,
+   "systemAvgSaturday": 7423,
+   "systemAvgSunday": 6102,
+   "systemAnnualBoardings": 2836552,
+   "coreSFRoutesAvgWeekdaySum": 7592,
+   "coreSFRoutesIncluded": [
+    "VJO",
+    "OA",
+    "SEA",
+    "HB",
+    "RCH"
+   ],
+   "routes": {
+    "HB": {
+     "name": "Harbor Bay",
+     "avgWeekday": 1083,
+     "weekdayDaysOperated": 250,
+     "medianWeekday": 1148,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 270679,
+     "medianWeekdayTrips": 22.0,
+     "avgWeekdayBikeBoardings": 139,
+     "avgPassengerMilesPerBoarding": 8.6
+    },
+    "OA": {
+     "name": "Oakland & Alameda",
+     "avgWeekday": 1457,
+     "weekdayDaysOperated": 250,
+     "medianWeekday": 1386,
+     "avgSaturday": 3669,
+     "saturdayDaysOperated": 52,
+     "avgSunday": 2763,
+     "sundayDaysOperated": 52,
+     "annualBoardings": 723725,
+     "medianWeekdayTrips": 39.0,
+     "avgWeekdayBikeBoardings": 167,
+     "avgPassengerMilesPerBoarding": 6.34
+    },
+    "OAB": {
+     "name": "Ballpark (Oakland & Alameda)",
+     "avgWeekday": 433,
+     "weekdayDaysOperated": 46,
+     "medianWeekday": 424,
+     "avgSaturday": 651,
+     "saturdayDaysOperated": 11,
+     "avgSunday": 670,
+     "sundayDaysOperated": 12,
+     "annualBoardings": 35131,
+     "medianWeekdayTrips": 2.0,
+     "avgWeekdayBikeBoardings": 1,
+     "avgPassengerMilesPerBoarding": 6.06
+    },
+    "OAS": {
+     "name": "Oakland Alameda Water Shuttle",
+     "avgWeekday": 328,
+     "weekdayDaysOperated": 144,
+     "medianWeekday": 315,
+     "avgSaturday": 548,
+     "saturdayDaysOperated": 50,
+     "avgSunday": 601,
+     "sundayDaysOperated": 50,
+     "annualBoardings": 105363,
+     "medianWeekdayTrips": 46.0,
+     "avgWeekdayBikeBoardings": 89,
+     "avgPassengerMilesPerBoarding": 0.25
+    },
+    "P41": {
+     "name": "San Francisco Pier 41 Short Hop",
+     "avgWeekday": 50,
+     "weekdayDaysOperated": 15,
+     "medianWeekday": 33,
+     "avgSaturday": 176,
+     "saturdayDaysOperated": 40,
+     "avgSunday": 160,
+     "sundayDaysOperated": 40,
+     "annualBoardings": 14940,
+     "medianWeekdayTrips": 7,
+     "avgWeekdayBikeBoardings": 0,
+     "avgPassengerMilesPerBoarding": 3.13
+    },
+    "P48": {
+     "name": "Chase Center",
+     "avgWeekday": 392,
+     "weekdayDaysOperated": 37,
+     "medianWeekday": 392,
+     "avgSaturday": 456,
+     "saturdayDaysOperated": 10,
+     "avgSunday": 473,
+     "sundayDaysOperated": 11,
+     "annualBoardings": 24826,
+     "medianWeekdayTrips": 2,
+     "avgWeekdayBikeBoardings": 1,
+     "avgPassengerMilesPerBoarding": 6.59
+    },
+    "RB": {
+     "name": "Ballpark (Richmond)",
+     "avgWeekday": null,
+     "weekdayDaysOperated": 0,
+     "medianWeekday": null,
+     "avgSaturday": 295,
+     "saturdayDaysOperated": 1,
+     "avgSunday": 157,
+     "sundayDaysOperated": 1,
+     "annualBoardings": 452,
+     "medianWeekdayTrips": null,
+     "avgWeekdayBikeBoardings": null,
+     "avgPassengerMilesPerBoarding": 13.0
+    },
+    "RCB": {
+     "name": "Ballpark (Redwood City)",
+     "avgWeekday": null,
+     "weekdayDaysOperated": 0,
+     "medianWeekday": null,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": 360,
+     "sundayDaysOperated": 4,
+     "annualBoardings": 1440,
+     "medianWeekdayTrips": null,
+     "avgWeekdayBikeBoardings": null,
+     "avgPassengerMilesPerBoarding": 23.0
+    },
+    "RCH": {
+     "name": "Richmond",
+     "avgWeekday": 1078,
+     "weekdayDaysOperated": 250,
+     "medianWeekday": 1092,
+     "avgSaturday": 675,
+     "saturdayDaysOperated": 52,
+     "avgSunday": 553,
+     "sundayDaysOperated": 52,
+     "annualBoardings": 338981,
+     "medianWeekdayTrips": 26.0,
+     "avgWeekdayBikeBoardings": 107,
+     "avgPassengerMilesPerBoarding": 10.6
+    },
+    "SEA": {
+     "name": "Alameda Seaplane",
+     "avgWeekday": 1579,
+     "weekdayDaysOperated": 250,
+     "medianWeekday": 1669,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 394837,
+     "medianWeekdayTrips": 31.0,
+     "avgWeekdayBikeBoardings": 252,
+     "avgPassengerMilesPerBoarding": 5.6
+    },
+    "SSF": {
+     "name": "South San Francisco",
+     "avgWeekday": 401,
+     "weekdayDaysOperated": 245,
+     "medianWeekday": 425,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 98188,
+     "medianWeekdayTrips": 8,
+     "avgWeekdayBikeBoardings": 84,
+     "avgPassengerMilesPerBoarding": 13.63
+    },
+    "VB": {
+     "name": "Ballpark (Vallejo)",
+     "avgWeekday": 187,
+     "weekdayDaysOperated": 47,
+     "medianWeekday": 168,
+     "avgSaturday": 554,
+     "saturdayDaysOperated": 12,
+     "avgSunday": 629,
+     "sundayDaysOperated": 12,
+     "annualBoardings": 23005,
+     "medianWeekdayTrips": 1,
+     "avgWeekdayBikeBoardings": 0,
+     "avgPassengerMilesPerBoarding": 29.79
+    },
+    "VJO": {
+     "name": "Vallejo",
+     "avgWeekday": 2395,
+     "weekdayDaysOperated": 250,
+     "medianWeekday": 2395,
+     "avgSaturday": 2058,
+     "saturdayDaysOperated": 52,
+     "avgSunday": 1654,
+     "sundayDaysOperated": 52,
+     "annualBoardings": 804985,
+     "medianWeekdayTrips": 27.0,
+     "avgWeekdayBikeBoardings": 127,
+     "avgPassengerMilesPerBoarding": 28.17
+    }
+   }
+  },
+  "FY2024": {
+   "period": "July 2023 - June 2024",
+   "dateRange": [
+    "2023-07-01",
+    "2024-06-30"
+   ],
+   "typicalWeekdaysUsed": 249,
+   "reducedServiceWeekdaysExcluded": [
+    "2023-07-03",
+    "2023-07-04",
+    "2023-09-04",
+    "2023-11-24",
+    "2024-01-08",
+    "2024-01-15",
+    "2024-02-19",
+    "2024-05-27"
+   ],
+   "systemAvgWeekday": 7204,
+   "systemAvgSaturday": 5945,
+   "systemAvgSunday": 4854,
+   "systemAnnualBoardings": 2407383,
+   "coreSFRoutesAvgWeekdaySum": 6722,
+   "coreSFRoutesIncluded": [
+    "VJO",
+    "OA",
+    "SEA",
+    "HB",
+    "RCH"
+   ],
+   "routes": {
+    "BSH": {
+     "name": "Ballpark Short Hop",
+     "avgWeekday": null,
+     "weekdayDaysOperated": 0,
+     "medianWeekday": null,
+     "avgSaturday": 564,
+     "saturdayDaysOperated": 5,
+     "avgSunday": 787,
+     "sundayDaysOperated": 11,
+     "annualBoardings": 13108,
+     "medianWeekdayTrips": null,
+     "avgWeekdayBikeBoardings": null,
+     "avgPassengerMilesPerBoarding": 2.52
+    },
+    "HB": {
+     "name": "Harbor Bay",
+     "avgWeekday": 964,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 1012,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 240701,
+     "medianWeekdayTrips": 22,
+     "avgWeekdayBikeBoardings": 108,
+     "avgPassengerMilesPerBoarding": 9.05
+    },
+    "OA": {
+     "name": "Oakland & Alameda",
+     "avgWeekday": 1302,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 1287,
+     "avgSaturday": 3009,
+     "saturdayDaysOperated": 53,
+     "avgSunday": 2395,
+     "sundayDaysOperated": 53,
+     "annualBoardings": 628885,
+     "medianWeekdayTrips": 39,
+     "avgWeekdayBikeBoardings": 147,
+     "avgPassengerMilesPerBoarding": 6.65
+    },
+    "OAB": {
+     "name": "Ballpark (Oakland & Alameda)",
+     "avgWeekday": 464,
+     "weekdayDaysOperated": 43,
+     "medianWeekday": 448,
+     "avgSaturday": 572,
+     "saturdayDaysOperated": 9,
+     "avgSunday": 545,
+     "sundayDaysOperated": 3,
+     "annualBoardings": 27447,
+     "medianWeekdayTrips": 2,
+     "avgWeekdayBikeBoardings": 1,
+     "avgPassengerMilesPerBoarding": 6.36
+    },
+    "OPL": {
+     "name": "Oyster Point Limited",
+     "avgWeekday": 1,
+     "weekdayDaysOperated": 47,
+     "medianWeekday": 1,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 68,
+     "medianWeekdayTrips": 3,
+     "avgWeekdayBikeBoardings": 0,
+     "avgPassengerMilesPerBoarding": 9.0
+    },
+    "P41": {
+     "name": "San Francisco Pier 41 Short Hop",
+     "avgWeekday": null,
+     "weekdayDaysOperated": 0,
+     "medianWeekday": null,
+     "avgSaturday": 163,
+     "saturdayDaysOperated": 53,
+     "avgSunday": 132,
+     "sundayDaysOperated": 52,
+     "annualBoardings": 16078,
+     "medianWeekdayTrips": null,
+     "avgWeekdayBikeBoardings": null,
+     "avgPassengerMilesPerBoarding": 3.28
+    },
+    "P48": {
+     "name": "Chase Center",
+     "avgWeekday": 365,
+     "weekdayDaysOperated": 28,
+     "medianWeekday": 386,
+     "avgSaturday": 364,
+     "saturdayDaysOperated": 9,
+     "avgSunday": 434,
+     "sundayDaysOperated": 5,
+     "annualBoardings": 16081,
+     "medianWeekdayTrips": 2.0,
+     "avgWeekdayBikeBoardings": 1,
+     "avgPassengerMilesPerBoarding": 6.93
+    },
+    "RCH": {
+     "name": "Richmond",
+     "avgWeekday": 923,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 937,
+     "avgSaturday": 519,
+     "saturdayDaysOperated": 53,
+     "avgSunday": 441,
+     "sundayDaysOperated": 53,
+     "annualBoardings": 284531,
+     "medianWeekdayTrips": 26,
+     "avgWeekdayBikeBoardings": 90,
+     "avgPassengerMilesPerBoarding": 11.15
+    },
+    "SEA": {
+     "name": "Alameda Seaplane",
+     "avgWeekday": 1366,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 1438,
+     "avgSaturday": 789,
+     "saturdayDaysOperated": 10,
+     "avgSunday": 495,
+     "sundayDaysOperated": 9,
+     "annualBoardings": 354532,
+     "medianWeekdayTrips": 30,
+     "avgWeekdayBikeBoardings": 219,
+     "avgPassengerMilesPerBoarding": 5.89
+    },
+    "SSF": {
+     "name": "South San Francisco",
+     "avgWeekday": 330,
+     "weekdayDaysOperated": 248,
+     "medianWeekday": 363,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 82173,
+     "medianWeekdayTrips": 8.0,
+     "avgWeekdayBikeBoardings": 70,
+     "avgPassengerMilesPerBoarding": 14.46
+    },
+    "VB": {
+     "name": "Ballpark (Vallejo)",
+     "avgWeekday": 190,
+     "weekdayDaysOperated": 43,
+     "medianWeekday": 185,
+     "avgSaturday": 591,
+     "saturdayDaysOperated": 9,
+     "avgSunday": 553,
+     "sundayDaysOperated": 3,
+     "annualBoardings": 15675,
+     "medianWeekdayTrips": 1,
+     "avgWeekdayBikeBoardings": 0,
+     "avgPassengerMilesPerBoarding": 31.35
+    },
+    "VJO": {
+     "name": "Vallejo",
+     "avgWeekday": 2167,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 2163,
+     "avgSaturday": 1793,
+     "saturdayDaysOperated": 53,
+     "avgSunday": 1539,
+     "sundayDaysOperated": 53,
+     "annualBoardings": 728104,
+     "medianWeekdayTrips": 27,
+     "avgWeekdayBikeBoardings": 110,
+     "avgPassengerMilesPerBoarding": 29.73
+    }
+   }
+  },
+  "FY2019": {
+   "period": "July 2018 - June 2019",
+   "dateRange": [
+    "2018-07-01",
+    "2019-06-30"
+   ],
+   "typicalWeekdaysUsed": 249,
+   "reducedServiceWeekdaysExcluded": [
+    "2018-07-04",
+    "2018-09-03",
+    "2018-11-23",
+    "2019-01-17",
+    "2019-01-21",
+    "2019-01-23",
+    "2019-02-18",
+    "2019-05-27"
+   ],
+   "systemAvgWeekday": 10079,
+   "systemAvgSaturday": 5207,
+   "systemAvgSunday": 4176,
+   "systemAnnualBoardings": 3045386,
+   "coreSFRoutesAvgWeekdaySum": 9770,
+   "coreSFRoutesIncluded": [
+    "VJO",
+    "OA",
+    "HB",
+    "RCH"
+   ],
+   "routes": {
+    "HB": {
+     "name": "Harbor Bay",
+     "avgWeekday": 1415,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 1497,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 355662,
+     "medianWeekdayTrips": 15,
+     "avgWeekdayBikeBoardings": 109,
+     "avgPassengerMilesPerBoarding": 9.16
+    },
+    "OA": {
+     "name": "Oakland & Alameda",
+     "avgWeekday": 4147,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 4130,
+     "avgSaturday": 3217,
+     "saturdayDaysOperated": 52,
+     "avgSunday": 2470,
+     "sundayDaysOperated": 53,
+     "annualBoardings": 1354984,
+     "medianWeekdayTrips": 45,
+     "avgWeekdayBikeBoardings": 382,
+     "avgPassengerMilesPerBoarding": 5.28
+    },
+    "OAB": {
+     "name": "Ballpark (Oakland & Alameda)",
+     "avgWeekday": 316,
+     "weekdayDaysOperated": 46,
+     "medianWeekday": 272,
+     "avgSaturday": 449,
+     "saturdayDaysOperated": 16,
+     "avgSunday": 490,
+     "sundayDaysOperated": 16,
+     "annualBoardings": 29574,
+     "medianWeekdayTrips": 2.0,
+     "avgWeekdayBikeBoardings": 0,
+     "avgPassengerMilesPerBoarding": 4.61
+    },
+    "RCH": {
+     "name": "Richmond",
+     "avgWeekday": 692,
+     "weekdayDaysOperated": 120,
+     "medianWeekday": 698,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 84576,
+     "medianWeekdayTrips": 13.0,
+     "avgWeekdayBikeBoardings": 46,
+     "avgPassengerMilesPerBoarding": 11.3
+    },
+    "SSF": {
+     "name": "South San Francisco",
+     "avgWeekday": 567,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 614,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 142556,
+     "medianWeekdayTrips": 9,
+     "avgWeekdayBikeBoardings": 91,
+     "avgPassengerMilesPerBoarding": 12.0
+    },
+    "VB": {
+     "name": "Ballpark (Vallejo)",
+     "avgWeekday": 193,
+     "weekdayDaysOperated": 54,
+     "medianWeekday": 128,
+     "avgSaturday": 538,
+     "saturdayDaysOperated": 16,
+     "avgSunday": 575,
+     "sundayDaysOperated": 16,
+     "annualBoardings": 28212,
+     "medianWeekdayTrips": 2.0,
+     "avgWeekdayBikeBoardings": 4,
+     "avgPassengerMilesPerBoarding": 31.77
+    },
+    "VJO": {
+     "name": "Vallejo",
+     "avgWeekday": 3516,
+     "weekdayDaysOperated": 249,
+     "medianWeekday": 3526,
+     "avgSaturday": 1686,
+     "saturdayDaysOperated": 52,
+     "avgSunday": 1384,
+     "sundayDaysOperated": 53,
+     "annualBoardings": 1049822,
+     "medianWeekdayTrips": 28,
+     "avgWeekdayBikeBoardings": 97,
+     "avgPassengerMilesPerBoarding": 28.29
+    }
+   }
+  },
+  "FY2027_JulAug2026_partial": {
+   "period": "July 1 - August 31, 2026 (summer; latest data in API on 2026-10-04). Summer-peaking, not an annual average.",
+   "dateRange": [
+    "2026-07-01",
+    "2026-08-31"
+   ],
+   "typicalWeekdaysUsed": 44,
+   "reducedServiceWeekdaysExcluded": [],
+   "systemAvgWeekday": 11093,
+   "systemAvgSaturday": 11061,
+   "systemAvgSunday": 8283,
+   "systemAnnualBoardings": 662195,
+   "coreSFRoutesAvgWeekdaySum": 9953,
+   "coreSFRoutesIncluded": [
+    "VJO",
+    "OA",
+    "SEA",
+    "HB",
+    "RCH"
+   ],
+   "routes": {
+    "BSH": {
+     "name": "Ballpark Short Hop",
+     "avgWeekday": null,
+     "weekdayDaysOperated": 0,
+     "medianWeekday": null,
+     "avgSaturday": 376,
+     "saturdayDaysOperated": 1,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 376,
+     "medianWeekdayTrips": null,
+     "avgWeekdayBikeBoardings": null,
+     "avgPassengerMilesPerBoarding": 2.4
+    },
+    "HB": {
+     "name": "Harbor Bay",
+     "avgWeekday": 1267,
+     "weekdayDaysOperated": 44,
+     "medianWeekday": 1338,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 55732,
+     "medianWeekdayTrips": 20.0,
+     "avgWeekdayBikeBoardings": 206,
+     "avgPassengerMilesPerBoarding": 8.6
+    },
+    "OA": {
+     "name": "Oakland & Alameda",
+     "avgWeekday": 1995,
+     "weekdayDaysOperated": 44,
+     "medianWeekday": 1962,
+     "avgSaturday": 5305,
+     "saturdayDaysOperated": 9,
+     "avgSunday": 3822,
+     "sundayDaysOperated": 9,
+     "annualBoardings": 169943,
+     "medianWeekdayTrips": 40.0,
+     "avgWeekdayBikeBoardings": 208,
+     "avgPassengerMilesPerBoarding": 6.36
+    },
+    "OAB": {
+     "name": "Ballpark (Oakland & Alameda)",
+     "avgWeekday": 487,
+     "weekdayDaysOperated": 16,
+     "medianWeekday": 518,
+     "avgSaturday": 519,
+     "saturdayDaysOperated": 5,
+     "avgSunday": 537,
+     "sundayDaysOperated": 4,
+     "annualBoardings": 12536,
+     "medianWeekdayTrips": 2.0,
+     "avgWeekdayBikeBoardings": 2,
+     "avgPassengerMilesPerBoarding": 6.04
+    },
+    "OAS": {
+     "name": "Oakland Alameda Water Shuttle",
+     "avgWeekday": 525,
+     "weekdayDaysOperated": 23,
+     "medianWeekday": 502,
+     "avgSaturday": 878,
+     "saturdayDaysOperated": 6,
+     "avgSunday": 882,
+     "sundayDaysOperated": 6,
+     "annualBoardings": 22651,
+     "medianWeekdayTrips": 48,
+     "avgWeekdayBikeBoardings": 148,
+     "avgPassengerMilesPerBoarding": 0.25
+    },
+    "P48": {
+     "name": "Chase Center",
+     "avgWeekday": 538,
+     "weekdayDaysOperated": 5,
+     "medianWeekday": 553,
+     "avgSaturday": 578,
+     "saturdayDaysOperated": 1,
+     "avgSunday": 539,
+     "sundayDaysOperated": 1,
+     "annualBoardings": 3809,
+     "medianWeekdayTrips": 2,
+     "avgWeekdayBikeBoardings": 11,
+     "avgPassengerMilesPerBoarding": 6.54
+    },
+    "RCH": {
+     "name": "Richmond",
+     "avgWeekday": 1370,
+     "weekdayDaysOperated": 44,
+     "medianWeekday": 1408,
+     "avgSaturday": 1172,
+     "saturdayDaysOperated": 9,
+     "avgSunday": 876,
+     "sundayDaysOperated": 9,
+     "annualBoardings": 78685,
+     "medianWeekdayTrips": 25.0,
+     "avgWeekdayBikeBoardings": 138,
+     "avgPassengerMilesPerBoarding": 10.61
+    },
+    "SEA": {
+     "name": "Alameda Seaplane",
+     "avgWeekday": 2145,
+     "weekdayDaysOperated": 44,
+     "medianWeekday": 2186,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 94396,
+     "medianWeekdayTrips": 35.0,
+     "avgWeekdayBikeBoardings": 373,
+     "avgPassengerMilesPerBoarding": 5.6
+    },
+    "SSF": {
+     "name": "South San Francisco",
+     "avgWeekday": 514,
+     "weekdayDaysOperated": 44,
+     "medianWeekday": 580,
+     "avgSaturday": null,
+     "saturdayDaysOperated": 0,
+     "avgSunday": null,
+     "sundayDaysOperated": 0,
+     "annualBoardings": 22631,
+     "medianWeekdayTrips": 7.0,
+     "avgWeekdayBikeBoardings": 121,
+     "avgPassengerMilesPerBoarding": 13.87
+    },
+    "VB": {
+     "name": "Ballpark (Vallejo)",
+     "avgWeekday": 261,
+     "weekdayDaysOperated": 19,
+     "medianWeekday": 194,
+     "avgSaturday": 540,
+     "saturdayDaysOperated": 5,
+     "avgSunday": 592,
+     "sundayDaysOperated": 4,
+     "annualBoardings": 10022,
+     "medianWeekdayTrips": 1,
+     "avgWeekdayBikeBoardings": 0,
+     "avgPassengerMilesPerBoarding": 29.8
+    },
+    "VJO": {
+     "name": "Vallejo",
+     "avgWeekday": 3176,
+     "weekdayDaysOperated": 44,
+     "medianWeekday": 3158,
+     "avgSaturday": 3304,
+     "saturdayDaysOperated": 9,
+     "avgSunday": 2435,
+     "sundayDaysOperated": 9,
+     "annualBoardings": 191414,
+     "medianWeekdayTrips": 27.0,
+     "avgWeekdayBikeBoardings": 176,
+     "avgPassengerMilesPerBoarding": 28.16
+    }
+   }
+  },
+  "notes": [
+   "FY2019 coverage: data FAQ/MTC blog say data before 2023 is partial; FY2019 rows exist for VJO, OA, HB, SSF, RCH (Richmond began Jan 2019, so 120 weekdays) and ballpark routes. Seaplane route did not exist yet (Alameda service was inside OA).",
+   "Mare Island has no separate route code; its boardings are within VJO.",
+   "Terminal-level boardings are not in the API (route-level only). Unweighted 2025 onboard-survey sample sizes by boarding terminal (not ridership): SF 723, Vallejo 353, Oakland 196, Richmond 147, Seaplane 135, Harbor Bay 119, Main St Alameda 92, South SF 2 (report pp. 23-25)."
+  ]
+ },
+ "goldenGateFerry": {
+  "routeTerminals": {
+   "Larkspur": "Larkspur - SF Ferry Building (plus Larkspur - Oracle Park special service, included in Larkspur figures)",
+   "Sausalito": "Sausalito - SF Ferry Building",
+   "Tiburon": "Tiburon - SF Ferry Building",
+   "AngelIsland": "Angel Island - SF (service began Dec 2021, per GGBHTD FY24-25 budget)"
+  },
+  "allServeSF": true,
+  "statisticsPage": {
+   "publisher": "Golden Gate Bridge, Highway and Transportation District",
+   "title": "Statistics & Ridership - Golden Gate Ferry History & Research",
+   "url": "https://www.goldengate.org/ferry/history-research/statistics-ridership/",
+   "rawFile": "data/beta3/raw/obs/ggferry_statistics_ridership.html",
+   "method": "Copied from HTML table. Weekday/Saturday/Sunday averages are published for ALL routes only; route split is annual only.",
+   "byFY": {
+    "FY2025": {
+     "annualAll": 1582632,
+     "annualByRoute": {
+      "Larkspur": 952087,
+      "Sausalito": 377595,
+      "Tiburon": 141517,
+      "AngelIsland": 111433
+     },
+     "avgWeekdayAll": 4481,
+     "avgSaturdayAll": 4605,
+     "avgSundayHolidayAll": 3672
+    },
+    "FY2024": {
+     "annualAll": 1421356,
+     "annualByRoute": {
+      "Larkspur": 816039,
+      "Sausalito": 362172,
+      "Tiburon": 129970,
+      "AngelIsland": 113175
+     },
+     "avgWeekdayAll": 4041,
+     "avgSaturdayAll": 3862,
+     "avgSundayHolidayAll": 3415
+    },
+    "FY2023": {
+     "annualAll": 1155682,
+     "annualByRoute": {
+      "Larkspur": 583966,
+      "Sausalito": 351149,
+      "Tiburon": 117112,
+      "AngelIsland": 103455
+     },
+     "avgWeekdayAll": 3208,
+     "avgSaturdayAll": 3430,
+     "avgSundayHolidayAll": 2907
+    },
+    "FY2019": {
+     "annualAll": 2470204,
+     "annualByRoute": {
+      "Larkspur": 1644783,
+      "Sausalito": 629954,
+      "Tiburon": 195467,
+      "AngelIsland": null
+     },
+     "avgWeekdayAll": 8367,
+     "avgSaturdayAll": 3638,
+     "avgSundayHolidayAll": 3063
+    }
+   },
+   "giantsOracleParkSeasonRidership": {
+    "2024": 67681,
+    "2023": 62042,
+    "2019": 45186,
+    "2025_through_2025-07-30": 49711
+   }
+  },
+  "weekdayByRoute": {
+   "published": false,
+   "finding": "No published average weekday (or monthly, or weekday/weekend) ridership by route was found for recent years. Checked: Statistics & Ridership page, GGBHTD FY24-25 adopted budget (291 pp.), General Manager reports to the Board (Dec 2025, Apr 2026: system-level % changes only, plus per-terminal bicycle counts), 2023 onboard survey slides, Larkspur Ferry Service Expansion & Parking Study pages.",
+   "LarkspurPreCOVID": {
+    "avgWeekday2019": 6348,
+    "avgWeekday2005": 4892,
+    "source": {
+     "publisher": "GGBHTD",
+     "title": "Background and Project Overview - Larkspur Ferry Service Expansion and Parking Study",
+     "date": "2024-05-14",
+     "url": "https://www.goldengate.org/assets/1/6/project_overview_loop.pdf",
+     "rawFile": "data/beta3/raw/ferry/gg_larkspur_project_overview_loop.pdf",
+     "page": 6,
+     "method": "Labels on chart 'Larkspur Ferry - Average Weekday Ridership' (2005-2019); year basis (calendar vs FY) not stated."
+    },
+    "conflictNote": "The study web page says 2019 'average weekday ridership exceeded 8,000'; that matches the ALL-routes FY2019 weekday figure (8,367), not Larkspur alone (6,348 on the study's own chart)."
+   }
+  },
+  "survey2023": {
+   "publisher": "GGBHTD",
+   "title": "2023 GGF On Board Survey Highlights (presented to Transportation Committee / advisory committees, Nov 7 2024)",
+   "url": "https://www.goldengate.org/assets/1/25/2024-1114-transcomm-no3-aca-bpac-fpac-pbac.pdf",
+   "rawFile": "data/beta3/raw/ferry/gg_2024-1114_transcomm.pdf",
+   "fieldwork": "spring and fall 2023, onboard",
+   "residentsVsVisitors": {
+    "page": "PDF p.39 (slide 41) chart + p.41 text",
+    "method": "read from chart except overall (text)",
+    "overallBayAreaResidents": 0.73,
+    "visitingShareByRoute": {
+     "AngelIsland": 0.22,
+     "Larkspur": 0.15,
+     "Sausalito": 0.48,
+     "Tiburon": 0.12,
+     "SpecialEvent": 0.28
+    },
+    "text": "Most riders are Bay Area residents (73% overall). Sausalito and Special Event service have the highest proportion of visitors riding."
+   },
+   "accessModeByRoute": {
+    "page": "PDF p.28 (slide 30) chart 'Access 2023 - Ferry'",
+    "method": "read from chart; 'access' = how riders got to the ferry at the terminal where they boarded, so for each route it mixes Marin-side and SF-side boardings",
+    "Larkspur": {
+     "walk": 0.24,
+     "driveParkRide": 0.4,
+     "dropOffPickUp": 0.09,
+     "otherTransit": 0.17,
+     "bike": 0.09,
+     "ggtBus": 0.0,
+     "tnc": 0.01
+    },
+    "Sausalito": {
+     "walk": 0.46,
+     "driveParkRide": 0.1,
+     "dropOffPickUp": 0.09,
+     "otherTransit": 0.15,
+     "bike": 0.17,
+     "ggtBus": 0.01,
+     "tnc": 0.02
+    },
+    "Tiburon": {
+     "walk": 0.49,
+     "driveParkRide": 0.09,
+     "dropOffPickUp": 0.065,
+     "otherTransit": 0.195,
+     "bike": 0.22,
+     "ggtBus": 0.0,
+     "tnc": 0.02
+    },
+    "AngelIsland": {
+     "walk": 0.31,
+     "driveParkRide": 0.09,
+     "dropOffPickUp": 0.15,
+     "otherTransit": 0.4,
+     "bike": 0.065,
+     "ggtBus": 0.0,
+     "tnc": 0.01
+    },
+    "SpecialEvent": {
+     "walk": 0.035,
+     "driveParkRide": 0.76,
+     "dropOffPickUp": 0.18,
+     "otherTransit": 0.045,
+     "bike": 0.0,
+     "ggtBus": 0.0,
+     "tnc": 0.0
+    }
+   },
+   "frequency4to5DaysPerWeek": {
+    "page": "PDF p.31 (slide 33) table",
+    "method": "copied from table",
+    "2018": {
+     "Larkspur": 0.539,
+     "Sausalito": 0.182,
+     "Tiburon": 0.661
+    },
+    "2023": {
+     "Larkspur": 0.145,
+     "Sausalito": 0.074,
+     "Tiburon": 0.193
+    }
+   },
+   "tripPurpose": "Not shown in the slides (no trip-purpose question summarized)."
+  },
+  "larkspurAccessSurvey2018": {
+   "publisher": "GGBHTD",
+   "title": "Larkspur Ferry Service and Parking Expansion Study - Ferry Service and Parking Demand board ('Mode of arrival survey results (2018)')",
+   "url": "https://www.goldengate.org/assets/1/6/c_larkspur_forecast_environmental_web.pdf",
+   "rawFile": "data/beta3/raw/ferry/gg_larkspur_forecast_environmental.pdf",
+   "page": 1,
+   "method": "copied from pie-chart labels",
+   "modeOfArrivalAtLarkspurTerminal": {
+    "park": 0.794,
+    "dropOffPickUp": 0.055,
+    "tnc": 0.008,
+    "bike": 0.073,
+    "feederShuttle": 0.024,
+    "bus": 0.023,
+    "scooter": 0.002,
+    "walk": 0.023
+   },
+   "assumedAvgVehicleOccupancy": 1.12,
+   "corroboration": "Project overview (2024-05-14) p.7: '79% of ferry riders drove and parked at the Terminal' pre-COVID; p.8: 14% arrived by bike, bus, shuttle and other modes. Main lot 1,808 spaces + north lot 215 (p.5). Fall 2024 passenger survey was conducted for the study, but results were not found online."
+  },
+  "mtcRegionalSurvey2018": {
+   "status": "not obtained",
+   "detail": "MTC Transit Passenger Survey schedule lists 'Golden Gate Transit and Ferry' and 'WETA Ferries' surveyed in 2018 (and 2013); reports are on MTCdrive (Box) links https://mtcdrive.box.com/v/transit-survey-ggt-2018 and https://mtcdrive.box.com/v/transit-survey-weta-2018, which require a Box login, so they were not fetched.",
+   "sourcePage": "https://bayareametro.github.io/transit-passenger-surveys/schedule/"
+  }
+ },
+ "sfBayFerrySurvey2025": {
+  "publisher": "WETA / San Francisco Bay Ferry (fieldwork by Corey, Canapary & Galanis)",
+  "title": "San Francisco Bay Ferry Onboard Ferry Survey Summary Report (2025)",
+  "url": "https://d262kwcyxl71on.cloudfront.net/wp-content/uploads/20260407225430/WETA-onboard-2025-Report-Finalv2-1.pdf",
+  "rawFile": "data/beta3/raw/ferry/WETA-onboard-2025-Report-Finalv2-1.pdf",
+  "publishedDate": "2025-08-14",
+  "fieldwork": "April 12-30, 2025, all regular routes; 1,786 completes (1,281 weekday, 505 weekend); 87% response rate; MOE +/-2.31% systemwide",
+  "pages": "3-4 method; 21-26 access/egress/purpose; 29 alternatives; 30 residence",
+  "method": "copied from report tables (multiple responses accepted for access, egress and purpose, so columns can sum above 100%)",
+  "accessAll": {
+   "2025_total": {
+    "carNet": 0.64,
+    "driveParkRide": 0.48,
+    "droppedOff": 0.12,
+    "tnc": 0.05,
+    "taxi": "<1%",
+    "walk": 0.17,
+    "bikeScooter": 0.13,
+    "publicTransit": 0.09,
+    "employerShuttle": "<1%"
+   },
+   "2024_total": {
+    "carNet": 0.56,
+    "driveParkRide": 0.4,
+    "droppedOff": 0.09,
+    "tnc": 0.07,
+    "walk": 0.21,
+    "bikeScooter": 0.14,
+    "publicTransit": 0.11,
+    "employerShuttle": 0.01
+   },
+   "2025_weekday": {
+    "carNet": 0.61,
+    "driveParkRide": 0.45,
+    "droppedOff": 0.12,
+    "tnc": 0.04,
+    "walk": 0.17,
+    "bikeScooter": 0.16,
+    "publicTransit": 0.09,
+    "employerShuttle": 0.01
+   },
+   "2025_weekend": {
+    "carNet": 0.72,
+    "driveParkRide": 0.54,
+    "droppedOff": 0.12,
+    "tnc": 0.06,
+    "walk": 0.16,
+    "bikeScooter": 0.08,
+    "publicTransit": 0.08,
+    "employerShuttle": "<1%"
+   },
+   "note": "Executive summary text (p.6, p.21) says 62% car-based; the table on p.21 says 64%. Table values used here."
+  },
+  "egressAll": {
+   "2025_total": {
+    "carNet": 0.38,
+    "driveParkRide": 0.23,
+    "pickedUp": 0.08,
+    "tnc": 0.06,
+    "taxi": 0.01,
+    "walk": 0.34,
+    "publicTransit": 0.16,
+    "bikeScooter": 0.15,
+    "employerShuttle": 0.02
+   },
+   "2025_weekday": {
+    "carNet": 0.31,
+    "driveParkRide": 0.2,
+    "pickedUp": 0.06,
+    "tnc": 0.04,
+    "walk": 0.37,
+    "publicTransit": 0.16,
+    "bikeScooter": 0.18,
+    "employerShuttle": 0.02
+   },
+   "2025_weekend": {
+    "carNet": 0.56,
+    "driveParkRide": 0.32,
+    "pickedUp": 0.12,
+    "tnc": 0.11,
+    "walk": 0.26,
+    "publicTransit": 0.15,
+    "bikeScooter": 0.07
+   }
+  },
+  "accessEgressByTerminal": {
+   "page": "23-25",
+   "note": "access = boarded at this terminal; egress = alighted at this terminal; n = respondents",
+   "SanFrancisco": {
+    "access": {
+     "n": 723,
+     "carNet": 0.47,
+     "driveParkRide": 0.35,
+     "droppedOff": 0.07,
+     "tnc": 0.05,
+     "walk": 0.25,
+     "publicTransit": 0.16,
+     "bikeScooter": 0.15,
+     "employerShuttle": "<1%"
+    },
+    "egress": {
+     "n": 824,
+     "walk": 0.44,
+     "publicTransit": 0.23,
+     "carNet": 0.22,
+     "driveParkRide": 0.1,
+     "tnc": 0.07,
+     "pickedUp": 0.04,
+     "taxi": 0.01,
+     "bikeScooter": 0.15,
+     "employerShuttle": 0.01
+    }
+   },
+   "Vallejo": {
+    "access": {
+     "n": 353,
+     "carNet": 0.89,
+     "driveParkRide": 0.59,
+     "droppedOff": 0.25,
+     "tnc": 0.05,
+     "bikeScooter": 0.06,
+     "publicTransit": 0.05,
+     "walk": 0.03
+    },
+    "egress": {
+     "n": 207,
+     "carNet": 0.78,
+     "driveParkRide": 0.44,
+     "pickedUp": 0.24,
+     "tnc": 0.09,
+     "taxi": 0.01,
+     "walk": 0.11,
+     "publicTransit": 0.07,
+     "bikeScooter": 0.06
+    }
+   },
+   "Oakland": {
+    "access": {
+     "n": 196,
+     "carNet": 0.6,
+     "driveParkRide": 0.42,
+     "tnc": 0.09,
+     "droppedOff": 0.08,
+     "walk": 0.23,
+     "bikeScooter": 0.14,
+     "publicTransit": 0.07
+    },
+    "egress": {
+     "n": 112,
+     "carNet": 0.52,
+     "driveParkRide": 0.38,
+     "tnc": 0.07,
+     "pickedUp": 0.06,
+     "taxi": 0.01,
+     "walk": 0.29,
+     "bikeScooter": 0.13,
+     "publicTransit": 0.08
+    }
+   },
+   "AlamedaMainStreet": {
+    "access": {
+     "n": 92,
+     "carNet": 0.74,
+     "driveParkRide": 0.58,
+     "droppedOff": 0.13,
+     "tnc": 0.03,
+     "walk": 0.14,
+     "bikeScooter": 0.12,
+     "publicTransit": 0.03
+    },
+    "egress": {
+     "n": 49,
+     "carNet": 0.67,
+     "driveParkRide": 0.47,
+     "pickedUp": 0.1,
+     "tnc": 0.1,
+     "walk": 0.22,
+     "bikeScooter": 0.12,
+     "publicTransit": 0.02
+    }
+   },
+   "AlamedaSeaplane": {
+    "access": {
+     "n": 135,
+     "carNet": 0.82,
+     "driveParkRide": 0.71,
+     "droppedOff": 0.1,
+     "tnc": 0.01,
+     "bikeScooter": 0.19,
+     "walk": 0.1,
+     "publicTransit": 0.01
+    },
+    "egress": {
+     "n": 44,
+     "bikeScooter": 0.5,
+     "carNet": 0.11,
+     "driveParkRide": 0.07,
+     "pickedUp": 0.05,
+     "walk": 0.36,
+     "publicTransit": 0.02
+    }
+   },
+   "HarborBay": {
+    "access": {
+     "n": 119,
+     "carNet": 0.47,
+     "driveParkRide": 0.35,
+     "droppedOff": 0.11,
+     "tnc": 0.01,
+     "bikeScooter": 0.31,
+     "walk": 0.22,
+     "publicTransit": 0.04,
+     "employerShuttle": 0.03
+    },
+    "egress": {
+     "n": 80,
+     "carNet": 0.38,
+     "driveParkRide": 0.29,
+     "pickedUp": 0.09,
+     "bikeScooter": 0.29,
+     "walk": 0.24,
+     "employerShuttle": 0.08,
+     "publicTransit": 0.04
+    }
+   },
+   "Richmond": {
+    "access": {
+     "n": 147,
+     "carNet": 0.86,
+     "driveParkRide": 0.69,
+     "droppedOff": 0.16,
+     "tnc": 0.01,
+     "walk": 0.07,
+     "bikeScooter": 0.07,
+     "publicTransit": 0.02
+    },
+    "egress": {
+     "n": 116,
+     "carNet": 0.71,
+     "driveParkRide": 0.59,
+     "pickedUp": 0.09,
+     "tnc": 0.03,
+     "walk": 0.18,
+     "bikeScooter": 0.09,
+     "publicTransit": 0.04
+    }
+   },
+   "SouthSanFrancisco": {
+    "access": {
+     "n": 2,
+     "note": "too few to use"
+    },
+    "egress": {
+     "n": 35,
+     "bikeScooter": 0.4,
+     "walk": 0.26,
+     "publicTransit": 0.2,
+     "employerShuttle": 0.14,
+     "carNet": 0.11,
+     "tnc": 0.11
+    }
+   }
+  },
+  "tripPurpose": {
+   "page": 26,
+   "byRoute2025": {
+    "n": {
+     "AlamedaSeaplane": 185,
+     "HarborBay": 211,
+     "OaklandAlameda": 458,
+     "Richmond": 280,
+     "SouthSF": 41,
+     "Vallejo": 611,
+     "total": 1786
+    },
+    "commuteWorkSchool": {
+     "total": 0.55,
+     "AlamedaSeaplane": 0.86,
+     "HarborBay": 0.87,
+     "OaklandAlameda": 0.29,
+     "Richmond": 0.45,
+     "SouthSF": 0.98,
+     "Vallejo": 0.57
+    },
+    "entertainmentRecreation": {
+     "total": 0.34,
+     "AlamedaSeaplane": 0.09,
+     "HarborBay": 0.06,
+     "OaklandAlameda": 0.59,
+     "Richmond": 0.47,
+     "SouthSF": 0.0,
+     "Vallejo": 0.3
+    },
+    "sightseeing": {
+     "total": 0.12,
+     "AlamedaSeaplane": 0.07,
+     "HarborBay": 0.02,
+     "OaklandAlameda": 0.16,
+     "Richmond": 0.12,
+     "SouthSF": 0.02,
+     "Vallejo": 0.14
+    },
+    "shopping": {
+     "total": 0.04,
+     "AlamedaSeaplane": 0.01,
+     "HarborBay": 0.01,
+     "OaklandAlameda": 0.05,
+     "Richmond": 0.08,
+     "SouthSF": 0.0,
+     "Vallejo": 0.03
+    }
+   },
+   "byDayType": {
+    "2025_total": {
+     "commute": 0.55,
+     "entertainmentRecreation": 0.34,
+     "sightseeing": 0.12,
+     "shopping": 0.04,
+     "medical": 0.02
+    },
+    "2024_total": {
+     "commute": 0.56,
+     "entertainmentRecreation": 0.34,
+     "sightseeing": 0.11,
+     "shopping": 0.05
+    },
+    "2025_weekday": {
+     "commute": 0.74,
+     "entertainmentRecreation": 0.16,
+     "sightseeing": 0.08,
+     "shopping": 0.02,
+     "medical": 0.02
+    },
+    "2025_weekend": {
+     "commute": 0.06,
+     "entertainmentRecreation": 0.81,
+     "sightseeing": 0.22,
+     "shopping": 0.09
+    }
+   }
+  },
+  "residence": {
+   "page": 30,
+   "visitingShareByRoute": {
+    "total": 0.09,
+    "AlamedaSeaplane": 0.04,
+    "HarborBay": 0.03,
+    "OaklandAlameda": 0.15,
+    "Richmond": 0.06,
+    "SouthSF": 0.0,
+    "Vallejo": 0.09
+   },
+   "homeCountyTotal": {
+    "Alameda": 0.38,
+    "Solano": 0.22,
+    "ContraCosta": 0.14,
+    "SanFrancisco": 0.11,
+    "Napa": 0.05,
+    "SanMateo": 0.01,
+    "otherCalifornia": 0.05,
+    "outsideCalifornia": 0.04
+   }
+  },
+  "alternativeIfNoFerry": {
+   "page": 29,
+   "total": {
+    "autoNet": 0.65,
+    "driveAlone": 0.43,
+    "carpool": 0.12,
+    "tnc": 0.1,
+    "transitNet": 0.58,
+    "bartRail": 0.45,
+    "bus": 0.13,
+    "ferryOnlyOption": 0.1
+   }
+  },
+  "destinationCounty": {
+   "page": 18,
+   "total": {
+    "SanFrancisco": 0.57,
+    "Alameda": 0.18,
+    "Solano": 0.1,
+    "ContraCosta": 0.08,
+    "SanMateo": 0.03
+   },
+   "SouthSFroute": {
+    "SanMateo": 0.95,
+    "SanFrancisco": 0.0
+   }
+  },
+  "avgDaysPerWeek": {
+   "2025": 2.4,
+   "2024": 2.3
+  }
+ },
+ "notFound": [
+  "Golden Gate Ferry weekday, weekend, or monthly ridership by route (recent years).",
+  "Golden Gate Ferry trip purpose by route.",
+  "MTC 2018 regional onboard survey reports for WETA and Golden Gate Ferry (Box login needed).",
+  "WETA ridership by terminal (only by route)."
+ ]
+}

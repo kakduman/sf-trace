@@ -1,0 +1,895 @@
+{
+ "description": "Where T Third Street riders board: every public stop-, station- or segment-level figure found for the T Third (and its predecessors KT / 15-Third), Central Subway stations, 4th & King Caltrain-Muni transfers, and Chase Center/UCSF effects. Compiled to locate the beta3 model's shortfall (model ~7,900 vs SFMTA APC ~25,000-27,500 average weekday T boardings, 2025-10..2026-09). Numbers are copied exactly as published; anything computed here is in 'derived' and labeled as such.",
+ "accessed": "2026-10-05",
+ "bottomLine": [
+  "No public 2024-2026 stop-level APC table for the T was found (SFMTA publishes route-level only; FTA lists no Central Subway Before-and-After study).",
+  "The newest station-level figure: SFMTA (via Mission Local, 2025-03-03) said 'not quite 9,500' board and 'not quite 12,700' alight per day at the Central Subway stations (the article says 'four', i.e. presumably incl. 4th & Brannan). T average weekday boardings that winter were 19,500 (Jan 2025) / 16,800 (Feb 2025, partial closure from Feb 26). So the Central Subway stations carried roughly half or more of all T boardings (derived ratio, see derived.centralSubwayShareEarly2025).",
+  "2023 faregate entries were much lower (about 1,250 + 1,110 + 350 = 2,710 weekday entries at the three underground stations), so Central Subway use grew several-fold 2023->2025, or the 2025 figure uses a different method (APC / exits); flagged uncertain.",
+  "Faregate exits exceed entries at the underground stations in both data points (Feb 2023: 4,501 vs 2,966; early 2025: 12,700 vs 9,500), so entries likely understate boardings there.",
+  "2024 peak-hour crowding (Muni Metro Capacity Study): Central Subway segment 15.0 sq ft/passenger, Mission Bay 18.7, Third Street South 26.2 -> peak loads highest north of 4th & King.",
+  "Latest public stop-level counts are 2006-07 (TEP ride checks, KT line, both directions): Third Street south of King St had 9,334 weekday boardings (Mission Bay 726, Dogpatch 1,908, Bayview+Visitacion Valley 6,700) plus 1,497 at 4th & King - already about 3x what the model now gives the same stops.",
+  "Caltrain transfer share at 4th & King specifically: not found. Systemwide Caltrain 2025 triennial: Muni is the access mode for 8% and egress mode for 5% of all Caltrain riders (all stations). The 2008 Central Subway SEIS forecast that 67% of 2030 passenger activity at the 4th & King T station would be Caltrain transfers (forecast, not observed)."
+ ],
+ "sources": [
+  {
+   "id": "chron2023mar",
+   "title": "S.F.'s Central Subway saw declines in ridership during its first two months of service, data show",
+   "publisher": "San Francisco Chronicle (Ricardo Cano)",
+   "date": "2023-03-16",
+   "url": "https://www.sfchronicle.com/sf/article/central-subway-ridership-muni-17839818.php",
+   "rawFile": "data/beta3/raw/t-third/chron-2023.html",
+   "dataOrigin": "SFMTA daily station entries (Jan-Feb 2023) and exits (Feb 2023) for the three underground stations, obtained by Howard Wong (Save Muni) via public-records request; entries/exits 'through a combination of sensors and when people tap ... Clipper cards or pay a fare to enter the stations' turnstiles'."
+  },
+  {
+   "id": "chron2023feb",
+   "title": "The Central Subway's first ridership numbers are in, and they're tepid",
+   "publisher": "San Francisco Chronicle (Ricardo Cano)",
+   "date": "2023-02-17 (updated 2023-03-15)",
+   "url": "https://www.sfchronicle.com/sf/article/central-subway-s-ridership-numbers-tepid-17789804.php",
+   "rawFile": "data/beta3/raw/t-third/chron-2023-02.html"
+  },
+  {
+   "id": "chron2024",
+   "title": "S.F. spent nearly $2 billion on the Central Subway. Did it really help Chinatown?",
+   "publisher": "San Francisco Chronicle (Ko Lyn Cheang)",
+   "date": "2024-02-29",
+   "url": "https://www.sfchronicle.com/bayarea/article/central-subway-chinatown-muni-18689710.php",
+   "rawFile": "data/beta3/raw/t-third/chron-2024.html",
+   "note": "Same figures repeated by SF Standard 2024-04-12 (https://sfstandard.com/2024/04/12/san-francisco-central-subway-leaks/)."
+  },
+  {
+   "id": "missionlocal2025",
+   "title": "The Central Subway has been shut down. Will anyone notice?",
+   "publisher": "Mission Local (Joe Eskenazi, column)",
+   "date": "2025-03-03 (modified 2025-03-04)",
+   "url": "https://missionlocal.org/2025/03/sf-central-subway-closed/",
+   "rawFile": "data/beta3/raw/t-third/missionlocal-2025-03.html",
+   "dataOrigin": "'The San Francisco Municipal Transportation Agency reports...' / 'The most up-to-date numbers from the SFMTA' - period, day type and counting method not stated."
+  },
+  {
+   "id": "metroCapacity2025",
+   "title": "Muni Metro Capacity Study | Final Report (approved by SFMTA Board 2025-12-02)",
+   "publisher": "SFMTA",
+   "date": "2025-12",
+   "url": "https://www.sfmta.com/media/44389/download?inline",
+   "rawFile": "data/beta3/raw/t-third/metro-capacity-final.pdf"
+  },
+  {
+   "id": "tep2007",
+   "title": "SFMTA Transit Effectiveness Project, Passenger Activity by Time Period, file Passenger_Activity_ByTimePeriod_KT.csv (K/T-line, ride checks)",
+   "publisher": "SFMTA (archives.sfmta.com, marked not current)",
+   "date": "Weekday, Oct 2006 - Jun 2007",
+   "url": "https://archives.sfmta.com/cms/rtep/tepdataindx.htm",
+   "rawFile": "data/beta3/raw/muni-stops/tep-2006-07/Passenger_Activity_ByTimePeriod_KT.csv",
+   "note": "Already parsed in server/beta3/reference/muni-stop-ridership.json (patternId 147 and 148); rows below are copied from that file."
+  },
+  {
+   "id": "seis2008",
+   "title": "Central Subway Project Final SEIS/SEIR, Volume I (Case No. 96.281E), Chapter 3 Transportation",
+   "publisher": "FTA / SFMTA / SF Planning",
+   "date": "2008 (model runs Jan 2007, revised Jan 2008)",
+   "url": "https://www.sfmta.com/sites/default/files/reports/2017/Central_Subway_Final_SEISSEIR_Volume_I_Part1.pdf",
+   "rawFile": "data/beta3/raw/t-third/central-subway-seis-vol1-part1.pdf",
+   "note": "Tables show tracked revisions: text extraction gives each revised cell as '<struck value> <new value>'. The second (revised) value is used here; check: revised Option B station values 3,000+2,800+28,600+8,000 = 42,400 = the table's 'Total in Central Subway', and +17,400 (4th & King) = 59,800 = 'Total in corridor'."
+  },
+  {
+   "id": "sfmta2021",
+   "title": "SFMTA Board staff report, 4th Street Bridge transit lanes (Temporary Emergency Transit Lanes) made permanent",
+   "publisher": "SFMTA",
+   "date": "2021 (cites May 2021 ridership)",
+   "url": "https://sfmta.com/media/28324/download?inline=",
+   "rawFile": "data/beta3/raw/t-third/sfmta-media-28324.pdf"
+  },
+  {
+   "id": "caltrain2025",
+   "title": "Caltrain Triennial Customer Survey Fall 2025 Summary Report",
+   "publisher": "Caltrain / Corey, Canapary & Galanis",
+   "date": "2025 (survey Fall 2025)",
+   "url": "https://www.caltrain.com/media/37005",
+   "rawFile": "data/beta3/raw/t-third/caltrain-triennial-2025.pdf"
+  },
+  {
+   "id": "caltrain2022",
+   "title": "Fall 2022 Caltrain Triennial Customer Survey Summary Report",
+   "publisher": "Caltrain / Corey, Canapary & Galanis",
+   "date": "2022",
+   "url": "https://www.caltrain.com/media/31369",
+   "rawFile": "data/beta3/raw/t-third/caltrain-triennial-2022.pdf"
+  },
+  {
+   "id": "caltrainOD2024",
+   "title": "2024 Caltrain OD Survey (Caltrain/MTC, RSG)",
+   "publisher": "Caltrain/MTC",
+   "date": "2025-01-17",
+   "url": "https://www.caltrain.com/media/34860",
+   "rawFile": "data/beta3/raw/t-third/caltrain-od-2024.pdf",
+   "note": "Transfer questions exist but the report gives only totals (79% no transfers before or after Caltrain, p.10 of report / PDF p30); no operator- or station-specific transfer table. Weighted microdata would answer the 4th & King -> Muni question but was not found publicly."
+  },
+  {
+   "id": "tjpa2004",
+   "title": "Transbay Terminal / Caltrain Downtown Extension / Redevelopment Project EIS/EIR, Chapter 3 Transportation Analysis",
+   "publisher": "TJPA / FTA",
+   "date": "2004 (data: Muni Monitoring Data FY99-00, schedules Feb 2001)",
+   "url": "https://www.tjpa.org/files/2009/11/FEIS_Ch3.pdf",
+   "rawFile": "data/beta3/raw/t-third/tjpa-feis-ch3.pdf"
+  },
+  {
+   "id": "warriorsTmp2015",
+   "title": "Final Transportation Management Plan - Golden State Warriors San Francisco Event Center",
+   "publisher": "Golden State Warriors / SFMTA (posted by SFMTA)",
+   "date": "2015-12",
+   "url": "https://www.sfmta.com/sites/default/files/reports-and-documents/2019/03/transportation_mgt_plan_12_2015_002_5118.pdf",
+   "rawFile": "data/beta3/raw/t-third/warriors-tmp-2015.pdf"
+  },
+  {
+   "id": "sfmtaBlog2026",
+   "title": "On the Right Track with the T Third",
+   "publisher": "SFMTA blog",
+   "date": "2026-09-09",
+   "url": "https://www.sfmta.com/blog/right-track-t-third"
+  },
+  {
+   "id": "routeRidership",
+   "title": "SFMTA average daily Muni boardings by route and month (already in repo)",
+   "url": "https://www.sfmta.com/reports/average-daily-muni-boardings-route-and-month-pre-pandemic-present",
+   "rawFile": "data/beta3/raw/obs/muni_ridership_by_route.csv",
+   "note": "See server/beta3/reference/muni-route-ridership.json."
+  }
+ ],
+ "tables": {
+  "centralSubwayStations": {
+   "label": "Central Subway station counts (observed)",
+   "rows": [
+    {
+     "period": "2023-01 (all days, average daily)",
+     "stations": "Yerba Buena/Moscone + Union Square/Market St + Chinatown-Rose Pak",
+     "entries": 3227,
+     "exits": null,
+     "source": "chron2023mar",
+     "quote": "Average daily entries in the Central Subway dropped from 3,227 across the three stations in January to 2,966 in February."
+    },
+    {
+     "period": "2023-02 (average daily; day type not stated, appears to be all days)",
+     "stations": "three underground stations",
+     "entries": 2966,
+     "exits": 4501,
+     "source": "chron2023mar",
+     "quote": "In February, an average of 2,966 people entered the subway's underground stations each day, while 4,501 people, on average, rode the T-line and exited through those stations."
+    },
+    {
+     "period": "2023-02 (average daily)",
+     "stations": "Union Square/Market St",
+     "entries": 1498,
+     "exits": 2227,
+     "source": "chron2023mar"
+    },
+    {
+     "period": "2023-02 (average daily)",
+     "stations": "Yerba Buena/Moscone",
+     "entries": 300,
+     "exits": null,
+     "source": "chron2023mar",
+     "quote": "Three hundred people, on average, entered the station each day last month."
+    },
+    {
+     "period": "2023-02 (average daily)",
+     "stations": "Chinatown-Rose Pak",
+     "entries": 1168,
+     "exits": null,
+     "source": "derived by Wikipedia (and here) as 2,966 - 1,498 - 300; not published directly",
+     "uncertain": true
+    },
+    {
+     "period": "2023-02-04 (Saturday, Chinese New Year Parade)",
+     "stations": "three underground stations",
+     "entries": "Almost 6,500",
+     "exits": 8846,
+     "note": "3,828 exits at Chinatown-Rose Pak that day",
+     "source": "chron2023mar"
+    },
+    {
+     "period": "calendar 2023 (average weekday)",
+     "stations": "Chinatown-Rose Pak",
+     "entries": "about 1,250",
+     "source": "chron2024",
+     "quote": "Chinatown-Rose Pak Station saw only about 1,250 daily weekday entries on average"
+    },
+    {
+     "period": "calendar 2023 (average weekday)",
+     "stations": "Union Square/Market St",
+     "entries": "just over 1,110",
+     "source": "chron2024"
+    },
+    {
+     "period": "calendar 2023 (average weekday)",
+     "stations": "Yerba Buena/Moscone",
+     "entries": "about 350",
+     "source": "chron2024"
+    },
+    {
+     "period": "'most up-to-date' as of 2025-03-03 (period/day type not stated)",
+     "stations": "Central Subway stations - article says 'one of the four Central Subway stations' (i.e. likely incl. 4th & Brannan surface stop); an earlier sentence says 'the new Central Subway stations'",
+     "boardings": "not quite 9,500",
+     "alightings": "not quite 12,700",
+     "source": "missionlocal2025",
+     "quote": "not quite 9,500 people a day now board a train at one of the four Central Subway stations and not quite 12,700 people deboard at one.",
+     "uncertain": true,
+     "uncertainty": "Secondary report of an SFMTA figure; period, weekday vs all-day, and whether faregate or APC based are not stated."
+    }
+   ]
+  },
+  "tLineTotalsContext": {
+   "label": "T line totals quoted alongside the station figures (for computing shares)",
+   "rows": [
+    {
+     "period": "2019 weekday",
+     "value": "35,000 (K/T combined)",
+     "source": "chron2023feb",
+     "quote": "when K/T trains drew 35,000 riders on weekdays"
+    },
+    {
+     "period": "pre-COVID",
+     "value": "around 33,000 daily boardings (including the K Ingleside)",
+     "source": "sfmta2021, PDF p3"
+    },
+    {
+     "period": "May 2021",
+     "value": "22,000 daily boardings (K+T through-routed)",
+     "source": "sfmta2021, PDF p3"
+    },
+    {
+     "period": "2023-01 weekday",
+     "value": "an average of 13,000 riders on weekdays",
+     "source": "chron2023feb"
+    },
+    {
+     "period": "calendar 2023 weekday",
+     "value": "about 14,300",
+     "source": "chron2024"
+    },
+    {
+     "period": "SFMTA APC monthly weekday averages, T Third",
+     "values": {
+      "2023-02": 14800,
+      "2025-01": 19500,
+      "2025-02": 16800,
+      "2025-03": 10200,
+      "2025-04": 20700,
+      "2026-07": 26500,
+      "2026-08": 26700,
+      "2026-09": 27500
+     },
+     "source": "routeRidership",
+     "note": "Central Subway closed 2025-02-26..2025-03-14 (T interlined with K)."
+    },
+    {
+     "period": "2026 (blog 2026-09-09)",
+     "value": "over 26,600 people during the weekday",
+     "source": "sfmtaBlog2026"
+    }
+   ]
+  },
+  "segmentCrowding2024": {
+   "label": "Peak-hour crowding by T segment, 2024 observed ridership (Muni Metro Capacity Study Table 1, PDF p23). Lower = more crowded. Basis: 555 sq ft usable space per car.",
+   "rows": [
+    {
+     "segment": "Muni Metro Extension",
+     "endpoints": "Embarcadero - 4th/King",
+     "sqFtPerPassengerPeakHour": 16.3,
+     "ridershipGrowthNeededForEligibility": "51%",
+     "note": "N Judah segment, not T"
+    },
+    {
+     "segment": "Central Subway",
+     "endpoints": "Chinatown - 4th/King",
+     "sqFtPerPassengerPeakHour": 15.0,
+     "ridershipGrowthNeededForEligibility": "39%"
+    },
+    {
+     "segment": "Mission Bay",
+     "endpoints": "4th/King - 3rd/20th",
+     "sqFtPerPassengerPeakHour": 18.7,
+     "ridershipGrowthNeededForEligibility": "73%"
+    },
+    {
+     "segment": "Third Street South",
+     "endpoints": "3rd/20th - Bayshore/Sunnydale",
+     "sqFtPerPassengerPeakHour": 26.2,
+     "ridershipGrowthNeededForEligibility": "148%"
+    },
+    {
+     "segment": "(comparison) Market Street Subway",
+     "endpoints": "Embarcadero - Van Ness",
+     "sqFtPerPassengerPeakHour": 8.6
+    }
+   ]
+  },
+  "tep2006_07_KT_ThirdStreet": {
+   "label": "Observed average weekday boardings/alightings per stop, KT line, Oct 2006 - Jun 2007 (ride checks), King St & 2nd St southward, both directions. Copied from muni-stop-ridership.json.",
+   "caveats": [
+    "T Third opened April 2007, inside the survey period; network and land use (Mission Bay, UCSF, Chase Center, Central Subway) changed greatly since.",
+    "Inbound pattern rows seq 11-16 repeat Evans/Marin/23rd (second copy all zeros) and the departing load jumps to 6,044 at Evans: a branch/duplicate artifact in the source; boardings are as published.",
+    "KT line total (both patterns, whole line incl. K Ingleside and Market St subway) = 32,746 boardings (row sum)."
+   ],
+   "segmentTotals_derived": {
+    "King St & 2nd St": {
+     "boardings": 558,
+     "alightings": 727
+    },
+    "4th & King": {
+     "boardings": 1497,
+     "alightings": 1728
+    },
+    "Mission Bay (Mission Rock, Gene Friend/UCSF, Mariposa)": {
+     "boardings": 726,
+     "alightings": 663
+    },
+    "Dogpatch/Central Waterfront (20th, 23rd, Marin)": {
+     "boardings": 1908,
+     "alightings": 1780
+    },
+    "Bayview + Visitacion Valley (Evans to Sunnydale)": {
+     "boardings": 6700,
+     "alightings": 6604
+    },
+    "Third Street south of King St (Mission Bay + Dogpatch + Bayview/VisValley)": {
+     "boardings": 9334,
+     "alightings": 9047
+    }
+   },
+   "rows": [
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 25,
+     "stopName": "King St&2nd St S-FS/SI",
+     "stopId": "5234",
+     "boardings": 104,
+     "alightings": 630,
+     "loadDeparting": 3612
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 26,
+     "stopName": "4th Street & King Street",
+     "stopId": null,
+     "boardings": 898,
+     "alightings": 900,
+     "loadDeparting": 3610
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 27,
+     "stopName": "Third Street&Mission Rock St SW/FS",
+     "stopId": "7359",
+     "boardings": 25,
+     "alightings": 93,
+     "loadDeparting": 3542
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 28,
+     "stopName": "Third Street&Gene Friend Wy SW/FS",
+     "stopId": null,
+     "boardings": 47,
+     "alightings": 308,
+     "loadDeparting": 3281
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 29,
+     "stopName": "Third Street&Mariposa St SW/FS SI",
+     "stopId": "7382",
+     "boardings": 93,
+     "alightings": 145,
+     "loadDeparting": 3229
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 30,
+     "stopName": "Third Street&20th St SW/FS SI",
+     "stopId": "7362",
+     "boardings": 389,
+     "alightings": 373,
+     "loadDeparting": 3245
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 31,
+     "stopName": "Third Street&23rd St SW/FS SI",
+     "stopId": "7363",
+     "boardings": 124,
+     "alightings": 251,
+     "loadDeparting": 3118
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 32,
+     "stopName": "Third Street&Marin St NW/NS SI",
+     "stopId": "7364",
+     "boardings": 108,
+     "alightings": 192,
+     "loadDeparting": 3034
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 33,
+     "stopName": "Third Street&Evans Ave SW/FS SI",
+     "stopId": "7365",
+     "boardings": 279,
+     "alightings": 308,
+     "loadDeparting": 3005
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 34,
+     "stopName": "Third Street&Hudson/Innes Ave",
+     "stopId": null,
+     "boardings": 175,
+     "alightings": 261,
+     "loadDeparting": 2919
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 35,
+     "stopName": "Third Street&Kirkwood/La Salle",
+     "stopId": null,
+     "boardings": 205,
+     "alightings": 330,
+     "loadDeparting": 2794
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 36,
+     "stopName": "Third Street&Oakdale/Palou",
+     "stopId": null,
+     "boardings": 455,
+     "alightings": 675,
+     "loadDeparting": 2574
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 37,
+     "stopName": "Third Street&Revere/Shafter",
+     "stopId": null,
+     "boardings": 187,
+     "alightings": 439,
+     "loadDeparting": 2322
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 38,
+     "stopName": "Third Street&Williams Ave SW/FS SI",
+     "stopId": "7346",
+     "boardings": 248,
+     "alightings": 524,
+     "loadDeparting": 2046
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 39,
+     "stopName": "Third Street&Carrol Ave SW/FS SI",
+     "stopId": "7344",
+     "boardings": 30,
+     "alightings": 162,
+     "loadDeparting": 1914
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 40,
+     "stopName": "Third Street&Paul Ave SW/FS SI",
+     "stopId": "7342",
+     "boardings": 114,
+     "alightings": 642,
+     "loadDeparting": 1386
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 41,
+     "stopName": "Third Street&Le Conte Ave",
+     "stopId": null,
+     "boardings": 88,
+     "alightings": 260,
+     "loadDeparting": 1214
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 42,
+     "stopName": "Bayshore&Arleta/Blanken",
+     "stopId": null,
+     "boardings": 18,
+     "alightings": 738,
+     "loadDeparting": 494
+    },
+    {
+     "pattern": "to Bay Shore & Sunnydale (outbound)",
+     "seq": 43,
+     "stopName": "Bay Shore Blvd&Sunnydale Ave",
+     "stopId": null,
+     "boardings": 0,
+     "alightings": 435,
+     "loadDeparting": 59
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 1,
+     "stopName": "Bay Shore Blvd&Sunnydale Ave",
+     "stopId": null,
+     "boardings": 333,
+     "alightings": 0,
+     "loadDeparting": 340
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 2,
+     "stopName": "Bayshore&Arleta/Blanken",
+     "stopId": null,
+     "boardings": 662,
+     "alightings": 5,
+     "loadDeparting": 997
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 3,
+     "stopName": "Third Street&Le Conte Ave",
+     "stopId": null,
+     "boardings": 202,
+     "alightings": 112,
+     "loadDeparting": 1087
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 4,
+     "stopName": "Third Street&Gilman Ave NE/FS SI",
+     "stopId": "7347",
+     "boardings": 720,
+     "alightings": 99,
+     "loadDeparting": 1708
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 5,
+     "stopName": "Third Street&Carroll Ave NE/FS SI",
+     "stopId": "7343",
+     "boardings": 190,
+     "alightings": 62,
+     "loadDeparting": 1836
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 6,
+     "stopName": "Third Street&Van Dyke Ave NE/FS SI",
+     "stopId": "7345",
+     "boardings": 530,
+     "alightings": 183,
+     "loadDeparting": 2183
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 7,
+     "stopName": "Third Street&Revere/Shafter",
+     "stopId": null,
+     "boardings": 378,
+     "alightings": 174,
+     "loadDeparting": 2387
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 8,
+     "stopName": "Third Street&Oakdale/Palou",
+     "stopId": null,
+     "boardings": 655,
+     "alightings": 447,
+     "loadDeparting": 2595
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 9,
+     "stopName": "Third Street&Kirkwood/La Salle",
+     "stopId": null,
+     "boardings": 354,
+     "alightings": 139,
+     "loadDeparting": 2810
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 10,
+     "stopName": "Third Street&Hudson/Innes Ave",
+     "stopId": null,
+     "boardings": 289,
+     "alightings": 133,
+     "loadDeparting": 2966
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 11,
+     "stopName": "Third Street&Evans Ave NE/FS SI",
+     "stopId": "7352",
+     "boardings": 588,
+     "alightings": 476,
+     "loadDeparting": 6044
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 12,
+     "stopName": "Third Street&Marin St SE/NS SI",
+     "stopId": "7353",
+     "boardings": 340,
+     "alightings": 200,
+     "loadDeparting": 6184
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 13,
+     "stopName": "Third Street&23rd St NE/FS SI",
+     "stopId": "7354",
+     "boardings": 598,
+     "alightings": 334,
+     "loadDeparting": 6448
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 14,
+     "stopName": "Third Street&Evans Ave NE/FS SI",
+     "stopId": "7352",
+     "boardings": 0,
+     "alightings": 0,
+     "loadDeparting": 0
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 15,
+     "stopName": "Third Street&Marin St SE/NS SI",
+     "stopId": "7353",
+     "boardings": 0,
+     "alightings": 0,
+     "loadDeparting": 0
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 16,
+     "stopName": "Third Street&23rd St NE/FS SI",
+     "stopId": "7354",
+     "boardings": 0,
+     "alightings": 0,
+     "loadDeparting": 0
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 17,
+     "stopName": "Third Street&20th St NE/FS SI",
+     "stopId": "7355",
+     "boardings": 349,
+     "alightings": 430,
+     "loadDeparting": 3143
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 18,
+     "stopName": "Third Street&Mariposa St NE/FS SI",
+     "stopId": "7381",
+     "boardings": 185,
+     "alightings": 50,
+     "loadDeparting": 3278
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 19,
+     "stopName": "Third Street&Gene Friend Wy NE/FS",
+     "stopId": null,
+     "boardings": 311,
+     "alightings": 40,
+     "loadDeparting": 3549
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 20,
+     "stopName": "Third Street&Mission Rock St NE/FS",
+     "stopId": "3153",
+     "boardings": 65,
+     "alightings": 27,
+     "loadDeparting": 3587
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 21,
+     "stopName": "King St&6th St **",
+     "stopId": null,
+     "boardings": 0,
+     "alightings": 0,
+     "loadDeparting": 0
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 22,
+     "stopName": "King St&4th St W-NS/SI",
+     "stopId": "5240",
+     "boardings": 0,
+     "alightings": 0,
+     "loadDeparting": 0
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 23,
+     "stopName": "4th Street & King Street",
+     "stopId": null,
+     "boardings": 599,
+     "alightings": 828,
+     "loadDeparting": 3358
+    },
+    {
+     "pattern": "to Balboa Park (inbound)",
+     "seq": 24,
+     "stopName": "King St&2nd St W-NS/SI",
+     "stopId": "5237",
+     "boardings": 454,
+     "alightings": 97,
+     "loadDeparting": 3715
+    }
+   ]
+  },
+  "seis2008Forecast2030": {
+   "label": "FORECAST (not observed): estimated weekday boardings by station, 2030, Fourth/Stockton Alignment Option B (Modified LPA = as built). SEIS Table 3-9, PDF p205 (doc p3-38). Revised values.",
+   "rows": [
+    {
+     "station": "Fourth and King",
+     "boardings2030": 17400
+    },
+    {
+     "station": "Fourth and Brannan",
+     "boardings2030": 3000
+    },
+    {
+     "station": "Moscone",
+     "boardings2030": 2800
+    },
+    {
+     "station": "Union Square/Market Street",
+     "boardings2030": 28600
+    },
+    {
+     "station": "Chinatown",
+     "boardings2030": 8000
+    },
+    {
+     "station": "Total in Central Subway (excl. 4th & King)",
+     "boardings2030": 42400
+    },
+    {
+     "station": "Total in corridor",
+     "boardings2030": 59800
+    }
+   ],
+   "notes": [
+    "Table note: 'An estimated 89 67 percent of passenger activity at the Fourth and King Station is related to transfers from Caltrain and about 25 to 32 49 percent of passenger activity at the ... Union Square/Market Street Stations is related to transfers from BART to Muni at Powell Street Station' (revised values 67% and 49%).",
+    "Table 3-8 (PDF p203): 2030 T-Third subtotal, Option B, revised = 76,600 boardings (long line 44,900 + short line 18,900 + very short line 12,800).",
+    "Existing-conditions text (PDF p172): T-Third 24,000 weekday boardings (FY05/06-era Muni data).",
+    "FFGA-era figure quoted by press: 43,521 average weekday T riders by 2030 (chron2024)."
+   ]
+  },
+  "caltrainMuniTransfer": {
+   "label": "Caltrain riders using Muni to reach/leave Caltrain - SYSTEMWIDE (all stations), not 4th & King specific",
+   "rows": [
+    {
+     "survey": "Triennial Fall 2025",
+     "base": 3622,
+     "accessMuniPct": 8,
+     "egressMuniPct": 5,
+     "source": "caltrain2025, PDF p28"
+    },
+    {
+     "survey": "Triennial 2022",
+     "base": 2838,
+     "accessMuniPct": 4,
+     "egressMuniPct": 5,
+     "source": "caltrain2025 p28 / caltrain2022 p30"
+    },
+    {
+     "survey": "Triennial 2019",
+     "base": 5501,
+     "accessMuniPct": 3,
+     "egressMuniPct": 5,
+     "source": "caltrain2025 p28"
+    },
+    {
+     "survey": "Triennial Fall 2025 by period",
+     "accessMuniPct": {
+      "weekdayPeak": 7,
+      "weekdayOffPeak": 10,
+      "weekend": 9
+     },
+     "egressMuniPct": {
+      "weekdayPeak": 4,
+      "weekdayOffPeak": 6,
+      "weekend": 6
+     },
+     "source": "caltrain2025, PDF p29"
+    },
+    {
+     "survey": "Triennial Fall 2025",
+     "note": "San Francisco (4th & King) was the boarding station for 28% of respondents and exit station for 19%",
+     "source": "caltrain2025 (Boarding Station / exit station tables)"
+    }
+   ],
+   "contextNotInSurvey": "Caltrain FY2026 AMWR boardings at San Francisco (4th & King) = 9,714 (server/beta3/reference/caltrain-ridership.json).",
+   "historic_FY99_00": {
+    "label": "Estimated weekday boardings and alightings at the 4th & Townsend Caltrain station by Muni line (TJPA 2004 FEIS Table 3.1-2, PDF p5; Muni Monitoring Data FY99-00) - pre-T Third",
+    "rows": {
+     "15-Third Street": 1623,
+     "30-Stockton": 3071,
+     "45-Union/Stockton": 2252,
+     "80x": 756,
+     "81x": 843,
+     "82x": 477,
+     "N-Judah (peak periods 6-9 AM and 3:30-7 PM only)": 3455
+    }
+   },
+   "notFound": "No source found giving the share of 4th & King Caltrain riders who transfer to Muni Metro, or to which Muni lines, for any year since 2014."
+  },
+  "chaseCenterUcsf": {
+   "label": "Chase Center / UCSF effects - only plan-stage figures found; no observed weekday-average T contribution",
+   "rows": [
+    {
+     "item": "Planned annual events",
+     "value": "approximately 200-220 events each year (43-60 GSW home games, 45 concerts, 55 family shows, 31 conventions/corporate, ~30 other sporting)",
+     "source": "warriorsTmp2015, PDF p38-39"
+    },
+    {
+     "item": "Seated capacity",
+     "value": 18064,
+     "source": "warriorsTmp2015, PDF p37"
+    },
+    {
+     "item": "Transit service plan objective",
+     "value": "Accommodate a 35 percent transit mode share for peak event trips",
+     "source": "warriorsTmp2015, PDF p58"
+    },
+    {
+     "item": "Event rail service",
+     "value": "Event trains signed 'S' run Chinatown-Rose Pak - UCSF/Chase Center about every 10 minutes during events, in addition to T service",
+     "source": "sfmta.com/blog/ride-chase-center-events-along-new-t-third-0 (search snippet; not opened)",
+     "uncertain": true
+    },
+    {
+     "item": "S Shuttle in SFMTA route ridership file",
+     "value": "Weekday averages 2,600-4,800 in 2023-2024; last value 300 in 2024-09, none after",
+     "source": "routeRidership",
+     "uncertain": true,
+     "uncertainty": "The S Shuttle label also covers Market Street subway shuttles, so these cannot be attributed to Chase Center; whether event-train riders are now counted under T is unknown."
+    }
+   ],
+   "notFound": "No published count of T boardings at UCSF/Chase Center or UCSF Medical Center stations, and no observed Chase Center transit mode share, was found (Axios 2023-11-08 'transit score' article blocked to scripts)."
+  }
+ },
+ "derived": {
+  "note": "Computed here from the numbers above; not published by any source.",
+  "centralSubwayShareEarly2025": {
+   "formula": "9,500 / 19,500 and 12,700 / 19,500 (Mission Local station figures / SFMTA Jan-2025 T weekday average)",
+   "value": "0.49 (boardings) to 0.65 (alightings)",
+   "caveat": "Period and day type of the 9,500/12,700 are not stated; if all-day averages, weekday shares would be somewhat lower or higher depending on weekend mix."
+  },
+  "centralSubwayShare2023": {
+   "formula": "(1,250 + 1,110 + 350) / 14,300",
+   "value": 0.19,
+   "caveat": "Faregate entries only at the 3 underground stations (no 4th & Brannan); exits ran ~1.5x entries in Feb 2023."
+  },
+  "peakLoadRatio2024": {
+   "formula": "(1/15.0) : (1/18.7) : (1/26.2), assuming equal cars per hour on all three segments",
+   "value": "Central Subway 1.75x and Mission Bay 1.40x the peak-hour load of Third Street South"
+  },
+  "tep2007ThirdStreetSouthOfKing": {
+   "value": 9334,
+   "note": "sum of rows above; plus 1,497 at 4th & King"
+  }
+ },
+ "searchedNotFound": [
+  "FTA Before and After Studies page (transit.dot.gov, checked 2026-10-05 in browser): no Central Subway or Third Street LRT study listed (California entries: Metro Gold Line Eastside, Sprinter, Perris Valley, South Sacramento Phase II).",
+  "Central Subway PMOC monitoring reports index (sfmta.com/reports/central-subway-fta-pmoc-monitoring-reports): latest report November 2022, before revenue service.",
+  "Third Street Light Rail (2007) before/after study: none found (project was locally funded; no FTA B&A).",
+  "DataSF / MTC / SFMTA Transtat: no stop-level Muni ridership (see muni-stop-ridership.json 'searched'); SFCTA PDFs (Downtown Travel Study 2025, Bayview NTP) blocked automated download.",
+  "Bayview Community Based Transportation Plan (SFMTA 2020): no stop boardings.",
+  "Mission Bay Loop Environmental Assessment (2013): no stop boardings.",
+  "Muni Metro Capacity Study final report and CWG/CAC presentations (2025): segment crowding only (above).",
+  "Caltrain 2014 onboard survey, 2022/2025 triennial, 2024 OD survey, 2025 customer satisfaction raw data: no station-specific Muni transfer table.",
+  "Chase Center transportation overview (Port of SF, 2019) and SFMTA Chase Center blog posts (2019): no ridership numbers."
+ ]
+}

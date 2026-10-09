@@ -1,0 +1,2750 @@
+{
+ "accessed": "2026-10-04",
+ "description": "Parking supply and price at stations/terminals outside San Francisco where commuters park and ride into SF (BART, Caltrain, ferries), plus AC Transit Transbay ridership by line. Every number is from a fetched page or file listed in sources; null means not found.",
+ "conventions": {
+  "fees": "USD, as charged to the customer (BART Oakland/Berkeley/SF prices include local parking tax).",
+  "spaces": "Counts as published; sources disagree, so multiple fields are kept (bartGIS, stationPage, wikipedia_secondary).",
+  "occupancy": "share of spaces occupied, 0-1"
+ },
+ "sources": {
+  "bartPricing": {
+   "publisher": "BART",
+   "title": "Parking Prices & Maps",
+   "url": "https://www.bart.gov/guide/parking/pricing",
+   "date": "current as of access (prices effective July 1, 2026 for the 7 changed stations)",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/www.bart.gov_guide_parking_pricing.html"
+  },
+  "bartOverview": {
+   "publisher": "BART",
+   "title": "Parking Overview",
+   "url": "https://www.bart.gov/guide/parking",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/www.bart.gov_guide_parking.html"
+  },
+  "bartParkingNews": {
+   "publisher": "BART",
+   "title": "Parking News",
+   "url": "https://www.bart.gov/guide/parking/news",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/www.bart.gov_guide_parking_news.html"
+  },
+  "bartStationPages": {
+   "publisher": "BART",
+   "title": "Station pages (Parking section: \"Estimated Parking Fill Time\" and parking description)",
+   "url": "https://www.bart.gov/stations/<code>",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/bart_stations/<code>.html"
+  },
+  "bartGIS": {
+   "publisher": "BART (layer hosted in BART's ArcGIS Online organization, service sqS7RNuF1BQinj5N)",
+   "title": "BART_Stations feature service, layer 1 (fields Parking, ParkingSpaces, ParkingGarage)",
+   "url": "https://services.arcgis.com/sqS7RNuF1BQinj5N/arcgis/rest/services/BART_Stations/FeatureServer/1/query?where=1%3D1&outFields=Name,AssetID,AssetStatus,City,Parking,ParkingSpaces,ParkingGarage,last_edited_date,created_date&returnGeometry=false&f=json",
+   "date": "records last edited 2025-05-07 (Millbrae 2025-07-23)",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/bart_gis_stations_parking.json"
+  },
+  "bartNews20260513": {
+   "publisher": "BART",
+   "title": "Parking rate changes effective July 1, 2026",
+   "url": "https://www.bart.gov/news/articles/2026/news20260513",
+   "date": "posted 2026-05-20 (page dated 06.20.26)",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/bart_news20260513.html"
+  },
+  "bartNews20251110": {
+   "publisher": "BART",
+   "title": "Parking rate changes effective January 1, 2026",
+   "url": "https://www.bart.gov/news/articles/2025/news20251110",
+   "date": "2025-11-10",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/bart_news20251110.html"
+  },
+  "bartNewsFremont": {
+   "publisher": "BART",
+   "title": "Parking alert: Parking to be reduced at Fremont Station until early 2027 to support critical track rebuilding project",
+   "url": "https://www.bart.gov/news/articles/2026/news20260518-0",
+   "date": "2026-05-18",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/bart_news20260518-0.html"
+  },
+  "bartNewsLafayette": {
+   "publisher": "BART",
+   "title": "Lafayette Station: Town Center pathway and bike station construction",
+   "url": "https://www.bart.gov/news/articles/2026/news20260209-0",
+   "date": "2026-02-10",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/bart_news20260209-0.html"
+  },
+  "bartNewsElCerritoPlaza": {
+   "publisher": "BART",
+   "title": "Partial parking closures at El Cerrito Plaza Station start this fall to accommodate building housing",
+   "url": "https://www.bart.gov/news/articles/2025/news20250915-2",
+   "date": "2025-09-15",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/bart_news20250915-2.html"
+  },
+  "bartPolicy2023": {
+   "publisher": "BART",
+   "title": "San Francisco Bay Area Rapid Transit District - Parking Pricing Policy",
+   "url": "https://www.bart.gov/sites/default/files/2023-10/BART%20Parking%20Policy.pdf",
+   "date": "2023 (adopted Sept 27, 2023 per Alameda doc)",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/bart_parking_policy_2023.pdf"
+  },
+  "mtcBart2014": {
+   "publisher": "BART (presented at MTC)",
+   "title": "Communicating When BART Lots Are Full (Bob Franklin, BART Customer Access)",
+   "url": "https://files.mtc.ca.gov/pdf/parking/12-8-14/BART_Parking_PPT.pdf",
+   "date": "2014-12-08",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/mtc_bart_parking_ppt_2014.pdf"
+  },
+  "sfChronicle2026": {
+   "publisher": "San Francisco Chronicle (Rachel Swan, Danielle Echeverria)",
+   "title": "These BART parking lots are nearly empty. Could they be put to better use?",
+   "url": "https://www.sfchronicle.com/bayarea/article/bart-parking-lots-empty-22330591.php",
+   "date": "2026-07-06",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/sfchronicle_bart_parking_empty.html"
+  },
+  "sfChronicleChart": {
+   "publisher": "San Francisco Chronicle chart (Datawrapper vGGou v3), source credited \"BART\"",
+   "title": "Share of parking spots taken at selected BART stations",
+   "url": "https://datawrapper.dwcdn.net/vGGou/3/dataset.csv",
+   "date": "published 2026-07-03",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/dw_vGGou_3.csv (chart page dw_vGGou_3.html; earlier version dw_vGGou_1.csv)"
+  },
+  "wikipedia": {
+   "publisher": "Wikipedia (secondary; infobox \"parking\" field)",
+   "title": "BART station articles, wikitext via MediaWiki API",
+   "url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content|timestamp&titles=...",
+   "date": "revisions dated Aug-Sep 2026",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/wikipedia_bart_station_wikitext.json"
+  },
+  "caltrainParking": {
+   "publisher": "Caltrain (Peninsula Corridor JPB; site run by San Mateo County Transit District)",
+   "title": "Parking (rider information)",
+   "url": "https://www.caltrain.com/rider-information/parking",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/caltrain_rider-information_parking.html"
+  },
+  "caltrainStations": {
+   "publisher": "Caltrain",
+   "title": "Station pages, \"Parking\" amenity text",
+   "url": "https://www.caltrain.com/station/<slug>",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/caltrain_stations/<slug>.html"
+  },
+  "caltrainLPMG": {
+   "publisher": "Caltrain",
+   "title": "Local Policy Maker Group (LPMG) Agenda April 23, 2026 (minutes of Parking and Curbside Management Strategy item)",
+   "url": "https://www.caltrain.com/media/36970/download",
+   "date": "2026-04-23",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/caltrain_lpmg_2026-04-23.pdf"
+  },
+  "ggTerminals": {
+   "publisher": "Golden Gate Bridge, Highway and Transportation District",
+   "title": "Terminals - Riding the Ferry",
+   "url": "https://www.goldengate.org/ferry/riding-the-ferry/terminal-locations-parking/",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/gg_terminal-locations-parking.html"
+  },
+  "ggLarkspurParking": {
+   "publisher": "Golden Gate Bridge, Highway and Transportation District",
+   "title": "Larkspur Ferry Parking (+ FAQs)",
+   "url": "https://www.goldengate.org/ferry/riding-the-ferry/larkspur-ferry-parking/",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/gg_larkspur-ferry-parking.html; data/beta3/raw/parking/gg_larkspur-ferry-parking_faqs.html"
+  },
+  "sfbfTerminals": {
+   "publisher": "San Francisco Bay Ferry (WETA)",
+   "title": "Terminal pages, \"Facilities & Services > Parking\"",
+   "url": "https://www.sfbayferry.com/terminal/<slug>/",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/browser_extracts_2026-10-04.json",
+   "method": "site blocks curl (AWS WAF); fetched inside one browser tab, text extracted"
+  },
+  "alamedaCity": {
+   "publisher": "City of Alameda",
+   "title": "Ferry Terminal & Transit Parking",
+   "url": "https://www.alamedaca.gov/RESIDENTS/Auto-Parking-in-Alameda/Ferry-Terminal-Transit-Parking",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/browser_extracts_2026-10-04.json",
+   "method": "site returns 403 to curl; read in browser tab"
+  },
+  "alamedaStrategy": {
+   "publisher": "City of Alameda",
+   "title": "Alameda Ferry Terminal Parking Pricing Strategy (August 2024)",
+   "url": "https://www.alamedaca.gov/files/assets/public/departments/alameda/transportation/parking/draft_ferryterminalparkingpricingstrategy_updated12-8-2022.pdf",
+   "date": "August 2024 (file name says updated 12-8-2022)",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/alameda_ferry_parking_pricing_strategy.pdf"
+  },
+  "vallejoProgram": {
+   "publisher": "City of Vallejo",
+   "title": "City of Vallejo Parking Program (Jan 1, 2020)",
+   "url": "https://www.cityofvallejo.net/common/pages/DisplayFile.aspx?itemId=17870784",
+   "date": "2020-01-01",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/vallejo_parking_program_2020.pdf"
+  },
+  "vallejoBrochure": {
+   "publisher": "City of Vallejo",
+   "title": "Park Vallejo brochure (Public Parking)",
+   "url": "https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_13423/File/CMO/Parking/Park%20Vallejo%20Brochure.pdf",
+   "date": "revised 2018-12-01",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/vallejo_park_brochure.pdf"
+  },
+  "vallejoWaterfront": {
+   "publisher": "City of Vallejo",
+   "title": "Waterfront - City of Vallejo, CA",
+   "url": "https://www.vallejo.gov/our_city/park_vallejo/waterfront",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/browser_extracts_2026-10-04.json"
+  },
+  "sausalitoLots": {
+   "publisher": "City of Sausalito",
+   "title": "Public Parking Lots",
+   "url": "https://www.sausalito.gov/services/parking/public_parking_lots.php",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/sausalito_public_parking_lots.html"
+  },
+  "sausalitoCommuters": {
+   "publisher": "City of Sausalito",
+   "title": "Parking for Commuters",
+   "url": "https://www.sausalito.gov/services/parking/parking_for_commuters.php",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/sausalito_parking_for_commuters.html"
+  },
+  "tiburonChamber": {
+   "publisher": "Tiburon Peninsula Chamber of Commerce (not the lot operators)",
+   "title": "Parking in Tiburon",
+   "url": "https://www.tiburonchamber.org/parking-in-tiburon/",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/tiburon_chamber_parking.html"
+  },
+  "acFY25Routes": {
+   "publisher": "AC Transit",
+   "title": "SR 25-412 Att.4 FY24-25 Route Performance (Wkdy, Sat, Sun) - FY24-25 Annual Ridership and Route Performance Report",
+   "url": "https://actransit.legistar1.com/actransit/attachments/33d00d7f-a864-4741-be09-17898daccda5.pdf",
+   "date": "Board item introduced 2025-08-06 (Legistar matter 7446)",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_fy25_route_performance.pdf"
+  },
+  "acFY25ServiceType": {
+   "publisher": "AC Transit",
+   "title": "SR 25-412 Att.2 Service Type Performance",
+   "url": "https://actransit.legistar1.com/actransit/attachments/483d6c9b-12ff-4697-9b66-f19d29b50437.pdf",
+   "date": "2025-08-06",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_fy25_service_type.pdf"
+  },
+  "acFY24Routes": {
+   "publisher": "AC Transit",
+   "title": "SR 24-451 Att.4 FY23-24 Route Performance (Wkdy, Sat, Sun)",
+   "url": "https://actransit.legistar1.com/actransit/attachments/60836b31-e396-40a8-a086-a11c00fdde5b.pdf",
+   "date": "Board item introduced 2024-08-19 (Legistar matter 6752)",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_fy24_route_performance.pdf"
+  },
+  "acFY19Routes": {
+   "publisher": "AC Transit",
+   "title": "SR 19-318 Att.4 Route Performance (Wkdy,Sat,Sun) - FY18-19 Annual Ridership and Route Performance Report",
+   "url": "https://actransit.legistar1.com/actransit/attachments/46ea9cf0-4f3b-4460-bbe9-7b9f811b2cf9.pdf",
+   "date": "Board item introduced 2019-09-17 (Legistar matter 2226)",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_fy19_route_performance.pdf"
+  },
+  "acFY19ServiceType": {
+   "publisher": "AC Transit",
+   "title": "SR 19-318 Att.2 Service Type Analysis",
+   "url": "https://actransit.legistar1.com/actransit/attachments/25d3d79c-97af-4722-8a57-9fca4ab505c4.pdf",
+   "date": "2019-09-17",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_fy19_service_type.pdf"
+  },
+  "acRealignRoutes": {
+   "publisher": "AC Transit",
+   "title": "SR 26-089 Att.3 Route-level Ridership Comparison (Realign)",
+   "url": "https://actransit.legistar1.com/actransit/attachments/1d224def-735d-4d87-a8d5-73796b9541a4.pdf",
+   "date": "Board meeting 2026-02-25",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_realign_route_comparison_2026.pdf"
+  },
+  "acRealignStaff": {
+   "publisher": "AC Transit",
+   "title": "Staff Report 26-089 Realign Ridership and Customer feedback Summary",
+   "url": "https://actransit.legistar1.com/actransit/attachments/cb163665-11ed-49ea-8428-5cd0eb9e8f8b.pdf",
+   "date": "Board meeting 2026-02-25",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_realign_staff_report_2026.pdf"
+  },
+  "acNTDMonthly": {
+   "publisher": "AC Transit Open Data Portal",
+   "title": "Total Ridership (NTD ridership by mode, monthly)",
+   "url": "https://opendata.actransit.org/dataset/0631d1dc-6a67-4253-ab2f-65925c5f73a0/resource/1ed8e53f-5802-4f53-85f2-59e8c5e34a8c/download/totalridership.csv",
+   "date": "dataset modified 2025-12-04; data through 2025-06",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_totalridership.csv"
+  },
+  "acFares": {
+   "publisher": "AC Transit",
+   "title": "Fares (\"Fares Effective July 1, 2026\")",
+   "url": "https://www.actransit.org/fares",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_fares.html"
+  },
+  "acTransbayPage": {
+   "publisher": "AC Transit",
+   "title": "Transbay (incl. Park & Ride Lots)",
+   "url": "https://www.actransit.org/transbay",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/actransit_transbay.html"
+  },
+  "samtransBoard20250702": {
+   "publisher": "SamTrans",
+   "title": "SamTrans Board of Directors Meeting of July 2, 2025 - correspondence (Re FCX)",
+   "url": "https://www.samtrans.com/media/35477/download",
+   "date": "2025-07-02",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/samtrans_board_2025-07-02.pdf"
+  },
+  "samtransRidership": {
+   "publisher": "SamTrans",
+   "title": "Ridership",
+   "url": "https://www.samtrans.com/about-samtrans/bus-operations/ridership",
+   "accessed": "2026-10-04",
+   "rawFile": "data/beta3/raw/parking/samtrans_ridership.html"
+  },
+  "smartParking": {
+   "publisher": "Sonoma-Marin Area Rail Transit (SMART)",
+   "title": "Parking Services",
+   "url": "https://www.sonomamarintrain.org/Parking",
+   "accessed": "2026-10-05",
+   "quote": "Day-use parking is complimentary at these SMART station parking lots during the hours of 4:00 a.m. to 11:59 p.m."
+  }
+ },
+ "bart": {
+  "summary": {
+   "totalSpacesClaim": "BART \"owns and operates more than 47,000 parking spaces at 35 stations\" (pricing page); \"nearly 48,000 parking spaces at 35 stations\" (Parking News page); 2014 MTC presentation: \"47,500 spaces at 33 BART stations\".",
+   "bartGIS_sumOverBARToperatedStations": 49196,
+   "bartGIS_sumExcludingSanFrancisco": 49143,
+   "bartGIS_sumNote": "Sum of BART GIS ParkingSpaces over stations with BART-operated parking as classified here (Lake Merritt set to 0, Pittsburg Center GIS=0, excludes VTA-run Berryessa/Milpitas). This 49,196 is somewhat above the 47-48k headline (GIS values are from 2025-05 edits and may include spaces since removed, e.g. Fremont/El Cerrito Plaza/Lafayette/West Oakland reductions, or non-BART spaces such as the private Walnut Creek South Garage).",
+   "dailyFeeAtMostStations": 3.4,
+   "reservedSingleMultiFrom": 4.5,
+   "reservedMonthlyFrom": 93.8,
+   "hours": "Payment required Monday-Friday 4am-3pm; free after 3pm, weekends and BART holidays (overview page).",
+   "dailyVsReservedSplit": null,
+   "dailyVsReservedSplitNote": "No current per-station count of Daily Fee vs Reserved (permit) spaces was found on BART pages, GIS, or FAQs. Historical (VTA SVRTC EIS ch.5, ~2003): BART designated \"Up to 25 percent of the spaces at each station ... (up to 40 percent at San Mateo County stations)\" as monthly reserved - not stored as a number here because it is ~20 years old; raw file vta_bart_core_parking_ch5.pdf.",
+   "pricingPolicy": "2023 policy: Daily Fee floor $3/ceiling $6.30, Single/Multi $4/$11, Monthly $84/$220 (2023 dollars, excl. local taxes; no ceiling at West Oakland). Rates may rise up to 30% at most every 6 months if occupancy or sales >90%, may fall if <70%. From 2025 floor/ceiling may be indexed with fares, not to exceed $8/day, $11/day, $220/month.",
+   "sources": [
+    "bartPricing",
+    "bartOverview",
+    "bartParkingNews",
+    "bartPolicy2023",
+    "mtcBart2014"
+   ]
+  },
+  "occupancy": {
+   "stationPageFillTimes": "Per-station \"Estimated Parking Fill Time\" in stations[].fillTime_stationPage (fetched 2026-10-04). Nearly all say \"capacity available at all times\"; MacArthur \"Parking at capacity by 10:30am\"; Glen Park and West Oakland \"Limited parking at this station. Fill times vary by day.\"",
+   "spring2026Above90pct": {
+    "value": [
+     "Glen Park",
+     "Rockridge",
+     "Walnut Creek",
+     "West Oakland"
+    ],
+    "what": "Daily Fee areas where Spring 2026 parking counts showed occupancy exceeding 90 percent (triggering daily-fee increases July 1, 2026); reserved single/multi-day >90% at Rockridge, San Bruno, Walnut Creek; reserved sales low at Castro Valley and Union City.",
+    "source": "bartNews20260513"
+   },
+   "january2026HighDemand": {
+    "value": [
+     "Glen Park",
+     "MacArthur",
+     "Rockridge",
+     "Walnut Creek"
+    ],
+    "what": "\"high-demand stations\" given the 30% daily-fee increase on Jan 1, 2026; reserved prices raised at Millbrae, San Bruno, Walnut Creek and lowered at nine lower-demand stations (Colma, Concord, El Cerrito del Norte, Dublin/Pleasanton, Fremont, Pittsburg/Bay Point, Pleasant Hill/Contra Costa Centre, South San Francisco, West Dublin/Pleasanton).",
+    "source": "bartNews20251110"
+   },
+   "weekdayOccupancyShare_selectedStations": {
+    "value": {
+     "Coliseum": {
+      "2019": 1.0,
+      "2022": 0.23,
+      "2023": 0.14,
+      "2024": 0.2,
+      "2025": 0.11,
+      "2026": 0.16
+     },
+     "Walnut Creek": {
+      "2019": 1.0,
+      "2022": 0.32,
+      "2023": 0.69,
+      "2024": 0.78,
+      "2025": 0.85,
+      "2026": 0.94
+     },
+     "West Dublin/Pleasanton": {
+      "2019": 1.0,
+      "2022": 0.28,
+      "2023": 0.44,
+      "2024": 0.44,
+      "2025": 0.59,
+      "2026": 0.5
+     },
+     "Pleasant Hill/Contra Costa Centre": {
+      "2019": 1.0,
+      "2022": 0.23,
+      "2023": 0.33,
+      "2024": 0.36,
+      "2025": 0.47,
+      "2026": 0.53
+     }
+    },
+    "units": "share of parking spots taken on a typical weekday (point-in-time count); 2019 counted in fall, 2022-2026 in spring",
+    "source": "sfChronicleChart",
+    "method": "Datawrapper dataset.csv for chart vGGou versions 3 (Coliseum, Walnut Creek, West Dublin/Pleasanton) and 1 (adds Pleasant Hill/Contra Costa Centre); chart credits source \"BART\"."
+   },
+   "systemwideNarrative": {
+    "value": "Pittsburg Center 99% and Warm Springs 98% full in fall 2019, \"around 10% occupancy since the spring of 2024\"; \"Parking areas at other stations are on average about half full, as indicated by manual counts the agency conducts twice a year\"; Coliseum \"about 16% full\".",
+    "source": "sfChronicle2026",
+    "date": "2026-07-06"
+   },
+   "preCovid2014": {
+    "value": "\"Several lots fill up by 7am\"; \"All spaces fill Monday through Thursday, except 150 spaces at Millbrae\"; 38,000 people on monthly permit waitlists.",
+    "source": "mtcBart2014",
+    "date": "2014-12-08"
+   }
+  },
+  "herculesParkAndRide": {
+   "value": {
+    "reservedSingleMultiPerDayUSD": 3.0,
+    "reservedMonthlyUSD": 63.0,
+    "spaces": null
+   },
+   "text": "BART jointly operates the Hercules Park & Ride lot with the City of Hercules and WestCAT. Only reserved parking is available. Single/multi-day reserved $3/day, monthly reserved $63/month.",
+   "source": "bartPricing"
+  },
+  "stations": [
+   {
+    "code": "12TH",
+    "name": "12th St./Oakland City Center",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at 12th St. Oakland City Center Station. The closest station with parking is West Oakland.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "16TH",
+    "name": "16th St./Mission",
+    "county": "sanfrancisco",
+    "inSanFrancisco": true,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at 16th Street Mission Station. The closest station with parking is Glen Park Station .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "19TH",
+    "name": "19th St./Oakland",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at 19th Street Station. The closest station with parking is MacArthur Station .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "24TH",
+    "name": "24th St./Mission",
+    "county": "sanfrancisco",
+    "inSanFrancisco": true,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at 24th Street Station. The closest station parking is at  Glen Park .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "ANTC",
+    "name": "Antioch",
+    "county": "Contra Costa",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1007,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 6.0,
+    "fee_reservedMonthlyUSD": 105.0,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "In 2021, BART openned an additional parking lot adding 850 new spaces. Parking at Antioch Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($6 per day) Monthly Reserved ($105) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1012,
+    "note": "Station page: \"In 2021, BART openned an additional parking lot adding 850 new spaces.\" GIS 1,007 and Wikipedia 1,012 may predate or exclude that lot - unresolved.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "ASHB",
+    "name": "Ashby",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 606,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.8,
+    "fee_reservedSingleMultiPerDayUSD": 6.6,
+    "fee_reservedMonthlyUSD": 115.5,
+    "localParkingTaxIncludedInFee": {
+     "jurisdiction": "Berkeley",
+     "rate": 0.1
+    },
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Ashby Station includes:  Daily fee ($3.80 per day) Carpool to BART options  ($3.80 per day) Single/Multi Day Reserved ($6.60 per day) Monthly Reserved ($115.50) Starting September 2022, parking prices at this station include a 10% tax that goes to the City of Berkeley. Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 535,
+    "note": "SF Chronicle: planned housing on the west surface lot will replace \"more than 500 spaces with a garage comprising 85 spaces for riders\" (future).",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "BALB",
+    "name": "Balboa Park",
+    "county": "sanfrancisco",
+    "inSanFrancisco": true,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at Balboa Park Station. The closest station parking is at Glen Park .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "BAYF",
+    "name": "Bay Fair",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1669,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 4.5,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Bay Fair Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($4.50 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1641,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "BERY",
+    "name": "Berryessa/North San Jose",
+    "county": "Santa Clara",
+    "inSanFrancisco": false,
+    "operator": "VTA",
+    "noBartParking": false,
+    "spaces_bartGIS": 1527,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.0,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "Parking at Berryessa/North San Jose Station is managed by VTA and offers: 1,527 parking spaces $3 daily fee Monthly parking passes are available for $50 Advanced payment for long-term parking can be made on the website or at on-site pay stations at the rate of $7 per calendar day. There is no limit on the number of days you can park long-term. There are 24 Electric Vehicle (EV) charging stations Parking can be paid for via the Passport parking app, at pay machines, and on VTA’s website at https://www.vta.org/projects/bart-sv/phase-i/parking Remember your license plate number as you will need it to pay for parking. Pay stations will accept all major credit cards and $1 and $5 bills. As no change will be provided from the pay stations, a change machine is in each parking garage to break larger bills into smaller bills. Parking will be first come, first serve. No reservations are offered Note: parking at this station is managed by VTA and is not part of BART’s parking program. For full details about parking at this station visit: https://www.vta.org/projects/bart-sv/phase-i/parking",
+    "fee_monthlyUSD_VTA": 50.0,
+    "spaces_stationPage": 1527,
+    "spaces_wikipedia_secondary": 1527,
+    "note": "Operated by VTA. Station page: \"1,527 parking spaces $3 daily fee Monthly parking passes are available for $50\"; long-term $7/calendar day.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "CAST",
+    "name": "Castro Valley",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1118,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Castro Valley Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1123,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "CIVC",
+    "name": "Civic Center/UN Plaza",
+    "county": "sanfrancisco",
+    "inSanFrancisco": true,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at Civic Center Station. San Francisco BART stations with parking include Glen Park and Daly City .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "COLM",
+    "name": "Colma",
+    "county": "sanmateo",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1424,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Colma Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 2238,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "COLS",
+    "name": "Coliseum",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 978,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 4.0,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": 112.6,
+    "localParkingTaxIncludedInFee": {
+     "jurisdiction": "Oakland",
+     "rate": 0.2
+    },
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Coliseum Station includes:  Daily fee ($4 per day) Carpool to BART options  ($4 per day) Monthly Reserved ($112.60) Purchase through the BART Official app or see the parking section for additional options and program rules. Parking prices at this station include an 20% tax that goes to the City of Oakland. Map of parking locations",
+    "note": "SF Chronicle: \"about 16% full\" on weekdays (2026); 888 spots in fall 2019, completely full then. GIS 978.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing"
+    ]
+   },
+   {
+    "code": "CONC",
+    "name": "Concord",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 2345,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Concord Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 2367,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "DALY",
+    "name": "Daly City",
+    "county": "sanmateo",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 2047,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 6.0,
+    "fee_reservedMonthlyUSD": 105.0,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Daly City Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($6 per day) Monthly Reserved ($105) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 2068,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "DBRK",
+    "name": "Downtown Berkeley",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at Downtown Berkeley Station. The closest station parking is at North Berkeley or Ashby stations.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "DELN",
+    "name": "El Cerrito del Norte",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 2180,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at El Cerrito del Norte Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 2198,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "DUBL",
+    "name": "Dublin/Pleasanton",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 2886,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Dublin/Pleasanton Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations BART operated parking: Surface lots on the Pleasanton side of the station. Parking garage located on the Dublin side of the station: Reserved permit parking until 10am is on garage levels 1, 2, and 3; Daily fee parking is on garage levels 3 and 4. The large surface lot located on the Dublin side of the station became privately operated. Parking fees at that lot are in effect seven days a week. BART patrons may use the lot provide that they pay the required fee. Please consult signage in that  lot for fee and payment procedures.",
+    "spaces_wikipedia_secondary": 2927,
+    "note": "Station page: large surface lot on the Dublin side \"became privately operated\"; fees there apply 7 days/week (amount not given).",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "EMBR",
+    "name": "Embarcadero",
+    "county": "sanfrancisco",
+    "inSanFrancisco": true,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at Embarcadero Station. San Francisco BART stations with parking include  Glen Park  and  Daly City .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "FRMT",
+    "name": "Fremont",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 2142,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Fremont Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_bartNews_approx": 1900,
+    "spaces_temporarilyClosed_May2026_Feb2027": 750,
+    "spaces_wikipedia_secondary": 2030,
+    "note": "Temporary: \"Approximately 750 of Fremont Station's roughly 1,900 parking spaces will be temporarily closed\" from week of May 25, 2026 through February 2027 (BART news 2026-05-18); \"Based on spring occupancy counts, there should still be plenty of parking\". GIS 2,142.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "FTVL",
+    "name": "Fruitvale",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 871,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 4.0,
+    "fee_reservedSingleMultiPerDayUSD": 7.2,
+    "fee_reservedMonthlyUSD": 126.0,
+    "localParkingTaxIncludedInFee": {
+     "jurisdiction": "Oakland",
+     "rate": 0.2
+    },
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Fruitvale Station includes:  Daily fee ($4 per day) Carpool to BART options  ($4 per day) Single/Multi Day Reserved ($7.20 per day) Monthly Reserved ($126) Purchase through the BART Official app or see the parking section for additional options and program rules. Parking prices at this station include an 20% tax that goes to the City of Oakland. Map of parking locations",
+    "spaces_wikipedia_secondary": 1268,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "GLEN",
+    "name": "Glen Park",
+    "county": "sanfrancisco",
+    "inSanFrancisco": true,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 53,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 7.0,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": {
+     "jurisdiction": "San Francisco",
+     "rate": 0.25
+    },
+    "fillTime_stationPage": "Limited parking at this station. Fill times vary by day",
+    "parkingDescription_stationPage": "This station has 55 parking spaces.  Parking is restricted to a five-hour limit. There is no parking between 2am and 4am. Parking at Glen Park Station includes:  Daily fee ($7 per day) Carpool to BART options  ($7 per day) Parking prices at this station include a 25% tax that goes to the City of San Francisco. Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_stationPage": 55,
+    "spaces_wikipedia_secondary": 53,
+    "note": "In San Francisco. Station page: \"This station has 55 parking spaces. Parking is restricted to a five-hour limit.\" GIS 53; SF Chronicle 2026 says 48 stalls.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "HAYW",
+    "name": "Hayward",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1467,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 4.5,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Hayward Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($4.50 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1473,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "LAFY",
+    "name": "Lafayette",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1529,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 6.0,
+    "fee_reservedMonthlyUSD": 105.0,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Lafayette Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($6 per day) Monthly Reserved ($105) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations Visit our Electric Vehicle Parking page for information on EV parking at this station.  https://www.bart.gov/guide/parking/electric-vehicle",
+    "spaces_wikipedia_secondary": 1629,
+    "note": "From Feb 23, 2026: \"About 50 reserved parking spaces will close during construction, leaving about 70 available in Lot A\"; project repurposes 19 spaces permanently (BART news 2026-02-10).",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "LAKE",
+    "name": "Lake Merritt",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": null,
+    "noBartParking": true,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "As of 9/16/2024, the Lake Merritt parking lot is closed. More information on the Transit-Oriented Development project here .",
+    "spaces_wikipedia_secondary": 207,
+    "spaces_bartGIS_stale": 214,
+    "spaces_bartGIS": 0,
+    "note": "No BART parking: station page says \"As of 9/16/2024, the Lake Merritt parking lot is closed\" for the TOD project. BART GIS layer (last edited 2025-05-07) still lists 214 spaces - stale.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "MCAR",
+    "name": "MacArthur",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 478,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 4.7,
+    "fee_reservedSingleMultiPerDayUSD": 7.2,
+    "fee_reservedMonthlyUSD": 126.0,
+    "localParkingTaxIncludedInFee": {
+     "jurisdiction": "Oakland",
+     "rate": 0.2
+    },
+    "fillTime_stationPage": "Parking at capacity by 10:30am",
+    "parkingDescription_stationPage": "Parking at MacArthur Station includes:  Daily fee ($4.70 per day) Carpool to BART options  ($4.70 per day) Single/Multi Day Reserved ($7.20 per day) Monthly Reserved ($126) Purchase through the BART Official app or see the parking section for additional options and program rules. Parking prices at this station include an 20% tax that goes to the City of Oakland. Map of parking locations",
+    "spaces_wikipedia_secondary": 602,
+    "note": "Only station page fill time that is a clock time: \"Parking at capacity by 10:30am\".",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "MLBR",
+    "name": "Millbrae",
+    "county": "sanmateo",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 2981,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 10.1,
+    "fee_reservedMonthlyUSD": 136.5,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Reserved Parking allowed on any level of the parking garage (in any Reserved or Daily Fee stall) at Millbrae Station due to the increase in demand. Parking at Millbrae Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($10.10 per day) Monthly Reserved ($136.50) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations As of November 2022, there is ongoing construction surrounding Millbrae station. Passenger loading areas have been relocated to the first floor of the parking garage.",
+    "spaces_wikipedia_secondary": 2900,
+    "note": "Station page: reserved parking allowed on any level of the garage \"due to the increase in demand\". Caltrain has a separate 175-space west-side lot.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "MLPT",
+    "name": "Milpitas",
+    "county": "Santa Clara",
+    "inSanFrancisco": false,
+    "operator": "VTA",
+    "noBartParking": false,
+    "spaces_bartGIS": 1631,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.0,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "Parking at Milpitas Station is managed by VTA and offers: 1,631 parking spaces $3 daily fee Monthly parking passes are available for $50 Advanced payment for long-term parking can be made on the website or at on-site pay stations at the rate of $7 per calendar day. There is no limit on the number of days you can park long-term. There are 24 Electric Vehicle (EV) charging stations Parking can be paid for via the Passport parking app, at pay machines located on the first floor of parking garages and near the surface lots entrances, and on VTA’s website at https://www.vta.org/projects/bart-sv/phase-i/parking Remember your license plate number as you will need it to pay for parking. Pay stations will accept all major credit cards and $1 and $5 bills. As no change will be provided from the pay stations, a change machine is in each parking garage to break larger bills into smaller bills. Parking will be first come, first serve. No reservations are offered Note: parking at this station is managed by VTA and is not part of BART’s parking program.  For full details about parking at this station visit: https://www.vta.org/projects/bart-sv/phase-i/parking",
+    "fee_monthlyUSD_VTA": 50.0,
+    "spaces_stationPage": 1631,
+    "spaces_wikipedia_secondary": 1631,
+    "note": "Operated by VTA. Station page: \"1,631 parking spaces $3 daily fee Monthly parking passes are available for $50\"; long-term $7/calendar day.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "MONT",
+    "name": "Montgomery St.",
+    "county": "sanfrancisco",
+    "inSanFrancisco": true,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at Montgomery St. Station. San Francisco BART stations with parking include  Glen Park  and  Daly City .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "NBRK",
+    "name": "North Berkeley",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 797,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.8,
+    "fee_reservedSingleMultiPerDayUSD": 6.6,
+    "fee_reservedMonthlyUSD": 115.5,
+    "localParkingTaxIncludedInFee": {
+     "jurisdiction": "Berkeley",
+     "rate": 0.1
+    },
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at North Berkeley Station includes:  Daily fee ($3.80 per day) Carpool to BART options  ($3.80 per day) Single/Multi Day Reserved ($6.60 per day) Monthly Reserved ($115.50) Starting September 2022, parking prices at this station include a 10% tax that goes to  the City of Berkeley . Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 822,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "NCON",
+    "name": "North Concord/Martinez",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1977,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 4.5,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at North Concord/Martinez Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($4.50 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1977,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "OAKL",
+    "name": "Oakland International Airport (OAK)",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There is no BART parking at Oakland International Airport station. There closest station with multi-day reserved parking is at Fruitvale Station .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "ORIN",
+    "name": "Orinda",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1442,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 6.0,
+    "fee_reservedMonthlyUSD": 105.0,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Orinda Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($6 per day) Monthly Reserved ($105) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1406,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "PCTR",
+    "name": "Pittsburg Center",
+    "county": "Contra Costa",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Pittsburg Center Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Purchase through the BART Official app or see the parking section for additional options and program rules. Please note: No permit parking is available at this station. Map of parking locations",
+    "spaces_wikipedia_secondary": 262,
+    "note": "Pricing page and station page show daily-fee parking ($3.40; \"No permit parking is available at this station\"), but BART GIS lists Parking=0/ParkingSpaces=0. Wikipedia says 262 spaces (secondary). SF Chronicle: lot ~99% full fall 2019, ~10% since spring 2024.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "PHIL",
+    "name": "Pleasant Hill/Contra Costa Centre",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 3060,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Pleasant Hill/Contra Costa Centre Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations The Pleasant Hill/Contra Costa Centre Station garage was built with Federal Highway funds as a rideshare facility. Accordingly, drivers who carpool or use other public transit may park in the garage as long as they pay the parking fee at the parking payment/validation machine located in the non-paid area outside the station fare gates or on the BART App .",
+    "spaces_wikipedia_secondary": 3011,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "PITT",
+    "name": "Pittsburg/Bay Point",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 2036,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Pittsburg/Bay Point Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1992,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "PLZA",
+    "name": "El Cerrito Plaza",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 749,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 6.0,
+    "fee_reservedMonthlyUSD": 105.0,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at El Cerrito Plaza Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($6 per day) Monthly Reserved ($105) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 761,
+    "note": "From mid-Nov 2025 the Willow St./Richmond St. lot is closed for TOD construction (count not given) (BART news 2025-09-15).",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "POWL",
+    "name": "Powell St.",
+    "county": "sanfrancisco",
+    "inSanFrancisco": true,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no parking at Powell St Station. San Francisco BART stations with parking include  Glen Park  and  Daly City .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "RICH",
+    "name": "Richmond",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 750,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 4.5,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Richmond Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($4.50 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 768,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "ROCK",
+    "name": "Rockridge",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 892,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 6.0,
+    "fee_reservedSingleMultiPerDayUSD": 8.3,
+    "fee_reservedMonthlyUSD": 126.0,
+    "localParkingTaxIncludedInFee": {
+     "jurisdiction": "Oakland",
+     "rate": 0.2
+    },
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Rockridge Station includes:  Daily fee ($6 per day) Carpool to BART options  ($6 per day) Single/Multi Day Reserved ($8.30 per day) Monthly Reserved ($126) Purchase through the BART Official app or see the parking section for additional options and program rules. Parking prices at this station include an 20% tax that goes to the City of Oakland. Map of parking locations",
+    "spaces_wikipedia_secondary": 903,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "SANL",
+    "name": "San Leandro",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1270,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 6.0,
+    "fee_reservedMonthlyUSD": 105.0,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "Capacity available at all times",
+    "parkingDescription_stationPage": "Parking at San Leandro Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($6 per day) Monthly Reserved ($105) Purchase through the BART Official app or see the parking section for additional options and program rules. PLEASE NOTE: There is a privately owned and operated parking garage across the street from San Leandro Station at West Juana and San Leandro St. that is available for BART Riders. Daily parking must be paid for after leaving the garage, monthly parking can be purchased through the private provider at  www.mareaaltaparkinggarage.com . Parking purchased through BART is not valid in this garage. Those using parking purchased through BART will be cited.   For more details, see the  passenger bulletin or visit www.mareaaltaparkinggarage.com . Map of parking locations",
+    "spaces_wikipedia_secondary": 1224,
+    "note": "Private garage across the street (Marea Alta) also available to BART riders at its own price (not stated).",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "SBRN",
+    "name": "San Bruno",
+    "county": "sanmateo",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1072,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 10.1,
+    "fee_reservedMonthlyUSD": 136.5,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Reserved Parking allowed on any level of the parking garage (in any Reserved or Daily Fee stall) at San Bruno Station due to the increase in demand.  Parking at San Bruno Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($10.10 per day) Monthly Reserved ($136.50) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1083,
+    "note": "Station page: reserved parking allowed on any level of the garage \"due to the increase in demand\".",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "SFIA",
+    "name": "San Francisco International Airport (SFO)",
+    "county": "sanmateo",
+    "inSanFrancisco": false,
+    "operator": null,
+    "noBartParking": true,
+    "spaces_bartGIS": 0,
+    "gis_hasParkingFlag": "0",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": null,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": null,
+    "parkingDescription_stationPage": "There's no BART parking at San Francisco International Airport Station. The closest station parking is at Millbrae .",
+    "sources": [
+     "bartStationPages",
+     "bartGIS"
+    ]
+   },
+   {
+    "code": "SHAY",
+    "name": "South Hayward",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1253,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 4.5,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at South Hayward Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi-Day Reserved ($4.50 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 1207,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "SSAN",
+    "name": "South San Francisco",
+    "county": "sanmateo",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1371,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at South San Francisco Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "spaces_wikipedia_secondary": 3500,
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "UCTY",
+    "name": "Union City",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1155,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Union City Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing"
+    ]
+   },
+   {
+    "code": "WARM",
+    "name": "Warm Springs/South Fremont",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1950,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 4.5,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Warm Springs Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($4.50 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. Map of parking locations Visit our Electric Vehicle Parking page for information on EV parking at this station.  https://www.bart.gov/guide/parking/electric-vehicle",
+    "spaces_wikipedia_secondary": 2082,
+    "note": "SF Chronicle (2026-07-06): BART \"leases about half of the 2,067 spaces at Warm Springs to Tesla\"; occupancy ~98% fall 2019, ~10% since spring 2024. GIS 1,950.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "WCRK",
+    "name": "Walnut Creek",
+    "county": "contracosta",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 2096,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 5.0,
+    "fee_reservedSingleMultiPerDayUSD": 9.0,
+    "fee_reservedMonthlyUSD": 136.5,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at Walnut Creek Station includes:  Daily fee ($5 per day in the North Garage. $8 per day in the privately owned South Garage) Carpool to BART options  ($5 per day) Single/Multi Day Reserved ($9 per day) Monthly Reserved ($136.50) Purchase through the BART Official app or see the parking section for additional options and program rules. PLEASE NOTE: The South Garage is privately owned and operated.   Parking purchased through BART is not valid in this garage.  You must purchase through the private provider at www.wcbartparking.com or at the kiosks inside the South Garage. Those using parking purchased through BART will be cited.   Map of parking locations",
+    "spaces_wikipedia_secondary": 2089,
+    "note": "Daily fee $5 in the BART North Garage; \"$8 per day in the privately owned South Garage\" (BART parking not valid there). Unknown whether GIS 2,096 includes the private South Garage.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "WDUB",
+    "name": "West Dublin/Pleasanton",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 1100,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "1",
+    "fee_dailyUSD": 3.4,
+    "fee_reservedSingleMultiPerDayUSD": 5.0,
+    "fee_reservedMonthlyUSD": 93.8,
+    "localParkingTaxIncludedInFee": null,
+    "fillTime_stationPage": "capacity available at all times",
+    "parkingDescription_stationPage": "Parking at West Dublin/Pleasanton Station includes:  Daily fee ($3.40 per day) Carpool to BART options  ($3.40 per day) Single/Multi Day Reserved ($5 per day) Monthly Reserved ($93.80) Purchase through the BART Official app or see the parking section for additional options and program rules. This station has two parking garages: 722-space garage on the Dublin side of the station, and a 468-space garage located on the Pleasanton side of the station. Map of parking locations",
+    "spaces_stationPage": 1190,
+    "spaces_wikipedia_secondary": 1190,
+    "note": "Station page: \"two parking garages: 722-space garage on the Dublin side ... and a 468-space garage\" (= 1,190). GIS 1,100.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   },
+   {
+    "code": "WOAK",
+    "name": "West Oakland",
+    "county": "alameda",
+    "inSanFrancisco": false,
+    "operator": "BART",
+    "noBartParking": false,
+    "spaces_bartGIS": 445,
+    "gis_hasParkingFlag": "1",
+    "gis_hasGarageFlag": "0",
+    "fee_dailyUSD": 18.0,
+    "fee_reservedSingleMultiPerDayUSD": null,
+    "fee_reservedMonthlyUSD": null,
+    "localParkingTaxIncludedInFee": {
+     "jurisdiction": "Oakland",
+     "rate": 0.2
+    },
+    "fillTime_stationPage": "Limited parking at this station. Fill times vary by day.",
+    "parkingDescription_stationPage": "Parking at West Oakland Station includes:  Daily fee ($18 per day) Purchase through the BART Official app  or see the parking section  for additional options and program rules. Parking prices at this station include a 20% tax that goes to the City of Oakland. As of September 14, 2026, approximately 240 out of 440 parking spaces will be removed for construction, leaving 200 first-come, first-served Daily Parking spaces available, including 11 ADA spaces.    Map of parking locations",
+    "spaces_stationPage": 440,
+    "spaces_stationPage_afterSep14_2026": 200,
+    "spaces_wikipedia_secondary": 156,
+    "note": "Station page: \"As of September 14, 2026, approximately 240 out of 440 parking spaces will be removed for construction, leaving 200 first-come, first-served Daily Parking spaces available, including 11 ADA spaces.\" Reserved parking eliminated earlier in 2026 (Parking News). Use 200 for scenarios after 2026-09-14; GIS 445.",
+    "sources": [
+     "bartStationPages",
+     "bartGIS",
+     "bartPricing",
+     "wikipedia"
+    ]
+   }
+  ]
+ },
+ "caltrain": {
+  "fees": {
+   "dailyUSD": 5.5,
+   "monthlyPermitUSD": 82.5,
+   "text": "\"A Daily Parking Permit may be purchased for $5.50 ... (24-hour limit from time of purchase)\"; \"Monthly Parking permits cost $82.50 and are only sold to those who have a Monthly Pass or GoPass product\"; permit required \"in all Caltrain-owned lots 24/7\"; \"Stations south of San Jose Diridon offer free parking.\"",
+   "source": "caltrainParking"
+  },
+  "occupancy": {
+   "value": null,
+   "text": "No station-level occupancy table found. Caltrain LPMG minutes (2026-04-23) summarize the Parking and Curbside Management Strategy as noting a \"Decline in parking lot occupancy, number of stations exceeding 80 percent occupancy, and riders parking at stations from 2019 to 2025\".",
+   "source": "caltrainLPMG"
+  },
+  "method": "Space counts and free/paid flags parsed from the \"Parking\" amenity text of each station page; paid stations take the systemwide $5.50/day and $82.50/month from the Caltrain parking page (station pages do not repeat the fee).",
+  "stations": [
+   {
+    "slug": "22ndstreet",
+    "name": "22nd Street",
+    "inSanFrancisco": true,
+    "spaces": null,
+    "stationPageParkingText": "Street parking only",
+    "fee_dailyUSD": null,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "Street parking only."
+   },
+   {
+    "slug": "bayshore",
+    "name": "Bayshore",
+    "inSanFrancisco": false,
+    "spaces": 11,
+    "stationPageParkingText": "11 spaces including 2 ADA Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99601",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "belmont",
+    "name": "Belmont",
+    "inSanFrancisco": false,
+    "spaces": 375,
+    "stationPageParkingText": "375 spaces Pay through ticket vending machine or via the ParkMobile app . Parking zone number: 99610",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "blossomhill",
+    "name": "Blossom Hill",
+    "inSanFrancisco": false,
+    "spaces": 425,
+    "stationPageParkingText": "425 spaces   (free)",
+    "fee_dailyUSD": 0.0,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations"
+    ]
+   },
+   {
+    "slug": "broadway",
+    "name": "Broadway",
+    "inSanFrancisco": false,
+    "spaces": 119,
+    "stationPageParkingText": "119 spaces Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99605",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "burlingame",
+    "name": "Burlingame",
+    "inSanFrancisco": false,
+    "spaces": 68,
+    "stationPageParkingText": "68 spaces Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99606",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "68 spaces; street side of lot is Burlingame City pay parking."
+   },
+   {
+    "slug": "californiaave",
+    "name": "California Avenue",
+    "inSanFrancisco": false,
+    "spaces": 185,
+    "stationPageParkingText": "185 spaces; pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99615",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "capitol",
+    "name": "Capitol",
+    "inSanFrancisco": false,
+    "spaces": 379,
+    "stationPageParkingText": "379 spaces (free)",
+    "fee_dailyUSD": 0.0,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations"
+    ]
+   },
+   {
+    "slug": "collegepark",
+    "name": "College Park",
+    "inSanFrancisco": false,
+    "spaces": null,
+    "stationPageParkingText": "No parking available",
+    "fee_dailyUSD": null,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "No parking available."
+   },
+   {
+    "slug": "gilroy",
+    "name": "Gilroy",
+    "inSanFrancisco": false,
+    "spaces": 471,
+    "stationPageParkingText": "471 spaces (free)",
+    "fee_dailyUSD": 0.0,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations"
+    ]
+   },
+   {
+    "slug": "haywardpark",
+    "name": "Hayward Park",
+    "inSanFrancisco": false,
+    "spaces": 213,
+    "stationPageParkingText": "213 spaces; pay through ticket vending machine or via the ParkMobile app . Parking zone number: 99608",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "hillsdale",
+    "name": "Hillsdale",
+    "inSanFrancisco": false,
+    "spaces": null,
+    "stationPageParkingText": "Two parking lots - one located between 25th and 28th avenues and the other located between 28th and 31st avenues. Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99609",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "Station page gives two lots (25th-28th Ave and 28th-31st Ave) but no space count."
+   },
+   {
+    "slug": "lawrence",
+    "name": "Lawrence",
+    "inSanFrancisco": false,
+    "spaces": 122,
+    "stationPageParkingText": "122 spaces; pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99619",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "menlopark",
+    "name": "Menlo Park",
+    "inSanFrancisco": false,
+    "spaces": 150,
+    "stationPageParkingText": "150 spaces (5 ADA spaces) Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99613",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "millbrae",
+    "name": "Millbrae",
+    "inSanFrancisco": false,
+    "spaces": 175,
+    "stationPageParkingText": "175 spaces on west side of the station Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99604",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "Caltrain west-side lot only; BART lot/garage on east side follows BART rules and fees."
+   },
+   {
+    "slug": "morganhill",
+    "name": "Morgan Hill",
+    "inSanFrancisco": false,
+    "spaces": 486,
+    "stationPageParkingText": "486 spaces (free) Parking is off Butterfield Boulevard",
+    "fee_dailyUSD": 0.0,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations"
+    ]
+   },
+   {
+    "slug": "mountainview",
+    "name": "Mountain View",
+    "inSanFrancisco": false,
+    "spaces": 340,
+    "stationPageParkingText": "340 spaces ;  pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99617",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "paloalto",
+    "name": "Palo Alto",
+    "inSanFrancisco": false,
+    "spaces": 389,
+    "stationPageParkingText": "389 spaces Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99614",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "redwoodcity",
+    "name": "Redwood City",
+    "inSanFrancisco": false,
+    "spaces": 557,
+    "stationPageParkingText": "557 spaces (among 3 lots);  pay through ticket vending machine. Station Lot  - Between Winklebleck and James Ave.",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "sanantonio",
+    "name": "San Antonio",
+    "inSanFrancisco": false,
+    "spaces": 199,
+    "stationPageParkingText": "199 spaces shared with housing development across the street.  Some parking spots reserved for Caltrain customers during specific hours. Pay for parking through ticket vending machine or via the ParkMobile app. Parking zone number: 99616",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "199 spaces shared with a housing development; some reserved for Caltrain customers during specific hours."
+   },
+   {
+    "slug": "sanbruno",
+    "name": "San Bruno",
+    "inSanFrancisco": false,
+    "spaces": 178,
+    "stationPageParkingText": "178 spaces (7 ADA spaces) Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99603",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "sancarlos",
+    "name": "San Carlos",
+    "inSanFrancisco": false,
+    "spaces": 251,
+    "stationPageParkingText": "251 stalls (7 ADA spaces) See construction notice above",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "sanfrancisco",
+    "name": "San Francisco (4th & King)",
+    "inSanFrancisco": true,
+    "spaces": null,
+    "stationPageParkingText": null,
+    "fee_dailyUSD": null,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "Station page has no Parking amenity entry."
+   },
+   {
+    "slug": "sanmartin",
+    "name": "San Martin",
+    "inSanFrancisco": false,
+    "spaces": 167,
+    "stationPageParkingText": "167 spaces (free)",
+    "fee_dailyUSD": 0.0,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations"
+    ]
+   },
+   {
+    "slug": "sanmateo",
+    "name": "San Mateo",
+    "inSanFrancisco": false,
+    "spaces": 42,
+    "stationPageParkingText": "42 spaces located at 2nd & Railroad avenues; pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99607 You can also use a Caltrain Monthly Parking permit.",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "Parking provided by the City of San Mateo (42 spaces at 2nd & Railroad); Caltrain monthly permit valid in non-metered surface lot and underground garage. Daily fee assumed Caltrain $5.50 via TVM/ParkMobile per page - city rates may differ."
+   },
+   {
+    "slug": "santaclara",
+    "name": "Santa Clara",
+    "inSanFrancisco": false,
+    "spaces": 289,
+    "stationPageParkingText": "289 spaces Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99620",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "sjdiridon",
+    "name": "San Jose Diridon",
+    "inSanFrancisco": false,
+    "spaces": 581,
+    "stationPageParkingText": "581 spaces; pay at ticket machine in station or via the ParkMobile app. Parking zone number: 99621 5 motorcycle spots are located in north corner by W. Santa Clara St; pay at ticket machine in station.",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "Higher SAP Center event rates apply during events; Caltrain permits not valid then."
+   },
+   {
+    "slug": "southsf",
+    "name": "South San Francisco",
+    "inSanFrancisco": false,
+    "spaces": 81,
+    "stationPageParkingText": "81 spaces Pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99602",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ]
+   },
+   {
+    "slug": "sunnyvale",
+    "name": "Sunnyvale",
+    "inSanFrancisco": false,
+    "spaces": 446,
+    "stationPageParkingText": "446 spaces; pay through ticket vending machine or via the ParkMobile app. Parking zone number: 99618 Note:  Spaces 1–72 are reserved for the Murphy’s Square District; Caltrain customers shouldn't park in them.",
+    "fee_dailyUSD": 5.5,
+    "fee_monthlyPermitUSD": 82.5,
+    "sources": [
+     "caltrainStations",
+     "caltrainParking"
+    ],
+    "note": "Spaces 1-72 reserved for Murphy's Square District; Caltrain customers shouldn't park in them."
+   },
+   {
+    "slug": "tamien",
+    "name": "Tamien",
+    "inSanFrancisco": false,
+    "spaces": 275,
+    "stationPageParkingText": "275 spaces (free)",
+    "fee_dailyUSD": 0.0,
+    "fee_monthlyPermitUSD": null,
+    "sources": [
+     "caltrainStations"
+    ]
+   }
+  ]
+ },
+ "ferries": [
+  {
+   "terminal": "Larkspur",
+   "operator": "Golden Gate Ferry",
+   "lotOperator": "Golden Gate Bridge, Highway and Transportation District",
+   "spaces": 1800,
+   "spacesDetail": {
+    "publicFirstComeFirstServed": 1800,
+    "carpoolHOV": 30,
+    "disabled": 28,
+    "ev": 2,
+    "overflowLot_approx": 200
+   },
+   "fee_dailyUSD": 2.0,
+   "fee_30dayPermitUSD": 20.0,
+   "feeHours": "weekdays 5:00am-1:00pm; free after 1pm, weekends, listed holidays",
+   "text": "\"The Larkspur Ferry Terminal lot has 1,800 parking spaces available to the public on a first-come, first-served basis. The lot also has 30 carpool/HOV spaces ..., 28 spaces for persons with disabilities, and 2 spaces for electric vehicles\"; overflow lot at 300 Larkspur Landing Circle \"can accommodate about 200 vehicles\"; \"The fee is $2 per day or $20 for a 30-day permit.\" Parking page fee table: Weekdays 5:00 a.m. to 1:00 p.m. $2.00.",
+   "note": "Whether the 30 HOV/28 disabled/2 EV are in addition to the 1,800 is ambiguous in the wording (\"The lot also has\"). FAQ: 30-day permit holders not guaranteed a space; FAQ addresses \"The Terminal parking lot is full\" (overflow). No occupancy figure.",
+   "sources": [
+    "ggTerminals",
+    "ggLarkspurParking"
+   ]
+  },
+  {
+   "terminal": "Sausalito",
+   "operator": "Golden Gate Ferry",
+   "lotOperator": "City of Sausalito (public lots #1-4 + Sausalito Yacht Harbor lot) - not ferry-operated",
+   "spaces": null,
+   "fee_dailyUSD": null,
+   "feeDetail": {
+    "peak_May1_Sep30": {
+     "lots1to4_and_SYH": {
+      "perHourUSD": 5.0,
+      "maxPerDayUSD": 50.0
+     }
+    },
+    "offPeak_Oct1_Apr30": {
+     "lot1": {
+      "perHourUSD": 3.5,
+      "maxPerDayUSD": 35.0
+     },
+     "lot2": {
+      "perHourUSD": 3.0,
+      "maxPerDayUSD": 30.0
+     },
+     "lot3": {
+      "perHourUSD": 2.5,
+      "maxPerDayUSD": 25.0
+     },
+     "lot4": {
+      "perHourUSD": 2.0,
+      "maxPerDayUSD": 20.0
+     }
+    },
+    "hours": "7:00am-10:00pm daily",
+    "lot5": "3 hours free 6am-2am; commuter permit lot"
+   },
+   "text": "GG Ferry: \"There are for-pay public parking lots adjacent to the Ferry Landing and metered parking on local streets.\" City of Sausalito rate tables as listed in feeDetail.",
+   "note": "Off-peak per-lot assignment follows the order of the rows in the City table (Lot #1, #2, then the next two rows read as #3, #4; the extracted text for #3/#4 labels was cut). Lot #5 commuter permits: employee vehicles $390/quarter or $150/quarter (two permit classes) plus $25 application. No space counts published.",
+   "sources": [
+    "ggTerminals",
+    "sausalitoLots",
+    "sausalitoCommuters"
+   ]
+  },
+  {
+   "terminal": "Tiburon",
+   "operator": "Golden Gate Ferry (also Angel Island-Tiburon Ferry)",
+   "lotOperator": "various private/town lots - not ferry-operated",
+   "spaces": null,
+   "fee_dailyUSD": 5.0,
+   "feeDetail": {
+    "lotA_TiburonBlvd": {
+     "dailyUSD": 5,
+     "twoDayUSD": 10,
+     "threeDayUSD": 15,
+     "monthlyUSD": 70
+    },
+    "lotB_TiburonBlvd": {
+     "dailyUSD": 5
+    },
+    "lotC_BeachRoad": {
+     "dailyUSD": 20,
+     "hourlyUSD": 2.5
+    },
+    "lotD_PointTiburon": {
+     "maxDayUSD": 16,
+     "overnight": "$25 + hourly"
+    },
+    "lotE_MainStreet": "hourly, no overnight"
+   },
+   "text": "GG Ferry: \"There are for-pay public parking lots near the Ferry Landing and metered parking on local streets.\" Tiburon Chamber: Lot A \"$5 Daily parking ... $70 Monthly Permit\"; Lot B \"$5.00 Per Day\"; Beach Road Lot C \"Daily Rate: $20.00\".",
+   "note": "fee_dailyUSD = cheapest all-day lot (A/B, ~10-minute walk per secondary sources not stored). Source is the Chamber of Commerce, not the lot operators. No space counts found.",
+   "sources": [
+    "ggTerminals",
+    "tiburonChamber"
+   ]
+  },
+  {
+   "terminal": "Vallejo",
+   "operator": "San Francisco Bay Ferry",
+   "lotOperator": "City of Vallejo (Vallejo Station Parking Garage + Waterfront Lots A1, A2, A3, B, F)",
+   "spaces": null,
+   "fee_dailyUSD": 8.0,
+   "fee_monthlyUSD": 50.0,
+   "feeHours": "24/7/365, daily = 24 hours from purchase; overnight/multi-day allowed if paid",
+   "text": "City of Vallejo Parking Program (Jan 1, 2020), Waterfront Parking Fees: \"Fee Beginning July 1, 2019 ... Monthly $50 per calendar month ... Daily $8 per twenty-four hours\". City of Alameda Aug 2024 price survey also lists \"Vallejo Ferry $8 $50 All days/hours\".",
+   "note": "Current (2026) City web page lists facilities but its fee table did not render dollar amounts; $8/$50 is the latest documented rate (2019 schedule, still cited Aug 2024). No space counts found.",
+   "sources": [
+    "vallejoProgram",
+    "vallejoBrochure",
+    "vallejoWaterfront",
+    "alamedaStrategy",
+    "sfbfTerminals"
+   ]
+  },
+  {
+   "terminal": "Mare Island",
+   "operator": "San Francisco Bay Ferry",
+   "spaces": null,
+   "fee_dailyUSD": 0.0,
+   "text": "\"Limited free parking is available directly adjacent to the terminal entrance.\"",
+   "note": "No space count published.",
+   "sources": [
+    "sfbfTerminals"
+   ]
+  },
+  {
+   "terminal": "Richmond",
+   "operator": "San Francisco Bay Ferry",
+   "spaces": 362,
+   "spacesDetail": {
+    "publicAccess": 15,
+    "accessible": 8
+   },
+   "fee_dailyUSD": 0.0,
+   "text": "\"Free parking is available in the lot adjacent to the terminal and includes 362 spaces, with 15 public access spaces and 8 accessible spaces.\"",
+   "note": "Alameda Aug 2024 survey: Richmond Ferry Terminal free/free.",
+   "sources": [
+    "sfbfTerminals",
+    "alamedaStrategy"
+   ]
+  },
+  {
+   "terminal": "Main Street Alameda",
+   "operator": "San Francisco Bay Ferry",
+   "lotOperator": "City of Alameda",
+   "spaces": 324,
+   "spacesDetail": {
+    "OLot_quarterMileWest": 121
+   },
+   "fee_dailyUSD": 0.0,
+   "text": "SF Bay Ferry: \"Limited free parking for 324 cars ... additional 121 cars in the paved O'Lot\"; City of Alameda: \"Parking is free and paid parking is not planned for this ferry terminal due to low parking occupancy.\"",
+   "occupancy": {
+    "nov2022": 0.17,
+    "aug2024": 0.21,
+    "note": "mid-week share of spaces full; Alameda strategy counted 305 spaces in two lots (O'Lot then closed)",
+    "source": "alamedaStrategy"
+   },
+   "sources": [
+    "sfbfTerminals",
+    "alamedaCity",
+    "alamedaStrategy"
+   ]
+  },
+  {
+   "terminal": "Alameda Seaplane Lagoon",
+   "operator": "San Francisco Bay Ferry",
+   "lotOperator": "City of Alameda",
+   "spaces": 400,
+   "spacesDetail": {
+    "ev": 10,
+    "disabled": 9
+   },
+   "fee_dailyUSD": 3.0,
+   "fee_hourlyUSD": 0.75,
+   "feeHours": "Tue/Wed/Thu only, 6:00am-4:00pm; free Mon, Fri, weekends (since Feb 3, 2026); $0.35 mobile transaction fee",
+   "text": "City of Alameda: \"The lot has 400 spaces, including 10 with EV charging\" ... \"Paid parking is in effect Tu/We/Th only ... The rates are $0.75/hr or $3/day.\"",
+   "occupancy": {
+    "nov2022": 0.8,
+    "aug2024": 0.89,
+    "note": "mid-week; Aug 2024 = average of five midweek counts; busiest day \"completely full, not including disability spaces\"",
+    "source": "alamedaStrategy"
+   },
+   "pricingRule": "Rate may rise $1/day (no more than quarterly) if lot consistently overfull (strategy: 90% full after last morning ferry) and fall $1/day if consistently too empty (<=60%).",
+   "sources": [
+    "alamedaCity",
+    "sfbfTerminals",
+    "alamedaStrategy"
+   ]
+  },
+  {
+   "terminal": "Harbor Bay",
+   "operator": "San Francisco Bay Ferry",
+   "lotOperator": "City of Alameda",
+   "spaces": 250,
+   "spacesDetail": {
+    "motorcycles": 2,
+    "disabled": 6
+   },
+   "fee_dailyUSD": 3.0,
+   "fee_hourlyUSD": 0.75,
+   "feeHours": "Tue/Wed/Thu only, 6:00am-4:00pm (paid parking launched October 2025)",
+   "text": "City of Alameda: \"The ferry terminal parking lot holds 250 cars and two motorcycles.\" ... \"Paid parking is in effect Tu/We/Th only ... The rates are $0.75/hr or $3/day.\"",
+   "occupancy": {
+    "nov2022": 0.88,
+    "aug2024": 0.97,
+    "note": "mid-week; busiest Aug 2024 day had \"just one space available\"",
+    "source": "alamedaStrategy"
+   },
+   "sources": [
+    "alamedaCity",
+    "sfbfTerminals",
+    "alamedaStrategy"
+   ]
+  },
+  {
+   "terminal": "Oakland (Jack London Square)",
+   "operator": "San Francisco Bay Ferry",
+   "lotOperator": "101 Washington Street Parking Garage (ACE Parking)",
+   "spaces": null,
+   "fee_dailyUSD": 0.0,
+   "text": "SF Bay Ferry: \"Validated parking for ferry riders is available for the 101 Washington Street Parking Garage\"; no overnight. Alameda Aug 2024 survey: \"Jack London Square ferry Free (12 hours) ... Parking is free with ferry transfer due to a long-standing agreement between City of Oakland and WETA\".",
+   "note": "fee 0 assumes validation (free up to 12 hours per Alameda survey). Garage capacity not published by the operator pages fetched.",
+   "sources": [
+    "sfbfTerminals",
+    "alamedaStrategy"
+   ]
+  },
+  {
+   "terminal": "South San Francisco (Oyster Point)",
+   "operator": "San Francisco Bay Ferry",
+   "spaces": 35,
+   "fee_dailyUSD": 0.0,
+   "text": "\"Free parking for 35 cars is available adjacent to the terminal. There is no overnight parking.\"",
+   "sources": [
+    "sfbfTerminals"
+   ]
+  }
+ ],
+ "acTransbay": {
+  "period_note": "AC Transit fiscal year = July-June (FY2025 = Jul 2024-Jun 2025). Values are \"Average Daily Ridership\" from the Weekday table of each year's Route Performance attachment (Board Policy 545 annual report).",
+  "method": "Text extracted from the PDFs with pypdf. Each weekday row reads: route, type, peak freq, off-peak freq, minority flag, [current-FY revenue trips, revenue hours], [PRIOR-FY average daily ridership + 5 effectiveness measures], [CURRENT-FY average daily ridership + 5 measures], 6 % changes. Column order was verified with the printed % change (e.g. FY25 F: 2,075 -> 2,226 = +7.2%, matches) and with productivity (FY25 F: 2,226 x ~252 weekdays / 23,644 revenue hours = 23.7 pax/rev-hr, matches the printed FY24/25 productivity). FY2024 values from the FY25 report equal the FY24 report's own FY23/24 values for every line (checked). Fall 2024/2025 = average of Sep, Oct, Nov average daily weekday ridership (Realign comparison; first block = 2024, second = 2025, confirmed by discontinued LA/OX having only the first block and by the staff report table).",
+  "lines": {
+   "B": {
+    "line": "B",
+    "fy2019_avgWeekday": 284,
+    "fy2018_avgWeekday": 272,
+    "servesSanFrancisco": true
+   },
+   "C": {
+    "line": "C",
+    "fy2019_avgWeekday": 416,
+    "fy2018_avgWeekday": 400,
+    "servesSanFrancisco": true
+   },
+   "CB": {
+    "line": "CB",
+    "fy2019_avgWeekday": 282,
+    "fy2018_avgWeekday": 247,
+    "servesSanFrancisco": true
+   },
+   "E": {
+    "line": "E",
+    "fy2025_avgWeekday": 163,
+    "fy2024_avgWeekday": 135,
+    "fy2023_avgWeekday": 123,
+    "fy2019_avgWeekday": 398,
+    "fy2018_avgWeekday": 379,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 154,
+    "fall2025_SepNovAvg": 174
+   },
+   "F": {
+    "line": "F",
+    "fy2025_avgWeekday": 2226,
+    "fy2024_avgWeekday": 2075,
+    "fy2023_avgWeekday": 1935,
+    "fy2019_avgWeekday": 1976,
+    "fy2018_avgWeekday": 1833,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 2512,
+    "fall2025_SepNovAvg": 2519
+   },
+   "FS": {
+    "line": "FS",
+    "fy2025_avgWeekday": 106,
+    "fy2024_avgWeekday": 93,
+    "fy2023_avgWeekday": 80,
+    "fy2019_avgWeekday": 624,
+    "fy2018_avgWeekday": 503,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 93,
+    "fall2025_SepNovAvg": 124
+   },
+   "G": {
+    "line": "G",
+    "fy2025_avgWeekday": 229,
+    "fy2024_avgWeekday": 191,
+    "fy2023_avgWeekday": 147,
+    "fy2019_avgWeekday": 467,
+    "fy2018_avgWeekday": 452,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 218,
+    "fall2025_SepNovAvg": 231
+   },
+   "H": {
+    "line": "H",
+    "fy2019_avgWeekday": 636,
+    "fy2018_avgWeekday": 592,
+    "servesSanFrancisco": true
+   },
+   "J": {
+    "line": "J",
+    "fy2025_avgWeekday": 270,
+    "fy2024_avgWeekday": 216,
+    "fy2023_avgWeekday": 187,
+    "fy2019_avgWeekday": 1038,
+    "fy2018_avgWeekday": 836,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 252,
+    "fall2025_SepNovAvg": 293
+   },
+   "L": {
+    "line": "L",
+    "fy2025_avgWeekday": 141,
+    "fy2024_avgWeekday": 139,
+    "fy2023_avgWeekday": 117,
+    "fy2019_avgWeekday": 584,
+    "fy2018_avgWeekday": 668,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 129,
+    "fall2025_SepNovAvg": 178
+   },
+   "LA": {
+    "line": "LA",
+    "fy2025_avgWeekday": 74,
+    "fy2024_avgWeekday": 72,
+    "fy2023_avgWeekday": 71,
+    "fy2019_avgWeekday": 594,
+    "fy2018_avgWeekday": 457,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 77,
+    "fall2025_SepNovAvg": null
+   },
+   "LC": {
+    "line": "LC",
+    "fy2019_avgWeekday": 37,
+    "fy2018_avgWeekday": 56,
+    "servesSanFrancisco": true
+   },
+   "M": {
+    "line": "M",
+    "fy2019_avgWeekday": 230,
+    "fy2018_avgWeekday": 224,
+    "servesSanFrancisco": false,
+    "note": "San Mateo Bridge to the Peninsula - not San Francisco"
+   },
+   "NL": {
+    "line": "NL",
+    "fy2025_avgWeekday": 2378,
+    "fy2024_avgWeekday": 2129,
+    "fy2023_avgWeekday": 1922,
+    "fy2019_avgWeekday": 3123,
+    "fy2018_avgWeekday": 3022,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 2425,
+    "fall2025_SepNovAvg": 2570
+   },
+   "NX": {
+    "line": "NX",
+    "fy2025_avgWeekday": 185,
+    "fy2024_avgWeekday": 146,
+    "fy2023_avgWeekday": 127,
+    "fy2019_avgWeekday": 311,
+    "fy2018_avgWeekday": 312,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 168,
+    "fall2025_SepNovAvg": 247
+   },
+   "NX1": {
+    "line": "NX1",
+    "fy2019_avgWeekday": 187,
+    "fy2018_avgWeekday": 200,
+    "servesSanFrancisco": true
+   },
+   "NX2": {
+    "line": "NX2",
+    "fy2019_avgWeekday": 268,
+    "fy2018_avgWeekday": 265,
+    "servesSanFrancisco": true
+   },
+   "NX3": {
+    "line": "NX3",
+    "fy2025_avgWeekday": 135,
+    "fy2024_avgWeekday": 99,
+    "fy2023_avgWeekday": 91,
+    "fy2019_avgWeekday": 351,
+    "fy2018_avgWeekday": 332,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 124,
+    "fall2025_SepNovAvg": 119
+   },
+   "NX4": {
+    "line": "NX4",
+    "fy2019_avgWeekday": 387,
+    "fy2018_avgWeekday": 368,
+    "servesSanFrancisco": true
+   },
+   "NXC": {
+    "line": "NXC",
+    "fy2019_avgWeekday": 25,
+    "fy2018_avgWeekday": 33,
+    "servesSanFrancisco": true
+   },
+   "O": {
+    "line": "O",
+    "fy2025_avgWeekday": 1131,
+    "fy2024_avgWeekday": 1065,
+    "fy2023_avgWeekday": 935,
+    "fy2019_avgWeekday": 1876,
+    "fy2018_avgWeekday": 1822,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 1157,
+    "fall2025_SepNovAvg": 1138
+   },
+   "OX": {
+    "line": "OX",
+    "fy2025_avgWeekday": 105,
+    "fy2024_avgWeekday": 93,
+    "fy2023_avgWeekday": 86,
+    "fy2019_avgWeekday": 581,
+    "fy2018_avgWeekday": 625,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 106,
+    "fall2025_SepNovAvg": null
+   },
+   "P": {
+    "line": "P",
+    "fy2025_avgWeekday": 340,
+    "fy2024_avgWeekday": 287,
+    "fy2023_avgWeekday": 237,
+    "fy2019_avgWeekday": 937,
+    "fy2018_avgWeekday": 926,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 330,
+    "fall2025_SepNovAvg": 366
+   },
+   "S": {
+    "line": "S",
+    "fy2019_avgWeekday": 188,
+    "fy2018_avgWeekday": 225,
+    "servesSanFrancisco": true
+   },
+   "SB": {
+    "line": "SB",
+    "fy2019_avgWeekday": 423,
+    "fy2018_avgWeekday": 403,
+    "servesSanFrancisco": true
+   },
+   "U": {
+    "line": "U",
+    "fy2025_avgWeekday": 256,
+    "fy2024_avgWeekday": 219,
+    "fy2023_avgWeekday": 183,
+    "fy2019_avgWeekday": 345,
+    "fy2018_avgWeekday": 375,
+    "servesSanFrancisco": false,
+    "note": "Dumbarton Bridge (Ardenwood Park & Ride, Fremont) to the Peninsula - not San Francisco",
+    "fall2024_SepNovAvg": 253,
+    "fall2025_SepNovAvg": 251
+   },
+   "V": {
+    "line": "V",
+    "fy2025_avgWeekday": 210,
+    "fy2024_avgWeekday": 157,
+    "fy2023_avgWeekday": 143,
+    "fy2019_avgWeekday": 757,
+    "fy2018_avgWeekday": 765,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 208,
+    "fall2025_SepNovAvg": 217
+   },
+   "W": {
+    "line": "W",
+    "fy2025_avgWeekday": 155,
+    "fy2024_avgWeekday": 119,
+    "fy2023_avgWeekday": 119,
+    "fy2019_avgWeekday": 569,
+    "fy2018_avgWeekday": 563,
+    "servesSanFrancisco": true,
+    "fall2024_SepNovAvg": 158,
+    "fall2025_SepNovAvg": 179
+   },
+   "Z": {
+    "line": "Z",
+    "fy2019_avgWeekday": 54,
+    "fy2018_avgWeekday": 52,
+    "servesSanFrancisco": true
+   }
+  },
+  "totals_routeSums": {
+   "fy2025_avgWeekday": {
+    "allTransbayLines_routeSum": 8104,
+    "sanFranciscoLinesOnly_routeSum": 7848
+   },
+   "fy2024_avgWeekday": {
+    "allTransbayLines_routeSum": 7235,
+    "sanFranciscoLinesOnly_routeSum": 7016
+   },
+   "fy2023_avgWeekday": {
+    "allTransbayLines_routeSum": 6503,
+    "sanFranciscoLinesOnly_routeSum": 6320
+   },
+   "fy2019_avgWeekday": {
+    "allTransbayLines_routeSum": 17948,
+    "sanFranciscoLinesOnly_routeSum": 17373
+   },
+   "fy2018_avgWeekday": {
+    "allTransbayLines_routeSum": 17207,
+    "sanFranciscoLinesOnly_routeSum": 16608
+   },
+   "fall2024_SepNovAvg": {
+    "allTransbayLines_routeSum": 8364,
+    "sanFranciscoLinesOnly_routeSum": 8111
+   },
+   "fall2025_SepNovAvg": {
+    "allTransbayLines_routeSum": 8606,
+    "sanFranciscoLinesOnly_routeSum": 8355
+   }
+  },
+  "totals_routeSums_check": "FY2025 route sum 8,104 equals the published Transbay service-type total (8,104); FY2024 7,235 vs 7,233, FY2019 17,948 vs 17,951 (rounding). Fall Sep-Nov route sums (8,364 in 2024; 8,606 in 2025) are 70-95 below the staff-report Transbay totals (8,434; 8,701) - the staff report may include a route not listed in the Transbay block of Att.3; unresolved.",
+  "totals_agencyPublished": {
+   "fy2025_transbayServiceType_avgWeekday": {
+    "value": 8104,
+    "source": "acFY25ServiceType",
+    "text": "Transbay 368 trips, 421.4 rev hrs, 8,104 avg daily pass, 5.9% split (FY24/25); prior FY 7,233 (+12.0%)"
+   },
+   "fy2024_transbayServiceType_avgWeekday": {
+    "value": 7233,
+    "source": "acFY25ServiceType"
+   },
+   "fy2019_transbayServiceType_avgWeekday": {
+    "value": 17951,
+    "source": "acFY19ServiceType",
+    "text": "Transbay 632 trips, 713.3 rev hrs, 17,951 avg daily pass, 10.8% split (FY18/19); FY17/18 17,206 (+4.3%)"
+   },
+   "fy2018_transbayServiceType_avgWeekday": {
+    "value": 17206,
+    "source": "acFY19ServiceType"
+   },
+   "fall2024_weekdayTransbay": {
+    "value": 8434,
+    "detail": "Realign Transbay routes 470 + Non-Realign Transbay routes 7,964 (Sep-Nov 2024 average daily)",
+    "source": "acRealignStaff"
+   },
+   "fall2025_weekdayTransbay": {
+    "value": 8701,
+    "detail": "Realign Transbay 357 + Non-Realign Transbay 8,344 (Sep-Nov 2025, after Realign of Aug 10, 2025)",
+    "source": "acRealignStaff"
+   },
+   "ntdCommuterBusAnnual": {
+    "value": {
+     "FY2019": 2818648,
+     "FY2024": 536641,
+     "FY2025": 588495
+    },
+    "note": "NTD mode CB (Commuter Bus) annual unlinked trips, summed from monthly rows. CB evidently excludes the all-day Transbay lines (F, NL, O are likely reported as MB): FY2025 CB 588,495/yr vs Transbay service type 8,104/weekday. Do not use CB as total Transbay.",
+    "source": "acNTDMonthly"
+   }
+  },
+  "fare": {
+   "adultClipperOrContactless": 6.5,
+   "adultCash": 6.5,
+   "localToTransbayUpgradeClipper": 3.75,
+   "localToTransbayUpgradeCash": 3.5,
+   "discountedSingleRide": 3.25,
+   "transbayMonthlyFareCap": 234.0,
+   "localSingleRideClipper": 2.75,
+   "effective": "2026-07-01",
+   "source": "acFares"
+  },
+  "parkAndRide": {
+   "richmondParkwayTransitCenter": {
+    "spaces": 206,
+    "fee_dailyUSD": 3.0,
+    "lines": [
+     "L"
+    ],
+    "operator": "AC Transit"
+   },
+   "ardenwood": {
+    "spaces": 349,
+    "detail": "300 first-come free; 50 reserved $50/month (unavailable); 11 accessible free",
+    "lines": [
+     "U",
+     "DB"
+    ],
+    "operator": "AC Transit",
+    "servesSanFrancisco": false
+   },
+   "otherLotsNotOperatedByAC": [
+    "Island Dr. & Doolittle Dr., Alameda: W",
+    "Fruitvale Ave. & Montana St., Oakland: NL, NX",
+    "Fruitvale Ave. & I-880, Oakland: O",
+    "Grand Ave. & Lake Park Ave., Oakland: NL, NX",
+    "Hilltop Dr. & I-80, Richmond: L"
+   ],
+   "source": "acTransbayPage"
+  },
+  "lineDestinationNote": "\"14 bus lines providing service across two Bay Area bridges\" (Transbay page). U (and DB) serve Ardenwood/Dumbarton Bridge to the Peninsula; M (FY2019) crossed the San Mateo Bridge. Their SF/non-SF classification is from general knowledge of the routes, not from a fetched route description; all other listed lines are treated as SF (Salesforce Transit Center) lines.",
+  "notInOtherOperatorsJson": "other-operators.json acTransit entry has system weekday 136,138 (FY2024-25) and transbayAvgWeekdayRidership=null; this block fills that gap. The service-type total 136,321 (FY24/25) differs slightly from the 136,138 on the ridership page."
+ },
+ "samtrans": {
+  "routeLevel": null,
+  "note": "Not easy: no route-level weekday ridership for 292, 397, ECR or FCX was found in a fetched SamTrans file. The SamTrans Ridership page gives only system totals (FY2025 bus 10,753,840 annual) and says monthly average weekday ridership is in Board packets. A July 2, 2025 Board correspondence states FCX \"average weekday ridership for April 2025 up by 49% compared to April 2024\" (no absolute number).",
+  "systemBusAnnual": {
+   "FY2024": 9970795,
+   "FY2025": 10753840,
+   "source": "samtransRidership"
+  },
+  "fcxApril2025vsApril2024": {
+   "value": 0.49,
+   "what": "year-over-year change in FCX average weekday ridership",
+   "source": "samtransBoard20250702"
+  }
+ },
+ "gaps": [
+  "BART: no current per-station split of Daily Fee vs Reserved spaces.",
+  "BART: occupancy by station only for 4 stations (SF Chronicle chart of BART counts) plus fill-time text and >90% lists; BART does not publish its twice-yearly counts on the pages fetched.",
+  "BART: space counts disagree between GIS (2025), station pages and Wikipedia; Antioch and Pittsburg Center unresolved.",
+  "Caltrain: no station-level occupancy; Hillsdale space count not on station page.",
+  "Ferries: no space counts for Sausalito, Tiburon, Vallejo, Mare Island, Oakland JLS garage; Vallejo fee from 2019/2020 schedule (also cited Aug 2024). No occupancy except Alameda terminals.",
+  "SamTrans route-level ridership not found."
+ ],
+ "smart": {
+  "note": "Day-use parking is free at the ten listed stations (no space counts published on the page). Santa Rosa Downtown, Santa Rosa North, San Rafael and Marin Civic Center are not listed (city street parking only).",
+  "source": "smartParking",
+  "stations": [
+   {
+    "name": "Windsor",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Sonoma County Airport",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Rohnert Park",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Cotati",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Petaluma Downtown",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Petaluma North",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Novato San Marin",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Novato Downtown",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Novato Hamilton",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   },
+   {
+    "name": "Larkspur",
+    "fee_dailyUSD": 0.0,
+    "spaces": null
+   }
+  ]
+ }
+}

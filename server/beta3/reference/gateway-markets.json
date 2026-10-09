@@ -1,0 +1,470 @@
+{
+ "source": "Caltrans Truck AADT 2023 (Traffic Census Program, Truck_Volumes_AADT feature service, layer TruckAADT_2023; data/beta3/raw/gateways/caltrans_truck_aadt_sf_sm_mrn_ala.json): trucks of two or more axles with dual tires as a share of all vehicles, at the count nearest each gateway. Light commercial vehicles (four tires) are not separated in any count.",
+ "truckPct": {
+  "Bay Bridge": {
+   "pct": 2.55,
+   "at": "I-80 at the SFOBB toll plaza (Alameda PM 1.989), legs A and B: 5,773 and 5,934 trucks of 230,000"
+  },
+  "Golden Gate": {
+   "pct": 1.33,
+   "at": "US-101 at the Golden Gate Bridge (Marin PM 0.0): 1,224 trucks of 92,000"
+  },
+  "US-101": {
+   "pct": 4.62,
+   "at": "US-101 at Third Street (SF PM 0.774): 9,148 of 198,000"
+  },
+  "I-280": {
+   "pct": 1.6,
+   "at": "I-280 at Jct. Rte. 82 (SF PM R0.738, leg A): 2,496 of 156,000"
+  },
+  "SR-35": {
+   "pct": 1.04,
+   "at": "SR-35 at Jct. Rte. 1 (SF PM 3.164)"
+  },
+  "SR-82": {
+   "pct": 0.71,
+   "at": "SR-82 at Jct. Rte. 280 (SF PM 0.208)"
+  }
+ },
+ "model": {
+  "today": {
+   "built": "2026-10-08T17:57:39.502Z",
+   "note": "The model's own cars across the counted crossings by market (gateways.ts): today's run, one pass from the saved crowding; each car trip on its least-cost path at today's congested times (roads.bin.gz). Trucks are Caltrans' truck AADT share at the count; through trips as roads-base.ts. 'left' is what the background fills: light commercial vehicles and any market the model misses. Today's model: the committed calibration on the rebuilt skims (cf6f66f), residents' trips out at the assumed 5%, paths at free-flow times on roads-net.bin (the road bundle predated the Peninsula freeways); trucks recomputed at the final truck shares.",
+   "corridorFactor": null,
+   "markets": [
+    {
+     "market": "in-commuters",
+     "key": "work",
+     "byGateway": {
+      "Bay Bridge": 108966,
+      "Golden Gate": 20328,
+      "US-101": 48033,
+      "I-280": 19386,
+      "SR-35": 147,
+      "SR-82": 4145
+     },
+     "uncounted": 20215
+    },
+    {
+     "market": "regional visitors",
+     "key": "regional",
+     "byGateway": {
+      "Bay Bridge": 42427,
+      "Golden Gate": 6082,
+      "US-101": 16921,
+      "I-280": 2631,
+      "SR-35": 66,
+      "SR-82": 1487
+     },
+     "uncounted": 22469
+    },
+    {
+     "market": "residents' commutes out",
+     "key": "res work",
+     "byGateway": {
+      "Bay Bridge": 28522,
+      "Golden Gate": 4733,
+      "US-101": 38275,
+      "I-280": 3557,
+      "SR-35": 33,
+      "SR-82": 910
+     },
+     "uncounted": 14720
+    },
+    {
+     "market": "residents' other trips out",
+     "key": "res social",
+     "byGateway": {
+      "Bay Bridge": 26521,
+      "Golden Gate": 3953,
+      "US-101": 13131,
+      "I-280": 3263,
+      "SR-35": 105,
+      "SR-82": 1643
+     },
+     "uncounted": 10479
+    },
+    {
+     "market": "air travelers (SFO)",
+     "key": "airport",
+     "byGateway": {
+      "Bay Bridge": 0,
+      "Golden Gate": 0,
+      "US-101": 17605,
+      "I-280": 173,
+      "SR-35": 0,
+      "SR-82": 45
+     },
+     "uncounted": 3222
+    },
+    {
+     "market": "college students from outside",
+     "key": "univ",
+     "byGateway": {
+      "Bay Bridge": 4216,
+      "Golden Gate": 445,
+      "US-101": 1602,
+      "I-280": 742,
+      "SR-35": 0,
+      "SR-82": 192
+     },
+     "uncounted": 2070
+    },
+    {
+     "market": "event-goers",
+     "key": "event",
+     "byGateway": {
+      "Bay Bridge": 3367,
+      "Golden Gate": 801,
+      "US-101": 1586,
+      "I-280": 545,
+      "SR-35": 0,
+      "SR-82": 133
+     },
+     "uncounted": 297
+    }
+   ],
+   "gateways": [
+    {
+     "name": "Bay Bridge",
+     "count": 242550,
+     "truckPct": 2.55,
+     "trucks": 6185,
+     "through": 16493,
+     "model": 214019,
+     "left": 5853
+    },
+    {
+     "name": "Golden Gate",
+     "count": 97650,
+     "truckPct": 1.33,
+     "trucks": 1299,
+     "through": 16796,
+     "model": 36342,
+     "left": 43213
+    },
+    {
+     "name": "US-101",
+     "count": 196350,
+     "truckPct": 4.62,
+     "trucks": 9071,
+     "through": 20211,
+     "model": 137154,
+     "left": 29914
+    },
+    {
+     "name": "I-280",
+     "count": 127050,
+     "truckPct": 1.6,
+     "trucks": 2033,
+     "through": 13078,
+     "model": 30297,
+     "left": 81642
+    },
+    {
+     "name": "SR-35",
+     "count": 31500,
+     "truckPct": 1.04,
+     "trucks": 328,
+     "through": 0,
+     "model": 351,
+     "left": 30821
+    },
+    {
+     "name": "SR-82",
+     "count": 17115,
+     "truckPct": 0.71,
+     "trucks": 122,
+     "through": 0,
+     "model": 8556,
+     "left": 8437
+    }
+   ],
+   "personsByCorridor": {
+    "in-commuters": {
+     "east": {
+      "da": 100036,
+      "sr": 19043,
+      "tnc": 3906,
+      "transit": 79664,
+      "walk": 0,
+      "bike": 0
+     },
+     "south": {
+      "da": 75106,
+      "sr": 12346,
+      "tnc": 3525,
+      "transit": 16952,
+      "walk": 0,
+      "bike": 0
+     },
+     "north": {
+      "da": 22070,
+      "sr": 5466,
+      "tnc": 553,
+      "transit": 5143,
+      "walk": 0,
+      "bike": 0
+     }
+    },
+    "regional visitors": {
+     "east": {
+      "da": 30301,
+      "sr": 29528,
+      "tnc": 2290,
+      "transit": 26893,
+      "walk": 0,
+      "bike": 0
+     },
+     "south": {
+      "da": 27393,
+      "sr": 16450,
+      "tnc": 2513,
+      "transit": 9905,
+      "walk": 0,
+      "bike": 0
+     },
+     "north": {
+      "da": 6413,
+      "sr": 6198,
+      "tnc": 490,
+      "transit": 3704,
+      "walk": 0,
+      "bike": 0
+     }
+    },
+    "residents' commutes out": {
+     "east": {
+      "da": 25663,
+      "sr": 9936,
+      "tnc": 154,
+      "transit": 10057,
+      "walk": 0,
+      "bike": 0
+     },
+     "south": {
+      "da": 47700,
+      "sr": 12006,
+      "tnc": 342,
+      "transit": 3923,
+      "walk": 0,
+      "bike": 0
+     },
+     "north": {
+      "da": 6246,
+      "sr": 2425,
+      "tnc": 51,
+      "transit": 743,
+      "walk": 0,
+      "bike": 0
+     }
+    },
+    "residents' other trips out": {
+     "east": {
+      "da": 18967,
+      "sr": 19351,
+      "tnc": 450,
+      "transit": 9231,
+      "walk": 0,
+      "bike": 0
+     },
+     "south": {
+      "da": 19646,
+      "sr": 12529,
+      "tnc": 490,
+      "transit": 4709,
+      "walk": 0,
+      "bike": 0
+     },
+     "north": {
+      "da": 3886,
+      "sr": 3884,
+      "tnc": 106,
+      "transit": 1026,
+      "walk": 0,
+      "bike": 0
+     }
+    },
+    "air travelers (SFO)": {
+     "east": {
+      "da": 0,
+      "sr": 0,
+      "tnc": 0,
+      "transit": 0,
+      "walk": 0,
+      "bike": 0
+     },
+     "south": {
+      "da": 3636,
+      "sr": 6061,
+      "tnc": 14774,
+      "transit": 5529,
+      "walk": 0,
+      "bike": 0
+     },
+     "north": {
+      "da": 0,
+      "sr": 0,
+      "tnc": 0,
+      "transit": 0,
+      "walk": 0,
+      "bike": 0
+     }
+    },
+    "college students from outside": {
+     "east": {
+      "da": 3644,
+      "sr": 1623,
+      "tnc": 71,
+      "transit": 2837,
+      "walk": 0,
+      "bike": 0
+     },
+     "south": {
+      "da": 3406,
+      "sr": 825,
+      "tnc": 125,
+      "transit": 811,
+      "walk": 0,
+      "bike": 0
+     },
+     "north": {
+      "da": 808,
+      "sr": 325,
+      "tnc": 9,
+      "transit": 401,
+      "walk": 0,
+      "bike": 0
+     }
+    },
+    "event-goers": {
+     "east": {
+      "da": 1515,
+      "sr": 2518,
+      "tnc": 793,
+      "transit": 4477,
+      "walk": 0,
+      "bike": 0
+     },
+     "south": {
+      "da": 1130,
+      "sr": 1587,
+      "tnc": 552,
+      "transit": 4129,
+      "walk": 0,
+      "bike": 0
+     },
+     "north": {
+      "da": 475,
+      "sr": 801,
+      "tnc": 130,
+      "transit": 1140,
+      "walk": 0,
+      "bike": 0
+     }
+    }
+   }
+  }
+ },
+ "evidence": {
+  "note": "What published sources say about who crosses the city line (gathered October 2026; downloads in data/beta3/raw/gateways/). No source splits the counts at the US-101 or I-280 county line by market, and none gives a county-to-county table of non-work trips; BATS 2023's report has no origin-destination table and its microdata need an agreement with MTC.",
+  "goldenGate": {
+   "southboundFY2025": 16887881,
+   "southboundFY2026": 17146500,
+   "source": "GGBHTD, Annual Vehicle Crossings and Toll Revenues; Monthly Traffic Crossings (goldengate.org)",
+   "vehicleClassJune2026": {
+    "twoAxle": 0.941,
+    "threePlusAxle": 0.005,
+    "carpool": 0.047,
+    "nonRevenue": 0.007,
+    "source": "GGBHTD Finance-Auditing Committee, tolls and fares report for the 12 months ending June 2026 (23 July 2026 meeting)"
+   },
+   "goldenGateTransitFY2025": {
+    "weekday": 4714,
+    "weekdayAcrossBridge": 2391,
+    "source": "goldengate.org bus statistics"
+   },
+   "goldenGateFerryFY2025": {
+    "weekday": 4481,
+    "source": "goldengate.org ferry statistics"
+   },
+   "tam2018": "TAM, Origin and Destination Data (26 July 2018): 63% of AM-peak trips leaving Marin go to San Francisco, San Mateo, or Santa Clara County; 28% of Marin's employed residents work in San Francisco. No bridge purpose split."
+  },
+  "bayBridge": {
+   "westboundTollFY2025": 43069460,
+   "source": "MTC Monthly Transportation Statistics (14 Sep 2026), Bay Bridge tab, summed over FY2025 (about 118,000 a day over all days)",
+   "sfctaDowntownTravelStudy2025": "SFCTA Downtown Travel Study (May 2025), executive summary p. 11: adults' weekday car trips on I-80 between US-101 and the Bay Bridge in BATS 2023 were 72% to or from the city, 13% within it, and 15% passing through; 8% work, 92% other purposes (2019: 82%, 11%, 7%; 13% work).",
+   "mtcCoreCapacity": "MTC Core Capacity Transit Study, transbay memo (about 2016): 70% of AM-peak-hour Bay Bridge vehicles assumed to end in the downtown core."
+  },
+  "countyLine": {
+   "sfchamp2002": "SFCTA SF-CHAMP validation (2002 base), Table 28: county boundary screenline 555,054 vehicles a day observed (all crossings, counted and surface roads), Golden Gate 120,321, Bay Bridge 276,683.",
+   "ccagCmp2025": "C/CAG 2025 CMP, Tables 15-17 (C/CAG-VTA model, 2015): San Mateo residents' work trips toward the north (San Francisco) 117,859."
+  },
+  "residentsOut": {
+   "sfchamp1990": "SF-CHAMP validation report, Table 8 (MTC 1990 survey): share of SF residents' tours external to the city: work 19%, school 7%, other 9%, work-based 5%.",
+   "bats2023": "BATS 2023 final report, Table 32: SF residents' weighted weekday trips 3,508,274 (unlinked), by purpose; no destination county.",
+   "check": "A check, not an input: 9% of residents' other tours outside the city in 1990, against the model's assumed 5% of non-work trips. A trial calibration at 9% lowered in-city trips and Muni's routes; the model keeps 5%."
+  },
+  "airport": {
+   "sfoPassengersFY2025": 54100000,
+   "groundAccess2014": "Corey, Canapary & Galanis, 2014-15 SFO/OAK Ground Access Study: SFO's originating passengers 38% from San Francisco; those starting in the city: personal vehicle 22%, rental 9%, BART 16%, taxi 19%, limousine 11%, TNC 12%, shared van 10%."
+  },
+  "commutes": "Vital Signs commute patterns (ACS 2016-20 PUMS, data.bayareametro.gov j7ht-u3pq) and the ACS 2024 1-year tables (acs-commute.json): in the model as in-commuters and residents' commutes out."
+ },
+ "trial": {
+  "note": "Not adopted. Regional visitors fitted by corridor to the counts less trucks and through trips (Golden Gate, Bay Bridge, county line), the East Bay visitors' transit share to BART's exits, north and south visitors' transit trips held by a constant, residents' trips out at 9%; 8 + 4 weekday iterations, then experiment.ts. Against today's model run the same way.",
+  "corridorFactor": {
+   "north": 6.62,
+   "east": 1.03,
+   "south": 5.94
+  },
+  "carsVsTarget": {
+   "north": [
+    79422,
+    79555
+   ],
+   "east": [
+    221888,
+    219872
+   ],
+   "south": [
+    326345,
+    327173
+   ]
+  },
+  "muniRoutes": {
+   "today": {
+    "total": 422800,
+    "r": 0.925,
+    "pctRmse": 44.9
+   },
+   "trial": {
+    "total": 387100,
+    "r": 0.93,
+    "pctRmse": 49.7
+   },
+   "count": 515600
+  },
+  "bartCityExits": {
+   "today": {
+    "totalVsCount": 0.032,
+    "r": 0.839,
+    "pctRmse": 34.4
+   },
+   "trial": {
+    "totalVsCount": 0.155,
+    "r": 0.831,
+    "pctRmse": 42.1
+   }
+  },
+  "caltrainCityBoardings": {
+   "today": 9900,
+   "trial": 11400,
+   "count": 11800
+  },
+  "modelCarKm": {
+   "today": 28800000.0,
+   "trial": 46100000.0
+  }
+ }
+}

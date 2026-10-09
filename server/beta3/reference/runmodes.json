@@ -1,0 +1,1015 @@
+{
+ "browser": {
+  "note": "Wall-clock seconds for one run in Chrome with six workers, on a 10-core Apple Silicon Mac with other model runs alongside (load 4 to 8) and the tab hidden, so on the slow side; the workers had the model and the streets loaded and no skims made ahead. Precise's fare-free Muni, 19th Avenue, Geary, and 14 runs were timed before the time savings were taken apart, which adds one demand (about 15 s).",
+  "quick": {
+   "free": 48.6,
+   "geary": 47.9,
+   "cut14": 47.4,
+   "portal": 45.5,
+   "bus19": 130.6,
+   "cordon": 129.7
+  },
+  "precise": {
+   "free": 289.3,
+   "bus19": 430.8,
+   "geary": 272.4,
+   "cut14": 116.3,
+   "portal": 267.5,
+   "cordon": 585.2
+  }
+ },
+ "note": "Quick against Precise on the run-mode test scenarios (server/beta3/pipeline/runmodes.ts). Each mode is compared with today’s network run in the same mode. Seconds are Node CPU seconds on one thread (wall-clock in parentheses in the log); the browser splits the work over its workers.",
+ "bundle": "2026-10-06T03:23:34.598Z",
+ "summary": {
+  "scenarios": 4,
+  "transitTripsPct": 6,
+  "muniBoardingsPct": 3,
+  "timeSavingsPct": 10,
+  "streets": {
+   "scenarios": 2,
+   "transitTripsPct": 71,
+   "muniBoardingsPct": 44,
+   "timeSavingsPct": 81
+  }
+ },
+ "scenarios": {
+  "today": {
+   "name": "No change",
+   "seconds": {
+    "precise": {
+     "cpu": 547.4,
+     "wall": 688.2
+    },
+    "quick": {
+     "cpu": 187.8,
+     "wall": 242.7
+    }
+   },
+   "transitTrips": {
+    "precise": 0,
+    "quick": 0,
+    "errPct": null
+   },
+   "muniBoardings": {
+    "precise": 0,
+    "quick": 0,
+    "errPct": null
+   },
+   "sharesPP": {
+    "da": {
+     "precise": 0,
+     "quick": 0
+    },
+    "sr": {
+     "precise": 0,
+     "quick": 0
+    },
+    "tnc": {
+     "precise": 0,
+     "quick": 0
+    },
+    "transit": {
+     "precise": 0,
+     "quick": 0
+    },
+    "walk": {
+     "precise": 0,
+     "quick": 0
+    },
+    "bike": {
+     "precise": 0,
+     "quick": 0
+    }
+   },
+   "routes": {
+    "n": 0,
+    "r": null,
+    "largestMisses": []
+   },
+   "roadResponse": {
+    "precise": "full",
+    "quick": "fixed"
+   },
+   "vmtPct": {
+    "precise": 0,
+    "quick": null
+   },
+   "vktPct": {
+    "precise": 0,
+    "quick": 0
+   },
+   "mph": {
+    "precise": 0,
+    "quick": 0
+   },
+   "driveMin": {
+    "precise": 0,
+    "quick": 0
+   },
+   "knownDrives": [
+    {
+     "name": "Outer Sunset to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Mission to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Bayview to SoMa",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Oakland to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Marina to Mission Bay",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Financial District to the Outer Richmond",
+     "precise": 0,
+     "quick": 0
+    }
+   ],
+   "timeSavingsH": {
+    "total": {
+     "precise": 0,
+     "quick": 0
+    },
+    "drivers": {
+     "precise": 0,
+     "quick": 0
+    },
+    "transit": {
+     "precise": 0,
+     "quick": 0
+    },
+    "others": {
+     "precise": 0,
+     "quick": 0
+    }
+   },
+   "noChangeVsSavedBaseline": {
+    "precise": {
+     "transitTrips": 0,
+     "logsumMin": 0,
+     "boardings": 0,
+     "lineBoardings": 0
+    },
+    "quick": {
+     "transitTrips": 0,
+     "logsumMin": 0,
+     "boardings": 0,
+     "lineBoardings": 0
+    }
+   }
+  },
+  "free": {
+   "name": "Fare-free Muni",
+   "seconds": {
+    "precise": {
+     "cpu": 943.6,
+     "wall": 995.7
+    },
+    "quick": {
+     "cpu": 216.6,
+     "wall": 276.2
+    }
+   },
+   "transitTrips": {
+    "precise": 81598,
+    "quick": 82764,
+    "errPct": 1.4
+   },
+   "muniBoardings": {
+    "precise": 107632,
+    "quick": 106583,
+    "errPct": -1
+   },
+   "sharesPP": {
+    "da": {
+     "precise": -0.76,
+     "quick": -0.786
+    },
+    "sr": {
+     "precise": -0.557,
+     "quick": -0.572
+    },
+    "tnc": {
+     "precise": -0.056,
+     "quick": -0.062
+    },
+    "transit": {
+     "precise": 2.39,
+     "quick": 2.424
+    },
+    "walk": {
+     "precise": -0.807,
+     "quick": -0.795
+    },
+    "bike": {
+     "precise": -0.21,
+     "quick": -0.209
+    }
+   },
+   "routes": {
+    "n": 67,
+    "r": 1,
+    "largestMisses": [
+     {
+      "route": "49",
+      "precise": 5553,
+      "quick": 5738
+     },
+     {
+      "route": "CA",
+      "precise": 2625,
+      "quick": 2454
+     },
+     {
+      "route": "M",
+      "precise": 3716,
+      "quick": 3564
+     }
+    ]
+   },
+   "roadResponse": {
+    "precise": "full",
+    "quick": "fixed"
+   },
+   "vmtPct": {
+    "precise": -1.386,
+    "quick": null
+   },
+   "vktPct": {
+    "precise": -1.921,
+    "quick": -2.048
+   },
+   "mph": {
+    "precise": 0.194,
+    "quick": 0
+   },
+   "driveMin": {
+    "precise": 0.019,
+    "quick": 0.137
+   },
+   "knownDrives": [
+    {
+     "name": "Outer Sunset to the Financial District",
+     "precise": -0.2,
+     "quick": 0
+    },
+    {
+     "name": "The Mission to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Bayview to SoMa",
+     "precise": -0.1,
+     "quick": 0
+    },
+    {
+     "name": "Oakland to the Financial District",
+     "precise": -0.4,
+     "quick": 0
+    },
+    {
+     "name": "The Marina to Mission Bay",
+     "precise": -0.1,
+     "quick": 0
+    },
+    {
+     "name": "The Financial District to the Outer Richmond",
+     "precise": -0.2,
+     "quick": 0
+    }
+   ],
+   "timeSavingsH": {
+    "total": {
+     "precise": 71338,
+     "quick": 69161
+    },
+    "drivers": {
+     "precise": 2419,
+     "quick": 0
+    },
+    "transit": {
+     "precise": 68919,
+     "quick": 69161
+    },
+    "others": {
+     "precise": 0,
+     "quick": 0
+    }
+   }
+  },
+  "bus19": {
+   "name": "19th Avenue bus lanes",
+   "seconds": {
+    "precise": {
+     "cpu": 1309.6,
+     "wall": 1394.1
+    },
+    "quick": {
+     "cpu": 340.8,
+     "wall": 346.1
+    }
+   },
+   "transitTrips": {
+    "precise": 207,
+    "quick": 352,
+    "errPct": 70.1
+   },
+   "muniBoardings": {
+    "precise": 268,
+    "quick": 384,
+    "errPct": 43.3
+   },
+   "sharesPP": {
+    "da": {
+     "precise": -0.005,
+     "quick": -0.008
+    },
+    "sr": {
+     "precise": -0.003,
+     "quick": -0.005
+    },
+    "tnc": {
+     "precise": -0.001,
+     "quick": -0.002
+    },
+    "transit": {
+     "precise": 0.006,
+     "quick": 0.01
+    },
+    "walk": {
+     "precise": 0.004,
+     "quick": 0.004
+    },
+    "bike": {
+     "precise": 0,
+     "quick": 0
+    }
+   },
+   "routes": {
+    "n": 67,
+    "r": 0.987,
+    "largestMisses": [
+     {
+      "route": "28",
+      "precise": 275,
+      "quick": 327
+     },
+     {
+      "route": "45",
+      "precise": -10,
+      "quick": -49
+     },
+     {
+      "route": "30",
+      "precise": -6,
+      "quick": 14
+     }
+    ]
+   },
+   "roadResponse": {
+    "precise": "full",
+    "quick": "approximate"
+   },
+   "vmtPct": {
+    "precise": -0.024,
+    "quick": 0.053
+   },
+   "vktPct": {
+    "precise": -0.02,
+    "quick": -0.039
+   },
+   "mph": {
+    "precise": -0.034,
+    "quick": -0.037
+   },
+   "driveMin": {
+    "precise": 0.02,
+    "quick": 0.035
+   },
+   "knownDrives": [
+    {
+     "name": "Outer Sunset to the Financial District",
+     "precise": 0,
+     "quick": -0.1
+    },
+    {
+     "name": "The Mission to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Bayview to SoMa",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Oakland to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Marina to Mission Bay",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Financial District to the Outer Richmond",
+     "precise": 0,
+     "quick": 0
+    }
+   ],
+   "timeSavingsH": {
+    "total": {
+     "precise": -372,
+     "quick": -670
+    },
+    "drivers": {
+     "precise": -456,
+     "quick": -757
+    },
+    "transit": {
+     "precise": 84,
+     "quick": 87
+    },
+    "others": {
+     "precise": 0,
+     "quick": 0
+    }
+   }
+  },
+  "geary": {
+   "name": "A Geary subway",
+   "seconds": {
+    "precise": {
+     "cpu": 799.8,
+     "wall": 1023.2
+    },
+    "quick": {
+     "cpu": 137.9,
+     "wall": 144.9
+    }
+   },
+   "transitTrips": {
+    "precise": 5071,
+    "quick": 5220,
+    "errPct": 2.9
+   },
+   "muniBoardings": {
+    "precise": -21894,
+    "quick": -22146,
+    "errPct": -1.2
+   },
+   "sharesPP": {
+    "da": {
+     "precise": -0.064,
+     "quick": -0.068
+    },
+    "sr": {
+     "precise": -0.037,
+     "quick": -0.039
+    },
+    "tnc": {
+     "precise": -0.009,
+     "quick": -0.01
+    },
+    "transit": {
+     "precise": 0.148,
+     "quick": 0.153
+    },
+    "walk": {
+     "precise": -0.027,
+     "quick": -0.024
+    },
+    "bike": {
+     "precise": -0.011,
+     "quick": -0.011
+    }
+   },
+   "routes": {
+    "n": 67,
+    "r": 1,
+    "largestMisses": [
+     {
+      "route": "38R",
+      "precise": -11891,
+      "quick": -12075
+     },
+     {
+      "route": "22",
+      "precise": 47,
+      "quick": -128
+     },
+     {
+      "route": "1",
+      "precise": -1774,
+      "quick": -1649
+     }
+    ]
+   },
+   "roadResponse": {
+    "precise": "full",
+    "quick": "fixed"
+   },
+   "vmtPct": {
+    "precise": -0.164,
+    "quick": null
+   },
+   "vktPct": {
+    "precise": -0.289,
+    "quick": -0.311
+   },
+   "mph": {
+    "precise": 0.032,
+    "quick": 0
+   },
+   "driveMin": {
+    "precise": -0.048,
+    "quick": -0.023
+   },
+   "knownDrives": [
+    {
+     "name": "Outer Sunset to the Financial District",
+     "precise": -0.1,
+     "quick": 0
+    },
+    {
+     "name": "The Mission to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Bayview to SoMa",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Oakland to the Financial District",
+     "precise": -0.2,
+     "quick": 0
+    },
+    {
+     "name": "The Marina to Mission Bay",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Financial District to the Outer Richmond",
+     "precise": -0.1,
+     "quick": 0
+    }
+   ],
+   "timeSavingsH": {
+    "total": {
+     "precise": 5896,
+     "quick": 5358
+    },
+    "drivers": {
+     "precise": 513,
+     "quick": 0
+    },
+    "transit": {
+     "precise": 5383,
+     "quick": 5358
+    },
+    "others": {
+     "precise": 0,
+     "quick": 0
+    }
+   }
+  },
+  "cut14": {
+   "name": "The 14 Mission at half its frequency",
+   "seconds": {
+    "precise": {
+     "cpu": 262.9,
+     "wall": 261.7
+    },
+    "quick": {
+     "cpu": 112.7,
+     "wall": 113.6
+    }
+   },
+   "transitTrips": {
+    "precise": -328,
+    "quick": -347,
+    "errPct": -5.6
+   },
+   "muniBoardings": {
+    "precise": -1268,
+    "quick": -1236,
+    "errPct": 2.6
+   },
+   "sharesPP": {
+    "da": {
+     "precise": 0.003,
+     "quick": 0.004
+    },
+    "sr": {
+     "precise": 0.003,
+     "quick": 0.003
+    },
+    "tnc": {
+     "precise": 0,
+     "quick": 0
+    },
+    "transit": {
+     "precise": -0.01,
+     "quick": -0.01
+    },
+    "walk": {
+     "precise": 0.003,
+     "quick": 0.003
+    },
+    "bike": {
+     "precise": 0.001,
+     "quick": 0.001
+    }
+   },
+   "routes": {
+    "n": 67,
+    "r": 1,
+    "largestMisses": [
+     {
+      "route": "F",
+      "precise": 378,
+      "quick": 320
+     },
+     {
+      "route": "14R",
+      "precise": 930,
+      "quick": 971
+     },
+     {
+      "route": "14",
+      "precise": -4532,
+      "quick": -4513
+     }
+    ]
+   },
+   "roadResponse": {
+    "precise": "full",
+    "quick": "fixed"
+   },
+   "vmtPct": {
+    "precise": 0.006,
+    "quick": null
+   },
+   "vktPct": {
+    "precise": 0.008,
+    "quick": 0.009
+   },
+   "mph": {
+    "precise": -0.003,
+    "quick": 0
+   },
+   "driveMin": {
+    "precise": 0,
+    "quick": -0.001
+   },
+   "knownDrives": [
+    {
+     "name": "Outer Sunset to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Mission to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Bayview to SoMa",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Oakland to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Marina to Mission Bay",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Financial District to the Outer Richmond",
+     "precise": 0,
+     "quick": 0
+    }
+   ],
+   "timeSavingsH": {
+    "total": {
+     "precise": -225,
+     "quick": -223
+    },
+    "drivers": {
+     "precise": -16,
+     "quick": 0
+    },
+    "transit": {
+     "precise": -209,
+     "quick": -223
+    },
+    "others": {
+     "precise": 0,
+     "quick": 0
+    }
+   }
+  },
+  "cordon": {
+   "name": "Downtown congestion charge",
+   "seconds": {
+    "precise": {
+     "cpu": 1700.3,
+     "wall": 1757.6
+    },
+    "quick": {
+     "cpu": 358.4,
+     "wall": 359.6
+    }
+   },
+   "transitTrips": {
+    "precise": 27947,
+    "quick": 28559,
+    "errPct": 2.2
+   },
+   "muniBoardings": {
+    "precise": 18937,
+    "quick": 19575,
+    "errPct": 3.4
+   },
+   "sharesPP": {
+    "da": {
+     "precise": -1.268,
+     "quick": -1.296
+    },
+    "sr": {
+     "precise": -0.133,
+     "quick": -0.148
+    },
+    "tnc": {
+     "precise": -0.075,
+     "quick": -0.078
+    },
+    "transit": {
+     "precise": 0.824,
+     "quick": 0.842
+    },
+    "walk": {
+     "precise": 0.571,
+     "quick": 0.597
+    },
+    "bike": {
+     "precise": 0.082,
+     "quick": 0.083
+    }
+   },
+   "routes": {
+    "n": 67,
+    "r": 0.988,
+    "largestMisses": [
+     {
+      "route": "7",
+      "precise": 834,
+      "quick": 1131
+     },
+     {
+      "route": "22",
+      "precise": -23,
+      "quick": 240
+     },
+     {
+      "route": "44",
+      "precise": 318,
+      "quick": 103
+     }
+    ]
+   },
+   "roadResponse": {
+    "precise": "full",
+    "quick": "approximate"
+   },
+   "vmtPct": {
+    "precise": -2.852,
+    "quick": -2.556
+   },
+   "vktPct": {
+    "precise": -4.289,
+    "quick": -4.358
+   },
+   "mph": {
+    "precise": 0.724,
+    "quick": 0.596
+   },
+   "driveMin": {
+    "precise": -0.364,
+    "quick": -0.327
+   },
+   "knownDrives": [
+    {
+     "name": "Outer Sunset to the Financial District",
+     "precise": 0,
+     "quick": -0.2
+    },
+    {
+     "name": "The Mission to the Financial District",
+     "precise": -0.3,
+     "quick": -0.3
+    },
+    {
+     "name": "Bayview to SoMa",
+     "precise": -0.9,
+     "quick": -0.9
+    },
+    {
+     "name": "Oakland to the Financial District",
+     "precise": -7.7,
+     "quick": -7.7
+    },
+    {
+     "name": "The Marina to Mission Bay",
+     "precise": 0,
+     "quick": -0.1
+    },
+    {
+     "name": "The Financial District to the Outer Richmond",
+     "precise": -0.4,
+     "quick": -0.3
+    }
+   ],
+   "timeSavingsH": {
+    "total": {
+     "precise": -69102,
+     "quick": -70731
+    },
+    "drivers": {
+     "precise": -69051,
+     "quick": -70731
+    },
+    "transit": {
+     "precise": -51,
+     "quick": 0
+    },
+    "others": {
+     "precise": 0,
+     "quick": 0
+    }
+   }
+  },
+  "portal": {
+   "name": "The Portal: Caltrain to the Salesforce Transit Center",
+   "seconds": {
+    "precise": {
+     "cpu": 553.8,
+     "wall": 555.4
+    },
+    "quick": {
+     "cpu": 147,
+     "wall": 149.8
+    }
+   },
+   "transitTrips": {
+    "precise": 2476,
+    "quick": 2592,
+    "errPct": 4.7
+   },
+   "muniBoardings": {
+    "precise": -5008,
+    "quick": -5041,
+    "errPct": -0.7
+   },
+   "sharesPP": {
+    "da": {
+     "precise": -0.052,
+     "quick": -0.055
+    },
+    "sr": {
+     "precise": -0.016,
+     "quick": -0.017
+    },
+    "tnc": {
+     "precise": -0.002,
+     "quick": -0.003
+    },
+    "transit": {
+     "precise": 0.072,
+     "quick": 0.076
+    },
+    "walk": {
+     "precise": -0.001,
+     "quick": 0
+    },
+    "bike": {
+     "precise": -0.001,
+     "quick": -0.001
+    }
+   },
+   "routes": {
+    "n": 67,
+    "r": 0.999,
+    "largestMisses": [
+     {
+      "route": "N",
+      "precise": -2458,
+      "quick": -2561
+     },
+     {
+      "route": "45",
+      "precise": -845,
+      "quick": -897
+     },
+     {
+      "route": "55",
+      "precise": -74,
+      "quick": -103
+     }
+    ]
+   },
+   "roadResponse": {
+    "precise": "full",
+    "quick": "fixed"
+   },
+   "vmtPct": {
+    "precise": -0.147,
+    "quick": null
+   },
+   "vktPct": {
+    "precise": -0.53,
+    "quick": -0.551
+   },
+   "mph": {
+    "precise": 0.022,
+    "quick": 0
+   },
+   "driveMin": {
+    "precise": -0.122,
+    "quick": -0.109
+   },
+   "knownDrives": [
+    {
+     "name": "Outer Sunset to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Mission to the Financial District",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Bayview to SoMa",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "Oakland to the Financial District",
+     "precise": -0.1,
+     "quick": 0
+    },
+    {
+     "name": "The Marina to Mission Bay",
+     "precise": 0,
+     "quick": 0
+    },
+    {
+     "name": "The Financial District to the Outer Richmond",
+     "precise": 0,
+     "quick": 0
+    }
+   ],
+   "timeSavingsH": {
+    "total": {
+     "precise": 3586,
+     "quick": 3300
+    },
+    "drivers": {
+     "precise": 289,
+     "quick": 0
+    },
+    "transit": {
+     "precise": 3297,
+     "quick": 3300
+    },
+    "others": {
+     "precise": 0,
+     "quick": 0
+    }
+   }
+  }
+ }
+}

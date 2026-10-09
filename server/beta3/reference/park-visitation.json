@@ -1,0 +1,379 @@
+{
+  "accessed": "2026-10-04",
+  "description": "Observed or officially estimated visitation for San Francisco parks, for calibrating the beta3 park attraction term. Every number below was read from the fetched source cited with it; raw downloads (and text extractions of PDFs) are in data/beta3/raw/parks-visits/ (gitignored). Nothing here is extrapolated or modelled by us. Where a value is a vehicle count, a cumulative total, or a partial-area screenline count, it is labelled as such and annualVisits is null.",
+  "parks": [
+    {
+      "name": "Golden Gate Park",
+      "annualVisits": 24000000,
+      "year": "not stated (undated agency web page, current at access)",
+      "acres": 1017,
+      "method": "Official round-number estimate ('an estimated 24 million visitors each year'). The page gives no methodology, counting period or definition of a visit. RPD's FY23 annual report (below) says RPD measures JFK Promenade use with hand counts, passive infrared sensors and location-based (cell phone) data, but it does not tie the 24 million figure to any of these.",
+      "source": {
+        "publisher": "San Francisco Recreation and Park Department",
+        "title": "Getting to Golden Gate Park",
+        "url": "https://sfrecpark.org/1159/Getting-to-Golden-Gate-Park",
+        "date": "undated (fetched 2026-10-04)",
+        "page": "intro paragraph: 'We're proud to welcome an estimated 24 million visitors each year to Golden Gate Park'; same section gives '1,017-acre, three-mile-long urban park'",
+        "rawFile": "ggp-getting-to.html"
+      }
+    },
+    {
+      "name": "Golden Gate Park - car-free JFK Drive (JFK Promenade) trips",
+      "annualVisits": null,
+      "cumulativeTrips": 7000000,
+      "period": "late April 2020 to about September 2021 (about 17 months)",
+      "method": "Counts of people walking, rolling, biking on car-free JFK Drive ('almost 7 million ... trips'); stated as 36% more daily park trips on JFK than before the closure. Counting technology not stated in the deck; RPD's FY23 annual report (p.4) says JFK visitation is measured with hand counts, passive infrared sensors (which cannot distinguish mode) and location-based data. Covers the JFK corridor only, not the whole park.",
+      "source": {
+        "publisher": "SFMTA and SF Recreation and Park Department",
+        "title": "Golden Gate Park Access & Safety Program (presentation)",
+        "url": "https://www.sfmta.com/sites/default/files/reports-and-documents/2021/09/ggp_access_and_safety_final_accessible.pdf",
+        "date": "September 2021",
+        "page": "slide 8 ('Almost 7 million walking, rolling, biking and strolling trips have been made on car-free JFK since April 2020, a 36% daily increase in park visits'); repeated on the program fact sheet https://sfrecpark.org/DocumentCenter/View/17286/GGP-Access-Fact-Sheet p.1",
+        "rawFile": "sfmta-ggp-access-safety-2021.pdf; ggp-access-fact-sheet.pdf"
+      }
+    },
+    {
+      "name": "Golden Gate Park (eastern end, JFK Drive area) - Saturday vs Sunday screenline counts",
+      "annualVisits": null,
+      "year": 2006,
+      "method": "Manual screenline counts of all pedestrians, cyclists, roller skaters and skateboarders passing 5 points on or near JFK Drive, 1-3pm only, on 2 Saturdays and 2 Sundays (Aug 5-6 sunny, Aug 19-20 foggy, 2006), plus a 763-response intercept survey. JFK was closed to cars on Sundays. Counts are summed across the two days of each type ('combined Saturdays' vs 'combined Sundays').",
+      "daySplit": {
+        "screenline_1to3pm_combinedSaturdays_vs_combinedSundays": {
+          "JFK just west of Conservatory Dr West": {"sat": 856, "sun": 2712},
+          "JFK east of 10th Ave": {"sat": 906, "sun": 2188},
+          "JFK just east of Stow (Lake Dr)": {"sat": 846, "sun": 1633},
+          "Arguello between Fulton and Conservatory Dr": {"sat": 466, "sun": 431}
+        },
+        "averageScreenlineChangeSundayVsSaturday": "+116% (study's own figure)",
+        "keyIntersectionsPedBikeChangeSundayVsSaturday": "+24% (study's own figure)"
+      },
+      "otherFindings": "Intercept survey: 31% walked to the park; about 31% reached it in under 10 minutes; fewer than 10% travelled an hour or more; 11% took transit (p.5-6). The study notes the survey covers only the JFK area and 'can not be extrapolated to uses of all areas within Golden Gate Park'.",
+      "source": {
+        "publisher": "San Francisco County Transportation Authority (with SFMTA/DPT)",
+        "title": "Golden Gate Park Transportation Access Summer 2006: Weekend Access Conditions",
+        "url": "https://www.sfcta.org/sites/default/files/2021-02/GGP_weekend_access_2007.pdf",
+        "date": "2007 (file name); data August 2006",
+        "page": "pp.1-3 of 8 (PDF pp.3-5), 'Methodology' and 'Pedestrian & Bicycle Access'",
+        "rawFile": "sfcta-ggp-weekend-access-2007.pdf"
+      }
+    },
+    {
+      "name": "Presidio of San Francisco",
+      "annualVisits": 9500000,
+      "year": 2024,
+      "acres": 1491,
+      "method": "Presidio Trust figure; the 2024 report does not restate its method. The Trust's 2021 visitor profile report says its visitation volume comes from Tourism Economics' 'Visitation Volume and Demographics Report', built from anonymized cellphone data plus trail counter data (stated margin of error 2.47%). Acreage (1,491) is from that 2021 report, p.7.",
+      "source": {
+        "publisher": "Presidio Trust",
+        "title": "Performance and Accountability Report, Fiscal Year 2025",
+        "url": "https://wp.presidio.gov/wp-content/uploads/2025/12/PT-FY2025-PAR_Accessible.pdf",
+        "date": "December 2025",
+        "page": "letter from the CEO, PDF p.4: 'In total, the Presidio hosted 9.5 million visits in 2024, the last year for which data is available.'",
+        "rawFile": "presidio-trust-fy2025-par.pdf"
+      },
+      "corroboration": [
+        "Presidio Trust FY2024 PAR (Nov 2024), PDF p.3: 'The park hosted 9.5 million visits last year' (https://wp.presidio.gov/wp-content/uploads/2024/11/Presidio-Trust-FY2024-PAR_ACCESSIBLE-1.pdf)",
+        "Presidio Trust Report to OMB, March 5 2025, PDF pp.2, 4, 11: 'The Presidio hosts 9.5 million visits annually' (https://wp.presidio.gov/wp-content/uploads/2025/03/Presidio-Trust-Submission-to-OMB-March-5-2025.pdf)",
+        "Presidio Trust background sheet 'Making & Sustaining a Great National Park Site' (Feb 2026), p.3: '9.5 million annual ... visits' (https://wp.presidio.gov/wp-content/uploads/2026/02/Background-Making-and-Sustaining-a-Great-National-Park.pdf)"
+      ]
+    },
+    {
+      "name": "Presidio of San Francisco (2018-2020 quarterly series and visitor origin)",
+      "annualVisits": 6300000,
+      "year": 2020,
+      "method": "Tourism Economics, Visitation Volume and Demographics Report (2021): anonymized cellphone data and trail counter data. 2020 was cut by COVID-19 shutdown orders.",
+      "quarterlyVisitsMillions": {
+        "note": "Read from the bar labels of the p.16 chart; labels matched to quarters by their x position in the PDF. Annual sums are just the sum of the four published labels (the report itself gives only 6.3M for 2020).",
+        "2018": {"Q1": 2.06, "Q2": 2.67, "Q3": 3.18, "Q4": 2.06, "sumOfQuarters": 9.97},
+        "2019": {"Q1": 2.03, "Q2": 2.60, "Q3": 3.35, "Q4": 2.13, "sumOfQuarters": 10.11},
+        "2020": {"Q1": 2.14, "Q2": 1.13, "Q3": 2.05, "Q4": 1.07, "sumOfQuarters": 6.39}
+      },
+      "visitorOriginShare": {
+        "2019": {"San Francisco": 0.19, "Other Bay Area": 0.23, "Other California": 0.11, "Other domestic": 0.31, "International": 0.16},
+        "2020": {"San Francisco": 0.23, "Other Bay Area": 0.41, "Other California": 0.16, "Other domestic": 0.12, "International": 0.08}
+      },
+      "source": {
+        "publisher": "Presidio Trust",
+        "title": "2020 Presidio Visitor Profile Report",
+        "url": "https://www.presidio.gov/presidio-trust/planning-internal/Shared%20Documents/Planning%20Documents/Presidio-Visitation-Data-Summary-Report_11.2021.pdf",
+        "date": "2021-11-17",
+        "page": "p.11 (methods), p.13/p.15 (6.3 million), p.16 (quarterly chart), p.18 (origin shares)",
+        "rawFile": "presidio-visitor-profile-2020.pdf"
+      },
+      "corroboration": [
+        "Presidio Trust FY2022 PAR (published Aug 2023), PDF p.4: 'The Presidio itself welcomes between seven and ten million visitors each year' (https://wp.presidio.gov/wp-content/uploads/2023/08/EXD-700-FY2022PerfAccRpt.pdf)"
+      ]
+    },
+    {
+      "name": "Presidio Tunnel Tops (14 acres, inside the Presidio; opened 2022-07-17)",
+      "annualVisits": 1800000,
+      "year": "first year of operation, 2022-07-17 to about 2023-07-12",
+      "acres": 14,
+      "method": "Presidio Trust count ('nearly 1.8 million visits'); counting method not stated. Part of the Presidio total, not additional to it.",
+      "source": {
+        "publisher": "Presidio Trust",
+        "title": "Presidio Tunnel Tops to Expand with New Picnic and Gathering Space (press release)",
+        "url": "https://presidio.gov/about/press/presidio-tunnel-tops-to-expand-with-new-picnic-and-gathering-space",
+        "date": "2023-07-12",
+        "page": "paragraph 2: 'Since opening on July 17, 2022, the hugely popular destination has hosted nearly 1.8 million visits'; same release: Outpost playground had '400,000 visitors ... over the last 12 months'",
+        "rawFile": "presidio-tunnel-tops-expansion-press.html"
+      },
+      "cumulativeSeries": [
+        {"visits": 500000, "qualifier": "over 500,000", "through": "first two months (about mid-Sept 2022)", "source": "Presidio Trust FY2022 PAR, PDF p.3-4"},
+        {"visits": 3800000, "through": "about two years after opening (FY2024 PAR, Nov 2024)", "source": "Presidio Trust FY2024 PAR, PDF p.3"},
+        {"visits": 5500000, "through": "FY2025 PAR (Dec 2025)", "source": "Presidio Trust FY2025 PAR, PDF p.3"},
+        {"visits": 6000000, "through": "February 2026", "source": "Presidio Trust background sheet (Feb 2026), p.2"}
+      ]
+    },
+    {
+      "name": "Golden Gate National Recreation Area (GOGA), whole unit",
+      "annualVisits": 15748676,
+      "year": 2025,
+      "method": "NPS official recreation visits (sum of the 12 monthly values from the IRMA visitation service). Built from the GOGA counting instructions (Jan 2023): Alcatraz concessioner ticket counts; inductive-loop vehicle counters at each site multiplied by persons-per-vehicle (1.7 to 2.8) after subtracting non-reportable vehicles; Crissy Field trail counters (Mason St path, Promenade) divided by 2; special-event counts; Ocean Beach walk-in regression; Cliff House restaurant patrons. Includes Marin and San Mateo sites and Alcatraz. Does NOT include Muir Woods NM, Fort Point NHS or SF Maritime NHP (separate NPS units). Presidio Trust-managed lands are not counted by these instructions apart from the NPS-run Crissy Field, Fort Scott overlook and Baker Beach counters.",
+      "annualSeries": {"2015": 14888537, "2016": 15638777, "2017": 14981897, "2018": 15223697, "2019": 15002227, "2020": 12400045, "2021": 13712614, "2022": 15638911, "2023": 14953882, "2024": 17187508, "2025": 15748676},
+      "monthly": {
+        "2019": [858993, 1003946, 1351250, 1382599, 1232164, 1408780, 1371028, 1383260, 1479950, 1435037, 1109237, 985983],
+        "2024": [1055976, 1011051, 1244022, 1418181, 1582123, 1764601, 1871923, 1733110, 1601597, 1502344, 1259683, 1142897],
+        "2025": [1050437, 1001568, 1222986, 1421322, 1452809, 1566690, 1688027, 1756832, 1341071, 1228178, 1058762, 959994]
+      },
+      "source": {
+        "publisher": "U.S. National Park Service, Social Science Program (IRMA Visitor Use Statistics)",
+        "title": "IRMA Stats REST service, recreation visitors by month, unit GOGA (Golden Gate NRA)",
+        "url": "https://irmaservices.nps.gov/v3/rest/stats/visitation?unitCodes=GOGA&startMonth=1&startYear=2015&endMonth=12&endYear=2026",
+        "date": "fetched 2026-10-04 (no 2026 months returned)",
+        "page": "JSON; method from 'Golden Gate National Recreation Area Visitor Use Counting and Reporting Instructions', January 2023, https://irma.nps.gov/Stats/FileDownload/33338, pp.1-2",
+        "rawFile": "irma-GOGA-2015-2026.json; irma-GOGA-counting-instructions-2023-present.pdf"
+      }
+    },
+    {
+      "name": "Fort Point National Historic Site (inside the Presidio, below the Golden Gate Bridge)",
+      "annualVisits": 1010870,
+      "year": 2025,
+      "method": "NPS official recreation visits (sum of the 12 monthly IRMA values). Separate NPS unit, not in the GOGA total. Physically inside the Presidio, so it may overlap the Presidio Trust count (neither source says either way).",
+      "annualSeries": {"2019": 1421349, "2022": 955454, "2023": 903685, "2024": 1189908, "2025": 1010870},
+      "source": {
+        "publisher": "U.S. National Park Service (IRMA Visitor Use Statistics)",
+        "title": "IRMA Stats REST service, recreation visitors by month, unit FOPO",
+        "url": "https://irmaservices.nps.gov/v3/rest/stats/visitation?unitCodes=FOPO&startMonth=1&startYear=2015&endMonth=12&endYear=2026",
+        "date": "fetched 2026-10-04",
+        "page": "JSON",
+        "rawFile": "irma-FOPO-2015-2026.json"
+      }
+    },
+    {
+      "name": "San Francisco Maritime National Historical Park (Aquatic Park, Hyde Street Pier, Municipal Pier)",
+      "annualVisits": 2944483,
+      "year": 2025,
+      "method": "NPS official recreation visits (sum of the 12 monthly IRMA values). Separate NPS unit, not in the GOGA total. Partly a waterfront park (Aquatic Park beach, lawn and pier) and partly a museum/ships attraction; the split is not published here.",
+      "annualSeries": {"2019": 4016598, "2022": 3034750, "2023": 1769467, "2024": 2535134, "2025": 2944483},
+      "source": {
+        "publisher": "U.S. National Park Service (IRMA Visitor Use Statistics)",
+        "title": "IRMA Stats REST service, recreation visitors by month, unit SAFR",
+        "url": "https://irmaservices.nps.gov/v3/rest/stats/visitation?unitCodes=SAFR&startMonth=1&startYear=2015&endMonth=12&endYear=2026",
+        "date": "fetched 2026-10-04",
+        "page": "JSON",
+        "rawFile": "irma-SAFR-2015-2026.json"
+      }
+    },
+    {
+      "name": "Fort Funston (GGNRA, SF)",
+      "annualVisits": 500000,
+      "year": "not stated (report March 2023; site visits about 2018-2022)",
+      "method": "NPS staff estimate quoted in an OSU report for NPS: '~0.5 million visitors per year; of these, approximately 60% have dogs'. Vehicle counter totals for the site are under siteVehicleCounts.",
+      "source": {
+        "publisher": "Oregon State University for the National Park Service (Hall, Engebretson & D'Antonio)",
+        "title": "Visitor Use Monitoring Program for Golden Gate National Recreation Area",
+        "url": "https://parkscalifornia.org/wp-content/uploads/2024/05/Golden-Gate-National-Recreation-Area-Visitor-Monitoring_Final-Report-March-2023.pdf",
+        "date": "March 2023",
+        "page": "report p.34 (PDF p.41), site descriptions, 'Fort Funston'",
+        "rawFile": "goga-visitor-use-monitoring-2023.pdf"
+      }
+    },
+    {
+      "name": "Mission Dolores Park",
+      "annualVisits": null,
+      "year": "about 2016 (article 2016-01-08, after renovation)",
+      "acres": "nearly 16 (SF RPD page)",
+      "dailyVisits": {"weekendDay": "5,000 to 10,000 on weekends", "weekday": "up to 3,000 on weekdays"},
+      "method": "Press figure in the San Francisco Chronicle's 'Dolores Park by the numbers' box. The article does not say who made the estimate or how. Low confidence: a newspaper, not an official count. It is ambiguous whether '5,000 to 10,000 on weekends' means per weekend day or per weekend.",
+      "source": {
+        "publisher": "San Francisco Chronicle (SFGate)",
+        "title": "Dolores Park, with spiffy new look, reopens next week in S.F.",
+        "url": "https://www.sfgate.com/bayarea/article/Dolores-Park-with-spiffy-new-look-reopens-next-6744096.php",
+        "date": "2016-01-08",
+        "page": "sidebar 'Dolores Park by the numbers'",
+        "rawFile": "sfgate-dolores-reopens-2016.html"
+      }
+    }
+  ],
+  "siteVehicleCounts": {
+    "description": "NPS inductive-loop VEHICLE counts (not people) at GGNRA sites in San Francisco, annual totals from the IRMA 'Traffic Counts' park report. To turn them into NPS recreation visits, NPS subtracts a fixed number of non-reportable vehicles and multiplies by persons-per-vehicle (PPV), as listed here from the Jan 2023 counting instructions. We have NOT applied these factors. Many months are clearly filled or estimated (identical values repeat, e.g. Ocean Beach Second Overlook 12,477 every month 2019-2024; Sloat 28,781 every month 2022-2024), so treat the Ocean Beach series especially as NPS estimates, not fresh counts. Monthly values are in the raw file.",
+    "source": {
+      "publisher": "U.S. National Park Service (IRMA Visitor Use Statistics)",
+      "title": "Park Specific Reports: Traffic Counts (Golden Gate NRA)",
+      "url": "https://irma.nps.gov/Stats/SSRSReports/Park%20Specific%20Reports/Traffic%20Counts?Park=GOGA",
+      "date": "fetched 2026-10-04 (report banner: current-year data preliminary)",
+      "page": "per-location tables",
+      "rawFile": "irma-GOGA-traffic-counts-SF-sites.txt"
+    },
+    "countingInstructionsSource": "https://irma.nps.gov/Stats/FileDownload/33338 (GOGA Visitor Use Counting and Reporting Instructions, January 2023, pp.1-2)",
+    "sites": [
+      {"site": "Crissy Field - East Beach parking entrance", "vehicles": {"2019": 505126, "2023": 382511, "2024": 395564, "2025": 392000}, "ppv": 1.7, "nonReportableVehiclesDeducted": 0, "note": "Crissy Field walk/bike visitors are counted separately by two trail counters (Mason St multi-use path, Promenade), divided by 2 for entry/exit; those counts are not published in this report."},
+      {"site": "Crissy Field - West Bluff parking lot", "vehicles": {"2019": 277860, "2023": 127314, "2024": 110507, "2025": 110900}, "ppv": 1.7, "nonReportableVehiclesDeducted": 0},
+      {"site": "Lower Fort Mason entrance", "vehicles": {"2019": 356403, "2023": 1069525, "2024": 1065133, "2025": 929000}, "ppv": 1.7, "nonReportableVehiclesDeducted": 9780, "note": "Large jump from 2022 on; cause not stated in the report."},
+      {"site": "Fort Scott Overlook (Presidio)", "vehicles": {"2019": 110493, "2023": 390104, "2024": 425306, "2025": 406000}, "ppv": 1.7, "nonReportableVehiclesDeducted": 120},
+      {"site": "Baker Beach entrance", "vehicles": {"2019": 363517, "2023": 312524, "2024": 349081, "2025": 342000}, "ppv": 2.2, "nonReportableVehiclesDeducted": 120},
+      {"site": "Merrie Way (Lands End / Sutro Baths lot)", "vehicles": {"2019": 318096, "2023": 216354, "2024": 335633, "2025": 297500}, "ppv": 2.2, "nonReportableVehiclesDeducted": 375},
+      {"site": "Navy Memorial parking area (Lands End, El Camino del Mar)", "vehicles": {"2019": 292796, "2023": 219021, "2024": 218050, "2025": 196700}, "ppv": 2.2, "nonReportableVehiclesDeducted": 120},
+      {"site": "Sutro Heights", "vehicles": "not counted; NPS uses a fixed monthly estimate table (10,000-19,000 vehicles/month; 167,000/yr summed from the table in the instructions, p.3)", "ppv": 2.2, "nonReportableVehiclesDeducted": 375},
+      {"site": "Ocean Beach at Balboa St", "vehicles": {"2019": 171852, "2023": 243900, "2024": 242243, "2025": 238000}, "ppv": 1.7, "note": "The four Ocean Beach lots are summed, then 150 vehicles deducted, then x1.7. NPS adds Ocean Beach walk/bike entries with a regression: 9.2 + 1.04 x the Ocean Beach vehicle-based visitor count (instructions item 15)."},
+      {"site": "Ocean Beach at Fulton St", "vehicles": {"2019": 247380, "2023": 249330, "2024": 267244, "2025": 273000}, "ppv": 1.7},
+      {"site": "Ocean Beach at Sloat Blvd", "vehicles": {"2019": 247344, "2023": 345372, "2024": 345372, "2025": 342000}, "ppv": 1.7},
+      {"site": "Ocean Beach at Second Overlook", "vehicles": {"2019": 149724, "2023": 149724, "2024": 154447, "2025": 148000}, "ppv": 1.7},
+      {"site": "Fort Funston entrance", "vehicles": {"2019": 387472, "2023": 366199, "2024": 412266, "2025": 409000}, "ppv": 2.0, "nonReportableVehiclesDeducted": 600}
+    ],
+    "crossCheck": "The 2019 totals for Crissy East Beach (505,125), West Bluff (277,860), Fort Funston (387,472) and Baker Beach (363,517) match Table 2 (p.6, PDF p.13) of the OSU/NPS 'Visitor Use Monitoring Program for GGNRA' report (March 2023) to within 1 vehicle; that report adds that walk-in and bike visitors from nearby neighborhoods are not captured by these counters."
+  },
+  "attractions": [
+    {
+      "name": "California Academy of Sciences (Golden Gate Park, Music Concourse)",
+      "annualVisits": 1184450,
+      "year": "FY2023 (Jul 2022-Jun 2023)",
+      "method": "Institution attendance reported to RPD for the Park Code 6.13 annual report (ticketed/admitted attendance; exact definition not stated).",
+      "annualSeries": {"FY18": 1294785, "FY19": 1334559, "FY20": 840574, "FY21": 240395, "FY22": 849636, "FY23": 1184450},
+      "monthly": {
+        "order": ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "FY19": [134698, 123593, 95634, 81925, 95657, 117090, 105442, 102357, 133762, 126980, 114844, 102577],
+        "FY23": [103176, 89392, 73977, 73946, 83435, 110187, 100737, 97140, 120542, 113621, 103990, 114307]
+      },
+      "source": {
+        "publisher": "SF Recreation and Park Department and SFMTA",
+        "title": "Annual Report, Golden Gate Park Access and Safety Program",
+        "url": "https://sfrecpark.org/DocumentCenter/View/21773/Annual-Report-GGP-Access-and-Safety-FY23",
+        "date": "2023-08-18",
+        "page": "p.2 (PDF p.3), table 'California Academy of Science Attendance'",
+        "rawFile": "ggp-access-annual-report-fy23.pdf"
+      },
+      "laterContext": "Cal Academy FY2024 Annual Report (Dec 2024), p.3, gives '1,860,000 in-person engagements'. That is a broader measure than attendance and is not comparable (https://www.calacademy.org/sites/default/files/assets/docs/fy24_cas-annual-report-final_241202.pdf)."
+    },
+    {
+      "name": "de Young Museum (Golden Gate Park, Music Concourse)",
+      "annualVisits": 1066221,
+      "year": "FY2023 (Jul 2022-Jun 2023)",
+      "method": "Museum attendance reported to RPD; the report notes attendance is driven mainly by special exhibitions and Free Saturdays.",
+      "annualSeries": {"FY19": 1120025, "FY20": 521292, "FY21": 269058, "FY22": 504007, "FY23": 1066221},
+      "source": {
+        "publisher": "SF Recreation and Park Department and SFMTA",
+        "title": "Annual Report, Golden Gate Park Access and Safety Program",
+        "url": "https://sfrecpark.org/DocumentCenter/View/21773/Annual-Report-GGP-Access-and-Safety-FY23",
+        "date": "2023-08-18",
+        "page": "p.3 (PDF p.4), table 'de Young Museum Attendance'",
+        "rawFile": "ggp-access-annual-report-fy23.pdf"
+      },
+      "laterContext": "Fine Arts Museums of SF annual reports give COMBINED de Young + Legion of Honor (Lincoln Park) visitors: 'nearly 1.5 million' in FY2023, '1.2 million' in FY2024 and '1.2 million' in FY2025 (p.1 of each 4-7 page report: https://www.famsf.org/storage/files/365a930b-d4e6-4768-9390-e91a6e83ccc9/2024-fine-arts-museums-sf-annual-report.pdf ; https://www.famsf.org/storage/files/33ced3b7-93d4-409c-9d88-853cc3cd5c49/annual-report-fy2024.pdf ; https://www.famsf.org/storage/files/01be7936-63cf-4726-9fbd-e2dde72f5282/famsf-annual-report-WS26.pdf). FY23 combined (about 1.5M) minus de Young FY23 (1,066,221) suggests Legion of Honor was about 0.4M, but that is our subtraction of two rounded figures, not a published number."
+    },
+    {
+      "name": "Gardens of Golden Gate Park - Conservatory of Flowers",
+      "annualVisits": 147175,
+      "year": "FY2023",
+      "method": "Garden admissions/visitation reported to RPD (admission free for SF residents from FY22, so this counts visitors, not only paid tickets).",
+      "annualSeries": {"FY18": 166168, "FY19": 168830, "FY20": 100722, "FY21": 45786, "FY22": 128787, "FY23": 147175},
+      "source": {"publisher": "SF Recreation and Park Department and SFMTA", "title": "Annual Report, Golden Gate Park Access and Safety Program", "url": "https://sfrecpark.org/DocumentCenter/View/21773/Annual-Report-GGP-Access-and-Safety-FY23", "date": "2023-08-18", "page": "p.3 (PDF p.4), table 'Visitation to Gardens of Golden Gate Park'", "rawFile": "ggp-access-annual-report-fy23.pdf"}
+    },
+    {
+      "name": "Gardens of Golden Gate Park - Japanese Tea Garden",
+      "annualVisits": 551134,
+      "year": "FY2023",
+      "method": "As above.",
+      "annualSeries": {"FY18": 541843, "FY19": 534068, "FY20": 289347, "FY21": 258268, "FY22": 489042, "FY23": 551134},
+      "source": {"publisher": "SF Recreation and Park Department and SFMTA", "title": "Annual Report, Golden Gate Park Access and Safety Program", "url": "https://sfrecpark.org/DocumentCenter/View/21773/Annual-Report-GGP-Access-and-Safety-FY23", "date": "2023-08-18", "page": "p.3 (PDF p.4), table 'Visitation to Gardens of Golden Gate Park'", "rawFile": "ggp-access-annual-report-fy23.pdf"}
+    },
+    {
+      "name": "Gardens of Golden Gate Park - San Francisco Botanical Garden",
+      "annualVisits": 507437,
+      "year": "FY2023",
+      "method": "As above.",
+      "annualSeries": {"FY18": 458900, "FY19": 424143, "FY20": 361458, "FY21": 470112, "FY22": 539294, "FY23": 507437},
+      "source": {"publisher": "SF Recreation and Park Department and SFMTA", "title": "Annual Report, Golden Gate Park Access and Safety Program", "url": "https://sfrecpark.org/DocumentCenter/View/21773/Annual-Report-GGP-Access-and-Safety-FY23", "date": "2023-08-18", "page": "p.3 (PDF p.4), table 'Visitation to Gardens of Golden Gate Park'", "rawFile": "ggp-access-annual-report-fy23.pdf"}
+    },
+    {
+      "name": "Gardens of Golden Gate Park - all three gardens combined",
+      "annualVisits": 1211165,
+      "year": "FY2025 (Jul 2024-Jun 2025)",
+      "method": "Gardens of Golden Gate Park (SF Botanical Garden Society) total visits, '53% free of charge'.",
+      "annualSeries": {"FY18": 1166911, "FY19": 1127041, "FY20": 751527, "FY21": 774166, "FY22": 1157123, "FY23": 1205746, "FY24": 1207652, "FY25": 1211165},
+      "source": {
+        "publisher": "Gardens of Golden Gate Park",
+        "title": "2025 Annual Report",
+        "url": "https://gggp.org/wp-content/uploads/2026/03/GGGP_Annual_Report_2025_260309-Web.pdf",
+        "date": "2026-03 (file 260309)",
+        "page": "p.2 headline stats; reporting year July 1, 2024 - June 30, 2025. FY24 (1,207,652, 'half of which were free of charge') from the 2024 Annual Report p.2 (https://gggp.org/wp-content/uploads/2026/03/GGGP_Annual_Report_2024_260309-Web.pdf). FY18-FY23 from the RPD FY23 annual report p.3.",
+        "rawFile": "gggp-annual-report-2025.pdf; gggp-annual-report-2024.pdf"
+      }
+    },
+    {
+      "name": "Alcatraz Island (GGNRA; ferry-only, EXCLUDE from city park access)",
+      "annualVisits": 1400000,
+      "year": "not stated ('currently'; page undated)",
+      "method": "Parks Conservancy statement 'more than 1.4 million visitors each year'. Alcatraz is counted inside the NPS GOGA total from the concessioner's ticket counts (GOGA counting instructions item 1), but IRMA does not publish the Alcatraz figure separately in anything we fetched.",
+      "source": {
+        "publisher": "Golden Gate National Parks Conservancy",
+        "title": "Alcatraz at a Glance",
+        "url": "https://www.parksconservancy.org/our-work/alcatraz-glance",
+        "date": "undated (fetched 2026-10-04)",
+        "page": "intro paragraph",
+        "rawFile": "ggnpc-alcatraz-glance.html"
+      },
+      "corroboration": ["NPS news release 'Alcatraz Island celebrates 50 years of public tours', 2023-10-26: 'draws more than a million visitors each year' (https://www.nps.gov/goga/learn/news/50th-anniversary-of-alcatraz-island.htm)"]
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Muir Woods National Monument (Marin County, outside SF - excluded)",
+      "annualVisits": 756573,
+      "year": 2025,
+      "annualSeries": {"2019": 812073, "2023": 809697, "2024": 792494, "2025": 756573},
+      "source": {"publisher": "U.S. National Park Service (IRMA)", "title": "IRMA Stats REST service, unit MUWO", "url": "https://irmaservices.nps.gov/v3/rest/stats/visitation?unitCodes=MUWO&startMonth=1&startYear=2015&endMonth=12&endYear=2026", "date": "fetched 2026-10-04", "page": "JSON", "rawFile": "irma-MUWO-2015-2026.json"}
+    }
+  ],
+  "benchmarks": [
+    {
+      "name": "U.S. neighborhood parks, observed use (SOPARC direct observation)",
+      "value": "Average neighborhood park of 8.8 acres averaged 20 users/hour, or an estimated 1,533 person-hours of weekly use",
+      "year": "spring/summer 2014",
+      "method": "Systematic direct observation (SOPARC) over a typical week at a stratified sample of 174 neighborhood parks in 25 major U.S. cities (population >100,000); repeated-measures negative binomial models. Note the unit is person-hours or users present per hour, not visits; turning it into visits needs a length-of-stay assumption, which the paper does not give.",
+      "source": {
+        "publisher": "American Journal of Preventive Medicine (Cohen, Han, Nagel, Harnik, McKenzie, Evenson et al.; RAND / Trust for Public Land)",
+        "title": "The First National Study of Neighborhood Parks: Implications for Physical Activity",
+        "url": "https://assets.centralparknyc.org/pdfs/institute/p2p-upelp/3.008_The+First+National+Study+of+Neighborhood+Parks.pdf",
+        "date": "2016 (Am J Prev Med 51(4):419-426)",
+        "page": "Abstract, p.419",
+        "rawFile": "cohen-2016-national-study-neighborhood-parks.pdf"
+      }
+    },
+    {
+      "name": "NPS GOGA activity proportions (from a 2023 visitor survey)",
+      "value": "Share of GOGA recreation visits doing each activity at the reference temperature: hiking/walking 0.634518, hiking/walking/running 0.65736, viewing scenery 0.92132, sightseeing 0.94, viewing wildlife 0.550761, visiting cultural/historic site 0.324873, driving for pleasure 0.177665, picnic 0.159898, creative arts 0.121827, water play 0.063452, biking 0.058376, running/jogging 0.045685, family gathering 0.045685, fishing 0.005076, horse riding 0.002538",
+      "year": 2023,
+      "method": "NPS Recreation Activity Reporting Instructions; proportions 'based on data from a 2023 visitor survey', adjusted month by month for temperature relative to 68.3 F.",
+      "source": {"publisher": "U.S. National Park Service", "title": "Golden Gate National Recreation Area Recreation Activity Reporting Instructions", "url": "https://irma.nps.gov/Stats/FileDownload/44199", "date": "October 2023", "page": "pp.1-4", "rawFile": "irma-GOGA-recreation-count-procedures-2023-present.pdf"}
+    },
+    {
+      "name": "SF residents' park-use frequency",
+      "value": "72% of SF residents go to parks at least once a week (75% in 2019)",
+      "year": "2023 City Survey (fielded Oct-Dec 2022, 2,530 residents)",
+      "method": "Controller's City Survey, a resident survey.",
+      "source": {"publisher": "City and County of San Francisco, Office of the Controller", "title": "2023 City Survey Results", "url": "https://sf.gov/reports/april-2023/2023-city-survey-results", "date": "April 2023", "page": "Parks section", "rawFile": "sfcontroller-city-survey-2023.html"}
+    }
+  ],
+  "notes": [
+    "Golden Gate Park's 24 million/yr is an undated round-number RPD claim with no published method. The only published GGP counts are the JFK Promenade sensor/LBD series (charted, not tabulated, in RPD's FY23 annual report p.4-5) and the 2006 SFCTA weekend screenlines. Museum and garden attendance at the Concourse in FY23 was about 3.46M (Cal Academy 1.18M + de Young 1.07M + three gardens 1.21M), i.e. the attraction-only share of the 24M claim.",
+    "The FY23 RPD annual report has a monthly 'Concourse Garage Transient Revenue' table (dollars, not visits). We did not record it as visitation.",
+    "No later (FY24/FY25) Golden Gate Park Access and Safety annual report was found on sfrecpark.org; the JFK Access page lists only the FY23 annual report and 2022-2023 quarterlies.",
+    "Presidio (9.5M, 2024) and GGNRA (15.7M, 2025) are counted by different agencies and methods (cellphone data plus trail counters vs vehicle counters times PPV). Crissy Field, Baker Beach and Fort Scott overlook are NPS-counted sites inside the Presidio and are probably also in the Trust's cellphone-based total. Neither source says how they overlap, so do not add the two totals together for the Presidio area.",
+    "GOGA's 15.7M covers sites in Marin and San Mateo counties too (Marin Headlands, Fort Baker, Stinson, Muir Beach, Tennessee Valley, Bolinas Ridge, etc.) plus Alcatraz. NPS does not publish a per-site person count; per-site vehicle counts and the PPV multipliers are under siteVehicleCounts.",
+    "The IRMA SSRS 'GOGA YTD Report' (which may hold per-field visitor numbers) returned 'Service unavailable' twice on 2026-10-04. The 'Monthly Public Use' report gives only unit totals. The Crissy Field trail-counter and Alcatraz concessioner monthly values were therefore not obtained.",
+    "Not found or not fetchable: NRPA does not publish a visits-per-acre benchmark (Park Metrics covers budgets, staffing, acreage per resident). We found no visitation counts for McLaren Park, Lake Merced, Twin Peaks or other RPD parks from RPD, the Controller, SFCTA or SF Planning. Trust for Public Land ParkScore rates access and acreage, not visits. We found no Placer.ai or mobile-data park estimates published by an official SF body (StreetLight's GGP case study page gives no numbers). Lands End: secondary pages cite '1 million visitors each year' and an NPS 48-hour survey of 'nearly 5,800 people', but the American Trails page that carries them returned HTTP 403 and the Parks Conservancy Lands End pages fetched do not contain them, so they are not recorded. Dolores Park: only a 2016 Chronicle figure, recorded with low confidence.",
+    "Day-type splits available: Presidio quarterly (2018-2020); GOGA, FOPO, SAFR, MUWO monthly; Cal Academy monthly (FY18-FY23); 2006 GGP Saturday vs Sunday screenlines (JFK closed Sundays); Dolores Park weekend vs weekday (press). None of the official sources gives a weekday/weekend split for annual visits."
+  ]
+}

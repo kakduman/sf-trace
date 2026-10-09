@@ -1,0 +1,410 @@
+{
+ "validator": "MobilityData gtfs-validator 8.0.1",
+ "url": "https://github.com/MobilityData/gtfs-validator/releases/download/v8.0.1/gtfs-validator-8.0.1-cli.jar",
+ "accessed": "2026-10-05",
+ "feeds": {
+  "muni": {
+   "bySeverity": {
+    "WARNING": 207,
+    "INFO": 8
+   },
+   "notices": [
+    {
+     "code": "mixed_case_recommended_field",
+     "severity": "WARNING",
+     "total": 80
+    },
+    {
+     "code": "fast_travel_between_consecutive_stops",
+     "severity": "WARNING",
+     "total": 66
+    },
+    {
+     "code": "stop_too_far_from_shape_using_user_distance",
+     "severity": "WARNING",
+     "total": 52
+    },
+    {
+     "code": "stop_too_far_from_shape",
+     "severity": "WARNING",
+     "total": 4
+    },
+    {
+     "code": "expired_calendar",
+     "severity": "WARNING",
+     "total": 2
+    },
+    {
+     "code": "missing_recommended_file",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "stops_match_shape_out_of_order",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "trip_coverage_not_active_for_next7_days",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "unknown_file",
+     "severity": "INFO",
+     "total": 7
+    },
+    {
+     "code": "unknown_column",
+     "severity": "INFO",
+     "total": 1
+    }
+   ],
+   "validatedAt": "2026-10-04T19:52:39-07:00",
+   "feedInfo": {
+    "publisherName": "",
+    "publisherUrl": "",
+    "feedLanguage": "",
+    "feedEmail": "",
+    "feedServiceWindowStart": "2026-07-23",
+    "feedServiceWindowEnd": "2026-08-28"
+   }
+  },
+  "bart": {
+   "bySeverity": {
+    "WARNING": 2656,
+    "INFO": 59,
+    "ERROR": 2
+   },
+   "notices": [
+    {
+     "code": "missing_required_column",
+     "severity": "ERROR",
+     "total": 2
+    },
+    {
+     "code": "missing_recommended_field",
+     "severity": "WARNING",
+     "total": 2514
+    },
+    {
+     "code": "same_name_and_description_for_stop",
+     "severity": "WARNING",
+     "total": 132
+    },
+    {
+     "code": "unused_shape",
+     "severity": "WARNING",
+     "total": 3
+    },
+    {
+     "code": "expired_calendar",
+     "severity": "WARNING",
+     "total": 2
+    },
+    {
+     "code": "stop_without_stop_time",
+     "severity": "WARNING",
+     "total": 2
+    },
+    {
+     "code": "feed_expiration_date7_days",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "missing_feed_contact_email_and_url",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "stop_too_far_from_shape",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "trip_headsign_matches_intermediate_stop",
+     "severity": "INFO",
+     "total": 40
+    },
+    {
+     "code": "service_window_outside_feed_period",
+     "severity": "INFO",
+     "total": 11
+    },
+    {
+     "code": "unknown_file",
+     "severity": "INFO",
+     "total": 5
+    }
+   ],
+   "validatedAt": "2026-10-04T19:52:41-07:00",
+   "feedInfo": {
+    "publisherName": "Bay Area Rapid Transit",
+    "publisherUrl": "http://www.bart.gov",
+    "feedLanguage": "English",
+    "feedStartDate": "2026-01-12",
+    "feedEndDate": "2026-08-30",
+    "feedEmail": "",
+    "feedServiceWindowStart": "2026-08-10",
+    "feedServiceWindowEnd": "2027-01-10"
+   }
+  },
+  "caltrain": {
+   "bySeverity": {
+    "WARNING": 10,
+    "INFO": 46
+   },
+   "notices": [
+    {
+     "code": "stop_without_stop_time",
+     "severity": "WARNING",
+     "total": 4
+    },
+    {
+     "code": "expired_calendar",
+     "severity": "WARNING",
+     "total": 2
+    },
+    {
+     "code": "route_short_name_too_long",
+     "severity": "WARNING",
+     "total": 2
+    },
+    {
+     "code": "feed_expiration_date7_days",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "trip_coverage_not_active_for_next7_days",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "unknown_column",
+     "severity": "INFO",
+     "total": 35
+    },
+    {
+     "code": "unknown_file",
+     "severity": "INFO",
+     "total": 11
+    }
+   ],
+   "validatedAt": "2026-10-04T19:52:43-07:00",
+   "feedInfo": {
+    "publisherName": "Trillium Solutions, Inc.",
+    "publisherUrl": "http://www.trilliumtransit.com",
+    "feedLanguage": "English",
+    "feedStartDate": "2026-01-31",
+    "feedEndDate": "2026-08-31",
+    "feedEmail": "support+test+caltrain-ca-us@trilliumtransit.com",
+    "feedServiceWindowStart": "2026-01-31",
+    "feedServiceWindowEnd": "2026-08-31"
+   }
+  },
+  "ggt": {
+   "bySeverity": {
+    "WARNING": 146,
+    "INFO": 729
+   },
+   "notices": [
+    {
+     "code": "missing_bike_allowance",
+     "severity": "WARNING",
+     "total": 89
+    },
+    {
+     "code": "missing_recommended_field",
+     "severity": "WARNING",
+     "total": 55
+    },
+    {
+     "code": "missing_recommended_file",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "stop_too_far_from_shape",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "trip_with_shape_dist_traveled_but_no_shape_distances",
+     "severity": "INFO",
+     "total": 686
+    },
+    {
+     "code": "unused_station",
+     "severity": "INFO",
+     "total": 37
+    },
+    {
+     "code": "unknown_file",
+     "severity": "INFO",
+     "total": 6
+    }
+   ],
+   "validatedAt": "2026-10-04T19:52:45-07:00",
+   "feedInfo": {
+    "publisherName": "",
+    "publisherUrl": "",
+    "feedLanguage": "",
+    "feedEmail": "",
+    "feedServiceWindowStart": "2026-09-13",
+    "feedServiceWindowEnd": "2026-12-12"
+   }
+  },
+  "ferry": {
+   "bySeverity": {
+    "WARNING": 3,
+    "ERROR": 165,
+    "INFO": 50
+   },
+   "notices": [
+    {
+     "code": "foreign_key_violation",
+     "severity": "ERROR",
+     "total": 165
+    },
+    {
+     "code": "stop_without_stop_time",
+     "severity": "WARNING",
+     "total": 2
+    },
+    {
+     "code": "feed_expiration_date30_days",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "unknown_column",
+     "severity": "INFO",
+     "total": 34
+    },
+    {
+     "code": "unknown_file",
+     "severity": "INFO",
+     "total": 11
+    },
+    {
+     "code": "service_window_outside_feed_period",
+     "severity": "INFO",
+     "total": 5
+    }
+   ],
+   "validatedAt": "2026-10-04T19:52:46-07:00",
+   "feedInfo": {
+    "publisherName": "Trillium Solutions, Inc.",
+    "publisherUrl": "http://www.trilliumtransit.com",
+    "feedLanguage": "English",
+    "feedStartDate": "2026-08-18",
+    "feedEndDate": "2026-11-01",
+    "feedEmail": "support+test+sfbayferry-ca-us@trilliumtransit.com",
+    "feedServiceWindowStart": "2026-03-10",
+    "feedServiceWindowEnd": "2026-11-01"
+   }
+  },
+  "ac": {
+   "bySeverity": {
+    "INFO": 151,
+    "WARNING": 1
+   },
+   "notices": [
+    {
+     "code": "mixed_case_recommended_field",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "big_gap_in_service",
+     "severity": "INFO",
+     "total": 117
+    },
+    {
+     "code": "trip_headsign_matches_intermediate_stop",
+     "severity": "INFO",
+     "total": 34
+    }
+   ],
+   "validatedAt": "2026-10-04T19:52:51-07:00",
+   "feedInfo": {
+    "publisherName": "AC TRANSIT",
+    "publisherUrl": "http://www.actransit.org",
+    "feedLanguage": "English",
+    "feedStartDate": "2026-08-09",
+    "feedEndDate": "2027-04-03",
+    "feedEmail": "DevSupport@actransit.org",
+    "feedServiceWindowStart": "2026-08-09",
+    "feedServiceWindowEnd": "2027-04-03"
+   }
+  },
+  "samtrans": {
+   "bySeverity": {
+    "WARNING": 43,
+    "ERROR": 2,
+    "INFO": 6087
+   },
+   "notices": [
+    {
+     "code": "missing_required_column",
+     "severity": "ERROR",
+     "total": 2
+    },
+    {
+     "code": "unused_shape",
+     "severity": "WARNING",
+     "total": 24
+    },
+    {
+     "code": "expired_calendar",
+     "severity": "WARNING",
+     "total": 17
+    },
+    {
+     "code": "missing_feed_contact_email_and_url",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "missing_recommended_field",
+     "severity": "WARNING",
+     "total": 1
+    },
+    {
+     "code": "trip_with_shape_dist_traveled_but_no_shape_distances",
+     "severity": "INFO",
+     "total": 6082
+    },
+    {
+     "code": "unknown_file",
+     "severity": "INFO",
+     "total": 4
+    },
+    {
+     "code": "unknown_column",
+     "severity": "INFO",
+     "total": 1
+    }
+   ],
+   "validatedAt": "2026-10-04T19:52:55-07:00",
+   "feedInfo": {
+    "publisherName": "511 SF Bay",
+    "publisherUrl": "https://511.org/open-data/transit",
+    "feedLanguage": "English",
+    "feedStartDate": "2026-08-23",
+    "feedEndDate": "2026-11-14",
+    "feedEmail": "",
+    "feedServiceWindowStart": "2026-08-23",
+    "feedServiceWindowEnd": "2026-11-14"
+   }
+  }
+ },
+ "impactOnModel": {
+  "ferry": "165 trips.txt rows reference a service_id defined in neither calendar.txt nor calendar_dates.txt; such trips are never active on any date, so the model (which keeps only trips whose service runs on the modelled day) excludes them. No effect on modelled service.",
+  "bart": "The two errors are in rider_categories.txt (GTFS Fares v2), which the model does not read; BART fares are fitted from fare_attributes.txt and fare_rules.txt. No effect.",
+  "samtrans": "As for BART: rider_categories.txt only. No effect.",
+  "warnings": "Warnings are cosmetic or advisory (field capitalisation, optional fields, stops slightly off the drawn shape, a few fast hops between stops). Shapes are used only for drawing; stop-to-stop times come from stop_times.txt."
+ }
+}

@@ -1,0 +1,5422 @@
+{
+ "description": "The Metro, visitor, work-trip, and southeast-route work (October 2026). Before: the short-trip model on its own calibration (work-local/short cal2 bundle). After: this work's changes on a 6-iteration weekday calibration from it. Experiment runs: 2 passes from the base run's crowding. Riders by market: each market assigned alone at the base crowding (od-checks.ts). Metro rides by stop and the 2006–07 counts: diag-metro.ts (straight lines between stops). Route groups: diag-routes.ts.",
+ "generated": "2026-10-07",
+ "ntd": {
+  "busMilesPerBoarding": 1.888,
+  "metroMilesPerBoarding": 2.338,
+  "lightRailHistory": {
+   "source": "FTA NTD, TS2.1 Service Data and Operating Expenses Time Series by Mode (2023 release; 2024 from data.transportation.gov npsm-38gk). SFMTA (90015), light rail and bus (MB+TB), directly operated. Trip miles = PMT/UPT (derived). Report year = fiscal year ending June 30.",
+   "url": "https://www.transit.dot.gov/ntd/data-product/ts21-service-data-and-operating-expenses-time-series-mode-2",
+   "rawFiles": [
+    "data/beta3/raw/ntd-history/"
+   ],
+   "notes": [
+    "FY2021 left out: rail was largely suspended (0.74 miles a trip).",
+    "SFMTA's route table (muni-route-ridership.json raw file data/beta3/raw/obs/muni_ridership_by_route.csv) has no L Taraval light-rail boardings from April 2020 to August 2024 (31,300-33,400 a weekday in January-March 2020; 15,000 in October 2024): the L ran as a bus while its tracks were rebuilt, so FY2021-FY2024 light rail has no L, the line with the longest rides. The Central Subway opened in November 2022 (FY2023).",
+    "The steps in 2012 (2.66 to 2.85) and 2016 (2.85 to 2.72) come with no change in service and are probably changes in how SFMTA estimated passenger miles."
+   ],
+   "byYear": {
+    "2002": {
+     "lrUpt": 47898229,
+     "lrPmt": 117816105,
+     "lrTripMiles": 2.46,
+     "busTripMiles": 1.842
+    },
+    "2003": {
+     "lrUpt": 42896269,
+     "lrPmt": 109941007,
+     "lrTripMiles": 2.563,
+     "busTripMiles": 1.847
+    },
+    "2004": {
+     "lrUpt": 45187031,
+     "lrPmt": 117833690,
+     "lrTripMiles": 2.608,
+     "busTripMiles": 1.857
+    },
+    "2005": {
+     "lrUpt": 46803247,
+     "lrPmt": 121027943,
+     "lrTripMiles": 2.586,
+     "busTripMiles": 1.841
+    },
+    "2006": {
+     "lrUpt": 43678772,
+     "lrPmt": 112916628,
+     "lrTripMiles": 2.585,
+     "busTripMiles": 1.866
+    },
+    "2007": {
+     "lrUpt": 41736824,
+     "lrPmt": 106543428,
+     "lrTripMiles": 2.553,
+     "busTripMiles": 1.884
+    },
+    "2008": {
+     "lrUpt": 50312720,
+     "lrPmt": 133115688,
+     "lrTripMiles": 2.646,
+     "busTripMiles": 1.778
+    },
+    "2009": {
+     "lrUpt": 50744862,
+     "lrPmt": 135364608,
+     "lrTripMiles": 2.668,
+     "busTripMiles": 1.882
+    },
+    "2010": {
+     "lrUpt": 49396925,
+     "lrPmt": 131367637,
+     "lrTripMiles": 2.659,
+     "busTripMiles": 1.936
+    },
+    "2011": {
+     "lrUpt": 51021623,
+     "lrPmt": 135716941,
+     "lrTripMiles": 2.66,
+     "busTripMiles": 1.929
+    },
+    "2012": {
+     "lrUpt": 43607739,
+     "lrPmt": 124349101,
+     "lrTripMiles": 2.852,
+     "busTripMiles": 1.944
+    },
+    "2013": {
+     "lrUpt": 45358815,
+     "lrPmt": 129329354,
+     "lrTripMiles": 2.851,
+     "busTripMiles": 1.956
+    },
+    "2014": {
+     "lrUpt": 48779247,
+     "lrPmt": 138802393,
+     "lrTripMiles": 2.846,
+     "busTripMiles": 1.98
+    },
+    "2015": {
+     "lrUpt": 49076058,
+     "lrPmt": 140039336,
+     "lrTripMiles": 2.854,
+     "busTripMiles": 1.931
+    },
+    "2016": {
+     "lrUpt": 52124572,
+     "lrPmt": 141541475,
+     "lrTripMiles": 2.715,
+     "busTripMiles": 1.964
+    },
+    "2017": {
+     "lrUpt": 50993166,
+     "lrPmt": 139398231,
+     "lrTripMiles": 2.734,
+     "busTripMiles": 1.929
+    },
+    "2018": {
+     "lrUpt": 49833591,
+     "lrPmt": 136717088,
+     "lrTripMiles": 2.743,
+     "busTripMiles": 1.783
+    },
+    "2019": {
+     "lrUpt": 49795740,
+     "lrPmt": 136469594,
+     "lrTripMiles": 2.741,
+     "busTripMiles": 1.837
+    },
+    "2020": {
+     "lrUpt": 37419416,
+     "lrPmt": 102607757,
+     "lrTripMiles": 2.742,
+     "busTripMiles": 1.837
+    },
+    "2022": {
+     "lrUpt": 13992686,
+     "lrPmt": 29918002,
+     "lrTripMiles": 2.138,
+     "busTripMiles": 1.828
+    },
+    "2023": {
+     "lrUpt": 23281310,
+     "lrPmt": 56446713,
+     "lrTripMiles": 2.425,
+     "busTripMiles": 1.824
+    },
+    "2024": {
+     "lrUpt": 28230682,
+     "lrPmt": 66007121,
+     "lrTripMiles": 2.338,
+     "busTripMiles": 1.888
+    }
+   }
+  }
+ },
+ "snapshot": {
+  "outsideBayArea": {
+   "lightRail": 0.042,
+   "bus": 0.055
+  },
+  "otherBayAreaCounties": {
+   "lightRail": 0.166,
+   "bus": 0.164
+  }
+ },
+ "visitorTarget": {
+  "shares": {
+   "da": 0.064,
+   "sr": 0.131,
+   "walk": 0.54,
+   "tnc": 0.193,
+   "bike": 0,
+   "transit": 0.071
+  },
+  "roomsByPlaceType": {
+   "1": 0.86,
+   "2": 0.13,
+   "3": 0.01
+  }
+ },
+ "tep2006": {
+  "J": {
+   "boardings": 16695,
+   "miPerBoarding": 2.144175926561955,
+   "subwayOn": 0.4739742437855645,
+   "subwayOff": 0.45300988319856245,
+   "insideSubway": 0.20791101131088147,
+   "onByDistance": [
+    0.3060796645702306,
+    0.16843366277328542,
+    0.22941000299490866,
+    0.19365079365079366,
+    0.020664869721473494,
+    0.08176100628930817
+   ],
+   "offByDistance": [
+    0.3179284301384643,
+    0.1439789006773362,
+    0.24384103578493077,
+    0.20517892465383925,
+    0.026134388299466522,
+    0.06293832044596295
+   ]
+  },
+  "KT": {
+   "boardings": 32746,
+   "miPerBoarding": 2.9360764635528263,
+   "subwayOn": 0.44985647101936116,
+   "subwayOff": 0.4313809320222317,
+   "insideSubway": 0.2524870307127006,
+   "onByDistance": [
+    0.2537409149209064,
+    0.1519574909912661,
+    0.13116105783912538,
+    0.07139803334758443,
+    0.16905881634398096,
+    0.22268368655713675
+   ],
+   "offByDistance": [
+    0.2551354018876072,
+    0.15628277095799148,
+    0.12398988341249768,
+    0.06288939608907532,
+    0.17426438837826166,
+    0.22743815927456665
+   ]
+  },
+  "L": {
+   "boardings": 29842,
+   "miPerBoarding": 3.3090845625356304,
+   "subwayOn": 0.6819583137859393,
+   "subwayOff": 0.6724080155485558,
+   "insideSubway": 0.4510547166638435,
+   "onByDistance": [
+    0.29287581261309564,
+    0.14415923865692648,
+    0.12137256216071309,
+    0,
+    0.03622411366530393,
+    0.4053682729039609
+   ],
+   "offByDistance": [
+    0.3185076517854166,
+    0.13109725602640615,
+    0.11255959723935585,
+    0,
+    0.04060947554429367,
+    0.39722601940452773
+   ]
+  },
+  "M": {
+   "boardings": 28671,
+   "miPerBoarding": 3.306060692159071,
+   "subwayOn": 0.612291165288968,
+   "subwayOff": 0.6212549265808657,
+   "insideSubway": 0.3999635363959833,
+   "onByDistance": [
+    0.2569495308848662,
+    0.13051515468591957,
+    0.13124760210665828,
+    0,
+    0.034564542569146525,
+    0.44672316975340937
+   ],
+   "offByDistance": [
+    0.28386055972504737,
+    0.12390404713474083,
+    0.11559234060461528,
+    0,
+    0.039454303149330155,
+    0.4371887493862664
+   ]
+  },
+  "N": {
+   "boardings": 45252,
+   "miPerBoarding": 2.89536036768398,
+   "subwayOn": 0.3987227083885795,
+   "subwayOff": 0.3582383099089543,
+   "insideSubway": 0.10138364186111466,
+   "onByDistance": [
+    0.34851498276319276,
+    0.16401485017236808,
+    0.07933351012109963,
+    0.11102271722796782,
+    0.1360381861575179,
+    0.1610757535578538
+   ],
+   "offByDistance": [
+    0.309465564738292,
+    0.17337741046831956,
+    0.09062258953168044,
+    0.12506887052341598,
+    0.14042975206611572,
+    0.16103581267217632
+   ]
+  }
+ },
+ "tep2006MiPerBoarding": 2.9796508749524766,
+ "before": {
+  "muniRoutes": {
+   "r": 0.9432942790555343,
+   "pctRmse": 34.23006561064927,
+   "pctRmseScaled": 32.80724664983119,
+   "model": 473017,
+   "observed": 515626,
+   "within25": 0.5087719298245614
+  },
+  "groups": {
+   "subway": {
+    "observed": 94783,
+    "model": 92929
+   },
+   "T": {
+    "observed": 24967,
+    "model": 11855
+   },
+   "bus": {
+    "observed": 395876,
+    "model": 368234
+   }
+  },
+  "bartCityExits": {
+   "r": 0.8913282443251082,
+   "pctRmse": 28.102610529721574,
+   "total": 0.9811811202162061
+  },
+  "tripMiles": {
+   "bus": 2.040411564397972,
+   "metro": 2.967585061831723
+  },
+  "muniAfterVehicle": 0.12618002488632835,
+  "linkedTransitTrips": 596778,
+  "residentTransit": 0.1377692592685631,
+  "routes": {
+   "5": {
+    "observed": 5392,
+    "model": 10195
+   },
+   "8": {
+    "observed": 18367,
+    "model": 13591
+   },
+   "9": {
+    "observed": 6483,
+    "model": 6809
+   },
+   "14": {
+    "observed": 22150,
+    "model": 13436
+   },
+   "15": {
+    "observed": 3792,
+    "model": 4996
+   },
+   "38": {
+    "observed": 18017,
+    "model": 23212
+   },
+   "44": {
+    "observed": 12992,
+    "model": 10268
+   },
+   "49": {
+    "observed": 35033,
+    "model": 28246
+   },
+   "54": {
+    "observed": 4800,
+    "model": 2989
+   },
+   "T": {
+    "observed": 24967,
+    "model": 11855
+   },
+   "14R": {
+    "observed": 22725,
+    "model": 14179
+   },
+   "8AX": {
+    "observed": 3458,
+    "model": 2168
+   },
+   "8BX": {
+    "observed": 3950,
+    "model": 3647
+   },
+   "9R": {
+    "observed": 9975,
+    "model": 9270
+   },
+   "38R": {
+    "observed": 27842,
+    "model": 26857
+   },
+   "5R": {
+    "observed": 8858,
+    "model": 12381
+   },
+   "N": {
+    "observed": 35125,
+    "model": 31221
+   },
+   "J": {
+    "observed": 7667,
+    "model": 6986
+   },
+   "K": {
+    "observed": 14433,
+    "model": 14627
+   },
+   "L": {
+    "observed": 17725,
+    "model": 20604
+   },
+   "M": {
+    "observed": 19833,
+    "model": 19491
+   }
+  },
+  "riders": {
+   "purposeLightRail": [
+    {
+     "purpose": "Other Purposes",
+     "observed": 0.135,
+     "model": 0.209,
+     "modelByTour": 0.153
+    },
+    {
+     "purpose": "School",
+     "observed": 0.128,
+     "model": 0.088,
+     "modelByTour": 0.127
+    },
+    {
+     "purpose": "Social/Recreation/Shopping",
+     "observed": 0.224,
+     "model": 0.406,
+     "modelByTour": 0.318
+    },
+    {
+     "purpose": "Work",
+     "observed": 0.513,
+     "model": 0.297,
+     "modelByTour": 0.402
+    }
+   ],
+   "purposeBus": [
+    {
+     "purpose": "Other Purposes",
+     "observed": 0.151,
+     "model": 0.209,
+     "modelByTour": 0.152
+    },
+    {
+     "purpose": "School",
+     "observed": 0.156,
+     "model": 0.113,
+     "modelByTour": 0.152
+    },
+    {
+     "purpose": "Social/Recreation/Shopping",
+     "observed": 0.249,
+     "model": 0.46,
+     "modelByTour": 0.371
+    },
+    {
+     "purpose": "Work",
+     "observed": 0.445,
+     "model": 0.218,
+     "modelByTour": 0.325
+    }
+   ],
+   "residentShare": {
+    "lightRail": {
+     "model": 0.822,
+     "observed": 0.792
+    },
+    "bus": {
+     "model": 0.803,
+     "observed": 0.782
+    },
+    "t": {
+     "model": 0.8
+    },
+    "note": "model: boardings on residents' trips (their tours, stops and subtours); observed: Snapshot survey riders whose home county is San Francisco (weekday, 2023–24). Visitors from outside the Bay Area are 4–6% of Muni riders in the survey; the model's visitors and air travelers are counted as non-residents."
+   },
+   "hotelVisitors": 0.08650939690284698,
+   "airTravelers": 0.0027560113300390764,
+   "inCommuters": 0.023509831083176547,
+   "regionalVisitors": 0.0383505282527343,
+   "notFromHomeNonResidents": 0.035910848305662955,
+   "muniBoardings": 483670
+  },
+  "commute": {
+   "source": "CTPP 2017-2021 (5-year ACS), Part 2 (workplace) Table B202105, Means of Transportation to Work (18), workers 16 and over, every census tract of San Francisco County (summary level C31). AASHTO CTPP Data Portal query, downloaded without an account (under the 10,000-cell instant-download limit).",
+   "note": "Commuters = workers less those working at home. Shares, not counts: CTPP counts usual workers 2017–2021, the model commuters at work on an average weekday of 2026. The distribution of jobs comes from LODES 2023 rebalanced to MTC 2023 employment (an input); the transit share by workplace is never fitted.",
+   "totalTransitShare": {
+    "observed": 0.403,
+    "model": 0.333
+   },
+   "byDistrict": [
+    {
+     "district": "Downtown",
+     "observedShareOfCommuters": 0.4385,
+     "modelShareOfCommuters": 0.4007,
+     "observedTransitShare": 0.575,
+     "modelTransitShare": 0.451,
+     "observedCommuters": 227745,
+     "modelCommuters": 131840
+    },
+    {
+     "district": "SoMa",
+     "observedShareOfCommuters": 0.1051,
+     "modelShareOfCommuters": 0.1148,
+     "observedTransitShare": 0.417,
+     "modelTransitShare": 0.396,
+     "observedCommuters": 54585,
+     "modelCommuters": 37770
+    },
+    {
+     "district": "Mission Bay–Potrero",
+     "observedShareOfCommuters": 0.0731,
+     "modelShareOfCommuters": 0.06,
+     "observedTransitShare": 0.287,
+     "modelTransitShare": 0.202,
+     "observedCommuters": 37965,
+     "modelCommuters": 19735
+    },
+    {
+     "district": "Northern",
+     "observedShareOfCommuters": 0.0781,
+     "modelShareOfCommuters": 0.0728,
+     "observedTransitShare": 0.268,
+     "modelTransitShare": 0.269,
+     "observedCommuters": 40580,
+     "modelCommuters": 23959
+    },
+    {
+     "district": "Western Addition–Haight",
+     "observedShareOfCommuters": 0.066,
+     "modelShareOfCommuters": 0.0758,
+     "observedTransitShare": 0.274,
+     "modelTransitShare": 0.306,
+     "observedCommuters": 34255,
+     "modelCommuters": 24930
+    },
+    {
+     "district": "Mission",
+     "observedShareOfCommuters": 0.0691,
+     "modelShareOfCommuters": 0.0868,
+     "observedTransitShare": 0.27,
+     "modelTransitShare": 0.246,
+     "observedCommuters": 35890,
+     "modelCommuters": 28569
+    },
+    {
+     "district": "Castro–Noe–Bernal",
+     "observedShareOfCommuters": 0.0278,
+     "modelShareOfCommuters": 0.0322,
+     "observedTransitShare": 0.214,
+     "modelTransitShare": 0.174,
+     "observedCommuters": 14440,
+     "modelCommuters": 10582
+    },
+    {
+     "district": "Richmond",
+     "observedShareOfCommuters": 0.026,
+     "modelShareOfCommuters": 0.0303,
+     "observedTransitShare": 0.202,
+     "modelTransitShare": 0.18,
+     "observedCommuters": 13491,
+     "modelCommuters": 9969
+    },
+    {
+     "district": "Sunset",
+     "observedShareOfCommuters": 0.0414,
+     "modelShareOfCommuters": 0.041,
+     "observedTransitShare": 0.168,
+     "modelTransitShare": 0.172,
+     "observedCommuters": 21515,
+     "modelCommuters": 13504
+    },
+    {
+     "district": "Southwest",
+     "observedShareOfCommuters": 0.0275,
+     "modelShareOfCommuters": 0.0304,
+     "observedTransitShare": 0.175,
+     "modelTransitShare": 0.152,
+     "observedCommuters": 14260,
+     "modelCommuters": 10000
+    },
+    {
+     "district": "Excelsior–Visitacion Valley",
+     "observedShareOfCommuters": 0.0133,
+     "modelShareOfCommuters": 0.0243,
+     "observedTransitShare": 0.189,
+     "modelTransitShare": 0.15,
+     "observedCommuters": 6900,
+     "modelCommuters": 7989
+    },
+    {
+     "district": "Bayview–Hunters Point",
+     "observedShareOfCommuters": 0.0341,
+     "modelShareOfCommuters": 0.0309,
+     "observedTransitShare": 0.085,
+     "modelTransitShare": 0.113,
+     "observedCommuters": 17720,
+     "modelCommuters": 10170
+    }
+   ],
+   "districtTransit": {
+    "n": 12,
+    "observedTotal": 3,
+    "modelTotal": 3,
+    "totalRatio": 0.899807938540333,
+    "r": 0.9493370998343585,
+    "r2": 0.9012409291219109,
+    "pctRmse": 19.070261946017737,
+    "mape": 3.6916666666666664,
+    "medianApe": 2.8,
+    "within25": 0.8333333333333334,
+    "slopeThroughOrigin": 0.8761463925441022
+   },
+   "districtJobs": {
+    "n": 12,
+    "observedTotal": 1,
+    "modelTotal": 1,
+    "totalRatio": 0.9999999999999999,
+    "r": 0.9965263151457595,
+    "r2": 0.9930646967779856,
+    "pctRmse": 16.64795482934766,
+    "mape": 0.9966666666666666,
+    "medianApe": 0.97,
+    "within25": 0.8333333333333334,
+    "slopeThroughOrigin": 0.9357525607319639
+   },
+   "tracts": {
+    "rows": [
+     {
+      "tract": "010101",
+      "district": "Northern",
+      "observedCommuters": 5995,
+      "modelCommuters": 2704,
+      "observedTransitShare": 0.39,
+      "modelTransitShare": 0.198
+     },
+     {
+      "tract": "010500",
+      "district": "Downtown",
+      "observedCommuters": 22030,
+      "modelCommuters": 11682,
+      "observedTransitShare": 0.512,
+      "modelTransitShare": 0.435
+     },
+     {
+      "tract": "010600",
+      "district": "Northern",
+      "observedCommuters": 2425,
+      "modelCommuters": 1634,
+      "observedTransitShare": 0.499,
+      "modelTransitShare": 0.34
+     },
+     {
+      "tract": "011700",
+      "district": "Downtown",
+      "observedCommuters": 65585,
+      "modelCommuters": 35493,
+      "observedTransitShare": 0.626,
+      "modelTransitShare": 0.475
+     },
+     {
+      "tract": "011800",
+      "district": "Downtown",
+      "observedCommuters": 3250,
+      "modelCommuters": 2103,
+      "observedTransitShare": 0.566,
+      "modelTransitShare": 0.445
+     },
+     {
+      "tract": "012100",
+      "district": "Downtown",
+      "observedCommuters": 2685,
+      "modelCommuters": 1632,
+      "observedTransitShare": 0.454,
+      "modelTransitShare": 0.423
+     },
+     {
+      "tract": "012301",
+      "district": "Downtown",
+      "observedCommuters": 2820,
+      "modelCommuters": 2260,
+      "observedTransitShare": 0.394,
+      "modelTransitShare": 0.458
+     },
+     {
+      "tract": "012405",
+      "district": "Downtown",
+      "observedCommuters": 9360,
+      "modelCommuters": 3262,
+      "observedTransitShare": 0.537,
+      "modelTransitShare": 0.443
+     },
+     {
+      "tract": "012503",
+      "district": "Downtown",
+      "observedCommuters": 2075,
+      "modelCommuters": 1349,
+      "observedTransitShare": 0.484,
+      "modelTransitShare": 0.462
+     },
+     {
+      "tract": "013300",
+      "district": "Northern",
+      "observedCommuters": 2705,
+      "modelCommuters": 1300,
+      "observedTransitShare": 0.183,
+      "modelTransitShare": 0.162
+     },
+     {
+      "tract": "013500",
+      "district": "Northern",
+      "observedCommuters": 2625,
+      "modelCommuters": 1814,
+      "observedTransitShare": 0.196,
+      "modelTransitShare": 0.205
+     },
+     {
+      "tract": "015100",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 3120,
+      "modelCommuters": 2770,
+      "observedTransitShare": 0.279,
+      "modelTransitShare": 0.653
+     },
+     {
+      "tract": "015300",
+      "district": "Northern",
+      "observedCommuters": 2055,
+      "modelCommuters": 697,
+      "observedTransitShare": 0.309,
+      "modelTransitShare": 0.235
+     },
+     {
+      "tract": "015500",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 4410,
+      "modelCommuters": 3688,
+      "observedTransitShare": 0.284,
+      "modelTransitShare": 0.224
+     },
+     {
+      "tract": "015701",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2730,
+      "modelCommuters": 1491,
+      "observedTransitShare": 0.33,
+      "modelTransitShare": 0.191
+     },
+     {
+      "tract": "015702",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2940,
+      "modelCommuters": 2788,
+      "observedTransitShare": 0.126,
+      "modelTransitShare": 0.179
+     },
+     {
+      "tract": "016000",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2150,
+      "modelCommuters": 1654,
+      "observedTransitShare": 0.358,
+      "modelTransitShare": 0.358
+     },
+     {
+      "tract": "016200",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 5600,
+      "modelCommuters": 4320,
+      "observedTransitShare": 0.354,
+      "modelTransitShare": 0.384
+     },
+     {
+      "tract": "016500",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2195,
+      "modelCommuters": 1001,
+      "observedTransitShare": 0.203,
+      "modelTransitShare": 0.19
+     },
+     {
+      "tract": "016802",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2620,
+      "modelCommuters": 634,
+      "observedTransitShare": 0.353,
+      "modelTransitShare": 0.259
+     },
+     {
+      "tract": "016900",
+      "district": "Castro–Noe–Bernal",
+      "observedCommuters": 2610,
+      "modelCommuters": 1270,
+      "observedTransitShare": 0.303,
+      "modelTransitShare": 0.18
+     },
+     {
+      "tract": "017602",
+      "district": "SoMa",
+      "observedCommuters": 10360,
+      "modelCommuters": 4234,
+      "observedTransitShare": 0.471,
+      "modelTransitShare": 0.45
+     },
+     {
+      "tract": "017603",
+      "district": "SoMa",
+      "observedCommuters": 13895,
+      "modelCommuters": 13873,
+      "observedTransitShare": 0.404,
+      "modelTransitShare": 0.446
+     },
+     {
+      "tract": "017604",
+      "district": "SoMa",
+      "observedCommuters": 3910,
+      "modelCommuters": 2167,
+      "observedTransitShare": 0.624,
+      "modelTransitShare": 0.465
+     },
+     {
+      "tract": "017700",
+      "district": "Mission",
+      "observedCommuters": 10050,
+      "modelCommuters": 13722,
+      "observedTransitShare": 0.312,
+      "modelTransitShare": 0.242
+     },
+     {
+      "tract": "017801",
+      "district": "SoMa",
+      "observedCommuters": 5220,
+      "modelCommuters": 4182,
+      "observedTransitShare": 0.478,
+      "modelTransitShare": 0.438
+     },
+     {
+      "tract": "017803",
+      "district": "SoMa",
+      "observedCommuters": 2305,
+      "modelCommuters": 1657,
+      "observedTransitShare": 0.451,
+      "modelTransitShare": 0.39
+     },
+     {
+      "tract": "017804",
+      "district": "SoMa",
+      "observedCommuters": 3040,
+      "modelCommuters": 2584,
+      "observedTransitShare": 0.347,
+      "modelTransitShare": 0.324
+     },
+     {
+      "tract": "018000",
+      "district": "SoMa",
+      "observedCommuters": 14945,
+      "modelCommuters": 8655,
+      "observedTransitShare": 0.343,
+      "modelTransitShare": 0.288
+     },
+     {
+      "tract": "020101",
+      "district": "Mission",
+      "observedCommuters": 4545,
+      "modelCommuters": 1254,
+      "observedTransitShare": 0.323,
+      "modelTransitShare": 0.327
+     },
+     {
+      "tract": "022600",
+      "district": "Mission Bay–Potrero",
+      "observedCommuters": 7530,
+      "modelCommuters": 3663,
+      "observedTransitShare": 0.177,
+      "modelTransitShare": 0.165
+     },
+     {
+      "tract": "022801",
+      "district": "Mission",
+      "observedCommuters": 5480,
+      "modelCommuters": 2961,
+      "observedTransitShare": 0.185,
+      "modelTransitShare": 0.254
+     },
+     {
+      "tract": "022802",
+      "district": "Mission",
+      "observedCommuters": 6025,
+      "modelCommuters": 2439,
+      "observedTransitShare": 0.156,
+      "modelTransitShare": 0.19
+     },
+     {
+      "tract": "030101",
+      "district": "Sunset",
+      "observedCommuters": 4795,
+      "modelCommuters": 380,
+      "observedTransitShare": 0.181,
+      "modelTransitShare": 0.241
+     },
+     {
+      "tract": "030102",
+      "district": "Sunset",
+      "observedCommuters": 6375,
+      "modelCommuters": 4505,
+      "observedTransitShare": 0.173,
+      "modelTransitShare": 0.224
+     },
+     {
+      "tract": "033201",
+      "district": "Southwest",
+      "observedCommuters": 5585,
+      "modelCommuters": 3241,
+      "observedTransitShare": 0.214,
+      "modelTransitShare": 0.166
+     },
+     {
+      "tract": "060100",
+      "district": "Northern",
+      "observedCommuters": 4725,
+      "modelCommuters": 2378,
+      "observedTransitShare": 0.192,
+      "modelTransitShare": 0.856
+     },
+     {
+      "tract": "060701",
+      "district": "Mission Bay–Potrero",
+      "observedCommuters": 14875,
+      "modelCommuters": 9791,
+      "observedTransitShare": 0.326,
+      "modelTransitShare": 0.211
+     },
+     {
+      "tract": "060702",
+      "district": "Mission Bay–Potrero",
+      "observedCommuters": 5875,
+      "modelCommuters": 2175,
+      "observedTransitShare": 0.211,
+      "modelTransitShare": 0.21
+     },
+     {
+      "tract": "060703",
+      "district": "Mission Bay–Potrero",
+      "observedCommuters": 6300,
+      "modelCommuters": 2141,
+      "observedTransitShare": 0.411,
+      "modelTransitShare": 0.239
+     },
+     {
+      "tract": "061101",
+      "district": "Downtown",
+      "observedCommuters": 11195,
+      "modelCommuters": 7409,
+      "observedTransitShare": 0.528,
+      "modelTransitShare": 0.451
+     },
+     {
+      "tract": "061501",
+      "district": "Downtown",
+      "observedCommuters": 47520,
+      "modelCommuters": 27211,
+      "observedTransitShare": 0.609,
+      "modelTransitShare": 0.472
+     },
+     {
+      "tract": "061502",
+      "district": "Downtown",
+      "observedCommuters": 6680,
+      "modelCommuters": 3993,
+      "observedTransitShare": 0.502,
+      "modelTransitShare": 0.412
+     },
+     {
+      "tract": "061503",
+      "district": "Downtown",
+      "observedCommuters": 11090,
+      "modelCommuters": 8898,
+      "observedTransitShare": 0.591,
+      "modelTransitShare": 0.448
+     },
+     {
+      "tract": "061506",
+      "district": "Downtown",
+      "observedCommuters": 2070,
+      "modelCommuters": 669,
+      "observedTransitShare": 0.531,
+      "modelTransitShare": 0.444
+     },
+     {
+      "tract": "061507",
+      "district": "Downtown",
+      "observedCommuters": 23200,
+      "modelCommuters": 13434,
+      "observedTransitShare": 0.692,
+      "modelTransitShare": 0.467
+     },
+     {
+      "tract": "061508",
+      "district": "Downtown",
+      "observedCommuters": 2815,
+      "modelCommuters": 1615,
+      "observedTransitShare": 0.545,
+      "modelTransitShare": 0.423
+     },
+     {
+      "tract": "980200",
+      "district": "Richmond",
+      "observedCommuters": 3115,
+      "modelCommuters": 2088,
+      "observedTransitShare": 0.123,
+      "modelTransitShare": 0.133
+     },
+     {
+      "tract": "980900",
+      "district": "Bayview–Hunters Point",
+      "observedCommuters": 11130,
+      "modelCommuters": 4641,
+      "observedTransitShare": 0.072,
+      "modelTransitShare": 0.11
+     }
+    ],
+    "transit": {
+     "n": 49,
+     "observedTotal": 18,
+     "modelTotal": 16,
+     "totalRatio": 0.9147498883430104,
+     "r": 0.5849732994338153,
+     "r2": 0.3421937610504841,
+     "pctRmse": 38.76504154855661,
+     "mape": 9.246938775510204,
+     "medianApe": 6.4,
+     "within25": 0.673469387755102,
+     "slopeThroughOrigin": 0.8573333126917413
+    },
+    "commuters": {
+     "n": 49,
+     "observedTotal": 406635,
+     "modelTotal": 241506,
+     "totalRatio": 0.5939134604743812,
+     "r": 0.9647815017241751,
+     "r2": 0.9308033460691545,
+     "pctRmse": 74.8805576812382,
+     "mape": 42.05284729099725,
+     "medianApe": 42.0948275862069,
+     "within25": 0.20408163265306123,
+     "slopeThroughOrigin": 0.5721580110945679
+    }
+   }
+  },
+  "metro": {
+   "note": "Metro rides by boarding and alighting stop from the assignment at the base run crowding (one demand pass); straight-line miles between the two stops for the model and the 2006–07 counts alike (NTD follows the track, about 10% longer).",
+   "model": {
+    "boardings": 101942,
+    "miPerBoardingStraight": 2.74380682502616,
+    "bandsMi": [
+     "0.5",
+     "1",
+     "1.5",
+     "2",
+     "3",
+     "4",
+     "6",
+     "Infinity"
+    ],
+    "bands": [
+     0.03967868311235194,
+     0.09860580758899369,
+     0.16857358956730054,
+     0.11230032470457557,
+     0.19902363684827104,
+     0.12811455871461402,
+     0.2144620173607104,
+     0.039241382103182426
+    ],
+    "byRoute": {
+     "J": {
+      "boardings": 6603.2608286109535,
+      "miPerBoarding": 1.8317560083585378,
+      "subwayOn": 0.5093386050702439,
+      "subwayOff": 0.4981407115718198,
+      "insideSubway": 0.2796105736527104,
+      "bands": [
+       0.086880454144041,
+       0.1523713955406856,
+       0.19166859537709274,
+       0.1711166919662085,
+       0.25493676362269474,
+       0.13956929711382748,
+       0.003456802235450737,
+       0
+      ],
+      "onByDistance": [
+       0.3119191719490375,
+       0.19741943312120658,
+       0.15721553558704132,
+       0.2530875922034336,
+       0.03319357653497688,
+       0.04716469060430472
+      ],
+      "offByDistance": [
+       0.2963237678089317,
+       0.2018169437628881,
+       0.1884954909962339,
+       0.23708015268744778,
+       0.03902880782489859,
+       0.03725483691960056
+      ]
+     },
+     "K": {
+      "boardings": 13897.390528927452,
+      "miPerBoarding": 2.649677764913284,
+      "subwayOn": 0.804404898693738,
+      "subwayOff": 0.7676136028159527,
+      "insideSubway": 0.6304226290399342,
+      "bands": [
+       0.045978208187837176,
+       0.09889696576845419,
+       0.16298337373329683,
+       0.10900322216853414,
+       0.2490155410048391,
+       0.0809836327468158,
+       0.25309163353266445,
+       0.00004742285755843769
+      ],
+      "onByDistance": [
+       0.30641290598580295,
+       0.2077555676661769,
+       0.21222694001233527,
+       0,
+       0.05484850107707194,
+       0.21875608525861276
+      ],
+      "offByDistance": [
+       0.2968098203900514,
+       0.2054920894152308,
+       0.19068358921654618,
+       0,
+       0.056779540792407025,
+       0.2502349601857648
+      ]
+     },
+     "L": {
+      "boardings": 19886.00217948151,
+      "miPerBoarding": 3.3737081306022874,
+      "subwayOn": 0.6823208346318897,
+      "subwayOff": 0.7208912287127212,
+      "insideSubway": 0.46129542146610153,
+      "bands": [
+       0.042682214461091605,
+       0.08303077454703141,
+       0.11399695655886909,
+       0.07991640548149737,
+       0.1725702996388225,
+       0.07766702625907619,
+       0.3292350350821844,
+       0.10090128797142699
+      ],
+      "onByDistance": [
+       0.28728404303412,
+       0.18366027627697157,
+       0.15815234611012205,
+       0,
+       0.040082105336642186,
+       0.3308212292421437
+      ],
+      "offByDistance": [
+       0.3192891302577936,
+       0.1997747753693362,
+       0.14397260538589204,
+       0,
+       0.04165671173304466,
+       0.29530677725393323
+      ]
+     },
+     "M": {
+      "boardings": 18899.516233268776,
+      "miPerBoarding": 3.089484898398417,
+      "subwayOn": 0.6485007716562514,
+      "subwayOff": 0.6954385238684991,
+      "insideSubway": 0.4619291493172045,
+      "bands": [
+       0.041229257632577176,
+       0.08821302152894883,
+       0.14465233887664244,
+       0.09993626941157067,
+       0.18174132950783334,
+       0.08680389543245033,
+       0.2805606955660856,
+       0.07686319204389162
+      ],
+      "onByDistance": [
+       0.2500347642248352,
+       0.1709912647487726,
+       0.16704547446821116,
+       0,
+       0.0440449724025031,
+       0.3678835241556781
+      ],
+      "offByDistance": [
+       0.2748754125576558,
+       0.1932156053322828,
+       0.16547749064440492,
+       0,
+       0.04819354570662198,
+       0.31823794575903447
+      ]
+     },
+     "N": {
+      "boardings": 30851.397389945512,
+      "miPerBoarding": 2.6219078810890757,
+      "subwayOn": 0.36670617528034655,
+      "subwayOff": 0.4005630227499663,
+      "insideSubway": 0.07467744502042292,
+      "bands": [
+       0.029071153220919035,
+       0.08834749955562997,
+       0.18763027097287868,
+       0.10874171214264279,
+       0.19010375830580803,
+       0.2103191639353781,
+       0.16826758668191646,
+       0.017518855184826307
+      ],
+      "onByDistance": [
+       0.3048679698477889,
+       0.2317839097763611,
+       0.09239915004713857,
+       0.1424258272622138,
+       0.10337322260005126,
+       0.1251499204664459
+      ],
+      "offByDistance": [
+       0.3179524774633962,
+       0.25618216275990624,
+       0.10029023630926419,
+       0.14131252262012708,
+       0.07806797917069759,
+       0.1061946216766081
+      ]
+     },
+     "T": {
+      "boardings": 11804.321248882812,
+      "miPerBoarding": 2.068803457530371,
+      "subwayOn": 0.28589626006637664,
+      "subwayOff": 0.41991026278841387,
+      "insideSubway": 0.027860182642008034,
+      "bands": [
+       0.026038865821934737,
+       0.1378755256868482,
+       0.2426712784279897,
+       0.16693208338133053,
+       0.20443717233104772,
+       0.11347437832252708,
+       0.10857069602832127,
+       0
+      ],
+      "onByDistance": [
+       0.28589626006637664,
+       0.3104513739305255,
+       0.10707128949988008,
+       0.05167372691284583,
+       0.15996380208093955,
+       0.08494354750943138
+      ],
+      "offByDistance": [
+       0.41991026278841387,
+       0.2303976194535587,
+       0.10105211315334084,
+       0.039767258520364064,
+       0.137731214759147,
+       0.07114153132517474
+      ]
+     }
+    }
+   },
+   "subwayPairs": [
+    {
+     "pair": "montgomery–vanness",
+     "rides": 3612
+    },
+    {
+     "pair": "castro–montgomery",
+     "rides": 2306
+    },
+    {
+     "pair": "embarcadero–vanness",
+     "rides": 2074
+    },
+    {
+     "pair": "castro–vanness",
+     "rides": 1949
+    },
+    {
+     "pair": "castro–powell",
+     "rides": 1608
+    },
+    {
+     "pair": "castro–embarcadero",
+     "rides": 1516
+    },
+    {
+     "pair": "powell–vanness",
+     "rides": 1471
+    },
+    {
+     "pair": "church–montgomery",
+     "rides": 1444
+    },
+    {
+     "pair": "castro–civiccenter",
+     "rides": 1326
+    },
+    {
+     "pair": "civiccenter–montgomery",
+     "rides": 1278
+    },
+    {
+     "pair": "civiccenter–embarcadero",
+     "rides": 930
+    },
+    {
+     "pair": "foresthill–montgomery",
+     "rides": 867
+    },
+    {
+     "pair": "church–powell",
+     "rides": 843
+    },
+    {
+     "pair": "church–embarcadero",
+     "rides": 835
+    },
+    {
+     "pair": "embarcadero–powell",
+     "rides": 821
+    },
+    {
+     "pair": "foresthill–vanness",
+     "rides": 814
+    },
+    {
+     "pair": "church–vanness",
+     "rides": 764
+    },
+    {
+     "pair": "montgomery–powell",
+     "rides": 694
+    },
+    {
+     "pair": "foresthill–powell",
+     "rides": 587
+    },
+    {
+     "pair": "embarcadero–foresthill",
+     "rides": 583
+    }
+   ],
+   "bart": {
+    "downtown": {
+     "observed": 1333,
+     "model": 738
+    },
+    "downtownMission": {
+     "observed": 9593,
+     "model": 9188
+    },
+    "city": {
+     "observed": 22237,
+     "model": 24341
+    }
+   }
+  },
+  "routeGroups": [
+   {
+    "group": "Mission St (14, 14R, 49)",
+    "counted": 79908,
+    "model": 54878,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 10925,
+      "tep2006Scaled": 9136
+     },
+     {
+      "district": "SoMa",
+      "model": 8599,
+      "tep2006Scaled": 8706
+     },
+     {
+      "district": "Northern",
+      "model": 4160,
+      "tep2006Scaled": 3628
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 2555,
+      "tep2006Scaled": 4377
+     },
+     {
+      "district": "Mission",
+      "model": 14415,
+      "tep2006Scaled": 25594
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "model": 4088,
+      "tep2006Scaled": 8142
+     },
+     {
+      "district": "Southwest",
+      "model": 648,
+      "tep2006Scaled": 546
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "model": 9487,
+      "tep2006Scaled": 19778
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 17489
+     },
+     {
+      "market": "resident work",
+      "boardings": 4716
+     },
+     {
+      "market": "resident work return",
+      "boardings": 4505
+     },
+     {
+      "market": "visitor",
+      "boardings": 4085
+     },
+     {
+      "market": "resident other return",
+      "boardings": 2866
+     },
+     {
+      "market": "resident other",
+      "boardings": 2838
+     },
+     {
+      "market": "resident social",
+      "boardings": 2444
+     },
+     {
+      "market": "resident social return",
+      "boardings": 2432
+     },
+     {
+      "market": "nhb",
+      "boardings": 2020
+     },
+     {
+      "market": "resident school",
+      "boardings": 1845
+     },
+     {
+      "market": "resident school return",
+      "boardings": 1827
+     },
+     {
+      "market": "resident shop",
+      "boardings": 1751
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 1731
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 796
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 792
+     },
+     {
+      "market": "regional",
+      "boardings": 789
+     },
+     {
+      "market": "resident univ",
+      "boardings": 770
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 761
+     },
+     {
+      "market": "airport",
+      "boardings": 211
+     },
+     {
+      "market": "event",
+      "boardings": 144
+     },
+     {
+      "market": "resident event return",
+      "boardings": 34
+     },
+     {
+      "market": "resident event",
+      "boardings": 32
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 2394
+     },
+     {
+      "district": "SoMa",
+      "boardings": 1839
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 157
+     },
+     {
+      "district": "Northern",
+      "boardings": 1722
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 1607
+     },
+     {
+      "district": "Mission",
+      "boardings": 3005
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 1212
+     },
+     {
+      "district": "Richmond",
+      "boardings": 156
+     },
+     {
+      "district": "Sunset",
+      "boardings": 90
+     },
+     {
+      "district": "Southwest",
+      "boardings": 464
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 1286
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 70
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 392
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 1582
+     },
+     {
+      "district": "SoMa",
+      "boardings": 846
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 72
+     },
+     {
+      "district": "Northern",
+      "boardings": 1287
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 842
+     },
+     {
+      "district": "Mission",
+      "boardings": 3460
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 1503
+     },
+     {
+      "district": "Richmond",
+      "boardings": 190
+     },
+     {
+      "district": "Sunset",
+      "boardings": 94
+     },
+     {
+      "district": "Southwest",
+      "boardings": 275
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 3903
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 132
+     }
+    ]
+   },
+   {
+    "group": "8 Bayshore",
+    "counted": 25775,
+    "model": 18326,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 6775,
+      "tep2006Scaled": null
+     },
+     {
+      "district": "SoMa",
+      "model": 2859,
+      "tep2006Scaled": null
+     },
+     {
+      "district": "Northern",
+      "model": 2333,
+      "tep2006Scaled": null
+     },
+     {
+      "district": "Southwest",
+      "model": 316,
+      "tep2006Scaled": null
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "model": 6044,
+      "tep2006Scaled": null
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 5474
+     },
+     {
+      "market": "visitor",
+      "boardings": 2299
+     },
+     {
+      "market": "resident work return",
+      "boardings": 1604
+     },
+     {
+      "market": "resident work",
+      "boardings": 1570
+     },
+     {
+      "market": "nhb",
+      "boardings": 779
+     },
+     {
+      "market": "resident other",
+      "boardings": 660
+     },
+     {
+      "market": "resident other return",
+      "boardings": 657
+     },
+     {
+      "market": "resident social return",
+      "boardings": 648
+     },
+     {
+      "market": "resident social",
+      "boardings": 646
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 612
+     },
+     {
+      "market": "resident shop",
+      "boardings": 562
+     },
+     {
+      "market": "resident school",
+      "boardings": 536
+     },
+     {
+      "market": "resident school return",
+      "boardings": 461
+     },
+     {
+      "market": "regional",
+      "boardings": 413
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 365
+     },
+     {
+      "market": "resident univ",
+      "boardings": 349
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 255
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 254
+     },
+     {
+      "market": "event",
+      "boardings": 87
+     },
+     {
+      "market": "airport",
+      "boardings": 59
+     },
+     {
+      "market": "resident event",
+      "boardings": 21
+     },
+     {
+      "market": "resident event return",
+      "boardings": 16
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 1681
+     },
+     {
+      "district": "SoMa",
+      "boardings": 539
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 55
+     },
+     {
+      "district": "Northern",
+      "boardings": 486
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 108
+     },
+     {
+      "district": "Mission",
+      "boardings": 63
+     },
+     {
+      "district": "Southwest",
+      "boardings": 313
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 695
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 149
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 128
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 687
+     },
+     {
+      "district": "SoMa",
+      "boardings": 287
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 69
+     },
+     {
+      "district": "Northern",
+      "boardings": 439
+     },
+     {
+      "district": "Southwest",
+      "boardings": 75
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 2110
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 417
+     }
+    ]
+   },
+   {
+    "group": "T Third",
+    "counted": 24967,
+    "model": 11924,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 2779,
+      "tep2006Scaled": 6135
+     },
+     {
+      "district": "SoMa",
+      "model": 1007,
+      "tep2006Scaled": 3181
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "model": 4586,
+      "tep2006Scaled": 2256
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 0,
+      "tep2006Scaled": 600
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "model": 0,
+      "tep2006Scaled": 2899
+     },
+     {
+      "district": "Southwest",
+      "model": 0,
+      "tep2006Scaled": 6920
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "model": 516,
+      "tep2006Scaled": 0
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "model": 3035,
+      "tep2006Scaled": 2976
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 3378
+     },
+     {
+      "market": "resident work return",
+      "boardings": 1444
+     },
+     {
+      "market": "resident work",
+      "boardings": 984
+     },
+     {
+      "market": "visitor",
+      "boardings": 892
+     },
+     {
+      "market": "resident social return",
+      "boardings": 665
+     },
+     {
+      "market": "resident social",
+      "boardings": 598
+     },
+     {
+      "market": "nhb",
+      "boardings": 555
+     },
+     {
+      "market": "regional",
+      "boardings": 497
+     },
+     {
+      "market": "resident other",
+      "boardings": 467
+     },
+     {
+      "market": "resident other return",
+      "boardings": 465
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 354
+     },
+     {
+      "market": "resident shop",
+      "boardings": 298
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 294
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 245
+     },
+     {
+      "market": "resident school",
+      "boardings": 191
+     },
+     {
+      "market": "resident school return",
+      "boardings": 178
+     },
+     {
+      "market": "resident event",
+      "boardings": 97
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 95
+     },
+     {
+      "market": "resident univ",
+      "boardings": 79
+     },
+     {
+      "market": "event",
+      "boardings": 67
+     },
+     {
+      "market": "resident event return",
+      "boardings": 60
+     },
+     {
+      "market": "airport",
+      "boardings": 22
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 779
+     },
+     {
+      "district": "SoMa",
+      "boardings": 214
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 699
+     },
+     {
+      "district": "Northern",
+      "boardings": 140
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 55
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 138
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 344
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 259
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 829
+     },
+     {
+      "district": "SoMa",
+      "boardings": 116
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 766
+     },
+     {
+      "district": "Northern",
+      "boardings": 204
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 88
+     },
+     {
+      "district": "Richmond",
+      "boardings": 117
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 210
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 798
+     }
+    ]
+   },
+   {
+    "group": "9, 9R San Bruno",
+    "counted": 16458,
+    "model": 16925,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 4226,
+      "tep2006Scaled": 4208
+     },
+     {
+      "district": "SoMa",
+      "model": 4445,
+      "tep2006Scaled": 2877
+     },
+     {
+      "district": "Mission",
+      "model": 3496,
+      "tep2006Scaled": 3287
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "model": 778,
+      "tep2006Scaled": 609
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "model": 3862,
+      "tep2006Scaled": 4996
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "model": 118,
+      "tep2006Scaled": 481
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 5930
+     },
+     {
+      "market": "resident work return",
+      "boardings": 1531
+     },
+     {
+      "market": "resident work",
+      "boardings": 1515
+     },
+     {
+      "market": "visitor",
+      "boardings": 1249
+     },
+     {
+      "market": "nhb",
+      "boardings": 916
+     },
+     {
+      "market": "resident other",
+      "boardings": 888
+     },
+     {
+      "market": "resident other return",
+      "boardings": 873
+     },
+     {
+      "market": "resident social",
+      "boardings": 546
+     },
+     {
+      "market": "resident school",
+      "boardings": 514
+     },
+     {
+      "market": "resident social return",
+      "boardings": 512
+     },
+     {
+      "market": "resident school return",
+      "boardings": 487
+     },
+     {
+      "market": "resident shop",
+      "boardings": 477
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 450
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 419
+     },
+     {
+      "market": "resident univ",
+      "boardings": 192
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 184
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 132
+     },
+     {
+      "market": "regional",
+      "boardings": 50
+     },
+     {
+      "market": "event",
+      "boardings": 36
+     },
+     {
+      "market": "resident event",
+      "boardings": 8
+     },
+     {
+      "market": "airport",
+      "boardings": 8
+     },
+     {
+      "market": "resident event return",
+      "boardings": 7
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 996
+     },
+     {
+      "district": "SoMa",
+      "boardings": 749
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 168
+     },
+     {
+      "district": "Northern",
+      "boardings": 70
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 340
+     },
+     {
+      "district": "Mission",
+      "boardings": 819
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 120
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 425
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 350
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 698
+     },
+     {
+      "district": "SoMa",
+      "boardings": 347
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 188
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 164
+     },
+     {
+      "district": "Mission",
+      "boardings": 629
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 185
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 1224
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 488
+     }
+    ]
+   },
+   {
+    "group": "38, 38R Geary",
+    "counted": 45859,
+    "model": 49941,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 23714,
+      "tep2006Scaled": 9255
+     },
+     {
+      "district": "Northern",
+      "model": 2522,
+      "tep2006Scaled": 3088
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 11620,
+      "tep2006Scaled": 14470
+     },
+     {
+      "district": "Richmond",
+      "model": 12084,
+      "tep2006Scaled": 19047
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 13643
+     },
+     {
+      "market": "visitor",
+      "boardings": 6234
+     },
+     {
+      "market": "resident work return",
+      "boardings": 4310
+     },
+     {
+      "market": "resident work",
+      "boardings": 4051
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 2449
+     },
+     {
+      "market": "resident social return",
+      "boardings": 2246
+     },
+     {
+      "market": "resident social",
+      "boardings": 2123
+     },
+     {
+      "market": "regional",
+      "boardings": 2038
+     },
+     {
+      "market": "resident other",
+      "boardings": 2015
+     },
+     {
+      "market": "resident other return",
+      "boardings": 1987
+     },
+     {
+      "market": "nhb",
+      "boardings": 1881
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 1404
+     },
+     {
+      "market": "resident shop",
+      "boardings": 1347
+     },
+     {
+      "market": "resident school return",
+      "boardings": 989
+     },
+     {
+      "market": "resident school",
+      "boardings": 953
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 668
+     },
+     {
+      "market": "resident univ",
+      "boardings": 634
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 523
+     },
+     {
+      "market": "event",
+      "boardings": 209
+     },
+     {
+      "market": "airport",
+      "boardings": 116
+     },
+     {
+      "market": "resident event return",
+      "boardings": 62
+     },
+     {
+      "market": "resident event",
+      "boardings": 60
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 4456
+     },
+     {
+      "district": "SoMa",
+      "boardings": 361
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 108
+     },
+     {
+      "district": "Northern",
+      "boardings": 984
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 2238
+     },
+     {
+      "district": "Mission",
+      "boardings": 117
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 75
+     },
+     {
+      "district": "Richmond",
+      "boardings": 1988
+     },
+     {
+      "district": "Sunset",
+      "boardings": 88
+     },
+     {
+      "district": "Southwest",
+      "boardings": 57
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 673
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 2907
+     },
+     {
+      "district": "SoMa",
+      "boardings": 245
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 58
+     },
+     {
+      "district": "Northern",
+      "boardings": 1199
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 2378
+     },
+     {
+      "district": "Mission",
+      "boardings": 113
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 100
+     },
+     {
+      "district": "Richmond",
+      "boardings": 4229
+     },
+     {
+      "district": "Sunset",
+      "boardings": 201
+     },
+     {
+      "district": "Southwest",
+      "boardings": 73
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 119
+     }
+    ]
+   },
+   {
+    "group": "5, 5R Fulton",
+    "counted": 14250,
+    "model": 23391,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 6889,
+      "tep2006Scaled": 4143
+     },
+     {
+      "district": "SoMa",
+      "model": 77,
+      "tep2006Scaled": 1138
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 10157,
+      "tep2006Scaled": 5008
+     },
+     {
+      "district": "Richmond",
+      "model": 6268,
+      "tep2006Scaled": 3960
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 5875
+     },
+     {
+      "market": "visitor",
+      "boardings": 3200
+     },
+     {
+      "market": "resident work return",
+      "boardings": 1810
+     },
+     {
+      "market": "resident work",
+      "boardings": 1774
+     },
+     {
+      "market": "resident social",
+      "boardings": 1718
+     },
+     {
+      "market": "resident social return",
+      "boardings": 1713
+     },
+     {
+      "market": "regional",
+      "boardings": 1155
+     },
+     {
+      "market": "resident other return",
+      "boardings": 843
+     },
+     {
+      "market": "resident other",
+      "boardings": 839
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 735
+     },
+     {
+      "market": "resident univ",
+      "boardings": 656
+     },
+     {
+      "market": "nhb",
+      "boardings": 651
+     },
+     {
+      "market": "resident shop",
+      "boardings": 483
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 451
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 434
+     },
+     {
+      "market": "resident school return",
+      "boardings": 386
+     },
+     {
+      "market": "resident school",
+      "boardings": 358
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 169
+     },
+     {
+      "market": "airport",
+      "boardings": 69
+     },
+     {
+      "market": "event",
+      "boardings": 33
+     },
+     {
+      "market": "resident event",
+      "boardings": 23
+     },
+     {
+      "market": "resident event return",
+      "boardings": 16
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 1459
+     },
+     {
+      "district": "SoMa",
+      "boardings": 558
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 54
+     },
+     {
+      "district": "Northern",
+      "boardings": 127
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 1728
+     },
+     {
+      "district": "Mission",
+      "boardings": 108
+     },
+     {
+      "district": "Richmond",
+      "boardings": 1278
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 394
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 946
+     },
+     {
+      "district": "SoMa",
+      "boardings": 396
+     },
+     {
+      "district": "Northern",
+      "boardings": 122
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 2562
+     },
+     {
+      "district": "Mission",
+      "boardings": 134
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 72
+     },
+     {
+      "district": "Richmond",
+      "boardings": 1468
+     },
+     {
+      "district": "Sunset",
+      "boardings": 73
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 53
+     }
+    ]
+   },
+   {
+    "group": "N Judah",
+    "counted": 35125,
+    "model": 31189,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 8298,
+      "tep2006Scaled": 12306
+     },
+     {
+      "district": "SoMa",
+      "model": 3710,
+      "tep2006Scaled": 3163
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "model": 3650,
+      "tep2006Scaled": 1209
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 5215,
+      "tep2006Scaled": 5157
+     },
+     {
+      "district": "Sunset",
+      "model": 10316,
+      "tep2006Scaled": 13291
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 7930
+     },
+     {
+      "market": "resident work return",
+      "boardings": 3690
+     },
+     {
+      "market": "resident work",
+      "boardings": 3650
+     },
+     {
+      "market": "visitor",
+      "boardings": 2161
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 1914
+     },
+     {
+      "market": "regional",
+      "boardings": 1839
+     },
+     {
+      "market": "resident social return",
+      "boardings": 1746
+     },
+     {
+      "market": "nhb",
+      "boardings": 1170
+     },
+     {
+      "market": "resident social",
+      "boardings": 1093
+     },
+     {
+      "market": "resident other",
+      "boardings": 1091
+     },
+     {
+      "market": "resident other return",
+      "boardings": 1075
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 578
+     },
+     {
+      "market": "resident shop",
+      "boardings": 565
+     },
+     {
+      "market": "resident univ",
+      "boardings": 434
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 405
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 385
+     },
+     {
+      "market": "event",
+      "boardings": 364
+     },
+     {
+      "market": "resident school",
+      "boardings": 332
+     },
+     {
+      "market": "resident school return",
+      "boardings": 315
+     },
+     {
+      "market": "resident event",
+      "boardings": 233
+     },
+     {
+      "market": "resident event return",
+      "boardings": 169
+     },
+     {
+      "market": "airport",
+      "boardings": 48
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 2866
+     },
+     {
+      "district": "SoMa",
+      "boardings": 622
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 458
+     },
+     {
+      "district": "Northern",
+      "boardings": 131
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 727
+     },
+     {
+      "district": "Mission",
+      "boardings": 195
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 149
+     },
+     {
+      "district": "Richmond",
+      "boardings": 146
+     },
+     {
+      "district": "Sunset",
+      "boardings": 1127
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 914
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 1335
+     },
+     {
+      "district": "SoMa",
+      "boardings": 421
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 463
+     },
+     {
+      "district": "Northern",
+      "boardings": 92
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 1821
+     },
+     {
+      "district": "Mission",
+      "boardings": 291
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 380
+     },
+     {
+      "district": "Richmond",
+      "boardings": 119
+     },
+     {
+      "district": "Sunset",
+      "boardings": 2955
+     }
+    ]
+   }
+  ],
+  "areas": [
+   {
+    "group": "SOUTHEAST Z5 (Excelsior/OMI, Bayview, Visitacion Valley)",
+    "tdsTransit": 0.19699999999999998,
+    "tdsSE": 0.027000000000000003,
+    "tdsRelative": 0.9899497487437185,
+    "modelTransit": 0.15455835780341548,
+    "modelRelative": 0.9380596778309052,
+    "modelCommuteTransit": 0.28091805913265977
+   },
+   {
+    "group": "WEST Z3+Z4 (Richmond, Sunset, Parkside, West of Twin Peaks)",
+    "tdsTransit": 0.182,
+    "tdsSE": 0.021,
+    "tdsRelative": 0.9145728643216081,
+    "modelTransit": 0.12370358656738288,
+    "modelRelative": 0.7507930869032716,
+    "modelCommuteTransit": 0.2871652260550181
+   },
+   {
+    "group": "Z1 Mission/SoMa/Potrero/Castro",
+    "tdsTransit": 0.226,
+    "tdsSE": 0.023,
+    "tdsRelative": 1.135678391959799,
+    "modelTransit": 0.1835921766450334,
+    "modelRelative": 1.1142743784516898,
+    "modelCommuteTransit": 0.3631084269450918
+   },
+   {
+    "group": "Z2 Downtown/NE/Marina/W.Addition",
+    "tdsTransit": 0.196,
+    "tdsSE": 0.022000000000000002,
+    "tdsRelative": 0.984924623115578,
+    "modelTransit": 0.2037961262759454,
+    "modelRelative": 1.2368980317502778,
+    "modelCommuteTransit": 0.35301797424856557
+   }
+  ]
+ },
+ "after": {
+  "muniRoutes": {
+   "r": 0.9455366743381973,
+   "pctRmse": 38.16866869739693,
+   "pctRmseScaled": 32.119205818856805,
+   "model": 435206,
+   "observed": 515626,
+   "within25": 0.5614035087719298
+  },
+  "groups": {
+   "subway": {
+    "observed": 94783,
+    "model": 87131
+   },
+   "T": {
+    "observed": 24967,
+    "model": 11286
+   },
+   "bus": {
+    "observed": 395876,
+    "model": 336788
+   }
+  },
+  "bartCityExits": {
+   "r": 0.8899964296341543,
+   "pctRmse": 28.279324198221936,
+   "total": 0.9796356992289807
+  },
+  "tripMiles": {
+   "bus": 2.110499885467744,
+   "metro": 3.024334004108886,
+   "metroWithoutL": 2.8873595448061518
+  },
+  "muniAfterVehicle": 0.12710481776484786,
+  "linkedTransitTrips": 563360,
+  "residentTransit": 0.13707181964709725,
+  "routes": {
+   "5": {
+    "observed": 5392,
+    "model": 9128
+   },
+   "8": {
+    "observed": 18367,
+    "model": 12120
+   },
+   "9": {
+    "observed": 6483,
+    "model": 6595
+   },
+   "14": {
+    "observed": 22150,
+    "model": 12596
+   },
+   "15": {
+    "observed": 3792,
+    "model": 4721
+   },
+   "38": {
+    "observed": 18017,
+    "model": 19721
+   },
+   "44": {
+    "observed": 12992,
+    "model": 10274
+   },
+   "49": {
+    "observed": 35033,
+    "model": 25390
+   },
+   "54": {
+    "observed": 4800,
+    "model": 3138
+   },
+   "T": {
+    "observed": 24967,
+    "model": 11286
+   },
+   "14R": {
+    "observed": 22725,
+    "model": 13386
+   },
+   "8AX": {
+    "observed": 3458,
+    "model": 1976
+   },
+   "8BX": {
+    "observed": 3950,
+    "model": 3329
+   },
+   "9R": {
+    "observed": 9975,
+    "model": 8502
+   },
+   "38R": {
+    "observed": 27842,
+    "model": 24014
+   },
+   "5R": {
+    "observed": 8858,
+    "model": 11237
+   },
+   "N": {
+    "observed": 35125,
+    "model": 29280
+   },
+   "J": {
+    "observed": 7667,
+    "model": 6513
+   },
+   "K": {
+    "observed": 14433,
+    "model": 13610
+   },
+   "L": {
+    "observed": 17725,
+    "model": 19351
+   },
+   "M": {
+    "observed": 19833,
+    "model": 18378
+   }
+  },
+  "riders": {
+   "purposeLightRail": [
+    {
+     "purpose": "Other Purposes",
+     "observed": 0.135,
+     "model": 0.212,
+     "modelByTour": 0.152
+    },
+    {
+     "purpose": "School",
+     "observed": 0.128,
+     "model": 0.095,
+     "modelByTour": 0.137
+    },
+    {
+     "purpose": "Social/Recreation/Shopping",
+     "observed": 0.224,
+     "model": 0.378,
+     "modelByTour": 0.283
+    },
+    {
+     "purpose": "Work",
+     "observed": 0.513,
+     "model": 0.315,
+     "modelByTour": 0.427
+    }
+   ],
+   "purposeBus": [
+    {
+     "purpose": "Other Purposes",
+     "observed": 0.151,
+     "model": 0.215,
+     "modelByTour": 0.153
+    },
+    {
+     "purpose": "School",
+     "observed": 0.156,
+     "model": 0.126,
+     "modelByTour": 0.169
+    },
+    {
+     "purpose": "Social/Recreation/Shopping",
+     "observed": 0.249,
+     "model": 0.425,
+     "modelByTour": 0.327
+    },
+    {
+     "purpose": "Work",
+     "observed": 0.445,
+     "model": 0.234,
+     "modelByTour": 0.351
+    }
+   ],
+   "residentShare": {
+    "lightRail": {
+     "model": 0.873,
+     "observed": 0.792
+    },
+    "bus": {
+     "model": 0.866,
+     "observed": 0.782
+    },
+    "t": {
+     "model": 0.855
+    },
+    "note": "model: boardings on residents' trips (their tours, stops and subtours); observed: Snapshot survey riders whose home county is San Francisco (weekday, 2023–24). Visitors from outside the Bay Area are 4–6% of Muni riders in the survey; the model's visitors and air travelers are counted as non-residents."
+   },
+   "hotelVisitors": 0.029412095842631103,
+   "airTravelers": 0.0029249971290443884,
+   "inCommuters": 0.023073476198089183,
+   "regionalVisitors": 0.043474149014980756,
+   "notFromHomeNonResidents": 0.028383055282220567,
+   "muniBoardings": 444103
+  },
+  "commute": {
+   "source": "CTPP 2017-2021 (5-year ACS), Part 2 (workplace) Table B202105, Means of Transportation to Work (18), workers 16 and over, every census tract of San Francisco County (summary level C31). AASHTO CTPP Data Portal query, downloaded without an account (under the 10,000-cell instant-download limit).",
+   "note": "Commuters = workers less those working at home. Shares, not counts: CTPP counts usual workers 2017–2021, the model commuters at work on an average weekday of 2026. The distribution of jobs comes from LODES 2023 rebalanced to MTC 2023 employment (an input); the transit share by workplace is never fitted.",
+   "totalTransitShare": {
+    "observed": 0.403,
+    "model": 0.333
+   },
+   "byDistrict": [
+    {
+     "district": "Downtown",
+     "observedShareOfCommuters": 0.4385,
+     "modelShareOfCommuters": 0.4006,
+     "observedTransitShare": 0.575,
+     "modelTransitShare": 0.452,
+     "observedCommuters": 227745,
+     "modelCommuters": 131805
+    },
+    {
+     "district": "SoMa",
+     "observedShareOfCommuters": 0.1051,
+     "modelShareOfCommuters": 0.1149,
+     "observedTransitShare": 0.417,
+     "modelTransitShare": 0.397,
+     "observedCommuters": 54585,
+     "modelCommuters": 37794
+    },
+    {
+     "district": "Mission Bay–Potrero",
+     "observedShareOfCommuters": 0.0731,
+     "modelShareOfCommuters": 0.0599,
+     "observedTransitShare": 0.287,
+     "modelTransitShare": 0.202,
+     "observedCommuters": 37965,
+     "modelCommuters": 19712
+    },
+    {
+     "district": "Northern",
+     "observedShareOfCommuters": 0.0781,
+     "modelShareOfCommuters": 0.0728,
+     "observedTransitShare": 0.268,
+     "modelTransitShare": 0.269,
+     "observedCommuters": 40580,
+     "modelCommuters": 23955
+    },
+    {
+     "district": "Western Addition–Haight",
+     "observedShareOfCommuters": 0.066,
+     "modelShareOfCommuters": 0.0758,
+     "observedTransitShare": 0.274,
+     "modelTransitShare": 0.306,
+     "observedCommuters": 34255,
+     "modelCommuters": 24932
+    },
+    {
+     "district": "Mission",
+     "observedShareOfCommuters": 0.0691,
+     "modelShareOfCommuters": 0.0868,
+     "observedTransitShare": 0.27,
+     "modelTransitShare": 0.247,
+     "observedCommuters": 35890,
+     "modelCommuters": 28563
+    },
+    {
+     "district": "Castro–Noe–Bernal",
+     "observedShareOfCommuters": 0.0278,
+     "modelShareOfCommuters": 0.0321,
+     "observedTransitShare": 0.214,
+     "modelTransitShare": 0.174,
+     "observedCommuters": 14440,
+     "modelCommuters": 10574
+    },
+    {
+     "district": "Richmond",
+     "observedShareOfCommuters": 0.026,
+     "modelShareOfCommuters": 0.0303,
+     "observedTransitShare": 0.202,
+     "modelTransitShare": 0.18,
+     "observedCommuters": 13491,
+     "modelCommuters": 9969
+    },
+    {
+     "district": "Sunset",
+     "observedShareOfCommuters": 0.0414,
+     "modelShareOfCommuters": 0.041,
+     "observedTransitShare": 0.168,
+     "modelTransitShare": 0.172,
+     "observedCommuters": 21515,
+     "modelCommuters": 13494
+    },
+    {
+     "district": "Southwest",
+     "observedShareOfCommuters": 0.0275,
+     "modelShareOfCommuters": 0.0304,
+     "observedTransitShare": 0.175,
+     "modelTransitShare": 0.152,
+     "observedCommuters": 14260,
+     "modelCommuters": 10001
+    },
+    {
+     "district": "Excelsior–Visitacion Valley",
+     "observedShareOfCommuters": 0.0133,
+     "modelShareOfCommuters": 0.0243,
+     "observedTransitShare": 0.189,
+     "modelTransitShare": 0.151,
+     "observedCommuters": 6900,
+     "modelCommuters": 8000
+    },
+    {
+     "district": "Bayview–Hunters Point",
+     "observedShareOfCommuters": 0.0341,
+     "modelShareOfCommuters": 0.031,
+     "observedTransitShare": 0.085,
+     "modelTransitShare": 0.113,
+     "observedCommuters": 17720,
+     "modelCommuters": 10199
+    }
+   ],
+   "districtTransit": {
+    "n": 12,
+    "observedTotal": 3,
+    "modelTotal": 3,
+    "totalRatio": 0.9010883482714468,
+    "r": 0.9496789021388015,
+    "r2": 0.9018900171675592,
+    "pctRmse": 18.936974231222383,
+    "mape": 3.6583333333333328,
+    "medianApe": 2.8,
+    "within25": 0.8333333333333334,
+    "slopeThroughOrigin": 0.8776045696920243
+   },
+   "districtJobs": {
+    "n": 12,
+    "observedTotal": 1,
+    "modelTotal": 1,
+    "totalRatio": 0.9999,
+    "r": 0.9965068199065495,
+    "r2": 0.9930258421202643,
+    "pctRmse": 16.68629377662997,
+    "mape": 0.9974999999999997,
+    "medianApe": 0.9800000000000003,
+    "within25": 0.8333333333333334,
+    "slopeThroughOrigin": 0.9355779237168763
+   },
+   "tracts": {
+    "rows": [
+     {
+      "tract": "010101",
+      "district": "Northern",
+      "observedCommuters": 5995,
+      "modelCommuters": 2706,
+      "observedTransitShare": 0.39,
+      "modelTransitShare": 0.198
+     },
+     {
+      "tract": "010500",
+      "district": "Downtown",
+      "observedCommuters": 22030,
+      "modelCommuters": 11663,
+      "observedTransitShare": 0.512,
+      "modelTransitShare": 0.435
+     },
+     {
+      "tract": "010600",
+      "district": "Northern",
+      "observedCommuters": 2425,
+      "modelCommuters": 1637,
+      "observedTransitShare": 0.499,
+      "modelTransitShare": 0.341
+     },
+     {
+      "tract": "011700",
+      "district": "Downtown",
+      "observedCommuters": 65585,
+      "modelCommuters": 35455,
+      "observedTransitShare": 0.626,
+      "modelTransitShare": 0.476
+     },
+     {
+      "tract": "011800",
+      "district": "Downtown",
+      "observedCommuters": 3250,
+      "modelCommuters": 2102,
+      "observedTransitShare": 0.566,
+      "modelTransitShare": 0.446
+     },
+     {
+      "tract": "012100",
+      "district": "Downtown",
+      "observedCommuters": 2685,
+      "modelCommuters": 1636,
+      "observedTransitShare": 0.454,
+      "modelTransitShare": 0.423
+     },
+     {
+      "tract": "012301",
+      "district": "Downtown",
+      "observedCommuters": 2820,
+      "modelCommuters": 2272,
+      "observedTransitShare": 0.394,
+      "modelTransitShare": 0.459
+     },
+     {
+      "tract": "012405",
+      "district": "Downtown",
+      "observedCommuters": 9360,
+      "modelCommuters": 3263,
+      "observedTransitShare": 0.537,
+      "modelTransitShare": 0.444
+     },
+     {
+      "tract": "012503",
+      "district": "Downtown",
+      "observedCommuters": 2075,
+      "modelCommuters": 1358,
+      "observedTransitShare": 0.484,
+      "modelTransitShare": 0.462
+     },
+     {
+      "tract": "013300",
+      "district": "Northern",
+      "observedCommuters": 2705,
+      "modelCommuters": 1298,
+      "observedTransitShare": 0.183,
+      "modelTransitShare": 0.161
+     },
+     {
+      "tract": "013500",
+      "district": "Northern",
+      "observedCommuters": 2625,
+      "modelCommuters": 1811,
+      "observedTransitShare": 0.196,
+      "modelTransitShare": 0.203
+     },
+     {
+      "tract": "015100",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 3120,
+      "modelCommuters": 2772,
+      "observedTransitShare": 0.279,
+      "modelTransitShare": 0.651
+     },
+     {
+      "tract": "015300",
+      "district": "Northern",
+      "observedCommuters": 2055,
+      "modelCommuters": 697,
+      "observedTransitShare": 0.309,
+      "modelTransitShare": 0.235
+     },
+     {
+      "tract": "015500",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 4410,
+      "modelCommuters": 3687,
+      "observedTransitShare": 0.284,
+      "modelTransitShare": 0.222
+     },
+     {
+      "tract": "015701",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2730,
+      "modelCommuters": 1489,
+      "observedTransitShare": 0.33,
+      "modelTransitShare": 0.19
+     },
+     {
+      "tract": "015702",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2940,
+      "modelCommuters": 2787,
+      "observedTransitShare": 0.126,
+      "modelTransitShare": 0.177
+     },
+     {
+      "tract": "016000",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2150,
+      "modelCommuters": 1655,
+      "observedTransitShare": 0.358,
+      "modelTransitShare": 0.359
+     },
+     {
+      "tract": "016200",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 5600,
+      "modelCommuters": 4320,
+      "observedTransitShare": 0.354,
+      "modelTransitShare": 0.385
+     },
+     {
+      "tract": "016500",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2195,
+      "modelCommuters": 1002,
+      "observedTransitShare": 0.203,
+      "modelTransitShare": 0.189
+     },
+     {
+      "tract": "016802",
+      "district": "Western Addition–Haight",
+      "observedCommuters": 2620,
+      "modelCommuters": 633,
+      "observedTransitShare": 0.353,
+      "modelTransitShare": 0.26
+     },
+     {
+      "tract": "016900",
+      "district": "Castro–Noe–Bernal",
+      "observedCommuters": 2610,
+      "modelCommuters": 1271,
+      "observedTransitShare": 0.303,
+      "modelTransitShare": 0.18
+     },
+     {
+      "tract": "017602",
+      "district": "SoMa",
+      "observedCommuters": 10360,
+      "modelCommuters": 4250,
+      "observedTransitShare": 0.471,
+      "modelTransitShare": 0.45
+     },
+     {
+      "tract": "017603",
+      "district": "SoMa",
+      "observedCommuters": 13895,
+      "modelCommuters": 13874,
+      "observedTransitShare": 0.404,
+      "modelTransitShare": 0.446
+     },
+     {
+      "tract": "017604",
+      "district": "SoMa",
+      "observedCommuters": 3910,
+      "modelCommuters": 2179,
+      "observedTransitShare": 0.624,
+      "modelTransitShare": 0.465
+     },
+     {
+      "tract": "017700",
+      "district": "Mission",
+      "observedCommuters": 10050,
+      "modelCommuters": 13722,
+      "observedTransitShare": 0.312,
+      "modelTransitShare": 0.243
+     },
+     {
+      "tract": "017801",
+      "district": "SoMa",
+      "observedCommuters": 5220,
+      "modelCommuters": 4185,
+      "observedTransitShare": 0.478,
+      "modelTransitShare": 0.439
+     },
+     {
+      "tract": "017803",
+      "district": "SoMa",
+      "observedCommuters": 2305,
+      "modelCommuters": 1657,
+      "observedTransitShare": 0.451,
+      "modelTransitShare": 0.391
+     },
+     {
+      "tract": "017804",
+      "district": "SoMa",
+      "observedCommuters": 3040,
+      "modelCommuters": 2582,
+      "observedTransitShare": 0.347,
+      "modelTransitShare": 0.325
+     },
+     {
+      "tract": "018000",
+      "district": "SoMa",
+      "observedCommuters": 14945,
+      "modelCommuters": 8647,
+      "observedTransitShare": 0.343,
+      "modelTransitShare": 0.289
+     },
+     {
+      "tract": "020101",
+      "district": "Mission",
+      "observedCommuters": 4545,
+      "modelCommuters": 1256,
+      "observedTransitShare": 0.323,
+      "modelTransitShare": 0.327
+     },
+     {
+      "tract": "022600",
+      "district": "Mission Bay–Potrero",
+      "observedCommuters": 7530,
+      "modelCommuters": 3659,
+      "observedTransitShare": 0.177,
+      "modelTransitShare": 0.164
+     },
+     {
+      "tract": "022801",
+      "district": "Mission",
+      "observedCommuters": 5480,
+      "modelCommuters": 2955,
+      "observedTransitShare": 0.185,
+      "modelTransitShare": 0.255
+     },
+     {
+      "tract": "022802",
+      "district": "Mission",
+      "observedCommuters": 6025,
+      "modelCommuters": 2436,
+      "observedTransitShare": 0.156,
+      "modelTransitShare": 0.191
+     },
+     {
+      "tract": "030101",
+      "district": "Sunset",
+      "observedCommuters": 4795,
+      "modelCommuters": 379,
+      "observedTransitShare": 0.181,
+      "modelTransitShare": 0.24
+     },
+     {
+      "tract": "030102",
+      "district": "Sunset",
+      "observedCommuters": 6375,
+      "modelCommuters": 4498,
+      "observedTransitShare": 0.173,
+      "modelTransitShare": 0.222
+     },
+     {
+      "tract": "033201",
+      "district": "Southwest",
+      "observedCommuters": 5585,
+      "modelCommuters": 3243,
+      "observedTransitShare": 0.214,
+      "modelTransitShare": 0.165
+     },
+     {
+      "tract": "060100",
+      "district": "Northern",
+      "observedCommuters": 4725,
+      "modelCommuters": 2372,
+      "observedTransitShare": 0.192,
+      "modelTransitShare": 0.857
+     },
+     {
+      "tract": "060701",
+      "district": "Mission Bay–Potrero",
+      "observedCommuters": 14875,
+      "modelCommuters": 9782,
+      "observedTransitShare": 0.326,
+      "modelTransitShare": 0.21
+     },
+     {
+      "tract": "060702",
+      "district": "Mission Bay–Potrero",
+      "observedCommuters": 5875,
+      "modelCommuters": 2172,
+      "observedTransitShare": 0.211,
+      "modelTransitShare": 0.21
+     },
+     {
+      "tract": "060703",
+      "district": "Mission Bay–Potrero",
+      "observedCommuters": 6300,
+      "modelCommuters": 2137,
+      "observedTransitShare": 0.411,
+      "modelTransitShare": 0.24
+     },
+     {
+      "tract": "061101",
+      "district": "Downtown",
+      "observedCommuters": 11195,
+      "modelCommuters": 7415,
+      "observedTransitShare": 0.528,
+      "modelTransitShare": 0.452
+     },
+     {
+      "tract": "061501",
+      "district": "Downtown",
+      "observedCommuters": 47520,
+      "modelCommuters": 27179,
+      "observedTransitShare": 0.609,
+      "modelTransitShare": 0.473
+     },
+     {
+      "tract": "061502",
+      "district": "Downtown",
+      "observedCommuters": 6680,
+      "modelCommuters": 3986,
+      "observedTransitShare": 0.502,
+      "modelTransitShare": 0.412
+     },
+     {
+      "tract": "061503",
+      "district": "Downtown",
+      "observedCommuters": 11090,
+      "modelCommuters": 8890,
+      "observedTransitShare": 0.591,
+      "modelTransitShare": 0.45
+     },
+     {
+      "tract": "061506",
+      "district": "Downtown",
+      "observedCommuters": 2070,
+      "modelCommuters": 670,
+      "observedTransitShare": 0.531,
+      "modelTransitShare": 0.446
+     },
+     {
+      "tract": "061507",
+      "district": "Downtown",
+      "observedCommuters": 23200,
+      "modelCommuters": 13403,
+      "observedTransitShare": 0.692,
+      "modelTransitShare": 0.468
+     },
+     {
+      "tract": "061508",
+      "district": "Downtown",
+      "observedCommuters": 2815,
+      "modelCommuters": 1612,
+      "observedTransitShare": 0.545,
+      "modelTransitShare": 0.424
+     },
+     {
+      "tract": "980200",
+      "district": "Richmond",
+      "observedCommuters": 3115,
+      "modelCommuters": 2086,
+      "observedTransitShare": 0.123,
+      "modelTransitShare": 0.132
+     },
+     {
+      "tract": "980900",
+      "district": "Bayview–Hunters Point",
+      "observedCommuters": 11130,
+      "modelCommuters": 4649,
+      "observedTransitShare": 0.072,
+      "modelTransitShare": 0.11
+     }
+    ],
+    "transit": {
+     "n": 49,
+     "observedTotal": 18,
+     "modelTotal": 16,
+     "totalRatio": 0.9151406878070567,
+     "r": 0.5874075347569205,
+     "r2": 0.3450476118892028,
+     "pctRmse": 38.69613333052684,
+     "mape": 9.216326530612246,
+     "medianApe": 6.5,
+     "within25": 0.673469387755102,
+     "slopeThroughOrigin": 0.8582785686087828
+    },
+    "commuters": {
+     "n": 49,
+     "observedTotal": 406635,
+     "modelTotal": 241389,
+     "totalRatio": 0.5936257331513519,
+     "r": 0.9646911039608325,
+     "r2": 0.9306289260611696,
+     "pctRmse": 74.97156466447461,
+     "mape": 42.04660831135079,
+     "medianApe": 42.22844827586207,
+     "within25": 0.20408163265306123,
+     "slopeThroughOrigin": 0.571605663006026
+    }
+   }
+  },
+  "metro": {
+   "note": "Metro rides by boarding and alighting stop from the assignment at the base run crowding (one demand pass); straight-line miles between the two stops for the model and the 2006–07 counts alike (NTD follows the track, about 10% longer).",
+   "model": {
+    "boardings": 95983,
+    "miPerBoardingStraight": 2.785675929335405,
+    "bandsMi": [
+     "0.5",
+     "1",
+     "1.5",
+     "2",
+     "3",
+     "4",
+     "6",
+     "Infinity"
+    ],
+    "bands": [
+     0.03713944160695688,
+     0.09375994223612368,
+     0.16686957582885056,
+     0.11053477489198425,
+     0.19852936351576678,
+     0.13127708461017343,
+     0.2211650826879133,
+     0.04072473462223126
+    ],
+    "byRoute": {
+     "J": {
+      "boardings": 6187.311346385928,
+      "miPerBoarding": 1.8741060860041092,
+      "subwayOn": 0.489053390322559,
+      "subwayOff": 0.48324393220400064,
+      "insideSubway": 0.2564184506309108,
+      "bands": [
+       0.07953237298567767,
+       0.14135756609644312,
+       0.18856426112007355,
+       0.17357322111293183,
+       0.2656232642109944,
+       0.14817000702052874,
+       0.003179307453350988,
+       0
+      ],
+      "onByDistance": [
+       0.29820166240719936,
+       0.1908517279153597,
+       0.15789079544148224,
+       0.26612579031514777,
+       0.035876780820886106,
+       0.05105324309992522
+      ],
+      "offByDistance": [
+       0.2869621094035422,
+       0.19628182280045794,
+       0.18957498288677693,
+       0.24447310624592844,
+       0.04183533765712292,
+       0.04087264100617167
+      ]
+     },
+     "K": {
+      "boardings": 12976.093510921683,
+      "miPerBoarding": 2.7007515197511376,
+      "subwayOn": 0.7896669782617581,
+      "subwayOff": 0.7500581888388336,
+      "insideSubway": 0.6047343439375746,
+      "bands": [
+       0.04201569890677368,
+       0.09314084386037257,
+       0.1629514968666459,
+       0.10744070370501045,
+       0.24748538383933866,
+       0.08179175498799256,
+       0.26512417809420474,
+       0.000049939739660998646
+      ],
+      "onByDistance": [
+       0.2965795696379554,
+       0.20529243730748079,
+       0.20875855067111124,
+       0,
+       0.054648926788867444,
+       0.23472051559458446
+      ],
+      "offByDistance": [
+       0.28544589840527773,
+       0.2003207900774465,
+       0.1883712043473912,
+       0,
+       0.056848235238414146,
+       0.26901387193146953
+      ]
+     },
+     "L": {
+      "boardings": 18726.709389522995,
+      "miPerBoarding": 3.4355374820721627,
+      "subwayOn": 0.6699055600964816,
+      "subwayOff": 0.7055613213445471,
+      "insideSubway": 0.43820113764392027,
+      "bands": [
+       0.04006069214149608,
+       0.07830604518864413,
+       0.11165474818933924,
+       0.077477474983805,
+       0.1694246068091438,
+       0.07876435921000724,
+       0.3397500758734605,
+       0.10456199760410416
+      ],
+      "onByDistance": [
+       0.2812300386406973,
+       0.18195672655070513,
+       0.1537590281252457,
+       0,
+       0.03932429443685659,
+       0.34372991224649563
+      ],
+      "offByDistance": [
+       0.3104780211813293,
+       0.1953252998219933,
+       0.14113083741355462,
+       0,
+       0.04132683732707655,
+       0.31173900425604684
+      ]
+     },
+     "M": {
+      "boardings": 17846.947949877205,
+      "miPerBoarding": 3.12023831008228,
+      "subwayOn": 0.6321083348873907,
+      "subwayOff": 0.6797290403469953,
+      "insideSubway": 0.4393563838774512,
+      "bands": [
+       0.03877590187911569,
+       0.08463679377899655,
+       0.1449377666692576,
+       0.09961858349176955,
+       0.17868222094931038,
+       0.08853509434017477,
+       0.28581381798474204,
+       0.0789998209066344
+      ],
+      "onByDistance": [
+       0.23979455826794366,
+       0.16803866884990082,
+       0.16348476905976309,
+       0,
+       0.04373148080792552,
+       0.3849505230144677
+      ],
+      "offByDistance": [
+       0.26403161788532925,
+       0.18899621570129896,
+       0.16375091464643524,
+       0,
+       0.04844528939373846,
+       0.33477596237319873
+      ]
+     },
+     "N": {
+      "boardings": 28978.763460899274,
+      "miPerBoarding": 2.6622678465769534,
+      "subwayOn": 0.3620612555049434,
+      "subwayOff": 0.38763837260624734,
+      "insideSubway": 0.06771828596601767,
+      "bands": [
+       0.0272524172850258,
+       0.08387252271912456,
+       0.1855682066228607,
+       0.10496464381758148,
+       0.19097702296717697,
+       0.21366558948804656,
+       0.17505696335600965,
+       0.01864263374417425
+      ],
+      "onByDistance": [
+       0.29795665011211736,
+       0.23540321982964793,
+       0.09099081031817048,
+       0.14199103628602694,
+       0.10590080318769143,
+       0.12775748026634598
+      ],
+      "offByDistance": [
+       0.307038280518051,
+       0.25611743901013045,
+       0.09689225792916674,
+       0.1433882074394512,
+       0.082516678979526,
+       0.1140471361236746
+      ]
+     },
+     "T": {
+      "boardings": 11267.52123568144,
+      "miPerBoarding": 2.0914399462055875,
+      "subwayOn": 0.2799240768805797,
+      "subwayOff": 0.3999512217500509,
+      "insideSubway": 0.023992323525834365,
+      "bands": [
+       0.026225725500649055,
+       0.1338999461289847,
+       0.23788379969359177,
+       0.16603954027679257,
+       0.20453920181704463,
+       0.12207294156511198,
+       0.10933884501782569,
+       0
+      ],
+      "onByDistance": [
+       0.2799240768805797,
+       0.29955317529620146,
+       0.10501630279322792,
+       0.05543585106067165,
+       0.17336162570077746,
+       0.08670896826854214
+      ],
+      "offByDistance": [
+       0.3999512217500509,
+       0.22859105384859527,
+       0.10178530137392859,
+       0.04356569390132004,
+       0.1522067661455903,
+       0.07389996298051528
+      ]
+     }
+    }
+   },
+   "subwayPairs": [
+    {
+     "pair": "montgomery–vanness",
+     "rides": 3278
+    },
+    {
+     "pair": "castro–montgomery",
+     "rides": 2127
+    },
+    {
+     "pair": "embarcadero–vanness",
+     "rides": 1943
+    },
+    {
+     "pair": "castro–vanness",
+     "rides": 1791
+    },
+    {
+     "pair": "castro–embarcadero",
+     "rides": 1462
+    },
+    {
+     "pair": "church–montgomery",
+     "rides": 1355
+    },
+    {
+     "pair": "castro–powell",
+     "rides": 1290
+    },
+    {
+     "pair": "powell–vanness",
+     "rides": 1171
+    },
+    {
+     "pair": "castro–civiccenter",
+     "rides": 1145
+    },
+    {
+     "pair": "civiccenter–montgomery",
+     "rides": 1071
+    },
+    {
+     "pair": "civiccenter–embarcadero",
+     "rides": 814
+    },
+    {
+     "pair": "foresthill–montgomery",
+     "rides": 806
+    },
+    {
+     "pair": "church–embarcadero",
+     "rides": 804
+    },
+    {
+     "pair": "foresthill–vanness",
+     "rides": 764
+    },
+    {
+     "pair": "church–powell",
+     "rides": 723
+    },
+    {
+     "pair": "church–vanness",
+     "rides": 700
+    },
+    {
+     "pair": "embarcadero–powell",
+     "rides": 620
+    },
+    {
+     "pair": "embarcadero–foresthill",
+     "rides": 572
+    },
+    {
+     "pair": "montgomery–powell",
+     "rides": 508
+    },
+    {
+     "pair": "church–civiccenter",
+     "rides": 506
+    }
+   ],
+   "bart": {
+    "downtown": {
+     "observed": 1333,
+     "model": 633
+    },
+    "downtownMission": {
+     "observed": 9593,
+     "model": 8356
+    },
+    "city": {
+     "observed": 22237,
+     "model": 22955
+    }
+   }
+  },
+  "routeGroups": [
+   {
+    "group": "Mission St (14, 14R, 49)",
+    "counted": 79908,
+    "model": 50257,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 9547,
+      "tep2006Scaled": 9136
+     },
+     {
+      "district": "SoMa",
+      "model": 7747,
+      "tep2006Scaled": 8706
+     },
+     {
+      "district": "Northern",
+      "model": 3502,
+      "tep2006Scaled": 3628
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 2203,
+      "tep2006Scaled": 4377
+     },
+     {
+      "district": "Mission",
+      "model": 13338,
+      "tep2006Scaled": 25594
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "model": 3828,
+      "tep2006Scaled": 8142
+     },
+     {
+      "district": "Southwest",
+      "model": 651,
+      "tep2006Scaled": 546
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "model": 9440,
+      "tep2006Scaled": 19778
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 17101
+     },
+     {
+      "market": "resident work",
+      "boardings": 4641
+     },
+     {
+      "market": "resident work return",
+      "boardings": 4419
+     },
+     {
+      "market": "resident other return",
+      "boardings": 2766
+     },
+     {
+      "market": "resident other",
+      "boardings": 2743
+     },
+     {
+      "market": "resident social",
+      "boardings": 2329
+     },
+     {
+      "market": "resident social return",
+      "boardings": 2320
+     },
+     {
+      "market": "resident school",
+      "boardings": 1828
+     },
+     {
+      "market": "resident school return",
+      "boardings": 1807
+     },
+     {
+      "market": "resident shop",
+      "boardings": 1672
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 1650
+     },
+     {
+      "market": "nhb",
+      "boardings": 1457
+     },
+     {
+      "market": "visitor",
+      "boardings": 1306
+     },
+     {
+      "market": "regional",
+      "boardings": 833
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 794
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 777
+     },
+     {
+      "market": "resident univ",
+      "boardings": 756
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 698
+     },
+     {
+      "market": "airport",
+      "boardings": 204
+     },
+     {
+      "market": "event",
+      "boardings": 92
+     },
+     {
+      "market": "resident event return",
+      "boardings": 32
+     },
+     {
+      "market": "resident event",
+      "boardings": 30
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 2348
+     },
+     {
+      "district": "SoMa",
+      "boardings": 1802
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 148
+     },
+     {
+      "district": "Northern",
+      "boardings": 1653
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 1537
+     },
+     {
+      "district": "Mission",
+      "boardings": 2935
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 1191
+     },
+     {
+      "district": "Richmond",
+      "boardings": 143
+     },
+     {
+      "district": "Sunset",
+      "boardings": 84
+     },
+     {
+      "district": "Southwest",
+      "boardings": 452
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 1278
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 64
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 364
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 1519
+     },
+     {
+      "district": "SoMa",
+      "boardings": 815
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 62
+     },
+     {
+      "district": "Northern",
+      "boardings": 1228
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 800
+     },
+     {
+      "district": "Mission",
+      "boardings": 3278
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 1417
+     },
+     {
+      "district": "Richmond",
+      "boardings": 178
+     },
+     {
+      "district": "Sunset",
+      "boardings": 88
+     },
+     {
+      "district": "Southwest",
+      "boardings": 277
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 3974
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 133
+     }
+    ]
+   },
+   {
+    "group": "8 Bayshore",
+    "counted": 25775,
+    "model": 16472,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 5655,
+      "tep2006Scaled": null
+     },
+     {
+      "district": "SoMa",
+      "model": 2614,
+      "tep2006Scaled": null
+     },
+     {
+      "district": "Northern",
+      "model": 1855,
+      "tep2006Scaled": null
+     },
+     {
+      "district": "Southwest",
+      "model": 326,
+      "tep2006Scaled": null
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "model": 6021,
+      "tep2006Scaled": null
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 5476
+     },
+     {
+      "market": "resident work return",
+      "boardings": 1594
+     },
+     {
+      "market": "resident work",
+      "boardings": 1556
+     },
+     {
+      "market": "resident other return",
+      "boardings": 665
+     },
+     {
+      "market": "resident other",
+      "boardings": 663
+     },
+     {
+      "market": "resident social return",
+      "boardings": 643
+     },
+     {
+      "market": "resident social",
+      "boardings": 641
+     },
+     {
+      "market": "visitor",
+      "boardings": 635
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 609
+     },
+     {
+      "market": "resident school",
+      "boardings": 585
+     },
+     {
+      "market": "nhb",
+      "boardings": 563
+     },
+     {
+      "market": "resident shop",
+      "boardings": 558
+     },
+     {
+      "market": "resident school return",
+      "boardings": 503
+     },
+     {
+      "market": "regional",
+      "boardings": 447
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 365
+     },
+     {
+      "market": "resident univ",
+      "boardings": 344
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 254
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 239
+     },
+     {
+      "market": "airport",
+      "boardings": 57
+     },
+     {
+      "market": "event",
+      "boardings": 38
+     },
+     {
+      "market": "resident event",
+      "boardings": 21
+     },
+     {
+      "market": "resident event return",
+      "boardings": 16
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 1677
+     },
+     {
+      "district": "SoMa",
+      "boardings": 538
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 56
+     },
+     {
+      "district": "Northern",
+      "boardings": 474
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 101
+     },
+     {
+      "district": "Mission",
+      "boardings": 61
+     },
+     {
+      "district": "Southwest",
+      "boardings": 323
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 733
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 153
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 126
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 656
+     },
+     {
+      "district": "SoMa",
+      "boardings": 275
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 65
+     },
+     {
+      "district": "Northern",
+      "boardings": 423
+     },
+     {
+      "district": "Southwest",
+      "boardings": 77
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 2204
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 428
+     }
+    ]
+   },
+   {
+    "group": "T Third",
+    "counted": 24967,
+    "model": 11381,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 2591,
+      "tep2006Scaled": 6135
+     },
+     {
+      "district": "SoMa",
+      "model": 942,
+      "tep2006Scaled": 3181
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "model": 4241,
+      "tep2006Scaled": 2256
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 0,
+      "tep2006Scaled": 600
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "model": 0,
+      "tep2006Scaled": 2899
+     },
+     {
+      "district": "Southwest",
+      "model": 0,
+      "tep2006Scaled": 6920
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "model": 515,
+      "tep2006Scaled": 0
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "model": 3092,
+      "tep2006Scaled": 2976
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 3454
+     },
+     {
+      "market": "resident work return",
+      "boardings": 1463
+     },
+     {
+      "market": "resident work",
+      "boardings": 1005
+     },
+     {
+      "market": "resident social return",
+      "boardings": 669
+     },
+     {
+      "market": "resident social",
+      "boardings": 602
+     },
+     {
+      "market": "regional",
+      "boardings": 514
+     },
+     {
+      "market": "resident other",
+      "boardings": 476
+     },
+     {
+      "market": "resident other return",
+      "boardings": 472
+     },
+     {
+      "market": "nhb",
+      "boardings": 409
+     },
+     {
+      "market": "visitor",
+      "boardings": 339
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 325
+     },
+     {
+      "market": "resident shop",
+      "boardings": 299
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 295
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 247
+     },
+     {
+      "market": "resident school",
+      "boardings": 212
+     },
+     {
+      "market": "resident school return",
+      "boardings": 195
+     },
+     {
+      "market": "resident event",
+      "boardings": 100
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 95
+     },
+     {
+      "market": "resident univ",
+      "boardings": 80
+     },
+     {
+      "market": "resident event return",
+      "boardings": 63
+     },
+     {
+      "market": "event",
+      "boardings": 46
+     },
+     {
+      "market": "airport",
+      "boardings": 22
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 797
+     },
+     {
+      "district": "SoMa",
+      "boardings": 220
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 710
+     },
+     {
+      "district": "Northern",
+      "boardings": 143
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 55
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 145
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 365
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 254
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 833
+     },
+     {
+      "district": "SoMa",
+      "boardings": 114
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 746
+     },
+     {
+      "district": "Northern",
+      "boardings": 202
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 85
+     },
+     {
+      "district": "Richmond",
+      "boardings": 112
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 227
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 865
+     }
+    ]
+   },
+   {
+    "group": "9, 9R San Bruno",
+    "counted": 16458,
+    "model": 15818,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 3615,
+      "tep2006Scaled": 4208
+     },
+     {
+      "district": "SoMa",
+      "model": 4132,
+      "tep2006Scaled": 2877
+     },
+     {
+      "district": "Mission",
+      "model": 3286,
+      "tep2006Scaled": 3287
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "model": 753,
+      "tep2006Scaled": 609
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "model": 3912,
+      "tep2006Scaled": 4996
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "model": 120,
+      "tep2006Scaled": 481
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 5933
+     },
+     {
+      "market": "resident work return",
+      "boardings": 1539
+     },
+     {
+      "market": "resident work",
+      "boardings": 1529
+     },
+     {
+      "market": "resident other",
+      "boardings": 892
+     },
+     {
+      "market": "resident other return",
+      "boardings": 876
+     },
+     {
+      "market": "nhb",
+      "boardings": 666
+     },
+     {
+      "market": "resident school",
+      "boardings": 547
+     },
+     {
+      "market": "resident social",
+      "boardings": 538
+     },
+     {
+      "market": "resident school return",
+      "boardings": 517
+     },
+     {
+      "market": "resident social return",
+      "boardings": 500
+     },
+     {
+      "market": "resident shop",
+      "boardings": 472
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 444
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 420
+     },
+     {
+      "market": "visitor",
+      "boardings": 365
+     },
+     {
+      "market": "resident univ",
+      "boardings": 190
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 182
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 121
+     },
+     {
+      "market": "regional",
+      "boardings": 52
+     },
+     {
+      "market": "event",
+      "boardings": 14
+     },
+     {
+      "market": "resident event",
+      "boardings": 7
+     },
+     {
+      "market": "airport",
+      "boardings": 7
+     },
+     {
+      "market": "resident event return",
+      "boardings": 7
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 999
+     },
+     {
+      "district": "SoMa",
+      "boardings": 750
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 165
+     },
+     {
+      "district": "Northern",
+      "boardings": 69
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 348
+     },
+     {
+      "district": "Mission",
+      "boardings": 829
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 126
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 438
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 354
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 687
+     },
+     {
+      "district": "SoMa",
+      "boardings": 334
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 178
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 160
+     },
+     {
+      "district": "Mission",
+      "boardings": 595
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 175
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 1313
+     },
+     {
+      "district": "Bayview–Hunters Point",
+      "boardings": 511
+     }
+    ]
+   },
+   {
+    "group": "38, 38R Geary",
+    "counted": 45859,
+    "model": 43411,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 19122,
+      "tep2006Scaled": 9255
+     },
+     {
+      "district": "Northern",
+      "model": 2343,
+      "tep2006Scaled": 3088
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 10680,
+      "tep2006Scaled": 14470
+     },
+     {
+      "district": "Richmond",
+      "model": 11266,
+      "tep2006Scaled": 19047
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 13369
+     },
+     {
+      "market": "resident work return",
+      "boardings": 4259
+     },
+     {
+      "market": "resident work",
+      "boardings": 4010
+     },
+     {
+      "market": "resident social return",
+      "boardings": 2137
+     },
+     {
+      "market": "regional",
+      "boardings": 2033
+     },
+     {
+      "market": "resident social",
+      "boardings": 2023
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 1978
+     },
+     {
+      "market": "resident other",
+      "boardings": 1955
+     },
+     {
+      "market": "resident other return",
+      "boardings": 1932
+     },
+     {
+      "market": "visitor",
+      "boardings": 1673
+     },
+     {
+      "market": "nhb",
+      "boardings": 1362
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 1343
+     },
+     {
+      "market": "resident shop",
+      "boardings": 1289
+     },
+     {
+      "market": "resident school return",
+      "boardings": 989
+     },
+     {
+      "market": "resident school",
+      "boardings": 951
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 659
+     },
+     {
+      "market": "resident univ",
+      "boardings": 627
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 522
+     },
+     {
+      "market": "airport",
+      "boardings": 114
+     },
+     {
+      "market": "event",
+      "boardings": 70
+     },
+     {
+      "market": "resident event return",
+      "boardings": 59
+     },
+     {
+      "market": "resident event",
+      "boardings": 58
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 4404
+     },
+     {
+      "district": "SoMa",
+      "boardings": 350
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 106
+     },
+     {
+      "district": "Northern",
+      "boardings": 930
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 2153
+     },
+     {
+      "district": "Mission",
+      "boardings": 114
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 72
+     },
+     {
+      "district": "Richmond",
+      "boardings": 1961
+     },
+     {
+      "district": "Sunset",
+      "boardings": 83
+     },
+     {
+      "district": "Southwest",
+      "boardings": 54
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 650
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 2800
+     },
+     {
+      "district": "SoMa",
+      "boardings": 234
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 51
+     },
+     {
+      "district": "Northern",
+      "boardings": 1171
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 2285
+     },
+     {
+      "district": "Mission",
+      "boardings": 104
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 92
+     },
+     {
+      "district": "Richmond",
+      "boardings": 4215
+     },
+     {
+      "district": "Sunset",
+      "boardings": 191
+     },
+     {
+      "district": "Southwest",
+      "boardings": 72
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 118
+     }
+    ]
+   },
+   {
+    "group": "5, 5R Fulton",
+    "counted": 14250,
+    "model": 20384,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 5571,
+      "tep2006Scaled": 4143
+     },
+     {
+      "district": "SoMa",
+      "model": 55,
+      "tep2006Scaled": 1138
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 9374,
+      "tep2006Scaled": 5008
+     },
+     {
+      "district": "Richmond",
+      "model": 5384,
+      "tep2006Scaled": 3960
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 5723
+     },
+     {
+      "market": "resident work return",
+      "boardings": 1791
+     },
+     {
+      "market": "resident work",
+      "boardings": 1759
+     },
+     {
+      "market": "resident social",
+      "boardings": 1596
+     },
+     {
+      "market": "resident social return",
+      "boardings": 1580
+     },
+     {
+      "market": "regional",
+      "boardings": 1208
+     },
+     {
+      "market": "visitor",
+      "boardings": 946
+     },
+     {
+      "market": "resident other return",
+      "boardings": 814
+     },
+     {
+      "market": "resident other",
+      "boardings": 809
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 717
+     },
+     {
+      "market": "resident univ",
+      "boardings": 640
+     },
+     {
+      "market": "nhb",
+      "boardings": 472
+     },
+     {
+      "market": "resident shop",
+      "boardings": 461
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 433
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 413
+     },
+     {
+      "market": "resident school return",
+      "boardings": 380
+     },
+     {
+      "market": "resident school",
+      "boardings": 353
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 169
+     },
+     {
+      "market": "airport",
+      "boardings": 67
+     },
+     {
+      "market": "resident event",
+      "boardings": 22
+     },
+     {
+      "market": "resident event return",
+      "boardings": 16
+     },
+     {
+      "market": "event",
+      "boardings": 15
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 1439
+     },
+     {
+      "district": "SoMa",
+      "boardings": 549
+     },
+     {
+      "district": "Northern",
+      "boardings": 119
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 1677
+     },
+     {
+      "district": "Mission",
+      "boardings": 104
+     },
+     {
+      "district": "Richmond",
+      "boardings": 1183
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 381
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 896
+     },
+     {
+      "district": "SoMa",
+      "boardings": 374
+     },
+     {
+      "district": "Northern",
+      "boardings": 113
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 2468
+     },
+     {
+      "district": "Mission",
+      "boardings": 116
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 62
+     },
+     {
+      "district": "Richmond",
+      "boardings": 1461
+     },
+     {
+      "district": "Sunset",
+      "boardings": 66
+     },
+     {
+      "district": "Excelsior–Visitacion Valley",
+      "boardings": 51
+     }
+    ]
+   },
+   {
+    "group": "N Judah",
+    "counted": 35125,
+    "model": 29267,
+    "byStopDistrict": [
+     {
+      "district": "Downtown",
+      "model": 7650,
+      "tep2006Scaled": 12306
+     },
+     {
+      "district": "SoMa",
+      "model": 3420,
+      "tep2006Scaled": 3163
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "model": 3467,
+      "tep2006Scaled": 1209
+     },
+     {
+      "district": "Western Addition–Haight",
+      "model": 4914,
+      "tep2006Scaled": 5157
+     },
+     {
+      "district": "Sunset",
+      "model": 9816,
+      "tep2006Scaled": 13291
+     }
+    ],
+    "byMarket": [
+     {
+      "market": "resident stop legs",
+      "boardings": 7904
+     },
+     {
+      "market": "resident work return",
+      "boardings": 3704
+     },
+     {
+      "market": "resident work",
+      "boardings": 3667
+     },
+     {
+      "market": "regional",
+      "boardings": 1915
+     },
+     {
+      "market": "in-commuters",
+      "boardings": 1796
+     },
+     {
+      "market": "resident social return",
+      "boardings": 1690
+     },
+     {
+      "market": "resident other",
+      "boardings": 1104
+     },
+     {
+      "market": "resident other return",
+      "boardings": 1089
+     },
+     {
+      "market": "resident social",
+      "boardings": 1068
+     },
+     {
+      "market": "nhb",
+      "boardings": 855
+     },
+     {
+      "market": "visitor",
+      "boardings": 701
+     },
+     {
+      "market": "resident shop return",
+      "boardings": 562
+     },
+     {
+      "market": "resident shop",
+      "boardings": 550
+     },
+     {
+      "market": "resident univ",
+      "boardings": 430
+     },
+     {
+      "market": "resident univ return",
+      "boardings": 403
+     },
+     {
+      "market": "resident subtours",
+      "boardings": 386
+     },
+     {
+      "market": "resident school",
+      "boardings": 349
+     },
+     {
+      "market": "resident school return",
+      "boardings": 330
+     },
+     {
+      "market": "event",
+      "boardings": 307
+     },
+     {
+      "market": "resident event",
+      "boardings": 236
+     },
+     {
+      "market": "resident event return",
+      "boardings": 174
+     },
+     {
+      "market": "airport",
+      "boardings": 47
+     }
+    ],
+    "residentsByActivityDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 2870
+     },
+     {
+      "district": "SoMa",
+      "boardings": 623
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 461
+     },
+     {
+      "district": "Northern",
+      "boardings": 130
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 723
+     },
+     {
+      "district": "Mission",
+      "boardings": 197
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 152
+     },
+     {
+      "district": "Richmond",
+      "boardings": 139
+     },
+     {
+      "district": "Sunset",
+      "boardings": 1136
+     },
+     {
+      "district": "Outside the city",
+      "boardings": 911
+     }
+    ],
+    "residentsByHomeDistrict": [
+     {
+      "district": "Downtown",
+      "boardings": 1316
+     },
+     {
+      "district": "SoMa",
+      "boardings": 410
+     },
+     {
+      "district": "Mission Bay–Potrero",
+      "boardings": 449
+     },
+     {
+      "district": "Northern",
+      "boardings": 90
+     },
+     {
+      "district": "Western Addition–Haight",
+      "boardings": 1792
+     },
+     {
+      "district": "Mission",
+      "boardings": 281
+     },
+     {
+      "district": "Castro–Noe–Bernal",
+      "boardings": 364
+     },
+     {
+      "district": "Richmond",
+      "boardings": 128
+     },
+     {
+      "district": "Sunset",
+      "boardings": 3025
+     }
+    ]
+   }
+  ],
+  "areas": [
+   {
+    "group": "SOUTHEAST Z5 (Excelsior/OMI, Bayview, Visitacion Valley)",
+    "tdsTransit": 0.19699999999999998,
+    "tdsSE": 0.027000000000000003,
+    "tdsRelative": 0.9899497487437185,
+    "modelTransit": 0.16085383272733408,
+    "modelRelative": 0.9844024852914158,
+    "modelCommuteTransit": 0.28059977802939434
+   },
+   {
+    "group": "WEST Z3+Z4 (Richmond, Sunset, Parkside, West of Twin Peaks)",
+    "tdsTransit": 0.182,
+    "tdsSE": 0.021,
+    "tdsRelative": 0.9145728643216081,
+    "modelTransit": 0.12491860422807463,
+    "modelRelative": 0.7644840186661898,
+    "modelCommuteTransit": 0.28740351105980866
+   },
+   {
+    "group": "Z1 Mission/SoMa/Potrero/Castro",
+    "tdsTransit": 0.226,
+    "tdsSE": 0.023,
+    "tdsRelative": 1.135678391959799,
+    "modelTransit": 0.17709431818784074,
+    "modelRelative": 1.083791937060103,
+    "modelCommuteTransit": 0.3637813371794927
+   },
+   {
+    "group": "Z2 Downtown/NE/Marina/W.Addition",
+    "tdsTransit": 0.196,
+    "tdsSE": 0.022000000000000002,
+    "tdsRelative": 0.984924623115578,
+    "modelTransit": 0.19838465912116068,
+    "modelRelative": 1.2140857831693743,
+    "modelCommuteTransit": 0.35469881818343
+   }
+  ]
+ }
+}

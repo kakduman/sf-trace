@@ -1,0 +1,33 @@
+{
+ "description": "Hotel visitors in San Francisco: how they travel from their hotels, how many there are, and how many ride Muni. Gathered October 2026 to replace the assumed visitor mode shares (27% transit). Numbers are copied from the named source unless labeled derived.",
+ "accessed": "2026-10-07",
+ "hotelDoorSurvey": {
+  "source": "SF Planning, Transportation Impact Analysis Guidelines for Environmental Review (October 2019), Appendix F: Travel Demand, Figure 1 (hotel panel, PDF p.7) and Table 1 (p.4); detailed shares from the SFCTA travel demand tool's API, https://api.sfcta.org/api/tia_modesplit (landuse 'Hotel').",
+  "url": "https://sfplanning.org/project/transportation-impact-analysis-guidelines-environmental-review-update",
+  "rawFiles": ["data/beta3/raw/visitors/sfplanning_tia2019_appendixF_travel_demand.pdf", "data/beta3/raw/visitors/sfcta_api_tia_modesplit.json", "data/beta3/raw/visitors/sfplanning_tia2019_appF_fig2_place_types.jpg"],
+  "method": "Door intercept surveys at 11 hotel sites, spring 2017, weekdays 3-7 pm (Appendix F footnote 4). Person trips into and out of the hotel; respondents include employees and other visitors to the hotel as well as guests. Private shuttles are counted as observed but left out of the department's impact analysis.",
+  "byPlaceType": {
+   "1": { "sites": 4, "respondents": 196, "drive_alone": 0.053, "hov_driver": 0.078, "hov_pass": 0.044, "walk": 0.551, "tnc_taxi": 0.196, "bike": 0.0, "bus": 0.016, "light_rail": 0.015, "heavy_rail": 0.028, "pvt_shuttle": 0.018 },
+   "2": { "sites": 5, "respondents": 187, "drive_alone": 0.113, "hov_driver": 0.07, "hov_pass": 0.086, "walk": 0.384, "tnc_taxi": 0.157, "bike": 0.0, "bus": 0.072, "light_rail": 0.05, "heavy_rail": 0.025, "pvt_shuttle": 0.042 },
+   "3": { "sites": 2, "respondents": 56, "drive_alone": 0.217, "hov_driver": 0.118, "hov_pass": 0.12, "walk": 0.456, "tnc_taxi": 0.075, "bike": 0.0, "bus": 0.0, "light_rail": 0.015, "heavy_rail": 0.0, "pvt_shuttle": 0.0 }
+  },
+  "tripsPerRoom": { "daily": 8.4, "pmPeakHour": 0.6, "note": "person trips per hotel room per weekday, all trip makers (Table 1, p.4)" },
+  "placeTypeOfNeighborhood": {
+   "note": "Appendix F Figure 2 maps three place types by planning district: urban high density (1) Downtown/North Beach, SoMa, and Mission; urban medium density (2) Marina/Western Market and Richmond; urban low density (3) Sunset, Outer Mission/Hills, and Bayshore. Each Analysis Neighborhood is assigned here to the district that holds most of it (our reading of the map).",
+   "1": ["Financial District/South Beach", "Chinatown", "Nob Hill", "Tenderloin", "North Beach", "Russian Hill", "South of Market", "Mission", "Mission Bay", "Potrero Hill", "Treasure Island"],
+   "2": ["Marina", "Pacific Heights", "Presidio Heights", "Presidio", "Seacliff", "Western Addition", "Japantown", "Hayes Valley", "Haight Ashbury", "Castro/Upper Market", "Lone Mountain/USF", "Inner Richmond", "Outer Richmond", "Lincoln Park", "Golden Gate Park"],
+   "3": ["Inner Sunset", "Sunset/Parkside", "West of Twin Peaks", "Twin Peaks", "Noe Valley", "Glen Park", "Bernal Heights", "Excelsior", "Outer Mission", "Oceanview/Merced/Ingleside", "Lakeshore", "Portola", "Visitacion Valley", "Bayview Hunters Point", "McLaren Park"]
+  }
+ },
+ "hotels": {
+  "occupancy": { "2024": 0.63, "2025": 0.672, "2026forecast": 0.707, "source": "SF Travel press release, May 7, 2026 (2025 results: 67.2%) and August 26, 2026 (2026 forecast: 70.7%); 2024 derived from the March 20, 2025 release's RevPAR $143.25 / ADR $227.51.", "url": "https://www.sftravel.com/media/press-release/san-francisco-travel-reports-visitor-spending-milestone-projects-continued", "rawFiles": ["data/beta3/raw/visitors/sftravel_2025results_2026forecast.txt", "data/beta3/raw/visitors/sftravel_2026_2027_forecast.txt", "data/beta3/raw/visitors/sftravel_2024results_2025forecast.txt"] },
+  "rooms": { "value": 34000, "note": "secondary press figure (c. 2015); SF Travel's 2011 fact sheet gave 32,976. No official 2024-2026 count was retrievable (the 2024 lodging statistics PDF is behind Cloudflare)." },
+  "partySize": { "value": 1.69, "source": "SF-CHAMP visitor model (sfchampdocs), persons per party" },
+  "overnightVisitors2025": { "domestic": 6090000, "international": 2260000, "day": 15420000, "source": "SF Travel and Tourism Economics, San Francisco Visitor Volume and Direct Spending Estimates 2025, p.3; overnight includes stays with friends and in rentals", "rawFile": "data/beta3/raw/visitors/sftravel_2025_visitor_volume_spending.pdf" }
+ },
+ "muniChecks": {
+  "snapshotOutsideBayArea": { "lightRail": 0.042, "localBus": 0.055, "note": "MTC 2023-24 Snapshot (od-validation.json): riders whose home ZIP is in the US outside the nine counties; riders living abroad or giving no ZIP are left out of the shares; cable cars and historic streetcars are surveyed as 'Local Bus' (MTC transit-passenger-surveys, preprocessing_RegionalSnapshot_2023.py)." },
+  "onboard2017VisitorFareMedia": { "visitorPasses": 8353, "cableCarTickets": 13790, "allRiders": 663236, "shareDerived": 0.0334, "source": "SFMTA 2025 Title VI Program Update, Appendices (MTAB November 4, 2025, item 12), FY25-26 fare-change equity analysis from the 2017 Muni Onboard Survey, PDF pp.275-281; 88% of Passport and CityPass users said they were visitors. A lower bound on visitors (cash and Clipper visitors not counted).", "url": "https://www.sfmta.com/media/43786/download?inline", "rawFile": "data/beta3/raw/visitors/sfmta_titlevi_program_2025_appendices.pdf" },
+  "cableCarWeekday2024": { "value": 9814, "source": "NTD 2024 service data, SFMTA mode CC (ntd-trip-length.json)" }
+ }
+}

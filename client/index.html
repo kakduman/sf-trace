@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>%MODEL_NAME% · %MODEL_TAGLINE%</title>
+    <meta name="description" content="A travel model of San Francisco transit that runs in the browser: modeled ridership on every route, a check against passenger counts, and scenarios you can build and run." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23132029'/%3E%3Cpath d='M5 16h22' stroke='%23fff' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23132029' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400..800;1,400..600&family=Overpass+Mono:wght@400..600&display=swap" />
+    <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin />
+  </head>
+  <body>
+    <div id="loading" class="loading" role="status" aria-live="polite">
+      <div class="loading-card">
+        <svg class="brand-mark lg" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10h36" /><circle cx="8" cy="10" r="3.2" /><circle cx="20" cy="10" r="5" class="xfer" /><circle cx="32" cy="10" r="3.2" /></svg>
+        <h1 title="%MODEL_NAME%: %MODEL_LONG_NAME%">%MODEL_NAME%</h1>
+        <p class="loading-long">%MODEL_LONG_NAME%</p>
+        <p class="loading-sub">%MODEL_TAGLINE%. Every trip in the city on an average weekday, estimated in your browser from public data.</p>
+        <div class="progress" aria-hidden="true"><span id="load-bar"></span></div>
+        <p id="load-text" class="loading-text">Downloading the model…</p>
+      </div>
+    </div>
+
+    <div id="app" class="app" hidden>
+      <header class="topbar">
+        <button class="icon-btn sb-toggle" id="sb-toggle" aria-label="Hide side panel" aria-expanded="true" aria-controls="sidebar">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><rect x="2" y="3" width="14" height="12" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M7 3v12" stroke="currentColor" stroke-width="1.5" /></svg>
+        </button>
+        <div class="brand" title="%MODEL_NAME%: %MODEL_LONG_NAME%. %MODEL_TAGLINE%.">
+          <svg class="brand-mark" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10h36" /><circle cx="8" cy="10" r="3.2" /><circle cx="20" cy="10" r="5" class="xfer" /><circle cx="32" cy="10" r="3.2" /></svg>
+          <div class="brand-t">
+            <h1><abbr title="%MODEL_LONG_NAME%">%MODEL_NAME%</abbr></h1>
+            <span class="brand-sub">Average weekday</span>
+          </div>
+        </div>
+        <div class="seg period" id="period" role="radiogroup" aria-label="Time of day"></div>
+        <select id="period-select" class="period-select" aria-label="Time of day"></select>
+        <div class="seg day" id="day" role="radiogroup" aria-label="Day of the week"></div>
+        <select id="day-select" class="period-select" aria-label="Day of the week"></select>
+        <button class="status-pill" id="status" type="button"></button>
+        <a class="top-link" href="method/" title="How the model works"><span class="tl-long">Methodology</span><span class="tl-short">Method</span></a>
+      </header>
+      <div class="body">
+        <aside class="sidebar" id="sidebar" aria-label="Panels">
+          <button class="sheet-handle" id="sheet-handle" aria-label="Expand panel"><span></span></button>
+          <nav class="tabs" role="tablist" aria-label="Sections" id="tabs"></nav>
+          <div class="panels" id="panels"></div>
+        </aside>
+        <main class="mapwrap" aria-label="Map">
+          <div id="map"></div>
+        </main>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    </div>
+    <script type="module" src="./beta3/main.ts"></script>
+  </body>
+</html>

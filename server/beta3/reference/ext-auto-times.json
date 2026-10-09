@@ -1,0 +1,3665 @@
+{
+ "note": "Outside zones’ morning driving times to the Financial District (the bundle’s extAutoIn, the time demand reads) against straight-line distance and the road assignment’s own times today (server/beta3/pipeline/diag-extauto.ts). Minutes; km straight line.",
+ "before": {
+  "bundle": "2026-10-08T02:40:14.425Z",
+  "byRegion": {
+   "Napa, Solano, and beyond": {
+    "zones": 10,
+    "medianKm": 62.1,
+    "medianMinToFiDi": 118.8,
+    "medianStraightKmh": 31.3,
+    "medianAssignmentMin": 126.1,
+    "medianRatioToAssignment": 0.942
+   },
+   "East Bay": {
+    "zones": 94,
+    "medianKm": 27.3,
+    "medianMinToFiDi": 64.8,
+    "medianStraightKmh": 25.6,
+    "medianAssignmentMin": 72.1,
+    "medianRatioToAssignment": 0.889
+   },
+   "Peninsula": {
+    "zones": 36,
+    "medianKm": 22,
+    "medianMinToFiDi": 45.7,
+    "medianStraightKmh": 29,
+    "medianAssignmentMin": 32,
+    "medianRatioToAssignment": 1.418
+   },
+   "South Bay": {
+    "zones": 42,
+    "medianKm": 61.7,
+    "medianMinToFiDi": 114.3,
+    "medianStraightKmh": 32.5,
+    "medianAssignmentMin": 67,
+    "medianRatioToAssignment": 1.692
+   },
+   "Marin and Sonoma": {
+    "zones": 36,
+    "medianKm": 30.1,
+    "medianMinToFiDi": 66,
+    "medianStraightKmh": 27.4,
+    "medianAssignmentMin": 71.9,
+    "medianRatioToAssignment": 0.957
+   }
+  },
+  "rows": [
+   {
+    "name": "Sacramento County",
+    "region": "Napa, Solano, and beyond",
+    "km": 117.2,
+    "toFiDi": 206.1,
+    "jobWeighted": 210.4,
+    "assignmentToFiDi": 213.5
+   },
+   {
+    "name": "Oakland (east)",
+    "region": "East Bay",
+    "km": 14.4,
+    "toFiDi": 40.2,
+    "jobWeighted": 44.7,
+    "assignmentToFiDi": 47.5
+   },
+   {
+    "name": "San Joaquin County",
+    "region": "East Bay",
+    "km": 96.5,
+    "toFiDi": 172.3,
+    "jobWeighted": 176.9,
+    "assignmentToFiDi": 179.6
+   },
+   {
+    "name": "Daly City (north-west)",
+    "region": "Peninsula",
+    "km": 12.5,
+    "toFiDi": 30.7,
+    "jobWeighted": 27.5,
+    "assignmentToFiDi": 21.7
+   },
+   {
+    "name": "San Jose (north-east)",
+    "region": "South Bay",
+    "km": 70.8,
+    "toFiDi": 129.7,
+    "jobWeighted": 127.4,
+    "assignmentToFiDi": 69
+   },
+   {
+    "name": "Pacifica",
+    "region": "Peninsula",
+    "km": 20.4,
+    "toFiDi": 41,
+    "jobWeighted": 37.8,
+    "assignmentToFiDi": 32.9
+   },
+   {
+    "name": "Daly City (south)",
+    "region": "Peninsula",
+    "km": 15.5,
+    "toFiDi": 32.9,
+    "jobWeighted": 29.7,
+    "assignmentToFiDi": 23.9
+   },
+   {
+    "name": "Oakland (south-east 2)",
+    "region": "East Bay",
+    "km": 18.4,
+    "toFiDi": 47.5,
+    "jobWeighted": 52.1,
+    "assignmentToFiDi": 54.8
+   },
+   {
+    "name": "San Jose (south-east)",
+    "region": "South Bay",
+    "km": 77.9,
+    "toFiDi": 140.1,
+    "jobWeighted": 137.7,
+    "assignmentToFiDi": 83.6
+   },
+   {
+    "name": "San Jose (west)",
+    "region": "South Bay",
+    "km": 67.5,
+    "toFiDi": 122.6,
+    "jobWeighted": 120.3,
+    "assignmentToFiDi": 64.5
+   },
+   {
+    "name": "Daly City (north-east)",
+    "region": "Peninsula",
+    "km": 10.5,
+    "toFiDi": 32.1,
+    "jobWeighted": 28.9,
+    "assignmentToFiDi": 25.1
+   },
+   {
+    "name": "Concord",
+    "region": "East Bay",
+    "km": 39.1,
+    "toFiDi": 78.5,
+    "jobWeighted": 83.2,
+    "assignmentToFiDi": 85.8
+   },
+   {
+    "name": "Berkeley",
+    "region": "East Bay",
+    "km": 14.3,
+    "toFiDi": 39.2,
+    "jobWeighted": 43.8,
+    "assignmentToFiDi": 46.6
+   },
+   {
+    "name": "San Ramon",
+    "region": "East Bay",
+    "km": 40.7,
+    "toFiDi": 83.3,
+    "jobWeighted": 87.2,
+    "assignmentToFiDi": 90.6
+   },
+   {
+    "name": "Hayward",
+    "region": "East Bay",
+    "km": 32.4,
+    "toFiDi": 72.4,
+    "jobWeighted": 70.3,
+    "assignmentToFiDi": 72.1
+   },
+   {
+    "name": "Walnut Creek",
+    "region": "East Bay",
+    "km": 33.5,
+    "toFiDi": 69.4,
+    "jobWeighted": 74,
+    "assignmentToFiDi": 76.7
+   },
+   {
+    "name": "San Mateo",
+    "region": "Peninsula",
+    "km": 28.4,
+    "toFiDi": 56.7,
+    "jobWeighted": 54.2,
+    "assignmentToFiDi": 37.2
+   },
+   {
+    "name": "Antioch",
+    "region": "East Bay",
+    "km": 57.1,
+    "toFiDi": 107.7,
+    "jobWeighted": 112.3,
+    "assignmentToFiDi": 115
+   },
+   {
+    "name": "Vallejo",
+    "region": "Napa, Solano, and beyond",
+    "km": 38.8,
+    "toFiDi": 82.3,
+    "jobWeighted": 85.2,
+    "assignmentToFiDi": 89.7
+   },
+   {
+    "name": "San Leandro",
+    "region": "East Bay",
+    "km": 23.4,
+    "toFiDi": 61.2,
+    "jobWeighted": 59,
+    "assignmentToFiDi": 66.7
+   },
+   {
+    "name": "Fremont (north-west)",
+    "region": "East Bay",
+    "km": 42.4,
+    "toFiDi": 86.3,
+    "jobWeighted": 84.1,
+    "assignmentToFiDi": 81.5
+   },
+   {
+    "name": "Alameda (north-west)",
+    "region": "East Bay",
+    "km": 12.6,
+    "toFiDi": 41.2,
+    "jobWeighted": 44.7,
+    "assignmentToFiDi": 48.5
+   },
+   {
+    "name": "Richmond (south)",
+    "region": "East Bay",
+    "km": 16.2,
+    "toFiDi": 48.3,
+    "jobWeighted": 50.8,
+    "assignmentToFiDi": 55.7
+   },
+   {
+    "name": "Oakland (south-east)",
+    "region": "East Bay",
+    "km": 20.7,
+    "toFiDi": 53.2,
+    "jobWeighted": 55.9,
+    "assignmentToFiDi": 60.5
+   },
+   {
+    "name": "San Bruno",
+    "region": "Peninsula",
+    "km": 18.9,
+    "toFiDi": 40.3,
+    "jobWeighted": 37.1,
+    "assignmentToFiDi": 27.4
+   },
+   {
+    "name": "San Rafael",
+    "region": "Marin and Sonoma",
+    "km": 24.3,
+    "toFiDi": 57,
+    "jobWeighted": 57.8,
+    "assignmentToFiDi": 60
+   },
+   {
+    "name": "Fremont (south-east)",
+    "region": "East Bay",
+    "km": 50.8,
+    "toFiDi": 99.4,
+    "jobWeighted": 97.2,
+    "assignmentToFiDi": 84.5
+   },
+   {
+    "name": "Santa Clara",
+    "region": "South Bay",
+    "km": 60.4,
+    "toFiDi": 111.8,
+    "jobWeighted": 109.5,
+    "assignmentToFiDi": 70.2
+   },
+   {
+    "name": "Santa Cruz County",
+    "region": "South Bay",
+    "km": 96.9,
+    "toFiDi": 168.4,
+    "jobWeighted": 165.8,
+    "assignmentToFiDi": 129.4
+   },
+   {
+    "name": "South San Francisco (west)",
+    "region": "Peninsula",
+    "km": 17,
+    "toFiDi": 36.4,
+    "jobWeighted": 33.2,
+    "assignmentToFiDi": 28.6
+   },
+   {
+    "name": "Oakland (north-east)",
+    "region": "East Bay",
+    "km": 17.3,
+    "toFiDi": 43.2,
+    "jobWeighted": 47.9,
+    "assignmentToFiDi": 50.5
+   },
+   {
+    "name": "Oakland (north-west)",
+    "region": "East Bay",
+    "km": 11.7,
+    "toFiDi": 34.2,
+    "jobWeighted": 38.9,
+    "assignmentToFiDi": 46.6
+   },
+   {
+    "name": "Novato",
+    "region": "Marin and Sonoma",
+    "km": 35.9,
+    "toFiDi": 76,
+    "jobWeighted": 76.8,
+    "assignmentToFiDi": 79
+   },
+   {
+    "name": "SFO airport",
+    "region": "Peninsula",
+    "km": 19.4,
+    "toFiDi": 41.4,
+    "jobWeighted": 38.6,
+    "assignmentToFiDi": 29.2
+   },
+   {
+    "name": "Near Colma",
+    "region": "Peninsula",
+    "km": 13.1,
+    "toFiDi": 29.1,
+    "jobWeighted": 25.9,
+    "assignmentToFiDi": 22.6
+   },
+   {
+    "name": "Foster City",
+    "region": "Peninsula",
+    "km": 28.7,
+    "toFiDi": 58.1,
+    "jobWeighted": 55.7,
+    "assignmentToFiDi": 39.4
+   },
+   {
+    "name": "Near MacArthur",
+    "region": "East Bay",
+    "km": 12.5,
+    "toFiDi": 35.5,
+    "jobWeighted": 40.3,
+    "assignmentToFiDi": 48.8
+   },
+   {
+    "name": "South San Francisco (north-west)",
+    "region": "Peninsula",
+    "km": 15.2,
+    "toFiDi": 35.5,
+    "jobWeighted": 32.4,
+    "assignmentToFiDi": 30.2
+   },
+   {
+    "name": "Redwood City",
+    "region": "Peninsula",
+    "km": 35.6,
+    "toFiDi": 69.3,
+    "jobWeighted": 66.8,
+    "assignmentToFiDi": 42.3
+   },
+   {
+    "name": "Pleasanton",
+    "region": "East Bay",
+    "km": 47.5,
+    "toFiDi": 96,
+    "jobWeighted": 97.9,
+    "assignmentToFiDi": 103.4
+   },
+   {
+    "name": "Near 19th Street Oakland",
+    "region": "East Bay",
+    "km": 11.9,
+    "toFiDi": 35.9,
+    "jobWeighted": 40.5,
+    "assignmentToFiDi": 48.8
+   },
+   {
+    "name": "Sunnyvale (south)",
+    "region": "South Bay",
+    "km": 58.1,
+    "toFiDi": 107,
+    "jobWeighted": 104.6,
+    "assignmentToFiDi": 67
+   },
+   {
+    "name": "Livermore",
+    "region": "East Bay",
+    "km": 57.4,
+    "toFiDi": 111.3,
+    "jobWeighted": 113.7,
+    "assignmentToFiDi": 123
+   },
+   {
+    "name": "Fairfield",
+    "region": "Napa, Solano, and beyond",
+    "km": 59.9,
+    "toFiDi": 115,
+    "jobWeighted": 118.4,
+    "assignmentToFiDi": 122.3
+   },
+   {
+    "name": "Dublin",
+    "region": "East Bay",
+    "km": 45.8,
+    "toFiDi": 92.4,
+    "jobWeighted": 95.2,
+    "assignmentToFiDi": 108.8
+   },
+   {
+    "name": "Castro Valley",
+    "region": "East Bay",
+    "km": 30.6,
+    "toFiDi": 73.2,
+    "jobWeighted": 71,
+    "assignmentToFiDi": 76.9
+   },
+   {
+    "name": "Near Ashby",
+    "region": "East Bay",
+    "km": 13.3,
+    "toFiDi": 36.7,
+    "jobWeighted": 41.4,
+    "assignmentToFiDi": 44
+   },
+   {
+    "name": "San Jose (north)",
+    "region": "South Bay",
+    "km": 61.8,
+    "toFiDi": 115.1,
+    "jobWeighted": 112.9,
+    "assignmentToFiDi": 66.6
+   },
+   {
+    "name": "Santa Rosa",
+    "region": "Marin and Sonoma",
+    "km": 77.9,
+    "toFiDi": 144.2,
+    "jobWeighted": 145,
+    "assignmentToFiDi": 147.2
+   },
+   {
+    "name": "San Pablo",
+    "region": "East Bay",
+    "km": 19.4,
+    "toFiDi": 53.9,
+    "jobWeighted": 55.8,
+    "assignmentToFiDi": 61.3
+   },
+   {
+    "name": "Petaluma",
+    "region": "Marin and Sonoma",
+    "km": 54.8,
+    "toFiDi": 107.4,
+    "jobWeighted": 108.2,
+    "assignmentToFiDi": 110.4
+   },
+   {
+    "name": "Brentwood",
+    "region": "East Bay",
+    "km": 62.6,
+    "toFiDi": 117,
+    "jobWeighted": 121.5,
+    "assignmentToFiDi": 124.3
+   },
+   {
+    "name": "Richmond (north)",
+    "region": "East Bay",
+    "km": 21.8,
+    "toFiDi": 56.3,
+    "jobWeighted": 58.9,
+    "assignmentToFiDi": 63.6
+   },
+   {
+    "name": "Vacaville",
+    "region": "Napa, Solano, and beyond",
+    "km": 75.7,
+    "toFiDi": 140.5,
+    "jobWeighted": 144,
+    "assignmentToFiDi": 147.8
+   },
+   {
+    "name": "Near Rockridge",
+    "region": "East Bay",
+    "km": 14.2,
+    "toFiDi": 38,
+    "jobWeighted": 42.8,
+    "assignmentToFiDi": 45.4
+   },
+   {
+    "name": "Hercules",
+    "region": "East Bay",
+    "km": 26.8,
+    "toFiDi": 62.8,
+    "jobWeighted": 65.9,
+    "assignmentToFiDi": 70.1
+   },
+   {
+    "name": "Near Downtown Berkeley",
+    "region": "East Bay",
+    "km": 14.6,
+    "toFiDi": 39.4,
+    "jobWeighted": 44,
+    "assignmentToFiDi": 46.7
+   },
+   {
+    "name": "Napa",
+    "region": "Napa, Solano, and beyond",
+    "km": 62.1,
+    "toFiDi": 123.3,
+    "jobWeighted": 123.7,
+    "assignmentToFiDi": 130.7
+   },
+   {
+    "name": "Martinez",
+    "region": "East Bay",
+    "km": 34,
+    "toFiDi": 70.9,
+    "jobWeighted": 75.3,
+    "assignmentToFiDi": 78.2
+   },
+   {
+    "name": "Near North Berkeley",
+    "region": "East Bay",
+    "km": 13.6,
+    "toFiDi": 38.4,
+    "jobWeighted": 42.9,
+    "assignmentToFiDi": 45.7
+   },
+   {
+    "name": "Near El Cerrito Plaza",
+    "region": "East Bay",
+    "km": 14.9,
+    "toFiDi": 42.6,
+    "jobWeighted": 46.6,
+    "assignmentToFiDi": 49.9
+   },
+   {
+    "name": "Near South San Francisco",
+    "region": "Peninsula",
+    "km": 15,
+    "toFiDi": 34,
+    "jobWeighted": 30.8,
+    "assignmentToFiDi": 27
+   },
+   {
+    "name": "Pittsburg",
+    "region": "East Bay",
+    "km": 49.7,
+    "toFiDi": 95.8,
+    "jobWeighted": 100.4,
+    "assignmentToFiDi": 103.1
+   },
+   {
+    "name": "Union City",
+    "region": "East Bay",
+    "km": 37.5,
+    "toFiDi": 78.8,
+    "jobWeighted": 76.6,
+    "assignmentToFiDi": 79.2
+   },
+   {
+    "name": "Pleasant Hill",
+    "region": "East Bay",
+    "km": 33.9,
+    "toFiDi": 70.2,
+    "jobWeighted": 74.8,
+    "assignmentToFiDi": 77.5
+   },
+   {
+    "name": "Danville",
+    "region": "East Bay",
+    "km": 38.1,
+    "toFiDi": 78.1,
+    "jobWeighted": 82.8,
+    "assignmentToFiDi": 85.4
+   },
+   {
+    "name": "Yolo County",
+    "region": "Napa, Solano, and beyond",
+    "km": 106.8,
+    "toFiDi": 190.6,
+    "jobWeighted": 194.2,
+    "assignmentToFiDi": 197.9
+   },
+   {
+    "name": "Pinole",
+    "region": "East Bay",
+    "km": 24.3,
+    "toFiDi": 59.8,
+    "jobWeighted": 62.5,
+    "assignmentToFiDi": 67.1
+   },
+   {
+    "name": "Near San Mateo",
+    "region": "Peninsula",
+    "km": 25.9,
+    "toFiDi": 52.5,
+    "jobWeighted": 50,
+    "assignmentToFiDi": 35.5
+   },
+   {
+    "name": "Alameda (south-east)",
+    "region": "East Bay",
+    "km": 15.3,
+    "toFiDi": 46.8,
+    "jobWeighted": 48.6,
+    "assignmentToFiDi": 54.1
+   },
+   {
+    "name": "Mill Valley",
+    "region": "Marin and Sonoma",
+    "km": 17.5,
+    "toFiDi": 43.8,
+    "jobWeighted": 44.6,
+    "assignmentToFiDi": 46.8
+   },
+   {
+    "name": "Cupertino",
+    "region": "South Bay",
+    "km": 61.6,
+    "toFiDi": 112.5,
+    "jobWeighted": 110.2,
+    "assignmentToFiDi": 59.7
+   },
+   {
+    "name": "Mountain View",
+    "region": "South Bay",
+    "km": 51.4,
+    "toFiDi": 96.2,
+    "jobWeighted": 93.8,
+    "assignmentToFiDi": 54.2
+   },
+   {
+    "name": "Tamalpais-Homestead Valley",
+    "region": "Marin and Sonoma",
+    "km": 15.8,
+    "toFiDi": 40.7,
+    "jobWeighted": 41.4,
+    "assignmentToFiDi": 43.6
+   },
+   {
+    "name": "Stanislaus County",
+    "region": "East Bay",
+    "km": 122.2,
+    "toFiDi": 215.8,
+    "jobWeighted": 218.7,
+    "assignmentToFiDi": 217.5
+   },
+   {
+    "name": "Newark",
+    "region": "East Bay",
+    "km": 43.2,
+    "toFiDi": 86.4,
+    "jobWeighted": 84.2,
+    "assignmentToFiDi": 79.9
+   },
+   {
+    "name": "Oakley",
+    "region": "East Bay",
+    "km": 65.1,
+    "toFiDi": 120.7,
+    "jobWeighted": 125.3,
+    "assignmentToFiDi": 128
+   },
+   {
+    "name": "San Anselmo",
+    "region": "Marin and Sonoma",
+    "km": 25.4,
+    "toFiDi": 57.4,
+    "jobWeighted": 58.1,
+    "assignmentToFiDi": 60.3
+   },
+   {
+    "name": "Sunnyvale (north)",
+    "region": "South Bay",
+    "km": 55,
+    "toFiDi": 102.9,
+    "jobWeighted": 100.6,
+    "assignmentToFiDi": 56.9
+   },
+   {
+    "name": "Near Lake Merritt",
+    "region": "East Bay",
+    "km": 12,
+    "toFiDi": 37.3,
+    "jobWeighted": 41.8,
+    "assignmentToFiDi": 44.7
+   },
+   {
+    "name": "Palo Alto",
+    "region": "South Bay",
+    "km": 46.6,
+    "toFiDi": 87.7,
+    "jobWeighted": 85.3,
+    "assignmentToFiDi": 57.4
+   },
+   {
+    "name": "Lafayette",
+    "region": "East Bay",
+    "km": 27.5,
+    "toFiDi": 59.6,
+    "jobWeighted": 64.2,
+    "assignmentToFiDi": 66.9
+   },
+   {
+    "name": "Near Richmond",
+    "region": "East Bay",
+    "km": 16.6,
+    "toFiDi": 49.8,
+    "jobWeighted": 51.7,
+    "assignmentToFiDi": 57.1
+   },
+   {
+    "name": "Milpitas",
+    "region": "South Bay",
+    "km": 59.8,
+    "toFiDi": 112.8,
+    "jobWeighted": 110.6,
+    "assignmentToFiDi": 73.3
+   },
+   {
+    "name": "Near South San Francisco",
+    "region": "Peninsula",
+    "km": 15.1,
+    "toFiDi": 34.6,
+    "jobWeighted": 31.9,
+    "assignmentToFiDi": 29.2
+   },
+   {
+    "name": "Half Moon Bay",
+    "region": "South Bay",
+    "km": 36.3,
+    "toFiDi": 68.7,
+    "jobWeighted": 65.5,
+    "assignmentToFiDi": 68.3
+   },
+   {
+    "name": "Near Fruitvale",
+    "region": "East Bay",
+    "km": 15.6,
+    "toFiDi": 44,
+    "jobWeighted": 48.3,
+    "assignmentToFiDi": 51.3
+   },
+   {
+    "name": "Near Burlingame",
+    "region": "Peninsula",
+    "km": 24.2,
+    "toFiDi": 49.5,
+    "jobWeighted": 47,
+    "assignmentToFiDi": 33.3
+   },
+   {
+    "name": "Near Hillsdale",
+    "region": "Peninsula",
+    "km": 29.2,
+    "toFiDi": 58.1,
+    "jobWeighted": 55.6,
+    "assignmentToFiDi": 36.8
+   },
+   {
+    "name": "Windsor",
+    "region": "Marin and Sonoma",
+    "km": 97.7,
+    "toFiDi": 175.6,
+    "jobWeighted": 176.4,
+    "assignmentToFiDi": 178.6
+   },
+   {
+    "name": "Hillsborough",
+    "region": "Peninsula",
+    "km": 27.2,
+    "toFiDi": 54.1,
+    "jobWeighted": 51.4,
+    "assignmentToFiDi": 41
+   },
+   {
+    "name": "San Lorenzo",
+    "region": "East Bay",
+    "km": 27.3,
+    "toFiDi": 65.2,
+    "jobWeighted": 63.1,
+    "assignmentToFiDi": 77.9
+   },
+   {
+    "name": "Near West Oakland",
+    "region": "East Bay",
+    "km": 9.5,
+    "toFiDi": 32.7,
+    "jobWeighted": 37.3,
+    "assignmentToFiDi": 43
+   },
+   {
+    "name": "Near El Cerrito Del Norte",
+    "region": "East Bay",
+    "km": 16.4,
+    "toFiDi": 46.6,
+    "jobWeighted": 49.9,
+    "assignmentToFiDi": 54
+   },
+   {
+    "name": "Emeryville",
+    "region": "East Bay",
+    "km": 10.8,
+    "toFiDi": 32.6,
+    "jobWeighted": 37.3,
+    "assignmentToFiDi": 43.8
+   },
+   {
+    "name": "Near 12th Street / Oakland City Center",
+    "region": "East Bay",
+    "km": 11.3,
+    "toFiDi": 35.6,
+    "jobWeighted": 40.2,
+    "assignmentToFiDi": 48.1
+   },
+   {
+    "name": "Los Altos",
+    "region": "South Bay",
+    "km": 53.8,
+    "toFiDi": 99.3,
+    "jobWeighted": 96.9,
+    "assignmentToFiDi": 58.7
+   },
+   {
+    "name": "Near San Leandro",
+    "region": "East Bay",
+    "km": 22.6,
+    "toFiDi": 61,
+    "jobWeighted": 58.9,
+    "assignmentToFiDi": 64.7
+   },
+   {
+    "name": "Near Hayward Park",
+    "region": "Peninsula",
+    "km": 27.6,
+    "toFiDi": 55.5,
+    "jobWeighted": 53,
+    "assignmentToFiDi": 36.4
+   },
+   {
+    "name": "Piedmont",
+    "region": "East Bay",
+    "km": 15.1,
+    "toFiDi": 40.2,
+    "jobWeighted": 44.8,
+    "assignmentToFiDi": 47.5
+   },
+   {
+    "name": "Moraga",
+    "region": "East Bay",
+    "km": 24.9,
+    "toFiDi": 55.8,
+    "jobWeighted": 60.4,
+    "assignmentToFiDi": 63.1
+   },
+   {
+    "name": "Albany",
+    "region": "East Bay",
+    "km": 14,
+    "toFiDi": 40.3,
+    "jobWeighted": 44.5,
+    "assignmentToFiDi": 47.6
+   },
+   {
+    "name": "Fairfax",
+    "region": "Marin and Sonoma",
+    "km": 28.5,
+    "toFiDi": 62,
+    "jobWeighted": 62.7,
+    "assignmentToFiDi": 76.6
+   },
+   {
+    "name": "Corte Madera",
+    "region": "Marin and Sonoma",
+    "km": 17.7,
+    "toFiDi": 45.4,
+    "jobWeighted": 46.1,
+    "assignmentToFiDi": 48.3
+   },
+   {
+    "name": "San Carlos",
+    "region": "Peninsula",
+    "km": 35.2,
+    "toFiDi": 67.9,
+    "jobWeighted": 65.4,
+    "assignmentToFiDi": 46.8
+   },
+   {
+    "name": "San Mateo (unincorporated)",
+    "region": "South Bay",
+    "km": 42.9,
+    "toFiDi": 80.4,
+    "jobWeighted": 77.8,
+    "assignmentToFiDi": 41.6
+   },
+   {
+    "name": "Orinda",
+    "region": "East Bay",
+    "km": 22.2,
+    "toFiDi": 51,
+    "jobWeighted": 55.7,
+    "assignmentToFiDi": 58.4
+   },
+   {
+    "name": "El Sobrante",
+    "region": "East Bay",
+    "km": 21.7,
+    "toFiDi": 55,
+    "jobWeighted": 58.1,
+    "assignmentToFiDi": 62.4
+   },
+   {
+    "name": "Tiburon",
+    "region": "Marin and Sonoma",
+    "km": 13.6,
+    "toFiDi": 39.5,
+    "jobWeighted": 40.2,
+    "assignmentToFiDi": 42.4
+   },
+   {
+    "name": "Campbell",
+    "region": "South Bay",
+    "km": 69.3,
+    "toFiDi": 125.3,
+    "jobWeighted": 122.9,
+    "assignmentToFiDi": 67
+   },
+   {
+    "name": "Los Gatos",
+    "region": "South Bay",
+    "km": 72.5,
+    "toFiDi": 130,
+    "jobWeighted": 127.6,
+    "assignmentToFiDi": 74.2
+   },
+   {
+    "name": "Near Bay Fair",
+    "region": "East Bay",
+    "km": 26.3,
+    "toFiDi": 65.4,
+    "jobWeighted": 63.3,
+    "assignmentToFiDi": 80.1
+   },
+   {
+    "name": "Larkspur",
+    "region": "Marin and Sonoma",
+    "km": 20.2,
+    "toFiDi": 49.1,
+    "jobWeighted": 49.9,
+    "assignmentToFiDi": 52.1
+   },
+   {
+    "name": "Belmont",
+    "region": "Peninsula",
+    "km": 32.1,
+    "toFiDi": 62.6,
+    "jobWeighted": 60,
+    "assignmentToFiDi": 44.2
+   },
+   {
+    "name": "Near Redwood City",
+    "region": "Peninsula",
+    "km": 37.2,
+    "toFiDi": 71.7,
+    "jobWeighted": 69.2,
+    "assignmentToFiDi": 44.1
+   },
+   {
+    "name": "Rohnert Park",
+    "region": "Marin and Sonoma",
+    "km": 66.2,
+    "toFiDi": 124.9,
+    "jobWeighted": 125.7,
+    "assignmentToFiDi": 127.9
+   },
+   {
+    "name": "Kentfield",
+    "region": "Marin and Sonoma",
+    "km": 21.8,
+    "toFiDi": 51.8,
+    "jobWeighted": 52.6,
+    "assignmentToFiDi": 54.8
+   },
+   {
+    "name": "Benicia",
+    "region": "Napa, Solano, and beyond",
+    "km": 37.3,
+    "toFiDi": 78,
+    "jobWeighted": 81.8,
+    "assignmentToFiDi": 85.3
+   },
+   {
+    "name": "Santa Rosa (unincorporated)",
+    "region": "Marin and Sonoma",
+    "km": 77.4,
+    "toFiDi": 142.5,
+    "jobWeighted": 143.3,
+    "assignmentToFiDi": 145.5
+   },
+   {
+    "name": "Near Pleasant Hill / Contra Costa Centre",
+    "region": "East Bay",
+    "km": 33.8,
+    "toFiDi": 69.8,
+    "jobWeighted": 74.5,
+    "assignmentToFiDi": 77.2
+   },
+   {
+    "name": "Near Broadway",
+    "region": "Peninsula",
+    "km": 22.6,
+    "toFiDi": 46.6,
+    "jobWeighted": 44,
+    "assignmentToFiDi": 30.7
+   },
+   {
+    "name": "Near SMART San Rafael",
+    "region": "Marin and Sonoma",
+    "km": 22.7,
+    "toFiDi": 54.1,
+    "jobWeighted": 54.8,
+    "assignmentToFiDi": 57
+   },
+   {
+    "name": "Suisun City",
+    "region": "Napa, Solano, and beyond",
+    "km": 62.9,
+    "toFiDi": 118.8,
+    "jobWeighted": 122.7,
+    "assignmentToFiDi": 126.1
+   },
+   {
+    "name": "Near Concord",
+    "region": "East Bay",
+    "km": 38.1,
+    "toFiDi": 77,
+    "jobWeighted": 81.5,
+    "assignmentToFiDi": 84.3
+   },
+   {
+    "name": "Sausalito",
+    "region": "Marin and Sonoma",
+    "km": 12,
+    "toFiDi": 34.7,
+    "jobWeighted": 35.5,
+    "assignmentToFiDi": 40.1
+   },
+   {
+    "name": "Brisbane",
+    "region": "Peninsula",
+    "km": 11.7,
+    "toFiDi": 29.8,
+    "jobWeighted": 27.4,
+    "assignmentToFiDi": 22.9
+   },
+   {
+    "name": "Saratoga",
+    "region": "South Bay",
+    "km": 66.4,
+    "toFiDi": 119.9,
+    "jobWeighted": 117.4,
+    "assignmentToFiDi": 65.5
+   },
+   {
+    "name": "Blackhawk",
+    "region": "East Bay",
+    "km": 44.9,
+    "toFiDi": 89.1,
+    "jobWeighted": 93.7,
+    "assignmentToFiDi": 96.4
+   },
+   {
+    "name": "Gilroy",
+    "region": "South Bay",
+    "km": 111.3,
+    "toFiDi": 194.3,
+    "jobWeighted": 192,
+    "assignmentToFiDi": 124.8
+   },
+   {
+    "name": "Rodeo",
+    "region": "East Bay",
+    "km": 30.1,
+    "toFiDi": 67.7,
+    "jobWeighted": 70.9,
+    "assignmentToFiDi": 75
+   },
+   {
+    "name": "Alamo",
+    "region": "East Bay",
+    "km": 34.4,
+    "toFiDi": 71.3,
+    "jobWeighted": 75.8,
+    "assignmentToFiDi": 78.6
+   },
+   {
+    "name": "East Palo Alto",
+    "region": "South Bay",
+    "km": 43.1,
+    "toFiDi": 82.6,
+    "jobWeighted": 80.3,
+    "assignmentToFiDi": 50.3
+   },
+   {
+    "name": "Near SMART Marin Civic Center",
+    "region": "Marin and Sonoma",
+    "km": 26.1,
+    "toFiDi": 59.6,
+    "jobWeighted": 60.3,
+    "assignmentToFiDi": 62.6
+   },
+   {
+    "name": "Near Fremont",
+    "region": "East Bay",
+    "km": 45.6,
+    "toFiDi": 91.8,
+    "jobWeighted": 89.7,
+    "assignmentToFiDi": 90.2
+   },
+   {
+    "name": "Strawberry",
+    "region": "Marin and Sonoma",
+    "km": 15,
+    "toFiDi": 40.4,
+    "jobWeighted": 41.2,
+    "assignmentToFiDi": 43.4
+   },
+   {
+    "name": "Near Walnut Creek",
+    "region": "East Bay",
+    "km": 32,
+    "toFiDi": 67,
+    "jobWeighted": 71.6,
+    "assignmentToFiDi": 74.3
+   },
+   {
+    "name": "El Cerrito",
+    "region": "East Bay",
+    "km": 16.9,
+    "toFiDi": 46.4,
+    "jobWeighted": 50,
+    "assignmentToFiDi": 53.7
+   },
+   {
+    "name": "Near Hayward",
+    "region": "East Bay",
+    "km": 30.7,
+    "toFiDi": 71.1,
+    "jobWeighted": 68.9,
+    "assignmentToFiDi": 76.5
+   },
+   {
+    "name": "Burlingame",
+    "region": "Peninsula",
+    "km": 22.9,
+    "toFiDi": 47.1,
+    "jobWeighted": 44.4,
+    "assignmentToFiDi": 32.4
+   },
+   {
+    "name": "Near Harbor Bay ferry",
+    "region": "East Bay",
+    "km": 14.6,
+    "toFiDi": 49.4,
+    "jobWeighted": 47.2,
+    "assignmentToFiDi": 53.9
+   },
+   {
+    "name": "Near South Hayward",
+    "region": "East Bay",
+    "km": 34.9,
+    "toFiDi": 76.5,
+    "jobWeighted": 74.3,
+    "assignmentToFiDi": 78.1
+   },
+   {
+    "name": "Millbrae",
+    "region": "Peninsula",
+    "km": 22,
+    "toFiDi": 45.7,
+    "jobWeighted": 42.7,
+    "assignmentToFiDi": 30.6
+   },
+   {
+    "name": "Morgan Hill",
+    "region": "South Bay",
+    "km": 99.7,
+    "toFiDi": 176.1,
+    "jobWeighted": 173.7,
+    "assignmentToFiDi": 107.4
+   },
+   {
+    "name": "Near San Bruno",
+    "region": "Peninsula",
+    "km": 17.1,
+    "toFiDi": 38.3,
+    "jobWeighted": 35.2,
+    "assignmentToFiDi": 29.4
+   },
+   {
+    "name": "Near Castro Valley",
+    "region": "East Bay",
+    "km": 30.7,
+    "toFiDi": 72.7,
+    "jobWeighted": 70.6,
+    "assignmentToFiDi": 83.6
+   },
+   {
+    "name": "Lucas Valley-Marinwood",
+    "region": "Marin and Sonoma",
+    "km": 30.1,
+    "toFiDi": 66,
+    "jobWeighted": 66.8,
+    "assignmentToFiDi": 69
+   },
+   {
+    "name": "Near Belmont",
+    "region": "Peninsula",
+    "km": 31.9,
+    "toFiDi": 62.6,
+    "jobWeighted": 60.2,
+    "assignmentToFiDi": 42.3
+   },
+   {
+    "name": "Stanford",
+    "region": "South Bay",
+    "km": 45.5,
+    "toFiDi": 85.5,
+    "jobWeighted": 83.1,
+    "assignmentToFiDi": 51.8
+   },
+   {
+    "name": "North Fair Oaks",
+    "region": "South Bay",
+    "km": 39.9,
+    "toFiDi": 76.4,
+    "jobWeighted": 74,
+    "assignmentToFiDi": 50.3
+   },
+   {
+    "name": "Broadmoor",
+    "region": "Peninsula",
+    "km": 13.3,
+    "toFiDi": 30.9,
+    "jobWeighted": 27.8,
+    "assignmentToFiDi": 23.1
+   },
+   {
+    "name": "Novato (unincorporated)",
+    "region": "Marin and Sonoma",
+    "km": 40,
+    "toFiDi": 81.2,
+    "jobWeighted": 81.9,
+    "assignmentToFiDi": 84.1
+   },
+   {
+    "name": "Near San Antonio",
+    "region": "South Bay",
+    "km": 50.2,
+    "toFiDi": 93.8,
+    "jobWeighted": 91.4,
+    "assignmentToFiDi": 60.7
+   },
+   {
+    "name": "Near Union City",
+    "region": "East Bay",
+    "km": 40.4,
+    "toFiDi": 84.1,
+    "jobWeighted": 82,
+    "assignmentToFiDi": 87.5
+   },
+   {
+    "name": "Bay Point",
+    "region": "East Bay",
+    "km": 46.4,
+    "toFiDi": 90.5,
+    "jobWeighted": 95,
+    "assignmentToFiDi": 97.8
+   },
+   {
+    "name": "Near Sausalito",
+    "region": "Marin and Sonoma",
+    "km": 9.9,
+    "toFiDi": 31.9,
+    "jobWeighted": 32.7,
+    "assignmentToFiDi": 36
+   },
+   {
+    "name": "Saranap",
+    "region": "East Bay",
+    "km": 30.7,
+    "toFiDi": 64.8,
+    "jobWeighted": 69.4,
+    "assignmentToFiDi": 72.1
+   },
+   {
+    "name": "Near Coliseum",
+    "region": "East Bay",
+    "km": 18.5,
+    "toFiDi": 49.7,
+    "jobWeighted": 52.7,
+    "assignmentToFiDi": 57
+   },
+   {
+    "name": "Near Mountain View",
+    "region": "South Bay",
+    "km": 52.5,
+    "toFiDi": 97.8,
+    "jobWeighted": 95.4,
+    "assignmentToFiDi": 57.5
+   },
+   {
+    "name": "American Canyon",
+    "region": "Napa, Solano, and beyond",
+    "km": 43.7,
+    "toFiDi": 91.3,
+    "jobWeighted": 93.7,
+    "assignmentToFiDi": 98.7
+   },
+   {
+    "name": "Near San Bruno",
+    "region": "Peninsula",
+    "km": 18.1,
+    "toFiDi": 39.8,
+    "jobWeighted": 36.7,
+    "assignmentToFiDi": 29.5
+   },
+   {
+    "name": "Near San Carlos",
+    "region": "Peninsula",
+    "km": 33.9,
+    "toFiDi": 66.1,
+    "jobWeighted": 63.7,
+    "assignmentToFiDi": 44.5
+   },
+   {
+    "name": "Cherryland",
+    "region": "East Bay",
+    "km": 28.9,
+    "toFiDi": 68.6,
+    "jobWeighted": 66.5,
+    "assignmentToFiDi": 76.7
+   },
+   {
+    "name": "Near Sunnyvale",
+    "region": "South Bay",
+    "km": 56.1,
+    "toFiDi": 104.1,
+    "jobWeighted": 101.8,
+    "assignmentToFiDi": 61.1
+   },
+   {
+    "name": "Menlo Park (north-east)",
+    "region": "Peninsula",
+    "km": 40.9,
+    "toFiDi": 79,
+    "jobWeighted": 76.7,
+    "assignmentToFiDi": 49
+   },
+   {
+    "name": "Kensington",
+    "region": "East Bay",
+    "km": 16.7,
+    "toFiDi": 44.5,
+    "jobWeighted": 48.7,
+    "assignmentToFiDi": 51.9
+   },
+   {
+    "name": "Discovery Bay",
+    "region": "East Bay",
+    "km": 70.3,
+    "toFiDi": 129.7,
+    "jobWeighted": 134.2,
+    "assignmentToFiDi": 137.1
+   },
+   {
+    "name": "Near SMART Larkspur",
+    "region": "Marin and Sonoma",
+    "km": 20.1,
+    "toFiDi": 49.7,
+    "jobWeighted": 50.5,
+    "assignmentToFiDi": 52.7
+   },
+   {
+    "name": "Clayton",
+    "region": "East Bay",
+    "km": 44.3,
+    "toFiDi": 86.9,
+    "jobWeighted": 91.5,
+    "assignmentToFiDi": 94.3
+   },
+   {
+    "name": "Near SMART Cotati",
+    "region": "Marin and Sonoma",
+    "km": 64.9,
+    "toFiDi": 122.9,
+    "jobWeighted": 123.6,
+    "assignmentToFiDi": 125.8
+   },
+   {
+    "name": "Near Tiburon-No Service to Angel Island",
+    "region": "Marin and Sonoma",
+    "km": 10.5,
+    "toFiDi": 36.3,
+    "jobWeighted": 37.1,
+    "assignmentToFiDi": 43.6
+   },
+   {
+    "name": "Near SMART Novato Hamilton",
+    "region": "Marin and Sonoma",
+    "km": 31.2,
+    "toFiDi": 68.9,
+    "jobWeighted": 69.7,
+    "assignmentToFiDi": 71.9
+   },
+   {
+    "name": "Near SMART Novato Downtown",
+    "region": "Marin and Sonoma",
+    "km": 37.6,
+    "toFiDi": 78.7,
+    "jobWeighted": 79.5,
+    "assignmentToFiDi": 81.7
+   },
+   {
+    "name": "Ashland",
+    "region": "East Bay",
+    "km": 27.8,
+    "toFiDi": 67.6,
+    "jobWeighted": 65.5,
+    "assignmentToFiDi": 80.1
+   },
+   {
+    "name": "Near California Avenue",
+    "region": "South Bay",
+    "km": 46.6,
+    "toFiDi": 87.7,
+    "jobWeighted": 85.2,
+    "assignmentToFiDi": 56.8
+   },
+   {
+    "name": "Menlo Park (south-west)",
+    "region": "South Bay",
+    "km": 44,
+    "toFiDi": 82.5,
+    "jobWeighted": 80.1,
+    "assignmentToFiDi": 48.4
+   },
+   {
+    "name": "Near Capitol",
+    "region": "South Bay",
+    "km": 75.1,
+    "toFiDi": 135.9,
+    "jobWeighted": 133.6,
+    "assignmentToFiDi": 79.4
+   },
+   {
+    "name": "Near Blossom Hill",
+    "region": "South Bay",
+    "km": 80.1,
+    "toFiDi": 144.1,
+    "jobWeighted": 141.8,
+    "assignmentToFiDi": 82.4
+   },
+   {
+    "name": "Near Menlo Park",
+    "region": "South Bay",
+    "km": 42.3,
+    "toFiDi": 80.4,
+    "jobWeighted": 78,
+    "assignmentToFiDi": 52.8
+   },
+   {
+    "name": "Near Pittsburg / Bay Point",
+    "region": "East Bay",
+    "km": 47.2,
+    "toFiDi": 91.8,
+    "jobWeighted": 96.4,
+    "assignmentToFiDi": 99.1
+   },
+   {
+    "name": "Near Pittsburg Center",
+    "region": "East Bay",
+    "km": 51.4,
+    "toFiDi": 98.4,
+    "jobWeighted": 103,
+    "assignmentToFiDi": 105.7
+   },
+   {
+    "name": "Near Lawrence",
+    "region": "South Bay",
+    "km": 58.6,
+    "toFiDi": 108.4,
+    "jobWeighted": 106.1,
+    "assignmentToFiDi": 64.8
+   },
+   {
+    "name": "Near Lafayette",
+    "region": "East Bay",
+    "km": 26.8,
+    "toFiDi": 58.4,
+    "jobWeighted": 63.1,
+    "assignmentToFiDi": 65.7
+   },
+   {
+    "name": "Near Tamien",
+    "region": "South Bay",
+    "km": 69.9,
+    "toFiDi": 127.4,
+    "jobWeighted": 125.1,
+    "assignmentToFiDi": 72.1
+   },
+   {
+    "name": "Near SMART Rohnert Park",
+    "region": "Marin and Sonoma",
+    "km": 66.8,
+    "toFiDi": 126,
+    "jobWeighted": 126.7,
+    "assignmentToFiDi": 128.9
+   },
+   {
+    "name": "Near Alameda Seaplane Lagoon ferry",
+    "region": "East Bay",
+    "km": 9.7,
+    "toFiDi": 37.8,
+    "jobWeighted": 41.5,
+    "assignmentToFiDi": 49.7
+   },
+   {
+    "name": "Near Palo Alto",
+    "region": "South Bay",
+    "km": 43.9,
+    "toFiDi": 83.3,
+    "jobWeighted": 80.9,
+    "assignmentToFiDi": 54.9
+   },
+   {
+    "name": "Near Dublin / Pleasanton",
+    "region": "East Bay",
+    "km": 45.4,
+    "toFiDi": 92.2,
+    "jobWeighted": 94.4,
+    "assignmentToFiDi": 105
+   },
+   {
+    "name": "Near San Jose Diridon",
+    "region": "South Bay",
+    "km": 67.6,
+    "toFiDi": 123.8,
+    "jobWeighted": 121.5,
+    "assignmentToFiDi": 69.6
+   },
+   {
+    "name": "Santa Venetia",
+    "region": "Marin and Sonoma",
+    "km": 26.1,
+    "toFiDi": 60.4,
+    "jobWeighted": 61.2,
+    "assignmentToFiDi": 63.4
+   },
+   {
+    "name": "Near Milpitas",
+    "region": "South Bay",
+    "km": 61.7,
+    "toFiDi": 115.5,
+    "jobWeighted": 113.3,
+    "assignmentToFiDi": 73.5
+   },
+   {
+    "name": "Monterey County",
+    "region": "South Bay",
+    "km": 124.3,
+    "toFiDi": 213.7,
+    "jobWeighted": 211.2,
+    "assignmentToFiDi": 205
+   },
+   {
+    "name": "Near Berryessa / North San Jose",
+    "region": "South Bay",
+    "km": 66,
+    "toFiDi": 122,
+    "jobWeighted": 119.8,
+    "assignmentToFiDi": 66.7
+   },
+   {
+    "name": "Near Millbrae",
+    "region": "Peninsula",
+    "km": 22.3,
+    "toFiDi": 46.1,
+    "jobWeighted": 43.3,
+    "assignmentToFiDi": 32
+   },
+   {
+    "name": "Near SMART Petaluma Downtown",
+    "region": "Marin and Sonoma",
+    "km": 53.4,
+    "toFiDi": 104.3,
+    "jobWeighted": 105.1,
+    "assignmentToFiDi": 107.3
+   },
+   {
+    "name": "Near Alameda Bohol Circle Immigrant Park Dock",
+    "region": "East Bay",
+    "km": 10.8,
+    "toFiDi": 37.1,
+    "jobWeighted": 41.6,
+    "assignmentToFiDi": 49.6
+   },
+   {
+    "name": "Near Vallejo ferry",
+    "region": "Napa, Solano, and beyond",
+    "km": 36.7,
+    "toFiDi": 79.5,
+    "jobWeighted": 82.1,
+    "assignmentToFiDi": 86.8
+   },
+   {
+    "name": "Near Santa Clara",
+    "region": "South Bay",
+    "km": 63.8,
+    "toFiDi": 117.4,
+    "jobWeighted": 115.1,
+    "assignmentToFiDi": 68.4
+   },
+   {
+    "name": "Near Richmond ferry",
+    "region": "East Bay",
+    "km": 14.2,
+    "toFiDi": 45.8,
+    "jobWeighted": 48.1,
+    "assignmentToFiDi": 53.2
+   },
+   {
+    "name": "Near Orinda",
+    "region": "East Bay",
+    "km": 21.5,
+    "toFiDi": 49.8,
+    "jobWeighted": 54.5,
+    "assignmentToFiDi": 57.2
+   },
+   {
+    "name": "Near Oakland Jack London Square Water Shuttle Dock",
+    "region": "East Bay",
+    "km": 11.1,
+    "toFiDi": 36.3,
+    "jobWeighted": 40.8,
+    "assignmentToFiDi": 48.7
+   },
+   {
+    "name": "San Jose (unincorporated)",
+    "region": "South Bay",
+    "km": 62.3,
+    "toFiDi": 114.3,
+    "jobWeighted": 111.9,
+    "assignmentToFiDi": 68.4
+   },
+   {
+    "name": "Near North Concord / Martinez",
+    "region": "East Bay",
+    "km": 40.1,
+    "toFiDi": 80.4,
+    "jobWeighted": 84.9,
+    "assignmentToFiDi": 87.7
+   },
+   {
+    "name": "Near SMART Santa Rosa North",
+    "region": "Marin and Sonoma",
+    "km": 79.3,
+    "toFiDi": 146.3,
+    "jobWeighted": 147.1,
+    "assignmentToFiDi": 149.3
+   },
+   {
+    "name": "Near SMART Novato San Marin",
+    "region": "Marin and Sonoma",
+    "km": 39,
+    "toFiDi": 81.1,
+    "jobWeighted": 81.9,
+    "assignmentToFiDi": 84.1
+   },
+   {
+    "name": "South San Francisco (unincorporated)",
+    "region": "Peninsula",
+    "km": 21.7,
+    "toFiDi": 45.3,
+    "jobWeighted": 42.2,
+    "assignmentToFiDi": 35.2
+   },
+   {
+    "name": "Near SMART Santa Rosa Downtown",
+    "region": "Marin and Sonoma",
+    "km": 77,
+    "toFiDi": 142.7,
+    "jobWeighted": 143.5,
+    "assignmentToFiDi": 145.7
+   },
+   {
+    "name": "Near Antioch",
+    "region": "East Bay",
+    "km": 58.7,
+    "toFiDi": 110.3,
+    "jobWeighted": 114.9,
+    "assignmentToFiDi": 117.6
+   },
+   {
+    "name": "Near SMART Petaluma North",
+    "region": "Marin and Sonoma",
+    "km": 56.9,
+    "toFiDi": 110,
+    "jobWeighted": 110.8,
+    "assignmentToFiDi": 113
+   },
+   {
+    "name": "Near Gilroy",
+    "region": "South Bay",
+    "km": 114,
+    "toFiDi": 198.8,
+    "jobWeighted": 196.5,
+    "assignmentToFiDi": 126.8
+   },
+   {
+    "name": "Near Morgan Hill",
+    "region": "South Bay",
+    "km": 98.8,
+    "toFiDi": 174.6,
+    "jobWeighted": 172.2,
+    "assignmentToFiDi": 107.5
+   },
+   {
+    "name": "Near West Dublin / Pleasanton",
+    "region": "East Bay",
+    "km": 43,
+    "toFiDi": 88.5,
+    "jobWeighted": 90.9,
+    "assignmentToFiDi": 101.9
+   },
+   {
+    "name": "Near Main Street Alameda ferry",
+    "region": "East Bay",
+    "km": 9.6,
+    "toFiDi": 36.3,
+    "jobWeighted": 40.7,
+    "assignmentToFiDi": 47.6
+   },
+   {
+    "name": "Near College Park",
+    "region": "South Bay",
+    "km": 65.7,
+    "toFiDi": 120.7,
+    "jobWeighted": 118.4,
+    "assignmentToFiDi": 67.8
+   },
+   {
+    "name": "Contra Costa Centre",
+    "region": "East Bay",
+    "km": 35.7,
+    "toFiDi": 72.9,
+    "jobWeighted": 77.5,
+    "assignmentToFiDi": 80.2
+   },
+   {
+    "name": "Near Larkspur",
+    "region": "Marin and Sonoma",
+    "km": 19.5,
+    "toFiDi": 48.9,
+    "jobWeighted": 49.7,
+    "assignmentToFiDi": 51.9
+   },
+   {
+    "name": "Near Warm Springs / South Fremont",
+    "region": "East Bay",
+    "km": 51.8,
+    "toFiDi": 101,
+    "jobWeighted": 98.8,
+    "assignmentToFiDi": 82.6
+   },
+   {
+    "name": "Lake County",
+    "region": "Marin and Sonoma",
+    "km": 118.7,
+    "toFiDi": 212.4,
+    "jobWeighted": 213.1,
+    "assignmentToFiDi": 215.3
+   },
+   {
+    "name": "Near Oakland ferry",
+    "region": "East Bay",
+    "km": 10.5,
+    "toFiDi": 35.1,
+    "jobWeighted": 39.6,
+    "assignmentToFiDi": 46.8
+   },
+   {
+    "name": "San Benito County",
+    "region": "South Bay",
+    "km": 125.7,
+    "toFiDi": 217,
+    "jobWeighted": 214.6,
+    "assignmentToFiDi": 147.7
+   },
+   {
+    "name": "Colma",
+    "region": "Peninsula",
+    "km": 13.9,
+    "toFiDi": 31.4,
+    "jobWeighted": 28.2,
+    "assignmentToFiDi": 24.9
+   },
+   {
+    "name": "Near South San Francisco ferry",
+    "region": "Peninsula",
+    "km": 15.2,
+    "toFiDi": 34.6,
+    "jobWeighted": 32.2,
+    "assignmentToFiDi": 27.1
+   },
+   {
+    "name": "Sutter County",
+    "region": "Napa, Solano, and beyond",
+    "km": 127.3,
+    "toFiDi": 223.9,
+    "jobWeighted": 227.5,
+    "assignmentToFiDi": 231.2
+   },
+   {
+    "name": "Mendocino County",
+    "region": "Marin and Sonoma",
+    "km": 127.7,
+    "toFiDi": 224.8,
+    "jobWeighted": 225.6,
+    "assignmentToFiDi": 227.8
+   }
+  ]
+ },
+ "after": {
+  "bundle": "2026-10-08T02:40:14.425Z",
+  "byRegion": {
+   "Napa, Solano, and beyond": {
+    "zones": 10,
+    "medianKm": 62.1,
+    "medianMinToFiDi": 112.2,
+    "medianStraightKmh": 33.2,
+    "medianAssignmentMin": 126.1,
+    "medianRatioToAssignment": 0.89
+   },
+   "East Bay": {
+    "zones": 94,
+    "medianKm": 27.3,
+    "medianMinToFiDi": 47.8,
+    "medianStraightKmh": 34.9,
+    "medianAssignmentMin": 72.1,
+    "medianRatioToAssignment": 0.7
+   },
+   "Peninsula": {
+    "zones": 36,
+    "medianKm": 22,
+    "medianMinToFiDi": 32.9,
+    "medianStraightKmh": 40.1,
+    "medianAssignmentMin": 32,
+    "medianRatioToAssignment": 1.039
+   },
+   "South Bay": {
+    "zones": 42,
+    "medianKm": 61.7,
+    "medianMinToFiDi": 66.1,
+    "medianStraightKmh": 55.6,
+    "medianAssignmentMin": 67,
+    "medianRatioToAssignment": 0.981
+   },
+   "Marin and Sonoma": {
+    "zones": 36,
+    "medianKm": 30.1,
+    "medianMinToFiDi": 66,
+    "medianStraightKmh": 27.4,
+    "medianAssignmentMin": 71.9,
+    "medianRatioToAssignment": 0.957
+   }
+  },
+  "rows": [
+   {
+    "name": "Sacramento County",
+    "region": "Napa, Solano, and beyond",
+    "km": 117.2,
+    "toFiDi": 199.6,
+    "jobWeighted": 204.4,
+    "assignmentToFiDi": 213.5
+   },
+   {
+    "name": "Oakland (east)",
+    "region": "East Bay",
+    "km": 14.4,
+    "toFiDi": 27.6,
+    "jobWeighted": 32.4,
+    "assignmentToFiDi": 47.5
+   },
+   {
+    "name": "San Joaquin County",
+    "region": "East Bay",
+    "km": 96.5,
+    "toFiDi": 158.8,
+    "jobWeighted": 163.7,
+    "assignmentToFiDi": 179.6
+   },
+   {
+    "name": "Daly City (north-west)",
+    "region": "Peninsula",
+    "km": 12.5,
+    "toFiDi": 26.2,
+    "jobWeighted": 23,
+    "assignmentToFiDi": 21.7
+   },
+   {
+    "name": "San Jose (north-east)",
+    "region": "South Bay",
+    "km": 70.8,
+    "toFiDi": 73.3,
+    "jobWeighted": 70.1,
+    "assignmentToFiDi": 69
+   },
+   {
+    "name": "Pacifica",
+    "region": "Peninsula",
+    "km": 20.4,
+    "toFiDi": 30.8,
+    "jobWeighted": 27.5,
+    "assignmentToFiDi": 32.9
+   },
+   {
+    "name": "Daly City (south)",
+    "region": "Peninsula",
+    "km": 15.5,
+    "toFiDi": 27.2,
+    "jobWeighted": 24,
+    "assignmentToFiDi": 23.9
+   },
+   {
+    "name": "Oakland (south-east 2)",
+    "region": "East Bay",
+    "km": 18.4,
+    "toFiDi": 32.6,
+    "jobWeighted": 37.5,
+    "assignmentToFiDi": 54.8
+   },
+   {
+    "name": "San Jose (south-east)",
+    "region": "South Bay",
+    "km": 77.9,
+    "toFiDi": 77.5,
+    "jobWeighted": 74.3,
+    "assignmentToFiDi": 83.6
+   },
+   {
+    "name": "San Jose (west)",
+    "region": "South Bay",
+    "km": 67.5,
+    "toFiDi": 69.7,
+    "jobWeighted": 66.5,
+    "assignmentToFiDi": 64.5
+   },
+   {
+    "name": "Daly City (north-east)",
+    "region": "Peninsula",
+    "km": 10.5,
+    "toFiDi": 26.4,
+    "jobWeighted": 23.2,
+    "assignmentToFiDi": 25.1
+   },
+   {
+    "name": "Concord",
+    "region": "East Bay",
+    "km": 39.1,
+    "toFiDi": 65,
+    "jobWeighted": 69.9,
+    "assignmentToFiDi": 85.8
+   },
+   {
+    "name": "Berkeley",
+    "region": "East Bay",
+    "km": 14.3,
+    "toFiDi": 32.6,
+    "jobWeighted": 37.5,
+    "assignmentToFiDi": 46.6
+   },
+   {
+    "name": "San Ramon",
+    "region": "East Bay",
+    "km": 40.7,
+    "toFiDi": 57.3,
+    "jobWeighted": 62.1,
+    "assignmentToFiDi": 90.6
+   },
+   {
+    "name": "Hayward",
+    "region": "East Bay",
+    "km": 32.4,
+    "toFiDi": 51.7,
+    "jobWeighted": 56.5,
+    "assignmentToFiDi": 72.1
+   },
+   {
+    "name": "Walnut Creek",
+    "region": "East Bay",
+    "km": 33.5,
+    "toFiDi": 55.9,
+    "jobWeighted": 60.7,
+    "assignmentToFiDi": 76.7
+   },
+   {
+    "name": "San Mateo",
+    "region": "Peninsula",
+    "km": 28.4,
+    "toFiDi": 39.3,
+    "jobWeighted": 36.1,
+    "assignmentToFiDi": 37.2
+   },
+   {
+    "name": "Antioch",
+    "region": "East Bay",
+    "km": 57.1,
+    "toFiDi": 94.2,
+    "jobWeighted": 99.1,
+    "assignmentToFiDi": 115
+   },
+   {
+    "name": "Vallejo",
+    "region": "Napa, Solano, and beyond",
+    "km": 38.8,
+    "toFiDi": 75.8,
+    "jobWeighted": 80.5,
+    "assignmentToFiDi": 89.7
+   },
+   {
+    "name": "San Leandro",
+    "region": "East Bay",
+    "km": 23.4,
+    "toFiDi": 40.9,
+    "jobWeighted": 45.7,
+    "assignmentToFiDi": 66.7
+   },
+   {
+    "name": "Fremont (north-west)",
+    "region": "East Bay",
+    "km": 42.4,
+    "toFiDi": 63.7,
+    "jobWeighted": 68.5,
+    "assignmentToFiDi": 81.5
+   },
+   {
+    "name": "Alameda (north-west)",
+    "region": "East Bay",
+    "km": 12.6,
+    "toFiDi": 28.4,
+    "jobWeighted": 33.2,
+    "assignmentToFiDi": 48.5
+   },
+   {
+    "name": "Richmond (south)",
+    "region": "East Bay",
+    "km": 16.2,
+    "toFiDi": 41.8,
+    "jobWeighted": 46.5,
+    "assignmentToFiDi": 55.7
+   },
+   {
+    "name": "Oakland (south-east)",
+    "region": "East Bay",
+    "km": 20.7,
+    "toFiDi": 36.6,
+    "jobWeighted": 41.4,
+    "assignmentToFiDi": 60.5
+   },
+   {
+    "name": "San Bruno",
+    "region": "Peninsula",
+    "km": 18.9,
+    "toFiDi": 30.4,
+    "jobWeighted": 27.2,
+    "assignmentToFiDi": 27.4
+   },
+   {
+    "name": "San Rafael",
+    "region": "Marin and Sonoma",
+    "km": 24.3,
+    "toFiDi": 57,
+    "jobWeighted": 57.8,
+    "assignmentToFiDi": 60
+   },
+   {
+    "name": "Fremont (south-east)",
+    "region": "East Bay",
+    "km": 50.8,
+    "toFiDi": 74.8,
+    "jobWeighted": 79.6,
+    "assignmentToFiDi": 84.5
+   },
+   {
+    "name": "Santa Clara",
+    "region": "South Bay",
+    "km": 60.4,
+    "toFiDi": 65.2,
+    "jobWeighted": 62,
+    "assignmentToFiDi": 70.2
+   },
+   {
+    "name": "Santa Cruz County",
+    "region": "South Bay",
+    "km": 96.9,
+    "toFiDi": 88.6,
+    "jobWeighted": 85.5,
+    "assignmentToFiDi": 129.4
+   },
+   {
+    "name": "South San Francisco (west)",
+    "region": "Peninsula",
+    "km": 17,
+    "toFiDi": 28.7,
+    "jobWeighted": 25.5,
+    "assignmentToFiDi": 28.6
+   },
+   {
+    "name": "Oakland (north-east)",
+    "region": "East Bay",
+    "km": 17.3,
+    "toFiDi": 29.7,
+    "jobWeighted": 34.5,
+    "assignmentToFiDi": 50.5
+   },
+   {
+    "name": "Oakland (north-west)",
+    "region": "East Bay",
+    "km": 11.7,
+    "toFiDi": 23.5,
+    "jobWeighted": 28.3,
+    "assignmentToFiDi": 46.6
+   },
+   {
+    "name": "Novato",
+    "region": "Marin and Sonoma",
+    "km": 35.9,
+    "toFiDi": 76,
+    "jobWeighted": 76.8,
+    "assignmentToFiDi": 79
+   },
+   {
+    "name": "SFO airport",
+    "region": "Peninsula",
+    "km": 19.4,
+    "toFiDi": 30.4,
+    "jobWeighted": 27.4,
+    "assignmentToFiDi": 29.2
+   },
+   {
+    "name": "Near Colma",
+    "region": "Peninsula",
+    "km": 13.1,
+    "toFiDi": 25.1,
+    "jobWeighted": 21.9,
+    "assignmentToFiDi": 22.6
+   },
+   {
+    "name": "Foster City",
+    "region": "Peninsula",
+    "km": 28.7,
+    "toFiDi": 40.1,
+    "jobWeighted": 37,
+    "assignmentToFiDi": 39.4
+   },
+   {
+    "name": "Near MacArthur",
+    "region": "East Bay",
+    "km": 12.5,
+    "toFiDi": 24.4,
+    "jobWeighted": 29.2,
+    "assignmentToFiDi": 48.8
+   },
+   {
+    "name": "South San Francisco (north-west)",
+    "region": "Peninsula",
+    "km": 15.2,
+    "toFiDi": 27,
+    "jobWeighted": 24,
+    "assignmentToFiDi": 30.2
+   },
+   {
+    "name": "Redwood City",
+    "region": "Peninsula",
+    "km": 35.6,
+    "toFiDi": 45.9,
+    "jobWeighted": 42.7,
+    "assignmentToFiDi": 42.3
+   },
+   {
+    "name": "Pleasanton",
+    "region": "East Bay",
+    "km": 47.5,
+    "toFiDi": 66,
+    "jobWeighted": 70.8,
+    "assignmentToFiDi": 103.4
+   },
+   {
+    "name": "Near 19th Street Oakland",
+    "region": "East Bay",
+    "km": 11.9,
+    "toFiDi": 24.6,
+    "jobWeighted": 29.5,
+    "assignmentToFiDi": 48.8
+   },
+   {
+    "name": "Sunnyvale (south)",
+    "region": "South Bay",
+    "km": 58.1,
+    "toFiDi": 62.8,
+    "jobWeighted": 59.6,
+    "assignmentToFiDi": 67
+   },
+   {
+    "name": "Livermore",
+    "region": "East Bay",
+    "km": 57.4,
+    "toFiDi": 76.5,
+    "jobWeighted": 81.3,
+    "assignmentToFiDi": 123
+   },
+   {
+    "name": "Fairfield",
+    "region": "Napa, Solano, and beyond",
+    "km": 59.9,
+    "toFiDi": 108.4,
+    "jobWeighted": 113.2,
+    "assignmentToFiDi": 122.3
+   },
+   {
+    "name": "Dublin",
+    "region": "East Bay",
+    "km": 45.8,
+    "toFiDi": 63.5,
+    "jobWeighted": 68.4,
+    "assignmentToFiDi": 108.8
+   },
+   {
+    "name": "Castro Valley",
+    "region": "East Bay",
+    "km": 30.6,
+    "toFiDi": 47.8,
+    "jobWeighted": 52.7,
+    "assignmentToFiDi": 76.9
+   },
+   {
+    "name": "Near Ashby",
+    "region": "East Bay",
+    "km": 13.3,
+    "toFiDi": 29.6,
+    "jobWeighted": 34.5,
+    "assignmentToFiDi": 44
+   },
+   {
+    "name": "San Jose (north)",
+    "region": "South Bay",
+    "km": 61.8,
+    "toFiDi": 66.9,
+    "jobWeighted": 63.7,
+    "assignmentToFiDi": 66.6
+   },
+   {
+    "name": "Santa Rosa",
+    "region": "Marin and Sonoma",
+    "km": 77.9,
+    "toFiDi": 144.2,
+    "jobWeighted": 145,
+    "assignmentToFiDi": 147.2
+   },
+   {
+    "name": "San Pablo",
+    "region": "East Bay",
+    "km": 19.4,
+    "toFiDi": 47.4,
+    "jobWeighted": 52,
+    "assignmentToFiDi": 61.3
+   },
+   {
+    "name": "Petaluma",
+    "region": "Marin and Sonoma",
+    "km": 54.8,
+    "toFiDi": 107.4,
+    "jobWeighted": 108.2,
+    "assignmentToFiDi": 110.4
+   },
+   {
+    "name": "Brentwood",
+    "region": "East Bay",
+    "km": 62.6,
+    "toFiDi": 103.5,
+    "jobWeighted": 108.3,
+    "assignmentToFiDi": 124.3
+   },
+   {
+    "name": "Richmond (north)",
+    "region": "East Bay",
+    "km": 21.8,
+    "toFiDi": 49.7,
+    "jobWeighted": 54.5,
+    "assignmentToFiDi": 63.6
+   },
+   {
+    "name": "Vacaville",
+    "region": "Napa, Solano, and beyond",
+    "km": 75.7,
+    "toFiDi": 133.9,
+    "jobWeighted": 138.7,
+    "assignmentToFiDi": 147.8
+   },
+   {
+    "name": "Near Rockridge",
+    "region": "East Bay",
+    "km": 14.2,
+    "toFiDi": 31.3,
+    "jobWeighted": 36.1,
+    "assignmentToFiDi": 45.4
+   },
+   {
+    "name": "Hercules",
+    "region": "East Bay",
+    "km": 26.8,
+    "toFiDi": 56.2,
+    "jobWeighted": 61,
+    "assignmentToFiDi": 70.1
+   },
+   {
+    "name": "Near Downtown Berkeley",
+    "region": "East Bay",
+    "km": 14.6,
+    "toFiDi": 32.8,
+    "jobWeighted": 37.7,
+    "assignmentToFiDi": 46.7
+   },
+   {
+    "name": "Napa",
+    "region": "Napa, Solano, and beyond",
+    "km": 62.1,
+    "toFiDi": 116.8,
+    "jobWeighted": 121.3,
+    "assignmentToFiDi": 130.7
+   },
+   {
+    "name": "Martinez",
+    "region": "East Bay",
+    "km": 34,
+    "toFiDi": 57.4,
+    "jobWeighted": 62.3,
+    "assignmentToFiDi": 78.2
+   },
+   {
+    "name": "Near North Berkeley",
+    "region": "East Bay",
+    "km": 13.6,
+    "toFiDi": 31.8,
+    "jobWeighted": 36.6,
+    "assignmentToFiDi": 45.7
+   },
+   {
+    "name": "Near El Cerrito Plaza",
+    "region": "East Bay",
+    "km": 14.9,
+    "toFiDi": 36,
+    "jobWeighted": 40.8,
+    "assignmentToFiDi": 49.9
+   },
+   {
+    "name": "Near South San Francisco",
+    "region": "Peninsula",
+    "km": 15,
+    "toFiDi": 27.7,
+    "jobWeighted": 24.4,
+    "assignmentToFiDi": 27
+   },
+   {
+    "name": "Pittsburg",
+    "region": "East Bay",
+    "km": 49.7,
+    "toFiDi": 89.2,
+    "jobWeighted": 94,
+    "assignmentToFiDi": 103.1
+   },
+   {
+    "name": "Union City",
+    "region": "East Bay",
+    "km": 37.5,
+    "toFiDi": 58.1,
+    "jobWeighted": 63,
+    "assignmentToFiDi": 79.2
+   },
+   {
+    "name": "Pleasant Hill",
+    "region": "East Bay",
+    "km": 33.9,
+    "toFiDi": 56.7,
+    "jobWeighted": 61.5,
+    "assignmentToFiDi": 77.5
+   },
+   {
+    "name": "Danville",
+    "region": "East Bay",
+    "km": 38.1,
+    "toFiDi": 64.6,
+    "jobWeighted": 69.4,
+    "assignmentToFiDi": 85.4
+   },
+   {
+    "name": "Yolo County",
+    "region": "Napa, Solano, and beyond",
+    "km": 106.8,
+    "toFiDi": 184,
+    "jobWeighted": 188.8,
+    "assignmentToFiDi": 197.9
+   },
+   {
+    "name": "Pinole",
+    "region": "East Bay",
+    "km": 24.3,
+    "toFiDi": 53.2,
+    "jobWeighted": 57.9,
+    "assignmentToFiDi": 67.1
+   },
+   {
+    "name": "Near San Mateo",
+    "region": "Peninsula",
+    "km": 25.9,
+    "toFiDi": 36.9,
+    "jobWeighted": 33.8,
+    "assignmentToFiDi": 35.5
+   },
+   {
+    "name": "Alameda (south-east)",
+    "region": "East Bay",
+    "km": 15.3,
+    "toFiDi": 32.2,
+    "jobWeighted": 37,
+    "assignmentToFiDi": 54.1
+   },
+   {
+    "name": "Mill Valley",
+    "region": "Marin and Sonoma",
+    "km": 17.5,
+    "toFiDi": 43.8,
+    "jobWeighted": 44.6,
+    "assignmentToFiDi": 46.8
+   },
+   {
+    "name": "Cupertino",
+    "region": "South Bay",
+    "km": 61.6,
+    "toFiDi": 65.1,
+    "jobWeighted": 61.9,
+    "assignmentToFiDi": 59.7
+   },
+   {
+    "name": "Mountain View",
+    "region": "South Bay",
+    "km": 51.4,
+    "toFiDi": 58.1,
+    "jobWeighted": 54.9,
+    "assignmentToFiDi": 54.2
+   },
+   {
+    "name": "Tamalpais-Homestead Valley",
+    "region": "Marin and Sonoma",
+    "km": 15.8,
+    "toFiDi": 40.7,
+    "jobWeighted": 41.4,
+    "assignmentToFiDi": 43.6
+   },
+   {
+    "name": "Stanislaus County",
+    "region": "East Bay",
+    "km": 122.2,
+    "toFiDi": 177.9,
+    "jobWeighted": 182.7,
+    "assignmentToFiDi": 217.5
+   },
+   {
+    "name": "Newark",
+    "region": "East Bay",
+    "km": 43.2,
+    "toFiDi": 65.3,
+    "jobWeighted": 70.1,
+    "assignmentToFiDi": 79.9
+   },
+   {
+    "name": "Oakley",
+    "region": "East Bay",
+    "km": 65.1,
+    "toFiDi": 107.2,
+    "jobWeighted": 112,
+    "assignmentToFiDi": 128
+   },
+   {
+    "name": "San Anselmo",
+    "region": "Marin and Sonoma",
+    "km": 25.4,
+    "toFiDi": 57.4,
+    "jobWeighted": 58.1,
+    "assignmentToFiDi": 60.3
+   },
+   {
+    "name": "Sunnyvale (north)",
+    "region": "South Bay",
+    "km": 55,
+    "toFiDi": 61.3,
+    "jobWeighted": 58.1,
+    "assignmentToFiDi": 56.9
+   },
+   {
+    "name": "Near Lake Merritt",
+    "region": "East Bay",
+    "km": 12,
+    "toFiDi": 25.6,
+    "jobWeighted": 30.5,
+    "assignmentToFiDi": 44.7
+   },
+   {
+    "name": "Palo Alto",
+    "region": "South Bay",
+    "km": 46.6,
+    "toFiDi": 54.1,
+    "jobWeighted": 50.9,
+    "assignmentToFiDi": 57.4
+   },
+   {
+    "name": "Lafayette",
+    "region": "East Bay",
+    "km": 27.5,
+    "toFiDi": 46.1,
+    "jobWeighted": 50.9,
+    "assignmentToFiDi": 66.9
+   },
+   {
+    "name": "Near Richmond",
+    "region": "East Bay",
+    "km": 16.6,
+    "toFiDi": 43.2,
+    "jobWeighted": 47.9,
+    "assignmentToFiDi": 57.1
+   },
+   {
+    "name": "Milpitas",
+    "region": "South Bay",
+    "km": 59.8,
+    "toFiDi": 66.1,
+    "jobWeighted": 63,
+    "assignmentToFiDi": 73.3
+   },
+   {
+    "name": "Near South San Francisco",
+    "region": "Peninsula",
+    "km": 15.1,
+    "toFiDi": 26.5,
+    "jobWeighted": 23.7,
+    "assignmentToFiDi": 29.2
+   },
+   {
+    "name": "Half Moon Bay",
+    "region": "South Bay",
+    "km": 36.3,
+    "toFiDi": 42.9,
+    "jobWeighted": 39.7,
+    "assignmentToFiDi": 68.3
+   },
+   {
+    "name": "Near Fruitvale",
+    "region": "East Bay",
+    "km": 15.6,
+    "toFiDi": 30.3,
+    "jobWeighted": 35.1,
+    "assignmentToFiDi": 51.3
+   },
+   {
+    "name": "Near Burlingame",
+    "region": "Peninsula",
+    "km": 24.2,
+    "toFiDi": 35.1,
+    "jobWeighted": 32.1,
+    "assignmentToFiDi": 33.3
+   },
+   {
+    "name": "Near Hillsdale",
+    "region": "Peninsula",
+    "km": 29.2,
+    "toFiDi": 40.1,
+    "jobWeighted": 36.9,
+    "assignmentToFiDi": 36.8
+   },
+   {
+    "name": "Windsor",
+    "region": "Marin and Sonoma",
+    "km": 97.7,
+    "toFiDi": 175.6,
+    "jobWeighted": 176.4,
+    "assignmentToFiDi": 178.6
+   },
+   {
+    "name": "Hillsborough",
+    "region": "Peninsula",
+    "km": 27.2,
+    "toFiDi": 37.8,
+    "jobWeighted": 34.6,
+    "assignmentToFiDi": 41
+   },
+   {
+    "name": "San Lorenzo",
+    "region": "East Bay",
+    "km": 27.3,
+    "toFiDi": 45.9,
+    "jobWeighted": 50.7,
+    "assignmentToFiDi": 77.9
+   },
+   {
+    "name": "Near West Oakland",
+    "region": "East Bay",
+    "km": 9.5,
+    "toFiDi": 22.5,
+    "jobWeighted": 27.3,
+    "assignmentToFiDi": 43
+   },
+   {
+    "name": "Near El Cerrito Del Norte",
+    "region": "East Bay",
+    "km": 16.4,
+    "toFiDi": 40,
+    "jobWeighted": 44.9,
+    "assignmentToFiDi": 54
+   },
+   {
+    "name": "Emeryville",
+    "region": "East Bay",
+    "km": 10.8,
+    "toFiDi": 24.4,
+    "jobWeighted": 29.2,
+    "assignmentToFiDi": 43.8
+   },
+   {
+    "name": "Near 12th Street / Oakland City Center",
+    "region": "East Bay",
+    "km": 11.3,
+    "toFiDi": 24.5,
+    "jobWeighted": 29.3,
+    "assignmentToFiDi": 48.1
+   },
+   {
+    "name": "Los Altos",
+    "region": "South Bay",
+    "km": 53.8,
+    "toFiDi": 59.1,
+    "jobWeighted": 55.9,
+    "assignmentToFiDi": 58.7
+   },
+   {
+    "name": "Near San Leandro",
+    "region": "East Bay",
+    "km": 22.6,
+    "toFiDi": 39.5,
+    "jobWeighted": 44.3,
+    "assignmentToFiDi": 64.7
+   },
+   {
+    "name": "Near Hayward Park",
+    "region": "Peninsula",
+    "km": 27.6,
+    "toFiDi": 38.6,
+    "jobWeighted": 35.5,
+    "assignmentToFiDi": 36.4
+   },
+   {
+    "name": "Piedmont",
+    "region": "East Bay",
+    "km": 15.1,
+    "toFiDi": 27.6,
+    "jobWeighted": 32.4,
+    "assignmentToFiDi": 47.5
+   },
+   {
+    "name": "Moraga",
+    "region": "East Bay",
+    "km": 24.9,
+    "toFiDi": 42.3,
+    "jobWeighted": 47.1,
+    "assignmentToFiDi": 63.1
+   },
+   {
+    "name": "Albany",
+    "region": "East Bay",
+    "km": 14,
+    "toFiDi": 33.7,
+    "jobWeighted": 38.6,
+    "assignmentToFiDi": 47.6
+   },
+   {
+    "name": "Fairfax",
+    "region": "Marin and Sonoma",
+    "km": 28.5,
+    "toFiDi": 62,
+    "jobWeighted": 62.7,
+    "assignmentToFiDi": 76.6
+   },
+   {
+    "name": "Corte Madera",
+    "region": "Marin and Sonoma",
+    "km": 17.7,
+    "toFiDi": 45.4,
+    "jobWeighted": 46.1,
+    "assignmentToFiDi": 48.3
+   },
+   {
+    "name": "San Carlos",
+    "region": "Peninsula",
+    "km": 35.2,
+    "toFiDi": 45,
+    "jobWeighted": 41.8,
+    "assignmentToFiDi": 46.8
+   },
+   {
+    "name": "San Mateo (unincorporated)",
+    "region": "South Bay",
+    "km": 42.9,
+    "toFiDi": 50.2,
+    "jobWeighted": 47,
+    "assignmentToFiDi": 41.6
+   },
+   {
+    "name": "Orinda",
+    "region": "East Bay",
+    "km": 22.2,
+    "toFiDi": 37.5,
+    "jobWeighted": 42.4,
+    "assignmentToFiDi": 58.4
+   },
+   {
+    "name": "El Sobrante",
+    "region": "East Bay",
+    "km": 21.7,
+    "toFiDi": 48.5,
+    "jobWeighted": 53.3,
+    "assignmentToFiDi": 62.4
+   },
+   {
+    "name": "Tiburon",
+    "region": "Marin and Sonoma",
+    "km": 13.6,
+    "toFiDi": 39.5,
+    "jobWeighted": 40.2,
+    "assignmentToFiDi": 42.4
+   },
+   {
+    "name": "Campbell",
+    "region": "South Bay",
+    "km": 69.3,
+    "toFiDi": 70.8,
+    "jobWeighted": 67.6,
+    "assignmentToFiDi": 67
+   },
+   {
+    "name": "Los Gatos",
+    "region": "South Bay",
+    "km": 72.5,
+    "toFiDi": 72.6,
+    "jobWeighted": 69.4,
+    "assignmentToFiDi": 74.2
+   },
+   {
+    "name": "Near Bay Fair",
+    "region": "East Bay",
+    "km": 26.3,
+    "toFiDi": 44,
+    "jobWeighted": 48.8,
+    "assignmentToFiDi": 80.1
+   },
+   {
+    "name": "Larkspur",
+    "region": "Marin and Sonoma",
+    "km": 20.2,
+    "toFiDi": 49.1,
+    "jobWeighted": 49.9,
+    "assignmentToFiDi": 52.1
+   },
+   {
+    "name": "Belmont",
+    "region": "Peninsula",
+    "km": 32.1,
+    "toFiDi": 42.4,
+    "jobWeighted": 39.1,
+    "assignmentToFiDi": 44.2
+   },
+   {
+    "name": "Near Redwood City",
+    "region": "Peninsula",
+    "km": 37.2,
+    "toFiDi": 46.9,
+    "jobWeighted": 43.7,
+    "assignmentToFiDi": 44.1
+   },
+   {
+    "name": "Rohnert Park",
+    "region": "Marin and Sonoma",
+    "km": 66.2,
+    "toFiDi": 124.9,
+    "jobWeighted": 125.7,
+    "assignmentToFiDi": 127.9
+   },
+   {
+    "name": "Kentfield",
+    "region": "Marin and Sonoma",
+    "km": 21.8,
+    "toFiDi": 51.8,
+    "jobWeighted": 52.6,
+    "assignmentToFiDi": 54.8
+   },
+   {
+    "name": "Benicia",
+    "region": "Napa, Solano, and beyond",
+    "km": 37.3,
+    "toFiDi": 71.4,
+    "jobWeighted": 76.2,
+    "assignmentToFiDi": 85.3
+   },
+   {
+    "name": "Santa Rosa (unincorporated)",
+    "region": "Marin and Sonoma",
+    "km": 77.4,
+    "toFiDi": 142.5,
+    "jobWeighted": 143.3,
+    "assignmentToFiDi": 145.5
+   },
+   {
+    "name": "Near Pleasant Hill / Contra Costa Centre",
+    "region": "East Bay",
+    "km": 33.8,
+    "toFiDi": 56.4,
+    "jobWeighted": 61.2,
+    "assignmentToFiDi": 77.2
+   },
+   {
+    "name": "Near Broadway",
+    "region": "Peninsula",
+    "km": 22.6,
+    "toFiDi": 33.5,
+    "jobWeighted": 30.5,
+    "assignmentToFiDi": 30.7
+   },
+   {
+    "name": "Near SMART San Rafael",
+    "region": "Marin and Sonoma",
+    "km": 22.7,
+    "toFiDi": 54.1,
+    "jobWeighted": 54.8,
+    "assignmentToFiDi": 57
+   },
+   {
+    "name": "Suisun City",
+    "region": "Napa, Solano, and beyond",
+    "km": 62.9,
+    "toFiDi": 112.2,
+    "jobWeighted": 117,
+    "assignmentToFiDi": 126.1
+   },
+   {
+    "name": "Near Concord",
+    "region": "East Bay",
+    "km": 38.1,
+    "toFiDi": 63.5,
+    "jobWeighted": 68.3,
+    "assignmentToFiDi": 84.3
+   },
+   {
+    "name": "Sausalito",
+    "region": "Marin and Sonoma",
+    "km": 12,
+    "toFiDi": 34.7,
+    "jobWeighted": 35.5,
+    "assignmentToFiDi": 40.1
+   },
+   {
+    "name": "Brisbane",
+    "region": "Peninsula",
+    "km": 11.7,
+    "toFiDi": 23.7,
+    "jobWeighted": 21.1,
+    "assignmentToFiDi": 22.9
+   },
+   {
+    "name": "Saratoga",
+    "region": "South Bay",
+    "km": 66.4,
+    "toFiDi": 68,
+    "jobWeighted": 64.9,
+    "assignmentToFiDi": 65.5
+   },
+   {
+    "name": "Blackhawk",
+    "region": "East Bay",
+    "km": 44.9,
+    "toFiDi": 75.6,
+    "jobWeighted": 80.4,
+    "assignmentToFiDi": 96.4
+   },
+   {
+    "name": "Gilroy",
+    "region": "South Bay",
+    "km": 111.3,
+    "toFiDi": 101.2,
+    "jobWeighted": 98,
+    "assignmentToFiDi": 124.8
+   },
+   {
+    "name": "Rodeo",
+    "region": "East Bay",
+    "km": 30.1,
+    "toFiDi": 61.1,
+    "jobWeighted": 65.9,
+    "assignmentToFiDi": 75
+   },
+   {
+    "name": "Alamo",
+    "region": "East Bay",
+    "km": 34.4,
+    "toFiDi": 57.8,
+    "jobWeighted": 62.6,
+    "assignmentToFiDi": 78.6
+   },
+   {
+    "name": "East Palo Alto",
+    "region": "South Bay",
+    "km": 43.1,
+    "toFiDi": 52.2,
+    "jobWeighted": 49,
+    "assignmentToFiDi": 50.3
+   },
+   {
+    "name": "Near SMART Marin Civic Center",
+    "region": "Marin and Sonoma",
+    "km": 26.1,
+    "toFiDi": 59.6,
+    "jobWeighted": 60.3,
+    "assignmentToFiDi": 62.6
+   },
+   {
+    "name": "Near Fremont",
+    "region": "East Bay",
+    "km": 45.6,
+    "toFiDi": 66.8,
+    "jobWeighted": 71.6,
+    "assignmentToFiDi": 90.2
+   },
+   {
+    "name": "Strawberry",
+    "region": "Marin and Sonoma",
+    "km": 15,
+    "toFiDi": 40.4,
+    "jobWeighted": 41.2,
+    "assignmentToFiDi": 43.4
+   },
+   {
+    "name": "Near Walnut Creek",
+    "region": "East Bay",
+    "km": 32,
+    "toFiDi": 53.5,
+    "jobWeighted": 58.3,
+    "assignmentToFiDi": 74.3
+   },
+   {
+    "name": "El Cerrito",
+    "region": "East Bay",
+    "km": 16.9,
+    "toFiDi": 39.8,
+    "jobWeighted": 44.6,
+    "assignmentToFiDi": 53.7
+   },
+   {
+    "name": "Near Hayward",
+    "region": "East Bay",
+    "km": 30.7,
+    "toFiDi": 49.1,
+    "jobWeighted": 53.9,
+    "assignmentToFiDi": 76.5
+   },
+   {
+    "name": "Burlingame",
+    "region": "Peninsula",
+    "km": 22.9,
+    "toFiDi": 33.7,
+    "jobWeighted": 30.6,
+    "assignmentToFiDi": 32.4
+   },
+   {
+    "name": "Near Harbor Bay ferry",
+    "region": "East Bay",
+    "km": 14.6,
+    "toFiDi": 32.1,
+    "jobWeighted": 36.9,
+    "assignmentToFiDi": 53.9
+   },
+   {
+    "name": "Near South Hayward",
+    "region": "East Bay",
+    "km": 34.9,
+    "toFiDi": 54.2,
+    "jobWeighted": 59,
+    "assignmentToFiDi": 78.1
+   },
+   {
+    "name": "Millbrae",
+    "region": "Peninsula",
+    "km": 22,
+    "toFiDi": 32.9,
+    "jobWeighted": 29.7,
+    "assignmentToFiDi": 30.6
+   },
+   {
+    "name": "Morgan Hill",
+    "region": "South Bay",
+    "km": 99.7,
+    "toFiDi": 93.3,
+    "jobWeighted": 90.2,
+    "assignmentToFiDi": 107.4
+   },
+   {
+    "name": "Near San Bruno",
+    "region": "Peninsula",
+    "km": 17.1,
+    "toFiDi": 28.6,
+    "jobWeighted": 25.5,
+    "assignmentToFiDi": 29.4
+   },
+   {
+    "name": "Near Castro Valley",
+    "region": "East Bay",
+    "km": 30.7,
+    "toFiDi": 48.3,
+    "jobWeighted": 53.1,
+    "assignmentToFiDi": 83.6
+   },
+   {
+    "name": "Lucas Valley-Marinwood",
+    "region": "Marin and Sonoma",
+    "km": 30.1,
+    "toFiDi": 66,
+    "jobWeighted": 66.8,
+    "assignmentToFiDi": 69
+   },
+   {
+    "name": "Near Belmont",
+    "region": "Peninsula",
+    "km": 31.9,
+    "toFiDi": 42.8,
+    "jobWeighted": 39.4,
+    "assignmentToFiDi": 42.3
+   },
+   {
+    "name": "Stanford",
+    "region": "South Bay",
+    "km": 45.5,
+    "toFiDi": 53,
+    "jobWeighted": 49.8,
+    "assignmentToFiDi": 51.8
+   },
+   {
+    "name": "North Fair Oaks",
+    "region": "South Bay",
+    "km": 39.9,
+    "toFiDi": 49,
+    "jobWeighted": 45.8,
+    "assignmentToFiDi": 50.3
+   },
+   {
+    "name": "Broadmoor",
+    "region": "Peninsula",
+    "km": 13.3,
+    "toFiDi": 26.4,
+    "jobWeighted": 23.2,
+    "assignmentToFiDi": 23.1
+   },
+   {
+    "name": "Novato (unincorporated)",
+    "region": "Marin and Sonoma",
+    "km": 40,
+    "toFiDi": 81.2,
+    "jobWeighted": 81.9,
+    "assignmentToFiDi": 84.1
+   },
+   {
+    "name": "Near San Antonio",
+    "region": "South Bay",
+    "km": 50.2,
+    "toFiDi": 56.9,
+    "jobWeighted": 53.7,
+    "assignmentToFiDi": 60.7
+   },
+   {
+    "name": "Near Union City",
+    "region": "East Bay",
+    "km": 40.4,
+    "toFiDi": 60.9,
+    "jobWeighted": 65.7,
+    "assignmentToFiDi": 87.5
+   },
+   {
+    "name": "Bay Point",
+    "region": "East Bay",
+    "km": 46.4,
+    "toFiDi": 83.9,
+    "jobWeighted": 88.7,
+    "assignmentToFiDi": 97.8
+   },
+   {
+    "name": "Near Sausalito",
+    "region": "Marin and Sonoma",
+    "km": 9.9,
+    "toFiDi": 31.9,
+    "jobWeighted": 32.7,
+    "assignmentToFiDi": 36
+   },
+   {
+    "name": "Saranap",
+    "region": "East Bay",
+    "km": 30.7,
+    "toFiDi": 51.3,
+    "jobWeighted": 56.2,
+    "assignmentToFiDi": 72.1
+   },
+   {
+    "name": "Near Coliseum",
+    "region": "East Bay",
+    "km": 18.5,
+    "toFiDi": 34.2,
+    "jobWeighted": 39,
+    "assignmentToFiDi": 57
+   },
+   {
+    "name": "Near Mountain View",
+    "region": "South Bay",
+    "km": 52.5,
+    "toFiDi": 58.7,
+    "jobWeighted": 55.5,
+    "assignmentToFiDi": 57.5
+   },
+   {
+    "name": "American Canyon",
+    "region": "Napa, Solano, and beyond",
+    "km": 43.7,
+    "toFiDi": 84.8,
+    "jobWeighted": 89.5,
+    "assignmentToFiDi": 98.7
+   },
+   {
+    "name": "Near San Bruno",
+    "region": "Peninsula",
+    "km": 18.1,
+    "toFiDi": 29.5,
+    "jobWeighted": 26.4,
+    "assignmentToFiDi": 29.5
+   },
+   {
+    "name": "Near San Carlos",
+    "region": "Peninsula",
+    "km": 33.9,
+    "toFiDi": 44.4,
+    "jobWeighted": 41.1,
+    "assignmentToFiDi": 44.5
+   },
+   {
+    "name": "Cherryland",
+    "region": "East Bay",
+    "km": 28.9,
+    "toFiDi": 47.1,
+    "jobWeighted": 52,
+    "assignmentToFiDi": 76.7
+   },
+   {
+    "name": "Near Sunnyvale",
+    "region": "South Bay",
+    "km": 56.1,
+    "toFiDi": 61.6,
+    "jobWeighted": 58.4,
+    "assignmentToFiDi": 61.1
+   },
+   {
+    "name": "Menlo Park (north-east)",
+    "region": "Peninsula",
+    "km": 40.9,
+    "toFiDi": 50.6,
+    "jobWeighted": 47.4,
+    "assignmentToFiDi": 49
+   },
+   {
+    "name": "Kensington",
+    "region": "East Bay",
+    "km": 16.7,
+    "toFiDi": 38,
+    "jobWeighted": 42.8,
+    "assignmentToFiDi": 51.9
+   },
+   {
+    "name": "Discovery Bay",
+    "region": "East Bay",
+    "km": 70.3,
+    "toFiDi": 116.3,
+    "jobWeighted": 121.1,
+    "assignmentToFiDi": 137.1
+   },
+   {
+    "name": "Near SMART Larkspur",
+    "region": "Marin and Sonoma",
+    "km": 20.1,
+    "toFiDi": 49.7,
+    "jobWeighted": 50.5,
+    "assignmentToFiDi": 52.7
+   },
+   {
+    "name": "Clayton",
+    "region": "East Bay",
+    "km": 44.3,
+    "toFiDi": 73.5,
+    "jobWeighted": 78.3,
+    "assignmentToFiDi": 94.3
+   },
+   {
+    "name": "Near SMART Cotati",
+    "region": "Marin and Sonoma",
+    "km": 64.9,
+    "toFiDi": 122.9,
+    "jobWeighted": 123.6,
+    "assignmentToFiDi": 125.8
+   },
+   {
+    "name": "Near Tiburon-No Service to Angel Island",
+    "region": "Marin and Sonoma",
+    "km": 10.5,
+    "toFiDi": 36.3,
+    "jobWeighted": 37.1,
+    "assignmentToFiDi": 43.6
+   },
+   {
+    "name": "Near SMART Novato Hamilton",
+    "region": "Marin and Sonoma",
+    "km": 31.2,
+    "toFiDi": 68.9,
+    "jobWeighted": 69.7,
+    "assignmentToFiDi": 71.9
+   },
+   {
+    "name": "Near SMART Novato Downtown",
+    "region": "Marin and Sonoma",
+    "km": 37.6,
+    "toFiDi": 78.7,
+    "jobWeighted": 79.5,
+    "assignmentToFiDi": 81.7
+   },
+   {
+    "name": "Ashland",
+    "region": "East Bay",
+    "km": 27.8,
+    "toFiDi": 45.5,
+    "jobWeighted": 50.4,
+    "assignmentToFiDi": 80.1
+   },
+   {
+    "name": "Near California Avenue",
+    "region": "South Bay",
+    "km": 46.6,
+    "toFiDi": 54.1,
+    "jobWeighted": 50.9,
+    "assignmentToFiDi": 56.8
+   },
+   {
+    "name": "Menlo Park (south-west)",
+    "region": "South Bay",
+    "km": 44,
+    "toFiDi": 51.4,
+    "jobWeighted": 48.2,
+    "assignmentToFiDi": 48.4
+   },
+   {
+    "name": "Near Capitol",
+    "region": "South Bay",
+    "km": 75.1,
+    "toFiDi": 75.8,
+    "jobWeighted": 72.6,
+    "assignmentToFiDi": 79.4
+   },
+   {
+    "name": "Near Blossom Hill",
+    "region": "South Bay",
+    "km": 80.1,
+    "toFiDi": 79.3,
+    "jobWeighted": 76.2,
+    "assignmentToFiDi": 82.4
+   },
+   {
+    "name": "Near Menlo Park",
+    "region": "South Bay",
+    "km": 42.3,
+    "toFiDi": 50.8,
+    "jobWeighted": 47.6,
+    "assignmentToFiDi": 52.8
+   },
+   {
+    "name": "Near Pittsburg / Bay Point",
+    "region": "East Bay",
+    "km": 47.2,
+    "toFiDi": 85.2,
+    "jobWeighted": 90,
+    "assignmentToFiDi": 99.1
+   },
+   {
+    "name": "Near Pittsburg Center",
+    "region": "East Bay",
+    "km": 51.4,
+    "toFiDi": 91.8,
+    "jobWeighted": 96.7,
+    "assignmentToFiDi": 105.7
+   },
+   {
+    "name": "Near Lawrence",
+    "region": "South Bay",
+    "km": 58.6,
+    "toFiDi": 63.6,
+    "jobWeighted": 60.4,
+    "assignmentToFiDi": 64.8
+   },
+   {
+    "name": "Near Lafayette",
+    "region": "East Bay",
+    "km": 26.8,
+    "toFiDi": 44.9,
+    "jobWeighted": 49.8,
+    "assignmentToFiDi": 65.7
+   },
+   {
+    "name": "Near Tamien",
+    "region": "South Bay",
+    "km": 69.9,
+    "toFiDi": 72,
+    "jobWeighted": 68.9,
+    "assignmentToFiDi": 72.1
+   },
+   {
+    "name": "Near SMART Rohnert Park",
+    "region": "Marin and Sonoma",
+    "km": 66.8,
+    "toFiDi": 126,
+    "jobWeighted": 126.7,
+    "assignmentToFiDi": 128.9
+   },
+   {
+    "name": "Near Alameda Seaplane Lagoon ferry",
+    "region": "East Bay",
+    "km": 9.7,
+    "toFiDi": 26,
+    "jobWeighted": 30.8,
+    "assignmentToFiDi": 49.7
+   },
+   {
+    "name": "Near Palo Alto",
+    "region": "South Bay",
+    "km": 43.9,
+    "toFiDi": 52.2,
+    "jobWeighted": 49,
+    "assignmentToFiDi": 54.9
+   },
+   {
+    "name": "Near Dublin / Pleasanton",
+    "region": "East Bay",
+    "km": 45.4,
+    "toFiDi": 63.4,
+    "jobWeighted": 68.2,
+    "assignmentToFiDi": 105
+   },
+   {
+    "name": "Near San Jose Diridon",
+    "region": "South Bay",
+    "km": 67.6,
+    "toFiDi": 70.5,
+    "jobWeighted": 67.3,
+    "assignmentToFiDi": 69.6
+   },
+   {
+    "name": "Santa Venetia",
+    "region": "Marin and Sonoma",
+    "km": 26.1,
+    "toFiDi": 60.4,
+    "jobWeighted": 61.2,
+    "assignmentToFiDi": 63.4
+   },
+   {
+    "name": "Near Milpitas",
+    "region": "South Bay",
+    "km": 61.7,
+    "toFiDi": 67.2,
+    "jobWeighted": 64.1,
+    "assignmentToFiDi": 73.5
+   },
+   {
+    "name": "Monterey County",
+    "region": "South Bay",
+    "km": 124.3,
+    "toFiDi": 108.9,
+    "jobWeighted": 105.7,
+    "assignmentToFiDi": 205
+   },
+   {
+    "name": "Near Berryessa / North San Jose",
+    "region": "South Bay",
+    "km": 66,
+    "toFiDi": 70,
+    "jobWeighted": 66.8,
+    "assignmentToFiDi": 66.7
+   },
+   {
+    "name": "Near Millbrae",
+    "region": "Peninsula",
+    "km": 22.3,
+    "toFiDi": 33.2,
+    "jobWeighted": 30.1,
+    "assignmentToFiDi": 32
+   },
+   {
+    "name": "Near SMART Petaluma Downtown",
+    "region": "Marin and Sonoma",
+    "km": 53.4,
+    "toFiDi": 104.3,
+    "jobWeighted": 105.1,
+    "assignmentToFiDi": 107.3
+   },
+   {
+    "name": "Near Alameda Bohol Circle Immigrant Park Dock",
+    "region": "East Bay",
+    "km": 10.8,
+    "toFiDi": 25.5,
+    "jobWeighted": 30.3,
+    "assignmentToFiDi": 49.6
+   },
+   {
+    "name": "Near Vallejo ferry",
+    "region": "Napa, Solano, and beyond",
+    "km": 36.7,
+    "toFiDi": 72.9,
+    "jobWeighted": 77.6,
+    "assignmentToFiDi": 86.8
+   },
+   {
+    "name": "Near Santa Clara",
+    "region": "South Bay",
+    "km": 63.8,
+    "toFiDi": 67.6,
+    "jobWeighted": 64.5,
+    "assignmentToFiDi": 68.4
+   },
+   {
+    "name": "Near Richmond ferry",
+    "region": "East Bay",
+    "km": 14.2,
+    "toFiDi": 39.3,
+    "jobWeighted": 44.1,
+    "assignmentToFiDi": 53.2
+   },
+   {
+    "name": "Near Orinda",
+    "region": "East Bay",
+    "km": 21.5,
+    "toFiDi": 36.4,
+    "jobWeighted": 41.2,
+    "assignmentToFiDi": 57.2
+   },
+   {
+    "name": "Near Oakland Jack London Square Water Shuttle Dock",
+    "region": "East Bay",
+    "km": 11.1,
+    "toFiDi": 24.9,
+    "jobWeighted": 29.7,
+    "assignmentToFiDi": 48.7
+   },
+   {
+    "name": "San Jose (unincorporated)",
+    "region": "South Bay",
+    "km": 62.3,
+    "toFiDi": 66.1,
+    "jobWeighted": 62.9,
+    "assignmentToFiDi": 68.4
+   },
+   {
+    "name": "Near North Concord / Martinez",
+    "region": "East Bay",
+    "km": 40.1,
+    "toFiDi": 73.8,
+    "jobWeighted": 78.6,
+    "assignmentToFiDi": 87.7
+   },
+   {
+    "name": "Near SMART Santa Rosa North",
+    "region": "Marin and Sonoma",
+    "km": 79.3,
+    "toFiDi": 146.3,
+    "jobWeighted": 147.1,
+    "assignmentToFiDi": 149.3
+   },
+   {
+    "name": "Near SMART Novato San Marin",
+    "region": "Marin and Sonoma",
+    "km": 39,
+    "toFiDi": 81.1,
+    "jobWeighted": 81.9,
+    "assignmentToFiDi": 84.1
+   },
+   {
+    "name": "South San Francisco (unincorporated)",
+    "region": "Peninsula",
+    "km": 21.7,
+    "toFiDi": 32.7,
+    "jobWeighted": 29.5,
+    "assignmentToFiDi": 35.2
+   },
+   {
+    "name": "Near SMART Santa Rosa Downtown",
+    "region": "Marin and Sonoma",
+    "km": 77,
+    "toFiDi": 142.7,
+    "jobWeighted": 143.5,
+    "assignmentToFiDi": 145.7
+   },
+   {
+    "name": "Near Antioch",
+    "region": "East Bay",
+    "km": 58.7,
+    "toFiDi": 96.8,
+    "jobWeighted": 101.7,
+    "assignmentToFiDi": 117.6
+   },
+   {
+    "name": "Near SMART Petaluma North",
+    "region": "Marin and Sonoma",
+    "km": 56.9,
+    "toFiDi": 110,
+    "jobWeighted": 110.8,
+    "assignmentToFiDi": 113
+   },
+   {
+    "name": "Near Gilroy",
+    "region": "South Bay",
+    "km": 114,
+    "toFiDi": 103.1,
+    "jobWeighted": 99.9,
+    "assignmentToFiDi": 126.8
+   },
+   {
+    "name": "Near Morgan Hill",
+    "region": "South Bay",
+    "km": 98.8,
+    "toFiDi": 92.7,
+    "jobWeighted": 89.5,
+    "assignmentToFiDi": 107.5
+   },
+   {
+    "name": "Near West Dublin / Pleasanton",
+    "region": "East Bay",
+    "km": 43,
+    "toFiDi": 60.9,
+    "jobWeighted": 65.7,
+    "assignmentToFiDi": 101.9
+   },
+   {
+    "name": "Near Main Street Alameda ferry",
+    "region": "East Bay",
+    "km": 9.6,
+    "toFiDi": 24.9,
+    "jobWeighted": 29.8,
+    "assignmentToFiDi": 47.6
+   },
+   {
+    "name": "Near College Park",
+    "region": "South Bay",
+    "km": 65.7,
+    "toFiDi": 69.1,
+    "jobWeighted": 65.9,
+    "assignmentToFiDi": 67.8
+   },
+   {
+    "name": "Contra Costa Centre",
+    "region": "East Bay",
+    "km": 35.7,
+    "toFiDi": 59.4,
+    "jobWeighted": 64.2,
+    "assignmentToFiDi": 80.2
+   },
+   {
+    "name": "Near Larkspur",
+    "region": "Marin and Sonoma",
+    "km": 19.5,
+    "toFiDi": 48.9,
+    "jobWeighted": 49.7,
+    "assignmentToFiDi": 51.9
+   },
+   {
+    "name": "Near Warm Springs / South Fremont",
+    "region": "East Bay",
+    "km": 51.8,
+    "toFiDi": 76.4,
+    "jobWeighted": 81.3,
+    "assignmentToFiDi": 82.6
+   },
+   {
+    "name": "Lake County",
+    "region": "Marin and Sonoma",
+    "km": 118.7,
+    "toFiDi": 212.4,
+    "jobWeighted": 213.1,
+    "assignmentToFiDi": 215.3
+   },
+   {
+    "name": "Near Oakland ferry",
+    "region": "East Bay",
+    "km": 10.5,
+    "toFiDi": 24.1,
+    "jobWeighted": 29,
+    "assignmentToFiDi": 46.8
+   },
+   {
+    "name": "San Benito County",
+    "region": "South Bay",
+    "km": 125.7,
+    "toFiDi": 110.8,
+    "jobWeighted": 107.7,
+    "assignmentToFiDi": 147.7
+   },
+   {
+    "name": "Colma",
+    "region": "Peninsula",
+    "km": 13.9,
+    "toFiDi": 26.5,
+    "jobWeighted": 23.3,
+    "assignmentToFiDi": 24.9
+   },
+   {
+    "name": "Near South San Francisco ferry",
+    "region": "Peninsula",
+    "km": 15.2,
+    "toFiDi": 26.5,
+    "jobWeighted": 23.8,
+    "assignmentToFiDi": 27.1
+   },
+   {
+    "name": "Sutter County",
+    "region": "Napa, Solano, and beyond",
+    "km": 127.3,
+    "toFiDi": 217.3,
+    "jobWeighted": 222.1,
+    "assignmentToFiDi": 231.2
+   },
+   {
+    "name": "Mendocino County",
+    "region": "Marin and Sonoma",
+    "km": 127.7,
+    "toFiDi": 224.8,
+    "jobWeighted": 225.6,
+    "assignmentToFiDi": 227.8
+   }
+  ]
+ }
+}

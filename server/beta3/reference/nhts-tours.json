@@ -1,0 +1,318 @@
+{
+ "source": "NHTS 2017 public microdata (FHWA), weekday person-days of residents of the San Francisco\u2013Oakland\u2013Hayward CBSA (41860); server/beta3/pipeline/nhts_tours.py",
+ "url": "https://nhts.ornl.gov/",
+ "byTourPurpose": {
+  "work": {
+   "tours_sample": 1251,
+   "toursPerPersonWeekday": 0.37004848635399906,
+   "meanDetourLegKm": 4.35759687562975,
+   "meanDetourLegKmDense": 2.5204428991174317,
+   "meanPrimaryKmDense": 6.4609075919644186,
+   "primaryBandsDense": [
+    0.053935688272603484,
+    0.12163743830484436,
+    0.1118542022672435,
+    0.0897952831028704,
+    0.14459678272861168,
+    0.13830632284340733,
+    0.18693605456550133,
+    0.15293822791491846
+   ],
+   "primarySampleDense": 213,
+   "meanPrimaryKmDenseUpTo5mi": 3.165030126706404,
+   "detourBandsDense": [
+    0.47182932417812823,
+    0.13497148592406577,
+    0.08313798161794628,
+    0.06075903420479244,
+    0.08748878220321127,
+    0.07730237521705093,
+    0.06363935709363472,
+    0.020871659561172606
+   ],
+   "halfToursWithStop": 0.31470704946799166,
+   "stopsPerHalfWithStop": 1.4517048249674964,
+   "stopPurpose": {
+    "social": 0.41812845663655046,
+    "shop": 0.22031107587549056,
+    "other": 0.3547508713327586,
+    "univ": 0.006456989956521829,
+    "school": 0.000352606198678484
+   },
+   "stopNearHomeShare": 0.4698685785055376,
+   "workSubtoursPerTour": 0.1771648813303047
+  },
+  "social": {
+   "tours_sample": 1167,
+   "toursPerPersonWeekday": 0.27615850882542425,
+   "meanDetourLegKm": 3.8799224271467376,
+   "meanDetourLegKmDense": 2.035420601873469,
+   "meanPrimaryKmDense": 3.1369381113737407,
+   "primaryBandsDense": [
+    0.33948484940450213,
+    0.17047987829233566,
+    0.08983093306538445,
+    0.05169650979606294,
+    0.11158264233405879,
+    0.15179579889196812,
+    0.0574509846720782,
+    0.02767840354361063
+   ],
+   "primarySampleDense": 293,
+   "meanPrimaryKmDenseUpTo5mi": 2.3333510191269755,
+   "detourBandsDense": [
+    0.45518624093274274,
+    0.18698787520543114,
+    0.11785471265484494,
+    0.0515221903109536,
+    0.09684123605404156,
+    0.03654111215674521,
+    0.033395306610352754,
+    0.021671326074888708
+   ],
+   "halfToursWithStop": 0.22691812590245403,
+   "stopsPerHalfWithStop": 1.42435969667937,
+   "stopPurpose": {
+    "shop": 0.33076840286886705,
+    "social": 0.3486507966258586,
+    "other": 0.3205808005052742
+   },
+   "stopNearHomeShare": 0.46498108326177656,
+   "workSubtoursPerTour": null
+  },
+  "other": {
+   "tours_sample": 569,
+   "toursPerPersonWeekday": 0.17440531284831542,
+   "meanDetourLegKm": 4.304983984358363,
+   "meanDetourLegKmDense": 2.501516435962303,
+   "meanPrimaryKmDense": 4.897712962931769,
+   "primaryBandsDense": [
+    0.17730069446714988,
+    0.20831168891189605,
+    0.04176662546135,
+    0.05433128927957622,
+    0.17681103294014275,
+    0.10158054598124949,
+    0.13131890006542402,
+    0.10857922289321202
+   ],
+   "primarySampleDense": 142,
+   "meanPrimaryKmDenseUpTo5mi": 2.5125759490539594,
+   "detourBandsDense": [
+    0.315366998573448,
+    0.14186005729231088,
+    0.0685931957889058,
+    0.17964166717899552,
+    0.1483319243278671,
+    0.10301080937078637,
+    0.039339282406444506,
+    0.0038560650612412114
+   ],
+   "halfToursWithStop": 0.18015919288338705,
+   "stopsPerHalfWithStop": 1.486250276649447,
+   "stopPurpose": {
+    "shop": 0.26934130234592774,
+    "other": 0.5644368898767853,
+    "social": 0.166221807777287
+   },
+   "stopNearHomeShare": 0.5081314627622017,
+   "workSubtoursPerTour": null
+  },
+  "shop": {
+   "tours_sample": 510,
+   "toursPerPersonWeekday": 0.1251641880851836,
+   "meanDetourLegKm": 2.64044927252221,
+   "meanDetourLegKmDense": 2.0104877066566416,
+   "meanPrimaryKmDense": 3.7969007085868327,
+   "primaryBandsDense": [
+    0.17869535710538803,
+    0.24807544614453392,
+    0.1177064915950452,
+    0.07528982570869783,
+    0.1849182793634792,
+    0.07419239593921832,
+    0.050594277709140156,
+    0.07052792643449761
+   ],
+   "primarySampleDense": 144,
+   "meanPrimaryKmDenseUpTo5mi": 2.364717878737454,
+   "detourBandsDense": [
+    0.5880623813409004,
+    0.12115275265436418,
+    0.04246277486961898,
+    0.06826222980396154,
+    0.0807002593902729,
+    0.02255029643288551,
+    0.0386878680290828,
+    0.03812143747891398
+   ],
+   "halfToursWithStop": 0.24088336166792412,
+   "stopsPerHalfWithStop": 1.4446196261638478,
+   "stopPurpose": {
+    "shop": 0.4506579214184145,
+    "social": 0.1586225921170111,
+    "other": 0.3907194864645744
+   },
+   "stopNearHomeShare": 0.3981557414701388,
+   "workSubtoursPerTour": null
+  },
+  "school": {
+   "tours_sample": 272,
+   "toursPerPersonWeekday": 0.10323429594187897,
+   "meanDetourLegKm": 3.392422924470797,
+   "meanDetourLegKmDense": 2.4998585470340253,
+   "meanPrimaryKmDense": 4.363243288011491,
+   "primaryBandsDense": [
+    0.15212881237498815,
+    0.24248023069816357,
+    0.06750724413432592,
+    0.015535636048271656,
+    0.12772713353543824,
+    0.27799309764311003,
+    0.033908672915961835,
+    0.08271917264974038
+   ],
+   "primarySampleDense": 59,
+   "meanPrimaryKmDenseUpTo5mi": 3.0983239905123243,
+   "detourBandsDense": [
+    0.3905635842547939,
+    0.05705722615169453,
+    0.263827724025223,
+    0.15486892689860635,
+    0.0,
+    0.051716466353217146,
+    0.025858233176608573,
+    0.05610783913985661
+   ],
+   "halfToursWithStop": 0.18863633036640182,
+   "stopsPerHalfWithStop": 1.4343556134504183,
+   "stopPurpose": {
+    "social": 0.35976449085851187,
+    "other": 0.4456097808277966,
+    "school": 0.05627588425003547,
+    "shop": 0.1383498440636561
+   },
+   "stopNearHomeShare": 0.4365292683696541,
+   "workSubtoursPerTour": null
+  },
+  "univ": {
+   "tours_sample": 41,
+   "toursPerPersonWeekday": 0.018232424240475026,
+   "meanDetourLegKm": 2.4457283827427307,
+   "meanDetourLegKmDense": 0.8832802868293129,
+   "meanPrimaryKmDense": 2.4262856857243364,
+   "primaryBandsDense": [
+    0.22807139689915804,
+    0.23211576681895935,
+    0.21841714455492095,
+    0.06477050967593172,
+    0.06662584784382879,
+    0.18999933420720108,
+    0.0,
+    0.0
+   ],
+   "primarySampleDense": 12,
+   "meanPrimaryKmDenseUpTo5mi": 2.4262856857243364,
+   "detourBandsDense": [
+    0.8567195156246828,
+    0.037375832331570914,
+    0.0,
+    0.058921065308318,
+    0.0,
+    0.014853713651780313,
+    0.032129873083648126,
+    0.0
+   ],
+   "halfToursWithStop": 0.21950007960060267,
+   "stopsPerHalfWithStop": 2.083831864556297,
+   "stopPurpose": {
+    "social": 0.3316957016908356,
+    "other": 0.24581685267398432,
+    "shop": 0.22094301542585784,
+    "univ": 0.20154443020932228
+   },
+   "stopNearHomeShare": 0.35138333192017623,
+   "workSubtoursPerTour": null
+  }
+ },
+ "byTourMode": {
+  "transit": {
+   "tours_sample": 271,
+   "stopsPerHalf": 0.3114372229507988,
+   "meanDetourLegKmDense": 1.5534928890163116,
+   "detourBandsDense": [
+    0.6835587159167512,
+    0.07969648282467348,
+    0.04621898500844616,
+    0.040545378441884244,
+    0.06343301943416534,
+    0.03366449845158338,
+    0.04734228906746984,
+    0.0055406308550263895
+   ],
+   "detourSampleDense": 126,
+   "meanDetourLegKmDenseUpTo5mi": 1.0363591742157092
+  },
+  "car": {
+   "tours_sample": 2720,
+   "stopsPerHalf": 0.38185928246648654,
+   "meanDetourLegKmDense": 3.4149075627296654,
+   "detourBandsDense": [
+    0.24622716451427218,
+    0.15925962827517348,
+    0.12104325979785469,
+    0.12911717830997443,
+    0.12649474338009614,
+    0.10122242655472201,
+    0.0796804362720696,
+    0.036955162895839506
+   ],
+   "detourSampleDense": 740,
+   "meanDetourLegKmDenseUpTo5mi": 2.284312542330116
+  },
+  "walk": {
+   "tours_sample": 730,
+   "stopsPerHalf": 0.32188893323302936,
+   "meanDetourLegKmDense": 0.8749232515002439,
+   "detourBandsDense": [
+    0.7645980138889478,
+    0.11107854447876161,
+    0.0654858583759695,
+    0.0008090548207487046,
+    0.03465039126340523,
+    0.013492058501123935,
+    0.00657571098191859,
+    0.0033103676891245515
+   ],
+   "detourSampleDense": 446,
+   "meanDetourLegKmDenseUpTo5mi": 0.7534285813041258
+  },
+  "bike": {
+   "tours_sample": 89,
+   "stopsPerHalf": 0.2212319930197028,
+   "meanDetourLegKmDense": 1.4549481805431654,
+   "detourBandsDense": [
+    0.39377148056228434,
+    0.39515327756815777,
+    0.03302454331869877,
+    0.019980811017159896,
+    0.06953268587609986,
+    0.08853720165759878,
+    0.0,
+    0.0
+   ],
+   "detourSampleDense": 36,
+   "meanDetourLegKmDenseUpTo5mi": 1.4549481805431654
+  }
+ },
+ "bandsMi": [
+  0.5,
+  1,
+  1.5,
+  2,
+  3,
+  5,
+  8,
+  12
+ ]
+}

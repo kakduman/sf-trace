@@ -1,0 +1,516 @@
+{
+  "meta": {
+    "purpose": "Accepted validation standards, reasonableness ranges, elasticities and real-model benchmarks for validating a San Francisco trip-based model (nested logit mode choice, optimal-strategies transit assignment).",
+    "compiled": "2026-10-04",
+    "rule": "Every number below was read from the cited document as fetched (text extracted from the PDF/HTML). Page numbers are the printed page numbers unless marked pdfPage. Where a table could not be read as text (chart or image), it is listed under notFound instead of guessed.",
+    "rawDir": "data/beta3/raw/standards/ (gitignored)",
+    "caveat": "Every guidance document here says that its thresholds are guidelines, not pass/fail standards (FHWA 2010 §9.1.4 and §9.2.4; TAG M3.1 §3.2.2; CTC: 'MPOs are encouraged to meet...')."
+  },
+
+  "sources": {
+    "fhwa2010": {
+      "title": "Travel Model Validation and Reasonableness Checking Manual, Second Edition (FHWA-HEP-10-042)",
+      "publisher": "FHWA Travel Model Improvement Program; prepared by Cambridge Systematics, Inc.",
+      "year": 2010,
+      "date": "2010-09-24",
+      "url": "https://www.fhwa.dot.gov/planning/tmip/publications/other_reports/validation_and_reasonableness_2010/fhwahep10042.pdf",
+      "rawFile": "fhwa-hep-10-042.pdf"
+    },
+    "ctc2017": {
+      "title": "2017 Regional Transportation Plan Guidelines for Metropolitan Planning Organizations",
+      "publisher": "California Transportation Commission",
+      "year": 2017,
+      "date": "2017-01-18",
+      "url": "https://catc.ca.gov/-/media/ctc-media/documents/rtp-2017-guidelines-mpos-011817-a11y.pdf",
+      "section": "Model Calibration & Validation; tables 'Recommended Static Validation Thresholds' and 'Recommended Transit Assignment Validation Thresholds', pp. 48-49 (pdfPage 59-60)",
+      "rawFile": "ctc-rtp-2017-guidelines-mpos.pdf"
+    },
+    "ctc2024": {
+      "title": "Final 2024 Regional Transportation Plan Guidelines for MPOs",
+      "publisher": "California Transportation Commission (adopted January 26, 2024)",
+      "year": 2024,
+      "url": "https://catc.ca.gov/-/media/ctc-media/documents/programs/transportation-planning/adopted-2024-rtp-guidelines-for-mpos.pdf",
+      "section": "Static Validation Criteria and the two threshold tables, p. 55 (pdfPage 61)",
+      "rawFile": "ctc-rtp-2024-guidelines-mpos.pdf"
+    },
+    "caltrans1992": {
+      "title": "Travel Forecasting Guidelines",
+      "publisher": "California Department of Transportation (prepared by JHK & Associates with FHWA)",
+      "year": 1992,
+      "date": "1992-11",
+      "url": "http://ajhassoc.com/wp-content/uploads/2017/01/TravelForecastingGuidelinesCA.htm (fetched via https://web.archive.org/web/20220308194827id_/...)",
+      "section": "§3.5.3 Calibration and Validation, pp. 65-66; Figure 3-9 Maximum Desirable Deviation",
+      "rawFile": "caltrans-travel-forecasting-guidelines-1992.htm"
+    },
+    "caltransPI2019": {
+      "title": "Travel Forecasting Guidance: Survey of Practice (Preliminary Investigation PI-0170)",
+      "publisher": "Caltrans Division of Research, Innovation and System Information",
+      "year": 2019,
+      "date": "2019-02-21",
+      "url": "https://dot.ca.gov/-/media/dot-media/programs/research-innovation-system-information/documents/preliminary-investigations/travel-forecasting-guidance-survey-of-practice-pi-a11y.pdf",
+      "section": "Executive Summary, Background (p. 1)",
+      "rawFile": "caltrans-travel-forecasting-guidance-pi.pdf"
+    },
+    "tn2016": {
+      "title": "Minimum Travel Demand Model Calibration and Validation Guidelines for State of Tennessee, Updated 2016",
+      "publisher": "Center for Transportation Research, University of Tennessee (F. Wegmann, J. Everett)",
+      "year": 2016,
+      "url": "https://tnmug.utk.edu/wp-content/uploads/sites/10/2022/11/Guidelines-Updated-2016.pdf",
+      "note": "Reprints the FDOT 'FSUTMS-Cube Framework Phase II - Model Calibration and Validation Standards' tables (Cambridge Systematics, Oct 2008), the FHWA-1990 and Michigan DOT link-deviation targets, and VDOT %RMSE. The original FDOT report could not be downloaded (fsutmsonline.net links return 404 or an HTML page), so FDOT values below are as reprinted here.",
+      "rawFile": "tn-min-calval-guidelines-2016.pdf"
+    },
+    "tagM31": {
+      "title": "TAG Unit M3.1 Highway Assignment Modelling",
+      "publisher": "UK Department for Transport, Transport Analysis Guidance",
+      "year": 2026,
+      "date": "2026-05",
+      "url": "https://assets.publishing.service.gov.uk/media/67ed0e54e9c76fa33048c634/tag-m3-1-highway-assignment-modelling.pdf",
+      "rawFile": "tag-m3-1-highway-assignment-2026.pdf"
+    },
+    "tagM32": {
+      "title": "TAG unit M3.2 Public Transport Assignment Modelling",
+      "publisher": "UK Department for Transport",
+      "year": 2024,
+      "date": "2024-05",
+      "url": "https://assets.publishing.service.gov.uk/media/666af32effd07973a043d110/tag-unit-m3.2-public-transport-assignment-modelling.pdf",
+      "rawFile": "tag-m3-2-pt-assignment-2024.pdf"
+    },
+    "tagM21": {
+      "title": "TAG Unit M2.1 Variable Demand Modelling",
+      "publisher": "UK Department for Transport",
+      "year": 2025,
+      "date": "2025-11",
+      "url": "https://assets.publishing.service.gov.uk/media/69a034423e672177d0bc7710/tag-unit-m21-variable-demand-modelling.pdf",
+      "section": "§6.4 Realism Testing, pp. 67-74",
+      "rawFile": "tag-m2-1-variable-demand-2025.pdf"
+    },
+    "nchrp716": {
+      "title": "NCHRP Report 716: Travel Demand Forecasting: Parameters and Techniques",
+      "publisher": "Transportation Research Board (Cambridge Systematics et al.)",
+      "year": 2012,
+      "url": "http://onlinepubs.trb.org/onlinepubs/nchrp/nchrp_rpt_716.pdf (fetched via https://web.archive.org/web/20150513074120id_/...; the live URL redirects to the NAP catalog page)",
+      "rawFile": "nchrp716.pdf"
+    },
+    "tcrp95c9": {
+      "title": "TCRP Report 95, Traveler Response to Transportation System Changes, Chapter 9: Transit Scheduling and Frequency",
+      "publisher": "Transportation Research Board (Pratt et al.)",
+      "year": 2004,
+      "url": "http://onlinepubs.trb.org/onlinepubs/tcrp/tcrp_rpt_95c9.pdf (fetched via https://web.archive.org/web/20110716153407id_/...)",
+      "rawFile": "tcrp95-ch9.pdf"
+    },
+    "tcrp95c10": {
+      "title": "TCRP Report 95, Chapter 10: Bus Routing and Coverage",
+      "publisher": "Transportation Research Board",
+      "year": 2004,
+      "url": "http://onlinepubs.trb.org/onlinepubs/tcrp/tcrp_rpt_95c10.pdf (fetched via https://web.archive.org/web/20100705073917id_/...)",
+      "rawFile": "tcrp95-ch10.pdf"
+    },
+    "tcrp95c12": {
+      "title": "TCRP Report 95, Chapter 12: Transit Pricing and Fares (McCollom and Pratt)",
+      "publisher": "Transportation Research Board",
+      "year": 2004,
+      "url": "http://onlinepubs.trb.org/onlinepubs/tcrp/tcrp_rpt_95c12.pdf (fetched via https://web.archive.org/web/20210126041434id_/...)",
+      "rawFile": "tcrp95-ch12.pdf"
+    },
+    "litman2025": {
+      "title": "Transit Price Elasticities and Cross-Elasticities (17 June 2025)",
+      "publisher": "Victoria Transport Policy Institute (T. Litman)",
+      "year": 2025,
+      "url": "https://www.vtpi.org/tranelas.pdf",
+      "section": "Service Elasticities, p. 12",
+      "rawFile": "litman-transit-elasticities.pdf"
+    },
+    "sfchamp2002": {
+      "title": "San Francisco Travel Demand Forecasting Model Development: Executive Summary (Final Report)",
+      "publisher": "SFCTA and Cambridge Systematics, Inc. (updated by SFCTA, 2002-10-01)",
+      "year": 2002,
+      "url": "https://www.sfcta.org/sites/default/files/2019-03/executivesummary.pdf (fetched via Wayback; the live site returns 403 to curl)",
+      "section": "§6.0 Model Validation, Trip Assignment Validation, pp. 30-32",
+      "rawFile": "sfcta-champ-2002-executive-summary.pdf"
+    },
+    "mtcTM1_2011": {
+      "title": "Travel Model Development: Calibration and Validation Technical Report (Travel Model One), DRAFT",
+      "publisher": "Metropolitan Transportation Commission with PB Americas, Inc.",
+      "year": 2011,
+      "date": "2011-04-29",
+      "url": "http://mtcgis.mtc.ca.gov/foswiki/pub/Main/Documents/2011_04_28_Draft_Calibration_and_Validation.pdf (fetched via https://web.archive.org/web/20170126031806id_/...; linked from github.com/BayAreaMetro/modeling-website wiki)",
+      "section": "§3 Year 2000 validation (Tables 62-63, pp. 167-169); §4 Year 2005 validation (Tables 72-74, Figure 56, pp. 191-195); highway §3.1 (p. 152-153)",
+      "rawFile": "mtc-tm1-2011-calibration-validation.pdf"
+    },
+    "mtcTM152": {
+      "title": "Travel Model 1.5.2 Development: Calibration and Validation Technical Report, DRAFT",
+      "publisher": "Metropolitan Transportation Commission",
+      "year": 2021,
+      "date": "2021-11-05",
+      "url": "https://mtcdrive.box.com/v/TM1-5-2-CalibrationValidation",
+      "section": "§3.2 Transit Assignment, Tables 39-40 (p. 86); Table 37 (p. 78)",
+      "rawFile": "mtc-tm1.5.2-calibration-validation-2021.pdf"
+    },
+    "mtcTM161": {
+      "title": "Travel Model 1.6.1 Development: Calibration and Validation Technical Report, DRAFT",
+      "publisher": "Metropolitan Transportation Commission",
+      "year": 2025,
+      "date": "2025-05-02",
+      "url": "https://mtcdrive.box.com/v/TM1-6-1-CalibrationValidation",
+      "section": "Ch. 4 Roadway Validation (pp. 12-15, Table 4-1); Ch. 5 Transit Validation (pp. 16-17); Appendix A",
+      "rawFile": "mtc-tm1.6.1-calibration-validation-2025.pdf"
+    },
+    "tamdm2020": {
+      "title": "Transportation Authority of Marin Demand Model (TAMDM) Development Report",
+      "publisher": "Transportation Authority of Marin / Fehr & Peers (TAMDM is built on MTC Travel Model Two)",
+      "year": 2020,
+      "date": "2020-09-01",
+      "url": "http://www.tam.ca.gov/wp-content/uploads/2021/01/TAMDM_Development_Report_9-1-2020.pdf",
+      "section": "§5.1.2 Transit Validation, Table 5-12 (p. 107); Table 5-1 (p. 100)",
+      "rawFile": "tamdm-development-report-2020.pdf"
+    }
+  },
+
+  "fhwa": {
+    "general": {
+      "value": "Guidelines are examples used by states and agencies, not standards; 'matching or exceeding the guidelines is not sufficient to determine the validity of a model.'",
+      "source": "fhwa2010 §9.1.4 p. 9-18 and §9.2.4 p. 9-30"
+    },
+    "highway": {
+      "vmtByFunctionalClass": {
+        "table": "Table 9.2 Example VMT Guidelines by Functional Class and Area Type (p. 9-19)",
+        "rows": [
+          {"class": "Freeways/Expressways", "ohio": "±7%", "floridaAcceptable": "±7%", "floridaPreferable": "±6%", "michigan": "±6%", "fhwa1990": "±7%"},
+          {"class": "Principal Arterials", "ohio": "±10%", "floridaAcceptable": "±15%", "floridaPreferable": "±10%", "michigan": "±7%", "fhwa1990": "±10%"},
+          {"class": "Minor Arterials", "ohio": "±10%", "floridaAcceptable": "±15%", "floridaPreferable": "±10%", "michigan": "±10%", "fhwa1990": "±15%"},
+          {"class": "Collectors", "ohio": "±15%", "floridaAcceptable": "±25%", "floridaPreferable": "±20%", "michigan": "±20%", "fhwa1990": "±20%"},
+          {"class": "All Links", "floridaAcceptable": "±5%", "floridaPreferable": "±2%"},
+          {"class": "Area type (CBD, Fringe, Urban, Suburban, Rural), each", "ohio": "±10%", "floridaAcceptable": "±25%", "floridaPreferable": "±15%"}
+        ],
+        "note": "The extracted text lines up the columns as shown. Check the PDF table before quoting a single cell."
+      },
+      "pctRmseByVolumeGroup": {
+        "value": "Figure 9.8 plots target %RMSE against link-volume group for Florida (acceptable and desirable), Ohio and Oregon. It is a chart, so no numbers are printed. The Florida values in table form are in other.floridaFsutms2008.pctRmseByVolumeGroup.",
+        "source": "fhwa2010 Figure 9.8, p. 9-20"
+      },
+      "screenlines": [
+        {"value": "Michigan DOT targets: 5% for screenlines and 10% for cutlines (percent difference, observed vs estimated)", "source": "fhwa2010 §9.1.4 p. 9-18"},
+        {"value": "Figure 9.9 shows the maximum desirable deviation in total screenline volume against screenline volume (from FHWA 1990 'Calibration and Adjustment of System Planning Models'). It is a chart, so no numbers are printed.", "source": "fhwa2010 Figure 9.9 p. 9-21"}
+      ],
+      "geh": {"value": "The GEH statistic is not mentioned anywhere in the FHWA 2010 manual (searched the full text). For GEH, use UK TAG M3.1 (other.ukTag.m31).", "source": "fhwa2010 (full text search)"},
+      "reasonableness": [
+        {"measure": "VMT per household", "value": "40-60 miles/day large urban areas; 30-40 small", "source": "fhwa2010 §9.1.5 p. 9-21"},
+        {"measure": "VMT per person", "value": "17-24 miles/day large urban; 10-16 small", "source": "fhwa2010 §9.1.5 p. 9-21"},
+        {"measure": "BPR alpha (18 MPOs)", "value": "freeways 0.10-1.20; arterials 0.15-1.00", "source": "fhwa2010 Table 9.3 p. 9-22"},
+        {"measure": "BPR beta (18 MPOs)", "value": "freeways 1.90-10.00; arterials 2.10-4.00", "source": "fhwa2010 Table 9.3 p. 9-22"}
+      ],
+      "sensitivity": [
+        {"test": "Regional: multiply all trips (e.g. ×1.5). VMT should change by a similar factor, or by more where congestion is heavy", "source": "fhwa2010 §9.1.5 p. 9-22"},
+        {"test": "Localized: remove a key bridge or facility, reassign a fixed trip table, review volume-difference plots", "source": "fhwa2010 §9.1.5 p. 9-22"},
+        {"test": "Over-sensitivity: a minor change (e.g. one lane on a minor arterial) should have only very local effects", "source": "fhwa2010 §9.1.5 p. 9-23"}
+      ]
+    },
+    "transit": {
+      "floridaTransitGuideline": {
+        "table": "Table 9.9 Example Transit Assignment Validation Guideline for State of Florida (p. 9-32), from FSUTMS-Cube Framework Phase II (Cambridge Systematics for FDOT, 2007-12-31)",
+        "rows": [
+          {"statistic": "Regional estimated/observed transit trips (boardings)", "acceptable": "±9%", "preferable": "±3%"},
+          {"statistic": "Transit screenlines", "acceptable": "±20%", "preferable": "±10%"},
+          {"statistic": "Line ridership <1,000 passengers/day", "acceptable": "±150%", "preferable": "±100%"},
+          {"statistic": "Line ridership 1,000-2,000/day", "acceptable": "±100%", "preferable": "±65%"},
+          {"statistic": "Line ridership 2,000-5,000/day", "acceptable": "±65%", "preferable": "±35%"},
+          {"statistic": "Line ridership 5,000-10,000/day", "acceptable": "±35%", "preferable": "±25%"},
+          {"statistic": "Line ridership 10,000-20,000/day", "acceptable": "±25%", "preferable": "±20%"},
+          {"statistic": "Line ridership >20,000/day", "acceptable": "±20%", "preferable": "±15%"}
+        ]
+      },
+      "pmt": {"value": "Transit PMT is analogous to VMT, so a regional VMT guideline (e.g. ±5%) may be applied to modeled vs observed PMT", "source": "fhwa2010 §9.2.4 p. 9-30"},
+      "fta": {"value": "FTA sets no numeric guidelines for New Starts; the modeling should 'tell a coherent story'", "source": "fhwa2010 §9.2.4 p. 9-30"},
+      "stringency": {"value": "Use a 'tight' validation when assigning an observed (on-board survey) trip table. Less stringent criteria are appropriate when assigning modeled trip tables, because the test then covers the whole model chain", "source": "fhwa2010 §9.2.4 p. 9-30"},
+      "exampleResults": [
+        {"region": "Seattle (PSRC 2000)", "value": "system total modeled 432,497 vs observed 441,385 daily boardings (-2%); operators -19% to +21%", "source": "fhwa2010 Table 9.8 p. 9-32"},
+        {"region": "Seattle (PSRC) transit screenlines", "value": "all screenlines -26% (193,564 modeled vs 261,025 observed); individual screenlines -73% to +44%", "source": "fhwa2010 Table 9.10 p. 9-33"},
+        {"region": "Sacramento (SACMET01)", "value": "total boardings ratio 1.00 (92,760 vs 92,418); LRT 0.90; RT bus 1.01", "source": "fhwa2010 Table 9.7 p. 9-31"}
+      ],
+      "reasonableness": [
+        {"measure": "Boardings per linked trip", "value": "typically 1.2 to 1.6; higher in regions with grid bus systems and fixed-guideway modes", "source": "fhwa2010 §9.2.5 p. 9-34"},
+        {"measure": "Max load points", "value": "radial lines: near the CBD or major generator; crosstown lines: near the middle of the route", "source": "fhwa2010 §9.2.5 p. 9-34"},
+        {"measure": "Forecast stability", "value": "boardings per linked trip and PMT per linked trip should stay roughly constant from base to future unless the system changes", "source": "fhwa2010 §9.2.7 p. 9-35"}
+      ],
+      "sensitivity": [
+        {"test": "Regional: multiply trips (e.g. ×1.5). Total boardings should change by a similar factor", "source": "fhwa2010 §9.2.5 p. 9-34"},
+        {"test": "Localized: change speeds or headways on selected routes. Faster or more frequent routes should attract riders; removing a route should shift riders to others", "source": "fhwa2010 §9.2.5 p. 9-34"},
+        {"test": "Mode: add a known number of linked rail trips. Rail boardings should rise by at least that number", "source": "fhwa2010 §9.2.5 p. 9-34"}
+      ]
+    },
+    "tripGeneration": {
+      "criteria": {"value": "No specific criteria guidelines for trip generation", "source": "fhwa2010 §5.1.4 p. 5-8"},
+      "nhts2001TripRatesPerHousehold_MSAover3M": {
+        "table": "Table 5.2 (by persons), 2001 NHTS, MSA population > 3 million, all-households column (p. 5-10). Rates include motorized and nonmotorized trips",
+        "HBW": 1.54, "HBNW": 5.84, "NHB": 3.27, "allPurposes": 10.65
+      },
+      "nhts2001TripRatesPerHousehold_MSA1to3M": {"table": "Table 5.2 (p. 5-10)", "HBW": 1.55, "HBNW": 5.60, "NHB": 3.44, "allPurposes": 10.59},
+      "zeroAutoHouseholds_MSAover3M": {"table": "Table 5.4 (p. 5-12)", "HBW": 0.82, "HBNW": 3.15, "NHB": 1.63, "allPurposes": 5.60},
+      "motorizedShare_MSAover3M": {"table": "Table 5.6 (p. 5-14)", "HBW": 0.963, "HBNW": 0.837, "NHB": 0.878, "all": 0.868},
+      "note": "FHWA says sensitivity testing of aggregate trip generation is 'not considered to be very useful'",
+      "source": "fhwa2010 §5.1.5 p. 5-14"
+    },
+    "tripDistribution": {
+      "criteria": [
+        {"measure": "Average trip length by purpose", "value": "modeled within 5% of observed (can be relaxed for purposes with few trips)", "source": "fhwa2010 §6.2.4 p. 6-15"},
+        {"measure": "Coincidence ratio (trip length distribution)", "value": "at least 70% for each purpose", "source": "fhwa2010 §6.2.4 p. 6-15"},
+        {"measure": "Intrazonal trip percentage", "value": "within 3 percentage points of observed for each purpose (used by some models)", "source": "fhwa2010 §6.2.4 p. 6-15"}
+      ],
+      "sensitivity": {"value": "Elasticities of travel with respect to level of service are 'generally well below 1.0 in absolute value'. Suggested tests: change speeds, CBD parking cost, tolls, transit times/headways/fares by a fixed percentage", "source": "fhwa2010 §6.2.5 p. 6-16"}
+    },
+    "modeChoice": {
+      "criteria": {"value": "No applicable criteria guidelines. Matching base-year shares by market segment is desirable, but the 'observed' shares are themselves assembled from several data sources", "source": "fhwa2010 §7.1.4 p. 7-9"},
+      "parameterReasonableness": [
+        {"measure": "OVT/IVT coefficient ratio", "value": "about 2 to 3 for HBW, with higher values for nonwork", "source": "fhwa2010 §7.1.5 p. 7-14"},
+        {"measure": "Value of in-vehicle time (model base-year $, not normalized)", "value": "about $2-$5/hr for work; $0.50-$5/hr for nonwork", "source": "fhwa2010 §7.1.5 p. 7-14"},
+        {"measure": "FTA 2006: HBW IVT coefficient", "value": "-0.02 to -0.03 per minute ('some further analysis' if outside this range)", "source": "fhwa2010 §7.1.5 p. 7-15"},
+        {"measure": "FTA 2006: NHB IVT coefficient", "value": "approximately equal to the HBW IVT coefficient", "source": "fhwa2010 §7.1.5 p. 7-15"},
+        {"measure": "FTA 2006: HBO IVT coefficient", "value": "0.1 to 0.5 × the HBW IVT coefficient", "source": "fhwa2010 §7.1.5 p. 7-15"},
+        {"measure": "FTA 2006: OVT coefficient", "value": "2 to 3 × the IVT coefficient ('compelling evidence' needed outside this range)", "source": "fhwa2010 §7.1.5 p. 7-15"},
+        {"measure": "Nested logit logsum (nesting) coefficient", "value": "must be between 0 and 1 (and statistically different from both if estimated); a lower nest's coefficient must be below its parent's", "source": "fhwa2010 §7.1.5 p. 7-15"},
+        {"measure": "Generalized-cost OVT weight (path building)", "value": "typically 2 to 4 × IVT", "source": "fhwa2010 §3.3 p. 3-19/3-20"},
+        {"measure": "Composite (Schultz 1991) HBW coefficients", "value": "IVT -0.025, auto OVT -0.050, transit walk/wait/transfer -0.050 per min", "source": "fhwa2010 Table 7.3 p. 7-12"}
+      ],
+      "elasticities": [
+        {"value": "Transit demand elasticities with respect to level-of-service variables are 'usually well under 1.0 in absolute value'", "source": "fhwa2010 §7.1.5 p. 7-17"},
+        {"value": "Simpson-Curtin rule: fare elasticity of transit demand is about -0.3", "source": "fhwa2010 §7.1.5 p. 7-17"},
+        {"value": "Arc elasticity formula: (ln q2 - ln q1)/(ln p2 - ln p1) (Eq. 7.2)", "source": "fhwa2010 §7.1.5 p. 7-16"}
+      ],
+      "sensitivityTests": {"value": "Change highway or transit times regionwide by a fixed percentage; CBD parking cost; headways on selected routes or submodes; fares on selected submodes; shift development patterns; reallocate households by income", "source": "fhwa2010 §7.1.5 p. 7-16"}
+    }
+  },
+
+  "ctc": {
+    "staticValidationThresholds": {
+      "rows": [
+        {"metric": "Percent of links with volume-to-count ratio within the Caltrans deviation allowance", "threshold": "at least 75%"},
+        {"metric": "Correlation coefficient", "threshold": "at least 0.88"},
+        {"metric": "Percent root mean squared error (%RMSE)", "threshold": "below 40%"}
+      ],
+      "source": "ctc2017 'Recommended Static Validation Thresholds' p. 49 (pdfPage 60); repeated unchanged in ctc2024 p. 55"
+    },
+    "transitAssignmentThresholds": {
+      "rows": [
+        {"metric": "Actual counts vs model results, by route group (e.g. local bus, express bus)", "threshold": "±20%"},
+        {"metric": "Actual counts vs model results, by transit mode (e.g. light rail, bus)", "threshold": "±10%"}
+      ],
+      "source": "ctc2017 'Recommended Transit Assignment Validation Thresholds' p. 49; repeated unchanged in ctc2024 p. 55"
+    },
+    "definitions": {"value": "Volume-to-count ratio = model volume / count. The Caltrans deviation allowance shrinks as the count grows. Correlation coefficient between counts and model volumes. %RMSE as defined by FHWA", "source": "ctc2017 'Static Validation Criteria' p. 48"},
+    "speeds": {"value": "Because emissions are sensitive to speed, US EPA and US DOT suggest comparing modeled validation-year speeds with observed peak and off-peak speeds", "source": "ctc2017 p. 48"},
+    "nonCompliance": {"value": "'MPOs are encouraged to meet the recommended ... thresholds ... Where a model does not meet the thresholds, the MPO is encouraged to clearly document impediments.'", "source": "ctc2017 p. 49"}
+  },
+
+  "caltrans": {
+    "pctErrorByFunctionalClass": {
+      "rows": [
+        {"class": "Freeways", "limit": "less than 7%"},
+        {"class": "Principal arterials", "limit": "less than 10%"},
+        {"class": "Minor arterials", "limit": "less than 15%"},
+        {"class": "Collectors", "limit": "less than 25%"},
+        {"class": "Frontage roads", "limit": "less than 25%"}
+      ],
+      "definition": "total assigned volume / total counted volume for counted links, by functional class",
+      "source": "caltrans1992 §3.5.3 p. 65-66 (citing FHWA, Calibration & Adjustment of System Planning Models, Dec 1990)"
+    },
+    "correlation": {"value": "region-wide correlation coefficient > 0.88", "source": "caltrans1992 §3.5.3 p. 66"},
+    "linkSpecific": {"value": "75% of freeway and principal arterial links, and all screenlines, within the maximum desirable deviation of Figure 3-9", "source": "caltrans1992 §3.5.3 p. 66"},
+    "countCoverage": {"value": "aim for counts on 10% or more of region-wide highway segments (and in each functional class)", "source": "caltrans1992 §3.5.3 p. 65"},
+    "transit": {"value": "Calibrate and validate transit assignment the same way as highway assignment, with ridership counts in place of traffic counts. No numeric transit thresholds are given", "source": "caltrans1992 §3.5.3 p. 65"},
+    "status": {"value": "'The last Caltrans travel forecasting guidance, published in November 1992...' No Caltrans 2014 Travel Forecasting Guidelines were found", "source": "caltransPI2019 p. 1"}
+  },
+
+  "other": {
+    "floridaFsutms2008": {
+      "via": "tn2016 (reprinted from FDOT FSUTMS-Cube Framework Phase II, Cambridge Systematics, Oct 2008)",
+      "pctRmseByVolumeGroup": {
+        "table": "Table 10 Root Mean Square Error (RMSE) by Volume Group (tn2016 p. 18)",
+        "rows": [
+          {"dailyVolume": "<5,000", "acceptable": "100%", "preferable": "45%"},
+          {"dailyVolume": "5,000-9,999", "acceptable": "45%", "preferable": "35%"},
+          {"dailyVolume": "10,000-14,999", "acceptable": "35%", "preferable": "27%"},
+          {"dailyVolume": "15,000-19,999", "acceptable": "30%", "preferable": "25%"},
+          {"dailyVolume": "20,000-29,999", "acceptable": "27%", "preferable": "15%"},
+          {"dailyVolume": "30,000-49,999", "acceptable": "25%", "preferable": "15%"},
+          {"dailyVolume": "50,000-59,999", "acceptable": "20%", "preferable": "10%"},
+          {"dailyVolume": "60,000+", "acceptable": "19%", "preferable": "10%"},
+          {"dailyVolume": "Areawide", "acceptable": "45%", "preferable": "35%"}
+        ]
+      },
+      "volumeToCount": {
+        "table": "Table 5 (tn2016 p. 14)",
+        "rows": [
+          {"class": "Freeway", "acceptable": "±7%", "preferable": "±6%"},
+          {"class": "Arterial", "acceptable": "±15%", "preferable": "±10%"},
+          {"class": "Collector", "acceptable": "±25%", "preferable": "±20%"},
+          {"class": "One-way/frontage", "acceptable": "±25%", "preferable": "±20%"}
+        ],
+        "screenlines": "external cordon ±1%; screenlines >70,000 AADT ±10%; 35,000-70,000 ±15%; <35,000 ±20%; cutlines ±15%"
+      },
+      "pctErrorByVolumeGroup": {
+        "table": "Table 7 (tn2016 p. 15)",
+        "rows": [
+          {"volume": "<10,000 (2-lane road)", "acceptable": "50%", "preferable": "25%"},
+          {"volume": "10,000-30,000 (4-lane)", "acceptable": "30%", "preferable": "20%"},
+          {"volume": "30,000-50,000 (6-lane)", "acceptable": "25%", "preferable": "15%"},
+          {"volume": "50,000-65,000 (4-6L freeway)", "acceptable": "20%", "preferable": "10%"},
+          {"volume": "65,000-75,000 (6L freeway)", "acceptable": "15%", "preferable": "5%"},
+          {"volume": ">75,000 (8+L freeway)", "acceptable": "10%", "preferable": "5%"}
+        ]
+      },
+      "vmt": {"value": "assigned VMT within ±5% (desirable) / ±12% (acceptable) of estimated VMT; typical VMT/HH 60-75 and VMT/person 24-32", "source": "tn2016 p. 15"},
+      "peakHour": {"value": "AM and PM peak-hour screenline/cordon totals within 10% of counts. Links: 75% of freeway links within ±20% (acceptable), 50% within ±10% (desirable); 75% of major/principal arterials over 10,000 vpd within ±30%, 50% within ±15%; 75% of minor arterials within ±40%, 50% within ±20%", "source": "tn2016 p. 18"},
+      "tripGeneration": {"value": "person trips/person 3.3-4.0; person trips/household 8.0-10.0 (up to 11.5 with nonmotorized); HBW person trips/employee 1.20-1.55; HBW share of trips 12-24% ('usually 15 to 20 percent'); NHB share 20-33%; unbalanced attractions/productions ±10% per purpose", "source": "tn2016 Tables 1-2, pp. 8-9"},
+      "tripLength": {"value": "average trip length (minutes): HBW 12-35, HBSH 9-19, HBSR 11-19, HBSC 7-16, HBO 8-20, NHB 6-19, IE 26-58. Standards: mean trip length ±3% of observed; trip length frequency distribution ±5%", "source": "tn2016 Table 3 p. 11"},
+      "intrazonal": {"value": "intrazonal share: HBW 1-4%, total 3-5%; ±5% vs observed", "source": "tn2016 Table 4 p. 12"},
+      "autoOccupancy": {"value": "HBW 1.05-1.10; HBSH 1.50-1.80; HBSR 1.70-1.90; HBO 1.65-1.95; NHB 1.60-1.90", "source": "tn2016 Table 12 p. 19"}
+    },
+    "linkDeviationByAADT": {
+      "table": "Table 6 Percent Difference Targets for Daily Volume Groupings (tn2016 pp. 14-15), 'Desirable Percent Deviation'",
+      "rows": [
+        {"aadt": "<1,000", "fhwa": "200", "michigan": "60"},
+        {"aadt": "1,000-2,500", "fhwa": "100", "michigan": "47"},
+        {"aadt": "2,500-5,000", "fhwa": "50", "michigan": "36"},
+        {"aadt": "5,000-10,000", "fhwa": "25", "michigan": "29"},
+        {"aadt": "10,000-25,000", "fhwa": "20", "michigan": "25"},
+        {"aadt": "25,000-50,000", "fhwa": "15", "michigan": "22"},
+        {"aadt": ">50,000", "fhwa": "10", "michigan": "21"}
+      ]
+    },
+    "virginiaPctRmseByClass": {
+      "table": "Table 11 (tn2016 p. 18), VDOT. Large regions = MSA >500,000",
+      "rows": [
+        {"class": "Freeways", "small": "20%", "large": "20%"},
+        {"class": "Principal arterials", "small": "30%", "large": "35%"},
+        {"class": "Minor arterials", "small": "40%", "large": "50%"},
+        {"class": "Collectors", "small": "70%", "large": "60%"}
+      ]
+    },
+    "r2": {"value": "suggested region-wide R² over 0.88 (tn2016 p. 16, citing FHWA 1990). Note that Caltrans 1992 and CTC state 0.88 as a correlation coefficient, not R²", "source": "tn2016 p. 16; caltrans1992 p. 66"},
+    "ukTag": {
+      "m31_highway": {
+        "screenlines": {"criterion": "modeled vs counted flow difference < 5% of counts", "guideline": "all or nearly all screenlines (i.e. 95%)", "source": "tagM31 Table 1 p. 30"},
+        "linkFlows": {
+          "criteria": [
+            "Individual flows within 100 veh/h of counts for flows < 700 veh/h: more than 85% of cases",
+            "Within 15% of counts for flows 700-2,700 veh/h: more than 85% of cases",
+            "Within 400 veh/h of counts for flows > 2,700 veh/h: more than 85% of cases",
+            "GEH < 5 for individual flows: more than 85% of cases"
+          ],
+          "gehDefinition": "GEH = sqrt(2(M-C)^2/(M+C)), where M = modeled hourly flow and C = observed hourly flow. In the PDF the equation is an image; M and C are defined in the text. The flow and GEH criteria are 'broadly consistent' and a flow meeting either is satisfactory",
+          "source": "tagM31 §3.3.10-3.3.11, Table 2 pp. 31-32"
+        },
+        "turningMovements": {"value": "85%+ of movements meeting flow criterion 1 and 85%+ with GEH < 5; practitioners also aim for GEH < 10 on all movements", "source": "tagM31 §C.3.8"},
+        "journeyTimes": {"value": "modeled times within 15% of surveyed (or 1 minute, if higher) on more than 85% of routes", "source": "tagM31 Table 3 p. 33"}
+      },
+      "m32_publicTransport": {
+        "tripMatrix": {"value": "assigned vs observed < 15% across screenline/boarding/alighting/service groups, for all or nearly all (95%) screenlines", "source": "tagM32 Table 4 p. 37"},
+        "assignment": {
+          "rows": [
+            {"aggregation": "Grouped services by corridor (onboard, entry/exit counts)", "criterion": "< 15%", "guideline": "all or nearly all (95%) services"},
+            {"aggregation": "Grouped stops/stations by fare stage or corridor", "criterion": "< 15%", "guideline": "95% of stops/stations"},
+            {"aggregation": "Individual service/link (total passengers)", "criterion": "< 25%, except where observed flows < 150 passengers/hour", "guideline": "95% of services"},
+            {"aggregation": "Individual stops/stations", "criterion": "< 25%, except where observed < 150 passengers/hour", "guideline": "95% of stops/stations"}
+          ],
+          "lowCounts": "counts under 150 passengers/hour are reported, but the criteria are not applied to them",
+          "source": "tagM32 Table 5 and §4.3.11, p. 39"
+        },
+        "annualPatronage": {"value": "differences in total patronage 'as small as possible (for instance less than 5% for services with significant patronage)'", "source": "tagM32 §4.3.17 pp. 40-41"},
+        "ptJourneyTimes": {"value": "modeled within 25% of timetable times on more than 85% of routes", "source": "tagM32 Table 6 p. 40"},
+        "generalisedCostWeights": {"value": "walk/access/egress/transfer time 1.5-2.0; waiting time 1.5-2.5; IVT rail 1, bus 1-1.4, tram/LRT 0.7-1.1; boarding/transfer penalty 2-10 minutes", "source": "tagM32 Table 1 p. 20"},
+        "convergence": {"value": "passenger-km per service: less than 1% change between iterations for 95% of services", "source": "tagM32 §4.4.6 p. 42"}
+      }
+    },
+    "nchrp716": {
+      "tripRatesPerHousehold_NHTS2009": {
+        "value": "weighted average trips per household: HBW 1.4 (Table C.5); HBNW 5.6 for urban areas over 500,000 and 5.1 for under 500,000 (Table C.6); NHB 3.0 (Table C.7); HB school 0.6 (Table C.8). Zero-vehicle households, urban areas over 500,000: HBNW 3.2",
+        "source": "nchrp716 Appendix C, Tables C.5-C.8, pp. C-13 to C-17"
+      },
+      "meanTripLengthMinutes_NHTS2009": {
+        "table": "Table C.10 Mean trip length in minutes by mode and purpose (pp. C-20 to C-21)",
+        "rows": [
+          {"purpose": "HBW", "areaType": "1M+ with subway or rail", "auto": 29, "transit": 55, "nonmotorized": 16, "all": 32},
+          {"purpose": "HBNW", "areaType": "all", "auto": 18, "transit": 48, "nonmotorized": 15, "all": 18},
+          {"purpose": "NHB", "areaType": "1M+ with subway or rail", "auto": 20, "transit": 42, "nonmotorized": 14, "all": 20},
+          {"purpose": "HB school", "areaType": "1M+ with subway or rail", "auto": 17, "transit": 45, "nonmotorized": 15, "all": 21},
+          {"purpose": "All trips", "areaType": "1M+ with subway or rail", "auto": 21, "transit": 48, "nonmotorized": 15, "all": 22}
+        ]
+      },
+      "transitTimeWeights_MPOs_over1M": {
+        "value": "walk/IVT ratio: mean 2.2 (range 1.5-3.0) for peak walk access. Wait/IVT ratio: mean 2.1 (range 1.5-2.6) for peak walk access",
+        "source": "nchrp716 Tables 4.29-4.30 p. 79"
+      },
+      "modeShares": {"value": "NCHRP 716 gives no mode-share benchmark ranges for large dense cities in a table that could be extracted. Use local ACS/survey shares", "source": "nchrp716 (searched)"}
+    }
+  },
+
+  "tcrp95": {
+    "elasticities": [
+      {"change": "Bus fare (general level)", "measure": "arc fare elasticity", "value": -0.40, "range": "APTA 1991 study of 52 bus systems: mean -0.40 ±0.18 SD, range -0.12 to -0.85", "context": "short-run, US bus systems", "source": "tcrp95c12 Traveler Response Summary p. 12-6; 'Transit by Mode' pp. 12-10 to 12-11"},
+      {"change": "Heavy rail (HRT/Metro) fare", "measure": "short-run fare elasticity", "value": "-0.17 to -0.18", "context": "about half the bus elasticity in the same cities. BART's value is about twice that of other HRT systems (parallel freeways and express buses)", "source": "tcrp95c12 p. 12-6; pp. 12-11 to 12-12 (text accompanying Table 12-3)"},
+      {"change": "Commuter rail fare", "measure": "fare elasticity", "value": "similar to HRT; Metro-North planning values -0.15 commuters, -0.30 non-commuters (overall -0.20)", "source": "tcrp95c12 pp. 12-11 to 12-12"},
+      {"change": "Simpson & Curtin formula", "measure": "shrinkage ratio", "value": "Y = 0.80 + 0.30X (% ridership loss for % fare increase X). Equals a midpoint arc elasticity of -0.39 to -0.41 for 10-40% fare changes. The common rule of thumb '10% fare rise loses 3% of riders' is a simplification of it", "source": "tcrp95c12 pp. 12-8 to 12-10"},
+      {"change": "Fare, all urban transit", "measure": "aggregate fare elasticity", "value": "most commonly -0.1 to -0.6; US average excluding HRT cities about -0.4", "source": "tcrp95c12 'Urban Transit Overall' p. 12-8"},
+      {"change": "Fare by city size", "measure": "mean arc elasticity (Ecosometrics)", "value": "-0.35 for city population under 500,000; -0.24 for central city over 1 million. APTA bus-only: -0.43 ±0.19 (under 1M) vs -0.36 ±0.15 (over 1M)", "source": "tcrp95c12 'Population of Service Area' p. 12-12"},
+      {"change": "Fare by time of day", "measure": "off-peak vs peak", "value": "off-peak ridership is roughly twice as sensitive to fare changes as peak ridership", "source": "tcrp95c12 pp. 12-6, 12-14"},
+      {"change": "Fare, senior citizens", "measure": "fare elasticity", "value": -0.21, "source": "tcrp95c12 p. 12-7"},
+      {"change": "Fare, long-run (cited from Litman 2004)", "measure": "short-run vs long-run", "value": "UK bus -0.2 to -0.3 short-run, -0.4 to -0.6 long-run; international bus -0.28 short-run, -0.55 long-run", "context": "TCRP's own values are short-run (1-2 years)", "source": "tcrp95c12 footnote 1, p. 12-5"},
+      {"change": "Fare range", "measure": "bounds", "value": "practically all observed fare elasticities lie between 0 and -1.0 (inelastic)", "source": "tcrp95c12 p. 12-8 (top)"},
+      {"change": "Bus service frequency", "measure": "service elasticity (ridership vs service quantity)", "value": 0.5, "range": "recent observations cluster around +0.3 (mostly central-city systems) or +1.0 (suburban systems with comprehensive expansions)", "context": "average of increases and decreases", "source": "tcrp95c9 Traveler Response Summary pp. 9-4 to 9-5"},
+      {"change": "Bus headway, by starting headway", "measure": "arc headway elasticity (Lago, Mayworm & McEnroe 1981)", "value": "headway <10 min: -0.22 ±0.10; 10-50 min: -0.46 ±0.18; >50 min: -0.58 ±0.19; all 23 observations: -0.44 ±0.22", "context": "more sensitive where prior service was infrequent", "source": "tcrp95c9 Table 9-2 p. 9-8"},
+      {"change": "Bus headway, by time of day", "measure": "arc headway elasticity", "value": "peak -0.37 ±0.19; off-peak -0.46 ±0.26; weekends -0.38 ±0.17; all hours -0.47 ±0.21", "source": "tcrp95c9 Table 9-11 p. 9-26"},
+      {"change": "Frequency, 1980s-90s cases", "measure": "service elasticity", "value": "averages slightly above +0.5", "source": "tcrp95c9 p. 9-8"},
+      {"change": "Commuter rail frequency (Boston & Maine experiment)", "measure": "service elasticity", "value": "peak +0.3; off-peak +0.7", "source": "tcrp95c9 p. 9-26"},
+      {"change": "Bus service expansion (miles/hours)", "measure": "service elasticity", "value": "typically +0.6 to +1.0 (as low as +0.3 and over +1.0 both 'not uncommon'); average +0.7 to +0.8; frequency-only changes average +0.5; with new express operation +0.9", "source": "tcrp95c10 pp. 10-5, 10-8"},
+      {"change": "Out-of-vehicle vs in-vehicle time", "measure": "relative weight in mode choice", "value": "OVT at least about 2× IVT. Newer models split between about 2× and about 4×. Over 50 US work models: wait time averages 2.12× IVT (2.72 for areas under 750,000; about 2.0 for larger cities)", "source": "tcrp95c9 'Wait and Transfer Time Savings' pp. 9-21 to 9-22"},
+      {"change": "Out-of-vehicle vs in-vehicle time (bus routing chapter)", "measure": "relative weight", "value": "most models 1.5 to 2.3 × IVT (Schultz 1991); Boston transfer penalty 12-15 IVT-minutes per transfer trip", "source": "tcrp95c10 pp. 10-35 to 10-36"},
+      {"change": "Value of time", "measure": "work trips", "value": "about one-third to one-half of the wage rate", "source": "tcrp95c9 p. 9-21"},
+      {"change": "Diversion source", "measure": "share of new riders", "value": "1 in 2 or 3 new riders from frequency improvements (and from fare cuts) would otherwise have driven", "source": "tcrp95c9 p. 9-5; tcrp95c12 p. 12-7"}
+    ],
+    "realismTestsUK": [
+      {"change": "Public transport fare (all modes)", "measure": "elasticity of PT trips, over periods longer than a year", "value": "-0.2 to -0.9 (TRL 2004); values near -0.2 are unlikely for the whole market", "source": "tagM21 §6.4.26 p. 71"},
+      {"change": "Bus fare, full-fare passengers", "measure": "target range", "value": "-0.35 to -0.9", "source": "tagM21 §6.4.29 p. 72"},
+      {"change": "Rail fare", "measure": "target range", "value": "-0.70 to -1.5", "source": "tagM21 §6.4.33 p. 72"},
+      {"change": "London Underground fare (closest analogue to an urban metro)", "measure": "target range", "value": "-0.2 to -0.6", "source": "tagM21 §6.4.34 p. 72"},
+      {"change": "Car fuel cost", "measure": "car vehicle-km elasticity", "value": "-0.15 to -0.35 (central value about -0.25)", "source": "tagM21 §6.4.19 p. 70"},
+      {"change": "Car journey time", "measure": "car trips elasticity", "value": "should not be stronger than -0.75", "source": "tagM21 §6.4.42 p. 73"},
+      {"change": "Pattern checks", "measure": "plausibility", "value": "peak elasticities < inter-peak < off-peak; non-discretionary purposes < discretionary; car-available segments > non-car-available", "source": "tagM21 §6.4.22, §6.4.27 pp. 71-72"},
+      {"change": "Method", "measure": "formula", "value": "e = (ln T1 - ln T0)/(ln C1 - ln C0), using a 10% (or 20%) change and a converged base-year run; PT measured in person trips", "source": "tagM21 §6.4.5, §6.4.10, §6.4.24 pp. 67-71"}
+    ],
+    "otherElasticities": [
+      {"change": "Transit service frequency (headway elasticity)", "value": "averages 0.5, greater where service is infrequent; service expansion 0.6 to 1.0. Portland non-Frequent-Service routes about 0.30, 'typical for urban systems with routes operating at 30-minute or better headways'", "source": "litman2025 p. 12"}
+    ]
+  },
+
+  "benchmarks": [
+    {"model": "SF-CHAMP (original, SFCTA/Cambridge Systematics)", "year": "1998 base (report 2002)", "measure": "Total transit boardings, all modes", "value": "within 5% of observed; route-group comparison shows an overall 8% over-estimate of boardings", "notes": "AM bus boardings significantly over-estimated: matching within 5% would have needed a 30% cut in work transit tours, so the observed work walk-transit share (35%) was held", "source": "sfchamp2002 p. 32"},
+    {"model": "SF-CHAMP (original)", "year": "1998 base", "measure": "Highway screenlines", "value": "target ±10%; 8 of 10 screenlines met it", "source": "sfchamp2002 p. 31"},
+    {"model": "SF-CHAMP (original)", "year": "1998 base", "measure": "Neighborhood volume totals", "value": "target ±20%; only Laurel Heights outside", "source": "sfchamp2002 p. 32"},
+    {"model": "MTC Travel Model One (v0.x)", "year": 2000, "measure": "Total regional boardings by mode", "value": "total +1% (1,722,392 modeled vs 1,705,025 observed); local +5%, light rail -12%, heavy rail -4%, express -3%, commuter rail -1%, ferry +4%", "source": "mtcTM1_2011 Table 62 p. 167"},
+    {"model": "MTC Travel Model One (v0.x)", "year": 2000, "measure": "Boardings by operator (SF)", "value": "Muni bus -17% (467,173 vs 562,970); Muni Metro -25% (126,211 vs 168,510); Muni cable car -43%; BART -4% (332,759 vs 344,869); Caltrain +7%; AC local +31%; VTA LRT +62%; all operators +5%", "source": "mtcTM1_2011 Table 63 p. 169"},
+    {"model": "MTC Travel Model One (v0.x)", "year": 2005, "measure": "Total regional boardings by mode", "value": "total 0% (1,533,628 vs 1,529,335); local +6%, LRT -2%, heavy rail -7%, express -7%, commuter rail -49%", "source": "mtcTM1_2011 Table 72 p. 191"},
+    {"model": "MTC Travel Model One (v0.x)", "year": 2005, "measure": "Boardings by operator (SF)", "value": "Muni bus -21% (416,612 vs 525,737); Muni Metro -17% (121,311 vs 146,998); Muni cable car -69%; BART -7% (311,992 vs 335,860); Caltrain -45%", "source": "mtcTM1_2011 Table 73 p. 192"},
+    {"model": "MTC Travel Model One (v0.x)", "year": 2005, "measure": "Muni boardings by route vs 2005 SFMTA on-board survey: %RMSE", "value": "all routes 66% ('acceptable'); by submode: local 68%, limited 77%, Metro 38%, cable car 75%. Totals: modeled 508,003 vs observed 684,696 (-26%); local -22%, limited -27%, Metro -29%, cable car -74%", "notes": "This is the most like-for-like published benchmark for a Muni route-level comparison. %RMSE rose sharply once congested-time feedback was added. Route errors include 14 Mission -3%, 38 Geary +18%, 1 California +14%, 22 Fillmore -84%, 49 -92%, N Judah -22%, K Ingleside -56%, J Church +45%", "source": "mtcTM1_2011 Table 74 and Figure 56, pp. 193-195"},
+    {"model": "MTC Travel Model One (v0.x)", "year": 2000, "measure": "Highway daily %RMSE", "value": "29% overall; freeways 21%, expressways 68%, arterials 67%, collectors 132%", "source": "mtcTM1_2011 §3.1 p. 152"},
+    {"model": "MTC Travel Model 1.5.2", "year": 2015, "measure": "Weekday boardings by mode", "value": "total -1% (1,686,981 vs 1,702,022); local -3%, light rail +1%, ferry -15%, express +12%, heavy rail +5%, commuter rail -9%", "source": "mtcTM152 Table 39 p. 86"},
+    {"model": "MTC Travel Model 1.5.2", "year": 2015, "measure": "Weekday boardings by operator", "value": "SF Muni bus -4% (506,041 vs 524,564); SF Muni light rail -6% (185,208 vs 196,076); BART +5% (454,535 vs 431,649); Caltrain +5% (59,900 vs 57,271); AC Transit +7%; SamTrans +23%; VTA bus -1%; VTA LRT +38%; Golden Gate bus +4%, ferry -24%; smaller-operator bus -39%", "source": "mtcTM152 Table 40 p. 86"},
+    {"model": "MTC Travel Model 1.5.2", "year": 2015, "measure": "Share of walk-access linked transit trips with 2 boardings (survey vs model)", "value": "all modes 15% observed vs 17% modeled; local bus 9% vs 13%; light rail 26% vs 4%; heavy rail 14% vs 13%", "notes": "transfer-penalty coefficients were calibrated to the survey's boardings per transit trip", "source": "mtcTM152 Table 37 p. 78"},
+    {"model": "MTC Travel Model 1.6.1", "year": 2023, "measure": "Freeway counts (PeMS) modeled vs observed", "value": "24-hour: R² 0.96, slope 0.892, %RMSE 24% (976 records). AM: R² 0.95, %RMSE 27%. PM: R² 0.95, %RMSE 27%. Midday: R² 0.95, %RMSE 27%. Evening: R² 0.94, %RMSE 34%. Early AM: R² 0.85, %RMSE 68%. Route-level daily %RMSE: freeways total 21%, US-101 24%, I-80 15%, I-280 24%", "notes": "MTC reads the FHWA examples as 'about 20% reasonable for high-volume links, 40% for lower volume links'", "source": "mtcTM161 Ch. 4 Figs 4-1, 4-2, Table 4-1 pp. 12-15; Appendix A"},
+    {"model": "MTC Travel Model 1.6.1", "year": 2023, "measure": "Transit", "value": "calibrated to NTD 2015 to 2023 change: bus -32%, BART -60%. Per-operator results appear only as figures (no extractable numbers)", "source": "mtcTM161 Ch. 5 p. 16"},
+    {"model": "TAMDM (Marin; built on MTC Travel Model Two)", "year": 2015, "measure": "Daily boardings by operator", "value": "BART -3% (409,658 vs 423,120); Caltrain -34%; AC Transit +10%; Marin Transit + Golden Gate bus and ferry +33%", "notes": "No Muni figures. This is the only published TM2-family operator validation found", "source": "tamdm2020 Table 5-12 p. 107"},
+    {"model": "TAMDM (Marin; Travel Model Two)", "year": 2015, "measure": "Highway volume/count ratios vs Caltrans 1992 targets", "value": "AM: total 1.00 (target ±10%); freeway 0.95 (±7%); arterial 1.10 (±15%); collector 1.17 (±25%)", "source": "tamdm2020 Table 5-1 p. 100"}
+  ],
+
+  "notFound": [
+    "The original FDOT FSUTMS-Cube Framework Phase II validation standards report: fsutmsonline.net returns 404 or an HTML page. Its tables are taken from the Tennessee 2016 reprint (other.floridaFsutms2008) and FHWA Table 9.9.",
+    "Ohio and Oregon %RMSE-by-volume curves: they appear only as a chart (FHWA Figure 9.8); no tabular values were obtained.",
+    "Numeric values of FHWA Figure 9.9 (screenline maximum desirable deviation curve) and Caltrans 1992 Figure 3-9 (link maximum desirable deviation): both are graphics. The FHWA-1990 desirable link deviation by AADT is tabulated in tn2016 Table 6.",
+    "Caltrans 2014 'Travel Forecasting Guidelines': not found. Caltrans PI-0170 (2019) says the last Caltrans travel forecasting guidance was November 1992.",
+    "SF-CHAMP 5/6/7 base-year validation reports (Muni line-level R², %RMSE): not public. sfcta.org/sf-champ-modeling links only the 2002 documentation. The github.com/sfcta/sfchampdocs validation page is an empty stub. github.com/sfcta/validation_workbook holds 2023 validation scripts (Muni line, BART station, screenline, NTD operator totals) but no results. archive.sfcta.org failed the TLS handshake. UPDATE 2026-10-05: SF-CHAMP 3 (2000) and 4.1 (2008/2012) validation tables were found in Van Ness BRT and Geary BRT EIR/EIS appendices; see benchmarks.json.",
+    "MTC Travel Model One v0.5/v0.6 2010 and 2015 transit validation: published only as Tableau dashboards (modeling-website wiki), not extractable. TM1.5.2 (2015) tables were used instead. UPDATE 2026-10-05: the 2010 validation memo of TM1 v0.3 (Ory, Vautin, and Singh, 2013) has a Muni-by-route table; see benchmarks.json.",
+    "MTC Travel Model Two 2015 validation report (transit by line, R², %RMSE): not found in BayAreaMetro repos or wiki. TAMDM (TM2-based) operator totals are the only published TM2 numbers found.",
+    "Per-operator transit validation in TM1.6.1 (2023): figures only.",
+    "TCRP 95 Table 12-3 (bus vs HRT fare elasticities by city, including BART), Tables 12-5, 12-7 and 12-8 row values: the table cells lost their row labels in text extraction, so only values stated in the narrative are recorded. TCRP 95 Chapter 4 (Busways/BRT/Express) and any in-vehicle travel-time elasticity of transit ridership: chapter 4 could not be retrieved (no Wayback capture). No transit in-vehicle-time elasticity is recorded.",
+    "NCHRP 716 mode-share benchmark ranges for large dense cities: none found in extractable form."
+  ]
+}

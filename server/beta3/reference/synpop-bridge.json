@@ -1,0 +1,288 @@
+{
+ "inputs": {
+  "off": {
+   "households": {
+    "car0": 30.16,
+    "car1": 44.12,
+    "car2": 25.71
+   },
+   "commuters": {
+    "car0": 27.03,
+    "car1": 44.67,
+    "car2": 28.3
+   },
+   "residents": {
+    "car0": 26.96,
+    "car1": 43.44,
+    "car2": 29.6
+   },
+   "youth": {
+    "car0": 21.32,
+    "car1": 42.82,
+    "car2": 35.86
+   },
+   "seniors": {
+    "car0": 28.07,
+    "car1": 40.86,
+    "car2": 31.08
+   }
+  },
+  "households": {
+   "households": {
+    "car0": 30.17,
+    "car1": 44.11,
+    "car2": 25.72
+   },
+   "commuters": {
+    "car0": 27.03,
+    "car1": 44.66,
+    "car2": 28.31
+   },
+   "residents": {
+    "car0": 26.97,
+    "car1": 43.42,
+    "car2": 29.61
+   },
+   "youth": {
+    "car0": 21.33,
+    "car1": 42.8,
+    "car2": 35.87
+   },
+   "seniors": {
+    "car0": 28.07,
+    "car1": 40.85,
+    "car2": 31.08
+   }
+  },
+  "persons": {
+   "households": {
+    "car0": 30.17,
+    "car1": 44.11,
+    "car2": 25.72
+   },
+   "commuters": {
+    "car0": 22.94,
+    "car1": 41.38,
+    "car2": 35.68
+   },
+   "residents": {
+    "car0": 24.62,
+    "car1": 38.84,
+    "car2": 36.54
+   },
+   "youth": {
+    "car0": 10.25,
+    "car1": 36.93,
+    "car2": 52.82
+   },
+   "seniors": {
+    "car0": 32.5,
+    "car1": 33.82,
+    "car2": 33.68
+   }
+  }
+ },
+ "zoneCarShareFit": {
+  "households": {
+   "r": 1,
+   "rmsePts": 0.08
+  }
+ },
+ "results": {
+  "off": {
+   "residentTrips": 2729699,
+   "residentModeShares": {
+    "da": 28.08,
+    "sr": 22.16,
+    "tnc": 1.74,
+    "transit": 9.14,
+    "walk": 36.61,
+    "bike": 2.26
+   },
+   "transitTripsAll": 499949,
+   "commuteTransitBySegment": {
+    "car0": 43.07,
+    "car1": 27.39,
+    "car2": 21.89
+   },
+   "commuteTripsBySegment": {
+    "car0": 119690,
+    "car1": 195667,
+    "car2": 129517
+   },
+   "nonworkTransitBySegment": {
+    "car0": 7.11,
+    "car1": 5.13,
+    "car2": 4.39
+   },
+   "transitByIncome": {
+    "under $100,000": 14.1,
+    "$100,000 or more": 9.29
+   },
+   "youthTransit": 7.7,
+   "vkt": 22805443,
+   "seconds": 14.5
+  },
+  "households": {
+   "residentTrips": 2729711,
+   "residentModeShares": {
+    "da": 28.09,
+    "sr": 22.17,
+    "tnc": 1.74,
+    "transit": 9.14,
+    "walk": 36.61,
+    "bike": 2.26
+   },
+   "transitTripsAll": 499866,
+   "commuteTransitBySegment": {
+    "car0": 43.07,
+    "car1": 27.43,
+    "car2": 21.8
+   },
+   "commuteTripsBySegment": {
+    "car0": 119712,
+    "car1": 195603,
+    "car2": 129560
+   },
+   "nonworkTransitBySegment": {
+    "car0": 7.15,
+    "car1": 5.18,
+    "car2": 4.28
+   },
+   "transitByIncome": {
+    "under $100,000": 14.15,
+    "$100,000 or more": 9.26
+   },
+   "youthTransit": 7.69,
+   "vkt": 22806268,
+   "seconds": 17.1
+  },
+  "persons": {
+   "residentTrips": 2731305,
+   "residentModeShares": {
+    "da": 28.69,
+    "sr": 22.69,
+    "tnc": 1.72,
+    "transit": 8.75,
+    "walk": 35.98,
+    "bike": 2.16
+   },
+   "transitTripsAll": 489326,
+   "commuteTransitBySegment": {
+    "car0": 42.38,
+    "car1": 26.94,
+    "car2": 21.56
+   },
+   "commuteTripsBySegment": {
+    "car0": 101182,
+    "car1": 180281,
+    "car2": 163411
+   },
+   "nonworkTransitBySegment": {
+    "car0": 7.12,
+    "car1": 5.17,
+    "car2": 4.19
+   },
+   "transitByIncome": {
+    "under $100,000": 12.63,
+    "$100,000 or more": 9.73
+   },
+   "youthTransit": 7.18,
+   "vkt": 22998854,
+   "seconds": 17.5
+  }
+ },
+ "zones": {
+  "households": {
+   "transitShareByHomeZone": {
+    "r": 1,
+    "rmsePts": 0.01
+   },
+   "commuteTransitShareByHomeZone": {
+    "r": 1,
+    "rmsePts": 0.03
+   },
+   "transitTripsFromZone": {
+    "r": 1,
+    "pctRmse": 0.06
+   }
+  },
+  "persons": {
+   "transitShareByHomeZone": {
+    "r": 0.9922,
+    "rmsePts": 0.67
+   },
+   "commuteTransitShareByHomeZone": {
+    "r": 0.9873,
+    "rmsePts": 2.1
+   },
+   "transitTripsFromZone": {
+    "r": 0.9999,
+    "pctRmse": 3.81
+   }
+  }
+ },
+ "fullRun": {
+  "command": "experiment.ts --synpop <mode> (two passes, warm-started from the saved base run; Muni routes as counted, 57 routes)",
+  "off": {
+   "muniBoardings": 391503,
+   "muniVsCounts": {
+    "r": 0.9348,
+    "pctRmse": 45.79
+   },
+   "routesVsOff": {
+    "r": 1.0,
+    "maxRelDiff": 0.0
+   },
+   "bartCityExitsTotalVsCounts": 1.0339087617423433,
+   "residentShares": {
+    "da": 0.28154846307990145,
+    "sr": 0.22206793437200908,
+    "tnc": 0.017483641613257505,
+    "transit": 0.08973282704512626,
+    "walk": 0.36640484699693715,
+    "bike": 0.022762286892768473
+   }
+  },
+  "households": {
+   "muniBoardings": 391426,
+   "muniVsCounts": {
+    "r": 0.9348,
+    "pctRmse": 45.8
+   },
+   "routesVsOff": {
+    "r": 1.0,
+    "maxRelDiff": 0.0006
+   },
+   "bartCityExitsTotalVsCounts": 1.0338073838126036,
+   "residentShares": {
+    "da": 0.2816179724373937,
+    "sr": 0.22210280405498672,
+    "tnc": 0.017459849807861832,
+    "transit": 0.08970310829468854,
+    "walk": 0.3663570023355527,
+    "bike": 0.022759263069516533
+   }
+  },
+  "persons": {
+   "muniBoardings": 379836,
+   "muniVsCounts": {
+    "r": 0.9335,
+    "pctRmse": 47.93
+   },
+   "routesVsOff": {
+    "r": 0.99991,
+    "maxRelDiff": 0.0833
+   },
+   "bartCityExitsTotalVsCounts": 1.0185383705703137,
+   "residentShares": {
+    "da": 0.2876431502472793,
+    "sr": 0.22731514371563963,
+    "tnc": 0.017295266680491746,
+    "transit": 0.08588178853955959,
+    "walk": 0.3600466227240894,
+    "bike": 0.021818028092940256
+   }
+  }
+ }
+}

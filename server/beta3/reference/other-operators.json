@@ -1,0 +1,646 @@
+{
+ "accessed": "2026-10-04",
+ "notes": [
+  "Fiscal years end June 30 (FY 2025 = July 2024 - June 2025). NTD \"report year 2024\" = agency fiscal year 2024; for Golden Gate this is confirmed because NTD 2024 values equal Golden Gate's own FY 2024 figures (ferry 1,421,356 annual / 4,041 weekday; bus 1,432,232 / 4,514).",
+  "All values are unlinked passenger trips (boardings) as published; no values estimated."
+ ],
+ "goldenGateTransitBus": {
+  "source": "Golden Gate Bridge, Highway and Transportation District - Bus \"Statistics & Ridership\"",
+  "url": "https://www.goldengate.org/bus/history-research/statistics-ridership/",
+  "rawFile": "data/beta3/raw/obs/ggbus_statistics_ridership.html",
+  "period": "FY 2025 (July 2024 - June 2025), latest year on the page",
+  "avgWeekdayRidership": 4714,
+  "avgSaturdayRidership": 3052,
+  "avgSundayHolidayRidership": 2612,
+  "avgWeekdayRidershipAcrossGoldenGateBridge": 2391,
+  "annualRidership": 1817781,
+  "fy2024": {
+   "avgWeekdayRidership": 4514,
+   "annualRidership": 1432232
+  },
+  "fy2019_preCOVID": {
+   "avgWeekdayRidership": 10833,
+   "avgWeekdayRidershipAcrossGoldenGateBridge": 7680,
+   "annualRidership": 3109580
+  },
+  "note": "GGT routes only (excludes routes operated for Marin Transit). Column order inferred from the HTML table (Annual | Weekday | Saturday | Sunday/Holiday | Avg weekday across Golden Gate Bridge) and confirmed by NTD FY2024 weekday 4,514. \"Across Golden Gate Bridge\" is the transbay (Marin/Sonoma <-> SF) subset most relevant to SF."
+ },
+ "goldenGateFerry": {
+  "source": "Golden Gate Ferry - \"Statistics & Ridership\"",
+  "url": "https://www.goldengate.org/ferry/history-research/statistics-ridership/",
+  "rawFile": "data/beta3/raw/obs/ggferry_statistics_ridership.html",
+  "period": "FY 2025 (July 2024 - June 2025)",
+  "avgWeekdayRidership": 4481,
+  "avgSaturdayRidership": 4605,
+  "avgSundayHolidayRidership": 3672,
+  "annualRidership": 1582632,
+  "annualByRoute": {
+   "Larkspur": 952087,
+   "Sausalito": 377595,
+   "Tiburon": 141517,
+   "AngelIsland": 111433
+  },
+  "fy2024": {
+   "avgWeekdayRidership": 4041,
+   "annualRidership": 1421356
+  },
+  "fy2019_preCOVID": {
+   "avgWeekdayRidership": 8367,
+   "annualRidership": 2470204
+  },
+  "note": "All routes; Larkspur includes Giants/Oracle Park special service."
+ },
+ "sfBayFerry": {
+  "source": "National Transit Database 2024 annual data, \"Service (by Mode and Time Period)\" (data.transportation.gov dataset wwdp-t4re), NTD ID 90225",
+  "url": "https://data.transportation.gov/resource/wwdp-t4re.json",
+  "period": "NTD report year 2024 (agency FY July 2023 - June 2024)",
+  "avgTypicalWeekdayUPT": 6987,
+  "annualUPT": 2388379,
+  "note": "Agency-published figures for FY2025/2026 not fetched (time). Covers all SF Bay Ferry routes, not only SF terminals."
+ },
+ "acTransit": {
+  "source": "AC Transit \"Ridership, Buses, and Service\" page",
+  "url": "https://www.actransit.org/ridership",
+  "rawFile": "data/beta3/raw/obs/actransit_ridership.html",
+  "period": "FY 2024-25 (July 2024 - June 2025)",
+  "systemAvgWeekdayRidership": 136138,
+  "systemAnnualRidership": 40004716,
+  "transbayAvgWeekdayRidership": null,
+  "transbayNote": "No Transbay-specific weekday ridership was found on the agency page. Page says AC Transit runs \"14 Transbay lines to San Francisco and the Peninsula\". NTD 2024 reports AC Transit Commuter Bus (CB, directly operated) at 2,130 average typical weekday UPT; it is NOT verified that CB equals the Transbay service, so do not use it as Transbay ridership without checking.",
+  "ntd2024": {
+   "MB_DO": 107225,
+   "RB_DO": 14027,
+   "CB_DO": 2130,
+   "MB_PT": 780,
+   "DR_PT": 1598
+  }
+ },
+ "ntdCrossCheck": {
+  "source": "NTD 2022-2024 Annual Data - Service (by Mode and Time Period), data.transportation.gov wwdp-t4re (queried via Socrata API)",
+  "url": "https://data.transportation.gov/resource/wwdp-t4re.json",
+  "rawFile": "data/beta3/raw/obs/ntd_service_by_time_period_bayarea.json",
+  "modeCodes": {
+   "MB": "bus",
+   "TB": "trolleybus",
+   "LR": "light rail",
+   "CC": "cable car",
+   "SR": "streetcar (historic F/E)",
+   "HR": "heavy rail",
+   "YR": "hybrid rail (eBART)",
+   "MG": "monorail/automated guideway (Oakland Airport connector)",
+   "CR": "commuter rail",
+   "FB": "ferry",
+   "RB": "bus rapid transit",
+   "CB": "commuter bus",
+   "DR": "demand response",
+   "DO": "directly operated",
+   "PT": "purchased transportation"
+  },
+  "muniFY2024AvgTypicalWeekdayUPT_fixedRouteSum_derived": 485001,
+  "agencies": {
+   "Golden Gate Bridge, Highway and Transportation District": {
+    "ntdId": "90016",
+    "byYearMode": [
+     {
+      "reportYear": 2022,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "annualUPT": 17146,
+      "avgTypicalWeekdayUPT": 57,
+      "weekdaysOperated": 253
+     },
+     {
+      "reportYear": 2022,
+      "mode": "FB",
+      "modeName": "Ferryboat",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 1728,
+      "weekdaysOperated": 254,
+      "annualUPT": 690362
+     },
+     {
+      "reportYear": 2022,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "annualUPT": 1037926,
+      "avgTypicalWeekdayUPT": 3203,
+      "weekdaysOperated": 253
+     },
+     {
+      "reportYear": 2023,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 41,
+      "weekdaysOperated": 253,
+      "annualUPT": 12485
+     },
+     {
+      "reportYear": 2023,
+      "mode": "FB",
+      "modeName": "Ferryboat",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 3208,
+      "weekdaysOperated": 252,
+      "annualUPT": 1155682
+     },
+     {
+      "reportYear": 2023,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 4112,
+      "weekdaysOperated": 253,
+      "annualUPT": 1308398
+     },
+     {
+      "reportYear": 2024,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 37,
+      "weekdaysOperated": 251,
+      "annualUPT": 11571
+     },
+     {
+      "reportYear": 2024,
+      "mode": "FB",
+      "modeName": "Ferryboat",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 4041,
+      "weekdaysOperated": 252,
+      "annualUPT": 1421356
+     },
+     {
+      "reportYear": 2024,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 4514,
+      "weekdaysOperated": 251,
+      "annualUPT": 1432232
+     }
+    ]
+   },
+   "SF Bay Ferry (WETA)": {
+    "ntdId": "90225",
+    "byYearMode": [
+     {
+      "reportYear": 2022,
+      "mode": "FB",
+      "modeName": "Ferryboat",
+      "typeOfService": "PT",
+      "annualUPT": 1412543,
+      "avgTypicalWeekdayUPT": 3915,
+      "weekdaysOperated": 261
+     },
+     {
+      "reportYear": 2023,
+      "mode": "FB",
+      "modeName": "Ferryboat",
+      "typeOfService": "PT",
+      "annualUPT": 2024646,
+      "avgTypicalWeekdayUPT": 5978,
+      "weekdaysOperated": 260
+     },
+     {
+      "reportYear": 2024,
+      "mode": "FB",
+      "modeName": "Ferryboat",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 6987,
+      "weekdaysOperated": 256,
+      "annualUPT": 2388379
+     }
+    ]
+   },
+   "AC Transit": {
+    "ntdId": "90014",
+    "byYearMode": [
+     {
+      "reportYear": 2022,
+      "mode": "CB",
+      "modeName": "Commuter Bus",
+      "typeOfService": "DO",
+      "annualUPT": 270332,
+      "avgTypicalWeekdayUPT": 1060,
+      "weekdaysOperated": 255
+     },
+     {
+      "reportYear": 2022,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "annualUPT": 316792,
+      "avgTypicalWeekdayUPT": 1054,
+      "weekdaysOperated": 261
+     },
+     {
+      "reportYear": 2022,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "annualUPT": 25111856,
+      "avgTypicalWeekdayUPT": 78519,
+      "weekdaysOperated": 255
+     },
+     {
+      "reportYear": 2022,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 480,
+      "weekdaysOperated": 254,
+      "annualUPT": 121926
+     },
+     {
+      "reportYear": 2022,
+      "mode": "RB",
+      "modeName": "Bus Rapid Transit",
+      "typeOfService": "DO",
+      "annualUPT": 3526675,
+      "avgTypicalWeekdayUPT": 10392,
+      "weekdaysOperated": 255
+     },
+     {
+      "reportYear": 2023,
+      "mode": "CB",
+      "modeName": "Commuter Bus",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 1848,
+      "weekdaysOperated": 253,
+      "annualUPT": 467661
+     },
+     {
+      "reportYear": 2023,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 1397,
+      "weekdaysOperated": 261,
+      "annualUPT": 419288
+     },
+     {
+      "reportYear": 2023,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 94698,
+      "weekdaysOperated": 253,
+      "annualUPT": 30029858
+     },
+     {
+      "reportYear": 2023,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "PT",
+      "annualUPT": 167120,
+      "avgTypicalWeekdayUPT": 658,
+      "weekdaysOperated": 254
+     },
+     {
+      "reportYear": 2023,
+      "mode": "RB",
+      "modeName": "Bus Rapid Transit",
+      "typeOfService": "DO",
+      "annualUPT": 4106130,
+      "avgTypicalWeekdayUPT": 12097,
+      "weekdaysOperated": 253
+     },
+     {
+      "reportYear": 2024,
+      "mode": "CB",
+      "modeName": "Commuter Bus",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 2130,
+      "weekdaysOperated": 252,
+      "annualUPT": 536641
+     },
+     {
+      "reportYear": 2024,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 1598,
+      "weekdaysOperated": 260,
+      "annualUPT": 480098
+     },
+     {
+      "reportYear": 2024,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 107225,
+      "weekdaysOperated": 252,
+      "annualUPT": 33931071
+     },
+     {
+      "reportYear": 2024,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 780,
+      "weekdaysOperated": 253,
+      "annualUPT": 197510
+     },
+     {
+      "reportYear": 2024,
+      "mode": "RB",
+      "modeName": "Bus Rapid Transit",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 14027,
+      "weekdaysOperated": 252,
+      "annualUPT": 4798970
+     }
+    ]
+   },
+   "SFMTA (Muni)": {
+    "ntdId": "90015",
+    "byYearMode": [
+     {
+      "reportYear": 2022,
+      "mode": "CC",
+      "modeName": "Cable Car",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 7485,
+      "weekdaysOperated": 211,
+      "annualUPT": 2154157
+     },
+     {
+      "reportYear": 2022,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "annualUPT": 184760,
+      "avgTypicalWeekdayUPT": 631,
+      "weekdaysOperated": 261
+     },
+     {
+      "reportYear": 2022,
+      "mode": "LR",
+      "modeName": "Light Rail",
+      "typeOfService": "DO",
+      "annualUPT": 13992686,
+      "avgTypicalWeekdayUPT": 42720,
+      "weekdaysOperated": 254
+     },
+     {
+      "reportYear": 2022,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "annualUPT": 54363946,
+      "avgTypicalWeekdayUPT": 167058,
+      "weekdaysOperated": 254
+     },
+     {
+      "reportYear": 2022,
+      "mode": "SR",
+      "modeName": "Streetcar Rail",
+      "typeOfService": "DO",
+      "annualUPT": 2611080,
+      "avgTypicalWeekdayUPT": 7675,
+      "weekdaysOperated": 254
+     },
+     {
+      "reportYear": 2022,
+      "mode": "TB",
+      "modeName": "Trolleybus",
+      "typeOfService": "DO",
+      "annualUPT": 29389681,
+      "avgTypicalWeekdayUPT": 86984,
+      "weekdaysOperated": 254
+     },
+     {
+      "reportYear": 2023,
+      "mode": "CC",
+      "modeName": "Cable Car",
+      "typeOfService": "DO",
+      "annualUPT": 2926495,
+      "avgTypicalWeekdayUPT": 7863,
+      "weekdaysOperated": 252
+     },
+     {
+      "reportYear": 2023,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "annualUPT": 237353,
+      "avgTypicalWeekdayUPT": 824,
+      "weekdaysOperated": 261
+     },
+     {
+      "reportYear": 2023,
+      "mode": "LR",
+      "modeName": "Light Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 71198,
+      "weekdaysOperated": 252,
+      "annualUPT": 23281310
+     },
+     {
+      "reportYear": 2023,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "annualUPT": 71851901,
+      "avgTypicalWeekdayUPT": 221292,
+      "weekdaysOperated": 252
+     },
+     {
+      "reportYear": 2023,
+      "mode": "SR",
+      "modeName": "Streetcar Rail",
+      "typeOfService": "DO",
+      "annualUPT": 3136144,
+      "avgTypicalWeekdayUPT": 8742,
+      "weekdaysOperated": 252
+     },
+     {
+      "reportYear": 2023,
+      "mode": "TB",
+      "modeName": "Trolleybus",
+      "typeOfService": "DO",
+      "annualUPT": 37694490,
+      "avgTypicalWeekdayUPT": 111531,
+      "weekdaysOperated": 252
+     },
+     {
+      "reportYear": 2024,
+      "mode": "CC",
+      "modeName": "Cable Car",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 9814,
+      "weekdaysOperated": 249,
+      "annualUPT": 3925803
+     },
+     {
+      "reportYear": 2024,
+      "mode": "DR",
+      "modeName": "Demand Response",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 886,
+      "weekdaysOperated": 260,
+      "annualUPT": 254113
+     },
+     {
+      "reportYear": 2024,
+      "mode": "LR",
+      "modeName": "Light Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 86951,
+      "weekdaysOperated": 249,
+      "annualUPT": 28230682
+     },
+     {
+      "reportYear": 2024,
+      "mode": "MB",
+      "modeName": "Bus",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 240425,
+      "weekdaysOperated": 249,
+      "annualUPT": 77857337
+     },
+     {
+      "reportYear": 2024,
+      "mode": "SR",
+      "modeName": "Streetcar Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 10331,
+      "weekdaysOperated": 249,
+      "annualUPT": 3828113
+     },
+     {
+      "reportYear": 2024,
+      "mode": "TB",
+      "modeName": "Trolleybus",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 137480,
+      "weekdaysOperated": 249,
+      "annualUPT": 46447945
+     }
+    ]
+   },
+   "BART": {
+    "ntdId": "90003",
+    "byYearMode": [
+     {
+      "reportYear": 2022,
+      "mode": "HR",
+      "modeName": "Heavy Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 117094,
+      "weekdaysOperated": 256,
+      "annualUPT": 36774619
+     },
+     {
+      "reportYear": 2022,
+      "mode": "MG",
+      "modeName": "Monorail/Automated Guideway",
+      "typeOfService": "PT",
+      "annualUPT": 377608,
+      "avgTypicalWeekdayUPT": 1112,
+      "weekdaysOperated": 256
+     },
+     {
+      "reportYear": 2022,
+      "mode": "YR",
+      "modeName": "Hybrid Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 3701,
+      "weekdaysOperated": 256,
+      "annualUPT": 1071845
+     },
+     {
+      "reportYear": 2023,
+      "mode": "HR",
+      "modeName": "Heavy Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 159953,
+      "weekdaysOperated": 254,
+      "annualUPT": 49043322
+     },
+     {
+      "reportYear": 2023,
+      "mode": "MG",
+      "modeName": "Monorail/Automated Guideway",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 1383,
+      "weekdaysOperated": 255,
+      "annualUPT": 457366
+     },
+     {
+      "reportYear": 2023,
+      "mode": "YR",
+      "modeName": "Hybrid Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 4425,
+      "weekdaysOperated": 256,
+      "annualUPT": 1263714
+     },
+     {
+      "reportYear": 2024,
+      "mode": "HR",
+      "modeName": "Heavy Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 173243,
+      "weekdaysOperated": 252,
+      "annualUPT": 53222212
+     },
+     {
+      "reportYear": 2024,
+      "mode": "MG",
+      "modeName": "Monorail/Automated Guideway",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 1304,
+      "weekdaysOperated": 252,
+      "annualUPT": 432021
+     },
+     {
+      "reportYear": 2024,
+      "mode": "YR",
+      "modeName": "Hybrid Rail",
+      "typeOfService": "DO",
+      "avgTypicalWeekdayUPT": 4402,
+      "weekdaysOperated": 252,
+      "annualUPT": 1273133
+     }
+    ]
+   },
+   "Caltrain": {
+    "ntdId": "90134",
+    "byYearMode": [
+     {
+      "reportYear": 2022,
+      "mode": "CR",
+      "modeName": "Commuter Rail",
+      "typeOfService": "PT",
+      "annualUPT": 4054829,
+      "avgTypicalWeekdayUPT": 12205,
+      "weekdaysOperated": 253
+     },
+     {
+      "reportYear": 2023,
+      "mode": "CR",
+      "modeName": "Commuter Rail",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 22399,
+      "weekdaysOperated": 252,
+      "annualUPT": 7012116
+     },
+     {
+      "reportYear": 2024,
+      "mode": "CR",
+      "modeName": "Commuter Rail",
+      "typeOfService": "PT",
+      "avgTypicalWeekdayUPT": 24660,
+      "weekdaysOperated": 251,
+      "annualUPT": 7405005
+     }
+    ]
+   }
+  }
+ }
+}

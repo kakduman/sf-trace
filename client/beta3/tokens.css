@@ -1,0 +1,236 @@
+/*
+ * SF-TRACE: shared design tokens.
+ * Used by the app (/beta3, client/beta3/style.css) and the methodology article (/beta3/method).
+ * Token names are stable; change values here, never rename.
+ *
+ * Fonts. Load them in the page head:
+ *   <link rel="preconnect" href="https://fonts.googleapis.com" />
+ *   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ *   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400..800;1,400..600&family=Overpass+Mono:wght@400..600&display=swap" />
+ *   --font-sans   Overpass: an open-source descendant of the US highway sign alphabet (Highway Gothic).
+ *                 Used for everything: UI, headings, tables, article text. It has tabular figures:
+ *                 put `font-variant-numeric: tabular-nums` on numbers in columns (.num does it).
+ *   --font-mono   Overpass Mono: only for literal code, file names and the calibration log.
+ *   Overpass's middle dot (U+00B7) has no advance width in the Google Fonts build, so "A · B"
+ *   collapses; --font-sans puts a system face first for that one character only.
+ *
+ * Color. The interface is ink on paper; color is kept for data, and each data color means one
+ * thing everywhere (the travel modes, today vs scenario, more vs fewer riders, time periods).
+ *   Surfaces   --paper (page behind everything), --surface (panels), --surface-raised (inputs,
+ *              floating cards), --surface-sunk (wells, table heads), --surface-hover
+ *   Text       --ink (primary), --ink-2 (secondary), --ink-3 (captions, axis labels; still >= 4.5:1)
+ *   Lines      --rule (hairlines between rows and blocks), --rule-strong (control borders),
+ *              --grid (chart gridlines), --axis (chart baselines)
+ *   Sign band  --sign, --sign-ink, --sign-ink-2: the dark top bar, like a station sign
+ *   Actions    --link (links and the selected-state color), --focus (keyboard focus ring),
+ *              --action / --action-ink (primary buttons: filled ink)
+ *   Status     --warn-text, --up-text, --down-text, --caution-wash/--caution-rule (notices),
+ *              --info-wash/--info-rule
+ *   Data       --m-transit --m-walk --m-bike --m-da --m-sr --m-tnc   travel modes
+ *              --c-today (today's network) --c-scen (the scenario) --c-obs (counted) --c-model (modeled)
+ *              --c-up (more) --c-down (fewer)
+ *              --p-am --p-md --p-pm --p-nt   time periods
+ *   Dark mode follows the system unless <html data-theme="light|dark"> forces one.
+ *
+ * Type scale (px): --text-xs 11 · --text-sm 12 · --text-base 13.5 (app body) · --text-md 15 ·
+ *   --text-lg 18 · --text-xl 23 · --text-2xl 30 · --text-prose 17 (article body)
+ *   Line heights: --lh-tight 1.2 · --lh-base 1.5 · --lh-prose 1.62
+ *   Weights: 400 body, 600 labels and table heads, 700 headings, 800 route bullets and big figures.
+ * Spacing (px): --space-1 4 · --space-2 8 · --space-3 12 · --space-4 16 · --space-5 20 ·
+ *   --space-6 24 · --space-7 32 · --space-8 48
+ * Radii: --radius-sm 3px (controls, bullets) · --radius-md 5px (cards on the map) ·
+ *   --radius-pill (status pill, toggles)
+ * Elevation: --shadow-float, only for things floating over the map (layer card, legend, tooltip).
+ */
+
+@font-face {
+  font-family: 'Overpass Middot';
+  src: local('Helvetica Neue'), local('Helvetica'), local('Arial'), local('Liberation Sans'), local('DejaVu Sans'), local('Segoe UI');
+  unicode-range: U+00B7;
+}
+
+:root {
+  color-scheme: light;
+
+  --font-sans: 'Overpass Middot', 'Overpass', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --font-mono: 'Overpass Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 13.5px;
+  --text-md: 15px;
+  --text-lg: 18px;
+  --text-xl: 23px;
+  --text-2xl: 30px;
+  --text-prose: 17px;
+  --lh-tight: 1.2;
+  --lh-base: 1.5;
+  --lh-prose: 1.62;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-pill: 999px;
+
+  --paper: #e8ecee;
+  --surface: #f7f8f8;
+  --surface-raised: #ffffff;
+  --surface-sunk: #eef1f2;
+  --surface-hover: #e4e9eb;
+  --ink: #132029;
+  --ink-2: #3c4a54;
+  --ink-3: #5a6670;
+  --rule: #d6dcdf;
+  --rule-strong: #808d95;
+  --grid: #e2e7e9;
+  --axis: #9ba7ae;
+  --sign: #132029;
+  --sign-ink: #f3f6f7;
+  --sign-ink-2: #a8b5bd;
+  --sign-rule: #2c3a44;
+  --link: #1a56a8;
+  --focus: #1f66d1;
+  --action: #132029;
+  --action-hover: #26353f;
+  --action-ink: #ffffff;
+  --select-wash: rgba(26, 86, 168, 0.09);
+  --warn-text: #b02a20;
+  --up-text: #1a56a8;
+  --down-text: #b02a20;
+  --caution-wash: #fbf1d6;
+  --caution-rule: #e3c372;
+  --info-wash: #e7eef8;
+  --info-rule: #b7cbe6;
+  --shadow-float: 0 1px 2px rgba(19, 32, 41, 0.1), 0 4px 14px rgba(19, 32, 41, 0.12);
+
+  --m-transit: #2a78d6;
+  --m-walk: #1baf7a;
+  --m-bike: #008300;
+  --m-da: #eb6834;
+  --m-sr: #eda100;
+  --m-tnc: #e87ba4;
+  --c-transit: #2a78d6;
+  --c-today: #8c979e;
+  --c-scen: #2a78d6;
+  --c-obs: #3c4a54;
+  --c-model: #4a3aa7;
+  --c-up: #2a78d6;
+  --c-down: #d03b3b;
+  --p-am: #2a78d6;
+  --p-md: #1baf7a;
+  --p-pm: #eb6834;
+  --p-nt: #4a3aa7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --paper: #0c1215;
+    --surface: #131b20;
+    --surface-raised: #1a242a;
+    --surface-sunk: #0f161a;
+    --surface-hover: #212d34;
+    --ink: #e8edf0;
+    --ink-2: #b6c2c9;
+    --ink-3: #8c99a1;
+    --rule: #26323a;
+    --rule-strong: #64737c;
+    --grid: #212c33;
+    --axis: #4a5861;
+    --sign: #080d10;
+    --sign-ink: #eef2f4;
+    --sign-ink-2: #98a6ae;
+    --sign-rule: #26323a;
+    --link: #8cb9f4;
+    --focus: #7fb1f6;
+    --action: #e8edf0;
+    --action-hover: #ffffff;
+    --action-ink: #0c1215;
+    --select-wash: rgba(140, 185, 244, 0.13);
+    --warn-text: #f2958c;
+    --up-text: #8cb9f4;
+    --down-text: #f2958c;
+    --caution-wash: #2e2610;
+    --caution-rule: #6b5620;
+    --info-wash: #15233a;
+    --info-rule: #2c4568;
+    --shadow-float: 0 1px 2px rgba(0, 0, 0, 0.45), 0 6px 18px rgba(0, 0, 0, 0.5);
+
+    --m-transit: #3987e5;
+    --m-walk: #199e70;
+    --m-bike: #2a9a2a;
+    --m-da: #d95926;
+    --m-sr: #c98500;
+    --m-tnc: #d55181;
+    --c-transit: #3987e5;
+    --c-today: #7f8b92;
+    --c-scen: #3987e5;
+    --c-obs: #b6c2c9;
+    --c-model: #9085e9;
+    --c-up: #3987e5;
+    --c-down: #e66767;
+    --p-am: #3987e5;
+    --p-md: #199e70;
+    --p-pm: #d95926;
+    --p-nt: #9085e9;
+  }
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #0c1215;
+  --surface: #131b20;
+  --surface-raised: #1a242a;
+  --surface-sunk: #0f161a;
+  --surface-hover: #212d34;
+  --ink: #e8edf0;
+  --ink-2: #b6c2c9;
+  --ink-3: #8c99a1;
+  --rule: #26323a;
+  --rule-strong: #64737c;
+  --grid: #212c33;
+  --axis: #4a5861;
+  --sign: #080d10;
+  --sign-ink: #eef2f4;
+  --sign-ink-2: #98a6ae;
+  --sign-rule: #26323a;
+  --link: #8cb9f4;
+  --focus: #7fb1f6;
+  --action: #e8edf0;
+  --action-hover: #ffffff;
+  --action-ink: #0c1215;
+  --select-wash: rgba(140, 185, 244, 0.13);
+  --warn-text: #f2958c;
+  --up-text: #8cb9f4;
+  --down-text: #f2958c;
+  --caution-wash: #2e2610;
+  --caution-rule: #6b5620;
+  --info-wash: #15233a;
+  --info-rule: #2c4568;
+  --shadow-float: 0 1px 2px rgba(0, 0, 0, 0.45), 0 6px 18px rgba(0, 0, 0, 0.5);
+
+  --m-transit: #3987e5;
+  --m-walk: #199e70;
+  --m-bike: #2a9a2a;
+  --m-da: #d95926;
+  --m-sr: #c98500;
+  --m-tnc: #d55181;
+  --c-transit: #3987e5;
+  --c-today: #7f8b92;
+  --c-scen: #3987e5;
+  --c-obs: #b6c2c9;
+  --c-model: #9085e9;
+  --c-up: #3987e5;
+  --c-down: #e66767;
+  --p-am: #3987e5;
+  --p-md: #199e70;
+  --p-pm: #d95926;
+  --p-nt: #9085e9;
+}

@@ -1,0 +1,61 @@
+{
+  "description": "Employers that LEHD LODES files at a single head-office address but that work at several sites in San Francisco, placed at their sites from the employer's own published counts. Used by server/beta3/pipeline/zones.ts: the employer's jobs are taken out of the head-office block groups (in the listed LODES CNS sectors, 1-based) and put at each site's census block, and their commuters' homes (LODES home-work flows to the head-office block groups) move with them.",
+  "accessed": "2026-10-05",
+  "employers": [
+    {
+      "name": "University of California, San Francisco (campus and UCSF Health)",
+      "source": "UCSF Real Estate, 'UCSF Population by Site and Category, December 2025' (https://realestate.ucsf.edu/ucsf-population-site-and-category-dec-2025; raw copy data/beta3/raw/destinations/ucsf-population-dec-2025.html). Faculty, staff (incl. clinical fellows) and postdoctoral scholars by site: Parnassus Heights 1,273 + 6,720 + 374 = 8,367; Mission Bay 1,489 + 7,677 + 576 = 9,742; Mount Zion and other sites 1,473 + 7,670 + 67 = 9,210. The same table gives each site's daily students, patients and visitors (Parnassus 3,419 students, 1,592 patients, 2,577 visitors; Mission Bay 722, 2,688, 2,835).",
+      "otherSitesSource": "'Mount Zion and other sites' is split by UCSF's 2014 Long Range Development Plan EIR, ch. 3 (August 2014), which gives faculty and staff at the other sites: Mount Zion about 1,840, Zuckerberg San Francisco General about 2,000, Mission Center (1855 Folsom) about 800, and Laurel Heights about 1,200. Laurel Heights closed in June 2023, most of its staff having moved to Mission Bay (UCSF News, 2023-06, https://www.ucsf.edu/news/2023/06/425641/ucsf-closes-laurel-heights-campus-ending-decades-long-run), so the other three sites' 2013 shares (39.7%, 43.1%, 17.2%) are applied to the 2025 total (assumed: leased offices are not listed separately).",
+      "headOffice": {
+        "note": "LODES 2023 files all of UCSF in two Inner Sunset block groups at Parnassus: 19,355 education jobs (CNS15) in 060750301012 and 15,205 health jobs (CNS16) in 060750301023, 34,560 in all, against 27,319 faculty, staff and postdocs at its San Francisco sites in December 2025.",
+        "blockGroups": [
+          "060750301012",
+          "060750301023"
+        ],
+        "sectors": [
+          15,
+          16
+        ]
+      },
+      "sites": [
+        {
+          "site": "Parnassus Heights",
+          "lat": 37.7632,
+          "lon": -122.4583,
+          "jobs": 8367,
+          "healthShare": 0.55
+        },
+        {
+          "site": "Mission Bay",
+          "lat": 37.7672,
+          "lon": -122.3906,
+          "jobs": 9742,
+          "healthShare": 0.55
+        },
+        {
+          "site": "Mount Zion",
+          "lat": 37.7849,
+          "lon": -122.4393,
+          "jobs": 3652,
+          "healthShare": 1
+        },
+        {
+          "site": "Zuckerberg San Francisco General",
+          "lat": 37.7556,
+          "lon": -122.4049,
+          "jobs": 3970,
+          "healthShare": 1
+        },
+        {
+          "site": "Mission Center (1855 Folsom)",
+          "lat": 37.7676,
+          "lon": -122.4152,
+          "jobs": 1588,
+          "healthShare": 0
+        }
+      ],
+      "healthShareNote": "Health (CNS16) against education (CNS15): the medical-center sites are health; Parnassus and Mission Bay, each with hospitals and schools or research, are split 55/45 (assumed); Mission Center (administration) is education.",
+      "mtcNote": "MTC's 2023 land use (TM1 TAZ1454) keeps 16,508 of these jobs in TAZ 90 (Parnassus) and puts 14,180 health, education and recreation jobs in TAZ 81 (Hayes Valley, around Market and Octavia), where LODES has 1,345 and no hospital stands (block groups 060750168011-168023, between Haight, Market, Octavia and Buchanan); and it has only 6,542 such jobs in Mission Bay's three TAZs (108-110). So the health-education-recreation group (HEREMPN) is not rebalanced to MTC once UCSF is placed here."
+    }
+  ]
+}

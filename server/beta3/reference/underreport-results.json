@@ -1,0 +1,482 @@
+{
+ "description": "Survey underreporting by segment as a cause of Muni's misses near home (research/underreporting.md). Stress tests of params.ts UNDERREPORT, which is 1 in the model: two-pass experiment.ts runs from the base run's crowding on the calibrated bundle. Muni's 57 counted routes are scaled to their counted total so only the pattern is compared; route counts are not fitted. Districts: Muni boardings by the district of the stop, the model against SFMTA's 2006–07 stop counts taken as shares of the model's total.",
+ "generated": "2026-10-09",
+ "households": {
+  "city": {
+   "limitedEnglish": 0.10860785256691685,
+   "under100k": 0.38831497101409457
+  },
+  "byDistrict": {
+   "Downtown": {
+    "limitedEnglish": 0.1886738814851682,
+    "under100k": 0.5785304095673104
+   },
+   "SoMa": {
+    "limitedEnglish": 0.16070808760746821,
+    "under100k": 0.4960777507809788
+   },
+   "Mission Bay–Potrero": {
+    "limitedEnglish": 0.060171735525108135,
+    "under100k": 0.26192781974304347
+   },
+   "Northern": {
+    "limitedEnglish": 0.05176903358244134,
+    "under100k": 0.2933371910391006
+   },
+   "Western Addition–Haight": {
+    "limitedEnglish": 0.08328453586435569,
+    "under100k": 0.3953686451956348
+   },
+   "Mission": {
+    "limitedEnglish": 0.0863785974912302,
+    "under100k": 0.37138155118575406
+   },
+   "Castro–Noe–Bernal": {
+    "limitedEnglish": 0.02928891859721291,
+    "under100k": 0.2782962924766668
+   },
+   "Richmond": {
+    "limitedEnglish": 0.11711095141076486,
+    "under100k": 0.36264409221902016
+   },
+   "Sunset": {
+    "limitedEnglish": 0.11949299894395896,
+    "under100k": 0.3435807012163958
+   },
+   "Southwest": {
+    "limitedEnglish": 0.09904213790261605,
+    "under100k": 0.3545981145647976
+   },
+   "Excelsior–Visitacion Valley": {
+    "limitedEnglish": 0.18994392982952718,
+    "under100k": 0.41719500128266207
+   },
+   "Bayview–Hunters Point": {
+    "limitedEnglish": 0.14537014573313717,
+    "under100k": 0.5458099193745419
+   }
+  }
+ },
+ "runs": [
+  {
+   "test": "base",
+   "what": "the model as calibrated (all factors 1)",
+   "muniRoutes": {
+    "model": 401353,
+    "observed": 515626,
+    "scaledBy": 1.2847196549739788,
+    "r": 0.9228740886533165,
+    "pctRmseScaled": 37.97436294649572,
+    "within25Scaled": 0.5087719298245614
+   },
+   "routesScaled": {
+    "8": {
+     "model": 14223,
+     "observed": 18367
+    },
+    "14": {
+     "model": 14691,
+     "observed": 22150
+    },
+    "30": {
+     "model": 13058,
+     "observed": 14933
+    },
+    "49": {
+     "model": 30365,
+     "observed": 35033
+    },
+    "T": {
+     "model": 11401,
+     "observed": 24967
+    },
+    "14R": {
+     "model": 11884,
+     "observed": 22725
+    }
+   },
+   "districts": [
+    {
+     "district": "Downtown",
+     "model": 98238,
+     "tep2006": 107048
+    },
+    {
+     "district": "SoMa",
+     "model": 32318,
+     "tep2006": 30972
+    },
+    {
+     "district": "Mission Bay–Potrero",
+     "model": 15943,
+     "tep2006": 8279
+    },
+    {
+     "district": "Northern",
+     "model": 43549,
+     "tep2006": 43130
+    },
+    {
+     "district": "Western Addition–Haight",
+     "model": 47541,
+     "tep2006": 39402
+    },
+    {
+     "district": "Mission",
+     "model": 26439,
+     "tep2006": 27738
+    },
+    {
+     "district": "Castro–Noe–Bernal",
+     "model": 36570,
+     "tep2006": 31593
+    },
+    {
+     "district": "Richmond",
+     "model": 25851,
+     "tep2006": 26780
+    },
+    {
+     "district": "Sunset",
+     "model": 30085,
+     "tep2006": 29262
+    },
+    {
+     "district": "Southwest",
+     "model": 24077,
+     "tep2006": 31472
+    },
+    {
+     "district": "Excelsior–Visitacion Valley",
+     "model": 34132,
+     "tep2006": 36463
+    },
+    {
+     "district": "Bayview–Hunters Point",
+     "model": 9165,
+     "tep2006": 11771
+    }
+   ],
+   "bartCityExits": {
+    "r": 0.8506033211137599,
+    "total": 1.0120758563934804
+   },
+   "residentTransitShare": 0.13435538428857766
+  },
+  {
+   "test": "inc125",
+   "what": "households under $100,000: shopping, other, and social tours ×1.25 (the top of RSG's 15–25% smartphone-over-web gap, given to every low-income household)",
+   "muniRoutes": {
+    "model": 426362,
+    "observed": 515626,
+    "scaledBy": 1.2093625429159724,
+    "r": 0.9208957958430605,
+    "pctRmseScaled": 38.438223038470774,
+    "within25Scaled": 0.47368421052631576
+   },
+   "routesScaled": {
+    "8": {
+     "model": 14353,
+     "observed": 18367
+    },
+    "14": {
+     "model": 14827,
+     "observed": 22150
+    },
+    "30": {
+     "model": 13056,
+     "observed": 14933
+    },
+    "49": {
+     "model": 30651,
+     "observed": 35033
+    },
+    "T": {
+     "model": 11296,
+     "observed": 24967
+    },
+    "14R": {
+     "model": 11798,
+     "observed": 22725
+    }
+   },
+   "districts": [
+    {
+     "district": "Downtown",
+     "model": 104255,
+     "tep2006": 113411
+    },
+    {
+     "district": "SoMa",
+     "model": 34360,
+     "tep2006": 32813
+    },
+    {
+     "district": "Mission Bay–Potrero",
+     "model": 16473,
+     "tep2006": 8771
+    },
+    {
+     "district": "Northern",
+     "model": 45664,
+     "tep2006": 45694
+    },
+    {
+     "district": "Western Addition–Haight",
+     "model": 50741,
+     "tep2006": 41744
+    },
+    {
+     "district": "Mission",
+     "model": 28050,
+     "tep2006": 29386
+    },
+    {
+     "district": "Castro–Noe–Bernal",
+     "model": 38373,
+     "tep2006": 33471
+    },
+    {
+     "district": "Richmond",
+     "model": 27523,
+     "tep2006": 28372
+    },
+    {
+     "district": "Sunset",
+     "model": 31915,
+     "tep2006": 31001
+    },
+    {
+     "district": "Southwest",
+     "model": 25407,
+     "tep2006": 33343
+    },
+    {
+     "district": "Excelsior–Visitacion Valley",
+     "model": 36467,
+     "tep2006": 38631
+    },
+    {
+     "district": "Bayview–Hunters Point",
+     "model": 9879,
+     "tep2006": 12470
+    }
+   ],
+   "bartCityExits": {
+    "r": 0.8495631150416042,
+    "total": 1.019274357532638
+   },
+   "residentTransitShare": 0.13552409751551084
+  },
+  {
+   "test": "lep2",
+   "what": "limited-English households: those tours ×2 (the cap on RSG's factors, given to every limited-English household)",
+   "muniRoutes": {
+    "model": 427925,
+    "observed": 515626,
+    "scaledBy": 1.2049439650441411,
+    "r": 0.9217919817509445,
+    "pctRmseScaled": 38.228549188036546,
+    "within25Scaled": 0.47368421052631576
+   },
+   "routesScaled": {
+    "8": {
+     "model": 14788,
+     "observed": 18367
+    },
+    "14": {
+     "model": 15007,
+     "observed": 22150
+    },
+    "30": {
+     "model": 13386,
+     "observed": 14933
+    },
+    "49": {
+     "model": 30577,
+     "observed": 35033
+    },
+    "T": {
+     "model": 11365,
+     "observed": 24967
+    },
+    "14R": {
+     "model": 11948,
+     "observed": 22725
+    }
+   },
+   "districts": [
+    {
+     "district": "Downtown",
+     "model": 106041,
+     "tep2006": 113812
+    },
+    {
+     "district": "SoMa",
+     "model": 34622,
+     "tep2006": 32929
+    },
+    {
+     "district": "Mission Bay–Potrero",
+     "model": 16396,
+     "tep2006": 8802
+    },
+    {
+     "district": "Northern",
+     "model": 45635,
+     "tep2006": 45855
+    },
+    {
+     "district": "Western Addition–Haight",
+     "model": 50254,
+     "tep2006": 41892
+    },
+    {
+     "district": "Mission",
+     "model": 27836,
+     "tep2006": 29490
+    },
+    {
+     "district": "Castro–Noe–Bernal",
+     "model": 37746,
+     "tep2006": 33589
+    },
+    {
+     "district": "Richmond",
+     "model": 27552,
+     "tep2006": 28473
+    },
+    {
+     "district": "Sunset",
+     "model": 32000,
+     "tep2006": 31111
+    },
+    {
+     "district": "Southwest",
+     "model": 25420,
+     "tep2006": 33461
+    },
+    {
+     "district": "Excelsior–Visitacion Valley",
+     "model": 37391,
+     "tep2006": 38768
+    },
+    {
+     "district": "Bayview–Hunters Point",
+     "model": 9803,
+     "tep2006": 12514
+    }
+   ],
+   "bartCityExits": {
+    "r": 0.8492469731600766,
+    "total": 1.0207481922971564
+   },
+   "residentTransitShare": 0.13369326911538873
+  },
+  {
+   "test": "strong",
+   "what": "all at once, beyond any source: under $100,000 ×1.5, households without a car another ×1.3, limited-English ×2",
+   "muniRoutes": {
+    "model": 535173,
+    "observed": 515626,
+    "scaledBy": 0.9634756567654383,
+    "r": 0.9145669927145534,
+    "pctRmseScaled": 39.880493523630946,
+    "within25Scaled": 0.5087719298245614
+   },
+   "routesScaled": {
+    "8": {
+     "model": 15300,
+     "observed": 18367
+    },
+    "14": {
+     "model": 15346,
+     "observed": 22150
+    },
+    "30": {
+     "model": 13893,
+     "observed": 14933
+    },
+    "49": {
+     "model": 31693,
+     "observed": 35033
+    },
+    "T": {
+     "model": 11044,
+     "observed": 24967
+    },
+    "14R": {
+     "model": 11618,
+     "observed": 22725
+    }
+   },
+   "districts": [
+    {
+     "district": "Downtown",
+     "model": 134150,
+     "tep2006": 141114
+    },
+    {
+     "district": "SoMa",
+     "model": 44028,
+     "tep2006": 40829
+    },
+    {
+     "district": "Mission Bay–Potrero",
+     "model": 18633,
+     "tep2006": 10913
+    },
+    {
+     "district": "Northern",
+     "model": 55382,
+     "tep2006": 56855
+    },
+    {
+     "district": "Western Addition–Haight",
+     "model": 64182,
+     "tep2006": 51941
+    },
+    {
+     "district": "Mission",
+     "model": 34596,
+     "tep2006": 36564
+    },
+    {
+     "district": "Castro–Noe–Bernal",
+     "model": 45157,
+     "tep2006": 41647
+    },
+    {
+     "district": "Richmond",
+     "model": 34381,
+     "tep2006": 35303
+    },
+    {
+     "district": "Sunset",
+     "model": 39197,
+     "tep2006": 38574
+    },
+    {
+     "district": "Southwest",
+     "model": 30414,
+     "tep2006": 41488
+    },
+    {
+     "district": "Excelsior–Visitacion Valley",
+     "model": 46284,
+     "tep2006": 48067
+    },
+    {
+     "district": "Bayview–Hunters Point",
+     "model": 12407,
+     "tep2006": 15516
+    }
+   ],
+   "bartCityExits": {
+    "r": 0.8448722399019354,
+    "total": 1.0528090173846811
+   },
+   "residentTransitShare": 0.14297364768157225
+  }
+ ]
+}

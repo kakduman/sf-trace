@@ -1,0 +1,217 @@
+{
+ "description": "Checks of the person-level choices (abm-validate.ts), one demand pass on today's network.",
+ "demandSeconds": 40.7,
+ "segments": 171464,
+ "householdSegments": 219732,
+ "stayHome": {
+  "model": 0.218,
+  "bats2023": 0.218,
+  "note": "fitted (one shift on NHTS 2017 shares by person type)"
+ },
+ "byPtype": {
+  "1": {
+   "persons": 366261,
+   "pattern": {
+    "M": 0.479,
+    "N": 0.356,
+    "H": 0.164
+   },
+   "patternNhts2017": {
+    "M": 0.777,
+    "N": 0.168,
+    "H": 0.055
+   },
+   "workTours": 0.47,
+   "schoolTours": 0.031,
+   "nonMandatoryTours": 0.679,
+   "tripsPerPerson": 3.39,
+   "tripsPerPersonNhts2017": 3.79
+  },
+  "2": {
+   "persons": 91595,
+   "pattern": {
+    "M": 0.47,
+    "N": 0.347,
+    "H": 0.183
+   },
+   "patternNhts2017": {
+    "M": 0.465,
+    "N": 0.39,
+    "H": 0.146
+   },
+   "workTours": 0.488,
+   "schoolTours": 0,
+   "nonMandatoryTours": 1.089,
+   "tripsPerPerson": 4.44,
+   "tripsPerPersonNhts2017": 4.36
+  },
+  "3": {
+   "persons": 40662,
+   "pattern": {
+    "M": 0.63,
+    "N": 0.108,
+    "H": 0.262
+   },
+   "patternNhts2017": {
+    "M": 0.63,
+    "N": 0.136,
+    "H": 0.234
+   },
+   "workTours": 0.273,
+   "schoolTours": 0.422,
+   "nonMandatoryTours": 0.378,
+   "tripsPerPerson": 2.96,
+   "tripsPerPersonNhts2017": 3.07
+  },
+  "4": {
+   "persons": 98983,
+   "pattern": {
+    "M": 0,
+    "N": 0.647,
+    "H": 0.353
+   },
+   "patternNhts2017": {
+    "M": 0.057,
+    "N": 0.681,
+    "H": 0.263
+   },
+   "workTours": 0,
+   "schoolTours": 0,
+   "nonMandatoryTours": 1.354,
+   "tripsPerPerson": 3.53,
+   "tripsPerPersonNhts2017": 3.55
+  },
+  "5": {
+   "persons": 113906,
+   "pattern": {
+    "M": 0,
+    "N": 0.728,
+    "H": 0.272
+   },
+   "patternNhts2017": {
+    "M": 0.016,
+    "N": 0.778,
+    "H": 0.206
+   },
+   "workTours": 0,
+   "schoolTours": 0,
+   "nonMandatoryTours": 1.179,
+   "tripsPerPerson": 3.1,
+   "tripsPerPersonNhts2017": 3.17
+  },
+  "6": {
+   "persons": 15771,
+   "pattern": {
+    "M": 0.688,
+    "N": 0.137,
+    "H": 0.176
+   },
+   "patternNhts2017": {
+    "M": 0.687,
+    "N": 0.164,
+    "H": 0.149
+   },
+   "workTours": 0.012,
+   "schoolTours": 0.722,
+   "nonMandatoryTours": 0.498,
+   "tripsPerPerson": 3.2,
+   "tripsPerPersonNhts2017": 2.85
+  },
+  "7": {
+   "persons": 60533,
+   "pattern": {
+    "M": 0.695,
+    "N": 0.152,
+    "H": 0.152
+   },
+   "patternNhts2017": {
+    "M": 0.715,
+    "N": 0.167,
+    "H": 0.118
+   },
+   "workTours": 0,
+   "schoolTours": 0.714,
+   "nonMandatoryTours": 0.475,
+   "tripsPerPerson": 3.07,
+   "tripsPerPersonNhts2017": 2.96
+  },
+  "8": {
+   "persons": 39484,
+   "pattern": {
+    "M": 0.248,
+    "N": 0.376,
+    "H": 0.376
+   },
+   "patternNhts2017": {
+    "M": 0.715,
+    "N": 0.167,
+    "H": 0.118
+   },
+   "workTours": 0,
+   "schoolTours": 0.248,
+   "nonMandatoryTours": 0.603,
+   "tripsPerPerson": 2.22,
+   "tripsPerPersonNhts2017": 2.96
+  }
+ },
+ "adults": {
+  "tripsPerPerson": 3.47,
+  "bats2023": 3.231
+ },
+ "under18": {
+  "trips": 323560,
+  "bats2023": 121621
+ },
+ "fullTimeWorkers": {
+  "commuteShare": 0.47,
+  "commuteShareNotWfh": 0.607,
+  "fitted": "work tours per worker not working from home = 0.606 (BATS 2023 Table 45 × absence)",
+  "bats2023DayLevel": 0.322,
+  "tripsOnCommuteDays": 3.64,
+  "tripsOtherDays": 3.01,
+  "bats2023": {
+   "commuted": 4.262,
+   "notCommuted": 2.9
+  }
+ },
+ "school": {
+  "residentsK12Tours": 58468,
+  "residentsK12Trips": 116937,
+  "cdeEnrollmentAtCitySchools": 72311,
+  "enrollmentOnAverageWeekday": 46877,
+  "byZonePctRmse": 6.1
+ },
+ "workplaces": {
+  "cellsObserved": 2111,
+  "shareCorrelation": 0.964,
+  "shareRmse": 0.000275,
+  "dissimilarity": 0.126,
+  "outOfCity": {
+   "model": 0.233,
+   "census": 0.22
+  },
+  "meanKmInCity": 5.44,
+  "distanceScale": 0.5844
+ },
+ "residentTrips": 2713720,
+ "residentShares": {
+  "da": 0.2664,
+  "sr": 0.2168,
+  "tnc": 0.0259,
+  "transit": 0.1213,
+  "walk": 0.3407,
+  "bike": 0.029
+ },
+ "byPurpose": {
+  "work": 752075,
+  "school": 116937,
+  "univ": 56829,
+  "shop": 235117,
+  "other": 441813,
+  "social": 750253,
+  "nhb": 831168,
+  "visitor": 161348,
+  "airport": 30000,
+  "regional": 133115
+ }
+}

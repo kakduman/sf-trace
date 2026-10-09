@@ -1,0 +1,228 @@
+{
+ "description": "Observed crowding on Muni and the literature behind capacity at boarding (failure to board) in the model (shared/beta3/model.ts boardingAvailability). Used to check where the model's capacity constraint binds; nothing here is fitted. Gathered 2026-10-05; items marked UNVERIFIED could not be confirmed against the primary source.",
+ "accessed": "2026-10-05",
+ "method": [
+  {
+   "ref": "Cepeda, M., Cominetti, R., Florian, M. (2006). A frequency-based assignment model for congested transit networks with strict capacity constraints: characterization and computation of equilibria. Transportation Research Part B 40(6):437-459.",
+   "url": "https://doi.org/10.1016/j.trb.2005.05.006",
+   "key_facts": [
+    "DOI 10.1016/j.trb.2005.05.006 (verified via Crossref).",
+    "Effective frequency on the boarding arc of line a: f_a(v) = mu_a * [1 - ( v_a / (mu_a*K - vt_a + v_a) )^beta] if vt_a < mu_a*K, else epsilon (tiny). mu_a = nominal frequency (veh/time), K = vehicle capacity, so mu_a*K = line capacity per unit time; v_a = boardings at the stop; vt_a = on-board flow on the in-vehicle segment just after the stop (through flow + boardings). So the denominator mu_a*K - vt_a + v_a is the residual capacity left for boarders (capacity minus through riders). UNVERIFIED against the original text: this general form comes from a secondary summary. It is consistent with the origin-stop special case published in Orlando, Degano & Lotito (arXiv 2405.15631), Eq. 34: f(v) = mu*[1-(v/(mu*K))^beta] for 0<=v<mu*K, else epsilon.",
+    "epsilon = 1/999, i.e. an effective headway of about 999 when the vehicle is full (per arXiv 2405.15631, 'As in [2]'). This matches Emme's 999.98 headway cap.",
+    "beta: arXiv 2405.15631 uses beta = 0.2 in its CCF example. UNVERIFIED whether CCF's own tests used 0.2. Smaller beta penalises boarding well below capacity; larger beta only near capacity.",
+    "Solution method: equilibrium found heuristically by minimising a gap function with the method of successive averages (MSA), per the abstract (Universidad Adolfo Ibanez repository: https://pure.uai.cl/en/publications/a-frequency-based-assignment-model-for-congested-transit-networks)."
+   ]
+  },
+  {
+   "ref": "Orlando, Degano & Lotito (2024). An analysis of Wardrop equilibrium and social optimum in congested transit networks. arXiv:2405.15631v2.",
+   "url": "https://arxiv.org/abs/2405.15631",
+   "key_facts": [
+    "Open-access restatement of the CCF frequency function (Eq. 34), with epsilon = 1/999 and beta = 0.2.",
+    "Equilibrium solved with a 'self-regulated' averaging method rather than plain MSA."
+   ]
+  },
+  {
+   "ref": "Emme capacitated transit assignment (Modeller tool inro.emme.transit_assignment.capacitated_transit_assignment), as invoked by tm2py and the CMAP trip-based model. INRO (Bentley) wrote the Python functions.",
+   "url": "https://github.com/BayAreaMetro/tm2py/blob/master/tm2py/components/network/transit/transit_assign.py ; https://github.com/CMAP-REPOS/cmap_trip-based_model/blob/main/Database/transit_asmt_macros/cmap_transit_assignment.py",
+   "key_facts": [
+    "Each outer iteration runs an extended (optimal-strategy) transit assignment. A user-defined 'headway' function then raises the perceived headway @phdwy on segments where boardings exceed available capacity, with flows averaged (MSA) across iterations.",
+    "Headway update (calc_adjusted_headway, identical in tm2py and CMAP): available_cap = max(capacity - transit_volume + transit_boardings, 0); new_phdwy = min(999.98, prev_phdwy * min((boardings+1)/(available_cap+1), 1.5)); new_phdwy = max(line.headway, new_phdwy). This is a multiplicative fixed-point update capped at x1.5 per iteration, not a closed-form CCF function.",
+    "Capacity for the period = 60 * period_hours * vehicle.total_capacity / headway (tm2py time_period_capacity).",
+    "Stopping criteria (dict passed to the tool): max_iterations, relative_difference, percent_segments_over_capacity. tm2py-utils config and CMAP both use 3, 0.01, 0.01; the CMAP code comments '3 changed from 10 for testing'.",
+    "Capacity penalty saved for skims: @capacity_penalty = max(@phdwy - @eawt - line.headway, 0) * 0.5 (headway_fraction 0.5). Skimmed as 'CAPPEN' boarding cost.",
+    "Older Emme 4 congestion tool (Queensland TMR PTM documentation, https://tau-docs.tmr.qld.gov.au/ptm/docs/PTM%20Assignment/model_assignment/): effective headway = Min[headway / (1 - (boardings/residual capacity)^headway_adj), 999.98]; capacity = 60*vcapt/hdw; solved by MSA. headway_adj must be calibrated and has no published default. This is the CCF form expressed as a headway.",
+    "UNVERIFIED: Emme's own default parameter values and its exact convergence definitions are in the proprietary Emme help and could not be checked publicly."
+   ]
+  },
+  {
+   "ref": "tm2py (MTC Travel Model Two, python): CCR and congested transit assignment",
+   "url": "https://github.com/BayAreaMetro/tm2py (master f5e2097, 2025-10-10); config: https://github.com/BayAreaMetro/tm2py/blob/master/tm2py/config.py ; example values: https://github.com/BayAreaMetro/tm2py-utils/blob/main/tm2py_utils/config/develop/model_config.toml",
+   "key_facts": [
+    "TransitConfig fields: use_ccr: bool; ccr_stop_criteria: AssignmentStoppingCriteriaConfig(max_iterations, relative_difference, percent_segments_over_capacity); ccr_weights; eawt_weights; congested_transit_assignment: bool; max_ccr_iterations: float = None (declared but never used in the code).",
+    "In the tm2py-utils develop config: use_ccr = false, ccr_stop_criteria = (3, 0.01, 0.01), congested_transit_assignment = true. MTC therefore runs Emme's congested assignment (crowding cost only, no hard capacity) rather than CCR.",
+    "CcrWeightsConfig defaults: min_seat 1.0, max_seat 1.4, power_seat 2.2, min_stand 1.4, max_stand 1.6, power_stand 3.4. Segment crowding factor = [seated_pax*(min_seat+(max_seat-min_seat)*(V/C)^power_seat) + standing_pax*(min_stand+(max_stand-min_stand)*(V/C)^power_stand)] / V, minus 1 and floored at 0 (the code notes this is the Toronto form).",
+    "EawtWeightsConfig defaults (extra added wait time, minutes): constant 0.259625, weight_inverse_headway 1.612019, vcr 0.005274, exit_proportion 0.591765, default_eawt_factor 1. EAWT = c + w1/headway + w2*V/C + w3*(offs through segment / total offs), multiplied by a per-mode eawt_factor (0.4 or 0.2 for rail modes in the config). The code itself says 'Have no idea what source is here'; the CMAP copy labels it EAWT_AM.",
+    "Congested (non-CCR) mode: run for AM/PM only; uses tool inro.emme.transit_assignment.congested_transit_assignment with stop criteria normalized_gap 0.25, relative_gap 0.005 and max_iterations 2-3 per global iteration. Peaking factors am 1.219 and pm 1.262 (peak-hour to period) divide the headway so capacity reflects the peak hour.",
+    "Iteration 0 (warm start) runs an uncongested assignment; CCR or congested assignment applies from global iteration >= 1."
+   ]
+  },
+  {
+   "ref": "UK DfT TAG unit M3.2 Public Transport Assignment Modelling (May 2024)",
+   "url": "https://www.gov.uk/government/publications/tag-unit-m3-2-public-transport-assignment",
+   "key_facts": [
+    "3.6.2 names two crowding effects: (i) in-vehicle discomfort, a crowding factor on IVT that affects all riders on board; (ii) extra waiting at the stop when riders cannot board a full vehicle, estimated with queueing theory from the headway and the probability that vehicles are too full. Only some software supports (ii); otherwise it needs a 'scripted' solution.",
+    "3.6.3: crowding requires iterative assignment and calibrated curves. Model it only where it significantly affects behaviour; otherwise monitor V/C.",
+    "3.6.4 to 3.6.10: code seated capacity, load distribution factor and crush capacity. Curves may be capped at crush (100%) for stability. Table 3 LSE weights run from sit 1.00 / stand 1.43 at 0 pax/m2 to sit 1.54 / stand 2.21 at 6 pax/m2. Very high modelled standing densities indicate a model problem.",
+    "3.6.11: apply within-period demand and supply profiles so peak-within-period crowding is represented.",
+    "4.4.3: MSA forces stability without guaranteeing convergence. 4.4.4: target %gap <= 0.1%, where %gap = sum D|C^n - C'^(n-1)| / sum D C'^(n-1). 4.4.6: also report passenger-km per service (<1% change for 95% of services), boardings per service, perceived hours, and perceived wait per service when stop-crowding methods are used. Appendix C covers convergence reporting."
+   ]
+  },
+  {
+   "ref": "Practice values for MSA and convergence (synthesis)",
+   "url": "see sources above",
+   "key_facts": [
+    "CCF and Emme capacitated/congested tools use MSA (step 1/k) on flows. The Emme headway update is additionally damped by the x1.5 cap per iteration.",
+    "Production stopping values seen: Emme CCR max_iterations 3, relative_difference 0.01, percent_segments_over_capacity 0.01 (MTC, CMAP); Emme congested normalized_gap 0.25, relative_gap 0.005 (MTC); TAG %gap <= 0.1%.",
+    "Cube PT crowding in TM2 (Cube branch, http://bayareametro.github.io/travel-model-two/transit-ccr/guide/): dampening factors link 0.4, volume 0.4, wait 0.4; RMSE convergence 0.01; iterations 1 by default."
+   ]
+  }
+ ],
+ "sfmtaCrowding": [
+  {
+   "source": "SFMTA, Percent of daily Muni trips crowded by route and month (APC data; Tableau CSV)",
+   "url": "https://www.sfmta.com/reports/percent-daily-muni-trips-crowded-route-and-month ; CSV: https://transtat.sfmta.com/t/public/views/CrowdingbyRoute/CrowdingAccessibleTable.csv",
+   "date": "Monthly May 2022 to May 2026 (CSV pulled 2026-10-05). Page metadata says last updated 2023-05-01, but the data runs through May 2026.",
+   "metric": "Percentage of trips where vehicles are above (crowding) capacity for 10% or more of the stops, by route, direction and period (AM 6-9, Mid-Day 9-14, School 14-16, PM 16-19, Evening, Night, Owl). Excludes cable car and historic streetcar.",
+   "values": {
+    "12-month mean Jun 2025-May 2026, AM peak, top route-directions": "1 California IB 24.5%; 30X IB 21.1%; 38R IB 19.4%; 45 IB 15.2%; 5R IB 14.6%; 2 Sutter IB 13.2%; 12 OB 11.4%; N Judah IB 10.1%; 44 IB 9.5%; 28 IB 9.3%; 24 IB 8.9%; 8AX IB 8.5%; 29 IB 8.2%; 49 IB 8.0%",
+    "PM peak top": "1 California OB 34.2%; 38R OB 27.1%; 45 OB 23.8%; 22 IB 11.3%; 5R OB 10.8%; N Judah OB 10.7%; 12 IB 10.2%; 22 OB 8.9%; 44 OB 8.2%; 29 OB 7.2%; 24 OB 7.0%",
+    "School 2-4pm top": "28 OB 23.7%; 29 OB 21.1%; 24 OB 16.2%; 48 IB 16.1%; 30 IB 14.0%; 49 OB 11.8%",
+    "Mid-day max": "45 OB 7.9%; 28 IB 6.4%; all others below 4%",
+    "Other Metro lines, peak direction": "J 1.0%, K 1.2%, L 2.3%, M 1.5% (AM IB); T 0-0.7%",
+    "Unweighted mean across all route-directions by month (my calculation)": "AM peak 1.3-3.9% (lowest Jul 2025, highest Oct 2025; May 2026 2.5%); PM peak 1.5-2.9%"
+   },
+   "notes": "This is a share of trips, not a count of riders left behind. Capacity here is SFMTA 'crowding capacity', not crush."
+  },
+  {
+   "source": "SFMTA Muni Equity Working Group slides, Sept 19 2024 (service standards)",
+   "url": "https://www.sfmta.com/media/40553/download",
+   "date": "2024-09-19",
+   "metric": "Three capacity thresholds by standing space per standee: Planning 4.5 sq ft (bus) / 3.7 (rail); Crowding 3.0 (bus) / 2.7 (rail); Crush 1.5 (bus) / 1.8 (rail). Crowding metric: % of trips over crowding capacity; target < 10% of trips crowded in an hour; a trip counts as crowded if over crowding capacity at >= 5% of stops; routes with >= 10% crowded trips are 'most crowded'.",
+   "values": {},
+   "notes": "The stop share conflicts with the transtat definition (10% of stops). Both are quoted."
+  },
+  {
+   "source": "SFMTA 2017 Bus Fleet Management Plan, Table 2",
+   "url": "https://sfcontroller.org/sites/default/files/Muni%20Reliability%20Working%20Group/2017%20Bus%20Fleet%20Plan.pdf",
+   "date": "2017",
+   "metric": "Passengers per bus",
+   "values": {
+    "max (planning) load at 4.5 sq ft/standee": "32ft 33, 40ft 44, 60ft 69",
+    "crowding at 3.0 sq ft/standee": "32ft 38, 40ft 51, 60ft 81",
+    "crush": "defined as 1.5 sq ft/pax (APTA gross load); no passenger counts given"
+   },
+   "notes": "Planning load is applied to the average max load over 30-60 minutes."
+  },
+  {
+   "source": "SFCTA Congestion Management Program 2021 Final Report, Table 4-13 (SFMTA data)",
+   "url": "https://www.sfcta.org/sites/default/files/2023-10/Congestion_Management_Program_Report_231010_FINAL.pdf",
+   "date": "FY17/18 to FY20/21",
+   "metric": "Percentage of Muni bus trips over capacity, AM/PM peak (old Strategic Plan metric; target <15%, later <13%)",
+   "values": {
+    "FY17/18": "11.3%",
+    "FY18/19": "14.7%",
+    "FY19/20": "5.6% (excl. Apr-Sep 2020)",
+    "FY20/21": "0.1%"
+   },
+   "notes": "Pre-pandemic baseline. The current Strategic Plan metric 'Percent of trips above capacity' is listed as 'metric in development' (https://www.sfmta.com/strategic-planning-metrics-service-quality)."
+  },
+  {
+   "source": "Pass-ups",
+   "url": "https://www.sfmta.com/blog/morning-commute-shuttles-reduce-n-judah-pass-ups-63-percent ; https://www.sfmta.com/media/44389/download?inline",
+   "date": "2016-10-18; 2025-12-02",
+   "metric": "Pass-up counts",
+   "values": {
+    "N Judah 2016": "Morning shuttles cut pass-ups 63% (operations staff tracking); each added car = 119 customers; Inner Sunset/Cole Valley riders often could not board"
+   },
+   "notes": "No recent systemwide pass-up counts found. The Metro Capacity Study (2025) mentions pass-ups only qualitatively."
+  }
+ ],
+ "metroSubway": [
+  {
+   "source": "SFMTA Muni Metro Capacity Study Final Report (approved by SFMTA Board 2025-12-02), Table 1",
+   "url": "https://www.sfmta.com/media/44389/download?inline",
+   "date": "2024 observed peak hour",
+   "metric": "Peak-hour sq ft per passenger by segment (555 sq ft usable per car). Below 5.4 sq ft = over capacity (FTA Core Capacity); below 10.8 = expected to reach capacity within 10 years.",
+   "values": {
+    "Market St Subway Embarcadero-Van Ness": "8.6 sq ft/pax, about 65 pax/car",
+    "Twin Peaks Tunnel Van Ness-West Portal": "10.2, about 54/car",
+    "Judah East (Van Ness-Judah/19th)": "6.3, about 88/car",
+    "Church (Van Ness-Balboa Park)": "7.3, about 76/car",
+    "MME Embarcadero-4th/King": "16.3",
+    "Central Subway": "15.0",
+    "outer/surface segments": "16.5-26.2"
+   },
+   "notes": "Passengers per car are my arithmetic (555 / sq ft). No 2024 segment is over capacity on average. Other facts: planning capacity 93 pax/LRV car; the study assumes at most 40 trains/hour/direction in the subway; Van Ness is the maximum load point; Metro carried about 117,000 riders per weekday (Sept 2025), about 70% of pre-pandemic; 'Prior to the pandemic, overcrowding was common'; ridership grew about 20% Sept 2024-Sept 2025 and crowding is re-emerging, especially on the N; at today's frequencies overcrowding is forecast in 10-15 years in the subway, Twin Peaks Tunnel, N and J."
+  },
+  {
+   "source": "SFMTA Muni Metro Capacity Study Draft Recommendations Appendix",
+   "url": "https://sfmta.com/media/43313/download?inline=",
+   "date": "2025-09",
+   "metric": "2050 crowding at planning capacity 93/car",
+   "values": {
+    "N, L, M subway segments": "over capacity in all growth bands at about 1,000-1,999 riders/hour",
+    "J": "over capacity in all bands at under 1,000/hour"
+   },
+   "notes": "Forecast, not observed."
+  },
+  {
+   "source": "SFMTA Train Control Upgrade Project, Board subcommittee presentation",
+   "url": "https://www.sfmta.com/sites/default/files/reports-and-documents/2023/10/11-3-23_tcup_item_4_presentation.pdf",
+   "date": "2023-11-03",
+   "metric": "Maximum trains per hour on a single track, peak hour",
+   "values": {
+    "SF Muni": 40,
+    "BART": 22,
+    "WMATA": 26,
+    "needed for good service": "1-2 min headways, about 45 tph, beyond the current ATCS"
+   },
+   "notes": "SFMTA runs a reduced service plan to limit subway congestion. CBTC promises up to 20% more capacity, in service 2028-2034."
+  },
+  {
+   "source": "SFMTA Subway Performance Data (ATCS), Subway Maximum Trains per Hour at Embarcadero EB",
+   "url": "https://www.sfmta.com/subway-performance-data",
+   "date": "about 1 year of weekdays ending around 2025-2026; exact window UNVERIFIED",
+   "metric": "Daily maximum hourly in-service train arrivals, Embarcadero EB",
+   "values": {
+    "AM peak mean": 27.4,
+    "PM peak mean": 28.6,
+    "Mid-day mean": 28.8
+   },
+   "notes": "From an earlier extraction in this project's scratchpad. Under 30 trains/hour, so actual peak service is far below the 40 tph assumption."
+  },
+  {
+   "source": "SFMTA blog 'A 21st Century Plan to Grow SF Rail'",
+   "url": "https://www.sfmta.com/blog/21st-century-plan-grow-sf-rail",
+   "date": "2016-02-19",
+   "metric": "Pre-pandemic subway throughput",
+   "values": {
+    "subway": "operates at about 60% of design capacity in peaks"
+   },
+   "notes": "Throughput limit, not passenger load."
+  }
+ ],
+ "bart": [
+  {
+   "source": "BART Transbay Corridor Core Capacity Program",
+   "url": "https://www.bart.gov/about/projects/corecapacity ; https://www.bart.gov/sites/default/files/docs/BART%20Core%20Capacity_2018%20TIRCP%20App.pdf",
+   "date": "about 2018 (pre-pandemic)",
+   "metric": "Transbay peak loads",
+   "values": {
+    "peak": ">28,000 pax/hour through the tube; 24 tph max per direction; core capacity target 30 ten-car tph",
+    "space": "about 4.7 sq ft/rider at Embarcadero/West Oakland (pre-pandemic)"
+   },
+   "notes": "Post-2023 load factors not found (UNVERIFIED). BART weekday ridership is about 205k (Q2 2026), well below 2019, so the tube is very unlikely to bind today."
+  }
+ ],
+ "ferryVessels": [
+  {
+   "source": "Golden Gate Bridge, Highway and Transportation District, ferry fleet history",
+   "url": "https://www.goldengate.org/ferry/history-research/fleet/",
+   "values": {
+    "Spaulding class (Marin, Sonoma, San Francisco)": "750, 630, 630 passengers",
+    "Mendocino class catamarans": "about 450",
+    "Del Norte": "390"
+   },
+   "notes": "Larkspur service uses the Spaulding class and catamarans; the model takes 600 a sailing for Larkspur and 420 for Golden Gate's other routes (transit.ts)."
+  },
+  {
+   "source": "Bay Crossings, 'WETA Welcomes New 445-Passenger Ferry Pyxis' (2019)",
+   "url": "https://www.baycrossings.com/weta-welcomes-new-445-passenger-ferry-pyxis/",
+   "values": {
+    "Pyxis, Vela, Lyra": "445 passengers each, built for the Vallejo route"
+   },
+   "notes": "Older SF Bay Ferry vessels carry fewer; the model takes 400 a sailing (transit.ts)."
+  }
+ ],
+ "recommendations": "Use SFMTA crowding-capacity values as a soft 'crowded' threshold, not as hard boarding capacity: bus 51 (40ft) / 81 (60ft), LRV about 93/car (planning) to about 103/car (5.4 sq ft). Make the hard capacity crush or near it (about 1.5 sq ft/standee; roughly 1.2-1.3x crowding capacity) and apply a peak-hour factor (MTC uses 1.219 AM, 1.262 PM) when the period is longer than an hour. Plausibility checks: (1) mid-day, evening and night riders left behind should be about 0 everywhere; (2) in the AM peak, failure-to-board should appear only on the routes with the most crowded trips: 1 California (IB AM, OB PM), 38R, 45, 30X, 5R, 2, 12, 22 and N Judah (IB AM, OB PM; inner Judah about 88 pax/car); on the 28, 29, 24 and 48 it belongs in the school period; (3) even on the worst route only 25-34% of peak trips reach crowding capacity, and the all-route average is about 2-4%, so modelled left-behind should be a small share of route boardings (a few percent at most at the max-load stops), not tens of percent; (4) in the Market Street subway the 2024 peak-hour average is about 65 pax/car at Van Ness against 93 planning, so the subway as a whole should show no or negligible left-behind in 2024-26, with any J/K/L/M left-behind being a red flag; (5) BART and the Transbay Tube should not bind today. If the model leaves riders behind on many routes, check capacity units (per vehicle vs per period), headways and peak-hour factoring before tuning beta or MSA."
+}

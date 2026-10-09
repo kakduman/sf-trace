@@ -1,0 +1,704 @@
+{
+ "source": "U.S. Census Bureau, American Community Survey 2020-2024 5-year estimates (latest 5-year vintage published; 2025 5-year not yet released), Table-Based Summary File",
+ "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/",
+ "dataFiles": {
+  "b08301": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08301.dat",
+  "b08007": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08007.dat",
+  "b08406": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08406.dat",
+  "b08604": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08604.dat"
+ },
+ "labelsFrom": "https://api.census.gov/data/2024/acs/acs5/groups/<TABLE>.json",
+ "geography": "San Francisco County (= City), California; GEO_ID 0500000US06075 (state 06, county 075)",
+ "period": "ACS 5-year 2020-2024 (pooled survey responses Jan 2020 - Dec 2024; question refers to the previous week)",
+ "accessed": "2026-10-04",
+ "rawFiles": [
+  "data/beta3/raw/obs/acs5y2024_b08301_sf.dat",
+  "data/beta3/raw/obs/acs5y2024_b08007_sf.dat",
+  "data/beta3/raw/obs/acs5y2024_b08406_sf.dat",
+  "data/beta3/raw/obs/acs5y2024_b08604_sf.dat",
+  "data/beta3/raw/obs/acs2024_*_vars.json"
+ ],
+ "notes": [
+  "The api.census.gov data endpoint now returns a \"Missing Key\" page without an API key, so values were taken from the Census table-based summary files (same estimates). Files were streamed and only the header + SF county row kept. Variable labels come from the API groups metadata (no key needed).",
+  "Universe for B08301/B08007: workers 16 years and over who LIVE in SF (residence geography). B08406/B08604: workers 16+ who WORK in SF (workplace geography).",
+  "Mode = usual primary means of travel to work last week, longest-distance mode only; one commute trip type, not all trips. The 5-year window 2020-2024 includes pandemic years with very high work-from-home, so WFH is likely higher and transit lower than a 2024-only snapshot.",
+  "Shares are computed here (count / total). shareOfCommuters_exclWFH divides by (total - worked from home). moe90 = published 90% margin of error.",
+  "In B08406 taxi/ride-hailing, motorcycle and other means are a single category."
+ ],
+ "residentsCommuteMode_B08301": {
+  "totalWorkers16plus": 466388,
+  "totalWorkersMoe90": 3189,
+  "commutersExclWFH": 321804,
+  "modes": {
+   "driveAlone": {
+    "count": 133460,
+    "moe90": 3045,
+    "shareOfAllWorkers": 0.2862,
+    "shareOfCommuters_exclWFH": 0.4147,
+    "acsVariable": "B08301_003E"
+   },
+   "carpool": {
+    "count": 27726,
+    "moe90": 1531,
+    "shareOfAllWorkers": 0.0594,
+    "shareOfCommuters_exclWFH": 0.0862,
+    "acsVariable": "B08301_004E"
+   },
+   "transit": {
+    "count": 87355,
+    "moe90": 2496,
+    "shareOfAllWorkers": 0.1873,
+    "shareOfCommuters_exclWFH": 0.2715,
+    "acsVariable": "B08301_010E"
+   },
+   "transitBus": {
+    "count": 58624,
+    "moe90": 2103,
+    "shareOfAllWorkers": 0.1257,
+    "shareOfCommuters_exclWFH": 0.1822,
+    "acsVariable": "B08301_011E"
+   },
+   "transitSubwayElevatedRail": {
+    "count": 18528,
+    "moe90": 1135,
+    "shareOfAllWorkers": 0.0397,
+    "shareOfCommuters_exclWFH": 0.0576,
+    "acsVariable": "B08301_012E"
+   },
+   "transitCommuterRail": {
+    "count": 4354,
+    "moe90": 567,
+    "shareOfAllWorkers": 0.0093,
+    "shareOfCommuters_exclWFH": 0.0135,
+    "acsVariable": "B08301_013E"
+   },
+   "transitLightRailStreetcarTrolley": {
+    "count": 5680,
+    "moe90": 786,
+    "shareOfAllWorkers": 0.0122,
+    "shareOfCommuters_exclWFH": 0.0177,
+    "acsVariable": "B08301_014E"
+   },
+   "transitFerry": {
+    "count": 169,
+    "moe90": 77,
+    "shareOfAllWorkers": 0.0004,
+    "shareOfCommuters_exclWFH": 0.0005,
+    "acsVariable": "B08301_015E"
+   },
+   "taxiRideHailing": {
+    "count": 3262,
+    "moe90": 470,
+    "shareOfAllWorkers": 0.007,
+    "shareOfCommuters_exclWFH": 0.0101,
+    "acsVariable": "B08301_016E"
+   },
+   "motorcycle": {
+    "count": 2015,
+    "moe90": 400,
+    "shareOfAllWorkers": 0.0043,
+    "shareOfCommuters_exclWFH": 0.0063,
+    "acsVariable": "B08301_017E"
+   },
+   "bike": {
+    "count": 15399,
+    "moe90": 1123,
+    "shareOfAllWorkers": 0.033,
+    "shareOfCommuters_exclWFH": 0.0479,
+    "acsVariable": "B08301_018E"
+   },
+   "walk": {
+    "count": 43623,
+    "moe90": 1946,
+    "shareOfAllWorkers": 0.0935,
+    "shareOfCommuters_exclWFH": 0.1356,
+    "acsVariable": "B08301_019E"
+   },
+   "otherMeans": {
+    "count": 8964,
+    "moe90": 1029,
+    "shareOfAllWorkers": 0.0192,
+    "shareOfCommuters_exclWFH": 0.0279,
+    "acsVariable": "B08301_020E"
+   },
+   "workedFromHome": {
+    "count": 144584,
+    "moe90": 3117,
+    "shareOfAllWorkers": 0.31,
+    "shareOfCommuters_exclWFH": null,
+    "acsVariable": "B08301_021E"
+   }
+  },
+  "carTruckVanTotal": {
+   "count": 161186,
+   "shareOfAllWorkers": 0.3456
+  }
+ },
+ "residentsCommuteMode_B08301_ACS1yr2024": {
+  "period": "ACS 2024 1-year (calendar 2024 only); secondary, larger sampling error, but not mixed with 2020-2021 pandemic years",
+  "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b08301.dat",
+  "rawFile": "data/beta3/raw/obs/acs1y2024_b08301_sf.dat",
+  "totalWorkers16plus": 468430,
+  "totalWorkersMoe90": 7060,
+  "commutersExclWFH": 368083,
+  "modes": {
+   "driveAlone": {
+    "count": 142260,
+    "moe90": 5890,
+    "shareOfAllWorkers": 0.3037,
+    "shareOfCommuters_exclWFH": 0.3865,
+    "acsVariable": "B08301_003E"
+   },
+   "carpool": {
+    "count": 27865,
+    "moe90": 3644,
+    "shareOfAllWorkers": 0.0595,
+    "shareOfCommuters_exclWFH": 0.0757,
+    "acsVariable": "B08301_004E"
+   },
+   "transit": {
+    "count": 117279,
+    "moe90": 6864,
+    "shareOfAllWorkers": 0.2504,
+    "shareOfCommuters_exclWFH": 0.3186,
+    "acsVariable": "B08301_010E"
+   },
+   "transitBus": {
+    "count": 77526,
+    "moe90": 5744,
+    "shareOfAllWorkers": 0.1655,
+    "shareOfCommuters_exclWFH": 0.2106,
+    "acsVariable": "B08301_011E"
+   },
+   "transitSubwayElevatedRail": {
+    "count": 26029,
+    "moe90": 3093,
+    "shareOfAllWorkers": 0.0556,
+    "shareOfCommuters_exclWFH": 0.0707,
+    "acsVariable": "B08301_012E"
+   },
+   "transitCommuterRail": {
+    "count": 5707,
+    "moe90": 1276,
+    "shareOfAllWorkers": 0.0122,
+    "shareOfCommuters_exclWFH": 0.0155,
+    "acsVariable": "B08301_013E"
+   },
+   "transitLightRailStreetcarTrolley": {
+    "count": 7555,
+    "moe90": 1581,
+    "shareOfAllWorkers": 0.0161,
+    "shareOfCommuters_exclWFH": 0.0205,
+    "acsVariable": "B08301_014E"
+   },
+   "transitFerry": {
+    "count": 462,
+    "moe90": 406,
+    "shareOfAllWorkers": 0.001,
+    "shareOfCommuters_exclWFH": 0.0013,
+    "acsVariable": "B08301_015E"
+   },
+   "taxiRideHailing": {
+    "count": 5330,
+    "moe90": 1359,
+    "shareOfAllWorkers": 0.0114,
+    "shareOfCommuters_exclWFH": 0.0145,
+    "acsVariable": "B08301_016E"
+   },
+   "motorcycle": {
+    "count": 2138,
+    "moe90": 1161,
+    "shareOfAllWorkers": 0.0046,
+    "shareOfCommuters_exclWFH": 0.0058,
+    "acsVariable": "B08301_017E"
+   },
+   "bike": {
+    "count": 17838,
+    "moe90": 2681,
+    "shareOfAllWorkers": 0.0381,
+    "shareOfCommuters_exclWFH": 0.0485,
+    "acsVariable": "B08301_018E"
+   },
+   "walk": {
+    "count": 46917,
+    "moe90": 4689,
+    "shareOfAllWorkers": 0.1002,
+    "shareOfCommuters_exclWFH": 0.1275,
+    "acsVariable": "B08301_019E"
+   },
+   "otherMeans": {
+    "count": 8456,
+    "moe90": 2043,
+    "shareOfAllWorkers": 0.0181,
+    "shareOfCommuters_exclWFH": 0.023,
+    "acsVariable": "B08301_020E"
+   },
+   "workedFromHome": {
+    "count": 100347,
+    "moe90": 5261,
+    "shareOfAllWorkers": 0.2142,
+    "shareOfCommuters_exclWFH": null,
+    "acsVariable": "B08301_021E"
+   }
+  }
+ },
+ "residentsPlaceOfWork_B08007": {
+  "totalWorkers16plus": 466388,
+  "workedInSFCounty": {
+   "count": 384949,
+   "moe90": 3646,
+   "share": 0.8254
+  },
+  "workedOutsideSFCountyInCalifornia": {
+   "count": 80115,
+   "moe90": 2390,
+   "share": 0.1718
+  },
+  "workedOutsideCalifornia": {
+   "count": 1324,
+   "moe90": 325,
+   "share": 0.0028
+  },
+  "note": "Worked-from-home residents are counted as working in their county of residence."
+ },
+ "workersWorkingInSF_B08604": {
+  "totalWorkersAtSFWorkplaces": 621656,
+  "moe90": 6088,
+  "note": "All workers (residents + in-commuters) whose workplace is in SF. In-commuters approx = this minus residents working in SF (B08007_003E) = 236707 (derived here; MOEs not combined)."
+ },
+ "workplaceCommuteMode_B08406": {
+  "totalWorkers16plus": 621656,
+  "commutersExclWFH": 477072,
+  "modes": {
+   "driveAlone": {
+    "count": 214130,
+    "moe90": 3838,
+    "shareOfAllWorkers": 0.3445,
+    "shareOfCommuters_exclWFH": 0.4488,
+    "acsVariable": "B08406_003E"
+   },
+   "carpool": {
+    "count": 44139,
+    "moe90": 1890,
+    "shareOfAllWorkers": 0.071,
+    "shareOfCommuters_exclWFH": 0.0925,
+    "acsVariable": "B08406_004E"
+   },
+   "transit": {
+    "count": 143726,
+    "moe90": 3518,
+    "shareOfAllWorkers": 0.2312,
+    "shareOfCommuters_exclWFH": 0.3013,
+    "acsVariable": "B08406_008E"
+   },
+   "transitBus": {
+    "count": 64306,
+    "moe90": 2379,
+    "shareOfAllWorkers": 0.1034,
+    "shareOfCommuters_exclWFH": 0.1348,
+    "acsVariable": "B08406_009E"
+   },
+   "transitSubwayElevatedRail": {
+    "count": 52851,
+    "moe90": 2260,
+    "shareOfAllWorkers": 0.085,
+    "shareOfCommuters_exclWFH": 0.1108,
+    "acsVariable": "B08406_010E"
+   },
+   "transitCommuterRail": {
+    "count": 14250,
+    "moe90": 1004,
+    "shareOfAllWorkers": 0.0229,
+    "shareOfCommuters_exclWFH": 0.0299,
+    "acsVariable": "B08406_011E"
+   },
+   "transitLightRailStreetcarTrolley": {
+    "count": 7134,
+    "moe90": 817,
+    "shareOfAllWorkers": 0.0115,
+    "shareOfCommuters_exclWFH": 0.015,
+    "acsVariable": "B08406_012E"
+   },
+   "transitFerry": {
+    "count": 5185,
+    "moe90": 562,
+    "shareOfAllWorkers": 0.0083,
+    "shareOfCommuters_exclWFH": 0.0109,
+    "acsVariable": "B08406_013E"
+   },
+   "bike": {
+    "count": 15791,
+    "moe90": 1122,
+    "shareOfAllWorkers": 0.0254,
+    "shareOfCommuters_exclWFH": 0.0331,
+    "acsVariable": "B08406_014E"
+   },
+   "walk": {
+    "count": 42791,
+    "moe90": 1920,
+    "shareOfAllWorkers": 0.0688,
+    "shareOfCommuters_exclWFH": 0.0897,
+    "acsVariable": "B08406_015E"
+   },
+   "taxiMotorcycleOther": {
+    "count": 16495,
+    "moe90": 1166,
+    "shareOfAllWorkers": 0.0265,
+    "shareOfCommuters_exclWFH": 0.0346,
+    "acsVariable": "B08406_016E"
+   },
+   "workedFromHome": {
+    "count": 144584,
+    "moe90": 3117,
+    "shareOfAllWorkers": 0.2326,
+    "shareOfCommuters_exclWFH": null,
+    "acsVariable": "B08406_017E"
+   }
+  }
+ },
+ "rawTables": {
+  "B08301": {
+   "B08301_001E": {
+    "label": "Total:",
+    "estimate": 466388,
+    "moe90": 3189
+   },
+   "B08301_002E": {
+    "label": "Total:!!Car, truck, or van:",
+    "estimate": 161186,
+    "moe90": 3207
+   },
+   "B08301_003E": {
+    "label": "Total:!!Car, truck, or van:!!Drove alone",
+    "estimate": 133460,
+    "moe90": 3045
+   },
+   "B08301_004E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:",
+    "estimate": 27726,
+    "moe90": 1531
+   },
+   "B08301_005E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:!!In 2-person carpool",
+    "estimate": 20907,
+    "moe90": 1274
+   },
+   "B08301_006E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:!!In 3-person carpool",
+    "estimate": 4308,
+    "moe90": 634
+   },
+   "B08301_007E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:!!In 4-person carpool",
+    "estimate": 1586,
+    "moe90": 368
+   },
+   "B08301_008E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:!!In 5- or 6-person carpool",
+    "estimate": 631,
+    "moe90": 198
+   },
+   "B08301_009E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:!!In 7-or-more-person carpool",
+    "estimate": 294,
+    "moe90": 108
+   },
+   "B08301_010E": {
+    "label": "Total:!!Public transportation:",
+    "estimate": 87355,
+    "moe90": 2496
+   },
+   "B08301_011E": {
+    "label": "Total:!!Public transportation:!!Bus",
+    "estimate": 58624,
+    "moe90": 2103
+   },
+   "B08301_012E": {
+    "label": "Total:!!Public transportation:!!Subway or elevated rail",
+    "estimate": 18528,
+    "moe90": 1135
+   },
+   "B08301_013E": {
+    "label": "Total:!!Public transportation:!!Long-distance train or commuter rail",
+    "estimate": 4354,
+    "moe90": 567
+   },
+   "B08301_014E": {
+    "label": "Total:!!Public transportation:!!Light rail, streetcar or trolley (carro público in Puerto Rico)",
+    "estimate": 5680,
+    "moe90": 786
+   },
+   "B08301_015E": {
+    "label": "Total:!!Public transportation:!!Ferryboat",
+    "estimate": 169,
+    "moe90": 77
+   },
+   "B08301_016E": {
+    "label": "Total:!!Taxi or ride-hailing services",
+    "estimate": 3262,
+    "moe90": 470
+   },
+   "B08301_017E": {
+    "label": "Total:!!Motorcycle",
+    "estimate": 2015,
+    "moe90": 400
+   },
+   "B08301_018E": {
+    "label": "Total:!!Bicycle",
+    "estimate": 15399,
+    "moe90": 1123
+   },
+   "B08301_019E": {
+    "label": "Total:!!Walked",
+    "estimate": 43623,
+    "moe90": 1946
+   },
+   "B08301_020E": {
+    "label": "Total:!!Other means",
+    "estimate": 8964,
+    "moe90": 1029
+   },
+   "B08301_021E": {
+    "label": "Total:!!Worked from home",
+    "estimate": 144584,
+    "moe90": 3117
+   }
+  },
+  "B08007": {
+   "B08007_001E": {
+    "label": "Total:",
+    "estimate": 466388,
+    "moe90": 3189
+   },
+   "B08007_002E": {
+    "label": "Total:!!Worked in state of residence:",
+    "estimate": 465064,
+    "moe90": 3270
+   },
+   "B08007_003E": {
+    "label": "Total:!!Worked in state of residence:!!Worked in county of residence",
+    "estimate": 384949,
+    "moe90": 3646
+   },
+   "B08007_004E": {
+    "label": "Total:!!Worked in state of residence:!!Worked outside county of residence",
+    "estimate": 80115,
+    "moe90": 2390
+   },
+   "B08007_005E": {
+    "label": "Total:!!Worked outside state of residence",
+    "estimate": 1324,
+    "moe90": 325
+   },
+   "B08007_006E": {
+    "label": "Total:!!Male:",
+    "estimate": 249723,
+    "moe90": 2348
+   },
+   "B08007_007E": {
+    "label": "Total:!!Male:!!Worked in state of residence:",
+    "estimate": 248967,
+    "moe90": 2399
+   },
+   "B08007_008E": {
+    "label": "Total:!!Male:!!Worked in state of residence:!!Worked in county of residence",
+    "estimate": 202169,
+    "moe90": 2233
+   },
+   "B08007_009E": {
+    "label": "Total:!!Male:!!Worked in state of residence:!!Worked outside county of residence",
+    "estimate": 46798,
+    "moe90": 1625
+   },
+   "B08007_010E": {
+    "label": "Total:!!Male:!!Worked outside state of residence",
+    "estimate": 756,
+    "moe90": 219
+   },
+   "B08007_011E": {
+    "label": "Total:!!Female:",
+    "estimate": 216665,
+    "moe90": 1941
+   },
+   "B08007_012E": {
+    "label": "Total:!!Female:!!Worked in state of residence:",
+    "estimate": 216097,
+    "moe90": 1974
+   },
+   "B08007_013E": {
+    "label": "Total:!!Female:!!Worked in state of residence:!!Worked in county of residence",
+    "estimate": 182780,
+    "moe90": 2342
+   },
+   "B08007_014E": {
+    "label": "Total:!!Female:!!Worked in state of residence:!!Worked outside county of residence",
+    "estimate": 33317,
+    "moe90": 1696
+   },
+   "B08007_015E": {
+    "label": "Total:!!Female:!!Worked outside state of residence",
+    "estimate": 568,
+    "moe90": 198
+   }
+  },
+  "B08406": {
+   "B08406_001E": {
+    "label": "Total:",
+    "estimate": 621656,
+    "moe90": 6088
+   },
+   "B08406_002E": {
+    "label": "Total:!!Car, truck, or van:",
+    "estimate": 258269,
+    "moe90": 4404
+   },
+   "B08406_003E": {
+    "label": "Total:!!Car, truck, or van:!!Drove alone",
+    "estimate": 214130,
+    "moe90": 3838
+   },
+   "B08406_004E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:",
+    "estimate": 44139,
+    "moe90": 1890
+   },
+   "B08406_005E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:!!In 2-person carpool",
+    "estimate": 31850,
+    "moe90": 1466
+   },
+   "B08406_006E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:!!In 3-person carpool",
+    "estimate": 7481,
+    "moe90": 845
+   },
+   "B08406_007E": {
+    "label": "Total:!!Car, truck, or van:!!Carpooled:!!In 4-or-more-person carpool",
+    "estimate": 4808,
+    "moe90": 665
+   },
+   "B08406_008E": {
+    "label": "Total:!!Public transportation:",
+    "estimate": 143726,
+    "moe90": 3518
+   },
+   "B08406_009E": {
+    "label": "Total:!!Public transportation:!!Bus",
+    "estimate": 64306,
+    "moe90": 2379
+   },
+   "B08406_010E": {
+    "label": "Total:!!Public transportation:!!Subway or elevated rail",
+    "estimate": 52851,
+    "moe90": 2260
+   },
+   "B08406_011E": {
+    "label": "Total:!!Public transportation:!!Long-distance train or commuter rail",
+    "estimate": 14250,
+    "moe90": 1004
+   },
+   "B08406_012E": {
+    "label": "Total:!!Public transportation:!!Light rail, streetcar or trolley (carro público in Puerto Rico)",
+    "estimate": 7134,
+    "moe90": 817
+   },
+   "B08406_013E": {
+    "label": "Total:!!Public transportation:!!Ferryboat",
+    "estimate": 5185,
+    "moe90": 562
+   },
+   "B08406_014E": {
+    "label": "Total:!!Bicycle",
+    "estimate": 15791,
+    "moe90": 1122
+   },
+   "B08406_015E": {
+    "label": "Total:!!Walked",
+    "estimate": 42791,
+    "moe90": 1920
+   },
+   "B08406_016E": {
+    "label": "Total:!!Taxi or ride-hailing services, motorcycle, or other means",
+    "estimate": 16495,
+    "moe90": 1166
+   },
+   "B08406_017E": {
+    "label": "Total:!!Worked from home",
+    "estimate": 144584,
+    "moe90": 3117
+   }
+  },
+  "B08604": {
+   "B08604_001E": {
+    "label": "Total:",
+    "estimate": 621656,
+    "moe90": 6088
+   }
+  }
+ },
+ "acs1yr2024": {
+  "period": "ACS 2024 1-year (calendar 2024), the year of the model's other commute targets (B08141, B08301 1-year, working from home)",
+  "urls": [
+   "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b08130.dat",
+   "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b08604.dat",
+   "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b08406.dat"
+  ],
+  "accessed": "2026-10-08",
+  "rawFiles": [
+   "data/beta3/raw/commutes/acsdt1y2024-b08130-sf.dat",
+   "data/beta3/raw/commutes/acsdt1y2024-b08604-sf.dat",
+   "data/beta3/raw/commutes/acsdt1y2024-b08007-sf.dat",
+   "data/beta3/raw/acs-workplace-era/acsdt1y2024-b08406-sf.dat"
+  ],
+  "residentsByPlaceOfWork_B08130": {
+   "totalWorkers16plus": 468430,
+   "workedInSFCounty": 364488,
+   "workedInSFCountyMoe90": 7824,
+   "workedOutsideSFCounty": 103942,
+   "workedOutsideSFCountyMoe90": 5298,
+   "workedFromHome": 100347,
+   "commutersInSF": 264141,
+   "commutersOutsideSF": 103942,
+   "outShareOfCommuters": 0.2824,
+   "modesInSF": {
+    "da": 81537,
+    "sr": 18500,
+    "transit": 92671,
+    "walk": 43506,
+    "other": 27927
+   },
+   "modesOutsideSF": {
+    "da": 60723,
+    "sr": 9365,
+    "transit": 24608,
+    "walk": 3411,
+    "other": 5835
+   }
+  },
+  "workersAtSFWorkplaces_B08604": {
+   "total": 632129,
+   "moe90": 12877,
+   "commutersExclWFH": 531782
+  },
+  "workplaceModes_B08406": {
+   "da": 224109,
+   "sr": 45066,
+   "transit": 181920,
+   "walk": 45522,
+   "other": 35165
+  },
+  "inCommuters": {
+   "total": 267641,
+   "modes": {
+    "da": 142572,
+    "sr": 26566,
+    "transit": 89249,
+    "walk": 2016,
+    "other": 7238
+   },
+   "transitShare": 0.3335,
+   "note": "Derived: workers at SF workplaces less those working from home (B08604 counts them at their home county, all SF residents) less residents commuting within the city (B08130); by mode, B08406 less B08130 within the county. Walk 2,016 and bike, taxi, motorcycle, and other 7,238."
+  },
+  "note": "The 2020-2024 5-year tables pool two pandemic years, when residents working from home were counted as working in the city: with 2024 working from home they gave 22.0% of residents' commutes leaving the city and 236,707 in-commuters, against 28.2% and 267,641 in 2024."
+ }
+}

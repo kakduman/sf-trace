@@ -1,0 +1,552 @@
+{
+ "source": "San Francisco County Transportation Authority (SFCTA), Congestion Management Program 2025 monitoring report (INRIX probe speeds, Tue-Thu, April-May 2025; AM peak 7-9am, PM peak 4:30-6:30pm), plus SFCTA's public PostgREST API behind the CMP map and the SF Congestion Dashboard (congestion.sfcta.org) for per-segment CMP speeds and monthly hourly INRIX speeds",
+ "url": "https://www.sfcta.org/reports/congestion-management-program-2025",
+ "dataUrls": {
+  "reportPdf": "https://www.sfcta.org/sites/default/files/2025-12/SFCTA_CMP_Report_2025_FINAL_2025-12-16.pdf",
+  "citywideCsv": "https://www.sfcta.org/sites/default/files/2025-12/SFCTA_CMP2025_Fig4-2_CMP_Network_Average_Travel_Speed.csv",
+  "downtownCsv": "https://www.sfcta.org/sites/default/files/2025-12/SFCTA_CMP2025_Fig4-3_CMP_Arterial_Average_Speeds_Citywide_and_in_the_Downtown_Core.csv",
+  "transitCsv": "https://www.sfcta.org/sites/default/files/2025-12/SFCTA_CMP2025_Fig0-8_CMP_Network_Average_Transit_Speeds.csv",
+  "segmentCsv": "https://www.sfcta.org/sites/default/files/2025-12/SFCTA_CMP2025_Fig4-4_Comparison_of_2024_and_2025_CMP_Segment_Speeds.csv",
+  "segmentSpeedsApi": "https://api.sfcta.org/api/cmp_autotransit_xd?year=gte.2024&order=cmp_segid,year,period",
+  "segmentLengthsApi": "https://api.sfcta.org/api/cmp_segments_exp?select=cmp_segid,cmp_name,cmp_from,cmp_to,direction,length",
+  "hourlyApi": "https://api.sfcta.org/api/inrix_rt_hourly_exp_agg?date=gte.2025-01&order=date,fac_typ,period",
+  "monthlyPeakApi": "https://api.sfcta.org/api/inrix_rt_weekly_exp_agg?date=gte.2025-01"
+ },
+ "rawFiles": [
+  "data/beta3/raw/obs/sfcta_cmp_autotransit_xd_2024_2025.json",
+  "data/beta3/raw/obs/sfcta_cmp_segments.json",
+  "data/beta3/raw/obs/sfcta_inrix_rt_hourly_exp_agg_2025on.json",
+  "data/beta3/raw/obs/sfcta_inrix_rt_weekly_exp_agg_2025on.json"
+ ],
+ "period": "CMP 2025: April-May 2025, Tue-Thu. Hourly profile: monthly values Oct 2025 - Sep 2026 (latest month in API on access date = 2026-09).",
+ "accessed": "2026-10-04",
+ "units": "mph",
+ "citywide": {
+  "arterial": {
+   "AM": 16.1,
+   "PM": 14.7,
+   "MD": 15.5
+  },
+  "freeway": {
+   "AM": 32.7,
+   "PM": 23.9,
+   "MD": 39.8
+  },
+  "downtownCoreArterial": {
+   "AM": 12.9,
+   "PM": 11.5
+  },
+  "muniBusOnCmpNetwork": {
+   "AM": 9.0,
+   "PM": 8.1,
+   "downtownCoreAM": 7.1,
+   "downtownCorePM": 6.1
+  },
+  "note": "AM/PM are the CMP 2025 report values (Fig 4-2, 4-3, 0-8 CSVs, which give more decimals: arterial 16.111922/14.672105, core 12.894593/11.547173, Muni 8.987458/8.146165 citywide and 7.072809/6.132969 core). MD is NOT from the CMP report: it is the plain mean of the 10:00-14:59 hourly INRIX speeds in the dashboard API over Oct 2025 - Sep 2026."
+ },
+ "history": {
+  "arterial": {
+   "2019": {
+    "AM": 13.3,
+    "PM": 12.2
+   },
+   "2021": {
+    "AM": 17.7,
+    "PM": 16.7
+   },
+   "2023": {
+    "AM": 15.5,
+    "PM": 13.9
+   },
+   "2024": {
+    "AM": 16.8,
+    "PM": 15.7
+   },
+   "2025": {
+    "AM": 16.1,
+    "PM": 14.7
+   }
+  },
+  "freeway": {
+   "2019": {
+    "AM": 31.5,
+    "PM": 23.6
+   },
+   "2021": {
+    "AM": 46.0,
+    "PM": 33.7
+   },
+   "2023": {
+    "AM": 35.5,
+    "PM": 23.7
+   },
+   "2024": {
+    "AM": 33.9,
+    "PM": 25.1
+   },
+   "2025": {
+    "AM": 32.7,
+    "PM": 23.9
+   }
+  },
+  "note": "From Fig4-2 CSV ('New' series 2017-2023, 'Newest' series 2024-2025; series breaks reflect methodology changes)."
+ },
+ "hourlyProfile": {
+  "source": "SF Congestion Dashboard API inrix_rt_hourly_exp_agg (INRIX, Tue-Thu, CMP network, fac_typ Arterial/Freeway), mean of 12 monthly values Oct 2025 - Sep 2026",
+  "arterial": {
+   "0": 17.5,
+   "1": 17.1,
+   "2": 16.9,
+   "3": 16.6,
+   "4": 16.9,
+   "5": 17.1,
+   "6": 16.8,
+   "7": 16.0,
+   "8": 15.0,
+   "9": 15.3,
+   "10": 15.7,
+   "11": 15.7,
+   "12": 15.6,
+   "13": 15.5,
+   "14": 15.2,
+   "15": 14.7,
+   "16": 14.6,
+   "17": 14.4,
+   "18": 15.4,
+   "19": 16.2,
+   "20": 16.8,
+   "21": 17.2,
+   "22": 17.6,
+   "23": 17.7
+  },
+  "freeway": {
+   "0": 53.0,
+   "1": 53.5,
+   "2": 54.3,
+   "3": 56.5,
+   "4": 57.6,
+   "5": 56.6,
+   "6": 51.4,
+   "7": 36.8,
+   "8": 31.3,
+   "9": 37.3,
+   "10": 42.7,
+   "11": 43.4,
+   "12": 42.7,
+   "13": 37.7,
+   "14": 32.4,
+   "15": 29.0,
+   "16": 26.1,
+   "17": 24.4,
+   "18": 29.8,
+   "19": 41.3,
+   "20": 50.5,
+   "21": 52.8,
+   "22": 49.7,
+   "23": 50.6
+  },
+  "byModelPeriod": {
+   "arterial": {
+    "EA": 16.9,
+    "AM": 15.8,
+    "MD": 15.5,
+    "PM": 14.8,
+    "EV": 17.1
+   },
+   "freeway": {
+    "EA": 56.9,
+    "AM": 39.2,
+    "MD": 39.8,
+    "PM": 27.3,
+    "EV": 50.7
+   },
+   "periods": "EA 3-6, AM 6-10, MD 10-15, PM 15-19, EV 19-3 (plain mean of hourly speeds)"
+  },
+  "peakMonthlyMean": {
+   "Arterial_AM": 15.4,
+   "Arterial_PM": 14.6,
+   "Freeway_AM": 33.5,
+   "Freeway_PM": 25.1
+  },
+  "note": "Dashboard AM/PM values for the same months (peakMonthlyMean) sit slightly below the CMP report numbers because the dashboard is a monthly real-time product on a different segment set (XD/TMC) and months; use the CMP report numbers as the AM/PM benchmark and this profile for shape and off-peak levels."
+ },
+ "notes": [
+  "CMP citywide averages are network travel-time-weighted (total segment length / total travel time). Recomputed from the API for 2024 this reproduces the report exactly (16.85/15.75 arterial, 33.92/25.06 freeway); for 2025 the API gives 16.22/14.77 and 31.44/22.99, a little off the report's 16.1/14.7/32.7/23.9 (segment set may differ slightly).",
+  "Corridor speeds below are computed here the same way (sum of length / sum of length/speed over that corridor's CMP segments in one direction) from the 2025 per-segment values in the API, which match the report's Fig 4-4 segment CSV.",
+  "muniTransitAM/PM on corridors = CMP 2025 Muni transit speed on those segments (APC/AVL), where reported.",
+  "Freeway segments are I-80, I-280 and US-101 only; 19th Ave/Park Presidio is classed arterial though its Lake-US-101 tunnel segments run ~40-45 mph.",
+  "Speeds are INRIX probe speeds (mostly passenger cars), including signal delay.",
+  "Corridor 'from'/'to' are the chain ends of that direction's CMP segments with 2025 data (a corridor direction may have a gap, e.g. Fell/Oak are one-way pairs with short counter-flow segments). Where 2024 lacked some segments, 2024 vs 2025 is given on the common segment set only."
+ ],
+ "corridors": [
+  {
+   "name": "Geary Blvd",
+   "direction": "E",
+   "from": "Great Hwy",
+   "to": "Gough",
+   "lengthMiles": 5.11,
+   "segments": 3,
+   "AM": 20.0,
+   "PM": 19.1,
+   "AM2024": 21.3,
+   "PM2024": 19.2,
+   "muniTransitAM": 10.3,
+   "muniTransitPM": 9.7
+  },
+  {
+   "name": "Geary Blvd",
+   "direction": "W",
+   "from": "Kearny",
+   "to": "Great Hwy",
+   "lengthMiles": 6.3,
+   "segments": 4,
+   "AM": 18.3,
+   "PM": 16.8,
+   "AM2024": 19.0,
+   "PM2024": 17.7,
+   "muniTransitAM": 9.5,
+   "muniTransitPM": 8.9
+  },
+  {
+   "name": "Mission St (incl. Otis)",
+   "direction": "N",
+   "from": "Sickles",
+   "to": "Embarcadero",
+   "lengthMiles": 7.15,
+   "segments": 6,
+   "AM": 14.8,
+   "PM": 13.6,
+   "AM2024": 14.6,
+   "PM2024": 13.7,
+   "muniTransitAM": 8.8,
+   "muniTransitPM": 7.5
+  },
+  {
+   "name": "Mission St (incl. Otis)",
+   "direction": "S",
+   "from": "Embarcadero",
+   "to": "Sickles",
+   "lengthMiles": 7.18,
+   "segments": 6,
+   "AM": 15.7,
+   "PM": 13.8,
+   "AM2024": 15.6,
+   "PM2024": 14.2,
+   "muniTransitAM": 8.9,
+   "muniTransitPM": 7.6
+  },
+  {
+   "name": "19th Ave / Park Presidio",
+   "direction": "N",
+   "from": "Junipero Serra",
+   "to": "US-101",
+   "lengthMiles": 6.41,
+   "segments": 4,
+   "AM": 20.5,
+   "PM": 19.7,
+   "AM2024": 22.1,
+   "PM2024": 20.7,
+   "muniTransitAM": 11.1,
+   "muniTransitPM": 11.2
+  },
+  {
+   "name": "19th Ave / Park Presidio",
+   "direction": "S",
+   "from": "US-101",
+   "to": "Junipero Serra",
+   "lengthMiles": 6.48,
+   "segments": 4,
+   "AM": 22.3,
+   "PM": 16.7,
+   "AM2024": 23.9,
+   "PM2024": 19.4,
+   "muniTransitAM": 12.2,
+   "muniTransitPM": 9.0
+  },
+  {
+   "name": "Van Ness Ave / South Van Ness",
+   "direction": "N",
+   "from": "Cesar Chavez",
+   "to": "Lombard",
+   "lengthMiles": 3.71,
+   "segments": 4,
+   "AM": 14.0,
+   "PM": 12.9,
+   "AM2024": 14.8,
+   "PM2024": 13.8,
+   "muniTransitAM": 7.8,
+   "muniTransitPM": 8.3
+  },
+  {
+   "name": "Van Ness Ave / South Van Ness",
+   "direction": "S",
+   "from": "Lombard",
+   "to": "Cesar Chavez",
+   "lengthMiles": 3.7,
+   "segments": 4,
+   "AM": 14.1,
+   "PM": 11.4,
+   "AM2024": 14.4,
+   "PM2024": 12.4,
+   "muniTransitAM": 7.7,
+   "muniTransitPM": 7.4
+  },
+  {
+   "name": "Market St / Portola Dr",
+   "direction": "E",
+   "from": "Sloat",
+   "to": "Drumm",
+   "lengthMiles": 6.39,
+   "segments": 6,
+   "AM": 14.9,
+   "PM": 15.0,
+   "AM2024": 15.0,
+   "PM2024": 15.1,
+   "muniTransitAM": 8.2,
+   "muniTransitPM": 7.9
+  },
+  {
+   "name": "Market St / Portola Dr",
+   "direction": "W",
+   "from": "Drumm",
+   "to": "Sloat",
+   "lengthMiles": 6.39,
+   "segments": 6,
+   "AM": 16.2,
+   "PM": 14.8,
+   "sameSegments2024vs2025": {
+    "segments": 5,
+    "AM2024": 20.1,
+    "PM2024": 19.3,
+    "AM2025": 19.4,
+    "PM2025": 18.7
+   },
+   "muniTransitAM": 8.4,
+   "muniTransitPM": 7.9
+  },
+  {
+   "name": "3rd St",
+   "direction": "N",
+   "from": "Jamestown",
+   "to": "Market",
+   "lengthMiles": 5.03,
+   "segments": 3,
+   "AM": 15.0,
+   "PM": 14.1,
+   "AM2024": 15.6,
+   "PM2024": 15.2,
+   "muniTransitAM": 10.4,
+   "muniTransitPM": 9.6
+  },
+  {
+   "name": "3rd St",
+   "direction": "S",
+   "from": "Terry Francois",
+   "to": "Jamestown",
+   "lengthMiles": 3.98,
+   "segments": 2,
+   "AM": 17.7,
+   "PM": 17.0,
+   "AM2024": 17.1,
+   "PM2024": 17.0,
+   "muniTransitAM": 12.3,
+   "muniTransitPM": 11.4
+  },
+  {
+   "name": "16th St",
+   "direction": "E",
+   "from": "Market",
+   "to": "Potrero",
+   "lengthMiles": 1.4,
+   "segments": 2,
+   "AM": 13.5,
+   "PM": 12.3,
+   "AM2024": 13.4,
+   "PM2024": 11.8,
+   "muniTransitAM": 7.0,
+   "muniTransitPM": 6.2
+  },
+  {
+   "name": "16th St",
+   "direction": "W",
+   "from": "Potrero",
+   "to": "Market",
+   "lengthMiles": 1.4,
+   "segments": 2,
+   "AM": 14.5,
+   "PM": 12.3,
+   "AM2024": 15.4,
+   "PM2024": 13.8,
+   "muniTransitAM": 7.0,
+   "muniTransitPM": 6.2
+  },
+  {
+   "name": "Oak St",
+   "direction": "E",
+   "from": "Stanyan",
+   "to": "Franklin",
+   "lengthMiles": 1.83,
+   "segments": 4,
+   "AM": 13.4,
+   "PM": 12.4,
+   "AM2024": 14.2,
+   "PM2024": 13.4
+  },
+  {
+   "name": "Fell St",
+   "direction": "E",
+   "from": "Gough",
+   "to": "Market",
+   "lengthMiles": 0.29,
+   "segments": 1,
+   "AM": 10.2,
+   "PM": 11.5,
+   "AM2024": 11.8,
+   "PM2024": 11.8
+  },
+  {
+   "name": "Fell St",
+   "direction": "W",
+   "from": "Gough",
+   "to": "Stanyan",
+   "lengthMiles": 1.74,
+   "segments": 2,
+   "AM": 15.0,
+   "PM": 13.5,
+   "AM2024": 15.8,
+   "PM2024": 14.7
+  },
+  {
+   "name": "US-101 Central Freeway (I-80 <-> Market/Octavia)",
+   "direction": "N",
+   "from": "I-80",
+   "to": "Market",
+   "lengthMiles": 1.27,
+   "segments": 1,
+   "AM": 14.9,
+   "PM": 20.3,
+   "AM2024": 16.9,
+   "PM2024": 20.1
+  },
+  {
+   "name": "US-101 Central Freeway (I-80 <-> Market/Octavia)",
+   "direction": "S",
+   "from": "Market",
+   "to": "I-80",
+   "lengthMiles": 1.17,
+   "segments": 1,
+   "AM": 27.1,
+   "PM": 14.2,
+   "AM2024": 30.0,
+   "PM2024": 14.7
+  },
+  {
+   "name": "US-101 Bayshore Fwy (county line <-> I-80)",
+   "direction": "N",
+   "from": "County Line",
+   "to": "I-80",
+   "lengthMiles": 4.21,
+   "segments": 2,
+   "AM": 22.6,
+   "PM": 15.8,
+   "AM2024": 24.2,
+   "PM2024": 20.7
+  },
+  {
+   "name": "US-101 Bayshore Fwy (county line <-> I-80)",
+   "direction": "S",
+   "from": "I-80",
+   "to": "Monster Park Exit",
+   "lengthMiles": 4.27,
+   "segments": 2,
+   "AM": 24.1,
+   "PM": 48.0,
+   "AM2024": 29.7,
+   "PM2024": 48.1
+  },
+  {
+   "name": "I-80 (US-101 <-> Fremont exit <-> Treasure Island)",
+   "direction": "E",
+   "from": "Fremont Exit",
+   "to": "Treasure Island",
+   "lengthMiles": 2.7,
+   "segments": 1,
+   "AM": 49.9,
+   "PM": 27.3,
+   "AM2024": 41.8,
+   "PM2024": 25.9
+  },
+  {
+   "name": "I-80 (US-101 <-> Fremont exit <-> Treasure Island)",
+   "direction": "N",
+   "from": "US-101",
+   "to": "Fremont Exit",
+   "lengthMiles": 1.74,
+   "segments": 1,
+   "AM": 37.4,
+   "PM": 9.0,
+   "AM2024": 36.7,
+   "PM2024": 9.4
+  },
+  {
+   "name": "I-80 (US-101 <-> Fremont exit <-> Treasure Island)",
+   "direction": "S",
+   "from": "Treasure Island",
+   "to": "Fremont Exit",
+   "lengthMiles": 2.71,
+   "segments": 1,
+   "AM": 31.0,
+   "PM": 14.0,
+   "AM2024": 29.8,
+   "PM2024": 14.8
+  },
+  {
+   "name": "I-80 (US-101 <-> Fremont exit <-> Treasure Island)",
+   "direction": "W",
+   "from": "Fremont Exit",
+   "to": "US-101",
+   "lengthMiles": 1.7,
+   "segments": 1,
+   "AM": 29.2,
+   "PM": 14.2,
+   "AM2024": 31.6,
+   "PM2024": 13.5
+  },
+  {
+   "name": "I-280 (Junipero Serra <-> 6th/Brannan)",
+   "direction": "E",
+   "from": "Junipero Serra",
+   "to": "Weldon",
+   "lengthMiles": 4.03,
+   "segments": 1,
+   "AM": 31.3,
+   "PM": 63.7,
+   "AM2024": 38.6,
+   "PM2024": 63.9
+  },
+  {
+   "name": "I-280 (Junipero Serra <-> 6th/Brannan)",
+   "direction": "N",
+   "from": "Weldon",
+   "to": "6th/Brannan",
+   "lengthMiles": 3.51,
+   "segments": 1,
+   "AM": 30.6,
+   "PM": 20.2,
+   "AM2024": 32.2,
+   "PM2024": 26.0
+  },
+  {
+   "name": "I-280 (Junipero Serra <-> 6th/Brannan)",
+   "direction": "S",
+   "from": "6th/Brannan",
+   "to": "Junipero Serra",
+   "lengthMiles": 7.54,
+   "segments": 2,
+   "AM": 59.3,
+   "PM": 44.0,
+   "AM2024": 59.9,
+   "PM2024": 47.1
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+{
+ "description": "Independent evidence on San Francisco's commute trips and on how many of its transit trips are commutes (commute_checks.py). Not fitted.",
+ "generated": "2026-10-08",
+ "bats2023": {
+  "table45WeightedTotalSF": 365855,
+  "table20PersonsSF": 689506,
+  "table20EmployedSF": {
+   "fullTime": 0.533,
+   "partTime": 0.119,
+   "selfEmployed": 0.025
+  },
+  "note": "BATS 2023 Final Report: Table 45 (typical commute frequency by home county, p. 68) has a weighted total of 365,855 San Francisco workers; Table 20 (employment status by county, p. 44) has 689,506 San Francisco persons, 53.3% employed full time, 11.9% part time, and 2.5% self-employed. Table 45 therefore covers about 78% of the county's workers: those who do not work only from home, the ACS's 78.6% not working from home in 2024. Its 65% of weekdays applies to all of them, part-time workers included.",
+  "diaryTripsToWork": {
+   "2019": 376996,
+   "2023": 180303
+  },
+  "diaryAdultTrips": {
+   "2019": 2963604,
+   "2023": 2183382
+  },
+  "diarySource": "MTC BATS 2019-2023 dashboard extract (mtc_bats_dashboard_tripshare.csv): weighted weekday trips of San Francisco adults by destination purpose (Tuesday-Thursday diaries in 2023)."
+ },
+ "tds": {
+  "2019": {
+   "trips": 2759,
+   "transitTrips": 455,
+   "workShareOfTrips": 0.3036,
+   "transitShare": 0.172,
+   "workTransitShare": 0.2235,
+   "nonWorkTransitShare": 0.1496,
+   "workShareOfTransitTrips": 0.3945
+  },
+  "2021": {
+   "trips": 2400,
+   "transitTrips": 231,
+   "workShareOfTrips": 0.1666,
+   "transitShare": 0.0963,
+   "workTransitShare": 0.21,
+   "nonWorkTransitShare": 0.0735,
+   "workShareOfTransitTrips": 0.3636
+  }
+ },
+ "tdsNote": "SFMTA Travel Decision Survey respondent files (DataSF qmdj-wtj2, 2019; b7eg-vqw2, 2021): San Francisco residents' trips yesterday and two days before, respondent weights. A work trip goes to work, or home from work, as MTC's Snapshot codes it; transit if any leg was public transit.",
+ "jobs": {
+  "lodes": {
+   "total": 747954,
+   "downtown": 363277
+  },
+  "model": {
+   "total": 668723,
+   "downtown": 281903
+  },
+  "note": "Downtown: the Financial District/South Beach, Chinatown, Nob Hill, and the Tenderloin (od-checks.ts). LODES 2023 WAC, all jobs (JT00), blocks in the model's zones; the model's jobs after UCSF's sites and the rebalancing to MTC's 2023 employment (zones.ts)."
+ },
+ "muni2017": {
+  "boardings": 703947,
+  "originWork": 0.26,
+  "destinationWork": 0.30000000000000004,
+  "note": "SFMTA 2017 on-board survey (ETC Institute for MTC, draft final report), expanded weekday boardings: coming from the usual workplace 24% and work-related 2% (Table 15), going to it 28% and work-related 2% (Table 19). Neither table gives both ends of a trip."
+ }
+}

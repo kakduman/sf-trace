@@ -1,0 +1,637 @@
+{
+ "description": "Commutes between San Francisco and the other Bay Area counties by ACS survey year, from the 2020-2024 5-year PUMS (California person file): each year's records read on their own (SERIALNO's first four characters), their 5-year weights times 5 giving that year's estimate. Workers who worked at home left out; residence county from PUMA, workplace county from POWSP 006 and POWPUMA. Modes: bus (02, which includes the private commuter shuttles), subway or elevated (03, BART), long-distance train or commuter rail (04, Caltrain). Used for the model year's commutes across the city line (calibrate.ts OUT_2024) and as evidence that the pooled 2020-2024 county flows understate the Caltrain corridor's commuting in 2024-26.",
+ "source": "U.S. Census Bureau, American Community Survey 2020-2024 5-year Public Use Microdata Sample, California persons (csv_pca_2024_5yr.zip); tabulated by server/beta3/pipeline/research/pums_caltrain_years.py",
+ "url": "https://www2.census.gov/programs-surveys/acs/data/pums/2024/5-Year/csv_pca.zip",
+ "accessed": "2026-10-07",
+ "note": "A single year's records are about a fifth of the pooled sample, so small cells are noisy (records given). Caltrain's own riders grew from 29,754 on an average weekday in FY2025 to 40,800 in FY2026 (caltrain-ridership.json), after the 2024 records.",
+ "sfCommutersInCalifornia": {
+  "2020": 315875,
+  "2021": 237895,
+  "2022": 319460,
+  "2023": 352385,
+  "2024": 372505,
+  "pooled": 319624
+ },
+ "flows": {
+  "San Francisco -> San Francisco": {
+   "all": {
+    "2020": {
+     "workers": 250795,
+     "records": 1896
+    },
+    "2021": {
+     "workers": 178610,
+     "records": 1617
+    },
+    "2022": {
+     "workers": 237010,
+     "records": 2316
+    },
+    "2023": {
+     "workers": 264545,
+     "records": 2609
+    },
+    "2024": {
+     "workers": 267805,
+     "records": 2548
+    },
+    "pooled": 239753
+   },
+   "bus": {
+    "2020": {
+     "workers": 47955,
+     "records": 412
+    },
+    "2021": {
+     "workers": 31830,
+     "records": 290
+    },
+    "2022": {
+     "workers": 47120,
+     "records": 481
+    },
+    "2023": {
+     "workers": 55330,
+     "records": 560
+    },
+    "2024": {
+     "workers": 63570,
+     "records": 570
+    },
+    "pooled": 49161
+   },
+   "commuterRail": {
+    "2020": {
+     "workers": 1140,
+     "records": 12
+    },
+    "2021": {
+     "workers": 495,
+     "records": 6
+    },
+    "2022": {
+     "workers": 1115,
+     "records": 9
+    },
+    "2023": {
+     "workers": 1670,
+     "records": 10
+    },
+    "2024": {
+     "workers": 1380,
+     "records": 12
+    },
+    "pooled": 1160
+   },
+   "subway": {
+    "2020": {
+     "workers": 16365,
+     "records": 126
+    },
+    "2021": {
+     "workers": 9515,
+     "records": 75
+    },
+    "2022": {
+     "workers": 10530,
+     "records": 107
+    },
+    "2023": {
+     "workers": 19430,
+     "records": 190
+    },
+    "2024": {
+     "workers": 20445,
+     "records": 190
+    },
+    "pooled": 15257
+   }
+  },
+  "San Francisco -> San Mateo": {
+   "all": {
+    "2020": {
+     "workers": 32415,
+     "records": 281
+    },
+    "2021": {
+     "workers": 32545,
+     "records": 311
+    },
+    "2022": {
+     "workers": 42650,
+     "records": 442
+    },
+    "2023": {
+     "workers": 42140,
+     "records": 433
+    },
+    "2024": {
+     "workers": 50240,
+     "records": 482
+    },
+    "pooled": 39998
+   },
+   "bus": {
+    "2020": {
+     "workers": 3520,
+     "records": 22
+    },
+    "2021": {
+     "workers": 1745,
+     "records": 17
+    },
+    "2022": {
+     "workers": 4135,
+     "records": 38
+    },
+    "2023": {
+     "workers": 4825,
+     "records": 53
+    },
+    "2024": {
+     "workers": 4335,
+     "records": 47
+    },
+    "pooled": 3712
+   },
+   "commuterRail": {
+    "2020": {
+     "workers": 305,
+     "records": 7
+    },
+    "2021": {
+     "workers": 500,
+     "records": 5
+    },
+    "2022": {
+     "workers": 1450,
+     "records": 15
+    },
+    "2023": {
+     "workers": 1330,
+     "records": 12
+    },
+    "2024": {
+     "workers": 1960,
+     "records": 19
+    },
+    "pooled": 1109
+   },
+   "subway": {
+    "2020": {
+     "workers": 80,
+     "records": 1
+    },
+    "2021": {
+     "workers": 485,
+     "records": 6
+    },
+    "2022": {
+     "workers": 1095,
+     "records": 11
+    },
+    "2023": {
+     "workers": 1910,
+     "records": 16
+    },
+    "2024": {
+     "workers": 1115,
+     "records": 10
+    },
+    "pooled": 937
+   }
+  },
+  "San Francisco -> Santa Clara": {
+   "all": {
+    "2020": {
+     "workers": 13990,
+     "records": 127
+    },
+    "2021": {
+     "workers": 8655,
+     "records": 77
+    },
+    "2022": {
+     "workers": 17920,
+     "records": 171
+    },
+    "2023": {
+     "workers": 23025,
+     "records": 229
+    },
+    "2024": {
+     "workers": 28830,
+     "records": 286
+    },
+    "pooled": 18484
+   },
+   "bus": {
+    "2020": {
+     "workers": 3535,
+     "records": 41
+    },
+    "2021": {
+     "workers": 540,
+     "records": 7
+    },
+    "2022": {
+     "workers": 2955,
+     "records": 29
+    },
+    "2023": {
+     "workers": 4425,
+     "records": 44
+    },
+    "2024": {
+     "workers": 7435,
+     "records": 69
+    },
+    "pooled": 3778
+   },
+   "commuterRail": {
+    "2020": {
+     "workers": 795,
+     "records": 13
+    },
+    "2021": {
+     "workers": 670,
+     "records": 4
+    },
+    "2022": {
+     "workers": 1990,
+     "records": 18
+    },
+    "2023": {
+     "workers": 1795,
+     "records": 20
+    },
+    "2024": {
+     "workers": 3250,
+     "records": 34
+    },
+    "pooled": 1700
+   },
+   "subway": {
+    "2020": {
+     "workers": 300,
+     "records": 2
+    },
+    "2021": {
+     "workers": 175,
+     "records": 2
+    },
+    "2022": {
+     "workers": 240,
+     "records": 4
+    },
+    "2023": {
+     "workers": 890,
+     "records": 7
+    },
+    "2024": {
+     "workers": 545,
+     "records": 7
+    },
+    "pooled": 430
+   }
+  },
+  "San Francisco -> Alameda": {
+   "all": {
+    "2020": {
+     "workers": 10110,
+     "records": 100
+    },
+    "2021": {
+     "workers": 8210,
+     "records": 76
+    },
+    "2022": {
+     "workers": 13375,
+     "records": 136
+    },
+    "2023": {
+     "workers": 13765,
+     "records": 143
+    },
+    "2024": {
+     "workers": 13675,
+     "records": 149
+    },
+    "pooled": 11827
+   }
+  },
+  "San Francisco -> Contra Costa": {
+   "all": {
+    "2020": {
+     "workers": 1785,
+     "records": 15
+    },
+    "2021": {
+     "workers": 1955,
+     "records": 19
+    },
+    "2022": {
+     "workers": 2110,
+     "records": 24
+    },
+    "2023": {
+     "workers": 2085,
+     "records": 21
+    },
+    "2024": {
+     "workers": 4565,
+     "records": 38
+    },
+    "pooled": 2500
+   }
+  },
+  "San Francisco -> Marin": {
+   "all": {
+    "2020": {
+     "workers": 4255,
+     "records": 35
+    },
+    "2021": {
+     "workers": 4965,
+     "records": 44
+    },
+    "2022": {
+     "workers": 3880,
+     "records": 44
+    },
+    "2023": {
+     "workers": 4090,
+     "records": 43
+    },
+    "2024": {
+     "workers": 3975,
+     "records": 42
+    },
+    "pooled": 4233
+   }
+  },
+  "San Mateo -> San Francisco": {
+   "all": {
+    "2020": {
+     "workers": 61435,
+     "records": 454
+    },
+    "2021": {
+     "workers": 47655,
+     "records": 442
+    },
+    "2022": {
+     "workers": 45080,
+     "records": 465
+    },
+    "2023": {
+     "workers": 58995,
+     "records": 596
+    },
+    "2024": {
+     "workers": 67125,
+     "records": 680
+    },
+    "pooled": 56058
+   },
+   "bus": {
+    "2020": {
+     "workers": 4095,
+     "records": 26
+    },
+    "2021": {
+     "workers": 3190,
+     "records": 24
+    },
+    "2022": {
+     "workers": 1650,
+     "records": 16
+    },
+    "2023": {
+     "workers": 3545,
+     "records": 28
+    },
+    "2024": {
+     "workers": 5355,
+     "records": 43
+    },
+    "pooled": 3567
+   },
+   "commuterRail": {
+    "2020": {
+     "workers": 2905,
+     "records": 34
+    },
+    "2021": {
+     "workers": 1395,
+     "records": 19
+    },
+    "2022": {
+     "workers": 1150,
+     "records": 12
+    },
+    "2023": {
+     "workers": 1760,
+     "records": 23
+    },
+    "2024": {
+     "workers": 3940,
+     "records": 34
+    },
+    "pooled": 2230
+   },
+   "subway": {
+    "2020": {
+     "workers": 5065,
+     "records": 55
+    },
+    "2021": {
+     "workers": 2495,
+     "records": 26
+    },
+    "2022": {
+     "workers": 2690,
+     "records": 37
+    },
+    "2023": {
+     "workers": 4410,
+     "records": 55
+    },
+    "2024": {
+     "workers": 4370,
+     "records": 58
+    },
+    "pooled": 3806
+   }
+  },
+  "Santa Clara -> San Francisco": {
+   "all": {
+    "2020": {
+     "workers": 11915,
+     "records": 128
+    },
+    "2021": {
+     "workers": 10170,
+     "records": 86
+    },
+    "2022": {
+     "workers": 16260,
+     "records": 138
+    },
+    "2023": {
+     "workers": 18505,
+     "records": 155
+    },
+    "2024": {
+     "workers": 19050,
+     "records": 169
+    },
+    "pooled": 15180
+   },
+   "bus": {
+    "2020": {
+     "workers": 275,
+     "records": 5
+    },
+    "2021": {
+     "workers": 185,
+     "records": 1
+    },
+    "2022": {
+     "workers": 575,
+     "records": 4
+    },
+    "2023": {
+     "workers": 420,
+     "records": 3
+    },
+    "2024": {
+     "workers": 1175,
+     "records": 9
+    },
+    "pooled": 526
+   },
+   "commuterRail": {
+    "2020": {
+     "workers": 2840,
+     "records": 33
+    },
+    "2021": {
+     "workers": 775,
+     "records": 10
+    },
+    "2022": {
+     "workers": 1300,
+     "records": 13
+    },
+    "2023": {
+     "workers": 2190,
+     "records": 23
+    },
+    "2024": {
+     "workers": 3240,
+     "records": 38
+    },
+    "pooled": 2069
+   },
+   "subway": {
+    "2020": {
+     "workers": 1615,
+     "records": 15
+    },
+    "2021": {
+     "workers": 405,
+     "records": 4
+    },
+    "2022": {
+     "workers": 705,
+     "records": 7
+    },
+    "2023": {
+     "workers": 335,
+     "records": 6
+    },
+    "2024": {
+     "workers": 275,
+     "records": 5
+    },
+    "pooled": 667
+   }
+  },
+  "Alameda -> San Francisco": {
+   "all": {
+    "2020": {
+     "workers": 73910,
+     "records": 634
+    },
+    "2021": {
+     "workers": 47565,
+     "records": 444
+    },
+    "2022": {
+     "workers": 56600,
+     "records": 573
+    },
+    "2023": {
+     "workers": 83890,
+     "records": 797
+    },
+    "2024": {
+     "workers": 74265,
+     "records": 711
+    },
+    "pooled": 67246
+   }
+  },
+  "Contra Costa -> San Francisco": {
+   "all": {
+    "2020": {
+     "workers": 49685,
+     "records": 340
+    },
+    "2021": {
+     "workers": 38760,
+     "records": 334
+    },
+    "2022": {
+     "workers": 44010,
+     "records": 398
+    },
+    "2023": {
+     "workers": 52175,
+     "records": 470
+    },
+    "2024": {
+     "workers": 46635,
+     "records": 404
+    },
+    "pooled": 46253
+   }
+  },
+  "Marin -> San Francisco": {
+   "all": {
+    "2020": {
+     "workers": 12900,
+     "records": 135
+    },
+    "2021": {
+     "workers": 11345,
+     "records": 105
+    },
+    "2022": {
+     "workers": 14270,
+     "records": 131
+    },
+    "2023": {
+     "workers": 16630,
+     "records": 160
+    },
+    "2024": {
+     "workers": 19760,
+     "records": 193
+    },
+    "pooled": 14981
+   }
+  }
+ }
+}

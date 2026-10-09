@@ -1,0 +1,456 @@
+{
+ "source": "National Transit Database (FTA), annual data product \"Service (by Mode and Time Period)\", Socrata dataset wwdp-t4re on data.transportation.gov (columns unlinked_passenger_trips_upt, passenger_miles, average_passenger_trip_length_aptl_, average_speed)",
+ "url": "https://data.transportation.gov/resource/wwdp-t4re.json",
+ "queries": [
+  "https://data.transportation.gov/resource/wwdp-t4re.json?_5_digit_ntd_id=90015&$limit=500",
+  "https://data.transportation.gov/resource/wwdp-t4re.json?_5_digit_ntd_id=90003&$limit=500",
+  "https://data.transportation.gov/resource/wwdp-t4re.json?_5_digit_ntd_id=90134&$limit=500",
+  "https://data.transportation.gov/resource/wwdp-t4re.json?_5_digit_ntd_id=90014&$limit=500"
+ ],
+ "rawFiles": [
+  "data/beta3/raw/obs/ntd2024_service_90015.json",
+  "data/beta3/raw/obs/ntd2024_service_90003.json",
+  "data/beta3/raw/obs/ntd2024_service_90134.json",
+  "data/beta3/raw/obs/ntd2024_service_90014.json"
+ ],
+ "period": "NTD report year 2024 (agency fiscal year July 2023 - June 2024). max(report_year) in the dataset on the access date = 2024; 2023 Muni values included for comparison.",
+ "accessed": "2026-10-04",
+ "units": {
+  "upt": "unlinked passenger trips per year",
+  "pmt": "passenger miles per year",
+  "avgTripMiles": "pmt/upt, miles (computed here)",
+  "ntdAptl": "NTD's own average passenger trip length column (should equal avgTripMiles)",
+  "avgRevenueSpeedMph": "NTD average_speed = revenue miles / revenue hours, includes dwell and layover in revenue time",
+  "avgWeekdayUpt": "Average Typical Weekday UPT (same dataset, time_period 'Average Typical Weekday')"
+ },
+ "notes": [
+  "Type of service: DO = directly operated, PT = purchased transportation. Caltrain's commuter rail is PT (contract operator).",
+  "Unlinked trips count every boarding: a Muni bus-to-Metro transfer is two UPT. Average trip length is per boarding, not per linked journey.",
+  "NTD 'Average Weekday - AM Peak/Midday/PM Peak/Other' rows exist for these agencies but carry no UPT/PMT values (only service span), so no time-of-day split is available from this table.",
+  "BART MG = Oakland Airport connector (automated guideway); YR = eBART hybrid rail (Pittsburg/Bay Point - Antioch). HR = main heavy rail system.",
+  "Muni DR = paratransit (purchased); excluded from fixed-route subtotal 'totalFixedRoute'."
+ ],
+ "agencies": {
+  "muni": {
+   "ntdId": "90015",
+   "byMode": {
+    "CC": {
+     "modeName": "Cable Car",
+     "typeOfService": "DO",
+     "avgWeekdayUpt": 9814,
+     "avgWeekdayPmt": 12131,
+     "avgWeekdayTripMiles": 1.236,
+     "upt": 3925803,
+     "pmt": 4875106,
+     "avgTripMiles": 1.242,
+     "ntdAptl": 1.2418,
+     "avgRevenueSpeedMph": 2.1452,
+     "vehicleRevenueMiles": 199513,
+     "vehicleRevenueHours": 93003
+    },
+    "DR": {
+     "modeName": "Demand Response",
+     "typeOfService": "PT",
+     "avgWeekdayUpt": 886,
+     "avgWeekdayPmt": 5170,
+     "avgWeekdayTripMiles": 5.835,
+     "upt": 254113,
+     "pmt": 1469112,
+     "avgTripMiles": 5.781,
+     "ntdAptl": 5.7813,
+     "avgRevenueSpeedMph": 7.4821,
+     "vehicleRevenueMiles": 1271406,
+     "vehicleRevenueHours": 169926
+    },
+    "LR": {
+     "modeName": "Light Rail",
+     "typeOfService": "DO",
+     "avgWeekdayUpt": 86951,
+     "avgWeekdayPmt": 205180,
+     "avgWeekdayTripMiles": 2.36,
+     "upt": 28230682,
+     "pmt": 66007121,
+     "avgTripMiles": 2.338,
+     "ntdAptl": 2.3381,
+     "avgRevenueSpeedMph": 8.5175,
+     "vehicleRevenueMiles": 4977464,
+     "vehicleRevenueHours": 584384
+    },
+    "MB": {
+     "modeName": "Bus",
+     "typeOfService": "DO",
+     "avgWeekdayUpt": 240425,
+     "avgWeekdayPmt": 530736,
+     "avgWeekdayTripMiles": 2.207,
+     "upt": 77857337,
+     "pmt": 168811279,
+     "avgTripMiles": 2.168,
+     "ntdAptl": 2.1682,
+     "avgRevenueSpeedMph": 7.8585,
+     "vehicleRevenueMiles": 13378563,
+     "vehicleRevenueHours": 1702426
+    },
+    "SR": {
+     "modeName": "Streetcar Rail",
+     "typeOfService": "DO",
+     "avgWeekdayUpt": 10331,
+     "avgWeekdayPmt": 13623,
+     "avgWeekdayTripMiles": 1.319,
+     "upt": 3828113,
+     "pmt": 5123939,
+     "avgTripMiles": 1.339,
+     "ntdAptl": 1.3385,
+     "avgRevenueSpeedMph": 5.0094,
+     "vehicleRevenueMiles": 251848,
+     "vehicleRevenueHours": 50275
+    },
+    "TB": {
+     "modeName": "Trolleybus",
+     "typeOfService": "DO",
+     "avgWeekdayUpt": 137480,
+     "avgWeekdayPmt": 192640,
+     "avgWeekdayTripMiles": 1.401,
+     "upt": 46447945,
+     "pmt": 65859106,
+     "avgTripMiles": 1.418,
+     "ntdAptl": 1.4179,
+     "avgRevenueSpeedMph": 6.0154,
+     "vehicleRevenueMiles": 5087866,
+     "vehicleRevenueHours": 845811
+    }
+   },
+   "total": {
+    "upt": 160543993,
+    "pmt": 312145663,
+    "avgTripMiles": 1.944
+   },
+   "totalFixedRoute": {
+    "modes": [
+     "CC",
+     "LR",
+     "MB",
+     "SR",
+     "TB"
+    ],
+    "upt": 160289880,
+    "pmt": 310676551,
+    "avgTripMiles": 1.938
+   },
+   "busMBplusTB": {
+    "upt": 124305282,
+    "pmt": 234670385,
+    "avgTripMiles": 1.888
+   },
+   "reportYear2023": {
+    "LR": {
+     "upt": 23281310,
+     "pmt": 56446713,
+     "avgTripMiles": 2.425
+    },
+    "MB": {
+     "upt": 71851901,
+     "pmt": 144667638,
+     "avgTripMiles": 2.013
+    },
+    "SR": {
+     "upt": 3136144,
+     "pmt": 4445931,
+     "avgTripMiles": 1.418
+    },
+    "TB": {
+     "upt": 37694490,
+     "pmt": 55160062,
+     "avgTripMiles": 1.463
+    },
+    "CC": {
+     "upt": 2926495,
+     "pmt": 3879736,
+     "avgTripMiles": 1.326
+    },
+    "DR": {
+     "upt": 237353,
+     "pmt": 1376402,
+     "avgTripMiles": 5.799
+    }
+   },
+   "lightRailHistory": {
+    "source": "FTA NTD, TS2.1 Service Data and Operating Expenses Time Series by Mode (2023 release; 2024 from data.transportation.gov npsm-38gk). SFMTA (90015), light rail and bus (MB+TB), directly operated. Trip miles = PMT/UPT (derived). Report year = fiscal year ending June 30.",
+    "url": "https://www.transit.dot.gov/ntd/data-product/ts21-service-data-and-operating-expenses-time-series-mode-2",
+    "rawFiles": [
+     "data/beta3/raw/ntd-history/"
+    ],
+    "notes": [
+     "FY2021 left out: rail was largely suspended (0.74 miles a trip).",
+     "SFMTA's route table (muni-route-ridership.json raw file data/beta3/raw/obs/muni_ridership_by_route.csv) has no L Taraval light-rail boardings from April 2020 to August 2024 (31,300-33,400 a weekday in January-March 2020; 15,000 in October 2024): the L ran as a bus while its tracks were rebuilt, so FY2021-FY2024 light rail has no L, the line with the longest rides. The Central Subway opened in November 2022 (FY2023).",
+     "The steps in 2012 (2.66 to 2.85) and 2016 (2.85 to 2.72) come with no change in service and are probably changes in how SFMTA estimated passenger miles."
+    ],
+    "byYear": {
+     "2002": {
+      "lrUpt": 47898229,
+      "lrPmt": 117816105,
+      "lrTripMiles": 2.46,
+      "busTripMiles": 1.842
+     },
+     "2003": {
+      "lrUpt": 42896269,
+      "lrPmt": 109941007,
+      "lrTripMiles": 2.563,
+      "busTripMiles": 1.847
+     },
+     "2004": {
+      "lrUpt": 45187031,
+      "lrPmt": 117833690,
+      "lrTripMiles": 2.608,
+      "busTripMiles": 1.857
+     },
+     "2005": {
+      "lrUpt": 46803247,
+      "lrPmt": 121027943,
+      "lrTripMiles": 2.586,
+      "busTripMiles": 1.841
+     },
+     "2006": {
+      "lrUpt": 43678772,
+      "lrPmt": 112916628,
+      "lrTripMiles": 2.585,
+      "busTripMiles": 1.866
+     },
+     "2007": {
+      "lrUpt": 41736824,
+      "lrPmt": 106543428,
+      "lrTripMiles": 2.553,
+      "busTripMiles": 1.884
+     },
+     "2008": {
+      "lrUpt": 50312720,
+      "lrPmt": 133115688,
+      "lrTripMiles": 2.646,
+      "busTripMiles": 1.778
+     },
+     "2009": {
+      "lrUpt": 50744862,
+      "lrPmt": 135364608,
+      "lrTripMiles": 2.668,
+      "busTripMiles": 1.882
+     },
+     "2010": {
+      "lrUpt": 49396925,
+      "lrPmt": 131367637,
+      "lrTripMiles": 2.659,
+      "busTripMiles": 1.936
+     },
+     "2011": {
+      "lrUpt": 51021623,
+      "lrPmt": 135716941,
+      "lrTripMiles": 2.66,
+      "busTripMiles": 1.929
+     },
+     "2012": {
+      "lrUpt": 43607739,
+      "lrPmt": 124349101,
+      "lrTripMiles": 2.852,
+      "busTripMiles": 1.944
+     },
+     "2013": {
+      "lrUpt": 45358815,
+      "lrPmt": 129329354,
+      "lrTripMiles": 2.851,
+      "busTripMiles": 1.956
+     },
+     "2014": {
+      "lrUpt": 48779247,
+      "lrPmt": 138802393,
+      "lrTripMiles": 2.846,
+      "busTripMiles": 1.98
+     },
+     "2015": {
+      "lrUpt": 49076058,
+      "lrPmt": 140039336,
+      "lrTripMiles": 2.854,
+      "busTripMiles": 1.931
+     },
+     "2016": {
+      "lrUpt": 52124572,
+      "lrPmt": 141541475,
+      "lrTripMiles": 2.715,
+      "busTripMiles": 1.964
+     },
+     "2017": {
+      "lrUpt": 50993166,
+      "lrPmt": 139398231,
+      "lrTripMiles": 2.734,
+      "busTripMiles": 1.929
+     },
+     "2018": {
+      "lrUpt": 49833591,
+      "lrPmt": 136717088,
+      "lrTripMiles": 2.743,
+      "busTripMiles": 1.783
+     },
+     "2019": {
+      "lrUpt": 49795740,
+      "lrPmt": 136469594,
+      "lrTripMiles": 2.741,
+      "busTripMiles": 1.837
+     },
+     "2020": {
+      "lrUpt": 37419416,
+      "lrPmt": 102607757,
+      "lrTripMiles": 2.742,
+      "busTripMiles": 1.837
+     },
+     "2022": {
+      "lrUpt": 13992686,
+      "lrPmt": 29918002,
+      "lrTripMiles": 2.138,
+      "busTripMiles": 1.828
+     },
+     "2023": {
+      "lrUpt": 23281310,
+      "lrPmt": 56446713,
+      "lrTripMiles": 2.425,
+      "busTripMiles": 1.824
+     },
+     "2024": {
+      "lrUpt": 28230682,
+      "lrPmt": 66007121,
+      "lrTripMiles": 2.338,
+      "busTripMiles": 1.888
+     }
+    }
+   }
+  },
+  "bart": {
+   "ntdId": "90003",
+   "byMode": {
+    "HR": {
+     "modeName": "Heavy Rail",
+     "typeOfService": "DO",
+     "avgWeekdayUpt": 173243,
+     "avgWeekdayPmt": 2426231,
+     "avgWeekdayTripMiles": 14.005,
+     "upt": 53222212,
+     "pmt": 740857064,
+     "avgTripMiles": 13.92,
+     "ntdAptl": 13.9201,
+     "avgRevenueSpeedMph": 31.6018,
+     "vehicleRevenueMiles": 71858025,
+     "vehicleRevenueHours": 2273862
+    },
+    "MG": {
+     "modeName": "Monorail/Automated Guideway",
+     "typeOfService": "PT",
+     "avgWeekdayUpt": 1304,
+     "avgWeekdayPmt": 4147,
+     "avgWeekdayTripMiles": 3.18,
+     "upt": 432021,
+     "pmt": 1373827,
+     "avgTripMiles": 3.18,
+     "ntdAptl": 3.18,
+     "avgRevenueSpeedMph": 12.949,
+     "vehicleRevenueMiles": 258320,
+     "vehicleRevenueHours": 19949
+    },
+    "YR": {
+     "modeName": "Hybrid Rail",
+     "typeOfService": "DO",
+     "avgWeekdayUpt": 4402,
+     "avgWeekdayPmt": 31221,
+     "avgWeekdayTripMiles": 7.092,
+     "upt": 1273133,
+     "pmt": 8986977,
+     "avgTripMiles": 7.059,
+     "ntdAptl": 7.0589,
+     "avgRevenueSpeedMph": 27.7861,
+     "vehicleRevenueMiles": 1113639,
+     "vehicleRevenueHours": 40079
+    }
+   },
+   "total": {
+    "upt": 54927366,
+    "pmt": 751217868,
+    "avgTripMiles": 13.677
+   }
+  },
+  "caltrain": {
+   "ntdId": "90134",
+   "byMode": {
+    "CR": {
+     "modeName": "Commuter Rail",
+     "typeOfService": "PT",
+     "avgWeekdayUpt": 24660,
+     "avgWeekdayPmt": 475358,
+     "avgWeekdayTripMiles": 19.276,
+     "upt": 7405005,
+     "pmt": 144203482,
+     "avgTripMiles": 19.474,
+     "ntdAptl": 19.4738,
+     "avgRevenueSpeedMph": 31.2644,
+     "vehicleRevenueMiles": 6061675,
+     "vehicleRevenueHours": 193884
+    }
+   },
+   "total": {
+    "upt": 7405005,
+    "pmt": 144203482,
+    "avgTripMiles": 19.474
+   }
+  },
+  "acTransit": {
+   "ntdId": "90014",
+   "byMode": {
+    "CB_DO": {
+     "modeName": "Commuter Bus",
+     "avgWeekdayUpt": 2130,
+     "avgWeekdayPmt": 24801,
+     "upt": 536641,
+     "pmt": 6249729,
+     "avgTripMiles": 11.646,
+     "avgRevenueSpeedMph": 15.2975
+    },
+    "DR_PT": {
+     "modeName": "Demand Response",
+     "avgWeekdayUpt": 1598,
+     "avgWeekdayPmt": 15398,
+     "upt": 480098,
+     "pmt": 4627850,
+     "avgTripMiles": 9.639,
+     "avgRevenueSpeedMph": 13.6512
+    },
+    "MB_DO": {
+     "modeName": "Bus",
+     "avgWeekdayUpt": 107225,
+     "avgWeekdayPmt": 354909,
+     "upt": 33931071,
+     "pmt": 113732863,
+     "avgTripMiles": 3.352,
+     "avgRevenueSpeedMph": 9.9993
+    },
+    "MB_PT": {
+     "modeName": "Bus",
+     "avgWeekdayUpt": 780,
+     "avgWeekdayPmt": 9070,
+     "upt": 197510,
+     "pmt": 2294806,
+     "avgTripMiles": 11.619,
+     "avgRevenueSpeedMph": 16.1168
+    },
+    "RB_DO": {
+     "modeName": "Bus Rapid Transit",
+     "avgWeekdayUpt": 14027,
+     "avgWeekdayPmt": 36070,
+     "upt": 4798970,
+     "pmt": 12450361,
+     "avgTripMiles": 2.594,
+     "avgRevenueSpeedMph": 8.9086
+    }
+   },
+   "total": {
+    "upt": 39944290,
+    "pmt": 139355609,
+    "avgTripMiles": 3.489
+   },
+   "note": "Keys are mode_typeOfService. CB = commuter bus (AC Transit's Transbay express service is reported here; NTD does not label routes, so whether every Transbay line (e.g. F, NL, O, which also carry local trips) is in CB rather than MB is not stated in the data). RB = Tempo bus rapid transit."
+  }
+ }
+}

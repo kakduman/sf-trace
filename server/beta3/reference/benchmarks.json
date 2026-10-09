@@ -1,0 +1,1269 @@
+{
+ "description": "Published transit validation of other travel models, for comparison with this model's route-level fit (Muni routes) and rail-station fit (BART). For each model: what was compared with what, base year, model structure, whether the comparison was fitted, and the route- and station-level statistics as published or as computed here from a published table of observed and modeled values. The article (client/beta3/paper/sections/front.ts, validation.ts, closing.ts) reads the 'comparison' rows and 'tm1Table74'.",
+ "accessed": "2026-10-05",
+ "rule": "Every number was read from the cited document as fetched. Statistics marked computed: true were computed here (FHWA definitions: %RMSE = 100*sqrt(mean((M-O)^2))/mean(O); r = Pearson correlation of modeled and observed; within25 = share of routes with |M/O-1| <= 0.25) from the observed and modeled values printed in the source table; the transcribed tables were checked against the source totals and, where printed, against each row's ratio. Statistics without that flag are as published. Nothing is estimated from charts except where marked uncertain.",
+ "rawDir": "data/beta3/raw/benchmarks/ (gitignored); TM1 2011, TM1.5.2, TM1.6.1, TAMDM, and the standards documents are in data/beta3/raw/standards/",
+ "whatDiffers": [
+  "Observed data: this model is compared with SFMTA automatic passenger counts (twelve-month mean of weekdays, 2025-26). TM1 2005 and SF-CHAMP 3 used year-2000 counts or a Muni on-board survey; TM1 2010 used operator counts scaled with NTD; ARC and the Met Council used expanded on-board surveys; LA Metro and SANDAG used automatic passenger counts. Survey-expanded route totals carry sampling and expansion error.",
+  "Base years range from 2000 (SF-CHAMP 3) to 2022 (SANDAG ABM3); this model's is 2025-26. Muni's network and ridership differ greatly between those years.",
+  "Fitted or not: this model's Muni total and Metro/bus ratio are calibrated and its route counts were examined during development (a development set, not an independent test). SF-CHAMP 3 and TM1 matched Muni totals by mode within a few percent but did not fit routes. SANDAG, ARC, PSRC, and the Met Council calibrated mode choice or networks to the same transit data they report. LA Metro calibrated to 2012 and compared with 2017 counts after network fixes. STOPS's national results are before its local count adjustment.",
+  "Statistic: several agencies publish only R-squared of a fitted line (PSRC, SANDAG, ARC, TM1 2010). R-squared is dominated by the largest routes and can be high while the %RMSE is large (Met Council: R-squared 0.97, %RMSE 45%).",
+  "Scope: the agency models are regional (TM1, TM2, SANDAG, ARC, PSRC, CMAP, MWCOG) or city models with regional demand (SF-CHAMP); this model covers San Francisco and trips with one end in it.",
+  "Period: most comparisons are daily weekday boardings; PSRC's route statistic is for the AM peak."
+ ],
+ "comparison": [
+  {
+   "id": "sfchamp3",
+   "group": "sf",
+   "inTable": true,
+   "model": "SF-CHAMP 3",
+   "agency": "SFCTA",
+   "baseYear": "2000",
+   "structure": "Activity-based (tour microsimulation), San Francisco, with regional trips from MTC",
+   "compared": "Daily boardings on 79 Muni routes, including the cable cars and the F, against year-2000 Muni counts; BART boardings at 8 city stations",
+   "routes": {
+    "n": 79,
+    "pctRmse": 37.6,
+    "r": 0.939,
+    "r2": 0.882,
+    "within25": 0.43,
+    "medianApe": 29.1,
+    "computed": true
+   },
+   "rail": {
+    "n": 8,
+    "pctRmse": 15.6,
+    "r": 0.985,
+    "r2": null,
+    "within25": 0.625,
+    "computed": true
+   },
+   "fit": "Muni total within 1% of counts; routes not fitted",
+   "published": [
+    "Table 65: 'Total MUNI ridership is validated to within 1% of year 2000 counts.' Local Bus 531,878 observed / 520,838 modeled (-2%); Express Bus 29,176 / 28,692 (-2%); Light Rail & CC 191,322 / 194,230 (2%); Total 752,376 / 743,760 (-1%).",
+    "Table 68 (Estimated and Observed MUNI Boardings by Route), 79 rows; total row 'Total 752,400 753,636 1.00'. No R-squared or %RMSE is printed; Figure 33 is a scatter plot.",
+    "Table 69, BART daily boardings at 8 San Francisco stations: total 145,414 observed / 142,286 modeled (-2%); Embarcadero 31,114/29,269; Montgomery 31,634/37,398; Powell 26,580/28,301; Civic Center 17,684/18,606; 16th St 8,845/6,626; 24th St 11,048/9,070; Glen Park 7,226/4,747; Balboa Park 11,283/8,269.",
+    "Time-of-day caveat: 'MUNI was unable to provide detailed counts by time of day, and the onboard survey data by time-of-day proved to be unreliable.'"
+   ],
+   "computedAlso": {
+    "routesWithoutCableCarsAndF": {
+     "n": 78,
+     "pctRmse": 38.3,
+     "r": 0.939,
+     "within25": 0.423
+    },
+    "metroJKLMN": {
+     "n": 5,
+     "pctRmse": 21.4,
+     "r": 0.818,
+     "within25": 0.6,
+     "computed": true
+    },
+    "busExcludingCableCarsAndF": {
+     "n": 70,
+     "pctRmse": 41.5,
+     "r": 0.937,
+     "within25": 0.414,
+     "computed": true
+    }
+   },
+   "refs": [
+    "sfchamp3"
+   ],
+   "loc": "Tables 68–69",
+   "source": {
+    "title": "Update of the San Francisco Chained Activity Modeling Process (SF-CHAMP), validation report (PB with Mark Bradley Research & Consulting, June 11, 2007), reprinted as Appendix 1 of the Van Ness Avenue BRT Vehicular Traffic Impact Analysis Technical Memorandum Appendices (SFCTA, July 3, 2013)",
+    "url": "http://web.archive.org/web/20160323221248id_/http://www.sfcta.org/sites/default/files/content/Planning/VanNess_BRT_EIR/FEIR-FEIS/Tech%20Memos/Transportation-Traffic/VN%20BRT%20Vehicular%20Tech%20Memo%20Appendices_CHS_7_3_2013_Final_LU.pdf",
+    "rawFile": "benchmarks/sfcta_vanness_brt_vehicular_tech_memo_appendices_2013.pdf",
+    "pages": "PDF pp. 128-133 (report pp. 125-130); table numbers in the body are one higher than in the report's list of tables"
+   },
+   "muniTotal": {
+    "observed": 752376,
+    "modeled": 743760,
+    "ratio": 0.9885,
+    "table": "Table 65"
+   }
+  },
+  {
+   "id": "sfchamp4",
+   "group": "sf",
+   "inTable": false,
+   "model": "SF-CHAMP 4.1",
+   "agency": "SFCTA",
+   "baseYear": "2008 (compared again with 2012 counts)",
+   "structure": "Activity-based (tour microsimulation)",
+   "compared": "Muni daily boardings by mode against Fall 2007 APC counts, and the same 2008 run against Fall 2012 APC counts; 7 Geary corridor routes; BART at 8 city stations",
+   "routes": {
+    "n": 7,
+    "pctRmse": 27.0,
+    "r": 0.906,
+    "r2": null,
+    "within25": 0.571,
+    "computed": true,
+    "note": "Geary corridor routes 1, 2, 3, 5, 31, 38, 38L against Fall 2012 APC (Table 7 of the 2014 addendum)"
+   },
+   "rail": null,
+   "fit": "Calibrated to 2000 data; 2008 Muni total within 0% of 2007 counts",
+   "published": [
+    "Geary BRT 2008 validation memo (Cambridge Systematics, Nov 3, 2011), Table 1: Local Bus 437,269 observed / 427,025 modeled (-2%); Express 28,279/28,736 (2%); Light Rail & CC 177,052/184,909 (4%); Total 642,600/640,670 (-0%). Figure 1 is a scatter of all Muni lines with no statistic.",
+    "Same memo, Table 3, BART SF stations ('boardings and exits'): total 163,946 observed / 99,951 modeled (-39%). UNCERTAIN: the modeled and observed columns may not measure the same thing; the memo's Table 2 prints BART systemwide 358,869 / 314,200 as '-4%', which is -12% by its own figures.",
+    "2012 addendum (R. Angueira, SFCTA, Aug 12, 2014): 'Systemwide, Muni boardings were within 9% of the observed when compared to 2012 data'; Table 1: Bus 513,730 / 455,761 (-11%); LR & CC 187,863 / 184,909 (-2%); Total 701,593 / 640,670 (-9%). Table 7 by route (modeled / 2012 APC): 1 21,947/26,010; 2 5,258/5,727; 3 4,515/3,342; 5 15,965/19,541; 31 6,043/10,850; 38 32,124/26,455; 38L 18,275/25,947; corridor 110,363/124,186 (-11%)."
+   ],
+   "refs": [],
+   "source": {
+    "title": "Geary Corridor Bus Rapid Transit Project Final EIS (SFCTA, 2017), Appendix D3-1 (SF-CHAMP 4.1 2008 base-year validation memo) and D3-2 (2012 validation addendum)",
+    "url": "http://web.archive.org/web/20211123040136id_/https://www.sfcta.org/sites/default/files/2019-04/Geary_BRT_Final_EIS_Appendix_B-E_small.pdf",
+    "rawFile": "benchmarks/sfcta_geary_brt_feis_appendix_B-E_2017.pdf",
+    "pages": "PDF pp. 61-79"
+   }
+  },
+  {
+   "id": "sfchampNow",
+   "group": "sf",
+   "inTable": true,
+   "model": "SF-CHAMP 6 and 7",
+   "agency": "SFCTA",
+   "baseYear": "2019 and 2023",
+   "structure": "Activity-based (DaySim)",
+   "compared": "Muni, BART, and Caltrain ridership (no statistics published)",
+   "routes": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "Not published"
+   },
+   "rail": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "Not published"
+   },
+   "fit": "Calibrated to BATS 2018–19 (SF-CHAMP 7) and BATS 2023 (7CE); SFCTA describes validation workbooks that are not public",
+   "published": [
+    "SF-CHAMP 6.1.2 (Nov 27, 2023 slides): 'Model is calibrated and validated to 2023 traffic and transit ridership'; 'Model Validation - Monthly 2023 ridership data for Muni, BART, and Caltrain'. No statistics.",
+    "CMP 2025 draft report, ch. 8: SF-CHAMP 7 (BCE) 'calibrated to 2019'; 7CE 'to reflect 2023'; 'In 2025, the Transportation Authority added interactive validation workbooks also using Simwrapper.' The workbooks are not public.",
+    "SF-CHAMP 5 (2014 slides) and 4.3 (2012 slides) show Muni by-line scatter plots only, with no numbers."
+   ],
+   "refs": [
+    "sfctaCmp",
+    "sfctaFiscalCliff"
+   ],
+   "loc": "ch. 8",
+   "source": {
+    "title": "SFCTA Congestion Management Program 2025 (Board item 8 enclosure, Dec 16, 2025), ch. 8; and Transit Fiscal Cliff Impact: SF-CHAMP Travel Model Scenario Analysis (SFCTA, Nov 27, 2023)",
+    "rawFile": "benchmarks/sfcta_cmp_SFCTA_Board_Item8_CongestionManagementProgramENCLOSURE_2025-12-16.pdf; benchmarks/sfcta_fiscal_cliff_sfchamp_senate.pdf"
+   }
+  },
+  {
+   "id": "tm1",
+   "group": "sf",
+   "inTable": true,
+   "model": "Travel Model One",
+   "agency": "MTC",
+   "baseYear": "2005",
+   "structure": "Activity-based (CT-RAMP), nine-county region",
+   "compared": "Daily boardings on 68 Muni routes, including the cable cars and the F, against the SFMTA on-board survey",
+   "routes": {
+    "n": 68,
+    "pctRmse": 65.8,
+    "r": 0.816,
+    "r2": null,
+    "within25": 0.221,
+    "medianApe": 52.2,
+    "computed": true
+   },
+   "rail": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "BART station profiles shown as charts only (year 2000)"
+   },
+   "fit": "Calibrated to year-2000 regional data, not to Muni routes; Muni total 26% low",
+   "published": [
+    "p. 193: 'The Percent Root Mean Squared Error (%RMSE) between the observed and modeled boardings is 66%, which is acceptable. However, the %RMSE increased dramatically when moving from calibration with only one iteration of the demand models to three iterations with feedback of congested travel times'.",
+    "Table 74 by submode (%RMSE): Local 68%, Limited 77%, Metro 38%, CableCar 75%, Total 66%. Totals: observed 684,696, estimated 508,003 (-26%).",
+    "The computed %RMSE (65.8%) reproduces the published 66%; r and within25 are computed from the same table."
+   ],
+   "uncertainObservedYear": "The report describes the observed values as from the 2005 SFMTA on-board survey, but they are identical to SF-CHAMP 3's year-2000 counts (e.g., route 14: 40,449; N: 45,621). The year of the observed data is therefore uncertain.",
+   "refs": [
+    "tm1Report"
+   ],
+   "loc": "Table 74",
+   "source": {
+    "title": "Travel Model Development: Calibration and Validation Technical Report (draft), MTC and PB Americas, April 2011",
+    "url": "http://mtcgis.mtc.ca.gov/foswiki/pub/Main/Documents/2011_04_28_Draft_Calibration_and_Validation.pdf (via https://web.archive.org/web/20170126031806id_/...)",
+    "rawFile": "standards/mtc-tm1-2011-calibration-validation.pdf",
+    "pages": "pp. 193-195 (PDF pp. 202-204)"
+   },
+   "muniTotal": {
+    "observed": 684696,
+    "modeled": 508003,
+    "ratio": 0.7419,
+    "table": "Table 74"
+   },
+   "computedAlso": {
+    "metro": {
+     "n": 6,
+     "obs": 168509,
+     "mod": 119143,
+     "pctRmse": 38.2,
+     "r": 0.737,
+     "within25": 0.167,
+     "medianApe": 40.1
+    },
+    "busLocalAndLimited": {
+     "n": 59,
+     "obs": 493374,
+     "mod": 383014,
+     "pctRmse": 73.0,
+     "r": 0.783,
+     "within25": 0.237,
+     "medianApe": 52.1,
+     "computed": true
+    }
+   }
+  },
+  {
+   "id": "tm1y2010",
+   "group": "sf",
+   "inTable": true,
+   "model": "Travel Model One",
+   "agency": "MTC",
+   "baseYear": "2010",
+   "structure": "Activity-based (CT-RAMP), nine-county region",
+   "compared": "Daily boardings on 74 Muni routes (75 listed, one without a count) against operator counts scaled to 2010",
+   "routes": {
+    "n": 74,
+    "pctRmse": 52.1,
+    "r": null,
+    "r2": 0.79,
+    "within25": 0.257,
+    "medianApe": 56.8,
+    "computed": true,
+    "note": "R² as published; %RMSE and share within ±25% computed"
+   },
+   "rail": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "BART by station shown as charts only"
+   },
+   "fit": "Validation of version 0.3, calibrated to 2000; Muni total 24% low",
+   "published": [
+    "p. 20: 'The regression results reveal an R2 value of 0.79'. The computed R-squared from Table 11 is 0.785.",
+    "Table 9: Muni 703,894 observed / 534,497 modeled (-24%); BART 348,991 / 341,516 (-2%); all operators 1,553,981 / 1,580,779 (2%).",
+    "Table 10: Muni Local Bus 514,817 / 398,454 (-23%); Light Rail 162,023 / 130,931 (-19%); Cable Car 27,053 / 5,112 (-81%).",
+    "AC Transit R-squared 0.84 (p. 24); VTA 0.94 (p. 28)."
+   ],
+   "computedAlso": {
+    "routesWithoutCableCars": {
+     "n": 71,
+     "pctRmse": 50.6,
+     "r2": 0.797,
+     "within25": 0.268
+    },
+    "metroJKLMN": {
+     "n": 5,
+     "pctRmse": 30.6,
+     "r": 0.908,
+     "within25": 0.4,
+     "computed": true
+    },
+    "localBus": {
+     "n": 64,
+     "pctRmse": 52.6,
+     "r": 0.89,
+     "within25": 0.266,
+     "computed": true
+    }
+   },
+   "refs": [
+    "tm1Val2010"
+   ],
+   "loc": "Table 11",
+   "source": {
+    "title": "Year 2010 Validation of Travel Model One (memorandum), D. Ory, D. Vautin, and R. Singh, MTC, October 2, 2013",
+    "url": "https://mtcdrive.box.com/s/sgin680x0xnum12dy9oje9tjb8yaach3",
+    "rawFile": "benchmarks/mtc_tm1_year2010_validation_2013.pdf",
+    "pages": "pp. 17-23"
+   },
+   "muniTotal": {
+    "observed": 703894,
+    "modeled": 534497,
+    "ratio": 0.7593,
+    "table": "Table 9"
+   },
+   "bartTotal": {
+    "observed": 348991,
+    "modeled": 341516,
+    "ratio": 0.9786,
+    "table": "Table 9"
+   }
+  },
+  {
+   "id": "tm152",
+   "group": "sf",
+   "inTable": true,
+   "model": "Travel Model 1.5.2",
+   "agency": "MTC",
+   "baseYear": "2015",
+   "structure": "Activity-based (CT-RAMP), nine-county region",
+   "compared": "Weekday boardings by operator and mode",
+   "routes": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "Not published by route; Muni bus −4%, Muni light rail −6% in total"
+   },
+   "rail": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "Not published by station; BART +5% in total"
+   },
+   "fit": "Mode choice 'calibrated in tandem with the transit assignment validation'",
+   "published": [
+    "Table 40: SF Muni Bus 524,564 observed / 506,041 modeled (-4%); Light Rail 196,076 / 185,208 (-6%); BART 431,649 / 454,535 (+5%); Caltrain 57,271 / 59,900 (+5%).",
+    "Table 39: total 1,702,022 / 1,686,981 (-1%).",
+    "Travel Model 1.6.1 (2023, report of May 2025): transit validated only as 2015-2023 changes, shown as charts; its '%RMSE by Route' table (Table 4-1) is for freeway routes."
+   ],
+   "refs": [
+    "tm152"
+   ],
+   "loc": "Table 40",
+   "source": {
+    "title": "Travel Model 1.5.2 Development: Calibration and Validation Technical Report (draft), MTC, November 2021",
+    "url": "https://mtcdrive.box.com/v/TM1-5-2-CalibrationValidation",
+    "rawFile": "standards/mtc-tm1.5.2-calibration-validation-2021.pdf",
+    "pages": "p. 86"
+   },
+   "muniBusTotal": {
+    "observed": 524564,
+    "modeled": 506041,
+    "ratio": 0.9647,
+    "table": "Table 40"
+   },
+   "bartTotal": {
+    "observed": 431649,
+    "modeled": 454535,
+    "ratio": 1.053,
+    "table": "Table 40"
+   }
+  },
+  {
+   "id": "tm2",
+   "group": "sf",
+   "inTable": true,
+   "model": "Travel Model Two",
+   "agency": "MTC",
+   "baseYear": "2015",
+   "structure": "Activity-based (CT-RAMP), nine-county region, with micro-zones and transit stops",
+   "compared": "No validation report published",
+   "routes": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "Not published"
+   },
+   "rail": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "Not published; TAMDM, a Marin model built on it, has BART −3% in total"
+   },
+   "fit": "–",
+   "published": [
+    "No calibration or validation report was found (BayAreaMetro GitHub repositories, MTC modeling wiki, MTC committee materials, Link21 reports). The Link21 RTDM summary (April 2024) describes its model as based on TM 1.5.",
+    "TAMDM (Transportation Authority of Marin, 2020; built on TM2), Table 5-12: BART 423,120 observed / 409,658 modeled (-3%); Caltrain -34%; no Muni figures.",
+    "A tm2py development notebook (2023, 'Quick Transit Summaries for 2.2.0') compares AM boardings with on-board survey targets (SF Muni -37.1%, BART -83.8%); it is development output, not a validation, and is not used."
+   ],
+   "refs": [
+    "tamdm"
+   ],
+   "loc": "Table 5-12",
+   "source": {
+    "title": "Transportation Authority of Marin Demand Model (TAMDM) Development Report, September 1, 2020",
+    "url": "http://www.tam.ca.gov/wp-content/uploads/2021/01/TAMDM_Development_Report_9-1-2020.pdf",
+    "rawFile": "standards/tamdm-development-report-2020.pdf",
+    "pages": "p. 107"
+   }
+  },
+  {
+   "id": "stops",
+   "group": "us",
+   "inTable": true,
+   "model": "STOPS",
+   "agency": "FTA",
+   "baseYear": "various",
+   "structure": "Simplified trip-based model for fixed-guideway projects, calibrated to counts in each application",
+   "compared": "Daily ridership on 29 fixed-guideway systems or lines in national testing, before local count adjustment",
+   "routes": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "Calibration goal ±30% for routes in the project corridor; 'correct order of magnitude' elsewhere"
+   },
+   "rail": {
+    "n": 29,
+    "pctRmse": 21.8,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "computed": true,
+    "note": "fixed-guideway systems or lines, not stations; 16 of 29 within ±20%"
+   },
+   "fit": "National parameters fitted to these systems; applications then adjust to local station and route counts",
+   "uncertain": "The 29 system totals were read from the data cached in the chart on slide 66 of FTA's 2015 workshop deck (11 before-and-after and 18 static points); FTA prints no statistic. Derived: %RMSE 21.8%, R-squared (1-SSE/SST) 0.970, 16 of 29 within ±20%, 22 of 29 within ±30%, total estimate/actual 1.020.",
+   "published": [
+    "Slide 88: route boardings 'Goals | For routes (in some cases, groups of routes) in the project corridor: ±30 % | For routes elsewhere: correct order of magnitude'.",
+    "Slide 86: station group boardings should 'differ from goals by 40% or less' before station-group calibration.",
+    "User Guide v2.53 (Sept 2024) p. 147: a regional calibration factor below 0.9 or above 1.1 suggests a setup problem; p. 199: final system-wide adjustment factor 'Should be between 0.99 and 1.01'; p. 156 fn. 58: count-based factoring should generate under 10 to 20 percent of transit trips.",
+    "Overview (Sept 5, 2013): 'STOPS has been calibrated and validated against current ridership on 24 fixed-guideway systems in 15 metropolitan areas'. No statistic is published.",
+    "Kansas City example in the User Guide (Tables 13-15), before count adjustment: computed %RMSE 37.1% and R-squared 0.635 over 9 routes."
+   ],
+   "refs": [
+    "stopsWorkshop",
+    "stopsGuide"
+   ],
+   "loc": "slides 66 and 88",
+   "source": {
+    "title": "FTA, STOPS workshop at the 15th TRB Conference on Transportation Planning Applications (May 17, 2015); STOPS User Guide v2.52-2.53 (September 2024)",
+    "url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/docs/STOPS_workshop_at_TRB_Apps_2015-05-17.pptx (via Wayback 20161111); https://www.transit.dot.gov/sites/fta.dot.gov/files/2024-09/STOPS-User-Guide-v2-53-v.pdf",
+    "rawFile": "benchmarks/stops-fta-workshop-trb-apps-2015.pptx; benchmarks/stops-fta-user-guide-v2.53-2024-09.pdf"
+   }
+  },
+  {
+   "id": "psrc",
+   "group": "us",
+   "inTable": true,
+   "model": "SoundCast",
+   "agency": "PSRC (Seattle)",
+   "baseYear": "2010",
+   "structure": "Activity-based (DaySim)",
+   "compared": "AM-peak boardings by route against 2010 counts",
+   "routes": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": 0.79,
+    "within25": null,
+    "note": "AM peak; number of routes not stated"
+   },
+   "rail": null,
+   "fit": "Model components 'calibrated to loosely match' the 2010 boardings",
+   "published": [
+    "Figure 17: 'Modeled Boardings = 1.007 × Observed Boardings + 3.0, R² = 0.79' (AM).",
+    "Figure 18 (captioned midday, chart labeled 'Total'): 'Modeled Boardings = 0.821 × Observed Boardings + 102.0, R² = 0.676'.",
+    "Table 35 (AM by operator): total 126,514 modeled / 124,144 observed (+1.91%); light rail 3,308 / 3,392 (-2.48%)."
+   ],
+   "refs": [
+    "psrcSoundcast"
+   ],
+   "loc": "Figure 17",
+   "source": {
+    "title": "SoundCast Calibration and Sensitivity Test Results (draft), S. Childress, PSRC, June 2015",
+    "url": "https://www.psrc.org/media/4343",
+    "rawFile": "benchmarks/psrc-soundcast-calibration-sensitivity-draft.pdf",
+    "pages": "pp. 31-32"
+   }
+  },
+  {
+   "id": "sandag",
+   "group": "us",
+   "inTable": true,
+   "model": "ABM3",
+   "agency": "SANDAG (San Diego)",
+   "baseYear": "2022",
+   "structure": "Activity-based (ActivitySim)",
+   "compared": "Daily boardings by route against Passenger Count Program counts",
+   "routes": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": 0.97,
+    "within25": null,
+    "note": "number of routes not stated"
+   },
+   "rail": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "note": "Not published by station; light rail −14% in total"
+   },
+   "fit": "Mode choice calibrated to on-board survey targets scaled to 2023 ridership",
+   "published": [
+    "pp. 84-85: 'A high R-squared value of 0.97 indicates that the linear regression line is a very good fit ... the model matches route level boardings very well.'",
+    "Table 18 (daily boardings, observed / model): Local 120,615 / 120,335 (-0.23%); LRT 121,016 / 103,517 (-14.46%); Rapid 23,333 / 33,517 (+43.65%); Express 8,094 / 10,218 (+26.24%); Commuter Rail 2,456 / 1,530 (-37.70%); Total 275,514 / 269,150 (-2.31%)."
+   ],
+   "refs": [
+    "sandagAbm3"
+   ],
+   "loc": "pp. 84–85",
+   "source": {
+    "title": "ABM3 Model Calibration and Validation Report, RSG for SANDAG, March 21, 2024",
+    "url": "https://raw.githubusercontent.com/SANDAG/ABM/main/docs/pdf_reports/202403_ABM3_Calibration_And_Validation_Report.pdf",
+    "rawFile": "benchmarks/sandag-abm3-calibration-validation-report-2024-03.pdf"
+   }
+  },
+  {
+   "id": "arc",
+   "group": "us",
+   "inTable": true,
+   "model": "ARC ABM",
+   "agency": "ARC (Atlanta)",
+   "baseYear": "2019",
+   "structure": "Activity-based (CT-RAMP)",
+   "compared": "Daily boardings by bus route, and entries at 38 MARTA rail stations, against the expanded 2019 on-board survey",
+   "routes": {
+    "n": null,
+    "pctRmse": null,
+    "r": null,
+    "r2": 0.72,
+    "within25": null,
+    "note": "number of routes not stated"
+   },
+   "rail": {
+    "n": 38,
+    "pctRmse": 21.6,
+    "r": 0.955,
+    "r2": 0.912,
+    "within25": 0.684,
+    "computed": true
+   },
+   "fit": "Mode choice calibrated to the same on-board survey",
+   "uncertain": "ARC labels both figures 'correlation coefficient' (bus routes 0.72, rail stations 0.91). Computed from Table 16, the station figure is R-squared (0.912; r = 0.955), so the bus figure is taken as R-squared too.",
+   "published": [
+    "p. 38: 'Individual routes vary ... the correlation coefficient is 0.72.'",
+    "Station entries (Table 16, 38 stations): observed 164,863 / model 165,850. Figure 3: 'correlation coefficient is 0.91'.",
+    "Table 15: MARTA Rail 200,585 / 207,240 (+3%); MARTA Bus 160,420 / 152,860 (-5%); total 426,430 / 412,755 (-3%)."
+   ],
+   "refs": [
+    "arcAbm"
+   ],
+   "loc": "pp. 38–40",
+   "source": {
+    "title": "ARC ABM Mode Choice Model Update, ARC and WSP, 2024",
+    "url": "https://cdn.atlantaregional.org/wp-content/uploads/arc-abm-mode-choice-model-update.pdf",
+    "rawFile": "benchmarks/arc-abm-mode-choice-model-update.pdf",
+    "pages": "PDF pp. 38-40"
+   }
+  },
+  {
+   "id": "lametro",
+   "group": "us",
+   "inTable": true,
+   "model": "Corridor Based Model",
+   "agency": "LA Metro",
+   "baseYear": "2017",
+   "structure": "Trip-based",
+   "compared": "Daily boardings on 32 Metro bus routes in the West Santa Ana Branch corridor against automatic passenger counts; 5 rail lines",
+   "routes": {
+    "n": 32,
+    "pctRmse": 38.5,
+    "r": 0.944,
+    "r2": null,
+    "within25": 0.5,
+    "computed": true
+   },
+   "rail": {
+    "n": 5,
+    "pctRmse": 5.1,
+    "r": null,
+    "r2": null,
+    "within25": null,
+    "computed": true,
+    "note": "rail lines, not stations"
+   },
+   "fit": "Calibrated to 2012; compared with 2017 counts after the corridor network was corrected",
+   "published": [
+    "Table 3.15 (24 routes across the corridor): total 212,234 observed / 196,581 estimated (-7%); Table 3.16 (8 routes along it): 44,716 / 41,090 (-8%). Examples: route 720 28,790 / 42,628 (+48%); route 127 874 / 90 (-90%).",
+    "'Note that the model is not expected to get the individual route correct, but for the corridor, it should do a reasonable job'.",
+    "Table 3.14 (rail lines, 2017): total 357,865 observed / 350,110 (-2%); B+D 139,075 / 131,705 (-5%)."
+   ],
+   "refs": [
+    "laMetroWsab"
+   ],
+   "loc": "Tables 3.14–3.16",
+   "source": {
+    "title": "West Santa Ana Branch Transit Corridor Project: Final Travel Demand Methodology and Forecasting Results Report (Draft EIS/EIR Appendix), WSP for LA Metro, June 2021",
+    "url": "https://files.ceqanet.lci.ca.gov/29119-3/attachment/n4wLKcE7pG5BWjUrgGe7M3nCszy3YlnvTHWAtPianW_nxgQHiLVS06-sAH5Db_JOl7T7v1TVUjwzG9xM0",
+    "rawFile": "benchmarks/lametro-cbm-ceqanet-29119-travel-demand-methodology.pdf",
+    "pages": "pp. 3-10 to 3-12"
+   }
+  },
+  {
+   "id": "metcouncil",
+   "group": "us",
+   "inTable": true,
+   "model": "Regional model",
+   "agency": "Metropolitan Council (Twin Cities)",
+   "baseYear": "2010",
+   "structure": "Trip-based",
+   "compared": "Daily ridership on 31 routes in the Southwest LRT corridor against the 2010 on-board survey",
+   "routes": {
+    "n": 31,
+    "pctRmse": 44.6,
+    "r": null,
+    "r2": 0.974,
+    "within25": 0.323,
+    "computed": true
+   },
+   "rail": null,
+   "fit": "Headways and running times adjusted to improve the fit",
+   "published": [
+    "Table 3-4 'Year 2010 Observed vs. Modeled Ridership for Regional Transit Routes': daily total on-board survey 74,297; model before adjustments 70,430 (-5%); validated 73,097 (-2%). Blue Line LRT 29,327 / 25,515 (-13%); Northstar 1,967 / 419 (-79%).",
+    "Computed for the 29 bus routes alone: %RMSE 53.8%."
+   ],
+   "refs": [
+    "metCouncilSwlrt"
+   ],
+   "loc": "Table 3-4",
+   "source": {
+    "title": "Southwest LRT Project Technical Report: Travel Demand Methodology and Forecast (draft, rev. 4), Metropolitan Council, February 2016",
+    "url": "https://metrocouncil.org/getattachment/dc6b9712-865a-4128-9d3d-1a8132ad86e8/C-23_Council-2015m_Travel-Demand-Methodology-and-F.aspx",
+    "rawFile": "benchmarks/metcouncil-swlrt-travel-demand-methodology-2015-draft.pdf",
+    "pages": "p. 25 (PDF p. 31)"
+   }
+  }
+ ],
+ "otherModels": [
+  {
+   "model": "Sound Transit ridership model (Seattle), 2014",
+   "structure": "Incremental, trip tables fitted to segment counts by matrix estimation",
+   "value": "All 291 transit lines: 'The R-squared value of 0.97 is acceptable, but the slope of 0.91 ...' (p. 36). 13 Central Link stations (Table 3-4): 31,100 actual / 29,800 estimated; computed %RMSE 13.6%, R-squared 0.95, 11 of 13 within ±25%.",
+   "fitted": "Yes, by construction",
+   "source": "Transit Ridership Forecasting Methodology Report (ST3 draft), Sound Transit, March 2015, https://www.wsdot.wa.gov/partners/erp/background/ST3%20Draft%20RidershipForecastingMethodologyReport_6March2015.pdf; benchmarks/soundtransit-st3-ridership-forecasting-methodology-2015-03.pdf"
+  },
+  {
+   "model": "CMAP ABM (Chicago), calibrated 2010, run for 2015",
+   "structure": "Activity-based (CT-RAMP)",
+   "value": "Average weekday line boardings: 8 CTA rail lines, computed %RMSE 28.9%, R-squared 0.986; 11 Metra lines, computed %RMSE 82.6%, R-squared 0.30. No bus routes.",
+   "fitted": "Validation year differs from calibration year",
+   "uncertain": "CMAP's trip-based-model report page has byte-identical transit data, so which model produced the line values is uncertain; the Metra mode total (248,138) does not equal the sum of the Metra lines (316,307).",
+   "source": "https://cmap-repos.github.io/cmap_abm_report/ and its data files; benchmarks/cmap-abm-report.html, benchmarks/cmap-abm-data/"
+  },
+  {
+   "model": "CMAP ActivitySim ABM (Chicago), 2019",
+   "structure": "Activity-based (ActivitySim)",
+   "value": "By operator, model / observed: CTA Bus 686,638 / 683,993 (0.4%); CTA Rail 676,760 / 708,153 (-4.4%); Metra 264,226 / 267,833 (-1.3%); Pace 148,694 / 101,779 (46.1%); total 1,842,734 / 1,836,516 (0.3%). No route-level results found.",
+   "source": "CMAP Activity-Based Model Development (ILMUG slides, Nov 3, 2023), slide 32; benchmarks/cmap-abm-development-ilmug-2023-11.pdf"
+  },
+  {
+   "model": "MWCOG Gen3 (Washington), 2018",
+   "structure": "Activity-based (ActivitySim)",
+   "value": "Metrorail 653,644 modeled / 641,227 observed (1.02); Metrobus 363,780 / 360,000 (1.01). 21 Metrorail station groups (Table 53): 'Most station groups are within 20% of the observed data'; computed %RMSE 22.6%, R-squared 0.969, 13 of 21 within ±20%. 52 commuter rail stations: computed %RMSE 62.7%. No bus route comparison.",
+   "fitted": "Constants adjusted to boardings by mode",
+   "source": "Gen3 Model Calibration and Validation Report, RSG and Baseline Mobility Group for MWCOG/TPB, Feb 7, 2024, https://www.mwcog.org/assets/1/6/Gen3_Model_Calibration_and_Validation_Report.pdf; benchmarks/mwcog-gen3-model-calibration-validation-report.pdf"
+  },
+  {
+   "model": "SACOG SACSIM23 (Sacramento), 2020",
+   "structure": "Activity-based (DaySim)",
+   "value": "Line-level boardings shown only as a scatter plot (Figure 11.8). By service type (Table 11-24), observed / modeled: light rail 37,016 / 43,571 (1.18); local bus 74,993 / 95,090 (1.27); all 118,668 / 142,897 (1.20). 'SACSIM is calibrated to match regional overall transit tour share rather than match boardings at the line level ... users should be aware of the poorer calibration if using SACSIM to estimate line-level boardings.'",
+   "fitted": "No",
+   "source": "User Guide and Model Documentation for SACSIM23 (provisional), SACOG, Nov 2025, §11.3.4, https://www.sacog.ca.gov/home/showpublisheddocument/3307/638975101175200000 (read in a browser; excerpt in scratchpad, not saved)"
+  },
+  {
+   "model": "DRCOG Focus (Denver), 2015",
+   "structure": "Activity-based",
+   "value": "From the CDOT Front Range Rail validation (Cambridge Systematics, Aug 25, 2020), Table 4.22: RTD light rail 85,100 observed / 79,100 (-7%); RTD total 364,100 / 313,700 (-14%). No route-level report found.",
+   "source": "https://www.codot.gov/programs/environmental/assets/copy4_of_assets/model-calibration-and-validation-report.pdf; benchmarks/cdot-front-range-rail-model-validation-2020-08.pdf"
+  },
+  {
+   "model": "SCAG regional model (Los Angeles region), 2016",
+   "structure": "Trip-based",
+   "value": "Table 16-9, daily boardings model / actual: urban rail 371,903 / 348,505 (1.07); MTA bus 932,256 / 957,891 (0.97); total 2,074,697 / 1,996,696 (1.04). No route-level results.",
+   "source": "2016 Regional Travel Demand Model and Model Validation, SCAG, April 2020; benchmarks/scag-2016-rtdm-validation-summary-2020.pdf"
+  },
+  {
+   "model": "NYMTC Best Practice Model (New York), 2019",
+   "structure": "Activity-based",
+   "value": "AM-peak ons, Table 6-15: MTA subway 2,287,945 modeled / 1,695,495 observed (+35%; 'The model overestimates MTA subway boardings by about a third'); PATH -13%; LIRR +8%.",
+   "source": "New York Best Practice Model 2019 Update, final report, Cambridge Systematics, June 30, 2023; benchmarks/nymtc-nybpm-2019-final-general-report-2023-06.pdf"
+  },
+  {
+   "model": "GTAModel V4.2 (Toronto), 2016",
+   "structure": "Activity-based (TASHA)",
+   "value": "Assignment parameters calibrated by minimizing line-level RMSE against boardings expanded from the household survey; the RMSE itself is not reported. AM subway 427,735 observed / 426,894 modeled.",
+   "source": "Transit Assignment Calibration Report, Xi, Vaughan, and Miller, University of Toronto TMG, Jan 14, 2021, Table 9; benchmarks/tmg-gtamodel-transit-assignment-calibration-report-2021-01.pdf"
+  },
+  {
+   "model": "SF-CHAMP original (1998)",
+   "structure": "Tour-based",
+   "value": "Route groups (Table 34): total 700,900 observed / 760,355 modeled (1.08). Muni bus +13%, LRV and cable car -3%, BART -6% (Table 33).",
+   "source": "SFCTA and Cambridge Systematics, 2002 model documentation (sfcta_champ2002_model_validation.pdf, PDF pp. 42-43; already summarized in validation-standards.json)"
+  },
+  {
+   "model": "SF-CHAMP 2 (Central Subway New Starts), 2000",
+   "structure": "Tour-based",
+   "value": "Table 2, 7 Third Street corridor routes: total 187,044 observed / 189,895 estimated (+2%); N 45,621 / 45,883; 22 25,467 / 18,254 (-28%); 30 24,943 / 33,871 (+36%).",
+   "source": "Freedman, Castiglione, and Charlton, Analysis of New Starts Project by Using Tour-Based Model of San Francisco, California, Transportation Research Record 1981, 2006, pp. 24-33; benchmarks/sfcta_ChampForNewStarts.pdf"
+  }
+ ],
+ "forecastAccuracy": {
+  "note": "Accuracy of project ridership forecasts (forecast against actual), a different question from base-year fit; relevant to the backcast.",
+  "rows": [
+   {
+    "value": "Actual ridership on 13 of 27 Capital Investment Grants projects opened 2007-2015 was within 20% of the forecast; 22 of 27 within 40%. Average ratio of actual to forecast 92%, median 90%.",
+    "source": "FTA, Predicted Versus Actual Impacts of Capital Investment Grants Projects - 2020, pp. 26 and 32 (Table 3.3-2); https://www.transit.dot.gov/sites/fta.dot.gov/files/2021-08/Predicted-vs-Actual-Impacts-of-CIG-Projects-2020.pdf; benchmarks/stops-fta-predicted-vs-actual-cig-2020.pdf"
+   },
+   {
+    "value": "Earlier studies, within 20%: 2007 study 6 of 18; 2003 study 6 of 19; 1990 study 0 of 10. Average actual/forecast: 42% (1990), 67% (2003), 72% (2007).",
+    "source": "Same report, pp. 30 and 32. GAO-23-105479 gives 11% for the 2007 study (UNCERTAIN: GAO standardized on FFGA forecasts)."
+   },
+   {
+    "value": "'FTA defines a reasonably accurate forecast as one the can reasonably be expected to come within ±20 percent'.",
+    "source": "FTA, The Predicted and Actual Impacts of New Starts Projects - 2007, April 2008, p. 18; benchmarks/stops-fta-predicted-actual-new-starts-2007-gondolaproject-copy.pdf (mirror)"
+   },
+   {
+    "value": "164 large transit projects: ridership about 24.6% lower than forecast on average; about 70% over-predicted.",
+    "source": "Hoque, Zhang, Schmitt, and Erhardt, Transportation Research Part A 186, 104142, 2024 (abstract only; not saved)"
+   }
+  ]
+ },
+ "standards": {
+  "note": "Thresholds the article applies; the full set with page references is in validation-standards.json.",
+  "rows": [
+   {
+    "measure": "Transit line ridership by daily volume (acceptable / preferable)",
+    "value": "<1,000: ±150% / ±100%; 1,000-2,000: ±100% / ±65%; 2,000-5,000: ±65% / ±35%; 5,000-10,000: ±35% / ±25%; 10,000-20,000: ±25% / ±20%; >20,000: ±20% / ±15%. Regional boardings ±9% / ±3%; screenlines ±20% / ±10%.",
+    "source": "FHWA Travel Model Validation and Reasonableness Checking Manual, 2nd ed., 2010, Table 9.9 (Florida FSUTMS), p. 9-32. The manual gives no transit route-level %RMSE example; its %RMSE guidelines are for highway links."
+   },
+   {
+    "measure": "FTA New Starts",
+    "value": "'FTA does not specify guidelines for the New Starts program other than that the overall modeling process should tell a coherent story.' With STOPS, 'documentation of the methodology, validation, and a detailed review by FTA are not necessary.'",
+    "source": "FHWA 2010 p. 9-30; FTA Reporting Instructions for Section 5309 New Starts, April 2024, p. 9 (benchmarks/stops-fta-cig-reporting-instructions-fy26-2024-04.pdf)"
+   },
+   {
+    "measure": "California RTP guidelines",
+    "value": "Transit boardings by route group ±20% and by mode ±10%; for highway links r >= 0.88 and %RMSE < 40%.",
+    "source": "CTC 2017 RTP Guidelines p. 49; 2024 p. 55"
+   },
+   {
+    "measure": "UK TAG",
+    "value": "Individual services within 25% for 95% of services (not applied below 150 passengers an hour); grouped services within 15%.",
+    "source": "TAG unit M3.2, May 2024, Table 5"
+   }
+  ]
+ },
+ "notFound": [
+  "SF-CHAMP 5, 6, and 7 (base years 2012-2023): no published transit statistics; SFCTA's validation workbooks are not public; slides show scatter plots only. github.com/sfcta/validation_workbook (branch 2019) holds a debugging notebook whose line matching is broken; not used.",
+  "MTC Travel Model Two: no calibration or validation report.",
+  "Travel Model One BART station-level statistics: charts only (2000, 2010).",
+  "Oregon Metro Kate v1.0 validation report (2015 base): no longer online and not archived. The 2020 Kate v2.0 methodology report has no transit validation numbers.",
+  "SANDAG ABM2+ (2021 Regional Plan Appendix S): 404.",
+  "Published station-level statistics from any STOPS application; the data behind STOPS User Guide Figure 7; FTA Discussion Piece #16.",
+  "STOPS calibration documents for the Portal, BART Silicon Valley Phase II, and other Bay Area projects.",
+  "DRCOG Focus, SCAG ABM, and CMAP ActivitySim route-level results; the full ARC calibration report."
+ ],
+ "tm1Table74": {
+  "description": "MTC Travel Model One 2011 report, Table 74 (Muni boardings by route), transcribed; statistics computed here with the FHWA definitions. pctRmse by submode reproduces the published values (Local 68%, Limited 77%, Metro 38%, CableCar 75%, Total 66%).",
+  "all": {
+   "n": 68,
+   "obs": 684696,
+   "mod": 508003,
+   "pctRmse": 65.8,
+   "r": 0.816,
+   "within25": 0.221,
+   "medianApe": 52.2,
+   "computed": true
+  },
+  "bySubmode": {
+   "Local": {
+    "n": 43,
+    "obs": 446739,
+    "mod": 349009,
+    "pctRmse": 67.5,
+    "r": 0.753,
+    "within25": 0.326,
+    "medianApe": 54.6
+   },
+   "Limited": {
+    "n": 16,
+    "obs": 46635,
+    "mod": 34005,
+    "pctRmse": 77.2,
+    "r": 0.923,
+    "within25": 0.0,
+    "medianApe": 41.8
+   },
+   "Metro": {
+    "n": 6,
+    "obs": 168509,
+    "mod": 119143,
+    "pctRmse": 38.2,
+    "r": 0.737,
+    "within25": 0.167,
+    "medianApe": 40.1
+   },
+   "CableCar": {
+    "n": 3,
+    "obs": 22813,
+    "mod": 5846,
+    "pctRmse": 75.5,
+    "r": 0.981,
+    "within25": 0.0,
+    "medianApe": 73.0
+   }
+  },
+  "busLocalAndLimited": {
+   "n": 59,
+   "obs": 493374,
+   "mod": 383014,
+   "pctRmse": 73.0,
+   "r": 0.783,
+   "within25": 0.237,
+   "medianApe": 52.1,
+   "computed": true
+  },
+  "metroWithoutF": {
+   "n": 5,
+   "obs": 149316,
+   "mod": 111260,
+   "pctRmse": 35.5,
+   "r": 0.678,
+   "within25": 0.2,
+   "medianApe": 35.1,
+   "computed": true
+  },
+  "withoutCableCarsAndF": {
+   "n": 64,
+   "obs": 642690,
+   "mod": 494274,
+   "pctRmse": 65.4,
+   "r": 0.822,
+   "within25": 0.234,
+   "medianApe": 45.3,
+   "computed": true
+  },
+  "rows": [
+   {
+    "route": "14",
+    "submode": "Local",
+    "observed": 40449,
+    "modeled": 39329
+   },
+   {
+    "route": "38",
+    "submode": "Local",
+    "observed": 30635,
+    "modeled": 36248
+   },
+   {
+    "route": "1",
+    "submode": "Local",
+    "observed": 29735,
+    "modeled": 34039
+   },
+   {
+    "route": "22",
+    "submode": "Local",
+    "observed": 25467,
+    "modeled": 4143
+   },
+   {
+    "route": "30",
+    "submode": "Local",
+    "observed": 24943,
+    "modeled": 11899
+   },
+   {
+    "route": "49",
+    "submode": "Local",
+    "observed": 21003,
+    "modeled": 1609
+   },
+   {
+    "route": "45",
+    "submode": "Local",
+    "observed": 18770,
+    "modeled": 8050
+   },
+   {
+    "route": "9",
+    "submode": "Local",
+    "observed": 17196,
+    "modeled": 13285
+   },
+   {
+    "route": "43",
+    "submode": "Local",
+    "observed": 17030,
+    "modeled": 8164
+   },
+   {
+    "route": "44",
+    "submode": "Local",
+    "observed": 16546,
+    "modeled": 15485
+   },
+   {
+    "route": "29",
+    "submode": "Local",
+    "observed": 14771,
+    "modeled": 12134
+   },
+   {
+    "route": "24",
+    "submode": "Local",
+    "observed": 14527,
+    "modeled": 13771
+   },
+   {
+    "route": "5",
+    "submode": "Local",
+    "observed": 14013,
+    "modeled": 8618
+   },
+   {
+    "route": "19",
+    "submode": "Local",
+    "observed": 13291,
+    "modeled": 9455
+   },
+   {
+    "route": "28",
+    "submode": "Local",
+    "observed": 12900,
+    "modeled": 1768
+   },
+   {
+    "route": "48",
+    "submode": "Local",
+    "observed": 11789,
+    "modeled": 21270
+   },
+   {
+    "route": "27",
+    "submode": "Local",
+    "observed": 10686,
+    "modeled": 997
+   },
+   {
+    "route": "71",
+    "submode": "Local",
+    "observed": 10643,
+    "modeled": 8794
+   },
+   {
+    "route": "21",
+    "submode": "Local",
+    "observed": 9074,
+    "modeled": 7322
+   },
+   {
+    "route": "6",
+    "submode": "Local",
+    "observed": 8298,
+    "modeled": 8585
+   },
+   {
+    "route": "2",
+    "submode": "Local",
+    "observed": 7810,
+    "modeled": 3300
+   },
+   {
+    "route": "33",
+    "submode": "Local",
+    "observed": 7107,
+    "modeled": 6529
+   },
+   {
+    "route": "47",
+    "submode": "Local",
+    "observed": 6657,
+    "modeled": 9028
+   },
+   {
+    "route": "7",
+    "submode": "Local",
+    "observed": 6432,
+    "modeled": 6241
+   },
+   {
+    "route": "54",
+    "submode": "Local",
+    "observed": 6167,
+    "modeled": 75
+   },
+   {
+    "route": "12",
+    "submode": "Local",
+    "observed": 5704,
+    "modeled": 8209
+   },
+   {
+    "route": "23",
+    "submode": "Local",
+    "observed": 5576,
+    "modeled": 15090
+   },
+   {
+    "route": "4",
+    "submode": "Local",
+    "observed": 5374,
+    "modeled": 2441
+   },
+   {
+    "route": "3",
+    "submode": "Local",
+    "observed": 4729,
+    "modeled": 1775
+   },
+   {
+    "route": "26",
+    "submode": "Local",
+    "observed": 4629,
+    "modeled": 719
+   },
+   {
+    "route": "52",
+    "submode": "Local",
+    "observed": 4577,
+    "modeled": 20610
+   },
+   {
+    "route": "41",
+    "submode": "Local",
+    "observed": 3976,
+    "modeled": 79
+   },
+   {
+    "route": "18",
+    "submode": "Local",
+    "observed": 3944,
+    "modeled": 330
+   },
+   {
+    "route": "67",
+    "submode": "Local",
+    "observed": 3159,
+    "modeled": 743
+   },
+   {
+    "route": "37",
+    "submode": "Local",
+    "observed": 2125,
+    "modeled": 1403
+   },
+   {
+    "route": "36",
+    "submode": "Local",
+    "observed": 1676,
+    "modeled": 1546
+   },
+   {
+    "route": "53",
+    "submode": "Local",
+    "observed": 1675,
+    "modeled": 499
+   },
+   {
+    "route": "35",
+    "submode": "Local",
+    "observed": 1256,
+    "modeled": 1254
+   },
+   {
+    "route": "66",
+    "submode": "Local",
+    "observed": 1222,
+    "modeled": 391
+   },
+   {
+    "route": "91",
+    "submode": "Local",
+    "observed": 466,
+    "modeled": 1220
+   },
+   {
+    "route": "56",
+    "submode": "Local",
+    "observed": 341,
+    "modeled": 1288
+   },
+   {
+    "route": "90",
+    "submode": "Local",
+    "observed": 235,
+    "modeled": 1038
+   },
+   {
+    "route": "89",
+    "submode": "Local",
+    "observed": 136,
+    "modeled": 236
+   },
+   {
+    "route": "38L",
+    "submode": "Limited",
+    "observed": 18823,
+    "modeled": 11837
+   },
+   {
+    "route": "9X",
+    "submode": "Limited",
+    "observed": 8464,
+    "modeled": 4642
+   },
+   {
+    "route": "14X",
+    "submode": "Limited",
+    "observed": 2614,
+    "modeled": 3551
+   },
+   {
+    "route": "9AX",
+    "submode": "Limited",
+    "observed": 2532,
+    "modeled": 1819
+   },
+   {
+    "route": "30X",
+    "submode": "Limited",
+    "observed": 2377,
+    "modeled": 1523
+   },
+   {
+    "route": "9BX",
+    "submode": "Limited",
+    "observed": 2076,
+    "modeled": 1278
+   },
+   {
+    "route": "1BX",
+    "submode": "Limited",
+    "observed": 1743,
+    "modeled": 1234
+   },
+   {
+    "route": "28L",
+    "submode": "Limited",
+    "observed": 1652,
+    "modeled": 5255
+   },
+   {
+    "route": "31AX",
+    "submode": "Limited",
+    "observed": 1145,
+    "modeled": 745
+   },
+   {
+    "route": "31BX",
+    "submode": "Limited",
+    "observed": 1048,
+    "modeled": 772
+   },
+   {
+    "route": "16BX",
+    "submode": "Limited",
+    "observed": 956,
+    "modeled": 372
+   },
+   {
+    "route": "16AX",
+    "submode": "Limited",
+    "observed": 912,
+    "modeled": 400
+   },
+   {
+    "route": "1AX",
+    "submode": "Limited",
+    "observed": 888,
+    "modeled": 485
+   },
+   {
+    "route": "81X",
+    "submode": "Limited",
+    "observed": 596,
+    "modeled": 15
+   },
+   {
+    "route": "82X",
+    "submode": "Limited",
+    "observed": 495,
+    "modeled": 76
+   },
+   {
+    "route": "80X",
+    "submode": "Limited",
+    "observed": 314,
+    "modeled": 1
+   },
+   {
+    "route": "PH",
+    "submode": "CableCar",
+    "observed": 9374,
+    "modeled": 2534
+   },
+   {
+    "route": "PM",
+    "submode": "CableCar",
+    "observed": 7924,
+    "modeled": 2249
+   },
+   {
+    "route": "C",
+    "submode": "CableCar",
+    "observed": 5515,
+    "modeled": 1063
+   },
+   {
+    "route": "N_JUDAH",
+    "submode": "Metro",
+    "observed": 45621,
+    "modeled": 35450
+   },
+   {
+    "route": "M_OCEANV",
+    "submode": "Metro",
+    "observed": 33296,
+    "modeled": 23047
+   },
+   {
+    "route": "L_TARAVA",
+    "submode": "Metro",
+    "observed": 29866,
+    "modeled": 19392
+   },
+   {
+    "route": "K_INGLES",
+    "submode": "Metro",
+    "observed": 25304,
+    "modeled": 11256
+   },
+   {
+    "route": "F_MARKET",
+    "submode": "Metro",
+    "observed": 19193,
+    "modeled": 7883
+   },
+   {
+    "route": "J_CHURCH",
+    "submode": "Metro",
+    "observed": 15229,
+    "modeled": 22115
+   }
+  ]
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "description": "Demand conditions ('drivers') of July 2024 relative to July 2026 for the Beta3 backcast, one per input the model now takes as an explicit condition (shared/beta3/types.ts DemandContext). Each value was fixed from sources other than Muni's counts, by the rule stated, before the backcast was run with it. Dollar amounts are in July 2026 dollars, the base model's, deflated by the BLS CPI-U for San Francisco–Oakland–Hayward.",
+ "written": "2026-10-05, before any model run with these inputs",
+ "knownBefore": [
+  "The first backcast (blind, on the model frozen for the article's first version): network only.",
+  "The second backcast, on the model of 2026-10-05 10:29: office attendance downtown from Kastle (0.904) and hotel visitors (0.922), the rest held; the model's system growth was -0.7% against +6.4% counted.",
+  "Its variant with downtown attendance from BART's four downtown stations (0.761, chosen after the second run's result): model growth +2.2%.",
+  "The second backcast's inputs rerun on the current model (merged 2026-10-05 16:31) were started before this file was written; their result was not used to choose any value below and is recorded in backcast-results.json as the 'before' run."
+ ],
+ "rules": [
+  "Every input is the ratio (or the July 2024 value) of the same published series in July 2024 and July 2026, the months of the counts compared; where a series has no July 2026 value, the latest same-season value two years apart.",
+  "An input with no source covering both years is held at today's value and listed under 'held'. None is filled in from Muni's counts or from the backcast's result.",
+  "Prices are converted to July 2026 dollars with the CPI-U (San Francisco–Oakland–Hayward, bimonthly; the mean of June and August for July).",
+  "Office attendance downtown stays on Kastle, the source chosen for the second run; BART's downtown exits remain a sensitivity run only (BART's counts rose in 2025 partly because its new fare gates cut fare evasion, BART news 2025-11-20)."
+ ],
+ "deflator": {
+  "series": "BLS CPI-U, San Francisco-Oakland-Hayward, all items (CUURS49BSA0)",
+  "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/CUURS49BSA0",
+  "july2024": 350.177,
+  "july2026": 370.0215,
+  "factor2024to2026": 1.05667,
+  "rawFile": "data/beta3/raw/backcast/drivers/bls_CUURS49BSA0_cpi_sf.json"
+ },
+ "drivers": {
+  "network": {
+   "applied": "Muni GTFS for service from 2024-06-22 (data/beta3/raw/gtfs/muni-2024.zip); other operators as today",
+   "note": "Caltrain's diesel timetable of 2024 and BART's 2024 schedule are not swapped in (no archived feed in hand); Caltrain's electrified service began 2024-09-21."
+  },
+  "attendanceCore": {
+   "value": 0.9043,
+   "meaning": "commuters at work on a weekday at jobs downtown (TM1 regional core), relative to today",
+   "source": "Kastle Back to Work Barometer, San Francisco metro, weekly office occupancy: mean of the July 2024 weeks 42.12% against July 2026 46.58% (backcast-inputs.json officeAttendance)",
+   "status": "set before the second run (unchanged)"
+  },
+  "employedResidents": {
+   "value": 1.0228,
+   "meaning": "employed San Francisco residents relative to today (scales residents' commutes)",
+   "source": "BLS Local Area Unemployment Statistics, San Francisco County, employment, not seasonally adjusted (LAUCN060750000000005): July 2024 490,314; July 2026 479,363",
+   "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/LAUCN060750000000005",
+   "rawFile": "data/beta3/raw/backcast/drivers/bls_LAUCN060750000000005.json"
+  },
+  "jobs": {
+   "value": 1.0105,
+   "meaning": "jobs in the city relative to today (scales in-commuters and their trips)",
+   "source": "BLS Quarterly Census of Employment and Wages, San Francisco County, all ownerships, all industries: first quarter 2024 mean 710,772 against first quarter 2026 703,386 (the latest quarter published; July 2026 not yet). The CES series for the San Francisco–San Mateo–Redwood City division (SMU06418840000000001), July 2024 1,134.3k against July 2026 1,133.5k, is the check.",
+   "url": "https://data.bls.gov/cew/data/api/2026/1/area/06075.csv",
+   "rawFile": "data/beta3/raw/backcast/drivers/qcew_06075_2024q1.csv, qcew_06075_2026q1.csv"
+  },
+  "residents": {
+   "value": 0.9983,
+   "meaning": "population relative to today (scales residents' non-work, school, and college travel)",
+   "source": "California Department of Finance E-1: January 1, 2024, 845,355 (E-1 2025); January 1, 2025, 844,394, and January 1, 2026, 845,658 (E-1 2026). July 2024 is the mean of January 2024 and 2025; July 2026 is January 2026 plus half the year's change.",
+   "url": "https://dof.ca.gov/forecasting/demographics/estimates-e1/",
+   "rawFile": "data/beta3/raw/backcast/drivers/E-1_2025.xlsx, E-1_2026.xlsx"
+  },
+  "visitors": {
+   "value": 0.922,
+   "meaning": "hotel visitors relative to today (their trips and their sightseeing rides on the cable cars and historic streetcars)",
+   "source": "City Performance Scorecard hotel occupancy, 4-week moving average, July 2024 67.4% against July 2026 73.1% (backcast-inputs.json)",
+   "status": "set before the second run; now also scales the sightseeing rides, which the second run had left at today's (an inconsistency found while making the conditions explicit, fixed before this run)"
+  },
+  "airPassengers": {
+   "value": 0.9414,
+   "meaning": "air travelers between the city and SFO relative to today",
+   "source": "SFO Air Traffic Passenger Statistics (DataSF rkru-6vcg), passengers in July 2024 4,989,844 against July 2026 5,300,638",
+   "url": "https://data.sf.gov/resource/rkru-6vcg.json",
+   "rawFile": "data/beta3/raw/backcast/drivers/datasf_rkru-6vcg_sfo_passengers_monthly.json"
+  },
+  "gasPrice": {
+   "value": 4.78,
+   "today": 5.39,
+   "meaning": "regular gasoline, $ a gallon in July 2026 dollars",
+   "source": "EIA weekly San Francisco regular retail gasoline price (EMM_EPMR_PTE_Y05SF_DPG): July 2024 mean $4.527 (×1.0567 = $4.78), July 2026 mean $5.387",
+   "url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=EMM_EPMR_PTE_Y05SF_DPG&f=W",
+   "rawFile": "data/beta3/raw/backcast/drivers/eia_EMM_EPMR_PTE_Y05SF_DPG_weekly.html",
+   "howApplied": "driving's running cost per mile = $0.110 (AAA Your Driving Costs 2025: maintenance, repair, and tires 11.04 cents a mile) + the rest of the model's $0.306 (fuel, $0.196 at today's price) × price / today's"
+  },
+  "muniFare": {
+   "value": 2.64,
+   "today": 2.85,
+   "meaning": "Muni adult Clipper fare, $ in July 2026 dollars",
+   "source": "SFMTA fare table 2025 (muni-fare-media.json historyOfAdultClipperFare): $2.50 in FY2024 and until 2025-01-01, $2.85 from 2025-07-01; $2.50 × 1.0567 = $2.64"
+  },
+  "transferDiscount": {
+   "value": 0.53,
+   "toMuniOnly": true,
+   "today": 2.85,
+   "meaning": "Clipper discount when changing between operators, $ in July 2026 dollars",
+   "source": "Before Next Generation Clipper (2025-12-10): a $0.50 inter-agency discount onto Muni (SFMTA fare table 2025); since then up to $2.85 off each later operator within 120 minutes (BART news 2025-10-21). $0.50 × 1.0567 = $0.53.",
+   "todayShare": 0.53,
+   "todayShareNote": "Added 2026-10-06, after the backcast's results (examinedAfterResults.transferDiscountAdoption): only cards moved to the next-generation Clipper system, and bank cards, got the new discount; 53% of Clipper trips were on it in the week ending July 18, 2026 (MTC news, July 24, 2026). Today's condition is now that mix; the rest keep the old rule. The July 2024 value is unchanged."
+  }
+ },
+ "held": {
+  "attendanceOther": "No source measures attendance at workplaces outside downtown for both years (Kastle's buildings are offices, most of them downtown).",
+  "wfh": "The model's share working from home full time is ACS 2024 (21.4%); ACS 2025 1-year tables were not published at the time of writing (summary file returns 401), so no 2026 value exists.",
+  "commuteDays": "BATS 2023 is the only survey of commute frequency.",
+  "regionalVisitors": "No series independent of transit counts; BART's exits are affected by its 2025 fare-gate replacement.",
+  "bartFare": "BART's fares rose 6.2% on 2026-01-01 (BART news 2025-11-20); in July 2026 dollars the 2024 fares were 0.995 of today's, so they are held.",
+  "events": "Events are the average weekday of October 2025 to September 2026 (special-events.json), not dated to July 2024; held."
+ },
+ "examinedAfterResults": {
+  "written": "2026-10-05, after the backcast with these inputs had been run; not used to change any input or the model",
+  "transferDiscountStep": {
+   "question": "The run attributes much of the system growth to Clipper's transfer discount, which changed on 2025-12-10. If that response were right, Muni's year-over-year growth should step up after December 2025.",
+   "series": "SFMTA weekday average daily boardings, all modes summed by month (data/beta3/raw/obs/muni_systemwide_ridership.csv), change on the same month a year earlier, percent",
+   "yoy": {
+    "July 2025": 4.79,
+    "August 2025": 5.61,
+    "September 2025": 3.69,
+    "October 2025": 2.28,
+    "November 2025": 4.91,
+    "December 2025": 0.8,
+    "January 2026": 4.61,
+    "February 2026": 3.78,
+    "March 2026": 6.35,
+    "April 2026": 2.96,
+    "May 2026": 2.49,
+    "June 2026": 6.4
+   },
+   "meanJulNov2025": 4.26,
+   "meanJanJun2026": 4.43,
+   "reading": "No step: growth ran at about 4 to 5% a year both before and after the new discount (December 2025, the month it began, is mixed with the holidays)."
+  },
+  "transferDiscountAdoption": {
+   "written": "2026-10-06, after the backcast with these inputs; changes the model's coding of today's discount and of the old rule, not any July 2024 input",
+   "finding": "The run gave every rider in July 2026 the new discount. Only cards moved to the next-generation system (and bank cards) had it: about 31% of Clipper trips in February 2026, 38% on April 20, 45% in the week ending May 23, and 53% in the week ending July 18 (MTC; server/beta3/research/transfer-fares.md). The old rule's $0.50 had been taken off the expected Muni fare (pass holders included) instead of the fare of riders who pay per ride, and its free transfer from Daly City BART to Muni was missing.",
+   "change": "Today's discount is applied to 53% of riders (condition transferDiscountShare), the old rule to the rest; the old $0.50 comes off the per-ride fare; Daly City BART to Muni is free under the old rule.",
+   "alsoFound": "The model has about twice the surveyed share of BART riders who also ride Muni (19% of BART trips with an end in the city, July 2024 run, against about 6-8% in MTC's 2015 onboard survey and BART's 1998 survey); the excess is at the far end of trips across the Bay. Not fixed here: a uniform penalty on changing operators was tried and rejected."
+  }
+ }
+}

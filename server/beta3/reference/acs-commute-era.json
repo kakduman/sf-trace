@@ -1,0 +1,105 @@
+{
+ "description": "Workers' means of transportation to work in San Francisco by ACS vintage: by workplace (B08406, people who work in the city, wherever they live) and by residence (B08301, people who live in the city). Used to put CTPP 2017-2021 workplace shares on the model's year: the CTPP's five years end in 2021 and three of them are before the pandemic, while the model is calibrated to 2024 surveys and counts.",
+ "source": "U.S. Census Bureau, American Community Survey Table-Based Summary Files: 2017-2021 5-year, 2020-2024 5-year, and 2021-2024 1-year; San Francisco County (GEO_ID 0500000US06075). Header and county row kept.",
+ "urls": [
+  "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b08406.dat",
+  "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b08406.dat",
+  "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b08406.dat",
+  "(and the same paths for the 2021-2023 1-year files and for b08301)"
+ ],
+ "accessed": "2026-10-07",
+ "rawFiles": "data/beta3/raw/acs-workplace-era/acsdt{1,5}y{2021..2024}-{b08406,b08301}-sf.dat",
+ "definitions": {
+  "commuters": "workers 16 and over less those who worked from home",
+  "transitShare": "public transportation (excluding taxicab) / commuters",
+  "wfhShare": "worked from home / all workers"
+ },
+ "byWorkplace": {
+  "2021 1-year": {
+   "workers": 563953,
+   "transit": 80352,
+   "workedFromHome": 200083,
+   "transitShare": 0.2208,
+   "wfhShare": 0.3548
+  },
+  "2022 1-year": {
+   "workers": 603177,
+   "transit": 122037,
+   "workedFromHome": 151314,
+   "transitShare": 0.2701,
+   "wfhShare": 0.2509
+  },
+  "2023 1-year": {
+   "workers": 639133,
+   "transit": 166996,
+   "workedFromHome": 112342,
+   "transitShare": 0.317,
+   "wfhShare": 0.1758
+  },
+  "2024 1-year": {
+   "workers": 632129,
+   "transit": 181920,
+   "workedFromHome": 100347,
+   "transitShare": 0.3421,
+   "wfhShare": 0.1587
+  },
+  "2017-2021 5-year": {
+   "workers": 713503,
+   "transit": 244129,
+   "workedFromHome": 90163,
+   "transitShare": 0.3916,
+   "wfhShare": 0.1264
+  },
+  "2020-2024 5-year": {
+   "workers": 621656,
+   "transit": 143726,
+   "workedFromHome": 144584,
+   "transitShare": 0.3013,
+   "wfhShare": 0.2326
+  }
+ },
+ "byResidence": {
+  "2021 1-year": {
+   "workers": 438943,
+   "transit": 49819,
+   "workedFromHome": 200083,
+   "transitShare": 0.2086,
+   "wfhShare": 0.4558
+  },
+  "2022 1-year": {
+   "workers": 465181,
+   "transit": 78649,
+   "workedFromHome": 151314,
+   "transitShare": 0.2506,
+   "wfhShare": 0.3253
+  },
+  "2023 1-year": {
+   "workers": 460397,
+   "transit": 101330,
+   "workedFromHome": 112342,
+   "transitShare": 0.2911,
+   "wfhShare": 0.244
+  },
+  "2024 1-year": {
+   "workers": 468430,
+   "transit": 117279,
+   "workedFromHome": 100347,
+   "transitShare": 0.3186,
+   "wfhShare": 0.2142
+  },
+  "2017-2021 5-year": {
+   "workers": 500344,
+   "transit": 138913,
+   "workedFromHome": 90163,
+   "transitShare": 0.3387,
+   "wfhShare": 0.1802
+  },
+  "2020-2024 5-year": {
+   "workers": 466388,
+   "transit": 87355,
+   "workedFromHome": 144584,
+   "transitShare": 0.2715,
+   "wfhShare": 0.31
+  }
+ }
+}

@@ -1,0 +1,1514 @@
+{
+ "today": {
+  "bus": [],
+  "trips": [
+   {
+    "name": "Outer Sunset to the Financial District",
+    "period": "AM",
+    "base": 29.1,
+    "scenario": 29.1
+   },
+   {
+    "name": "The Mission to the Financial District",
+    "period": "AM",
+    "base": 13.7,
+    "scenario": 13.7
+   },
+   {
+    "name": "Bayview to SoMa",
+    "period": "AM",
+    "base": 13.2,
+    "scenario": 13.2
+   },
+   {
+    "name": "Oakland to the Financial District",
+    "period": "AM",
+    "base": 40.2,
+    "scenario": 40.2
+   },
+   {
+    "name": "The Marina to Mission Bay",
+    "period": "MD",
+    "base": 18.8,
+    "scenario": 18.8
+   },
+   {
+    "name": "The Financial District to the Outer Richmond",
+    "period": "PM",
+    "base": 26,
+    "scenario": 26
+   }
+  ],
+  "convergence": [
+   0
+  ],
+  "seconds": 137.875,
+  "timing": {
+   "transit skims": 39.173,
+   "demand": 42.696,
+   "road assignment": 13.183,
+   "transit assignment": 42.732,
+   "other": 0.031
+  },
+  "gaps": {
+   "AM": 0.0004411326514425681,
+   "MD": 0.0004583593618763822,
+   "PM": 0.0004917763309340966,
+   "NT": 0.0004618574200029195
+  },
+  "iterations": {
+   "AM": 0,
+   "MD": 0,
+   "PM": 0,
+   "NT": 0
+  },
+  "mode": {
+   "da": 0,
+   "sr": 0,
+   "tnc": 0,
+   "transit": 0,
+   "walk": 0,
+   "bike": 0
+  },
+  "transitTrips": 0,
+  "vmt": {
+   "base": 9548002.70968202,
+   "scenario": 9548002.709708259
+  },
+  "vht": {
+   "base": 440993.294050353,
+   "scenario": 440993.29405285633
+  },
+  "speed": {
+   "base": {
+    "all": {
+     "AM": 22.45892381769715,
+     "MD": 22.61794377169653,
+     "PM": 17.80701697658448,
+     "NT": 27.725214473050396
+    },
+    "freeway": {
+     "AM": 32.92727128435416,
+     "MD": 52.817652617054925,
+     "PM": 20.618963939937743,
+     "NT": 57.02268240791346
+    },
+    "ramp": {
+     "AM": 28.916839512857386,
+     "MD": 29.520981436203098,
+     "PM": 16.762976594112295,
+     "NT": 36.88187526489452
+    },
+    "expressway": {
+     "AM": 26.577847471259435,
+     "MD": 27.976859234504598,
+     "PM": 24.82574480350563,
+     "NT": 30.523008032588194
+    },
+    "arterial": {
+     "AM": 17.815666283990222,
+     "MD": 17.542705418387424,
+     "PM": 16.86200051207264,
+     "NT": 20.51805562916636
+    },
+    "collector": {
+     "AM": 13.509192449305191,
+     "MD": 12.954960439373876,
+     "PM": 13.198959726674241,
+     "NT": 14.314636892869176
+    },
+    "local": {
+     "AM": 15.041878590851214,
+     "MD": 14.76923319968872,
+     "PM": 14.66019962784985,
+     "NT": 15.627302478231822
+    }
+   },
+   "scenario": {
+    "all": {
+     "AM": 22.45892381769715,
+     "MD": 22.61794377169653,
+     "PM": 17.80701697646857,
+     "NT": 27.725214473050396
+    },
+    "freeway": {
+     "AM": 32.92727128435416,
+     "MD": 52.817652617054925,
+     "PM": 20.618963939937743,
+     "NT": 57.02268240791346
+    },
+    "ramp": {
+     "AM": 28.916839512857386,
+     "MD": 29.520981436203098,
+     "PM": 16.762976594112295,
+     "NT": 36.88187526489452
+    },
+    "expressway": {
+     "AM": 26.577847471259435,
+     "MD": 27.976859234504598,
+     "PM": 24.82574480350563,
+     "NT": 30.523008032588194
+    },
+    "arterial": {
+     "AM": 17.815666283990222,
+     "MD": 17.542705418387424,
+     "PM": 16.86200051200641,
+     "NT": 20.51805562916636
+    },
+    "collector": {
+     "AM": 13.509192449305191,
+     "MD": 12.954960439373876,
+     "PM": 13.198959726486335,
+     "NT": 14.314636892869176
+    },
+    "local": {
+     "AM": 15.041878590851214,
+     "MD": 14.76923319968872,
+     "PM": 14.660199627583793,
+     "NT": 15.627302478231822
+    }
+   }
+  },
+  "changes": [
+   {
+    "name": "Macondray Lane",
+    "base": 607,
+    "scenario": 607
+   },
+   {
+    "name": "Leavenworth Street",
+    "base": 1716,
+    "scenario": 1716
+   },
+   {
+    "name": "6th Street",
+    "base": 1425,
+    "scenario": 1425
+   },
+   {
+    "name": "Bluxome Street",
+    "base": 549,
+    "scenario": 549
+   },
+   {
+    "name": "5th Street",
+    "base": 1909,
+    "scenario": 1909
+   },
+   {
+    "name": "4th Street",
+    "base": 10044,
+    "scenario": 10044
+   },
+   {
+    "name": "Nelson Rising Lane",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "Merrimac Street",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "Vandewater Street",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "Powell Street",
+    "base": 2,
+    "scenario": 2
+   },
+   {
+    "name": "Mason Street",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "Hawes Street",
+    "base": 388,
+    "scenario": 388
+   }
+  ]
+ },
+ "cordon": {
+  "bus": [
+   {
+    "route": "30",
+    "base": 33.3,
+    "scenario": 33.2
+   },
+   {
+    "route": "8",
+    "base": 63.3,
+    "scenario": 63.3
+   },
+   {
+    "route": "12",
+    "base": 38.2,
+    "scenario": 38.3
+   }
+  ],
+  "trips": [
+   {
+    "name": "Outer Sunset to the Financial District",
+    "period": "AM",
+    "base": 29.1,
+    "scenario": 29.2
+   },
+   {
+    "name": "The Mission to the Financial District",
+    "period": "AM",
+    "base": 13.7,
+    "scenario": 13.7
+   },
+   {
+    "name": "Bayview to SoMa",
+    "period": "AM",
+    "base": 13.2,
+    "scenario": 12.3
+   },
+   {
+    "name": "Oakland to the Financial District",
+    "period": "AM",
+    "base": 40.2,
+    "scenario": 34.5
+   },
+   {
+    "name": "The Marina to Mission Bay",
+    "period": "MD",
+    "base": 18.8,
+    "scenario": 18.8
+   },
+   {
+    "name": "The Financial District to the Outer Richmond",
+    "period": "PM",
+    "base": 26,
+    "scenario": 25.6
+   }
+  ],
+  "convergence": [
+   0.028533114297287585,
+   0.0018959426304220876
+  ],
+  "seconds": 589.395,
+  "timing": {
+   "transit skims": 93.14,
+   "demand": 110.01599999999999,
+   "road assignment": 341.8,
+   "transit assignment": 44.359,
+   "other": 0.028
+  },
+  "gaps": {
+   "AM": 0.0009320330095062665,
+   "MD": 0.0007137696682332641,
+   "PM": 0.0009980944791505597,
+   "NT": 0.0006890524556427622
+  },
+  "iterations": {
+   "AM": 1,
+   "MD": 0,
+   "PM": 38,
+   "NT": 0
+  },
+  "mode": {
+   "da": -48880,
+   "sr": -5092,
+   "tnc": -3032,
+   "transit": 29985,
+   "walk": 21870,
+   "bike": 3305
+  },
+  "transitTrips": 29985.012240705197,
+  "vmt": {
+   "base": 9548002.70968202,
+   "scenario": 9344947.633990768
+  },
+  "vht": {
+   "base": 440993.294050353,
+   "scenario": 422951.65700942714
+  },
+  "speed": {
+   "base": {
+    "all": {
+     "AM": 22.45892381769715,
+     "MD": 22.61794377169653,
+     "PM": 17.80701697658448,
+     "NT": 27.725214473050396
+    },
+    "freeway": {
+     "AM": 32.92727128435416,
+     "MD": 52.817652617054925,
+     "PM": 20.618963939937743,
+     "NT": 57.02268240791346
+    },
+    "ramp": {
+     "AM": 28.916839512857386,
+     "MD": 29.520981436203098,
+     "PM": 16.762976594112295,
+     "NT": 36.88187526489452
+    },
+    "expressway": {
+     "AM": 26.577847471259435,
+     "MD": 27.976859234504598,
+     "PM": 24.82574480350563,
+     "NT": 30.523008032588194
+    },
+    "arterial": {
+     "AM": 17.815666283990222,
+     "MD": 17.542705418387424,
+     "PM": 16.86200051207264,
+     "NT": 20.51805562916636
+    },
+    "collector": {
+     "AM": 13.509192449305191,
+     "MD": 12.954960439373876,
+     "PM": 13.198959726674241,
+     "NT": 14.314636892869176
+    },
+    "local": {
+     "AM": 15.041878590851214,
+     "MD": 14.76923319968872,
+     "PM": 14.66019962784985,
+     "NT": 15.627302478231822
+    }
+   },
+   "scenario": {
+    "all": {
+     "AM": 22.743868638645026,
+     "MD": 22.653487658723346,
+     "PM": 18.563124713577608,
+     "NT": 27.774151377580488
+    },
+    "freeway": {
+     "AM": 39.224129269745134,
+     "MD": 52.69468474387024,
+     "PM": 25.650152141272862,
+     "NT": 57.0184735192687
+    },
+    "ramp": {
+     "AM": 26.291892814232103,
+     "MD": 29.629835677181855,
+     "PM": 13.488016012565692,
+     "NT": 38.41936850519318
+    },
+    "expressway": {
+     "AM": 24.75141383288748,
+     "MD": 27.993092011160027,
+     "PM": 23.324401054131574,
+     "NT": 30.530780789856134
+    },
+    "arterial": {
+     "AM": 18.026220211410262,
+     "MD": 17.555091259481678,
+     "PM": 16.868895895157248,
+     "NT": 20.52547317376774
+    },
+    "collector": {
+     "AM": 12.986606525313302,
+     "MD": 12.98957610932072,
+     "PM": 12.537758442644106,
+     "NT": 14.308395678424047
+    },
+    "local": {
+     "AM": 14.500048057344548,
+     "MD": 14.780739580219892,
+     "PM": 13.869901257204482,
+     "NT": 15.62710471894726
+    }
+   }
+  },
+  "changes": [
+   {
+    "name": "Central Freeway",
+    "base": 80769,
+    "scenario": 48401
+   },
+   {
+    "name": "James Lick Freeway",
+    "base": 62944,
+    "scenario": 47964
+   },
+   {
+    "name": "Octavia Boulevard",
+    "base": 36842,
+    "scenario": 23102
+   },
+   {
+    "name": "US 101",
+    "base": 36469,
+    "scenario": 22732
+   },
+   {
+    "name": "Southern Embarcadero Freeway",
+    "base": 65440,
+    "scenario": 53182
+   },
+   {
+    "name": "Route 80",
+    "base": 126915,
+    "scenario": 114941
+   },
+   {
+    "name": "Dwight D. Eisenhower Highway",
+    "base": 117931,
+    "scenario": 106904
+   },
+   {
+    "name": "John F Foran Freeway",
+    "base": 67178,
+    "scenario": 56492
+   },
+   {
+    "name": "The Embarcadero",
+    "base": 21043,
+    "scenario": 10813
+   },
+   {
+    "name": "Market Street",
+    "base": 32119,
+    "scenario": 23147
+   },
+   {
+    "name": "Van Ness Avenue",
+    "base": 24329,
+    "scenario": 15363
+   },
+   {
+    "name": "Oak Street",
+    "base": 37706,
+    "scenario": 29158
+   }
+  ],
+  "entering": [
+   {
+    "p": "AM",
+    "base": 193861.22966831923,
+    "scn": 117547.95377812348
+   },
+   {
+    "p": "MD",
+    "base": 219131.81427514553,
+    "scn": 221452.4753396511
+   },
+   {
+    "p": "PM",
+    "base": 188277.71088794386,
+    "scn": 105845.96096609175
+   },
+   {
+    "p": "NT",
+    "base": 165887.55927535892,
+    "scn": 167054.1230905056
+   }
+  ]
+ },
+ "control": {
+  "seconds": 96.244,
+  "timing": {
+   "transit skims": 38.805,
+   "demand": 15.214,
+   "transit assignment": 42.207,
+   "other": 0.013
+  }
+ },
+ "buslane": {
+  "bus": [
+   {
+    "route": "28",
+    "base": 55.7,
+    "scenario": 53.7
+   },
+   {
+    "route": "28R",
+    "base": 32.7,
+    "scenario": 30.7
+   }
+  ],
+  "trips": [
+   {
+    "name": "Outer Sunset to the Financial District",
+    "period": "AM",
+    "base": 29.1,
+    "scenario": 29
+   },
+   {
+    "name": "The Mission to the Financial District",
+    "period": "AM",
+    "base": 13.7,
+    "scenario": 13.7
+   },
+   {
+    "name": "Bayview to SoMa",
+    "period": "AM",
+    "base": 13.2,
+    "scenario": 13.2
+   },
+   {
+    "name": "Oakland to the Financial District",
+    "period": "AM",
+    "base": 40.2,
+    "scenario": 40.1
+   },
+   {
+    "name": "The Marina to Mission Bay",
+    "period": "MD",
+    "base": 18.8,
+    "scenario": 18.8
+   },
+   {
+    "name": "The Financial District to the Outer Richmond",
+    "period": "PM",
+    "base": 26,
+    "scenario": 26
+   }
+  ],
+  "convergence": [
+   0.0006154712902924586
+  ],
+  "seconds": 325.422,
+  "timing": {
+   "transit skims": 84.48899999999999,
+   "demand": 72.189,
+   "road assignment": 124.676,
+   "transit assignment": 43.968,
+   "other": 0.034
+  },
+  "gaps": {
+   "AM": 0.0008977402984351569,
+   "MD": 0.0008979996096812772,
+   "PM": 0.0009430816077368663,
+   "NT": 0.0004891485520858448
+  },
+  "iterations": {
+   "AM": 17,
+   "MD": 16,
+   "PM": 56,
+   "NT": 0
+  },
+  "mode": {
+   "da": -307,
+   "sr": -246,
+   "tnc": -52,
+   "transit": 322,
+   "walk": 245,
+   "bike": 17
+  },
+  "transitTrips": 321.72168190352386,
+  "vmt": {
+   "base": 9548002.70968202,
+   "scenario": 9550645.658985537
+  },
+  "vht": {
+   "base": 440993.294050353,
+   "scenario": 442045.54582919064
+  },
+  "speed": {
+   "base": {
+    "all": {
+     "AM": 22.45892381769715,
+     "MD": 22.61794377169653,
+     "PM": 17.80701697658448,
+     "NT": 27.725214473050396
+    },
+    "freeway": {
+     "AM": 32.92727128435416,
+     "MD": 52.817652617054925,
+     "PM": 20.618963939937743,
+     "NT": 57.02268240791346
+    },
+    "ramp": {
+     "AM": 28.916839512857386,
+     "MD": 29.520981436203098,
+     "PM": 16.762976594112295,
+     "NT": 36.88187526489452
+    },
+    "expressway": {
+     "AM": 26.577847471259435,
+     "MD": 27.976859234504598,
+     "PM": 24.82574480350563,
+     "NT": 30.523008032588194
+    },
+    "arterial": {
+     "AM": 17.815666283990222,
+     "MD": 17.542705418387424,
+     "PM": 16.86200051207264,
+     "NT": 20.51805562916636
+    },
+    "collector": {
+     "AM": 13.509192449305191,
+     "MD": 12.954960439373876,
+     "PM": 13.198959726674241,
+     "NT": 14.314636892869176
+    },
+    "local": {
+     "AM": 15.041878590851214,
+     "MD": 14.76923319968872,
+     "PM": 14.66019962784985,
+     "NT": 15.627302478231822
+    }
+   },
+   "scenario": {
+    "all": {
+     "AM": 22.425761914281043,
+     "MD": 22.59577776563309,
+     "PM": 17.743894850385537,
+     "NT": 27.689269147762026
+    },
+    "freeway": {
+     "AM": 32.94057070052415,
+     "MD": 52.74590335063977,
+     "PM": 20.639503285404878,
+     "NT": 57.02285521582347
+    },
+    "ramp": {
+     "AM": 28.51598021552135,
+     "MD": 29.316346776922828,
+     "PM": 16.27544925157569,
+     "NT": 36.8787026586936
+    },
+    "expressway": {
+     "AM": 26.667824248810774,
+     "MD": 27.861026139414502,
+     "PM": 24.802849827674837,
+     "NT": 30.523669433915625
+    },
+    "arterial": {
+     "AM": 17.78861329675734,
+     "MD": 17.50691930345978,
+     "PM": 16.76825906475044,
+     "NT": 20.467003680676203
+    },
+    "collector": {
+     "AM": 13.522656705150114,
+     "MD": 13.035197641958298,
+     "PM": 13.170426289744759,
+     "NT": 14.314861060472607
+    },
+    "local": {
+     "AM": 15.102768119410374,
+     "MD": 14.838627307791453,
+     "PM": 14.703501294900542,
+     "NT": 15.627359939721261
+    }
+   }
+  },
+  "changes": [
+   {
+    "name": "19th Avenue",
+    "base": 42999,
+    "scenario": 34483
+   },
+   {
+    "name": "Lincoln Way",
+    "base": 31721,
+    "scenario": 35101
+   },
+   {
+    "name": "Junipero Serra Boulevard",
+    "base": 23269,
+    "scenario": 26420
+   },
+   {
+    "name": "Sloat Boulevard",
+    "base": 47670,
+    "scenario": 44894
+   },
+   {
+    "name": "15th Avenue",
+    "base": 1466,
+    "scenario": 4137
+   },
+   {
+    "name": "Portola Drive",
+    "base": 19764,
+    "scenario": 22283
+   },
+   {
+    "name": "Wawona Street",
+    "base": 732,
+    "scenario": 3024
+   },
+   {
+    "name": "West Portal Avenue",
+    "base": 4698,
+    "scenario": 6829
+   },
+   {
+    "name": "14th Avenue",
+    "base": 3261,
+    "scenario": 5250
+   },
+   {
+    "name": "Ocean Avenue",
+    "base": 9718,
+    "scenario": 7763
+   },
+   {
+    "name": "17th Avenue",
+    "base": 1797,
+    "scenario": 3620
+   },
+   {
+    "name": "18th Avenue",
+    "base": 1874,
+    "scenario": 3656
+   }
+  ],
+  "edited": [
+   {
+    "p": "AM",
+    "base": 8161.2036728277435,
+    "scn": 6150.190644054878
+   },
+   {
+    "p": "MD",
+    "base": 10504.093916730182,
+    "scn": 8113.109791825457
+   },
+   {
+    "p": "PM",
+    "base": 9039.805390148627,
+    "scn": 6416.350419207317
+   },
+   {
+    "p": "NT",
+    "base": 9204.014041063263,
+    "scn": 9197.26953125
+   }
+  ]
+ },
+ "free": {
+  "bus": [],
+  "trips": [
+   {
+    "name": "Outer Sunset to the Financial District",
+    "period": "AM",
+    "base": 29.1,
+    "scenario": 28.5
+   },
+   {
+    "name": "The Mission to the Financial District",
+    "period": "AM",
+    "base": 13.7,
+    "scenario": 13.4
+   },
+   {
+    "name": "Bayview to SoMa",
+    "period": "AM",
+    "base": 13.2,
+    "scenario": 13.1
+   },
+   {
+    "name": "Oakland to the Financial District",
+    "period": "AM",
+    "base": 40.2,
+    "scenario": 39.8
+   },
+   {
+    "name": "The Marina to Mission Bay",
+    "period": "MD",
+    "base": 18.8,
+    "scenario": 18.7
+   },
+   {
+    "name": "The Financial District to the Outer Richmond",
+    "period": "PM",
+    "base": 26,
+    "scenario": 25.8
+   }
+  ],
+  "convergence": [
+   0.00232203127091815
+  ],
+  "seconds": 237.384,
+  "timing": {
+   "transit skims": 82.55699999999999,
+   "demand": 69.673,
+   "road assignment": 41.03,
+   "transit assignment": 44.042,
+   "other": 0.023
+  },
+  "gaps": {
+   "AM": 0.0008773448321228191,
+   "MD": 0.0009064760061254747,
+   "PM": 0.0008271872056203843,
+   "NT": 0.00048602068458426887
+  },
+  "iterations": {
+   "AM": 2,
+   "MD": 2,
+   "PM": 4,
+   "NT": 0
+  },
+  "mode": {
+   "da": -25753,
+   "sr": -18074,
+   "tnc": -812,
+   "transit": 77279,
+   "walk": -24926,
+   "bike": -9004
+  },
+  "transitTrips": 77279.2315411332,
+  "vmt": {
+   "base": 9548002.70968202,
+   "scenario": 9421300.779520273
+  },
+  "vht": {
+   "base": 440993.294050353,
+   "scenario": 428535.93012300285
+  },
+  "speed": {
+   "base": {
+    "all": {
+     "AM": 22.45892381769715,
+     "MD": 22.61794377169653,
+     "PM": 17.80701697658448,
+     "NT": 27.725214473050396
+    },
+    "freeway": {
+     "AM": 32.92727128435416,
+     "MD": 52.817652617054925,
+     "PM": 20.618963939937743,
+     "NT": 57.02268240791346
+    },
+    "ramp": {
+     "AM": 28.916839512857386,
+     "MD": 29.520981436203098,
+     "PM": 16.762976594112295,
+     "NT": 36.88187526489452
+    },
+    "expressway": {
+     "AM": 26.577847471259435,
+     "MD": 27.976859234504598,
+     "PM": 24.82574480350563,
+     "NT": 30.523008032588194
+    },
+    "arterial": {
+     "AM": 17.815666283990222,
+     "MD": 17.542705418387424,
+     "PM": 16.86200051207264,
+     "NT": 20.51805562916636
+    },
+    "collector": {
+     "AM": 13.509192449305191,
+     "MD": 12.954960439373876,
+     "PM": 13.198959726674241,
+     "NT": 14.314636892869176
+    },
+    "local": {
+     "AM": 15.041878590851214,
+     "MD": 14.76923319968872,
+     "PM": 14.66019962784985,
+     "NT": 15.627302478231822
+    }
+   },
+   "scenario": {
+    "all": {
+     "AM": 22.870465235623143,
+     "MD": 22.929074339258385,
+     "PM": 18.178471882042754,
+     "NT": 27.77226627810268
+    },
+    "freeway": {
+     "AM": 33.46729708170647,
+     "MD": 53.09371581069807,
+     "PM": 20.955914730899586,
+     "NT": 57.02839699210879
+    },
+    "ramp": {
+     "AM": 30.220079685967658,
+     "MD": 31.245140835723973,
+     "PM": 17.6205986295281,
+     "NT": 37.57309100579375
+    },
+    "expressway": {
+     "AM": 26.75970166995707,
+     "MD": 28.059042462666977,
+     "PM": 25.074630516868936,
+     "NT": 30.528631140664462
+    },
+    "arterial": {
+     "AM": 18.125505625642834,
+     "MD": 17.75860738392295,
+     "PM": 17.270502706367335,
+     "NT": 20.525384733741078
+    },
+    "collector": {
+     "AM": 13.64715236167173,
+     "MD": 13.10193545018106,
+     "PM": 13.385676065859718,
+     "NT": 14.323485908845576
+    },
+    "local": {
+     "AM": 15.163573041717571,
+     "MD": 14.939189859564392,
+     "PM": 14.838663372363369,
+     "NT": 15.632095062547524
+    }
+   }
+  },
+  "changes": [
+   {
+    "name": "James Lick Freeway",
+    "base": 149865,
+    "scenario": 148239
+   },
+   {
+    "name": "Route 80",
+    "base": 126915,
+    "scenario": 125548
+   },
+   {
+    "name": "John F Foran Freeway",
+    "base": 109920,
+    "scenario": 108675
+   },
+   {
+    "name": "Dwight D. Eisenhower Highway",
+    "base": 120024,
+    "scenario": 118888
+   },
+   {
+    "name": "Southern Embarcadero Freeway",
+    "base": 88667,
+    "scenario": 87602
+   },
+   {
+    "name": "Central Freeway",
+    "base": 80769,
+    "scenario": 79724
+   },
+   {
+    "name": "I 80",
+    "base": 82615,
+    "scenario": 81838
+   },
+   {
+    "name": "Fulton Street",
+    "base": 33966,
+    "scenario": 33235
+   },
+   {
+    "name": "Crossover Drive",
+    "base": 50818,
+    "scenario": 50110
+   },
+   {
+    "name": "Oak Street",
+    "base": 34793,
+    "scenario": 34123
+   },
+   {
+    "name": "Sloat Boulevard",
+    "base": 47670,
+    "scenario": 47004
+   },
+   {
+    "name": "Geary Boulevard",
+    "base": 25521,
+    "scenario": 24860
+   }
+  ]
+ },
+ "parking": {
+  "bus": [],
+  "trips": [
+   {
+    "name": "Outer Sunset to the Financial District",
+    "period": "AM",
+    "base": 29.1,
+    "scenario": 28.3
+   },
+   {
+    "name": "The Mission to the Financial District",
+    "period": "AM",
+    "base": 13.7,
+    "scenario": 12.7
+   },
+   {
+    "name": "Bayview to SoMa",
+    "period": "AM",
+    "base": 13.2,
+    "scenario": 12.9
+   },
+   {
+    "name": "Oakland to the Financial District",
+    "period": "AM",
+    "base": 40.2,
+    "scenario": 35.1
+   },
+   {
+    "name": "The Marina to Mission Bay",
+    "period": "MD",
+    "base": 18.8,
+    "scenario": 18.4
+   },
+   {
+    "name": "The Financial District to the Outer Richmond",
+    "period": "PM",
+    "base": 26,
+    "scenario": 25.6
+   }
+  ],
+  "convergence": [
+   0.004033481080752286
+  ],
+  "seconds": 324.88,
+  "timing": {
+   "transit skims": 82.65599999999999,
+   "demand": 71.673,
+   "road assignment": 127.244,
+   "transit assignment": 43.225,
+   "other": 0.033
+  },
+  "gaps": {
+   "AM": 0.0009083515631529301,
+   "MD": 0.0009037623871491591,
+   "PM": 0.0009053060376403932,
+   "NT": 0.0009864725221997335
+  },
+  "iterations": {
+   "AM": 27,
+   "MD": 4,
+   "PM": 57,
+   "NT": 0
+  },
+  "mode": {
+   "da": -68797,
+   "sr": -13095,
+   "tnc": 6266,
+   "transit": 48357,
+   "walk": 18866,
+   "bike": 5540
+  },
+  "transitTrips": 48357.007941458316,
+  "vmt": {
+   "base": 9548002.70968202,
+   "scenario": 9261521.356731351
+  },
+  "vht": {
+   "base": 440993.294050353,
+   "scenario": 410405.3652071606
+  },
+  "speed": {
+   "base": {
+    "all": {
+     "AM": 22.45892381769715,
+     "MD": 22.61794377169653,
+     "PM": 17.80701697658448,
+     "NT": 27.725214473050396
+    },
+    "freeway": {
+     "AM": 32.92727128435416,
+     "MD": 52.817652617054925,
+     "PM": 20.618963939937743,
+     "NT": 57.02268240791346
+    },
+    "ramp": {
+     "AM": 28.916839512857386,
+     "MD": 29.520981436203098,
+     "PM": 16.762976594112295,
+     "NT": 36.88187526489452
+    },
+    "expressway": {
+     "AM": 26.577847471259435,
+     "MD": 27.976859234504598,
+     "PM": 24.82574480350563,
+     "NT": 30.523008032588194
+    },
+    "arterial": {
+     "AM": 17.815666283990222,
+     "MD": 17.542705418387424,
+     "PM": 16.86200051207264,
+     "NT": 20.51805562916636
+    },
+    "collector": {
+     "AM": 13.509192449305191,
+     "MD": 12.954960439373876,
+     "PM": 13.198959726674241,
+     "NT": 14.314636892869176
+    },
+    "local": {
+     "AM": 15.041878590851214,
+     "MD": 14.76923319968872,
+     "PM": 14.66019962784985,
+     "NT": 15.627302478231822
+    }
+   },
+   "scenario": {
+    "all": {
+     "AM": 23.82090900516033,
+     "MD": 22.931889224389803,
+     "PM": 19.041629785238175,
+     "NT": 27.80878577596802
+    },
+    "freeway": {
+     "AM": 37.760508951044784,
+     "MD": 53.24103359228504,
+     "PM": 23.52971913664124,
+     "NT": 57.015941796158984
+    },
+    "ramp": {
+     "AM": 30.547191025425477,
+     "MD": 31.35023293855449,
+     "PM": 18.618194878210574,
+     "NT": 40.73409288827181
+    },
+    "expressway": {
+     "AM": 26.693084769710087,
+     "MD": 28.00518448679121,
+     "PM": 25.364874538283146,
+     "NT": 30.536317969301074
+    },
+    "arterial": {
+     "AM": 18.334534999978853,
+     "MD": 17.87271994362969,
+     "PM": 17.239830858613747,
+     "NT": 20.615714294388937
+    },
+    "collector": {
+     "AM": 13.773255650271713,
+     "MD": 13.264278068938864,
+     "PM": 13.511950935438009,
+     "NT": 14.382410634418342
+    },
+    "local": {
+     "AM": 15.15786072525964,
+     "MD": 14.848945170211566,
+     "PM": 14.74199026527311,
+     "NT": 15.644566873355993
+    }
+   }
+  },
+  "changes": [
+   {
+    "name": "Dwight D. Eisenhower Highway",
+    "base": 120024,
+    "scenario": 115116
+   },
+   {
+    "name": "Southern Embarcadero Freeway",
+    "base": 65440,
+    "scenario": 60544
+   },
+   {
+    "name": "Route 80",
+    "base": 126915,
+    "scenario": 122641
+   },
+   {
+    "name": "James Lick Freeway",
+    "base": 136803,
+    "scenario": 132915
+   },
+   {
+    "name": "Bayshore Freeway",
+    "base": 94870,
+    "scenario": 91118
+   },
+   {
+    "name": "John F Foran Freeway",
+    "base": 89019,
+    "scenario": 85584
+   },
+   {
+    "name": "Fremont Street",
+    "base": 31048,
+    "scenario": 27648
+   },
+   {
+    "name": "I 80",
+    "base": 82615,
+    "scenario": 79487
+   },
+   {
+    "name": "3rd Street",
+    "base": 50953,
+    "scenario": 47948
+   },
+   {
+    "name": "Front Street",
+    "base": 31880,
+    "scenario": 29196
+   },
+   {
+    "name": "Harrison Street",
+    "base": 45459,
+    "scenario": 42868
+   },
+   {
+    "name": "9th Street",
+    "base": 27517,
+    "scenario": 25298
+   }
+  ]
+ },
+ "geary": {
+  "bus": [
+   {
+    "route": "38",
+    "base": 45.2,
+    "scenario": 45.2
+   },
+   {
+    "route": "38R",
+    "base": 41.2,
+    "scenario": 41.2
+   }
+  ],
+  "trips": [
+   {
+    "name": "Outer Sunset to the Financial District",
+    "period": "AM",
+    "base": 29.1,
+    "scenario": 29.1
+   },
+   {
+    "name": "The Mission to the Financial District",
+    "period": "AM",
+    "base": 13.7,
+    "scenario": 13.7
+   },
+   {
+    "name": "Bayview to SoMa",
+    "period": "AM",
+    "base": 13.2,
+    "scenario": 13.2
+   },
+   {
+    "name": "Oakland to the Financial District",
+    "period": "AM",
+    "base": 40.2,
+    "scenario": 40.2
+   },
+   {
+    "name": "The Marina to Mission Bay",
+    "period": "MD",
+    "base": 18.8,
+    "scenario": 18.8
+   },
+   {
+    "name": "The Financial District to the Outer Richmond",
+    "period": "PM",
+    "base": 26,
+    "scenario": 25.9
+   }
+  ],
+  "convergence": [
+   0.0000017167754110686316
+  ],
+  "seconds": 262.716,
+  "timing": {
+   "transit skims": 89.81900000000002,
+   "demand": 72.799,
+   "road assignment": 25.849,
+   "transit assignment": 74.036,
+   "other": 0.061
+  },
+  "gaps": {
+   "AM": 0.0004977328202230513,
+   "MD": 0.0003998119337507947,
+   "PM": 0.0004889586281915287,
+   "NT": 0.0002484493759494258
+  },
+  "iterations": {
+   "AM": 0,
+   "MD": 0,
+   "PM": 0,
+   "NT": 0
+  },
+  "mode": {
+   "da": -2,
+   "sr": -2,
+   "tnc": -1,
+   "transit": 1,
+   "walk": 2,
+   "bike": 0
+  },
+  "transitTrips": 1.150337265280541,
+  "vmt": {
+   "base": 9450794.009414257,
+   "scenario": 9450794.009440517
+  },
+  "vht": {
+   "base": 412487.77537455445,
+   "scenario": 412493.9784119444
+  },
+  "speed": {
+   "base": {
+    "all": {
+     "AM": 23.046512347055554,
+     "MD": 23.942826317470818,
+     "PM": 19.770262301629373,
+     "NT": 27.910867043423654
+    },
+    "freeway": {
+     "AM": 31.705007113001663,
+     "MD": 52.70408015439834,
+     "PM": 23.91986707689321,
+     "NT": 57.25063422981878
+    },
+    "ramp": {
+     "AM": 27.623645811842742,
+     "MD": 29.79156049172027,
+     "PM": 18.50919517223501,
+     "NT": 34.876058555844814
+    },
+    "expressway": {
+     "AM": 26.59515694788832,
+     "MD": 26.885277704008466,
+     "PM": 25.487406970487427,
+     "NT": 28.86852739714847
+    },
+    "arterial": {
+     "AM": 18.599251018320953,
+     "MD": 18.871049885072217,
+     "PM": 18.07069075255942,
+     "NT": 20.317176881038513
+    },
+    "collector": {
+     "AM": 15.032329146334074,
+     "MD": 14.9968716130037,
+     "PM": 14.845263238205334,
+     "NT": 15.823195684381776
+    },
+    "local": {
+     "AM": 15.024929137267964,
+     "MD": 15.010044596196314,
+     "PM": 14.636271422356241,
+     "NT": 15.668146435101495
+    }
+   },
+   "scenario": {
+    "all": {
+     "AM": 23.046213906654614,
+     "MD": 23.94228036409016,
+     "PM": 19.769914528852308,
+     "NT": 27.910851725179192
+    },
+    "freeway": {
+     "AM": 31.705007113001663,
+     "MD": 52.70408015439834,
+     "PM": 23.91986707689321,
+     "NT": 57.25063422981878
+    },
+    "ramp": {
+     "AM": 27.623645811842742,
+     "MD": 29.79156049172027,
+     "PM": 18.50919517223501,
+     "NT": 34.876058555844814
+    },
+    "expressway": {
+     "AM": 26.59515694788832,
+     "MD": 26.885277704008466,
+     "PM": 25.487406970487427,
+     "NT": 28.86852739714847
+    },
+    "arterial": {
+     "AM": 18.598698081044965,
+     "MD": 18.870286161857464,
+     "PM": 18.06989020020913,
+     "NT": 20.3171563873435
+    },
+    "collector": {
+     "AM": 15.032329146334074,
+     "MD": 14.9968716130037,
+     "PM": 14.845263238171428,
+     "NT": 15.823195684381776
+    },
+    "local": {
+     "AM": 15.024929137267964,
+     "MD": 15.010044596196314,
+     "PM": 14.636271422384965,
+     "NT": 15.668146435101495
+    }
+   }
+  },
+  "changes": [
+   {
+    "name": "Macondray Lane",
+    "base": 639,
+    "scenario": 639
+   },
+   {
+    "name": "Leavenworth Street",
+    "base": 1574,
+    "scenario": 1574
+   },
+   {
+    "name": "6th Street",
+    "base": 51,
+    "scenario": 51
+   },
+   {
+    "name": "Bluxome Street",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "5th Street",
+    "base": 1837,
+    "scenario": 1837
+   },
+   {
+    "name": "4th Street",
+    "base": 13747,
+    "scenario": 13747
+   },
+   {
+    "name": "Nelson Rising Lane",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "Merrimac Street",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "Vandewater Street",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "Powell Street",
+    "base": 3,
+    "scenario": 3
+   },
+   {
+    "name": "Mason Street",
+    "base": 0,
+    "scenario": 0
+   },
+   {
+    "name": "Hawes Street",
+    "base": 555,
+    "scenario": 555
+   }
+  ],
+  "edited": [
+   {
+    "p": "AM",
+    "base": 3421.320217248165,
+    "scn": 3421.320217248165
+   },
+   {
+    "p": "MD",
+    "base": 5302.208948771159,
+    "scn": 5302.208948771159
+   },
+   {
+    "p": "PM",
+    "base": 4241.263151226622,
+    "scn": 4241.263151226622
+   },
+   {
+    "p": "NT",
+    "base": 2811.585485284979,
+    "scn": 2811.585485284979
+   }
+  ]
+ }
+}

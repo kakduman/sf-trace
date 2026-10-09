@@ -1,0 +1,2637 @@
+{
+ "note": "Alameda County freeway speeds, spring 2024 (INRIX, weekday 7\u20139 a.m. and 4\u20136 p.m. peak periods), by CMP segment and direction, from Alameda CTC\u2019s 2024 LOS Monitoring Report, Appendix C, Tables C-3 (PM) and C-4 (AM), as extracted from the PDF\u2019s text (raw/eastbay/actc-2024-los-appendix-c.pdf); mph is the 2024 column. The corridors list the segments a drive to the Bay Bridge takes on each route (in) and from it (out); the bridge's own approach, F13 and F14 westbound (from the I-580 split to the toll plaza and on to the San Francisco county line, with the toll plaza and its metering queue) and F1 and F2 eastbound, is shared by every route and kept apart (bridge).",
+ "source": "Alameda County Transportation Commission, 2024 Level of Service Monitoring Report, Appendix C: LOS Tables (April 2025). https://alamedactc.org/wp-content/uploads/2025/04/Appendix_C_LOS_Tables.pdf",
+ "freeFlowMph": 65,
+ "corridors": {
+  "I-80": {
+   "in": [
+    "F8",
+    "F9",
+    "F10",
+    "F11",
+    "F12"
+   ],
+   "out": [
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7"
+   ]
+  },
+  "I-580": {
+   "in": [
+    "F31",
+    "F32",
+    "F33",
+    "F34",
+    "F35",
+    "F36",
+    "F37",
+    "F38",
+    "F39",
+    "F40",
+    "F41",
+    "F42",
+    "F43",
+    "F51",
+    "F52",
+    "F53",
+    "F54",
+    "F55",
+    "F56"
+   ],
+   "out": [
+    "F44",
+    "F45",
+    "F46",
+    "F47",
+    "F48",
+    "F49",
+    "F50",
+    "F17",
+    "F18",
+    "F19",
+    "F20",
+    "F21",
+    "F22",
+    "F23",
+    "F24",
+    "F25",
+    "F26",
+    "F27",
+    "F28",
+    "F29",
+    "F30"
+   ]
+  },
+  "SR-24": {
+   "in": [
+    "F134",
+    "F135",
+    "F136",
+    "F56"
+   ],
+   "out": [
+    "F44",
+    "F131",
+    "F132",
+    "F133"
+   ]
+  },
+  "I-880": {
+   "in": [
+    "F85",
+    "F86",
+    "F87",
+    "F88",
+    "F89",
+    "F90",
+    "F91",
+    "F92",
+    "F93",
+    "F94",
+    "F95",
+    "F96",
+    "F97",
+    "F98",
+    "F99",
+    "F100",
+    "F101",
+    "F102"
+   ],
+   "out": [
+    "F103",
+    "F104",
+    "F105",
+    "F106",
+    "F107",
+    "F108",
+    "F109",
+    "F110",
+    "F111",
+    "F112",
+    "F113",
+    "F114",
+    "F115",
+    "F116",
+    "F117",
+    "F118",
+    "F119",
+    "F120"
+   ]
+  }
+ },
+ "segments": {
+  "AM": [
+   {
+    "id": "F1",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "SF County Line Toll Plaza Oak",
+    "miles": 2.01,
+    "mph": 64.1
+   },
+   {
+    "id": "F2",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Toll Plaza I-580 SB Merge Oak",
+    "miles": 1.3,
+    "mph": 61.2
+   },
+   {
+    "id": "F3",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "I-80/I-580 (Merge) Powell Emery",
+    "miles": 0.54,
+    "mph": 49.6
+   },
+   {
+    "id": "F4",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Powell Ashby Emery-Berk",
+    "miles": 0.72,
+    "mph": 56.8
+   },
+   {
+    "id": "F5",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Ashby University Berk",
+    "miles": 1.3,
+    "mph": 60.7
+   },
+   {
+    "id": "F6",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "University Jct I-580 (off) Berk-Alb",
+    "miles": 1.37,
+    "mph": 62.3
+   },
+   {
+    "id": "F7",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Jct I-580 (off) Central (County Line) Alb",
+    "miles": 0.84,
+    "mph": 63.6
+   },
+   {
+    "id": "F8",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Central (County Line) Jct I-580 Alb",
+    "miles": 0.7,
+    "mph": 14.4
+   },
+   {
+    "id": "F9",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Jct I-580 University Berk-Alb",
+    "miles": 1.51,
+    "mph": 20.2
+   },
+   {
+    "id": "F10",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "University Ashby Berk",
+    "miles": 1.31,
+    "mph": 31.7
+   },
+   {
+    "id": "F11",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Ashby Powell Emery",
+    "miles": 0.71,
+    "mph": 33.3
+   },
+   {
+    "id": "F12",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Powell I-80/I-580 (Split) Emery",
+    "miles": 0.47,
+    "mph": 34.4
+   },
+   {
+    "id": "F13",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "I-580 Split Toll Plaza Oak",
+    "miles": 1.31,
+    "mph": 17.7
+   },
+   {
+    "id": "F14",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Toll Plaza SF County  Oak",
+    "miles": 2.01,
+    "mph": 20.5
+   },
+   {
+    "id": "F15",
+    "route": "I-238",
+    "dir": "EB",
+    "limits": "I-880 I-580 Uninc-San L",
+    "miles": 2.59,
+    "mph": 42.5
+   },
+   {
+    "id": "F16",
+    "route": "I-238",
+    "dir": "WB",
+    "limits": "I-580 I-880 Uninc-San L",
+    "miles": 2.48,
+    "mph": 24.8
+   },
+   {
+    "id": "F17",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "I-580/I-238 changd fm (I-238/Fthl Off) Grove Uninc",
+    "miles": 2.68,
+    "mph": 38.4
+   },
+   {
+    "id": "F18",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Grove Eden Canyon Uninc-Plea",
+    "miles": 2.19,
+    "mph": 40.8
+   },
+   {
+    "id": "F19",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Eden Canyon San Ramon/ Foothill Uninc-Plea",
+    "miles": 4.82,
+    "mph": 56.3
+   },
+   {
+    "id": "F20",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "San Ramon/ Foothill I-680 Plea",
+    "miles": 0.71,
+    "mph": 62.7
+   },
+   {
+    "id": "F21",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "I-680 Hopyard Plea",
+    "miles": 0.87,
+    "mph": 64.2
+   },
+   {
+    "id": "F22",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Hopyard Santa Rita Plea",
+    "miles": 1.9,
+    "mph": 64.3
+   },
+   {
+    "id": "F23",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Santa Rita El Charro Uninc-Pleas",
+    "miles": 1.25,
+    "mph": 65.5
+   },
+   {
+    "id": "F24",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "El Charro SR 84/Airway Blvd. Uninc",
+    "miles": 1.72,
+    "mph": 65.8
+   },
+   {
+    "id": "F25",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "SR 84/Airway Blvd. Portola Liv",
+    "miles": 1.73,
+    "mph": 66.0
+   },
+   {
+    "id": "F26",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Portola 1st St Liv",
+    "miles": 2.56,
+    "mph": 66.2
+   },
+   {
+    "id": "F27",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "1st St Greenville Liv",
+    "miles": 2.13,
+    "mph": 63.7
+   },
+   {
+    "id": "F28",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Greenville N.Flynn Uninc",
+    "miles": 2.73,
+    "mph": 64.4
+   },
+   {
+    "id": "F29",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "N.Flynn Grant Line Uninc",
+    "miles": 4.32,
+    "mph": 67.5
+   },
+   {
+    "id": "F30",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Grant Line I-205 (SJ Co) Off Uninc",
+    "miles": 0.87,
+    "mph": 66.2
+   },
+   {
+    "id": "F31",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "I-205 (SJ Co) Grant Line Uninc",
+    "miles": 0.72,
+    "mph": 14.4
+   },
+   {
+    "id": "F32",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Grant Line N Flynn Uninc",
+    "miles": 4.59,
+    "mph": 31.0
+   },
+   {
+    "id": "F33",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "N Flynn Greenville Rd Liv-Uninc",
+    "miles": 2.43,
+    "mph": 60.0
+   },
+   {
+    "id": "F34",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Greenville Rd 1st St Liv",
+    "miles": 2.21,
+    "mph": 57.9
+   },
+   {
+    "id": "F35",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "1st St Portola Ave Liv",
+    "miles": 2.56,
+    "mph": 54.1
+   },
+   {
+    "id": "F36",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Portola SR 84/Airway Blvd Liv",
+    "miles": 1.73,
+    "mph": 46.7
+   },
+   {
+    "id": "F37",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "SR 84/Airway Blvd Fallon Rd/El Charro Liv-Uninc",
+    "miles": 1.73,
+    "mph": 48.7
+   },
+   {
+    "id": "F38",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Fallon Rd/El Charro Tassajara Plea",
+    "miles": 1.23,
+    "mph": 45.9
+   },
+   {
+    "id": "F39",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Tassajara Rd I-680 Plea",
+    "miles": 2.78,
+    "mph": 50.0
+   },
+   {
+    "id": "F40",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "I-680 San Ramon Rd Plea",
+    "miles": 0.71,
+    "mph": 60.5
+   },
+   {
+    "id": "F41",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "San Ramon Rd Eden Caynon Plea-Uninc",
+    "miles": 4.82,
+    "mph": 59.8
+   },
+   {
+    "id": "F42",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Eden Canyon Center St Uninc",
+    "miles": 2.5,
+    "mph": 55.6
+   },
+   {
+    "id": "F43",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Center I-580/238 Uninc",
+    "miles": 2.26,
+    "mph": 46.7
+   },
+   {
+    "id": "F44",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "I-80 I-980 Oak",
+    "miles": 1.27,
+    "mph": 55.9
+   },
+   {
+    "id": "F45",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "I-980 Harrison Oak",
+    "miles": 1.02,
+    "mph": 63.1
+   },
+   {
+    "id": "F46",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Harrison Lakeshore Oak",
+    "miles": 0.84,
+    "mph": 64.6
+   },
+   {
+    "id": "F47",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Lakeshore Coolidge Oak",
+    "miles": 2.21,
+    "mph": 65.1
+   },
+   {
+    "id": "F48",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Coolidge SH 13 Off Oak",
+    "miles": 2.2,
+    "mph": 65.7
+   },
+   {
+    "id": "F49",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "SH 13 Off MacArthur Oak",
+    "miles": 4.08,
+    "mph": 65.8
+   },
+   {
+    "id": "F50",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "MacArthur I-580/238 San L-Uninc",
+    "miles": 3.78,
+    "mph": 67.2
+   },
+   {
+    "id": "F51",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "I-238 Foothill/MacArthur Uninc",
+    "miles": 3.86,
+    "mph": 59.3
+   },
+   {
+    "id": "F52",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Foothill/MacArthur SH 13 Off Oak",
+    "miles": 4.04,
+    "mph": 34.6
+   },
+   {
+    "id": "F53",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "SH 13 Off Fruitvale Oak",
+    "miles": 2.63,
+    "mph": 29.2
+   },
+   {
+    "id": "F54",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Fruitvale Harrison Oak",
+    "miles": 2.68,
+    "mph": 44.8
+   },
+   {
+    "id": "F55",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Harrison SH 24 On-ramp Oak",
+    "miles": 1.24,
+    "mph": 46.4
+   },
+   {
+    "id": "F56",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "SH-24 On-ramp I-80/580 Split Oak",
+    "miles": 1.17,
+    "mph": 33.7
+   },
+   {
+    "id": "F57",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Central (County Line) I-80 Jct Alb",
+    "miles": 0.7,
+    "mph": 16.7
+   },
+   {
+    "id": "F58",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "I-80 Jct Central (County Line) Alb",
+    "miles": 0.86,
+    "mph": 61.2
+   },
+   {
+    "id": "F59",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Scott Creek Rd Rt 262/Mission Fre",
+    "miles": 2.26,
+    "mph": 64.6
+   },
+   {
+    "id": "F60",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Rt 262/Mission Durham Rd Fre",
+    "miles": 1.62,
+    "mph": 65.3
+   },
+   {
+    "id": "F61",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Durham Rd Washington Blvd Fre",
+    "miles": 1.3,
+    "mph": 60.3
+   },
+   {
+    "id": "F62",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Washington Blvd Rt 238/Mission Fre",
+    "miles": 1.14,
+    "mph": 58.5
+   },
+   {
+    "id": "F63",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "SR 238/Mission  Vargas Rd Fre",
+    "miles": 1.1,
+    "mph": 63.2
+   },
+   {
+    "id": "F64",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Vargas Rd Andrade Rd Uninc",
+    "miles": 2.21,
+    "mph": 65.2
+   },
+   {
+    "id": "F65",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Andrade Rd Calaveras Uninc",
+    "miles": 1.15,
+    "mph": 63.5
+   },
+   {
+    "id": "F66",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Calaveras Rt.84/Vallecitos Uninc",
+    "miles": 0.39,
+    "mph": 59.6
+   },
+   {
+    "id": "F67",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "SR 84 Sunol Blvd Plea-Uninc",
+    "miles": 3.52,
+    "mph": 64.8
+   },
+   {
+    "id": "F68",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Sunol Blvd. Bernal Ave Plea-Uninc",
+    "miles": 1.49,
+    "mph": 64.7
+   },
+   {
+    "id": "F69",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Bernal Ave Stoneridge Dr Plea",
+    "miles": 2.53,
+    "mph": 65.1
+   },
+   {
+    "id": "F70",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Stoneridge Dr I-580 Plea",
+    "miles": 0.74,
+    "mph": 64.1
+   },
+   {
+    "id": "F71",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "I-580 Alcosta Dub",
+    "miles": 1.85,
+    "mph": 63.4
+   },
+   {
+    "id": "F72",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Alcosta I-580 Dub",
+    "miles": 1.85,
+    "mph": 64.0
+   },
+   {
+    "id": "F73",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "I-580 Stoneridge Dr Plea",
+    "miles": 0.73,
+    "mph": 34.9
+   },
+   {
+    "id": "F74",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Stoneridge Dr Bernal Plea",
+    "miles": 2.54,
+    "mph": 22.0
+   },
+   {
+    "id": "F75",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Bernal Ave. Sunol Blvd Uninc",
+    "miles": 1.49,
+    "mph": 21.7
+   },
+   {
+    "id": "F76",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Sunol Blvd. SR 84 Uninc",
+    "miles": 3.71,
+    "mph": 35.0
+   },
+   {
+    "id": "F77",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "SR 84 (Niles Canyon) Andrade Rd Uninc",
+    "miles": 1.33,
+    "mph": 50.8
+   },
+   {
+    "id": "F78",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Andrade Rd Sheridon Rd Uninc",
+    "miles": 1.4,
+    "mph": 53.9
+   },
+   {
+    "id": "F79",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Sheridon Rd Vargas Rd Uninc",
+    "miles": 0.81,
+    "mph": 58.6
+   },
+   {
+    "id": "F80",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Vargas Rd SR 238/Mission Fre",
+    "miles": 1.11,
+    "mph": 59.0
+   },
+   {
+    "id": "F81",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Rt 238/Mission Washington Blvd Fre",
+    "miles": 1.14,
+    "mph": 56.7
+   },
+   {
+    "id": "F82",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Washington Blvd Durham Rd Fre",
+    "miles": 1.35,
+    "mph": 44.8
+   },
+   {
+    "id": "F83",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Durham Rd Rt 262/Mission Fre",
+    "miles": 1.63,
+    "mph": 49.3
+   },
+   {
+    "id": "F84",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Rt 262/Mission Scott Creek Rd Fre",
+    "miles": 2.25,
+    "mph": 65.9
+   },
+   {
+    "id": "F85",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Dix Landing SR 262/Mission Fre",
+    "miles": 2.09,
+    "mph": 64.2
+   },
+   {
+    "id": "F86",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "SR 262/Mission AutoMall Pkwy Fre",
+    "miles": 2.43,
+    "mph": 61.6
+   },
+   {
+    "id": "F87",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "AutoMall Pkwy Stevenson Fre",
+    "miles": 1.53,
+    "mph": 60.6
+   },
+   {
+    "id": "F88",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Stevenson Decoto Fre",
+    "miles": 4.06,
+    "mph": 58.5
+   },
+   {
+    "id": "F89",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Decoto Alvarado Blvd Fre",
+    "miles": 1.17,
+    "mph": 60.3
+   },
+   {
+    "id": "F90",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Alvarado Blvd Alvarado-Niles Blvd Fre-Uni Cty",
+    "miles": 1.57,
+    "mph": 57.4
+   },
+   {
+    "id": "F91",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Alv-Niles Tennyson Uni Cty-Hay",
+    "miles": 2.6,
+    "mph": 44.1
+   },
+   {
+    "id": "F92",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Tennyson SR 92 Hay",
+    "miles": 1.02,
+    "mph": 47.3
+   },
+   {
+    "id": "F93",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "SR 92 A St Hay",
+    "miles": 1.68,
+    "mph": 51.7
+   },
+   {
+    "id": "F94",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "A St I-238 (Marina before 06) Uninc",
+    "miles": 1.95,
+    "mph": 49.0
+   },
+   {
+    "id": "F95",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "I-880/I238 (split) Marina Blvd San L",
+    "miles": 2.54,
+    "mph": 28.5
+   },
+   {
+    "id": "F96",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Marina Blvd SR 112/Davis San L",
+    "miles": 0.82,
+    "mph": 26.1
+   },
+   {
+    "id": "F97",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "SR 112/Davis Hegenberger Oak-San L",
+    "miles": 1.83,
+    "mph": 27.7
+   },
+   {
+    "id": "F98",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Hegenberger High/42nd Oak",
+    "miles": 2.34,
+    "mph": 22.5
+   },
+   {
+    "id": "F99",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "High/42nd 23rd (1st on) Oak",
+    "miles": 1.25,
+    "mph": 30.4
+   },
+   {
+    "id": "F100",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "23RD (1ST on) Jct 980 (off) Oak",
+    "miles": 2.63,
+    "mph": 47.1
+   },
+   {
+    "id": "F101",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Jct 980 (off) I-880/I-80 split Oak",
+    "miles": 2.43,
+    "mph": 61.0
+   },
+   {
+    "id": "F102",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "I-880/I-80 (split) I-880/I-80 (merge) Oak",
+    "miles": 1.44,
+    "mph": 56.4
+   },
+   {
+    "id": "F103",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "I-880/I-80 split I-880/I-80 merge Oak",
+    "miles": 1.28,
+    "mph": 52.2
+   },
+   {
+    "id": "F104",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "I-880/I-80 merge Jct 980 Oak",
+    "miles": 2.51,
+    "mph": 61.8
+   },
+   {
+    "id": "F105",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "I-980 23rd Oak",
+    "miles": 2.74,
+    "mph": 45.7
+   },
+   {
+    "id": "F106",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "23rd St High/42nd Oak",
+    "miles": 1.1,
+    "mph": 46.4
+   },
+   {
+    "id": "F107",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "High/42nd Hegenberger Oak",
+    "miles": 2.36,
+    "mph": 58.5
+   },
+   {
+    "id": "F108",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Hegenberger SR 112/Davis Oak-San L",
+    "miles": 1.82,
+    "mph": 59.8
+   },
+   {
+    "id": "F109",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "SR 112/Davis Marina Blvd San L",
+    "miles": 0.82,
+    "mph": 61.6
+   },
+   {
+    "id": "F110",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Marina Blvd SR 238 WB (merge) Oak-San L",
+    "miles": 2.55,
+    "mph": 46.1
+   },
+   {
+    "id": "F111",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "I-238 (Marina before 06) A St Uninc",
+    "miles": 1.91,
+    "mph": 22.8
+   },
+   {
+    "id": "F112",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "A St Rt 92 Hay",
+    "miles": 1.7,
+    "mph": 32.6
+   },
+   {
+    "id": "F113",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Rt 92 Tennyson Hay",
+    "miles": 1.01,
+    "mph": 23.2
+   },
+   {
+    "id": "F114",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Tennyson Alv-Niles Hay-Uni Cty",
+    "miles": 2.6,
+    "mph": 21.0
+   },
+   {
+    "id": "F115",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Alvarado-Niles Alvarado Uni Cty-Fre",
+    "miles": 1.56,
+    "mph": 25.8
+   },
+   {
+    "id": "F116",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Alvarado Decoto Fre",
+    "miles": 1.19,
+    "mph": 32.0
+   },
+   {
+    "id": "F117",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Decoto Stevenson Fre",
+    "miles": 4.06,
+    "mph": 22.5
+   },
+   {
+    "id": "F118",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Stevenson AutoMall Pkwy Fre",
+    "miles": 1.52,
+    "mph": 36.3
+   },
+   {
+    "id": "F119",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "AutoMall Pkwy Rt 262/Mission Fre",
+    "miles": 2.83,
+    "mph": 47.2
+   },
+   {
+    "id": "F120",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "SR 262/Mission Dix Landing(off) Fre",
+    "miles": 1.69,
+    "mph": 56.1
+   },
+   {
+    "id": "F121",
+    "route": "I-980",
+    "dir": "WB",
+    "limits": "SR 24 @ 580  I-880 Oak",
+    "miles": 2.49,
+    "mph": 61.5
+   },
+   {
+    "id": "F122",
+    "route": "I-980",
+    "dir": "EB",
+    "limits": "I-880 SR 24 @ 580 Oak",
+    "miles": 2.44,
+    "mph": 60.0
+   },
+   {
+    "id": "F123",
+    "route": "SR-13",
+    "dir": "NB",
+    "limits": "Mountain On Carson/Redwood (1) (off) Oak",
+    "miles": 1.27,
+    "mph": 44.2
+   },
+   {
+    "id": "F124",
+    "route": "SR-13",
+    "dir": "NB",
+    "limits": "Carson/Redwood (1) (off) Joaquin Miller Oak",
+    "miles": 1.08,
+    "mph": 38.8
+   },
+   {
+    "id": "F125",
+    "route": "SR-13",
+    "dir": "NB",
+    "limits": "Joa Miller/Linc Moraga Ave Oak",
+    "miles": 1.83,
+    "mph": 39.6
+   },
+   {
+    "id": "F126",
+    "route": "SR-13",
+    "dir": "NB",
+    "limits": "Moraga Ave Hiller (Sig) Oak",
+    "miles": 1.63,
+    "mph": 36.3
+   },
+   {
+    "id": "F127",
+    "route": "SR-13",
+    "dir": "SB",
+    "limits": "Hiller Sig Moraga Ave Oak",
+    "miles": 1.6,
+    "mph": 53.4
+   },
+   {
+    "id": "F128",
+    "route": "SR-13",
+    "dir": "SB",
+    "limits": "Moraga Ave Joa Miller/Linc Oak",
+    "miles": 1.85,
+    "mph": 62.1
+   },
+   {
+    "id": "F129",
+    "route": "SR-13",
+    "dir": "SB",
+    "limits": "Joaq Miller/Lincoln Redwood Oak",
+    "miles": 1.07,
+    "mph": 64.3
+   },
+   {
+    "id": "F130",
+    "route": "SR-13",
+    "dir": "SB",
+    "limits": "Redwood Jct I-580 (EB Merge) Oak",
+    "miles": 1.4,
+    "mph": 56.3
+   },
+   {
+    "id": "F131",
+    "route": "SR-24",
+    "dir": "EB",
+    "limits": "Jct I-580 (on) Broadway/SR 13 Oak",
+    "miles": 1.84,
+    "mph": 63.0
+   },
+   {
+    "id": "F132",
+    "route": "SR-24",
+    "dir": "EB",
+    "limits": "Broadway/SR 13 Caldecott (enter) Oak",
+    "miles": 1.65,
+    "mph": 53.3
+   },
+   {
+    "id": "F133",
+    "route": "SR-24",
+    "dir": "EB",
+    "limits": "Caldecott (enter) Fish Ranch Road Oak",
+    "miles": 1.04,
+    "mph": 43.9
+   },
+   {
+    "id": "F134",
+    "route": "SR-24",
+    "dir": "WB",
+    "limits": "Fish Ranch Road (CC) Caldecott (exit) Oak",
+    "miles": 0.99,
+    "mph": 50.8
+   },
+   {
+    "id": "F135",
+    "route": "SR-24",
+    "dir": "WB",
+    "limits": "Caldecott (exit) Broadway Oak",
+    "miles": 1.73,
+    "mph": 60.6
+   },
+   {
+    "id": "F136",
+    "route": "SR-24",
+    "dir": "WB",
+    "limits": "Broadway Jct I-580 (on) Oak",
+    "miles": 1.86,
+    "mph": 50.1
+   },
+   {
+    "id": "F137",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "San M CL Toll Plaza Fre",
+    "miles": 3.29,
+    "mph": 65.7
+   },
+   {
+    "id": "F138",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "Toll Plaza Thornton Fre",
+    "miles": 0.54,
+    "mph": 62.8
+   },
+   {
+    "id": "F139",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "Thornton Ave/Pascon Padre Newark Blvd/Ardenwood Blvd New",
+    "miles": 1.16,
+    "mph": 63.0
+   },
+   {
+    "id": "F140",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "Newark Blvd/Ardenwood Blvd I-880 NB (off) New",
+    "miles": 1.2,
+    "mph": 49.2
+   },
+   {
+    "id": "F141",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "I-880 NB (off) Ardenwood/Newark New",
+    "miles": 1.21,
+    "mph": 49.1
+   },
+   {
+    "id": "F142",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "Ardenwood/Newark Paseo Padre Pkwy New",
+    "miles": 1.15,
+    "mph": 62.2
+   },
+   {
+    "id": "F143",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "Paseo Padre Pkwy Toll Gate Fre",
+    "miles": 0.54,
+    "mph": 55.7
+   },
+   {
+    "id": "F144",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "Toll Plaza San M CL Fre",
+    "miles": 3.29,
+    "mph": 56.4
+   },
+   {
+    "id": "F145",
+    "route": "SR-92",
+    "dir": "EB",
+    "limits": "San M CL Toll Plaza Hay",
+    "miles": 2.78,
+    "mph": 67.6
+   },
+   {
+    "id": "F146",
+    "route": "SR-92",
+    "dir": "EB",
+    "limits": "Toll Plaza Clawiter Hay",
+    "miles": 1.87,
+    "mph": 65.4
+   },
+   {
+    "id": "F147",
+    "route": "SR-92",
+    "dir": "EB",
+    "limits": "Clawiter I-880 Hay",
+    "miles": 2.07,
+    "mph": 58.4
+   },
+   {
+    "id": "F148",
+    "route": "SR-92",
+    "dir": "WB",
+    "limits": "I-880 Clawiter Hay",
+    "miles": 2.05,
+    "mph": 44.0
+   },
+   {
+    "id": "F149",
+    "route": "SR-92",
+    "dir": "WB",
+    "limits": "Clawiter Toll Plaza Hay",
+    "miles": 1.88,
+    "mph": 19.7
+   },
+   {
+    "id": "F150",
+    "route": "SR-92",
+    "dir": "WB",
+    "limits": "Toll Plaza San M CL Hay",
+    "miles": 2.79,
+    "mph": 28.1
+   },
+   {
+    "id": "F151",
+    "route": "SR-92",
+    "dir": "WB",
+    "limits": "San M CL Foster City Blvd SM",
+    "miles": 4.97,
+    "mph": 35.2
+   },
+   {
+    "id": "F152",
+    "route": "SR-92",
+    "dir": "EB",
+    "limits": "Foster City Boulevard San M CL  SM",
+    "miles": 4.97,
+    "mph": 66.9
+   },
+   {
+    "id": "F153",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "San M CL Ravenswood Slough SM",
+    "miles": 1.31,
+    "mph": 42.6
+   },
+   {
+    "id": "F154",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "Ravenswood Slough San M CL SM",
+    "miles": 1.31,
+    "mph": 64.1
+   },
+   {
+    "id": "F155",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "SF County Line Fremont St Off Ramp SF",
+    "miles": 3.32,
+    "mph": 27.4
+   },
+   {
+    "id": "F156",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Bryant St On Ramp SF County Line SF",
+    "miles": 3.29,
+    "mph": 55.2
+   }
+  ],
+  "PM": [
+   {
+    "id": "F1",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "SF County Line Toll Plaza Oak",
+    "miles": 2.01,
+    "mph": 53.7
+   },
+   {
+    "id": "F2",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Toll Plaza I-580 SB Merge Oak",
+    "miles": 1.3,
+    "mph": 18.9
+   },
+   {
+    "id": "F3",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "I-80/I-580 (Merge) Powell Emery",
+    "miles": 0.54,
+    "mph": 12.8
+   },
+   {
+    "id": "F4",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Powell Ashby Emery-Berk",
+    "miles": 0.72,
+    "mph": 11.6
+   },
+   {
+    "id": "F5",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Ashby University Berk",
+    "miles": 1.3,
+    "mph": 18.1
+   },
+   {
+    "id": "F6",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "University Jct I-580 (off) Berk-Alb",
+    "miles": 1.37,
+    "mph": 26.9
+   },
+   {
+    "id": "F7",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Jct I-580 (off) Central (County Line) Alb",
+    "miles": 0.84,
+    "mph": 30.3
+   },
+   {
+    "id": "F8",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Central (County Line) Jct I-580 Alb",
+    "miles": 0.7,
+    "mph": 64.0
+   },
+   {
+    "id": "F9",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Jct I-580 University Berk-Alb",
+    "miles": 1.51,
+    "mph": 51.6
+   },
+   {
+    "id": "F10",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "University Ashby Berk",
+    "miles": 1.31,
+    "mph": 31.6
+   },
+   {
+    "id": "F11",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Ashby Powell Emery",
+    "miles": 0.71,
+    "mph": 22.3
+   },
+   {
+    "id": "F12",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Powell I-80/I-580 (Split) Emery",
+    "miles": 0.47,
+    "mph": 24.8
+   },
+   {
+    "id": "F13",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "I-580 Split Toll Plaza Oak",
+    "miles": 1.31,
+    "mph": 52.2
+   },
+   {
+    "id": "F14",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "Toll Plaza SF County  Oak",
+    "miles": 2.01,
+    "mph": 42.2
+   },
+   {
+    "id": "F15",
+    "route": "I-238",
+    "dir": "EB",
+    "limits": "I-880 I-580 Uninc-San L",
+    "miles": 2.59,
+    "mph": 33.8
+   },
+   {
+    "id": "F16",
+    "route": "I-238",
+    "dir": "WB",
+    "limits": "I-580 I-880 Uninc-San L",
+    "miles": 2.48,
+    "mph": 38.1
+   },
+   {
+    "id": "F17",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "I-580/I-238 changd fm (I-238/Fthl Off) Grove Uninc",
+    "miles": 2.68,
+    "mph": 41.5
+   },
+   {
+    "id": "F18",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Grove Eden Canyon Uninc-Plea",
+    "miles": 2.19,
+    "mph": 26.8
+   },
+   {
+    "id": "F19",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Eden Canyon San Ramon/ Foothill Uninc-Plea",
+    "miles": 4.82,
+    "mph": 19.5
+   },
+   {
+    "id": "F20",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "San Ramon/ Foothill I-680 Plea",
+    "miles": 0.71,
+    "mph": 14.1
+   },
+   {
+    "id": "F21",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "I-680 Hopyard Plea",
+    "miles": 0.87,
+    "mph": 15.5
+   },
+   {
+    "id": "F22",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Hopyard Santa Rita Plea",
+    "miles": 1.9,
+    "mph": 27.2
+   },
+   {
+    "id": "F23",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Santa Rita El Charro Uninc-Pleas",
+    "miles": 1.25,
+    "mph": 46.3
+   },
+   {
+    "id": "F24",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "El Charro SR 84/Airway Blvd. Uninc",
+    "miles": 1.72,
+    "mph": 59.5
+   },
+   {
+    "id": "F25",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "SR 84/Airway Blvd. Portola Liv",
+    "miles": 1.73,
+    "mph": 61.3
+   },
+   {
+    "id": "F26",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Portola 1st St Liv",
+    "miles": 2.56,
+    "mph": 51.6
+   },
+   {
+    "id": "F27",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "1st St Greenville Liv",
+    "miles": 2.13,
+    "mph": 23.6
+   },
+   {
+    "id": "F28",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Greenville N.Flynn Uninc",
+    "miles": 2.73,
+    "mph": 17.9
+   },
+   {
+    "id": "F29",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "N.Flynn Grant Line Uninc",
+    "miles": 4.32,
+    "mph": 32.1
+   },
+   {
+    "id": "F30",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Grant Line I-205 (SJ Co) Off Uninc",
+    "miles": 0.87,
+    "mph": 56.1
+   },
+   {
+    "id": "F31",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "I-205 (SJ Co) Grant Line Uninc",
+    "miles": 0.72,
+    "mph": 67.5
+   },
+   {
+    "id": "F32",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Grant Line N Flynn Uninc",
+    "miles": 4.59,
+    "mph": 66.8
+   },
+   {
+    "id": "F33",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "N Flynn Greenville Rd Liv-Uninc",
+    "miles": 2.43,
+    "mph": 67.7
+   },
+   {
+    "id": "F34",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Greenville Rd 1st St Liv",
+    "miles": 2.21,
+    "mph": 66.0
+   },
+   {
+    "id": "F35",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "1st St Portola Ave Liv",
+    "miles": 2.56,
+    "mph": 68.4
+   },
+   {
+    "id": "F36",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Portola SR 84/Airway Blvd Liv",
+    "miles": 1.73,
+    "mph": 67.0
+   },
+   {
+    "id": "F37",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "SR 84/Airway Blvd Fallon Rd/El Charro Liv-Uninc",
+    "miles": 1.73,
+    "mph": 66.4
+   },
+   {
+    "id": "F38",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Fallon Rd/El Charro Tassajara Plea",
+    "miles": 1.23,
+    "mph": 61.1
+   },
+   {
+    "id": "F39",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Tassajara Rd I-680 Plea",
+    "miles": 2.78,
+    "mph": 51.3
+   },
+   {
+    "id": "F40",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "I-680 San Ramon Rd Plea",
+    "miles": 0.71,
+    "mph": 55.0
+   },
+   {
+    "id": "F41",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "San Ramon Rd Eden Caynon Plea-Uninc",
+    "miles": 4.82,
+    "mph": 59.2
+   },
+   {
+    "id": "F42",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Eden Canyon Center St Uninc",
+    "miles": 2.5,
+    "mph": 60.7
+   },
+   {
+    "id": "F43",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Center I-580/238 Uninc",
+    "miles": 2.26,
+    "mph": 57.9
+   },
+   {
+    "id": "F44",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "I-80 I-980 Oak",
+    "miles": 1.27,
+    "mph": 21.8
+   },
+   {
+    "id": "F45",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "I-980 Harrison Oak",
+    "miles": 1.02,
+    "mph": 16.6
+   },
+   {
+    "id": "F46",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Harrison Lakeshore Oak",
+    "miles": 0.84,
+    "mph": 20.9
+   },
+   {
+    "id": "F47",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Lakeshore Coolidge Oak",
+    "miles": 2.21,
+    "mph": 28.5
+   },
+   {
+    "id": "F48",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Coolidge SH 13 Off Oak",
+    "miles": 2.2,
+    "mph": 26.7
+   },
+   {
+    "id": "F49",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "SH 13 Off MacArthur Oak",
+    "miles": 4.08,
+    "mph": 49.1
+   },
+   {
+    "id": "F50",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "MacArthur I-580/238 San L-Uninc",
+    "miles": 3.78,
+    "mph": 62.9
+   },
+   {
+    "id": "F51",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "I-238 Foothill/MacArthur Uninc",
+    "miles": 3.86,
+    "mph": 62.2
+   },
+   {
+    "id": "F52",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Foothill/MacArthur SH 13 Off Oak",
+    "miles": 4.04,
+    "mph": 65.4
+   },
+   {
+    "id": "F53",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "SH 13 Off Fruitvale Oak",
+    "miles": 2.63,
+    "mph": 66.7
+   },
+   {
+    "id": "F54",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Fruitvale Harrison Oak",
+    "miles": 2.68,
+    "mph": 64.3
+   },
+   {
+    "id": "F55",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "Harrison SH 24 On-ramp Oak",
+    "miles": 1.24,
+    "mph": 60.1
+   },
+   {
+    "id": "F56",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "SH-24 On-ramp I-80/580 Split Oak",
+    "miles": 1.17,
+    "mph": 22.1
+   },
+   {
+    "id": "F57",
+    "route": "I-580",
+    "dir": "EB",
+    "limits": "Central (County Line) I-80 Jct Alb",
+    "miles": 0.7,
+    "mph": 56.3
+   },
+   {
+    "id": "F58",
+    "route": "I-580",
+    "dir": "WB",
+    "limits": "I-80 Jct Central (County Line) Alb",
+    "miles": 0.86,
+    "mph": 52.3
+   },
+   {
+    "id": "F59",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Scott Creek Rd Rt 262/Mission Fre",
+    "miles": 2.26,
+    "mph": 46.1
+   },
+   {
+    "id": "F60",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Rt 262/Mission Durham Rd Fre",
+    "miles": 1.62,
+    "mph": 20.8
+   },
+   {
+    "id": "F61",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Durham Rd Washington Blvd Fre",
+    "miles": 1.3,
+    "mph": 11.1
+   },
+   {
+    "id": "F62",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Washington Blvd Rt 238/Mission Fre",
+    "miles": 1.14,
+    "mph": 11.2
+   },
+   {
+    "id": "F63",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "SR 238/Mission  Vargas Rd Fre",
+    "miles": 1.1,
+    "mph": 11.8
+   },
+   {
+    "id": "F64",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Vargas Rd Andrade Rd Uninc",
+    "miles": 2.21,
+    "mph": 12.6
+   },
+   {
+    "id": "F65",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Andrade Rd Calaveras Uninc",
+    "miles": 1.15,
+    "mph": 18.3
+   },
+   {
+    "id": "F66",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Calaveras Rt.84/Vallecitos Uninc",
+    "miles": 0.39,
+    "mph": 32.6
+   },
+   {
+    "id": "F67",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "SR 84 Sunol Blvd Plea-Uninc",
+    "miles": 3.52,
+    "mph": 63.8
+   },
+   {
+    "id": "F68",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Sunol Blvd. Bernal Ave Plea-Uninc",
+    "miles": 1.49,
+    "mph": 63.1
+   },
+   {
+    "id": "F69",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Bernal Ave Stoneridge Dr Plea",
+    "miles": 2.53,
+    "mph": 62.1
+   },
+   {
+    "id": "F70",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "Stoneridge Dr I-580 Plea",
+    "miles": 0.74,
+    "mph": 61.2
+   },
+   {
+    "id": "F71",
+    "route": "I-680",
+    "dir": "NB",
+    "limits": "I-580 Alcosta Dub",
+    "miles": 1.85,
+    "mph": 65.6
+   },
+   {
+    "id": "F72",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Alcosta I-580 Dub",
+    "miles": 1.85,
+    "mph": 65.8
+   },
+   {
+    "id": "F73",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "I-580 Stoneridge Dr Plea",
+    "miles": 0.73,
+    "mph": 63.5
+   },
+   {
+    "id": "F74",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Stoneridge Dr Bernal Plea",
+    "miles": 2.54,
+    "mph": 65.3
+   },
+   {
+    "id": "F75",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Bernal Ave. Sunol Blvd Uninc",
+    "miles": 1.49,
+    "mph": 62.6
+   },
+   {
+    "id": "F76",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Sunol Blvd. SR 84 Uninc",
+    "miles": 3.71,
+    "mph": 63.9
+   },
+   {
+    "id": "F77",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "SR 84 (Niles Canyon) Andrade Rd Uninc",
+    "miles": 1.33,
+    "mph": 63.9
+   },
+   {
+    "id": "F78",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Andrade Rd Sheridon Rd Uninc",
+    "miles": 1.4,
+    "mph": 63.0
+   },
+   {
+    "id": "F79",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Sheridon Rd Vargas Rd Uninc",
+    "miles": 0.81,
+    "mph": 65.7
+   },
+   {
+    "id": "F80",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Vargas Rd SR 238/Mission Fre",
+    "miles": 1.11,
+    "mph": 67.6
+   },
+   {
+    "id": "F81",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Rt 238/Mission Washington Blvd Fre",
+    "miles": 1.14,
+    "mph": 67.5
+   },
+   {
+    "id": "F82",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Washington Blvd Durham Rd Fre",
+    "miles": 1.35,
+    "mph": 67.3
+   },
+   {
+    "id": "F83",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Durham Rd Rt 262/Mission Fre",
+    "miles": 1.63,
+    "mph": 62.2
+   },
+   {
+    "id": "F84",
+    "route": "I-680",
+    "dir": "SB",
+    "limits": "Rt 262/Mission Scott Creek Rd Fre",
+    "miles": 2.25,
+    "mph": 68.3
+   },
+   {
+    "id": "F85",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Dix Landing SR 262/Mission Fre",
+    "miles": 2.09,
+    "mph": 26.3
+   },
+   {
+    "id": "F86",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "SR 262/Mission AutoMall Pkwy Fre",
+    "miles": 2.43,
+    "mph": 27.4
+   },
+   {
+    "id": "F87",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "AutoMall Pkwy Stevenson Fre",
+    "miles": 1.53,
+    "mph": 35.8
+   },
+   {
+    "id": "F88",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Stevenson Decoto Fre",
+    "miles": 4.06,
+    "mph": 40.2
+   },
+   {
+    "id": "F89",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Decoto Alvarado Blvd Fre",
+    "miles": 1.17,
+    "mph": 20.2
+   },
+   {
+    "id": "F90",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Alvarado Blvd Alvarado-Niles Blvd Fre-Uni Cty",
+    "miles": 1.57,
+    "mph": 20.4
+   },
+   {
+    "id": "F91",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Alv-Niles Tennyson Uni Cty-Hay",
+    "miles": 2.6,
+    "mph": 19.3
+   },
+   {
+    "id": "F92",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Tennyson SR 92 Hay",
+    "miles": 1.02,
+    "mph": 24.9
+   },
+   {
+    "id": "F93",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "SR 92 A St Hay",
+    "miles": 1.68,
+    "mph": 30.4
+   },
+   {
+    "id": "F94",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "A St I-238 (Marina before 06) Uninc",
+    "miles": 1.95,
+    "mph": 49.1
+   },
+   {
+    "id": "F95",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "I-880/I238 (split) Marina Blvd San L",
+    "miles": 2.54,
+    "mph": 56.8
+   },
+   {
+    "id": "F96",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Marina Blvd SR 112/Davis San L",
+    "miles": 0.82,
+    "mph": 45.6
+   },
+   {
+    "id": "F97",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "SR 112/Davis Hegenberger Oak-San L",
+    "miles": 1.83,
+    "mph": 54.7
+   },
+   {
+    "id": "F98",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Hegenberger High/42nd Oak",
+    "miles": 2.34,
+    "mph": 49.5
+   },
+   {
+    "id": "F99",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "High/42nd 23rd (1st on) Oak",
+    "miles": 1.25,
+    "mph": 49.7
+   },
+   {
+    "id": "F100",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "23RD (1ST on) Jct 980 (off) Oak",
+    "miles": 2.63,
+    "mph": 57.5
+   },
+   {
+    "id": "F101",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "Jct 980 (off) I-880/I-80 split Oak",
+    "miles": 2.43,
+    "mph": 63.7
+   },
+   {
+    "id": "F102",
+    "route": "I-880",
+    "dir": "NB",
+    "limits": "I-880/I-80 (split) I-880/I-80 (merge) Oak",
+    "miles": 1.44,
+    "mph": 20.8
+   },
+   {
+    "id": "F103",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "I-880/I-80 split I-880/I-80 merge Oak",
+    "miles": 1.28,
+    "mph": 49.2
+   },
+   {
+    "id": "F104",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "I-880/I-80 merge Jct 980 Oak",
+    "miles": 2.51,
+    "mph": 33.7
+   },
+   {
+    "id": "F105",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "I-980 23rd Oak",
+    "miles": 2.74,
+    "mph": 16.0
+   },
+   {
+    "id": "F106",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "23rd St High/42nd Oak",
+    "miles": 1.1,
+    "mph": 28.4
+   },
+   {
+    "id": "F107",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "High/42nd Hegenberger Oak",
+    "miles": 2.36,
+    "mph": 32.7
+   },
+   {
+    "id": "F108",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Hegenberger SR 112/Davis Oak-San L",
+    "miles": 1.82,
+    "mph": 44.8
+   },
+   {
+    "id": "F109",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "SR 112/Davis Marina Blvd San L",
+    "miles": 0.82,
+    "mph": 38.1
+   },
+   {
+    "id": "F110",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Marina Blvd SR 238 WB (merge) Oak-San L",
+    "miles": 2.55,
+    "mph": 40.2
+   },
+   {
+    "id": "F111",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "I-238 (Marina before 06) A St Uninc",
+    "miles": 1.91,
+    "mph": 31.9
+   },
+   {
+    "id": "F112",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "A St Rt 92 Hay",
+    "miles": 1.7,
+    "mph": 46.3
+   },
+   {
+    "id": "F113",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Rt 92 Tennyson Hay",
+    "miles": 1.01,
+    "mph": 40.6
+   },
+   {
+    "id": "F114",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Tennyson Alv-Niles Hay-Uni Cty",
+    "miles": 2.6,
+    "mph": 41.6
+   },
+   {
+    "id": "F115",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Alvarado-Niles Alvarado Uni Cty-Fre",
+    "miles": 1.56,
+    "mph": 44.8
+   },
+   {
+    "id": "F116",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Alvarado Decoto Fre",
+    "miles": 1.19,
+    "mph": 37.4
+   },
+   {
+    "id": "F117",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Decoto Stevenson Fre",
+    "miles": 4.06,
+    "mph": 40.6
+   },
+   {
+    "id": "F118",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "Stevenson AutoMall Pkwy Fre",
+    "miles": 1.52,
+    "mph": 47.2
+   },
+   {
+    "id": "F119",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "AutoMall Pkwy Rt 262/Mission Fre",
+    "miles": 2.83,
+    "mph": 60.6
+   },
+   {
+    "id": "F120",
+    "route": "I-880",
+    "dir": "SB",
+    "limits": "SR 262/Mission Dix Landing(off) Fre",
+    "miles": 1.69,
+    "mph": 63.8
+   },
+   {
+    "id": "F121",
+    "route": "I-980",
+    "dir": "WB",
+    "limits": "SR 24 @ 580  I-880 Oak",
+    "miles": 2.49,
+    "mph": 50.8
+   },
+   {
+    "id": "F122",
+    "route": "I-980",
+    "dir": "EB",
+    "limits": "I-880 SR 24 @ 580 Oak",
+    "miles": 2.44,
+    "mph": 56.0
+   },
+   {
+    "id": "F123",
+    "route": "SR-13",
+    "dir": "NB",
+    "limits": "Mountain On Carson/Redwood (1) (off) Oak",
+    "miles": 1.27,
+    "mph": 61.3
+   },
+   {
+    "id": "F124",
+    "route": "SR-13",
+    "dir": "NB",
+    "limits": "Carson/Redwood (1) (off) Joaquin Miller Oak",
+    "miles": 1.08,
+    "mph": 60.8
+   },
+   {
+    "id": "F125",
+    "route": "SR-13",
+    "dir": "NB",
+    "limits": "Joa Miller/Linc Moraga Ave Oak",
+    "miles": 1.83,
+    "mph": 43.8
+   },
+   {
+    "id": "F126",
+    "route": "SR-13",
+    "dir": "NB",
+    "limits": "Moraga Ave Hiller (Sig) Oak",
+    "miles": 1.63,
+    "mph": 20.5
+   },
+   {
+    "id": "F127",
+    "route": "SR-13",
+    "dir": "SB",
+    "limits": "Hiller Sig Moraga Ave Oak",
+    "miles": 1.6,
+    "mph": 37.8
+   },
+   {
+    "id": "F128",
+    "route": "SR-13",
+    "dir": "SB",
+    "limits": "Moraga Ave Joa Miller/Linc Oak",
+    "miles": 1.85,
+    "mph": 46.4
+   },
+   {
+    "id": "F129",
+    "route": "SR-13",
+    "dir": "SB",
+    "limits": "Joaq Miller/Lincoln Redwood Oak",
+    "miles": 1.07,
+    "mph": 55.3
+   },
+   {
+    "id": "F130",
+    "route": "SR-13",
+    "dir": "SB",
+    "limits": "Redwood Jct I-580 (EB Merge) Oak",
+    "miles": 1.4,
+    "mph": 20.1
+   },
+   {
+    "id": "F131",
+    "route": "SR-24",
+    "dir": "EB",
+    "limits": "Jct I-580 (on) Broadway/SR 13 Oak",
+    "miles": 1.84,
+    "mph": 17.3
+   },
+   {
+    "id": "F132",
+    "route": "SR-24",
+    "dir": "EB",
+    "limits": "Broadway/SR 13 Caldecott (enter) Oak",
+    "miles": 1.65,
+    "mph": 11.6
+   },
+   {
+    "id": "F133",
+    "route": "SR-24",
+    "dir": "EB",
+    "limits": "Caldecott (enter) Fish Ranch Road Oak",
+    "miles": 1.04,
+    "mph": 19.1
+   },
+   {
+    "id": "F134",
+    "route": "SR-24",
+    "dir": "WB",
+    "limits": "Fish Ranch Road (CC) Caldecott (exit) Oak",
+    "miles": 0.99,
+    "mph": 56.8
+   },
+   {
+    "id": "F135",
+    "route": "SR-24",
+    "dir": "WB",
+    "limits": "Caldecott (exit) Broadway Oak",
+    "miles": 1.73,
+    "mph": 61.3
+   },
+   {
+    "id": "F136",
+    "route": "SR-24",
+    "dir": "WB",
+    "limits": "Broadway Jct I-580 (on) Oak",
+    "miles": 1.86,
+    "mph": 65.6
+   },
+   {
+    "id": "F137",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "San M CL Toll Plaza Fre",
+    "miles": 3.29,
+    "mph": 48.5
+   },
+   {
+    "id": "F138",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "Toll Plaza Thornton Fre",
+    "miles": 0.54,
+    "mph": 49.7
+   },
+   {
+    "id": "F139",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "Thornton Ave/Pascon Padre Newark Blvd/Ardenwood Blvd New",
+    "miles": 1.16,
+    "mph": 54.7
+   },
+   {
+    "id": "F140",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "Newark Blvd/Ardenwood Blvd I-880 NB (off) New",
+    "miles": 1.2,
+    "mph": 17.8
+   },
+   {
+    "id": "F141",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "I-880 NB (off) Ardenwood/Newark New",
+    "miles": 1.21,
+    "mph": 51.7
+   },
+   {
+    "id": "F142",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "Ardenwood/Newark Paseo Padre Pkwy New",
+    "miles": 1.15,
+    "mph": 64.5
+   },
+   {
+    "id": "F143",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "Paseo Padre Pkwy Toll Gate Fre",
+    "miles": 0.54,
+    "mph": 59.4
+   },
+   {
+    "id": "F144",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "Toll Plaza San M CL Fre",
+    "miles": 3.29,
+    "mph": 65.1
+   },
+   {
+    "id": "F145",
+    "route": "SR-92",
+    "dir": "EB",
+    "limits": "San M CL Toll Plaza Hay",
+    "miles": 2.78,
+    "mph": 39.6
+   },
+   {
+    "id": "F146",
+    "route": "SR-92",
+    "dir": "EB",
+    "limits": "Toll Plaza Clawiter Hay",
+    "miles": 1.87,
+    "mph": 38.8
+   },
+   {
+    "id": "F147",
+    "route": "SR-92",
+    "dir": "EB",
+    "limits": "Clawiter I-880 Hay",
+    "miles": 2.07,
+    "mph": 31.8
+   },
+   {
+    "id": "F148",
+    "route": "SR-92",
+    "dir": "WB",
+    "limits": "I-880 Clawiter Hay",
+    "miles": 2.05,
+    "mph": 61.0
+   },
+   {
+    "id": "F149",
+    "route": "SR-92",
+    "dir": "WB",
+    "limits": "Clawiter Toll Plaza Hay",
+    "miles": 1.88,
+    "mph": 60.4
+   },
+   {
+    "id": "F150",
+    "route": "SR-92",
+    "dir": "WB",
+    "limits": "Toll Plaza San M CL Hay",
+    "miles": 2.79,
+    "mph": 65.8
+   },
+   {
+    "id": "F151",
+    "route": "SR-92",
+    "dir": "WB",
+    "limits": "San M CL Foster City Blvd SM",
+    "miles": 4.97,
+    "mph": 66.7
+   },
+   {
+    "id": "F152",
+    "route": "SR-92",
+    "dir": "EB",
+    "limits": "Foster City Boulevard San M CL  SM",
+    "miles": 4.97,
+    "mph": 35.9
+   },
+   {
+    "id": "F153",
+    "route": "SR-84",
+    "dir": "WB",
+    "limits": "San M CL Ravenswood Slough SM",
+    "miles": 1.31,
+    "mph": 65.5
+   },
+   {
+    "id": "F154",
+    "route": "SR-84",
+    "dir": "EB",
+    "limits": "Ravenswood Slough San M CL SM",
+    "miles": 1.31,
+    "mph": 45.5
+   },
+   {
+    "id": "F155",
+    "route": "I-80",
+    "dir": "WB",
+    "limits": "SF County Line Fremont St Off Ramp SF",
+    "miles": 3.32,
+    "mph": 19.0
+   },
+   {
+    "id": "F156",
+    "route": "I-80",
+    "dir": "EB",
+    "limits": "Bryant St On Ramp SF County Line SF",
+    "miles": 3.29,
+    "mph": 32.7
+   }
+  ]
+ },
+ "bridge": {
+  "in": [
+   "F13",
+   "F14"
+  ],
+  "out": [
+   "F1",
+   "F2"
+  ]
+ }
+}

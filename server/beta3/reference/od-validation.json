@@ -1,0 +1,12223 @@
+{
+ "description": "Observed transit markets for the model's origin-destination checks (server/beta3/pipeline/od-checks.ts): who rides Muni (purpose, home county), how riders reach BART in the city, how many Muni boardings follow a change of vehicle, commute flows by means of transportation. Numbers are copied from the published sources; anything computed here is labeled derived.",
+ "generated": "2026-10-05",
+ "sources": [
+  {
+   "id": "mtc-snapshot-2023-24",
+   "title": "2023-2024 Regional Transit Passenger Snapshot Survey dashboard (weekday)",
+   "operator": "MTC regional (Muni LR, Muni bus, BART, Caltrain shown)",
+   "year": "2023-2024",
+   "url": "https://mtc.ca.gov/2023-2024-regional-transit-passenger-snapshot-survey",
+   "sampleSize": "see n_unweighted per item (regional total >16,500)",
+   "use": "Muni light rail and bus riders: home county (San Francisco share) and trip purpose, weekday"
+  },
+  {
+   "id": "bart-2024-station-profile",
+   "title": "2024 BART Station Profile Study (weekdays, primarily Tue-Thu; Apr-Dec 2024)",
+   "operator": "BART",
+   "year": 2024,
+   "url": "https://www.bart.gov/about/reports/profile",
+   "sampleSize": {
+    "completedQuestionnaires": "approximately 32,000 (bart.gov page); 31,998 in Origin Type systemwide row"
+   },
+   "use": "Share of entries at the eight city stations by riders setting out from home, and their access by \"bus / transit\" (Muni and other operators together), Sept-Nov 2024 Tue-Thu"
+  },
+  {
+   "id": "muni-2017-obs",
+   "title": "2017 SFMTA Systemwide On-Board Survey - Draft Final Summary Report (ETC Institute for SFMTA/MTC), Nov 28 2017",
+   "operator": "SFMTA (Muni)",
+   "year": 2017,
+   "url": "https://mtcdrive.box.com/v/transit-survey-muni-2017",
+   "sampleSize": {
+    "odSurveysCompleted": "over 48,300",
+    "onToOffSurveys": "over 98,800",
+    "boardingAlightingCounts": "over 166,300",
+    "fieldDates": "March 2016 - July 2017",
+    "weightedBaseWeekdayBoardings": 703947
+   },
+   "use": "Changes of vehicle before boarding by Muni Metro line; KT origin and destination purposes; access and egress modes"
+  },
+  {
+   "id": "mtc-tps-route-decomposition",
+   "title": "MTC Transit Passenger Survey route-level decomposition (decomposition/route_level_analysis.csv, BayAreaMetro/transit-passenger-surveys)",
+   "operator": "MTC regional (Muni 2017, BART 2015, Caltrain 2014 surveys)",
+   "year": "2014-2017",
+   "url": "https://github.com/BayAreaMetro/transit-passenger-surveys/blob/master/decomposition/route_level_analysis.csv",
+   "sampleSize": "weighted (expanded) records; unweighted n not in file",
+   "use": "Derived: share of Muni-intercepted linked trips with a BART or Caltrain leg before or after (before MTC's re-weighting)"
+  },
+  {
+   "id": "caltrain-triennial-2025",
+   "title": "Caltrain Triennial Customer Survey - Fall 2025 Summary Report (with 2022 and 2019 comparisons)",
+   "operator": "Caltrain",
+   "year": 2025,
+   "url": "https://www.caltrain.com/media/37005",
+   "sampleSize": {
+    "2025_total": 3622,
+    "2025_weekdayPeak": 2129,
+    "2025_weekdayOffPeak": 935,
+    "2025_weekend": 558,
+    "2022_total": 2838,
+    "2019_total": 5501
+   },
+   "use": "Share of Caltrain riders reaching or leaving the train by Muni"
+  },
+  {
+   "id": "ctpp-2017-2021-B202105",
+   "title": "CTPP 2017-2021 Part 2, Table B202105 Means of Transportation to Work (18), San Francisco County tracts",
+   "operator": "AASHTO / U.S. Census Bureau",
+   "year": "2017-2021",
+   "url": "https://ctppdata.transportation.org/",
+   "use": "Commuters to jobs in each tract of the city and their means of transportation"
+  }
+ ],
+ "snapshot": {
+  "SFMTA (Muni) -- Light Rail": {
+   "home_county": {
+    "Alameda": 0.069,
+    "San Francisco": 0.792,
+    "Marin": 0.0,
+    "Outside Bay Area": 0.042,
+    "Sonoma": 0.003,
+    "Contra Costa": 0.042,
+    "Santa Clara": 0.028,
+    "San Mateo": 0.021,
+    "Napa": 0.003,
+    "Solano": 0.0
+   },
+   "trip_purpose_group": {
+    "Other Purposes": 0.135,
+    "School": 0.128,
+    "Social/Recreation/Shopping": 0.224,
+    "Work": 0.513
+   },
+   "n": {
+    "home_county": 288,
+    "trip_purpose_group": 304
+   }
+  },
+  "SFMTA (Muni) -- Local Bus": {
+   "home_county": {
+    "Alameda": 0.066,
+    "San Francisco": 0.782,
+    "Marin": 0.001,
+    "Outside Bay Area": 0.055,
+    "Sonoma": 0.002,
+    "Contra Costa": 0.025,
+    "Santa Clara": 0.03,
+    "San Mateo": 0.033,
+    "Napa": 0.0,
+    "Solano": 0.007
+   },
+   "trip_purpose_group": {
+    "Other Purposes": 0.151,
+    "School": 0.156,
+    "Social/Recreation/Shopping": 0.249,
+    "Work": 0.445
+   },
+   "n": {
+    "home_county": 1142,
+    "trip_purpose_group": 1266
+   }
+  },
+  "BART": {
+   "home_county": {
+    "Alameda": 0.401,
+    "San Francisco": 0.165,
+    "Marin": 0.001,
+    "Outside Bay Area": 0.046,
+    "Sonoma": 0.001,
+    "Contra Costa": 0.231,
+    "Santa Clara": 0.052,
+    "San Mateo": 0.068,
+    "Napa": 0.004,
+    "Solano": 0.031
+   },
+   "trip_purpose_group": {
+    "Other Purposes": 0.107,
+    "School": 0.116,
+    "Social/Recreation/Shopping": 0.154,
+    "Work": 0.624
+   },
+   "n": {
+    "home_county": 1604,
+    "trip_purpose_group": 1700
+   }
+  },
+  "Caltrain": {
+   "home_county": {
+    "Alameda": 0.038,
+    "San Francisco": 0.339,
+    "Marin": 0.001,
+    "Outside Bay Area": 0.057,
+    "Sonoma": 0.001,
+    "Contra Costa": 0.024,
+    "Santa Clara": 0.308,
+    "San Mateo": 0.228,
+    "Napa": 0.0,
+    "Solano": 0.004
+   },
+   "trip_purpose_group": {
+    "Other Purposes": 0.053,
+    "School": 0.109,
+    "Social/Recreation/Shopping": 0.151,
+    "Work": 0.687
+   },
+   "n": {
+    "home_county": 790,
+    "trip_purpose_group": 850
+   }
+  }
+ },
+ "bartProfile2024": {
+  "EMBR": {
+   "avgTueThuEntries": 17327,
+   "homeOriginShare": 0.091,
+   "homeAccessTransit": 0.476,
+   "homeAccessWalk": 0.338,
+   "sampleHome": 231
+  },
+  "MONT": {
+   "avgTueThuEntries": 14640,
+   "homeOriginShare": 0.062,
+   "homeAccessTransit": 0.472,
+   "homeAccessWalk": 0.383,
+   "sampleHome": 166
+  },
+  "POWL": {
+   "avgTueThuEntries": 12226,
+   "homeOriginShare": 0.173,
+   "homeAccessTransit": 0.411,
+   "homeAccessWalk": 0.518,
+   "sampleHome": 277
+  },
+  "CIVC": {
+   "avgTueThuEntries": 10661,
+   "homeOriginShare": 0.192,
+   "homeAccessTransit": 0.245,
+   "homeAccessWalk": 0.57,
+   "sampleHome": 346
+  },
+  "16TH": {
+   "avgTueThuEntries": 5981,
+   "homeOriginShare": 0.394,
+   "homeAccessTransit": 0.126,
+   "homeAccessWalk": 0.753,
+   "sampleHome": 475
+  },
+  "24TH": {
+   "avgTueThuEntries": 6198,
+   "homeOriginShare": 0.564,
+   "homeAccessTransit": 0.134,
+   "homeAccessWalk": 0.77,
+   "sampleHome": 565
+  },
+  "GLEN": {
+   "avgTueThuEntries": 3661,
+   "homeOriginShare": 0.742,
+   "homeAccessTransit": 0.183,
+   "homeAccessWalk": 0.574,
+   "sampleHome": 575
+  },
+  "BALB": {
+   "avgTueThuEntries": 5060,
+   "homeOriginShare": 0.65,
+   "homeAccessTransit": 0.368,
+   "homeAccessWalk": 0.426,
+   "sampleHome": 508
+  }
+ },
+ "muni2017TransfersBefore": {
+  "J": 0.06,
+  "KT": 0.15,
+  "L": 0.07,
+  "M": 0.1,
+  "N": 0.07,
+  "system": 0.123
+ },
+ "muni2017TransfersBeforeNote": "Share of a line's boardings preceded by another bus or train (route charts: \"how many buses/trains did you travel on before you boarded this one\"); KT = the 2017 K-Ingleside/T-Third through line. \"system\" is derived from Table 8 (changes per one-way trip: 0 75%, 1 22%, 2 2%). MTC/RSG note local-bus surveys under-report changes to and from rail.",
+ "muni2017KT": {
+  "originPct": {
+   "Your HOME": 49,
+   "Your usual WORKPLACE": 28,
+   "College or University": 5,
+   "Social or recreational": 4,
+   "Dining or coffee": 4,
+   "Shopping": 2,
+   "Personal business": 2,
+   "Work related": 2,
+   "Medical or dental": 2,
+   "Escorting others": "<1",
+   "Hotel Residence (visitor)": "<1",
+   "School (K-12)": "<1",
+   "Airport": "<1",
+   "Hotel (guest)": "<1",
+   "Your Hotel": 0
+  },
+  "destinationPct": {
+   "Your usual WORKPLACE": 35,
+   "Your HOME": 33,
+   "Social or recreational": 8,
+   "Personal business": 6,
+   "Dining or coffee": 4,
+   "College or University": 4,
+   "Shopping": 3,
+   "Work related": 3,
+   "Medical or dental": 3,
+   "Escorting others": "<1",
+   "Hotel Residence (visitor)": "<1",
+   "School (K-12)": "<1",
+   "Airport": "<1",
+   "Your Hotel": "<1"
+  },
+  "accessModePct_table": {
+   "Walked all the way": "96%",
+   "Drove alone and parked": "2%",
+   "Was dropped off (Not a service)": "1%",
+   "Used Uber/similar service": "<1%",
+   "Drove/rode with others and parked": "<1%",
+   "Bike (PERSONAL BIKE)": "<1%",
+   "Taxi": "<1%",
+   "Shuttle": "<1%",
+   "Wheelchair/Scooter": "<1%",
+   "Bike (BIKE SHARE)": "<1%"
+  }
+ },
+ "muni2017System": {
+  "accessModePct_table1": {
+   "Walked All The Way": 97,
+   "Walk All The Way": 0,
+   "Drove Alone And Parked": 1,
+   "Was Dropped Off (Not A Service)": 1,
+   "Drove Or Rode With Others And Parked": 0,
+   "Bike (Personal Bike)": 0,
+   "Bike (Bike Share)": 0,
+   "Used Uber Or Similar Service": 0,
+   "Taxi": 0,
+   "Shuttle": 0,
+   "Skateboard/Longboard": 0,
+   "Wheelchair/Scooter": 0
+  },
+  "egressModePct_table5": {
+   "Walk All The Way": 98,
+   "Be Picked Up By Someone (Not A Service)": 1,
+   "Get In A Parked Vehicle And Drive Alone": 0
+  },
+  "totalTransfersPerOneWayTripPct_table8": {
+   "0": 75,
+   "1": 22,
+   "2": 2,
+   "3+": 0
+  },
+  "originPurposePct_table15": {
+   "Your Home": 46,
+   "Your Usual Workplace": 24,
+   "Social Or Recreational": 8,
+   "Shopping": 5,
+   "Personal Business": 4,
+   "College Or University": 3,
+   "Dining Or Coffee": 3,
+   "Work Related": 2,
+   "Hotel Residence (Visitor Only)": 2,
+   "Medical Or Dental": 1,
+   "School (K-12)": 1,
+   "Escorting Others": 1,
+   "Airport": 0,
+   "Hotel (Guest)": 0,
+   "Your Hotel": 0
+  }
+ },
+ "muni2017OtherOperators": {
+  "BART": 3.38,
+  "Caltrain": 0.51,
+  "AC Transit": 0.35,
+  "SAMTRANS": 0.18,
+  "SF BAY FERRY": 0.08,
+  "GOLDEN GATE TRANSIT": 0.08
+ },
+ "caltrain2025": {
+  "accessMuni": 0.08,
+  "egressMuni": 0.05,
+  "note": "all Caltrain riders, all stations (no station-level access by mode is published)"
+ },
+ "ctppWorkplace": {
+  "source": "CTPP 2017-2021 (5-year ACS), Part 2 (workplace) Table B202105, Means of Transportation to Work (18), workers 16 and over, every census tract of San Francisco County (summary level C31). AASHTO CTPP Data Portal query, downloaded without an account (under the 10,000-cell instant-download limit).",
+  "url": "https://ctppdata.transportation.org/",
+  "file": "data/beta3/raw/od/ctpp/B202105_2026-10-06.csv",
+  "accessed": "2026-10-05",
+  "note": "transit = bus + subway or elevated rail + long-distance train or commuter rail + light rail, streetcar or trolley + ferryboat; drive = drove alone + all carpools; margins of error at 90% (transitMoe: root sum of squares, approximate)",
+  "tracts": [
+   {
+    "tract": "010101",
+    "workers": 6280.0,
+    "wfh": 285.0,
+    "drive": 3125.0,
+    "transit": 2340.0,
+    "bus": 1340.0,
+    "subway": 675.0,
+    "rail": 110.0,
+    "lightRail": 70.0,
+    "ferry": 145.0,
+    "bike": 95.0,
+    "walk": 190.0,
+    "other": 255.0,
+    "transitMoe": 354
+   },
+   {
+    "tract": "010102",
+    "workers": 330.0,
+    "wfh": 85.0,
+    "drive": 95.0,
+    "transit": 105.0,
+    "bus": 105.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 40.0,
+    "other": 4.0,
+    "transitMoe": 82
+   },
+   {
+    "tract": "010201",
+    "workers": 765.0,
+    "wfh": 575.0,
+    "drive": 150.0,
+    "transit": 25.0,
+    "bus": 25.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 10.0,
+    "transitMoe": 49
+   },
+   {
+    "tract": "010202",
+    "workers": 2115.0,
+    "wfh": 310.0,
+    "drive": 925.0,
+    "transit": 610.0,
+    "bus": 460.0,
+    "subway": 140.0,
+    "rail": 10.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 150.0,
+    "other": 95.0,
+    "transitMoe": 193
+   },
+   {
+    "tract": "010300",
+    "workers": 1210.0,
+    "wfh": 675.0,
+    "drive": 305.0,
+    "transit": 90.0,
+    "bus": 35.0,
+    "subway": 40.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 15.0,
+    "bike": 15.0,
+    "walk": 125.0,
+    "other": 0.0,
+    "transitMoe": 77
+   },
+   {
+    "tract": "010401",
+    "workers": 605.0,
+    "wfh": 215.0,
+    "drive": 260.0,
+    "transit": 30.0,
+    "bus": 10.0,
+    "subway": 20.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 100.0,
+    "other": 0.0,
+    "transitMoe": 45
+   },
+   {
+    "tract": "010402",
+    "workers": 1605.0,
+    "wfh": 335.0,
+    "drive": 630.0,
+    "transit": 395.0,
+    "bus": 175.0,
+    "subway": 160.0,
+    "rail": 35.0,
+    "lightRail": 25.0,
+    "ferry": 0.0,
+    "bike": 50.0,
+    "walk": 160.0,
+    "other": 35.0,
+    "transitMoe": 129
+   },
+   {
+    "tract": "010500",
+    "workers": 22455.0,
+    "wfh": 425.0,
+    "drive": 7570.0,
+    "transit": 11285.0,
+    "bus": 3065.0,
+    "subway": 6315.0,
+    "rail": 690.0,
+    "lightRail": 530.0,
+    "ferry": 685.0,
+    "bike": 605.0,
+    "walk": 1970.0,
+    "other": 590.0,
+    "transitMoe": 759
+   },
+   {
+    "tract": "010600",
+    "workers": 2660.0,
+    "wfh": 235.0,
+    "drive": 765.0,
+    "transit": 1210.0,
+    "bus": 610.0,
+    "subway": 420.0,
+    "rail": 130.0,
+    "lightRail": 0.0,
+    "ferry": 50.0,
+    "bike": 105.0,
+    "walk": 250.0,
+    "other": 100.0,
+    "transitMoe": 281
+   },
+   {
+    "tract": "010701",
+    "workers": 1630.0,
+    "wfh": 160.0,
+    "drive": 650.0,
+    "transit": 600.0,
+    "bus": 475.0,
+    "subway": 80.0,
+    "rail": 45.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 50.0,
+    "walk": 150.0,
+    "other": 20.0,
+    "transitMoe": 179
+   },
+   {
+    "tract": "010702",
+    "workers": 625.0,
+    "wfh": 150.0,
+    "drive": 180.0,
+    "transit": 200.0,
+    "bus": 80.0,
+    "subway": 85.0,
+    "rail": 35.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 30.0,
+    "walk": 65.0,
+    "other": 0.0,
+    "transitMoe": 113
+   },
+   {
+    "tract": "010800",
+    "workers": 855.0,
+    "wfh": 400.0,
+    "drive": 280.0,
+    "transit": 50.0,
+    "bus": 50.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 85.0,
+    "other": 20.0,
+    "transitMoe": 106
+   },
+   {
+    "tract": "010901",
+    "workers": 305.0,
+    "wfh": 185.0,
+    "drive": 100.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 20.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "010902",
+    "workers": 1025.0,
+    "wfh": 680.0,
+    "drive": 60.0,
+    "transit": 150.0,
+    "bus": 65.0,
+    "subway": 45.0,
+    "rail": 25.0,
+    "lightRail": 0.0,
+    "ferry": 15.0,
+    "bike": 0.0,
+    "walk": 120.0,
+    "other": 15.0,
+    "transitMoe": 84
+   },
+   {
+    "tract": "011001",
+    "workers": 665.0,
+    "wfh": 245.0,
+    "drive": 194.0,
+    "transit": 110.0,
+    "bus": 80.0,
+    "subway": 15.0,
+    "rail": 15.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 105.0,
+    "other": 4.0,
+    "transitMoe": 94
+   },
+   {
+    "tract": "011002",
+    "workers": 650.0,
+    "wfh": 165.0,
+    "drive": 225.0,
+    "transit": 105.0,
+    "bus": 60.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 45.0,
+    "bike": 0.0,
+    "walk": 155.0,
+    "other": 0.0,
+    "transitMoe": 89
+   },
+   {
+    "tract": "011101",
+    "workers": 750.0,
+    "wfh": 290.0,
+    "drive": 150.0,
+    "transit": 145.0,
+    "bus": 110.0,
+    "subway": 25.0,
+    "rail": 0.0,
+    "lightRail": 10.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 135.0,
+    "other": 30.0,
+    "transitMoe": 75
+   },
+   {
+    "tract": "011102",
+    "workers": 2065.0,
+    "wfh": 115.0,
+    "drive": 1198.0,
+    "transit": 320.0,
+    "bus": 110.0,
+    "subway": 210.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 375.0,
+    "other": 20.0,
+    "transitMoe": 138
+   },
+   {
+    "tract": "011200",
+    "workers": 1375.0,
+    "wfh": 380.0,
+    "drive": 315.0,
+    "transit": 365.0,
+    "bus": 230.0,
+    "subway": 95.0,
+    "rail": 15.0,
+    "lightRail": 25.0,
+    "ferry": 0.0,
+    "bike": 75.0,
+    "walk": 245.0,
+    "other": 0.0,
+    "transitMoe": 139
+   },
+   {
+    "tract": "011300",
+    "workers": 1250.0,
+    "wfh": 245.0,
+    "drive": 515.0,
+    "transit": 365.0,
+    "bus": 265.0,
+    "subway": 80.0,
+    "rail": 20.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 75.0,
+    "other": 35.0,
+    "transitMoe": 125
+   },
+   {
+    "tract": "011700",
+    "workers": 65745.0,
+    "wfh": 160.0,
+    "drive": 15330.0,
+    "transit": 41045.0,
+    "bus": 13440.0,
+    "subway": 20835.0,
+    "rail": 3295.0,
+    "lightRail": 1775.0,
+    "ferry": 1700.0,
+    "bike": 1295.0,
+    "walk": 5940.0,
+    "other": 1985.0,
+    "transitMoe": 1586
+   },
+   {
+    "tract": "011800",
+    "workers": 3370.0,
+    "wfh": 120.0,
+    "drive": 765.0,
+    "transit": 1840.0,
+    "bus": 845.0,
+    "subway": 625.0,
+    "rail": 175.0,
+    "lightRail": 130.0,
+    "ferry": 65.0,
+    "bike": 35.0,
+    "walk": 390.0,
+    "other": 215.0,
+    "transitMoe": 315
+   },
+   {
+    "tract": "011901",
+    "workers": 490.0,
+    "wfh": 225.0,
+    "drive": 140.0,
+    "transit": 45.0,
+    "bus": 45.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 65.0,
+    "other": 0.0,
+    "transitMoe": 57
+   },
+   {
+    "tract": "011902",
+    "workers": 840.0,
+    "wfh": 340.0,
+    "drive": 215.0,
+    "transit": 108.0,
+    "bus": 75.0,
+    "subway": 25.0,
+    "rail": 4.0,
+    "lightRail": 0.0,
+    "ferry": 4.0,
+    "bike": 0.0,
+    "walk": 100.0,
+    "other": 65.0,
+    "transitMoe": 49
+   },
+   {
+    "tract": "012001",
+    "workers": 1300.0,
+    "wfh": 275.0,
+    "drive": 340.0,
+    "transit": 429.0,
+    "bus": 190.0,
+    "subway": 150.0,
+    "rail": 4.0,
+    "lightRail": 85.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 155.0,
+    "other": 95.0,
+    "transitMoe": 159
+   },
+   {
+    "tract": "012002",
+    "workers": 515.0,
+    "wfh": 155.0,
+    "drive": 230.0,
+    "transit": 84.0,
+    "bus": 80.0,
+    "subway": 4.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 40.0,
+    "other": 15.0,
+    "transitMoe": 89
+   },
+   {
+    "tract": "012100",
+    "workers": 3050.0,
+    "wfh": 365.0,
+    "drive": 900.0,
+    "transit": 1220.0,
+    "bus": 600.0,
+    "subway": 425.0,
+    "rail": 55.0,
+    "lightRail": 140.0,
+    "ferry": 0.0,
+    "bike": 75.0,
+    "walk": 360.0,
+    "other": 140.0,
+    "transitMoe": 329
+   },
+   {
+    "tract": "012202",
+    "workers": 1075.0,
+    "wfh": 160.0,
+    "drive": 570.0,
+    "transit": 135.0,
+    "bus": 75.0,
+    "subway": 45.0,
+    "rail": 15.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 145.0,
+    "other": 45.0,
+    "transitMoe": 86
+   },
+   {
+    "tract": "012203",
+    "workers": 130.0,
+    "wfh": 15.0,
+    "drive": 64.0,
+    "transit": 4.0,
+    "bus": 4.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 45.0,
+    "other": 4.0,
+    "transitMoe": 28
+   },
+   {
+    "tract": "012204",
+    "workers": 295.0,
+    "wfh": 225.0,
+    "drive": 25.0,
+    "transit": 49.0,
+    "bus": 35.0,
+    "subway": 0.0,
+    "rail": 4.0,
+    "lightRail": 0.0,
+    "ferry": 10.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 54
+   },
+   {
+    "tract": "012301",
+    "workers": 2850.0,
+    "wfh": 30.0,
+    "drive": 1093.0,
+    "transit": 1110.0,
+    "bus": 445.0,
+    "subway": 540.0,
+    "rail": 95.0,
+    "lightRail": 30.0,
+    "ferry": 0.0,
+    "bike": 30.0,
+    "walk": 440.0,
+    "other": 140.0,
+    "transitMoe": 224
+   },
+   {
+    "tract": "012302",
+    "workers": 1575.0,
+    "wfh": 155.0,
+    "drive": 450.0,
+    "transit": 690.0,
+    "bus": 295.0,
+    "subway": 305.0,
+    "rail": 55.0,
+    "lightRail": 35.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 265.0,
+    "other": 15.0,
+    "transitMoe": 186
+   },
+   {
+    "tract": "012403",
+    "workers": 350.0,
+    "wfh": 70.0,
+    "drive": 80.0,
+    "transit": 65.0,
+    "bus": 10.0,
+    "subway": 55.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 130.0,
+    "other": 0.0,
+    "transitMoe": 57
+   },
+   {
+    "tract": "012404",
+    "workers": 645.0,
+    "wfh": 0.0,
+    "drive": 210.0,
+    "transit": 250.0,
+    "bus": 60.0,
+    "subway": 180.0,
+    "rail": 0.0,
+    "lightRail": 10.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 175.0,
+    "other": 4.0,
+    "transitMoe": 122
+   },
+   {
+    "tract": "012405",
+    "workers": 10170.0,
+    "wfh": 810.0,
+    "drive": 3195.0,
+    "transit": 5030.0,
+    "bus": 1635.0,
+    "subway": 2680.0,
+    "rail": 410.0,
+    "lightRail": 175.0,
+    "ferry": 130.0,
+    "bike": 280.0,
+    "walk": 680.0,
+    "other": 160.0,
+    "transitMoe": 483
+   },
+   {
+    "tract": "012406",
+    "workers": 575.0,
+    "wfh": 40.0,
+    "drive": 195.0,
+    "transit": 144.0,
+    "bus": 60.0,
+    "subway": 80.0,
+    "rail": 4.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 85.0,
+    "other": 80.0,
+    "transitMoe": 81
+   },
+   {
+    "tract": "012502",
+    "workers": 900.0,
+    "wfh": 35.0,
+    "drive": 199.0,
+    "transit": 340.0,
+    "bus": 155.0,
+    "subway": 165.0,
+    "rail": 0.0,
+    "lightRail": 20.0,
+    "ferry": 0.0,
+    "bike": 75.0,
+    "walk": 220.0,
+    "other": 30.0,
+    "transitMoe": 129
+   },
+   {
+    "tract": "012503",
+    "workers": 2175.0,
+    "wfh": 100.0,
+    "drive": 604.0,
+    "transit": 1004.0,
+    "bus": 430.0,
+    "subway": 495.0,
+    "rail": 65.0,
+    "lightRail": 4.0,
+    "ferry": 10.0,
+    "bike": 85.0,
+    "walk": 280.0,
+    "other": 104.0,
+    "transitMoe": 237
+   },
+   {
+    "tract": "012504",
+    "workers": 230.0,
+    "wfh": 0.0,
+    "drive": 70.0,
+    "transit": 110.0,
+    "bus": 25.0,
+    "subway": 70.0,
+    "rail": 15.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 45.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 74
+   },
+   {
+    "tract": "012601",
+    "workers": 725.0,
+    "wfh": 395.0,
+    "drive": 205.0,
+    "transit": 94.0,
+    "bus": 65.0,
+    "subway": 25.0,
+    "rail": 0.0,
+    "lightRail": 4.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 30.0,
+    "other": 0.0,
+    "transitMoe": 71
+   },
+   {
+    "tract": "012602",
+    "workers": 1360.0,
+    "wfh": 485.0,
+    "drive": 610.0,
+    "transit": 200.0,
+    "bus": 185.0,
+    "subway": 15.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 60.0,
+    "other": 0.0,
+    "transitMoe": 97
+   },
+   {
+    "tract": "012700",
+    "workers": 1330.0,
+    "wfh": 700.0,
+    "drive": 530.0,
+    "transit": 70.0,
+    "bus": 10.0,
+    "subway": 30.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 30.0,
+    "bike": 0.0,
+    "walk": 10.0,
+    "other": 30.0,
+    "transitMoe": 65
+   },
+   {
+    "tract": "012801",
+    "workers": 745.0,
+    "wfh": 340.0,
+    "drive": 240.0,
+    "transit": 55.0,
+    "bus": 45.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 85.0,
+    "other": 25.0,
+    "transitMoe": 53
+   },
+   {
+    "tract": "012802",
+    "workers": 1485.0,
+    "wfh": 490.0,
+    "drive": 485.0,
+    "transit": 329.0,
+    "bus": 290.0,
+    "subway": 4.0,
+    "rail": 0.0,
+    "lightRail": 35.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 170.0,
+    "other": 14.0,
+    "transitMoe": 139
+   },
+   {
+    "tract": "012901",
+    "workers": 535.0,
+    "wfh": 425.0,
+    "drive": 60.0,
+    "transit": 35.0,
+    "bus": 25.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 15.0,
+    "transitMoe": 42
+   },
+   {
+    "tract": "012902",
+    "workers": 1310.0,
+    "wfh": 430.0,
+    "drive": 735.0,
+    "transit": 114.0,
+    "bus": 55.0,
+    "subway": 55.0,
+    "rail": 4.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 20.0,
+    "other": 0.0,
+    "transitMoe": 82
+   },
+   {
+    "tract": "013001",
+    "workers": 985.0,
+    "wfh": 25.0,
+    "drive": 650.0,
+    "transit": 170.0,
+    "bus": 135.0,
+    "subway": 35.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 95.0,
+    "other": 50.0,
+    "transitMoe": 117
+   },
+   {
+    "tract": "013002",
+    "workers": 2310.0,
+    "wfh": 680.0,
+    "drive": 920.0,
+    "transit": 425.0,
+    "bus": 370.0,
+    "subway": 55.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 190.0,
+    "other": 60.0,
+    "transitMoe": 248
+   },
+   {
+    "tract": "013101",
+    "workers": 1460.0,
+    "wfh": 850.0,
+    "drive": 485.0,
+    "transit": 105.0,
+    "bus": 70.0,
+    "subway": 0.0,
+    "rail": 35.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 10.0,
+    "other": 0.0,
+    "transitMoe": 74
+   },
+   {
+    "tract": "013102",
+    "workers": 1365.0,
+    "wfh": 550.0,
+    "drive": 390.0,
+    "transit": 295.0,
+    "bus": 145.0,
+    "subway": 150.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 120.0,
+    "other": 4.0,
+    "transitMoe": 146
+   },
+   {
+    "tract": "013200",
+    "workers": 1445.0,
+    "wfh": 495.0,
+    "drive": 600.0,
+    "transit": 175.0,
+    "bus": 125.0,
+    "subway": 50.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 75.0,
+    "walk": 55.0,
+    "other": 50.0,
+    "transitMoe": 101
+   },
+   {
+    "tract": "013300",
+    "workers": 3010.0,
+    "wfh": 305.0,
+    "drive": 1795.0,
+    "transit": 495.0,
+    "bus": 355.0,
+    "subway": 115.0,
+    "rail": 25.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 150.0,
+    "walk": 150.0,
+    "other": 110.0,
+    "transitMoe": 176
+   },
+   {
+    "tract": "013401",
+    "workers": 405.0,
+    "wfh": 115.0,
+    "drive": 270.0,
+    "transit": 15.0,
+    "bus": 15.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 10.0,
+    "transitMoe": 32
+   },
+   {
+    "tract": "013402",
+    "workers": 600.0,
+    "wfh": 275.0,
+    "drive": 170.0,
+    "transit": 75.0,
+    "bus": 75.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 25.0,
+    "walk": 40.0,
+    "other": 19.0,
+    "transitMoe": 63
+   },
+   {
+    "tract": "013500",
+    "workers": 3025.0,
+    "wfh": 400.0,
+    "drive": 1750.0,
+    "transit": 515.0,
+    "bus": 360.0,
+    "subway": 95.0,
+    "rail": 60.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 265.0,
+    "other": 90.0,
+    "transitMoe": 169
+   },
+   {
+    "tract": "015100",
+    "workers": 3435.0,
+    "wfh": 315.0,
+    "drive": 1770.0,
+    "transit": 870.0,
+    "bus": 565.0,
+    "subway": 295.0,
+    "rail": 0.0,
+    "lightRail": 10.0,
+    "ferry": 0.0,
+    "bike": 65.0,
+    "walk": 330.0,
+    "other": 74.0,
+    "transitMoe": 312
+   },
+   {
+    "tract": "015201",
+    "workers": 650.0,
+    "wfh": 105.0,
+    "drive": 315.0,
+    "transit": 215.0,
+    "bus": 215.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 15.0,
+    "other": 0.0,
+    "transitMoe": 153
+   },
+   {
+    "tract": "015202",
+    "workers": 1220.0,
+    "wfh": 345.0,
+    "drive": 575.0,
+    "transit": 194.0,
+    "bus": 170.0,
+    "subway": 20.0,
+    "rail": 0.0,
+    "lightRail": 4.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 90.0,
+    "other": 15.0,
+    "transitMoe": 85
+   },
+   {
+    "tract": "015300",
+    "workers": 2345.0,
+    "wfh": 290.0,
+    "drive": 1300.0,
+    "transit": 635.0,
+    "bus": 385.0,
+    "subway": 215.0,
+    "rail": 35.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 115.0,
+    "other": 4.0,
+    "transitMoe": 289
+   },
+   {
+    "tract": "015401",
+    "workers": 1505.0,
+    "wfh": 500.0,
+    "drive": 775.0,
+    "transit": 135.0,
+    "bus": 125.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 40.0,
+    "other": 30.0,
+    "transitMoe": 82
+   },
+   {
+    "tract": "015402",
+    "workers": 2180.0,
+    "wfh": 590.0,
+    "drive": 975.0,
+    "transit": 445.0,
+    "bus": 290.0,
+    "subway": 145.0,
+    "rail": 10.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 110.0,
+    "other": 45.0,
+    "transitMoe": 139
+   },
+   {
+    "tract": "015500",
+    "workers": 4960.0,
+    "wfh": 550.0,
+    "drive": 2435.0,
+    "transit": 1254.0,
+    "bus": 865.0,
+    "subway": 270.0,
+    "rail": 115.0,
+    "lightRail": 4.0,
+    "ferry": 0.0,
+    "bike": 125.0,
+    "walk": 340.0,
+    "other": 250.0,
+    "transitMoe": 228
+   },
+   {
+    "tract": "015600",
+    "workers": 570.0,
+    "wfh": 255.0,
+    "drive": 115.0,
+    "transit": 129.0,
+    "bus": 90.0,
+    "subway": 25.0,
+    "rail": 10.0,
+    "lightRail": 4.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 40.0,
+    "other": 34.0,
+    "transitMoe": 77
+   },
+   {
+    "tract": "015701",
+    "workers": 3115.0,
+    "wfh": 385.0,
+    "drive": 1205.0,
+    "transit": 900.0,
+    "bus": 625.0,
+    "subway": 200.0,
+    "rail": 55.0,
+    "lightRail": 20.0,
+    "ferry": 0.0,
+    "bike": 40.0,
+    "walk": 475.0,
+    "other": 100.0,
+    "transitMoe": 234
+   },
+   {
+    "tract": "015702",
+    "workers": 3535.0,
+    "wfh": 595.0,
+    "drive": 2190.0,
+    "transit": 369.0,
+    "bus": 225.0,
+    "subway": 140.0,
+    "rail": 4.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 60.0,
+    "walk": 210.0,
+    "other": 115.0,
+    "transitMoe": 172
+   },
+   {
+    "tract": "015801",
+    "workers": 1165.0,
+    "wfh": 260.0,
+    "drive": 565.0,
+    "transit": 135.0,
+    "bus": 35.0,
+    "subway": 85.0,
+    "rail": 15.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 105.0,
+    "walk": 65.0,
+    "other": 35.0,
+    "transitMoe": 84
+   },
+   {
+    "tract": "015802",
+    "workers": 975.0,
+    "wfh": 550.0,
+    "drive": 175.0,
+    "transit": 120.0,
+    "bus": 110.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 45.0,
+    "other": 85.0,
+    "transitMoe": 94
+   },
+   {
+    "tract": "015900",
+    "workers": 1760.0,
+    "wfh": 520.0,
+    "drive": 815.0,
+    "transit": 300.0,
+    "bus": 235.0,
+    "subway": 35.0,
+    "rail": 30.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 30.0,
+    "walk": 75.0,
+    "other": 20.0,
+    "transitMoe": 120
+   },
+   {
+    "tract": "016000",
+    "workers": 2345.0,
+    "wfh": 195.0,
+    "drive": 1150.0,
+    "transit": 770.0,
+    "bus": 360.0,
+    "subway": 310.0,
+    "rail": 90.0,
+    "lightRail": 10.0,
+    "ferry": 0.0,
+    "bike": 60.0,
+    "walk": 160.0,
+    "other": 10.0,
+    "transitMoe": 196
+   },
+   {
+    "tract": "016101",
+    "workers": 550.0,
+    "wfh": 195.0,
+    "drive": 244.0,
+    "transit": 110.0,
+    "bus": 95.0,
+    "subway": 15.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 87
+   },
+   {
+    "tract": "016102",
+    "workers": 415.0,
+    "wfh": 80.0,
+    "drive": 190.0,
+    "transit": 104.0,
+    "bus": 80.0,
+    "subway": 20.0,
+    "rail": 0.0,
+    "lightRail": 4.0,
+    "ferry": 0.0,
+    "bike": 40.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 78
+   },
+   {
+    "tract": "016200",
+    "workers": 6160.0,
+    "wfh": 560.0,
+    "drive": 2965.0,
+    "transit": 1985.0,
+    "bus": 640.0,
+    "subway": 1155.0,
+    "rail": 115.0,
+    "lightRail": 60.0,
+    "ferry": 15.0,
+    "bike": 240.0,
+    "walk": 245.0,
+    "other": 170.0,
+    "transitMoe": 308
+   },
+   {
+    "tract": "016300",
+    "workers": 1025.0,
+    "wfh": 740.0,
+    "drive": 114.0,
+    "transit": 65.0,
+    "bus": 40.0,
+    "subway": 10.0,
+    "rail": 15.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 20.0,
+    "other": 65.0,
+    "transitMoe": 49
+   },
+   {
+    "tract": "016400",
+    "workers": 1205.0,
+    "wfh": 580.0,
+    "drive": 375.0,
+    "transit": 70.0,
+    "bus": 40.0,
+    "subway": 30.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 70.0,
+    "walk": 95.0,
+    "other": 10.0,
+    "transitMoe": 64
+   },
+   {
+    "tract": "016500",
+    "workers": 2990.0,
+    "wfh": 795.0,
+    "drive": 1280.0,
+    "transit": 445.0,
+    "bus": 245.0,
+    "subway": 90.0,
+    "rail": 45.0,
+    "lightRail": 55.0,
+    "ferry": 10.0,
+    "bike": 125.0,
+    "walk": 325.0,
+    "other": 25.0,
+    "transitMoe": 228
+   },
+   {
+    "tract": "016601",
+    "workers": 1180.0,
+    "wfh": 540.0,
+    "drive": 194.0,
+    "transit": 155.0,
+    "bus": 130.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 25.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 235.0,
+    "other": 44.0,
+    "transitMoe": 118
+   },
+   {
+    "tract": "016602",
+    "workers": 1180.0,
+    "wfh": 545.0,
+    "drive": 215.0,
+    "transit": 80.0,
+    "bus": 70.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 145.0,
+    "walk": 190.0,
+    "other": 0.0,
+    "transitMoe": 49
+   },
+   {
+    "tract": "016700",
+    "workers": 1560.0,
+    "wfh": 985.0,
+    "drive": 240.0,
+    "transit": 115.0,
+    "bus": 115.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 195.0,
+    "other": 4.0,
+    "transitMoe": 88
+   },
+   {
+    "tract": "016801",
+    "workers": 1860.0,
+    "wfh": 740.0,
+    "drive": 569.0,
+    "transit": 340.0,
+    "bus": 135.0,
+    "subway": 110.0,
+    "rail": 75.0,
+    "lightRail": 20.0,
+    "ferry": 0.0,
+    "bike": 45.0,
+    "walk": 125.0,
+    "other": 40.0,
+    "transitMoe": 121
+   },
+   {
+    "tract": "016802",
+    "workers": 3220.0,
+    "wfh": 600.0,
+    "drive": 1204.0,
+    "transit": 925.0,
+    "bus": 515.0,
+    "subway": 345.0,
+    "rail": 30.0,
+    "lightRail": 35.0,
+    "ferry": 0.0,
+    "bike": 110.0,
+    "walk": 305.0,
+    "other": 70.0,
+    "transitMoe": 209
+   },
+   {
+    "tract": "016900",
+    "workers": 3075.0,
+    "wfh": 465.0,
+    "drive": 1389.0,
+    "transit": 790.0,
+    "bus": 355.0,
+    "subway": 395.0,
+    "rail": 0.0,
+    "lightRail": 40.0,
+    "ferry": 0.0,
+    "bike": 60.0,
+    "walk": 310.0,
+    "other": 59.0,
+    "transitMoe": 313
+   },
+   {
+    "tract": "017000",
+    "workers": 790.0,
+    "wfh": 500.0,
+    "drive": 194.0,
+    "transit": 30.0,
+    "bus": 10.0,
+    "subway": 20.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 15.0,
+    "other": 50.0,
+    "transitMoe": 42
+   },
+   {
+    "tract": "017101",
+    "workers": 1130.0,
+    "wfh": 705.0,
+    "drive": 300.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 50.0,
+    "other": 80.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "017102",
+    "workers": 1105.0,
+    "wfh": 495.0,
+    "drive": 210.0,
+    "transit": 155.0,
+    "bus": 100.0,
+    "subway": 55.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 210.0,
+    "other": 40.0,
+    "transitMoe": 95
+   },
+   {
+    "tract": "017602",
+    "workers": 10685.0,
+    "wfh": 325.0,
+    "drive": 3610.0,
+    "transit": 4875.0,
+    "bus": 1945.0,
+    "subway": 2460.0,
+    "rail": 255.0,
+    "lightRail": 145.0,
+    "ferry": 70.0,
+    "bike": 205.0,
+    "walk": 1260.0,
+    "other": 410.0,
+    "transitMoe": 468
+   },
+   {
+    "tract": "017603",
+    "workers": 14545.0,
+    "wfh": 650.0,
+    "drive": 5795.0,
+    "transit": 5615.0,
+    "bus": 1725.0,
+    "subway": 3095.0,
+    "rail": 480.0,
+    "lightRail": 240.0,
+    "ferry": 75.0,
+    "bike": 690.0,
+    "walk": 1070.0,
+    "other": 725.0,
+    "transitMoe": 604
+   },
+   {
+    "tract": "017604",
+    "workers": 4115.0,
+    "wfh": 205.0,
+    "drive": 990.0,
+    "transit": 2440.0,
+    "bus": 935.0,
+    "subway": 1265.0,
+    "rail": 145.0,
+    "lightRail": 45.0,
+    "ferry": 50.0,
+    "bike": 60.0,
+    "walk": 325.0,
+    "other": 95.0,
+    "transitMoe": 457
+   },
+   {
+    "tract": "017700",
+    "workers": 10350.0,
+    "wfh": 300.0,
+    "drive": 5275.0,
+    "transit": 3140.0,
+    "bus": 1260.0,
+    "subway": 1300.0,
+    "rail": 260.0,
+    "lightRail": 135.0,
+    "ferry": 185.0,
+    "bike": 470.0,
+    "walk": 705.0,
+    "other": 460.0,
+    "transitMoe": 450
+   },
+   {
+    "tract": "017801",
+    "workers": 5815.0,
+    "wfh": 595.0,
+    "drive": 1520.0,
+    "transit": 2495.0,
+    "bus": 965.0,
+    "subway": 1190.0,
+    "rail": 225.0,
+    "lightRail": 75.0,
+    "ferry": 40.0,
+    "bike": 310.0,
+    "walk": 645.0,
+    "other": 255.0,
+    "transitMoe": 343
+   },
+   {
+    "tract": "017803",
+    "workers": 2475.0,
+    "wfh": 170.0,
+    "drive": 895.0,
+    "transit": 1040.0,
+    "bus": 325.0,
+    "subway": 490.0,
+    "rail": 135.0,
+    "lightRail": 40.0,
+    "ferry": 50.0,
+    "bike": 100.0,
+    "walk": 170.0,
+    "other": 95.0,
+    "transitMoe": 232
+   },
+   {
+    "tract": "017804",
+    "workers": 3665.0,
+    "wfh": 625.0,
+    "drive": 1440.0,
+    "transit": 1055.0,
+    "bus": 385.0,
+    "subway": 520.0,
+    "rail": 55.0,
+    "lightRail": 65.0,
+    "ferry": 30.0,
+    "bike": 120.0,
+    "walk": 300.0,
+    "other": 120.0,
+    "transitMoe": 213
+   },
+   {
+    "tract": "017903",
+    "workers": 1040.0,
+    "wfh": 130.0,
+    "drive": 685.0,
+    "transit": 105.0,
+    "bus": 85.0,
+    "subway": 0.0,
+    "rail": 20.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 85.0,
+    "other": 15.0,
+    "transitMoe": 76
+   },
+   {
+    "tract": "018000",
+    "workers": 15435.0,
+    "wfh": 490.0,
+    "drive": 7070.0,
+    "transit": 5130.0,
+    "bus": 2125.0,
+    "subway": 1995.0,
+    "rail": 735.0,
+    "lightRail": 205.0,
+    "ferry": 70.0,
+    "bike": 735.0,
+    "walk": 1230.0,
+    "other": 785.0,
+    "transitMoe": 571
+   },
+   {
+    "tract": "020101",
+    "workers": 4935.0,
+    "wfh": 390.0,
+    "drive": 2465.0,
+    "transit": 1470.0,
+    "bus": 730.0,
+    "subway": 575.0,
+    "rail": 115.0,
+    "lightRail": 35.0,
+    "ferry": 15.0,
+    "bike": 200.0,
+    "walk": 240.0,
+    "other": 165.0,
+    "transitMoe": 318
+   },
+   {
+    "tract": "020102",
+    "workers": 1125.0,
+    "wfh": 290.0,
+    "drive": 250.0,
+    "transit": 420.0,
+    "bus": 150.0,
+    "subway": 235.0,
+    "rail": 15.0,
+    "lightRail": 0.0,
+    "ferry": 20.0,
+    "bike": 65.0,
+    "walk": 35.0,
+    "other": 60.0,
+    "transitMoe": 141
+   },
+   {
+    "tract": "020201",
+    "workers": 800.0,
+    "wfh": 200.0,
+    "drive": 199.0,
+    "transit": 340.0,
+    "bus": 90.0,
+    "subway": 160.0,
+    "rail": 20.0,
+    "lightRail": 0.0,
+    "ferry": 70.0,
+    "bike": 0.0,
+    "walk": 65.0,
+    "other": 0.0,
+    "transitMoe": 146
+   },
+   {
+    "tract": "020202",
+    "workers": 1570.0,
+    "wfh": 890.0,
+    "drive": 320.0,
+    "transit": 220.0,
+    "bus": 95.0,
+    "subway": 105.0,
+    "rail": 20.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 125.0,
+    "other": 20.0,
+    "transitMoe": 164
+   },
+   {
+    "tract": "020300",
+    "workers": 2075.0,
+    "wfh": 985.0,
+    "drive": 590.0,
+    "transit": 295.0,
+    "bus": 230.0,
+    "subway": 65.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 145.0,
+    "other": 44.0,
+    "transitMoe": 188
+   },
+   {
+    "tract": "020401",
+    "workers": 785.0,
+    "wfh": 650.0,
+    "drive": 69.0,
+    "transit": 40.0,
+    "bus": 40.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 20.0,
+    "transitMoe": 64
+   },
+   {
+    "tract": "020402",
+    "workers": 805.0,
+    "wfh": 660.0,
+    "drive": 55.0,
+    "transit": 25.0,
+    "bus": 25.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 50.0,
+    "other": 15.0,
+    "transitMoe": 42
+   },
+   {
+    "tract": "020500",
+    "workers": 1550.0,
+    "wfh": 475.0,
+    "drive": 419.0,
+    "transit": 415.0,
+    "bus": 175.0,
+    "subway": 240.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 175.0,
+    "other": 35.0,
+    "transitMoe": 153
+   },
+   {
+    "tract": "020601",
+    "workers": 1370.0,
+    "wfh": 615.0,
+    "drive": 455.0,
+    "transit": 234.0,
+    "bus": 90.0,
+    "subway": 140.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 4.0,
+    "bike": 0.0,
+    "walk": 60.0,
+    "other": 10.0,
+    "transitMoe": 118
+   },
+   {
+    "tract": "020602",
+    "workers": 305.0,
+    "wfh": 240.0,
+    "drive": 10.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 25.0,
+    "other": 10.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "020701",
+    "workers": 750.0,
+    "wfh": 515.0,
+    "drive": 70.0,
+    "transit": 70.0,
+    "bus": 25.0,
+    "subway": 45.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 80.0,
+    "other": 10.0,
+    "transitMoe": 64
+   },
+   {
+    "tract": "020702",
+    "workers": 1230.0,
+    "wfh": 480.0,
+    "drive": 444.0,
+    "transit": 150.0,
+    "bus": 60.0,
+    "subway": 55.0,
+    "rail": 35.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 25.0,
+    "walk": 115.0,
+    "other": 15.0,
+    "transitMoe": 88
+   },
+   {
+    "tract": "020801",
+    "workers": 2035.0,
+    "wfh": 320.0,
+    "drive": 895.0,
+    "transit": 435.0,
+    "bus": 140.0,
+    "subway": 155.0,
+    "rail": 85.0,
+    "lightRail": 55.0,
+    "ferry": 0.0,
+    "bike": 125.0,
+    "walk": 215.0,
+    "other": 45.0,
+    "transitMoe": 170
+   },
+   {
+    "tract": "020802",
+    "workers": 1145.0,
+    "wfh": 300.0,
+    "drive": 355.0,
+    "transit": 225.0,
+    "bus": 130.0,
+    "subway": 95.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 140.0,
+    "other": 90.0,
+    "transitMoe": 114
+   },
+   {
+    "tract": "020900",
+    "workers": 2140.0,
+    "wfh": 495.0,
+    "drive": 675.0,
+    "transit": 565.0,
+    "bus": 280.0,
+    "subway": 230.0,
+    "rail": 55.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 170.0,
+    "walk": 220.0,
+    "other": 24.0,
+    "transitMoe": 203
+   },
+   {
+    "tract": "021000",
+    "workers": 1055.0,
+    "wfh": 435.0,
+    "drive": 325.0,
+    "transit": 95.0,
+    "bus": 80.0,
+    "subway": 15.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 70.0,
+    "walk": 70.0,
+    "other": 60.0,
+    "transitMoe": 91
+   },
+   {
+    "tract": "021100",
+    "workers": 1370.0,
+    "wfh": 745.0,
+    "drive": 350.0,
+    "transit": 115.0,
+    "bus": 115.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 40.0,
+    "walk": 80.0,
+    "other": 35.0,
+    "transitMoe": 80
+   },
+   {
+    "tract": "021200",
+    "workers": 745.0,
+    "wfh": 465.0,
+    "drive": 250.0,
+    "transit": 15.0,
+    "bus": 15.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 15.0,
+    "other": 4.0,
+    "transitMoe": 37
+   },
+   {
+    "tract": "021300",
+    "workers": 715.0,
+    "wfh": 325.0,
+    "drive": 305.0,
+    "transit": 50.0,
+    "bus": 40.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 4.0,
+    "other": 25.0,
+    "transitMoe": 54
+   },
+   {
+    "tract": "021400",
+    "workers": 1380.0,
+    "wfh": 720.0,
+    "drive": 405.0,
+    "transit": 130.0,
+    "bus": 50.0,
+    "subway": 30.0,
+    "rail": 0.0,
+    "lightRail": 50.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 95.0,
+    "other": 20.0,
+    "transitMoe": 87
+   },
+   {
+    "tract": "021500",
+    "workers": 1060.0,
+    "wfh": 625.0,
+    "drive": 244.0,
+    "transit": 10.0,
+    "bus": 10.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 120.0,
+    "other": 60.0,
+    "transitMoe": 39
+   },
+   {
+    "tract": "021600",
+    "workers": 935.0,
+    "wfh": 850.0,
+    "drive": 75.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 15.0,
+    "other": 0.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "021700",
+    "workers": 1230.0,
+    "wfh": 620.0,
+    "drive": 455.0,
+    "transit": 109.0,
+    "bus": 55.0,
+    "subway": 50.0,
+    "rail": 4.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 25.0,
+    "other": 10.0,
+    "transitMoe": 76
+   },
+   {
+    "tract": "021800",
+    "workers": 1300.0,
+    "wfh": 840.0,
+    "drive": 235.0,
+    "transit": 129.0,
+    "bus": 4.0,
+    "subway": 80.0,
+    "rail": 20.0,
+    "lightRail": 0.0,
+    "ferry": 25.0,
+    "bike": 15.0,
+    "walk": 65.0,
+    "other": 15.0,
+    "transitMoe": 80
+   },
+   {
+    "tract": "022600",
+    "workers": 8110.0,
+    "wfh": 580.0,
+    "drive": 4650.0,
+    "transit": 1335.0,
+    "bus": 480.0,
+    "subway": 495.0,
+    "rail": 210.0,
+    "lightRail": 105.0,
+    "ferry": 45.0,
+    "bike": 610.0,
+    "walk": 610.0,
+    "other": 315.0,
+    "transitMoe": 276
+   },
+   {
+    "tract": "022702",
+    "workers": 1485.0,
+    "wfh": 485.0,
+    "drive": 685.0,
+    "transit": 220.0,
+    "bus": 185.0,
+    "subway": 10.0,
+    "rail": 10.0,
+    "lightRail": 15.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 15.0,
+    "other": 60.0,
+    "transitMoe": 136
+   },
+   {
+    "tract": "022704",
+    "workers": 2260.0,
+    "wfh": 700.0,
+    "drive": 770.0,
+    "transit": 580.0,
+    "bus": 425.0,
+    "subway": 125.0,
+    "rail": 30.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 90.0,
+    "other": 100.0,
+    "transitMoe": 208
+   },
+   {
+    "tract": "022801",
+    "workers": 5960.0,
+    "wfh": 480.0,
+    "drive": 3225.0,
+    "transit": 1014.0,
+    "bus": 425.0,
+    "subway": 335.0,
+    "rail": 215.0,
+    "lightRail": 35.0,
+    "ferry": 4.0,
+    "bike": 400.0,
+    "walk": 520.0,
+    "other": 315.0,
+    "transitMoe": 272
+   },
+   {
+    "tract": "022802",
+    "workers": 6245.0,
+    "wfh": 220.0,
+    "drive": 4430.0,
+    "transit": 939.0,
+    "bus": 485.0,
+    "subway": 365.0,
+    "rail": 65.0,
+    "lightRail": 20.0,
+    "ferry": 4.0,
+    "bike": 145.0,
+    "walk": 355.0,
+    "other": 155.0,
+    "transitMoe": 245
+   },
+   {
+    "tract": "022803",
+    "workers": 790.0,
+    "wfh": 340.0,
+    "drive": 139.0,
+    "transit": 195.0,
+    "bus": 110.0,
+    "subway": 70.0,
+    "rail": 15.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 105.0,
+    "other": 0.0,
+    "transitMoe": 95
+   },
+   {
+    "tract": "022901",
+    "workers": 705.0,
+    "wfh": 410.0,
+    "drive": 180.0,
+    "transit": 50.0,
+    "bus": 10.0,
+    "subway": 40.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 35.0,
+    "other": 10.0,
+    "transitMoe": 55
+   },
+   {
+    "tract": "022902",
+    "workers": 795.0,
+    "wfh": 335.0,
+    "drive": 153.0,
+    "transit": 235.0,
+    "bus": 225.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 45.0,
+    "walk": 20.0,
+    "other": 0.0,
+    "transitMoe": 73
+   },
+   {
+    "tract": "022903",
+    "workers": 1195.0,
+    "wfh": 535.0,
+    "drive": 420.0,
+    "transit": 135.0,
+    "bus": 95.0,
+    "subway": 40.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 45.0,
+    "walk": 60.0,
+    "other": 10.0,
+    "transitMoe": 90
+   },
+   {
+    "tract": "023001",
+    "workers": 560.0,
+    "wfh": 185.0,
+    "drive": 350.0,
+    "transit": 4.0,
+    "bus": 4.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 20.0,
+    "other": 0.0,
+    "transitMoe": 39
+   },
+   {
+    "tract": "023003",
+    "workers": 270.0,
+    "wfh": 225.0,
+    "drive": 15.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 25.0,
+    "other": 0.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "023102",
+    "workers": 245.0,
+    "wfh": 90.0,
+    "drive": 105.0,
+    "transit": 25.0,
+    "bus": 15.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 25.0,
+    "other": 0.0,
+    "transitMoe": 37
+   },
+   {
+    "tract": "023103",
+    "workers": 390.0,
+    "wfh": 35.0,
+    "drive": 275.0,
+    "transit": 15.0,
+    "bus": 15.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 15.0,
+    "other": 50.0,
+    "transitMoe": 35
+   },
+   {
+    "tract": "023200",
+    "workers": 1340.0,
+    "wfh": 215.0,
+    "drive": 934.0,
+    "transit": 90.0,
+    "bus": 90.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 55.0,
+    "other": 50.0,
+    "transitMoe": 90
+   },
+   {
+    "tract": "023300",
+    "workers": 1405.0,
+    "wfh": 125.0,
+    "drive": 990.0,
+    "transit": 215.0,
+    "bus": 150.0,
+    "subway": 65.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 60.0,
+    "other": 0.0,
+    "transitMoe": 100
+   },
+   {
+    "tract": "023400",
+    "workers": 1275.0,
+    "wfh": 0.0,
+    "drive": 989.0,
+    "transit": 160.0,
+    "bus": 85.0,
+    "subway": 45.0,
+    "rail": 10.0,
+    "lightRail": 20.0,
+    "ferry": 0.0,
+    "bike": 70.0,
+    "walk": 50.0,
+    "other": 4.0,
+    "transitMoe": 80
+   },
+   {
+    "tract": "025100",
+    "workers": 760.0,
+    "wfh": 420.0,
+    "drive": 270.0,
+    "transit": 20.0,
+    "bus": 20.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 25.0,
+    "walk": 15.0,
+    "other": 4.0,
+    "transitMoe": 38
+   },
+   {
+    "tract": "025200",
+    "workers": 1410.0,
+    "wfh": 775.0,
+    "drive": 405.0,
+    "transit": 65.0,
+    "bus": 0.0,
+    "subway": 40.0,
+    "rail": 10.0,
+    "lightRail": 0.0,
+    "ferry": 15.0,
+    "bike": 15.0,
+    "walk": 135.0,
+    "other": 15.0,
+    "transitMoe": 55
+   },
+   {
+    "tract": "025300",
+    "workers": 1710.0,
+    "wfh": 560.0,
+    "drive": 745.0,
+    "transit": 240.0,
+    "bus": 150.0,
+    "subway": 90.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 30.0,
+    "walk": 40.0,
+    "other": 100.0,
+    "transitMoe": 101
+   },
+   {
+    "tract": "025401",
+    "workers": 960.0,
+    "wfh": 380.0,
+    "drive": 325.0,
+    "transit": 55.0,
+    "bus": 55.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 110.0,
+    "other": 50.0,
+    "transitMoe": 63
+   },
+   {
+    "tract": "025402",
+    "workers": 380.0,
+    "wfh": 235.0,
+    "drive": 80.0,
+    "transit": 65.0,
+    "bus": 35.0,
+    "subway": 0.0,
+    "rail": 30.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 4.0,
+    "other": 0.0,
+    "transitMoe": 67
+   },
+   {
+    "tract": "025403",
+    "workers": 585.0,
+    "wfh": 470.0,
+    "drive": 90.0,
+    "transit": 25.0,
+    "bus": 10.0,
+    "subway": 15.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 40
+   },
+   {
+    "tract": "025501",
+    "workers": 855.0,
+    "wfh": 405.0,
+    "drive": 174.0,
+    "transit": 60.0,
+    "bus": 15.0,
+    "subway": 45.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 210.0,
+    "transitMoe": 49
+   },
+   {
+    "tract": "025502",
+    "workers": 840.0,
+    "wfh": 460.0,
+    "drive": 260.0,
+    "transit": 100.0,
+    "bus": 45.0,
+    "subway": 10.0,
+    "rail": 45.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 77
+   },
+   {
+    "tract": "025600",
+    "workers": 1530.0,
+    "wfh": 500.0,
+    "drive": 845.0,
+    "transit": 134.0,
+    "bus": 100.0,
+    "subway": 30.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 4.0,
+    "bike": 0.0,
+    "walk": 30.0,
+    "other": 10.0,
+    "transitMoe": 112
+   },
+   {
+    "tract": "025701",
+    "workers": 615.0,
+    "wfh": 290.0,
+    "drive": 279.0,
+    "transit": 35.0,
+    "bus": 35.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 4.0,
+    "other": 0.0,
+    "transitMoe": 50
+   },
+   {
+    "tract": "025702",
+    "workers": 555.0,
+    "wfh": 40.0,
+    "drive": 329.0,
+    "transit": 89.0,
+    "bus": 45.0,
+    "subway": 4.0,
+    "rail": 40.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 55.0,
+    "other": 10.0,
+    "transitMoe": 72
+   },
+   {
+    "tract": "025800",
+    "workers": 90.0,
+    "wfh": 85.0,
+    "drive": 4.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "025900",
+    "workers": 370.0,
+    "wfh": 140.0,
+    "drive": 164.0,
+    "transit": 35.0,
+    "bus": 35.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 25.0,
+    "other": 0.0,
+    "transitMoe": 43
+   },
+   {
+    "tract": "026001",
+    "workers": 645.0,
+    "wfh": 335.0,
+    "drive": 225.0,
+    "transit": 40.0,
+    "bus": 40.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 30.0,
+    "other": 0.0,
+    "transitMoe": 58
+   },
+   {
+    "tract": "026002",
+    "workers": 355.0,
+    "wfh": 270.0,
+    "drive": 30.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 0.0,
+    "other": 50.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "026003",
+    "workers": 490.0,
+    "wfh": 190.0,
+    "drive": 250.0,
+    "transit": 30.0,
+    "bus": 30.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 25.0,
+    "other": 0.0,
+    "transitMoe": 46
+   },
+   {
+    "tract": "026004",
+    "workers": 605.0,
+    "wfh": 270.0,
+    "drive": 140.0,
+    "transit": 180.0,
+    "bus": 65.0,
+    "subway": 115.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 15.0,
+    "other": 0.0,
+    "transitMoe": 188
+   },
+   {
+    "tract": "026100",
+    "workers": 1510.0,
+    "wfh": 510.0,
+    "drive": 710.0,
+    "transit": 195.0,
+    "bus": 120.0,
+    "subway": 65.0,
+    "rail": 0.0,
+    "lightRail": 10.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 65.0,
+    "other": 15.0,
+    "transitMoe": 102
+   },
+   {
+    "tract": "026201",
+    "workers": 570.0,
+    "wfh": 220.0,
+    "drive": 255.0,
+    "transit": 45.0,
+    "bus": 45.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 50.0,
+    "other": 0.0,
+    "transitMoe": 52
+   },
+   {
+    "tract": "026202",
+    "workers": 195.0,
+    "wfh": 80.0,
+    "drive": 95.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 10.0,
+    "other": 15.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "026301",
+    "workers": 530.0,
+    "wfh": 55.0,
+    "drive": 340.0,
+    "transit": 85.0,
+    "bus": 85.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 40.0,
+    "other": 20.0,
+    "transitMoe": 73
+   },
+   {
+    "tract": "026302",
+    "workers": 160.0,
+    "wfh": 110.0,
+    "drive": 40.0,
+    "transit": 4.0,
+    "bus": 4.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 39
+   },
+   {
+    "tract": "026303",
+    "workers": 460.0,
+    "wfh": 155.0,
+    "drive": 85.0,
+    "transit": 210.0,
+    "bus": 155.0,
+    "subway": 55.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 20.0,
+    "other": 0.0,
+    "transitMoe": 147
+   },
+   {
+    "tract": "026401",
+    "workers": 200.0,
+    "wfh": 90.0,
+    "drive": 100.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 10.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "026402",
+    "workers": 370.0,
+    "wfh": 345.0,
+    "drive": 25.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 40
+   },
+   {
+    "tract": "026403",
+    "workers": 300.0,
+    "wfh": 95.0,
+    "drive": 115.0,
+    "transit": 20.0,
+    "bus": 20.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 50.0,
+    "other": 0.0,
+    "transitMoe": 43
+   },
+   {
+    "tract": "026404",
+    "workers": 205.0,
+    "wfh": 145.0,
+    "drive": 10.0,
+    "transit": 35.0,
+    "bus": 15.0,
+    "subway": 0.0,
+    "rail": 20.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 10.0,
+    "other": 0.0,
+    "transitMoe": 48
+   },
+   {
+    "tract": "030101",
+    "workers": 5160.0,
+    "wfh": 365.0,
+    "drive": 2509.0,
+    "transit": 870.0,
+    "bus": 485.0,
+    "subway": 255.0,
+    "rail": 25.0,
+    "lightRail": 90.0,
+    "ferry": 15.0,
+    "bike": 430.0,
+    "walk": 745.0,
+    "other": 235.0,
+    "transitMoe": 223
+   },
+   {
+    "tract": "030102",
+    "workers": 6920.0,
+    "wfh": 545.0,
+    "drive": 4440.0,
+    "transit": 1100.0,
+    "bus": 570.0,
+    "subway": 370.0,
+    "rail": 65.0,
+    "lightRail": 95.0,
+    "ferry": 0.0,
+    "bike": 145.0,
+    "walk": 510.0,
+    "other": 190.0,
+    "transitMoe": 281
+   },
+   {
+    "tract": "030201",
+    "workers": 605.0,
+    "wfh": 280.0,
+    "drive": 180.0,
+    "transit": 80.0,
+    "bus": 50.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 20.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 45.0,
+    "other": 20.0,
+    "transitMoe": 64
+   },
+   {
+    "tract": "030202",
+    "workers": 1150.0,
+    "wfh": 420.0,
+    "drive": 330.0,
+    "transit": 235.0,
+    "bus": 195.0,
+    "subway": 40.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 85.0,
+    "other": 55.0,
+    "transitMoe": 136
+   },
+   {
+    "tract": "030301",
+    "workers": 1270.0,
+    "wfh": 915.0,
+    "drive": 305.0,
+    "transit": 10.0,
+    "bus": 0.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 45.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 39
+   },
+   {
+    "tract": "030302",
+    "workers": 630.0,
+    "wfh": 515.0,
+    "drive": 79.0,
+    "transit": 20.0,
+    "bus": 20.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 4.0,
+    "other": 10.0,
+    "transitMoe": 44
+   },
+   {
+    "tract": "030400",
+    "workers": 1010.0,
+    "wfh": 315.0,
+    "drive": 465.0,
+    "transit": 89.0,
+    "bus": 75.0,
+    "subway": 10.0,
+    "rail": 4.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 25.0,
+    "other": 110.0,
+    "transitMoe": 61
+   },
+   {
+    "tract": "030500",
+    "workers": 2130.0,
+    "wfh": 365.0,
+    "drive": 1455.0,
+    "transit": 228.0,
+    "bus": 105.0,
+    "subway": 95.0,
+    "rail": 4.0,
+    "lightRail": 4.0,
+    "ferry": 20.0,
+    "bike": 10.0,
+    "walk": 45.0,
+    "other": 19.0,
+    "transitMoe": 98
+   },
+   {
+    "tract": "030600",
+    "workers": 780.0,
+    "wfh": 310.0,
+    "drive": 369.0,
+    "transit": 70.0,
+    "bus": 55.0,
+    "subway": 15.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 10.0,
+    "other": 19.0,
+    "transitMoe": 84
+   },
+   {
+    "tract": "030700",
+    "workers": 800.0,
+    "wfh": 550.0,
+    "drive": 195.0,
+    "transit": 30.0,
+    "bus": 30.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 20.0,
+    "other": 0.0,
+    "transitMoe": 65
+   },
+   {
+    "tract": "030800",
+    "workers": 2485.0,
+    "wfh": 1030.0,
+    "drive": 1124.0,
+    "transit": 144.0,
+    "bus": 110.0,
+    "subway": 30.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 4.0,
+    "bike": 10.0,
+    "walk": 75.0,
+    "other": 94.0,
+    "transitMoe": 73
+   },
+   {
+    "tract": "030900",
+    "workers": 1265.0,
+    "wfh": 590.0,
+    "drive": 450.0,
+    "transit": 145.0,
+    "bus": 110.0,
+    "subway": 35.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 65.0,
+    "other": 10.0,
+    "transitMoe": 97
+   },
+   {
+    "tract": "031000",
+    "workers": 1135.0,
+    "wfh": 520.0,
+    "drive": 440.0,
+    "transit": 49.0,
+    "bus": 35.0,
+    "subway": 4.0,
+    "rail": 0.0,
+    "lightRail": 10.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 45.0,
+    "other": 80.0,
+    "transitMoe": 51
+   },
+   {
+    "tract": "031100",
+    "workers": 2735.0,
+    "wfh": 1035.0,
+    "drive": 1065.0,
+    "transit": 375.0,
+    "bus": 195.0,
+    "subway": 120.0,
+    "rail": 40.0,
+    "lightRail": 20.0,
+    "ferry": 0.0,
+    "bike": 75.0,
+    "walk": 110.0,
+    "other": 64.0,
+    "transitMoe": 122
+   },
+   {
+    "tract": "031201",
+    "workers": 665.0,
+    "wfh": 265.0,
+    "drive": 340.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 55.0,
+    "other": 4.0,
+    "transitMoe": 40
+   },
+   {
+    "tract": "031202",
+    "workers": 550.0,
+    "wfh": 170.0,
+    "drive": 235.0,
+    "transit": 110.0,
+    "bus": 95.0,
+    "subway": 15.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 20.0,
+    "other": 4.0,
+    "transitMoe": 134
+   },
+   {
+    "tract": "031301",
+    "workers": 375.0,
+    "wfh": 225.0,
+    "drive": 150.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "031302",
+    "workers": 1065.0,
+    "wfh": 700.0,
+    "drive": 344.0,
+    "transit": 10.0,
+    "bus": 10.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 4.0,
+    "walk": 10.0,
+    "other": 0.0,
+    "transitMoe": 39
+   },
+   {
+    "tract": "031401",
+    "workers": 340.0,
+    "wfh": 80.0,
+    "drive": 159.0,
+    "transit": 45.0,
+    "bus": 0.0,
+    "subway": 20.0,
+    "rail": 25.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 45.0,
+    "walk": 0.0,
+    "other": 10.0,
+    "transitMoe": 55
+   },
+   {
+    "tract": "031402",
+    "workers": 520.0,
+    "wfh": 380.0,
+    "drive": 90.0,
+    "transit": 40.0,
+    "bus": 25.0,
+    "subway": 15.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 10.0,
+    "other": 0.0,
+    "transitMoe": 50
+   },
+   {
+    "tract": "032601",
+    "workers": 1755.0,
+    "wfh": 440.0,
+    "drive": 680.0,
+    "transit": 235.0,
+    "bus": 195.0,
+    "subway": 30.0,
+    "rail": 10.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 325.0,
+    "other": 75.0,
+    "transitMoe": 118
+   },
+   {
+    "tract": "032602",
+    "workers": 820.0,
+    "wfh": 410.0,
+    "drive": 340.0,
+    "transit": 45.0,
+    "bus": 25.0,
+    "subway": 20.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 25.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 48
+   },
+   {
+    "tract": "032700",
+    "workers": 855.0,
+    "wfh": 530.0,
+    "drive": 180.0,
+    "transit": 70.0,
+    "bus": 70.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 60.0,
+    "other": 10.0,
+    "transitMoe": 104
+   },
+   {
+    "tract": "032801",
+    "workers": 890.0,
+    "wfh": 190.0,
+    "drive": 439.0,
+    "transit": 160.0,
+    "bus": 105.0,
+    "subway": 35.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 20.0,
+    "bike": 20.0,
+    "walk": 45.0,
+    "other": 35.0,
+    "transitMoe": 124
+   },
+   {
+    "tract": "032802",
+    "workers": 1175.0,
+    "wfh": 195.0,
+    "drive": 775.0,
+    "transit": 55.0,
+    "bus": 55.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 45.0,
+    "walk": 80.0,
+    "other": 15.0,
+    "transitMoe": 48
+   },
+   {
+    "tract": "032901",
+    "workers": 725.0,
+    "wfh": 395.0,
+    "drive": 220.0,
+    "transit": 70.0,
+    "bus": 45.0,
+    "subway": 25.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 40.0,
+    "other": 0.0,
+    "transitMoe": 73
+   },
+   {
+    "tract": "032902",
+    "workers": 535.0,
+    "wfh": 140.0,
+    "drive": 195.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 150.0,
+    "other": 35.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "033001",
+    "workers": 680.0,
+    "wfh": 260.0,
+    "drive": 335.0,
+    "transit": 50.0,
+    "bus": 15.0,
+    "subway": 35.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 20.0,
+    "other": 0.0,
+    "transitMoe": 52
+   },
+   {
+    "tract": "033002",
+    "workers": 1455.0,
+    "wfh": 505.0,
+    "drive": 700.0,
+    "transit": 140.0,
+    "bus": 105.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 35.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 90.0,
+    "other": 20.0,
+    "transitMoe": 90
+   },
+   {
+    "tract": "033100",
+    "workers": 1040.0,
+    "wfh": 410.0,
+    "drive": 479.0,
+    "transit": 69.0,
+    "bus": 65.0,
+    "subway": 0.0,
+    "rail": 4.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 35.0,
+    "other": 30.0,
+    "transitMoe": 73
+   },
+   {
+    "tract": "033201",
+    "workers": 5850.0,
+    "wfh": 265.0,
+    "drive": 3625.0,
+    "transit": 1195.0,
+    "bus": 655.0,
+    "subway": 425.0,
+    "rail": 45.0,
+    "lightRail": 60.0,
+    "ferry": 10.0,
+    "bike": 90.0,
+    "walk": 570.0,
+    "other": 105.0,
+    "transitMoe": 255
+   },
+   {
+    "tract": "033203",
+    "workers": 275.0,
+    "wfh": 210.0,
+    "drive": 40.0,
+    "transit": 20.0,
+    "bus": 20.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 4.0,
+    "other": 0.0,
+    "transitMoe": 35
+   },
+   {
+    "tract": "033204",
+    "workers": 220.0,
+    "wfh": 120.0,
+    "drive": 55.0,
+    "transit": 15.0,
+    "bus": 15.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 30.0,
+    "other": 0.0,
+    "transitMoe": 39
+   },
+   {
+    "tract": "035101",
+    "workers": 435.0,
+    "wfh": 100.0,
+    "drive": 179.0,
+    "transit": 50.0,
+    "bus": 25.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 25.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 105.0,
+    "transitMoe": 61
+   },
+   {
+    "tract": "035102",
+    "workers": 580.0,
+    "wfh": 260.0,
+    "drive": 260.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 25.0,
+    "walk": 35.0,
+    "other": 4.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "035201",
+    "workers": 740.0,
+    "wfh": 450.0,
+    "drive": 175.0,
+    "transit": 70.0,
+    "bus": 70.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 40.0,
+    "other": 0.0,
+    "transitMoe": 67
+   },
+   {
+    "tract": "035202",
+    "workers": 560.0,
+    "wfh": 345.0,
+    "drive": 125.0,
+    "transit": 30.0,
+    "bus": 30.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 35.0,
+    "other": 20.0,
+    "transitMoe": 38
+   },
+   {
+    "tract": "035300",
+    "workers": 1955.0,
+    "wfh": 1020.0,
+    "drive": 595.0,
+    "transit": 200.0,
+    "bus": 180.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 20.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 80.0,
+    "other": 25.0,
+    "transitMoe": 93
+   },
+   {
+    "tract": "035400",
+    "workers": 530.0,
+    "wfh": 260.0,
+    "drive": 100.0,
+    "transit": 65.0,
+    "bus": 40.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 25.0,
+    "ferry": 0.0,
+    "bike": 30.0,
+    "walk": 30.0,
+    "other": 45.0,
+    "transitMoe": 67
+   },
+   {
+    "tract": "040100",
+    "workers": 1705.0,
+    "wfh": 665.0,
+    "drive": 664.0,
+    "transit": 260.0,
+    "bus": 200.0,
+    "subway": 60.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 20.0,
+    "walk": 85.0,
+    "other": 4.0,
+    "transitMoe": 124
+   },
+   {
+    "tract": "040200",
+    "workers": 1860.0,
+    "wfh": 635.0,
+    "drive": 735.0,
+    "transit": 195.0,
+    "bus": 160.0,
+    "subway": 25.0,
+    "rail": 10.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 35.0,
+    "walk": 170.0,
+    "other": 90.0,
+    "transitMoe": 127
+   },
+   {
+    "tract": "042601",
+    "workers": 780.0,
+    "wfh": 255.0,
+    "drive": 254.0,
+    "transit": 169.0,
+    "bus": 155.0,
+    "subway": 0.0,
+    "rail": 4.0,
+    "lightRail": 10.0,
+    "ferry": 0.0,
+    "bike": 25.0,
+    "walk": 25.0,
+    "other": 50.0,
+    "transitMoe": 102
+   },
+   {
+    "tract": "042602",
+    "workers": 1005.0,
+    "wfh": 460.0,
+    "drive": 280.0,
+    "transit": 159.0,
+    "bus": 155.0,
+    "subway": 4.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 90.0,
+    "other": 0.0,
+    "transitMoe": 92
+   },
+   {
+    "tract": "042700",
+    "workers": 820.0,
+    "wfh": 300.0,
+    "drive": 410.0,
+    "transit": 50.0,
+    "bus": 50.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 40.0,
+    "other": 15.0,
+    "transitMoe": 58
+   },
+   {
+    "tract": "042800",
+    "workers": 785.0,
+    "wfh": 360.0,
+    "drive": 340.0,
+    "transit": 25.0,
+    "bus": 25.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 55.0,
+    "other": 0.0,
+    "transitMoe": 37
+   },
+   {
+    "tract": "045100",
+    "workers": 1375.0,
+    "wfh": 775.0,
+    "drive": 400.0,
+    "transit": 140.0,
+    "bus": 45.0,
+    "subway": 75.0,
+    "rail": 20.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 25.0,
+    "other": 20.0,
+    "transitMoe": 83
+   },
+   {
+    "tract": "045201",
+    "workers": 330.0,
+    "wfh": 180.0,
+    "drive": 110.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 10.0,
+    "other": 25.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "045202",
+    "workers": 1225.0,
+    "wfh": 360.0,
+    "drive": 290.0,
+    "transit": 355.0,
+    "bus": 280.0,
+    "subway": 45.0,
+    "rail": 15.0,
+    "lightRail": 15.0,
+    "ferry": 0.0,
+    "bike": 55.0,
+    "walk": 100.0,
+    "other": 65.0,
+    "transitMoe": 237
+   },
+   {
+    "tract": "047600",
+    "workers": 1345.0,
+    "wfh": 800.0,
+    "drive": 395.0,
+    "transit": 105.0,
+    "bus": 75.0,
+    "subway": 15.0,
+    "rail": 0.0,
+    "lightRail": 15.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 25.0,
+    "other": 25.0,
+    "transitMoe": 73
+   },
+   {
+    "tract": "047701",
+    "workers": 1050.0,
+    "wfh": 640.0,
+    "drive": 285.0,
+    "transit": 65.0,
+    "bus": 40.0,
+    "subway": 10.0,
+    "rail": 15.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 60.0,
+    "other": 4.0,
+    "transitMoe": 54
+   },
+   {
+    "tract": "047702",
+    "workers": 695.0,
+    "wfh": 400.0,
+    "drive": 175.0,
+    "transit": 95.0,
+    "bus": 85.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 25.0,
+    "transitMoe": 81
+   },
+   {
+    "tract": "047801",
+    "workers": 1035.0,
+    "wfh": 380.0,
+    "drive": 280.0,
+    "transit": 195.0,
+    "bus": 155.0,
+    "subway": 0.0,
+    "rail": 40.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 110.0,
+    "other": 65.0,
+    "transitMoe": 181
+   },
+   {
+    "tract": "047802",
+    "workers": 790.0,
+    "wfh": 295.0,
+    "drive": 260.0,
+    "transit": 4.0,
+    "bus": 4.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 180.0,
+    "other": 45.0,
+    "transitMoe": 27
+   },
+   {
+    "tract": "047902",
+    "workers": 700.0,
+    "wfh": 425.0,
+    "drive": 195.0,
+    "transit": 30.0,
+    "bus": 30.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 30.0,
+    "walk": 10.0,
+    "other": 10.0,
+    "transitMoe": 48
+   },
+   {
+    "tract": "047903",
+    "workers": 465.0,
+    "wfh": 420.0,
+    "drive": 20.0,
+    "transit": 20.0,
+    "bus": 10.0,
+    "subway": 0.0,
+    "rail": 10.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 36
+   },
+   {
+    "tract": "047904",
+    "workers": 765.0,
+    "wfh": 340.0,
+    "drive": 270.0,
+    "transit": 120.0,
+    "bus": 90.0,
+    "subway": 30.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 35.0,
+    "other": 0.0,
+    "transitMoe": 80
+   },
+   {
+    "tract": "060100",
+    "workers": 5180.0,
+    "wfh": 455.0,
+    "drive": 2825.0,
+    "transit": 905.0,
+    "bus": 600.0,
+    "subway": 215.0,
+    "rail": 25.0,
+    "lightRail": 65.0,
+    "ferry": 0.0,
+    "bike": 150.0,
+    "walk": 615.0,
+    "other": 230.0,
+    "transitMoe": 225
+   },
+   {
+    "tract": "060400",
+    "workers": 1095.0,
+    "wfh": 140.0,
+    "drive": 715.0,
+    "transit": 160.0,
+    "bus": 100.0,
+    "subway": 60.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 30.0,
+    "walk": 20.0,
+    "other": 19.0,
+    "transitMoe": 98
+   },
+   {
+    "tract": "060502",
+    "workers": 130.0,
+    "wfh": 80.0,
+    "drive": 50.0,
+    "transit": 0.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "060701",
+    "workers": 16030.0,
+    "wfh": 1155.0,
+    "drive": 7469.0,
+    "transit": 4845.0,
+    "bus": 2085.0,
+    "subway": 1370.0,
+    "rail": 970.0,
+    "lightRail": 235.0,
+    "ferry": 185.0,
+    "bike": 660.0,
+    "walk": 1295.0,
+    "other": 610.0,
+    "transitMoe": 563
+   },
+   {
+    "tract": "060702",
+    "workers": 5900.0,
+    "wfh": 25.0,
+    "drive": 3180.0,
+    "transit": 1240.0,
+    "bus": 465.0,
+    "subway": 505.0,
+    "rail": 115.0,
+    "lightRail": 100.0,
+    "ferry": 55.0,
+    "bike": 670.0,
+    "walk": 620.0,
+    "other": 165.0,
+    "transitMoe": 278
+   },
+   {
+    "tract": "060703",
+    "workers": 7325.0,
+    "wfh": 1025.0,
+    "drive": 2505.0,
+    "transit": 2590.0,
+    "bus": 920.0,
+    "subway": 815.0,
+    "rail": 690.0,
+    "lightRail": 95.0,
+    "ferry": 70.0,
+    "bike": 330.0,
+    "walk": 575.0,
+    "other": 295.0,
+    "transitMoe": 482
+   },
+   {
+    "tract": "061000",
+    "workers": 1430.0,
+    "wfh": 310.0,
+    "drive": 865.0,
+    "transit": 125.0,
+    "bus": 75.0,
+    "subway": 25.0,
+    "rail": 25.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 105.0,
+    "other": 25.0,
+    "transitMoe": 80
+   },
+   {
+    "tract": "061101",
+    "workers": 11220.0,
+    "wfh": 25.0,
+    "drive": 3360.0,
+    "transit": 5910.0,
+    "bus": 2040.0,
+    "subway": 2870.0,
+    "rail": 405.0,
+    "lightRail": 285.0,
+    "ferry": 310.0,
+    "bike": 290.0,
+    "walk": 1190.0,
+    "other": 445.0,
+    "transitMoe": 688
+   },
+   {
+    "tract": "061102",
+    "workers": 490.0,
+    "wfh": 0.0,
+    "drive": 270.0,
+    "transit": 70.0,
+    "bus": 20.0,
+    "subway": 50.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 135.0,
+    "other": 20.0,
+    "transitMoe": 52
+   },
+   {
+    "tract": "061200",
+    "workers": 850.0,
+    "wfh": 175.0,
+    "drive": 589.0,
+    "transit": 69.0,
+    "bus": 65.0,
+    "subway": 4.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 10.0,
+    "transitMoe": 55
+   },
+   {
+    "tract": "061401",
+    "workers": 635.0,
+    "wfh": 425.0,
+    "drive": 145.0,
+    "transit": 45.0,
+    "bus": 45.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 15.0,
+    "transitMoe": 46
+   },
+   {
+    "tract": "061402",
+    "workers": 1015.0,
+    "wfh": 400.0,
+    "drive": 465.0,
+    "transit": 50.0,
+    "bus": 50.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 15.0,
+    "walk": 90.0,
+    "other": 0.0,
+    "transitMoe": 54
+   },
+   {
+    "tract": "061501",
+    "workers": 47600.0,
+    "wfh": 80.0,
+    "drive": 11435.0,
+    "transit": 28960.0,
+    "bus": 9970.0,
+    "subway": 13920.0,
+    "rail": 2950.0,
+    "lightRail": 1065.0,
+    "ferry": 1055.0,
+    "bike": 855.0,
+    "walk": 4595.0,
+    "other": 1675.0,
+    "transitMoe": 1368
+   },
+   {
+    "tract": "061502",
+    "workers": 6775.0,
+    "wfh": 95.0,
+    "drive": 2280.0,
+    "transit": 3355.0,
+    "bus": 1100.0,
+    "subway": 1115.0,
+    "rail": 770.0,
+    "lightRail": 255.0,
+    "ferry": 115.0,
+    "bike": 195.0,
+    "walk": 475.0,
+    "other": 370.0,
+    "transitMoe": 441
+   },
+   {
+    "tract": "061503",
+    "workers": 11445.0,
+    "wfh": 355.0,
+    "drive": 2550.0,
+    "transit": 6555.0,
+    "bus": 2305.0,
+    "subway": 2655.0,
+    "rail": 1045.0,
+    "lightRail": 255.0,
+    "ferry": 295.0,
+    "bike": 325.0,
+    "walk": 1345.0,
+    "other": 310.0,
+    "transitMoe": 663
+   },
+   {
+    "tract": "061504",
+    "workers": 995.0,
+    "wfh": 315.0,
+    "drive": 204.0,
+    "transit": 285.0,
+    "bus": 80.0,
+    "subway": 165.0,
+    "rail": 25.0,
+    "lightRail": 15.0,
+    "ferry": 0.0,
+    "bike": 10.0,
+    "walk": 135.0,
+    "other": 45.0,
+    "transitMoe": 121
+   },
+   {
+    "tract": "061505",
+    "workers": 225.0,
+    "wfh": 60.0,
+    "drive": 109.0,
+    "transit": 50.0,
+    "bus": 40.0,
+    "subway": 10.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 56
+   },
+   {
+    "tract": "061506",
+    "workers": 3415.0,
+    "wfh": 1345.0,
+    "drive": 715.0,
+    "transit": 1100.0,
+    "bus": 435.0,
+    "subway": 415.0,
+    "rail": 150.0,
+    "lightRail": 25.0,
+    "ferry": 75.0,
+    "bike": 70.0,
+    "walk": 155.0,
+    "other": 25.0,
+    "transitMoe": 252
+   },
+   {
+    "tract": "061507",
+    "workers": 23255.0,
+    "wfh": 55.0,
+    "drive": 4375.0,
+    "transit": 16050.0,
+    "bus": 4775.0,
+    "subway": 7680.0,
+    "rail": 1860.0,
+    "lightRail": 760.0,
+    "ferry": 975.0,
+    "bike": 585.0,
+    "walk": 1370.0,
+    "other": 830.0,
+    "transitMoe": 924
+   },
+   {
+    "tract": "061508",
+    "workers": 3000.0,
+    "wfh": 185.0,
+    "drive": 914.0,
+    "transit": 1535.0,
+    "bus": 580.0,
+    "subway": 590.0,
+    "rail": 230.0,
+    "lightRail": 25.0,
+    "ferry": 110.0,
+    "bike": 170.0,
+    "walk": 90.0,
+    "other": 105.0,
+    "transitMoe": 371
+   },
+   {
+    "tract": "980200",
+    "workers": 3115.0,
+    "wfh": 0.0,
+    "drive": 2400.0,
+    "transit": 384.0,
+    "bus": 220.0,
+    "subway": 140.0,
+    "rail": 20.0,
+    "lightRail": 0.0,
+    "ferry": 4.0,
+    "bike": 105.0,
+    "walk": 230.0,
+    "other": 0.0,
+    "transitMoe": 137
+   },
+   {
+    "tract": "980300",
+    "workers": 1765.0,
+    "wfh": 4.0,
+    "drive": 874.0,
+    "transit": 380.0,
+    "bus": 300.0,
+    "subway": 80.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 125.0,
+    "walk": 350.0,
+    "other": 30.0,
+    "transitMoe": 260
+   },
+   {
+    "tract": "980501",
+    "workers": 190.0,
+    "wfh": 0.0,
+    "drive": 179.0,
+    "transit": 10.0,
+    "bus": 0.0,
+    "subway": 0.0,
+    "rail": 10.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 0.0,
+    "other": 0.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "980600",
+    "workers": 245.0,
+    "wfh": 60.0,
+    "drive": 175.0,
+    "transit": 10.0,
+    "bus": 10.0,
+    "subway": 0.0,
+    "rail": 0.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 0.0,
+    "walk": 4.0,
+    "other": 0.0,
+    "transitMoe": 29
+   },
+   {
+    "tract": "980900",
+    "workers": 11165.0,
+    "wfh": 35.0,
+    "drive": 9504.0,
+    "transit": 800.0,
+    "bus": 535.0,
+    "subway": 215.0,
+    "rail": 50.0,
+    "lightRail": 0.0,
+    "ferry": 0.0,
+    "bike": 95.0,
+    "walk": 260.0,
+    "other": 470.0,
+    "transitMoe": 225
+   }
+  ]
+ },
+ "inCommutersByPuma": {
+  "source": "ACS 2020-2024 5-year PUMS, California person file: workers with workplace San Francisco County (POWSP 006, POWPUMA 07500) by residence PUMA (2020 PUMAs) and means of transportation; commuters = workers less those working from home; standard errors from the 80 replicate weights (successive differences). Tabulated by data/beta3/raw/od/pums/puma_to_sf.py.",
+  "url": "https://www2.census.gov/programs-surveys/acs/data/pums/2024/5-Year/csv_pca.zip",
+  "pumas": [
+   {
+    "puma": "00101",
+    "commuters": 7246,
+    "commutersSE": 447,
+    "transitShare": 0.616,
+    "transitShareSE": 0.032,
+    "bartShare": 0.427
+   },
+   {
+    "puma": "00111",
+    "commuters": 10029,
+    "commutersSE": 559,
+    "transitShare": 0.657,
+    "transitShareSE": 0.026,
+    "bartShare": 0.531
+   },
+   {
+    "puma": "00112",
+    "commuters": 7543,
+    "commutersSE": 444,
+    "transitShare": 0.496,
+    "transitShareSE": 0.031,
+    "bartShare": 0.359
+   },
+   {
+    "puma": "00113",
+    "commuters": 6155,
+    "commutersSE": 563,
+    "transitShare": 0.427,
+    "transitShareSE": 0.038,
+    "bartShare": 0.322
+   },
+   {
+    "puma": "00114",
+    "commuters": 11088,
+    "commutersSE": 692,
+    "transitShare": 0.494,
+    "transitShareSE": 0.033,
+    "bartShare": 0.199
+   },
+   {
+    "puma": "00115",
+    "commuters": 3079,
+    "commutersSE": 343,
+    "transitShare": 0.375,
+    "transitShareSE": 0.052,
+    "bartShare": 0.216
+   },
+   {
+    "puma": "00116",
+    "commuters": 3487,
+    "commutersSE": 440,
+    "transitShare": 0.426,
+    "transitShareSE": 0.073,
+    "bartShare": 0.252
+   },
+   {
+    "puma": "00117",
+    "commuters": 1542,
+    "commutersSE": 195,
+    "transitShare": 0.562,
+    "transitShareSE": 0.062,
+    "bartShare": 0.259
+   },
+   {
+    "puma": "00118",
+    "commuters": 1940,
+    "commutersSE": 275,
+    "transitShare": 0.561,
+    "transitShareSE": 0.063,
+    "bartShare": 0.304
+   },
+   {
+    "puma": "00119",
+    "commuters": 2836,
+    "commutersSE": 347,
+    "transitShare": 0.541,
+    "transitShareSE": 0.055,
+    "bartShare": 0.289
+   },
+   {
+    "puma": "00120",
+    "commuters": 1992,
+    "commutersSE": 263,
+    "transitShare": 0.526,
+    "transitShareSE": 0.065,
+    "bartShare": 0.251
+   },
+   {
+    "puma": "00121",
+    "commuters": 1597,
+    "commutersSE": 204,
+    "transitShare": 0.697,
+    "transitShareSE": 0.056,
+    "bartShare": 0.45
+   },
+   {
+    "puma": "00122",
+    "commuters": 2487,
+    "commutersSE": 246,
+    "transitShare": 0.246,
+    "transitShareSE": 0.052,
+    "bartShare": 0.171
+   },
+   {
+    "puma": "00123",
+    "commuters": 6225,
+    "commutersSE": 509,
+    "transitShare": 0.549,
+    "transitShareSE": 0.043,
+    "bartShare": 0.344
+   },
+   {
+    "puma": "01301",
+    "commuters": 8941,
+    "commutersSE": 625,
+    "transitShare": 0.273,
+    "transitShareSE": 0.035,
+    "bartShare": 0.14
+   },
+   {
+    "puma": "01305",
+    "commuters": 3187,
+    "commutersSE": 310,
+    "transitShare": 0.511,
+    "transitShareSE": 0.05,
+    "bartShare": 0.328
+   },
+   {
+    "puma": "01308",
+    "commuters": 3628,
+    "commutersSE": 350,
+    "transitShare": 0.239,
+    "transitShareSE": 0.045,
+    "bartShare": 0.14
+   },
+   {
+    "puma": "01309",
+    "commuters": 2056,
+    "commutersSE": 317,
+    "transitShare": 0.183,
+    "transitShareSE": 0.046,
+    "bartShare": 0.054
+   },
+   {
+    "puma": "01310",
+    "commuters": 8445,
+    "commutersSE": 615,
+    "transitShare": 0.384,
+    "transitShareSE": 0.036,
+    "bartShare": 0.215
+   },
+   {
+    "puma": "01311",
+    "commuters": 3738,
+    "commutersSE": 360,
+    "transitShare": 0.389,
+    "transitShareSE": 0.045,
+    "bartShare": 0.218
+   },
+   {
+    "puma": "01312",
+    "commuters": 4849,
+    "commutersSE": 381,
+    "transitShare": 0.503,
+    "transitShareSE": 0.052,
+    "bartShare": 0.342
+   },
+   {
+    "puma": "01313",
+    "commuters": 7345,
+    "commutersSE": 606,
+    "transitShare": 0.506,
+    "transitShareSE": 0.038,
+    "bartShare": 0.313
+   },
+   {
+    "puma": "01314",
+    "commuters": 4064,
+    "commutersSE": 477,
+    "transitShare": 0.351,
+    "transitShareSE": 0.047,
+    "bartShare": 0.174
+   },
+   {
+    "puma": "04103",
+    "commuters": 5031,
+    "commutersSE": 403,
+    "transitShare": 0.196,
+    "transitShareSE": 0.04,
+    "bartShare": 0.0
+   },
+   {
+    "puma": "04104",
+    "commuters": 9950,
+    "commutersSE": 510,
+    "transitShare": 0.161,
+    "transitShareSE": 0.017,
+    "bartShare": 0.001
+   },
+   {
+    "puma": "05500",
+    "commuters": 1406,
+    "commutersSE": 170,
+    "transitShare": 0.197,
+    "transitShareSE": 0.051,
+    "bartShare": 0.0
+   },
+   {
+    "puma": "08101",
+    "commuters": 22428,
+    "commutersSE": 932,
+    "transitShare": 0.196,
+    "transitShareSE": 0.016,
+    "bartShare": 0.078
+   },
+   {
+    "puma": "08102",
+    "commuters": 14907,
+    "commutersSE": 803,
+    "transitShare": 0.137,
+    "transitShareSE": 0.021,
+    "bartShare": 0.056
+   },
+   {
+    "puma": "08103",
+    "commuters": 7705,
+    "commutersSE": 514,
+    "transitShare": 0.178,
+    "transitShareSE": 0.023,
+    "bartShare": 0.101
+   },
+   {
+    "puma": "08104",
+    "commuters": 4925,
+    "commutersSE": 381,
+    "transitShare": 0.167,
+    "transitShareSE": 0.028,
+    "bartShare": 0.056
+   },
+   {
+    "puma": "08105",
+    "commuters": 3757,
+    "commutersSE": 338,
+    "transitShare": 0.289,
+    "transitShareSE": 0.037,
+    "bartShare": 0.038
+   },
+   {
+    "puma": "08106",
+    "commuters": 2336,
+    "commutersSE": 318,
+    "transitShare": 0.152,
+    "transitShareSE": 0.042,
+    "bartShare": 0.008
+   },
+   {
+    "puma": "08505",
+    "commuters": 2249,
+    "commutersSE": 362,
+    "transitShare": 0.036,
+    "transitShareSE": 0.017,
+    "bartShare": 0.014
+   },
+   {
+    "puma": "08510",
+    "commuters": 1417,
+    "commutersSE": 220,
+    "transitShare": 0.186,
+    "transitShareSE": 0.056,
+    "bartShare": 0.024
+   },
+   {
+    "puma": "08516",
+    "commuters": 1688,
+    "commutersSE": 240,
+    "transitShare": 0.366,
+    "transitShareSE": 0.069,
+    "bartShare": 0.042
+   },
+   {
+    "puma": "08518",
+    "commuters": 1078,
+    "commutersSE": 231,
+    "transitShare": 0.372,
+    "transitShareSE": 0.114,
+    "bartShare": 0.173
+   },
+   {
+    "puma": "08521",
+    "commuters": 1991,
+    "commutersSE": 338,
+    "transitShare": 0.081,
+    "transitShareSE": 0.036,
+    "bartShare": 0.069
+   },
+   {
+    "puma": "08522",
+    "commuters": 1112,
+    "commutersSE": 166,
+    "transitShare": 0.436,
+    "transitShareSE": 0.077,
+    "bartShare": 0.014
+   },
+   {
+    "puma": "09501",
+    "commuters": 4492,
+    "commutersSE": 410,
+    "transitShare": 0.213,
+    "transitShareSE": 0.034,
+    "bartShare": 0.044
+   },
+   {
+    "puma": "09502",
+    "commuters": 2779,
+    "commutersSE": 314,
+    "transitShare": 0.147,
+    "transitShareSE": 0.058,
+    "bartShare": 0.014
+   },
+   {
+    "puma": "09702",
+    "commuters": 2489,
+    "commutersSE": 300,
+    "transitShare": 0.073,
+    "transitShareSE": 0.026,
+    "bartShare": 0.0
+   },
+   {
+    "puma": "09704",
+    "commuters": 1260,
+    "commutersSE": 210,
+    "transitShare": 0.066,
+    "transitShareSE": 0.026,
+    "bartShare": 0.019
+   },
+   {
+    "puma": "09706",
+    "commuters": 1220,
+    "commutersSE": 223,
+    "transitShare": 0.148,
+    "transitShareSE": 0.063,
+    "bartShare": 0.055
+   }
+  ],
+  "tractCentroidsNote": "mean of the LODES 2023 crosswalk block points (blklatdd, blklondd) of each 2020 tract, with its 2020 PUMA (2020_Census_Tract_to_2020_PUMA.txt)",
+  "tractCentroids": [
+   [
+    37.86224,
+    -122.23242,
+    "00112"
+   ],
+   [
+    37.84894,
+    -122.24903,
+    "00111"
+   ],
+   [
+    37.84008,
+    -122.25547,
+    "00112"
+   ],
+   [
+    37.84774,
+    -122.25786,
+    "00111"
+   ],
+   [
+    37.84859,
+    -122.26527,
+    "00111"
+   ],
+   [
+    37.84207,
+    -122.26468,
+    "00111"
+   ],
+   [
+    37.84224,
+    -122.27277,
+    "00111"
+   ],
+   [
+    37.84567,
+    -122.28379,
+    "00111"
+   ],
+   [
+    37.83948,
+    -122.28027,
+    "00111"
+   ],
+   [
+    37.83099,
+    -122.27206,
+    "00111"
+   ],
+   [
+    37.83106,
+    -122.26389,
+    "00112"
+   ],
+   [
+    37.831,
+    -122.25773,
+    "00112"
+   ],
+   [
+    37.81784,
+    -122.26734,
+    "00111"
+   ],
+   [
+    37.82032,
+    -122.2738,
+    "00111"
+   ],
+   [
+    37.82368,
+    -122.28044,
+    "00111"
+   ],
+   [
+    37.81742,
+    -122.28178,
+    "00111"
+   ],
+   [
+    37.81961,
+    -122.29643,
+    "00111"
+   ],
+   [
+    37.80984,
+    -122.29808,
+    "00111"
+   ],
+   [
+    37.80782,
+    -122.29441,
+    "00111"
+   ],
+   [
+    37.81263,
+    -122.28244,
+    "00111"
+   ],
+   [
+    37.80557,
+    -122.28512,
+    "00111"
+   ],
+   [
+    37.80411,
+    -122.28014,
+    "00111"
+   ],
+   [
+    37.8105,
+    -122.27733,
+    "00111"
+   ],
+   [
+    37.80951,
+    -122.27079,
+    "00111"
+   ],
+   [
+    37.80716,
+    -122.27346,
+    "00111"
+   ],
+   [
+    37.80785,
+    -122.26676,
+    "00111"
+   ],
+   [
+    37.79986,
+    -122.27122,
+    "00111"
+   ],
+   [
+    37.80174,
+    -122.27599,
+    "00111"
+   ],
+   [
+    37.79772,
+    -122.2672,
+    "00111"
+   ],
+   [
+    37.79486,
+    -122.26649,
+    "00111"
+   ],
+   [
+    37.80501,
+    -122.26103,
+    "00111"
+   ],
+   [
+    37.80147,
+    -122.26502,
+    "00111"
+   ],
+   [
+    37.81822,
+    -122.25995,
+    "00111"
+   ],
+   [
+    37.81601,
+    -122.2572,
+    "00111"
+   ],
+   [
+    37.81389,
+    -122.25344,
+    "00111"
+   ],
+   [
+    37.81124,
+    -122.25931,
+    "00111"
+   ],
+   [
+    37.80948,
+    -122.25198,
+    "00111"
+   ],
+   [
+    37.81486,
+    -122.24259,
+    "00112"
+   ],
+   [
+    37.81794,
+    -122.24896,
+    "00112"
+   ],
+   [
+    37.82352,
+    -122.25416,
+    "00112"
+   ],
+   [
+    37.83016,
+    -122.25029,
+    "00112"
+   ],
+   [
+    37.82623,
+    -122.25184,
+    "00112"
+   ],
+   [
+    37.83795,
+    -122.23148,
+    "00112"
+   ],
+   [
+    37.8446,
+    -122.23985,
+    "00112"
+   ],
+   [
+    37.84403,
+    -122.21729,
+    "00112"
+   ],
+   [
+    37.82539,
+    -122.21646,
+    "00112"
+   ],
+   [
+    37.83358,
+    -122.20255,
+    "00112"
+   ],
+   [
+    37.82407,
+    -122.19378,
+    "00112"
+   ],
+   [
+    37.8128,
+    -122.20688,
+    "00112"
+   ],
+   [
+    37.80626,
+    -122.21286,
+    "00112"
+   ],
+   [
+    37.80359,
+    -122.22257,
+    "00112"
+   ],
+   [
+    37.80744,
+    -122.22787,
+    "00112"
+   ],
+   [
+    37.81247,
+    -122.23179,
+    "00112"
+   ],
+   [
+    37.80537,
+    -122.24406,
+    "00123"
+   ],
+   [
+    37.80224,
+    -122.25151,
+    "00123"
+   ],
+   [
+    37.79862,
+    -122.25396,
+    "00123"
+   ],
+   [
+    37.79655,
+    -122.24948,
+    "00123"
+   ],
+   [
+    37.79333,
+    -122.24602,
+    "00123"
+   ],
+   [
+    37.79826,
+    -122.24322,
+    "00123"
+   ],
+   [
+    37.8014,
+    -122.23722,
+    "00123"
+   ],
+   [
+    37.79857,
+    -122.22896,
+    "00123"
+   ],
+   [
+    37.79423,
+    -122.23331,
+    "00123"
+   ],
+   [
+    37.78789,
+    -122.23627,
+    "00123"
+   ],
+   [
+    37.79088,
+    -122.24133,
+    "00123"
+   ],
+   [
+    37.78876,
+    -122.2493,
+    "00123"
+   ],
+   [
+    37.77467,
+    -122.22744,
+    "00123"
+   ],
+   [
+    37.78532,
+    -122.23115,
+    "00123"
+   ],
+   [
+    37.78206,
+    -122.22654,
+    "00123"
+   ],
+   [
+    37.78946,
+    -122.22602,
+    "00123"
+   ],
+   [
+    37.79525,
+    -122.22086,
+    "00123"
+   ],
+   [
+    37.78845,
+    -122.21654,
+    "00123"
+   ],
+   [
+    37.79358,
+    -122.20688,
+    "00123"
+   ],
+   [
+    37.79709,
+    -122.21448,
+    "00123"
+   ],
+   [
+    37.80193,
+    -122.20414,
+    "00112"
+   ],
+   [
+    37.79654,
+    -122.19595,
+    "00112"
+   ],
+   [
+    37.79262,
+    -122.19088,
+    "00112"
+   ],
+   [
+    37.78787,
+    -122.20253,
+    "00123"
+   ],
+   [
+    37.78318,
+    -122.21397,
+    "00123"
+   ],
+   [
+    37.77975,
+    -122.21066,
+    "00123"
+   ],
+   [
+    37.77737,
+    -122.21805,
+    "00123"
+   ],
+   [
+    37.7653,
+    -122.2107,
+    "00113"
+   ],
+   [
+    37.77166,
+    -122.20727,
+    "00113"
+   ],
+   [
+    37.77033,
+    -122.19693,
+    "00113"
+   ],
+   [
+    37.77715,
+    -122.20338,
+    "00113"
+   ],
+   [
+    37.77619,
+    -122.19291,
+    "00113"
+   ],
+   [
+    37.7815,
+    -122.18758,
+    "00113"
+   ],
+   [
+    37.78816,
+    -122.18641,
+    "00112"
+   ],
+   [
+    37.80216,
+    -122.18041,
+    "00112"
+   ],
+   [
+    37.78549,
+    -122.15892,
+    "00112"
+   ],
+   [
+    37.77527,
+    -122.17624,
+    "00113"
+   ],
+   [
+    37.77168,
+    -122.16539,
+    "00113"
+   ],
+   [
+    37.76451,
+    -122.17217,
+    "00113"
+   ],
+   [
+    37.76076,
+    -122.17877,
+    "00113"
+   ],
+   [
+    37.76575,
+    -122.18292,
+    "00113"
+   ],
+   [
+    37.76889,
+    -122.18894,
+    "00113"
+   ],
+   [
+    37.75928,
+    -122.1956,
+    "00113"
+   ],
+   [
+    37.75498,
+    -122.18943,
+    "00113"
+   ],
+   [
+    37.7347,
+    -122.20182,
+    "00113"
+   ],
+   [
+    37.7329,
+    -122.18394,
+    "00113"
+   ],
+   [
+    37.72948,
+    -122.17747,
+    "00113"
+   ],
+   [
+    37.73754,
+    -122.17289,
+    "00113"
+   ],
+   [
+    37.74596,
+    -122.17762,
+    "00113"
+   ],
+   [
+    37.75086,
+    -122.18142,
+    "00113"
+   ],
+   [
+    37.75319,
+    -122.17253,
+    "00113"
+   ],
+   [
+    37.75592,
+    -122.16668,
+    "00113"
+   ],
+   [
+    37.76049,
+    -122.15631,
+    "00113"
+   ],
+   [
+    37.76193,
+    -122.13872,
+    "00112"
+   ],
+   [
+    37.74402,
+    -122.13614,
+    "00112"
+   ],
+   [
+    37.74791,
+    -122.15394,
+    "00113"
+   ],
+   [
+    37.74557,
+    -122.15738,
+    "00113"
+   ],
+   [
+    37.74675,
+    -122.16571,
+    "00113"
+   ],
+   [
+    37.74129,
+    -122.16166,
+    "00113"
+   ],
+   [
+    37.81047,
+    -122.28887,
+    "00111"
+   ],
+   [
+    37.89506,
+    -122.29084,
+    "00101"
+   ],
+   [
+    37.89457,
+    -122.29774,
+    "00101"
+   ],
+   [
+    37.89352,
+    -122.30385,
+    "00101"
+   ],
+   [
+    37.89077,
+    -122.30542,
+    "00101"
+   ],
+   [
+    37.88463,
+    -122.29984,
+    "00101"
+   ],
+   [
+    37.88485,
+    -122.30775,
+    "00101"
+   ],
+   [
+    37.88608,
+    -122.29497,
+    "00101"
+   ],
+   [
+    37.88711,
+    -122.28687,
+    "00101"
+   ],
+   [
+    37.89891,
+    -122.26708,
+    "00101"
+   ],
+   [
+    37.89689,
+    -122.27454,
+    "00101"
+   ],
+   [
+    37.8911,
+    -122.28171,
+    "00101"
+   ],
+   [
+    37.88841,
+    -122.27148,
+    "00101"
+   ],
+   [
+    37.89191,
+    -122.26023,
+    "00101"
+   ],
+   [
+    37.8832,
+    -122.25838,
+    "00101"
+   ],
+   [
+    37.88189,
+    -122.27056,
+    "00101"
+   ],
+   [
+    37.87981,
+    -122.27892,
+    "00101"
+   ],
+   [
+    37.87918,
+    -122.2903,
+    "00101"
+   ],
+   [
+    37.8668,
+    -122.29814,
+    "00101"
+   ],
+   [
+    37.87332,
+    -122.2966,
+    "00101"
+   ],
+   [
+    37.87264,
+    -122.28792,
+    "00101"
+   ],
+   [
+    37.87389,
+    -122.27838,
+    "00101"
+   ],
+   [
+    37.8747,
+    -122.26979,
+    "00101"
+   ],
+   [
+    37.87747,
+    -122.26016,
+    "00101"
+   ],
+   [
+    37.86789,
+    -122.25045,
+    "00101"
+   ],
+   [
+    37.86679,
+    -122.25993,
+    "00101"
+   ],
+   [
+    37.86583,
+    -122.26769,
+    "00101"
+   ],
+   [
+    37.86923,
+    -122.26906,
+    "00101"
+   ],
+   [
+    37.86686,
+    -122.27778,
+    "00101"
+   ],
+   [
+    37.86569,
+    -122.28702,
+    "00101"
+   ],
+   [
+    37.86471,
+    -122.29359,
+    "00101"
+   ],
+   [
+    37.85707,
+    -122.28463,
+    "00101"
+   ],
+   [
+    37.85844,
+    -122.27667,
+    "00101"
+   ],
+   [
+    37.85917,
+    -122.26783,
+    "00101"
+   ],
+   [
+    37.85872,
+    -122.25894,
+    "00101"
+   ],
+   [
+    37.86313,
+    -122.25944,
+    "00101"
+   ],
+   [
+    37.8613,
+    -122.24874,
+    "00101"
+   ],
+   [
+    37.85505,
+    -122.24531,
+    "00101"
+   ],
+   [
+    37.8521,
+    -122.26801,
+    "00101"
+   ],
+   [
+    37.85481,
+    -122.258,
+    "00101"
+   ],
+   [
+    37.84974,
+    -122.27473,
+    "00101"
+   ],
+   [
+    37.84998,
+    -122.28158,
+    "00101"
+   ],
+   [
+    37.83627,
+    -122.29924,
+    "00114"
+   ],
+   [
+    37.84037,
+    -122.29468,
+    "00114"
+   ],
+   [
+    37.8429,
+    -122.28928,
+    "00114"
+   ],
+   [
+    37.8319,
+    -122.28181,
+    "00114"
+   ],
+   [
+    37.82086,
+    -122.22513,
+    "00114"
+   ],
+   [
+    37.82393,
+    -122.24097,
+    "00114"
+   ],
+   [
+    37.76475,
+    -122.23132,
+    "00114"
+   ],
+   [
+    37.77348,
+    -122.24822,
+    "00114"
+   ],
+   [
+    37.77851,
+    -122.26921,
+    "00114"
+   ],
+   [
+    37.77728,
+    -122.28435,
+    "00114"
+   ],
+   [
+    37.77323,
+    -122.28487,
+    "00114"
+   ],
+   [
+    37.77208,
+    -122.27044,
+    "00114"
+   ],
+   [
+    37.76949,
+    -122.25795,
+    "00114"
+   ],
+   [
+    37.76612,
+    -122.24692,
+    "00114"
+   ],
+   [
+    37.75963,
+    -122.23462,
+    "00114"
+   ],
+   [
+    37.75509,
+    -122.23948,
+    "00114"
+   ],
+   [
+    37.73366,
+    -122.23951,
+    "00114"
+   ],
+   [
+    37.74182,
+    -122.24911,
+    "00114"
+   ],
+   [
+    37.75983,
+    -122.25087,
+    "00114"
+   ],
+   [
+    37.76085,
+    -122.25924,
+    "00114"
+   ],
+   [
+    37.76395,
+    -122.26894,
+    "00114"
+   ],
+   [
+    37.78404,
+    -122.29024,
+    "00114"
+   ],
+   [
+    37.70896,
+    -122.03583,
+    "00115"
+   ],
+   [
+    37.75162,
+    -122.0858,
+    "00115"
+   ],
+   [
+    37.71356,
+    -122.06498,
+    "00115"
+   ],
+   [
+    37.71543,
+    -122.08277,
+    "00115"
+   ],
+   [
+    37.71518,
+    -122.09802,
+    "00115"
+   ],
+   [
+    37.69974,
+    -122.10421,
+    "00115"
+   ],
+   [
+    37.70176,
+    -122.09641,
+    "00115"
+   ],
+   [
+    37.70614,
+    -122.08431,
+    "00115"
+   ],
+   [
+    37.69914,
+    -122.06551,
+    "00115"
+   ],
+   [
+    37.69759,
+    -122.08217,
+    "00115"
+   ],
+   [
+    37.69339,
+    -122.07909,
+    "00115"
+   ],
+   [
+    37.68863,
+    -122.06753,
+    "00115"
+   ],
+   [
+    37.6851,
+    -122.08278,
+    "00115"
+   ],
+   [
+    37.73633,
+    -122.14644,
+    "00114"
+   ],
+   [
+    37.73307,
+    -122.15491,
+    "00114"
+   ],
+   [
+    37.73109,
+    -122.16467,
+    "00114"
+   ],
+   [
+    37.70954,
+    -122.18127,
+    "00114"
+   ],
+   [
+    37.71613,
+    -122.16491,
+    "00114"
+   ],
+   [
+    37.72317,
+    -122.17336,
+    "00114"
+   ],
+   [
+    37.72157,
+    -122.1572,
+    "00114"
+   ],
+   [
+    37.72525,
+    -122.15138,
+    "00114"
+   ],
+   [
+    37.72716,
+    -122.14225,
+    "00114"
+   ],
+   [
+    37.71987,
+    -122.12743,
+    "00114"
+   ],
+   [
+    37.71524,
+    -122.13461,
+    "00114"
+   ],
+   [
+    37.70269,
+    -122.1327,
+    "00114"
+   ],
+   [
+    37.70958,
+    -122.13818,
+    "00114"
+   ],
+   [
+    37.71509,
+    -122.14672,
+    "00114"
+   ],
+   [
+    37.69823,
+    -122.14324,
+    "00114"
+   ],
+   [
+    37.69684,
+    -122.15682,
+    "00114"
+   ],
+   [
+    37.68854,
+    -122.16739,
+    "00114"
+   ],
+   [
+    37.68499,
+    -122.15496,
+    "00114"
+   ],
+   [
+    37.68658,
+    -122.14393,
+    "00114"
+   ],
+   [
+    37.68739,
+    -122.11752,
+    "00115"
+   ],
+   [
+    37.70549,
+    -122.12344,
+    "00115"
+   ],
+   [
+    37.69529,
+    -122.12438,
+    "00115"
+   ],
+   [
+    37.69954,
+    -122.11301,
+    "00115"
+   ],
+   [
+    37.69236,
+    -122.10872,
+    "00115"
+   ],
+   [
+    37.65573,
+    -122.04836,
+    "00116"
+   ],
+   [
+    37.66393,
+    -122.01121,
+    "00116"
+   ],
+   [
+    37.63427,
+    -122.04538,
+    "00116"
+   ],
+   [
+    37.68842,
+    -122.05254,
+    "00116"
+   ],
+   [
+    37.68143,
+    -122.06664,
+    "00116"
+   ],
+   [
+    37.67338,
+    -122.08238,
+    "00116"
+   ],
+   [
+    37.68048,
+    -122.09359,
+    "00115"
+   ],
+   [
+    37.67452,
+    -122.10182,
+    "00115"
+   ],
+   [
+    37.68188,
+    -122.10571,
+    "00115"
+   ],
+   [
+    37.67905,
+    -122.11634,
+    "00115"
+   ],
+   [
+    37.67959,
+    -122.12972,
+    "00122"
+   ],
+   [
+    37.67379,
+    -122.1452,
+    "00122"
+   ],
+   [
+    37.66834,
+    -122.13661,
+    "00122"
+   ],
+   [
+    37.67226,
+    -122.12367,
+    "00122"
+   ],
+   [
+    37.66777,
+    -122.11127,
+    "00122"
+   ],
+   [
+    37.66675,
+    -122.09401,
+    "00116"
+   ],
+   [
+    37.66488,
+    -122.08701,
+    "00116"
+   ],
+   [
+    37.66612,
+    -122.04317,
+    "00116"
+   ],
+   [
+    37.67121,
+    -122.07227,
+    "00116"
+   ],
+   [
+    37.6743,
+    -122.05901,
+    "00116"
+   ],
+   [
+    37.6593,
+    -122.07156,
+    "00116"
+   ],
+   [
+    37.65745,
+    -122.07929,
+    "00116"
+   ],
+   [
+    37.65202,
+    -122.08658,
+    "00116"
+   ],
+   [
+    37.66276,
+    -122.1011,
+    "00122"
+   ],
+   [
+    37.65353,
+    -122.09546,
+    "00122"
+   ],
+   [
+    37.66037,
+    -122.11054,
+    "00122"
+   ],
+   [
+    37.64654,
+    -122.10227,
+    "00122"
+   ],
+   [
+    37.62976,
+    -122.1121,
+    "00122"
+   ],
+   [
+    37.63184,
+    -122.10169,
+    "00122"
+   ],
+   [
+    37.64395,
+    -122.11247,
+    "00122"
+   ],
+   [
+    37.63646,
+    -122.09413,
+    "00122"
+   ],
+   [
+    37.64327,
+    -122.08792,
+    "00122"
+   ],
+   [
+    37.64498,
+    -122.07909,
+    "00122"
+   ],
+   [
+    37.63492,
+    -122.08023,
+    "00122"
+   ],
+   [
+    37.6344,
+    -122.06949,
+    "00122"
+   ],
+   [
+    37.63966,
+    -122.07403,
+    "00122"
+   ],
+   [
+    37.64391,
+    -122.06947,
+    "00116"
+   ],
+   [
+    37.64145,
+    -122.05913,
+    "00116"
+   ],
+   [
+    37.62003,
+    -122.03221,
+    "00116"
+   ],
+   [
+    37.61711,
+    -122.03716,
+    "00116"
+   ],
+   [
+    37.62577,
+    -122.07573,
+    "00122"
+   ],
+   [
+    37.61706,
+    -122.06125,
+    "00116"
+   ],
+   [
+    37.62798,
+    -122.05979,
+    "00116"
+   ],
+   [
+    37.6282,
+    -122.08925,
+    "00122"
+   ],
+   [
+    37.61947,
+    -122.08469,
+    "00122"
+   ],
+   [
+    37.61061,
+    -121.98713,
+    "00118"
+   ],
+   [
+    37.60041,
+    -122.02172,
+    "00118"
+   ],
+   [
+    37.60143,
+    -122.04615,
+    "00118"
+   ],
+   [
+    37.58607,
+    -122.07762,
+    "00117"
+   ],
+   [
+    37.5768,
+    -122.07477,
+    "00117"
+   ],
+   [
+    37.58512,
+    -122.06768,
+    "00117"
+   ],
+   [
+    37.59133,
+    -122.04809,
+    "00118"
+   ],
+   [
+    37.58929,
+    -122.028,
+    "00118"
+   ],
+   [
+    37.59568,
+    -122.08049,
+    "00117"
+   ],
+   [
+    37.58345,
+    -122.08315,
+    "00117"
+   ],
+   [
+    37.60411,
+    -122.07398,
+    "00117"
+   ],
+   [
+    37.59398,
+    -122.06564,
+    "00117"
+   ],
+   [
+    37.58142,
+    -122.01855,
+    "00118"
+   ],
+   [
+    37.59444,
+    -122.00911,
+    "00118"
+   ],
+   [
+    37.58716,
+    -122.01285,
+    "00118"
+   ],
+   [
+    37.57908,
+    -121.9669,
+    "00118"
+   ],
+   [
+    37.57962,
+    -121.9905,
+    "00118"
+   ],
+   [
+    37.56957,
+    -122.0066,
+    "00118"
+   ],
+   [
+    37.56851,
+    -122.01744,
+    "00118"
+   ],
+   [
+    37.57373,
+    -122.03733,
+    "00118"
+   ],
+   [
+    37.58156,
+    -122.04092,
+    "00118"
+   ],
+   [
+    37.57284,
+    -122.06772,
+    "00117"
+   ],
+   [
+    37.51556,
+    -121.99859,
+    "00117"
+   ],
+   [
+    37.57228,
+    -122.05227,
+    "00117"
+   ],
+   [
+    37.58448,
+    -122.05749,
+    "00117"
+   ],
+   [
+    37.5646,
+    -122.04635,
+    "00117"
+   ],
+   [
+    37.56125,
+    -122.05347,
+    "00117"
+   ],
+   [
+    37.50023,
+    -121.93793,
+    "00121"
+   ],
+   [
+    37.56275,
+    -122.03042,
+    "00118"
+   ],
+   [
+    37.55638,
+    -122.02088,
+    "00118"
+   ],
+   [
+    37.5477,
+    -122.01418,
+    "00118"
+   ],
+   [
+    37.55795,
+    -122.00833,
+    "00118"
+   ],
+   [
+    37.55957,
+    -121.99198,
+    "00118"
+   ],
+   [
+    37.54216,
+    -121.96817,
+    "00121"
+   ],
+   [
+    37.54999,
+    -121.98553,
+    "00118"
+   ],
+   [
+    37.56403,
+    -121.97219,
+    "00118"
+   ],
+   [
+    37.54129,
+    -121.97872,
+    "00121"
+   ],
+   [
+    37.54616,
+    -121.97683,
+    "00121"
+   ],
+   [
+    37.55788,
+    -121.96466,
+    "00121"
+   ],
+   [
+    37.55549,
+    -121.97017,
+    "00121"
+   ],
+   [
+    37.55507,
+    -121.9353,
+    "00121"
+   ],
+   [
+    37.54798,
+    -121.94898,
+    "00121"
+   ],
+   [
+    37.5377,
+    -121.9419,
+    "00121"
+   ],
+   [
+    37.52715,
+    -121.96132,
+    "00121"
+   ],
+   [
+    37.53542,
+    -121.96002,
+    "00121"
+   ],
+   [
+    37.5317,
+    -121.97338,
+    "00121"
+   ],
+   [
+    37.53368,
+    -121.98522,
+    "00121"
+   ],
+   [
+    37.53957,
+    -121.99104,
+    "00121"
+   ],
+   [
+    37.54278,
+    -121.99798,
+    "00118"
+   ],
+   [
+    37.54677,
+    -122.00572,
+    "00118"
+   ],
+   [
+    37.53778,
+    -122.00819,
+    "00118"
+   ],
+   [
+    37.53061,
+    -121.9942,
+    "00121"
+   ],
+   [
+    37.51955,
+    -121.97593,
+    "00121"
+   ],
+   [
+    37.51846,
+    -121.95245,
+    "00121"
+   ],
+   [
+    37.51699,
+    -121.95965,
+    "00121"
+   ],
+   [
+    37.50688,
+    -121.92721,
+    "00121"
+   ],
+   [
+    37.52215,
+    -121.91304,
+    "00121"
+   ],
+   [
+    37.53221,
+    -121.92525,
+    "00121"
+   ],
+   [
+    37.52215,
+    -121.92675,
+    "00121"
+   ],
+   [
+    37.48817,
+    -121.90921,
+    "00121"
+   ],
+   [
+    37.46996,
+    -121.91353,
+    "00121"
+   ],
+   [
+    37.48967,
+    -121.92505,
+    "00121"
+   ],
+   [
+    37.48267,
+    -121.9209,
+    "00121"
+   ],
+   [
+    37.5497,
+    -122.0363,
+    "00117"
+   ],
+   [
+    37.54253,
+    -122.04625,
+    "00117"
+   ],
+   [
+    37.53635,
+    -122.05654,
+    "00117"
+   ],
+   [
+    37.53167,
+    -122.06832,
+    "00117"
+   ],
+   [
+    37.5238,
+    -122.04682,
+    "00117"
+   ],
+   [
+    37.5365,
+    -122.03432,
+    "00117"
+   ],
+   [
+    37.53376,
+    -122.02777,
+    "00117"
+   ],
+   [
+    37.52928,
+    -122.01481,
+    "00117"
+   ],
+   [
+    37.51781,
+    -121.99882,
+    "00117"
+   ],
+   [
+    37.70566,
+    -121.88754,
+    "00119"
+   ],
+   [
+    37.71415,
+    -121.89432,
+    "00119"
+   ],
+   [
+    37.72033,
+    -121.91407,
+    "00119"
+   ],
+   [
+    37.71052,
+    -121.91823,
+    "00119"
+   ],
+   [
+    37.71357,
+    -121.9321,
+    "00119"
+   ],
+   [
+    37.70641,
+    -121.94169,
+    "00119"
+   ],
+   [
+    37.7084,
+    -121.95728,
+    "00119"
+   ],
+   [
+    37.64826,
+    -121.91812,
+    "00119"
+   ],
+   [
+    37.68827,
+    -121.90797,
+    "00119"
+   ],
+   [
+    37.68093,
+    -121.8863,
+    "00119"
+   ],
+   [
+    37.67266,
+    -121.88418,
+    "00119"
+   ],
+   [
+    37.67017,
+    -121.89922,
+    "00119"
+   ],
+   [
+    37.65875,
+    -121.88437,
+    "00119"
+   ],
+   [
+    37.65848,
+    -121.90517,
+    "00119"
+   ],
+   [
+    37.68839,
+    -121.9237,
+    "00119"
+   ],
+   [
+    37.59677,
+    -121.83813,
+    "00119"
+   ],
+   [
+    37.6612,
+    -121.8661,
+    "00119"
+   ],
+   [
+    37.66364,
+    -121.84454,
+    "00119"
+   ],
+   [
+    37.69199,
+    -121.8927,
+    "00119"
+   ],
+   [
+    37.69646,
+    -121.86768,
+    "00119"
+   ],
+   [
+    37.68537,
+    -121.86295,
+    "00119"
+   ],
+   [
+    37.67383,
+    -121.87021,
+    "00119"
+   ],
+   [
+    37.70618,
+    -121.86215,
+    "00120"
+   ],
+   [
+    37.7154,
+    -121.853,
+    "00120"
+   ],
+   [
+    37.7245,
+    -121.85382,
+    "00120"
+   ],
+   [
+    37.65205,
+    -121.78389,
+    "00120"
+   ],
+   [
+    37.66012,
+    -121.74221,
+    "00120"
+   ],
+   [
+    37.69976,
+    -121.64876,
+    "00120"
+   ],
+   [
+    37.71009,
+    -121.73882,
+    "00120"
+   ],
+   [
+    37.71643,
+    -121.76917,
+    "00120"
+   ],
+   [
+    37.69104,
+    -121.80561,
+    "00120"
+   ],
+   [
+    37.6941,
+    -121.76375,
+    "00120"
+   ],
+   [
+    37.69085,
+    -121.78391,
+    "00120"
+   ],
+   [
+    37.6856,
+    -121.77838,
+    "00120"
+   ],
+   [
+    37.67594,
+    -121.73913,
+    "00120"
+   ],
+   [
+    37.68416,
+    -121.7495,
+    "00120"
+   ],
+   [
+    37.6951,
+    -121.73561,
+    "00120"
+   ],
+   [
+    37.68979,
+    -121.72493,
+    "00120"
+   ],
+   [
+    37.6832,
+    -121.72959,
+    "00120"
+   ],
+   [
+    37.67487,
+    -121.7644,
+    "00120"
+   ],
+   [
+    37.67303,
+    -121.77525,
+    "00120"
+   ],
+   [
+    37.6719,
+    -121.78831,
+    "00120"
+   ],
+   [
+    37.66783,
+    -121.80065,
+    "00120"
+   ],
+   [
+    37.66261,
+    -121.78939,
+    "00120"
+   ],
+   [
+    37.8047,
+    -122.3107,
+    "00111"
+   ],
+   [
+    37.79984,
+    -122.28523,
+    "00111"
+   ],
+   [
+    37.87252,
+    -122.2586,
+    "00101"
+   ],
+   [
+    37.7963,
+    -122.27561,
+    "00111"
+   ],
+   [
+    37.70288,
+    -122.24077,
+    "00114"
+   ],
+   [
+    38.01616,
+    -121.63592,
+    "01309"
+   ],
+   [
+    37.99828,
+    -121.73026,
+    "01309"
+   ],
+   [
+    38.0081,
+    -121.72273,
+    "01309"
+   ],
+   [
+    37.98994,
+    -121.70576,
+    "01309"
+   ],
+   [
+    37.9692,
+    -121.75011,
+    "01308"
+   ],
+   [
+    37.98958,
+    -121.67484,
+    "01309"
+   ],
+   [
+    37.98109,
+    -121.68917,
+    "01309"
+   ],
+   [
+    37.98807,
+    -121.73894,
+    "01309"
+   ],
+   [
+    37.97829,
+    -121.72411,
+    "01309"
+   ],
+   [
+    37.96314,
+    -121.71365,
+    "01309"
+   ],
+   [
+    37.94648,
+    -121.70216,
+    "01309"
+   ],
+   [
+    37.94793,
+    -121.67861,
+    "01309"
+   ],
+   [
+    37.93142,
+    -121.68882,
+    "01309"
+   ],
+   [
+    37.94189,
+    -121.71467,
+    "01309"
+   ],
+   [
+    37.92909,
+    -121.70782,
+    "01309"
+   ],
+   [
+    37.9344,
+    -121.74597,
+    "01308"
+   ],
+   [
+    37.95747,
+    -121.76216,
+    "01308"
+   ],
+   [
+    37.93496,
+    -121.72872,
+    "01309"
+   ],
+   [
+    37.95405,
+    -121.7321,
+    "01309"
+   ],
+   [
+    37.91678,
+    -121.72187,
+    "01309"
+   ],
+   [
+    37.91951,
+    -121.69716,
+    "01309"
+   ],
+   [
+    37.90614,
+    -121.73275,
+    "01309"
+   ],
+   [
+    37.85023,
+    -121.61711,
+    "01309"
+   ],
+   [
+    37.90421,
+    -121.59182,
+    "01309"
+   ],
+   [
+    37.90094,
+    -121.60911,
+    "01309"
+   ],
+   [
+    37.93239,
+    -121.61229,
+    "01309"
+   ],
+   [
+    37.90696,
+    -121.6204,
+    "01309"
+   ],
+   [
+    38.01289,
+    -121.81835,
+    "01308"
+   ],
+   [
+    38.00458,
+    -121.76482,
+    "01308"
+   ],
+   [
+    38.0062,
+    -121.8009,
+    "01308"
+   ],
+   [
+    38.00901,
+    -121.78884,
+    "01308"
+   ],
+   [
+    37.98579,
+    -121.81558,
+    "01308"
+   ],
+   [
+    38.00062,
+    -121.81452,
+    "01308"
+   ],
+   [
+    38.0041,
+    -121.8497,
+    "01308"
+   ],
+   [
+    38.0037,
+    -121.82694,
+    "01308"
+   ],
+   [
+    37.99531,
+    -121.83044,
+    "01308"
+   ],
+   [
+    37.99185,
+    -121.83643,
+    "01308"
+   ],
+   [
+    37.99233,
+    -121.79672,
+    "01308"
+   ],
+   [
+    37.98777,
+    -121.76597,
+    "01308"
+   ],
+   [
+    38.03265,
+    -121.88302,
+    "01314"
+   ],
+   [
+    38.0264,
+    -121.88608,
+    "01314"
+   ],
+   [
+    38.0215,
+    -121.8943,
+    "01314"
+   ],
+   [
+    38.01623,
+    -121.87307,
+    "01314"
+   ],
+   [
+    38.00319,
+    -121.86478,
+    "01314"
+   ],
+   [
+    38.00428,
+    -121.89034,
+    "01314"
+   ],
+   [
+    38.00629,
+    -121.87925,
+    "01314"
+   ],
+   [
+    37.98944,
+    -121.86989,
+    "01314"
+   ],
+   [
+    37.9946,
+    -121.88218,
+    "01314"
+   ],
+   [
+    38.01421,
+    -121.93069,
+    "01314"
+   ],
+   [
+    37.99944,
+    -121.90461,
+    "01314"
+   ],
+   [
+    38.01797,
+    -121.92353,
+    "01314"
+   ],
+   [
+    38.01388,
+    -121.89934,
+    "01314"
+   ],
+   [
+    38.02487,
+    -121.91987,
+    "01314"
+   ],
+   [
+    38.03132,
+    -121.94545,
+    "01314"
+   ],
+   [
+    38.02352,
+    -121.95067,
+    "01314"
+   ],
+   [
+    38.0228,
+    -121.93461,
+    "01314"
+   ],
+   [
+    38.03724,
+    -121.9703,
+    "01314"
+   ],
+   [
+    38.02705,
+    -122.02531,
+    "01314"
+   ],
+   [
+    38.01773,
+    -122.13806,
+    "01311"
+   ],
+   [
+    38.01491,
+    -122.13069,
+    "01311"
+   ],
+   [
+    38.00753,
+    -122.13763,
+    "01311"
+   ],
+   [
+    38.00601,
+    -122.11655,
+    "01311"
+   ],
+   [
+    38.00928,
+    -122.12136,
+    "01311"
+   ],
+   [
+    38.01901,
+    -122.1015,
+    "01311"
+   ],
+   [
+    37.99907,
+    -122.10648,
+    "01311"
+   ],
+   [
+    37.99859,
+    -122.08353,
+    "01311"
+   ],
+   [
+    37.98915,
+    -122.09834,
+    "01311"
+   ],
+   [
+    37.97593,
+    -122.09121,
+    "01311"
+   ],
+   [
+    37.96841,
+    -122.1094,
+    "01311"
+   ],
+   [
+    37.98314,
+    -122.07246,
+    "01311"
+   ],
+   [
+    37.96153,
+    -122.07189,
+    "01311"
+   ],
+   [
+    37.95145,
+    -122.0729,
+    "01311"
+   ],
+   [
+    37.95326,
+    -122.05961,
+    "01311"
+   ],
+   [
+    37.93018,
+    -122.05709,
+    "01313"
+   ],
+   [
+    37.94231,
+    -122.05541,
+    "01313"
+   ],
+   [
+    37.93487,
+    -122.07279,
+    "01311"
+   ],
+   [
+    37.9383,
+    -122.08767,
+    "01311"
+   ],
+   [
+    37.9841,
+    -122.05746,
+    "01311"
+   ],
+   [
+    37.99654,
+    -122.04461,
+    "01311"
+   ],
+   [
+    37.97656,
+    -122.03533,
+    "01311"
+   ],
+   [
+    37.99472,
+    -122.03389,
+    "01311"
+   ],
+   [
+    37.98838,
+    -122.02682,
+    "01313"
+   ],
+   [
+    37.9763,
+    -122.01579,
+    "01313"
+   ],
+   [
+    37.98258,
+    -121.9987,
+    "01313"
+   ],
+   [
+    37.96434,
+    -121.97071,
+    "01313"
+   ],
+   [
+    37.95859,
+    -121.95924,
+    "01313"
+   ],
+   [
+    37.96946,
+    -121.98648,
+    "01313"
+   ],
+   [
+    37.96164,
+    -122.00075,
+    "01313"
+   ],
+   [
+    37.95178,
+    -121.98889,
+    "01313"
+   ],
+   [
+    37.95837,
+    -121.98855,
+    "01313"
+   ],
+   [
+    37.9519,
+    -121.96691,
+    "01313"
+   ],
+   [
+    37.8765,
+    -122.05475,
+    "01312"
+   ],
+   [
+    37.97021,
+    -122.02228,
+    "01313"
+   ],
+   [
+    37.9662,
+    -122.03487,
+    "01311"
+   ],
+   [
+    37.96456,
+    -122.04036,
+    "01311"
+   ],
+   [
+    37.96883,
+    -122.03958,
+    "01311"
+   ],
+   [
+    37.96152,
+    -122.0469,
+    "01311"
+   ],
+   [
+    37.95583,
+    -122.04385,
+    "01311"
+   ],
+   [
+    37.96025,
+    -122.01589,
+    "01313"
+   ],
+   [
+    37.9502,
+    -122.03083,
+    "01313"
+   ],
+   [
+    37.9546,
+    -122.02449,
+    "01313"
+   ],
+   [
+    37.93808,
+    -122.01058,
+    "01313"
+   ],
+   [
+    37.94936,
+    -122.04373,
+    "01313"
+   ],
+   [
+    37.94093,
+    -122.04278,
+    "01313"
+   ],
+   [
+    37.93267,
+    -122.03288,
+    "01313"
+   ],
+   [
+    37.9262,
+    -122.05439,
+    "01313"
+   ],
+   [
+    37.92035,
+    -122.04698,
+    "01313"
+   ],
+   [
+    37.91955,
+    -122.01916,
+    "01313"
+   ],
+   [
+    37.9113,
+    -122.02312,
+    "01313"
+   ],
+   [
+    37.89288,
+    -122.0596,
+    "01313"
+   ],
+   [
+    37.90144,
+    -122.06299,
+    "01313"
+   ],
+   [
+    37.91162,
+    -122.06348,
+    "01313"
+   ],
+   [
+    37.9251,
+    -122.06772,
+    "01312"
+   ],
+   [
+    37.91928,
+    -122.08772,
+    "01312"
+   ],
+   [
+    37.90421,
+    -122.07859,
+    "01312"
+   ],
+   [
+    37.8903,
+    -122.08105,
+    "01312"
+   ],
+   [
+    37.89391,
+    -122.04757,
+    "01313"
+   ],
+   [
+    37.90384,
+    -122.04196,
+    "01313"
+   ],
+   [
+    37.88357,
+    -122.03368,
+    "01313"
+   ],
+   [
+    37.72967,
+    -121.93675,
+    "01305"
+   ],
+   [
+    37.74429,
+    -121.94863,
+    "01305"
+   ],
+   [
+    37.7409,
+    -121.93029,
+    "01305"
+   ],
+   [
+    37.79504,
+    -121.97888,
+    "01305"
+   ],
+   [
+    37.75718,
+    -121.94852,
+    "01305"
+   ],
+   [
+    37.76642,
+    -121.92624,
+    "01305"
+   ],
+   [
+    37.79456,
+    -121.93533,
+    "01305"
+   ],
+   [
+    37.79235,
+    -121.96758,
+    "01305"
+   ],
+   [
+    37.74493,
+    -121.96339,
+    "01305"
+   ],
+   [
+    37.76482,
+    -121.97375,
+    "01305"
+   ],
+   [
+    37.77486,
+    -121.94275,
+    "01305"
+   ],
+   [
+    37.76982,
+    -121.95374,
+    "01305"
+   ],
+   [
+    37.81547,
+    -122.00687,
+    "01305"
+   ],
+   [
+    37.84287,
+    -122.03507,
+    "01312"
+   ],
+   [
+    37.78408,
+    -121.98659,
+    "01305"
+   ],
+   [
+    37.76875,
+    -121.98885,
+    "01305"
+   ],
+   [
+    37.87419,
+    -122.02359,
+    "01313"
+   ],
+   [
+    37.85754,
+    -122.00533,
+    "01313"
+   ],
+   [
+    37.81941,
+    -121.98509,
+    "01305"
+   ],
+   [
+    37.81537,
+    -121.94728,
+    "01305"
+   ],
+   [
+    37.83968,
+    -121.96501,
+    "01313"
+   ],
+   [
+    37.83854,
+    -121.99754,
+    "01313"
+   ],
+   [
+    37.93618,
+    -122.10829,
+    "01312"
+   ],
+   [
+    37.89988,
+    -122.12727,
+    "01312"
+   ],
+   [
+    37.88966,
+    -122.10758,
+    "01312"
+   ],
+   [
+    37.87954,
+    -122.13578,
+    "01312"
+   ],
+   [
+    37.8532,
+    -122.06209,
+    "01312"
+   ],
+   [
+    37.86503,
+    -122.06579,
+    "01312"
+   ],
+   [
+    37.8764,
+    -122.08359,
+    "01312"
+   ],
+   [
+    37.87456,
+    -122.07758,
+    "01312"
+   ],
+   [
+    37.86832,
+    -122.10126,
+    "01312"
+   ],
+   [
+    37.84845,
+    -122.10669,
+    "01312"
+   ],
+   [
+    37.82284,
+    -122.117,
+    "01312"
+   ],
+   [
+    37.85039,
+    -122.14035,
+    "01312"
+   ],
+   [
+    37.83381,
+    -122.1517,
+    "01312"
+   ],
+   [
+    37.86022,
+    -122.18026,
+    "01312"
+   ],
+   [
+    37.87977,
+    -122.16857,
+    "01312"
+   ],
+   [
+    37.88342,
+    -122.2152,
+    "01312"
+   ],
+   [
+    37.89742,
+    -122.1824,
+    "01312"
+   ],
+   [
+    37.95793,
+    -121.843,
+    "01308"
+   ],
+   [
+    37.97696,
+    -121.7935,
+    "01308"
+   ],
+   [
+    37.96879,
+    -121.76688,
+    "01308"
+   ],
+   [
+    37.97744,
+    -121.7767,
+    "01308"
+   ],
+   [
+    37.82538,
+    -121.80177,
+    "01305"
+   ],
+   [
+    37.80287,
+    -121.90689,
+    "01305"
+   ],
+   [
+    37.76475,
+    -121.91322,
+    "01305"
+   ],
+   [
+    37.96414,
+    -121.80496,
+    "01308"
+   ],
+   [
+    37.95128,
+    -121.7962,
+    "01308"
+   ],
+   [
+    37.96427,
+    -121.78979,
+    "01308"
+   ],
+   [
+    37.78372,
+    -121.91754,
+    "01305"
+   ],
+   [
+    37.7953,
+    -121.89667,
+    "01305"
+   ],
+   [
+    37.74814,
+    -121.89955,
+    "01305"
+   ],
+   [
+    37.75553,
+    -121.89532,
+    "01305"
+   ],
+   [
+    37.76522,
+    -121.89609,
+    "01305"
+   ],
+   [
+    37.77348,
+    -121.88536,
+    "01305"
+   ],
+   [
+    38.01367,
+    -121.95543,
+    "01314"
+   ],
+   [
+    38.00746,
+    -121.98411,
+    "01314"
+   ],
+   [
+    37.92027,
+    -122.00365,
+    "01313"
+   ],
+   [
+    37.92263,
+    -121.93074,
+    "01313"
+   ],
+   [
+    37.95565,
+    -121.93237,
+    "01313"
+   ],
+   [
+    37.9426,
+    -121.93414,
+    "01313"
+   ],
+   [
+    37.9367,
+    -121.96454,
+    "01313"
+   ],
+   [
+    37.94549,
+    -121.95631,
+    "01313"
+   ],
+   [
+    38.0238,
+    -122.24362,
+    "01310"
+   ],
+   [
+    37.963,
+    -122.20337,
+    "01311"
+   ],
+   [
+    38.05069,
+    -122.21496,
+    "01310"
+   ],
+   [
+    38.0397,
+    -122.25722,
+    "01310"
+   ],
+   [
+    38.00396,
+    -122.3075,
+    "01310"
+   ],
+   [
+    38.00465,
+    -122.29131,
+    "01310"
+   ],
+   [
+    38.01001,
+    -122.27741,
+    "01310"
+   ],
+   [
+    38.01499,
+    -122.28459,
+    "01310"
+   ],
+   [
+    37.98702,
+    -122.26892,
+    "01310"
+   ],
+   [
+    38.01037,
+    -122.25793,
+    "01310"
+   ],
+   [
+    38.00135,
+    -122.2689,
+    "01310"
+   ],
+   [
+    37.98335,
+    -122.28888,
+    "01310"
+   ],
+   [
+    37.96593,
+    -122.26971,
+    "01310"
+   ],
+   [
+    37.96895,
+    -122.29376,
+    "01310"
+   ],
+   [
+    37.95192,
+    -122.29221,
+    "01310"
+   ],
+   [
+    37.94519,
+    -122.31599,
+    "01310"
+   ],
+   [
+    37.97865,
+    -122.31038,
+    "01310"
+   ],
+   [
+    37.99414,
+    -122.3185,
+    "01310"
+   ],
+   [
+    37.95789,
+    -122.36835,
+    "01301"
+   ],
+   [
+    37.98255,
+    -122.32741,
+    "01310"
+   ],
+   [
+    37.97395,
+    -122.3465,
+    "01301"
+   ],
+   [
+    37.96888,
+    -122.35056,
+    "01301"
+   ],
+   [
+    37.97283,
+    -122.3308,
+    "01310"
+   ],
+   [
+    37.96597,
+    -122.33468,
+    "01301"
+   ],
+   [
+    37.95456,
+    -122.35214,
+    "01301"
+   ],
+   [
+    37.96077,
+    -122.35316,
+    "01301"
+   ],
+   [
+    37.95587,
+    -122.3377,
+    "01301"
+   ],
+   [
+    37.95794,
+    -122.32339,
+    "01301"
+   ],
+   [
+    37.93972,
+    -122.32224,
+    "01301"
+   ],
+   [
+    37.93995,
+    -122.33042,
+    "01301"
+   ],
+   [
+    37.94866,
+    -122.33959,
+    "01301"
+   ],
+   [
+    37.94778,
+    -122.35347,
+    "01301"
+   ],
+   [
+    37.93914,
+    -122.34123,
+    "01301"
+   ],
+   [
+    37.94054,
+    -122.35108,
+    "01301"
+   ],
+   [
+    37.94066,
+    -122.36292,
+    "01301"
+   ],
+   [
+    37.93396,
+    -122.36161,
+    "01301"
+   ],
+   [
+    37.9308,
+    -122.38205,
+    "01301"
+   ],
+   [
+    37.92843,
+    -122.35556,
+    "01301"
+   ],
+   [
+    37.91092,
+    -122.3369,
+    "01301"
+   ],
+   [
+    37.92194,
+    -122.34992,
+    "01301"
+   ],
+   [
+    37.93044,
+    -122.33696,
+    "01301"
+   ],
+   [
+    37.91702,
+    -122.32256,
+    "01301"
+   ],
+   [
+    37.90889,
+    -122.31099,
+    "01301"
+   ],
+   [
+    37.93456,
+    -122.31465,
+    "01310"
+   ],
+   [
+    37.92349,
+    -122.29362,
+    "01310"
+   ],
+   [
+    37.92776,
+    -122.31068,
+    "01310"
+   ],
+   [
+    37.92232,
+    -122.3155,
+    "01310"
+   ],
+   [
+    37.9177,
+    -122.30629,
+    "01310"
+   ],
+   [
+    37.90914,
+    -122.30208,
+    "01310"
+   ],
+   [
+    37.90278,
+    -122.29816,
+    "01310"
+   ],
+   [
+    37.90143,
+    -122.30569,
+    "01301"
+   ],
+   [
+    37.91372,
+    -122.29442,
+    "01310"
+   ],
+   [
+    37.9029,
+    -122.29079,
+    "01310"
+   ],
+   [
+    37.90593,
+    -122.28489,
+    "01310"
+   ],
+   [
+    37.90914,
+    -122.27583,
+    "01310"
+   ],
+   [
+    37.9854,
+    -122.35058,
+    "01310"
+   ],
+   [
+    38.00099,
+    -122.32468,
+    "01310"
+   ],
+   [
+    38.02449,
+    -122.27118,
+    "01310"
+   ],
+   [
+    37.99311,
+    -122.35632,
+    "01310"
+   ],
+   [
+    38.00607,
+    -122.36074,
+    "01310"
+   ],
+   [
+    38.12115,
+    -122.52973,
+    "04103"
+   ],
+   [
+    38.1041,
+    -122.54876,
+    "04103"
+   ],
+   [
+    38.12524,
+    -122.58402,
+    "04103"
+   ],
+   [
+    38.11585,
+    -122.59255,
+    "04103"
+   ],
+   [
+    38.1084,
+    -122.56977,
+    "04103"
+   ],
+   [
+    38.10924,
+    -122.61766,
+    "04103"
+   ],
+   [
+    38.09825,
+    -122.58408,
+    "04103"
+   ],
+   [
+    38.08638,
+    -122.55677,
+    "04103"
+   ],
+   [
+    38.08606,
+    -122.56829,
+    "04103"
+   ],
+   [
+    38.07361,
+    -122.55156,
+    "04103"
+   ],
+   [
+    38.05862,
+    -122.55221,
+    "04103"
+   ],
+   [
+    38.07856,
+    -122.52788,
+    "04103"
+   ],
+   [
+    38.05059,
+    -122.528,
+    "04103"
+   ],
+   [
+    38.05605,
+    -122.51448,
+    "04103"
+   ],
+   [
+    38.01986,
+    -122.52795,
+    "04103"
+   ],
+   [
+    38.00651,
+    -122.51562,
+    "04103"
+   ],
+   [
+    38.03268,
+    -122.56394,
+    "04103"
+   ],
+   [
+    38.01441,
+    -122.55729,
+    "04103"
+   ],
+   [
+    37.9975,
+    -122.5377,
+    "04103"
+   ],
+   [
+    38.00171,
+    -122.55084,
+    "04103"
+   ],
+   [
+    37.98052,
+    -122.52694,
+    "04104"
+   ],
+   [
+    37.98095,
+    -122.54698,
+    "04104"
+   ],
+   [
+    37.97436,
+    -122.51207,
+    "04104"
+   ],
+   [
+    37.98357,
+    -122.47607,
+    "04104"
+   ],
+   [
+    37.97227,
+    -122.52578,
+    "04104"
+   ],
+   [
+    37.97143,
+    -122.53746,
+    "04104"
+   ],
+   [
+    37.96123,
+    -122.52015,
+    "04104"
+   ],
+   [
+    37.9591,
+    -122.49892,
+    "04104"
+   ],
+   [
+    37.96488,
+    -122.50312,
+    "04104"
+   ],
+   [
+    37.96662,
+    -122.50489,
+    "04104"
+   ],
+   [
+    38.01111,
+    -122.66513,
+    "04103"
+   ],
+   [
+    37.98327,
+    -122.59281,
+    "04104"
+   ],
+   [
+    38.0,
+    -122.59788,
+    "04104"
+   ],
+   [
+    37.99528,
+    -122.57514,
+    "04104"
+   ],
+   [
+    37.98114,
+    -122.57446,
+    "04104"
+   ],
+   [
+    37.97489,
+    -122.56161,
+    "04104"
+   ],
+   [
+    37.96436,
+    -122.55986,
+    "04104"
+   ],
+   [
+    37.95092,
+    -122.54941,
+    "04104"
+   ],
+   [
+    37.94511,
+    -122.52812,
+    "04104"
+   ],
+   [
+    37.94966,
+    -122.52123,
+    "04104"
+   ],
+   [
+    37.94622,
+    -122.54513,
+    "04104"
+   ],
+   [
+    37.93387,
+    -122.53396,
+    "04104"
+   ],
+   [
+    37.92583,
+    -122.52479,
+    "04104"
+   ],
+   [
+    37.93002,
+    -122.50202,
+    "04104"
+   ],
+   [
+    37.94277,
+    -122.49311,
+    "04104"
+   ],
+   [
+    37.87207,
+    -122.46472,
+    "04104"
+   ],
+   [
+    37.90567,
+    -122.4924,
+    "04104"
+   ],
+   [
+    37.88179,
+    -122.45998,
+    "04104"
+   ],
+   [
+    37.89239,
+    -122.50835,
+    "04104"
+   ],
+   [
+    37.90727,
+    -122.53991,
+    "04104"
+   ],
+   [
+    37.89911,
+    -122.52056,
+    "04104"
+   ],
+   [
+    37.90647,
+    -122.55129,
+    "04104"
+   ],
+   [
+    37.87813,
+    -122.53113,
+    "04104"
+   ],
+   [
+    37.89222,
+    -122.54032,
+    "04104"
+   ],
+   [
+    37.87041,
+    -122.51195,
+    "04104"
+   ],
+   [
+    37.85147,
+    -122.48394,
+    "04104"
+   ],
+   [
+    37.8654,
+    -122.50145,
+    "04104"
+   ],
+   [
+    37.86338,
+    -122.49367,
+    "04104"
+   ],
+   [
+    37.90197,
+    -122.57566,
+    "04103"
+   ],
+   [
+    37.90961,
+    -122.68621,
+    "04103"
+   ],
+   [
+    38.05193,
+    -122.82403,
+    "04103"
+   ],
+   [
+    38.15478,
+    -122.78639,
+    "04103"
+   ],
+   [
+    37.95778,
+    -122.55607,
+    "04103"
+   ],
+   [
+    38.29188,
+    -122.2974,
+    "05500"
+   ],
+   [
+    38.29555,
+    -122.28797,
+    "05500"
+   ],
+   [
+    38.28707,
+    -122.28961,
+    "05500"
+   ],
+   [
+    38.28772,
+    -122.2721,
+    "05500"
+   ],
+   [
+    38.2863,
+    -122.26076,
+    "05500"
+   ],
+   [
+    38.30674,
+    -122.27327,
+    "05500"
+   ],
+   [
+    38.30912,
+    -122.29997,
+    "05500"
+   ],
+   [
+    38.30392,
+    -122.28796,
+    "05500"
+   ],
+   [
+    38.31617,
+    -122.29174,
+    "05500"
+   ],
+   [
+    38.31632,
+    -122.28179,
+    "05500"
+   ],
+   [
+    38.33091,
+    -122.31253,
+    "05500"
+   ],
+   [
+    38.33275,
+    -122.30083,
+    "05500"
+   ],
+   [
+    38.30973,
+    -122.33138,
+    "05500"
+   ],
+   [
+    38.31508,
+    -122.31475,
+    "05500"
+   ],
+   [
+    38.30574,
+    -122.30909,
+    "05500"
+   ],
+   [
+    38.33069,
+    -122.32853,
+    "05500"
+   ],
+   [
+    38.32364,
+    -122.32076,
+    "05500"
+   ],
+   [
+    38.27063,
+    -122.29921,
+    "05500"
+   ],
+   [
+    38.29506,
+    -122.32224,
+    "05500"
+   ],
+   [
+    38.29428,
+    -122.30787,
+    "05500"
+   ],
+   [
+    38.27103,
+    -122.27168,
+    "05500"
+   ],
+   [
+    38.19528,
+    -122.24127,
+    "05500"
+   ],
+   [
+    38.16032,
+    -122.24359,
+    "05500"
+   ],
+   [
+    38.20766,
+    -122.27119,
+    "05500"
+   ],
+   [
+    38.17107,
+    -122.2611,
+    "05500"
+   ],
+   [
+    38.16073,
+    -122.25991,
+    "05500"
+   ],
+   [
+    38.30908,
+    -122.34452,
+    "05500"
+   ],
+   [
+    38.26057,
+    -122.35674,
+    "05500"
+   ],
+   [
+    38.35915,
+    -122.33581,
+    "05500"
+   ],
+   [
+    38.40307,
+    -122.36216,
+    "05500"
+   ],
+   [
+    38.363,
+    -122.25822,
+    "05500"
+   ],
+   [
+    38.322,
+    -122.24623,
+    "05500"
+   ],
+   [
+    38.41406,
+    -122.19597,
+    "05500"
+   ],
+   [
+    38.47973,
+    -122.45075,
+    "05500"
+   ],
+   [
+    38.50106,
+    -122.46125,
+    "05500"
+   ],
+   [
+    38.50542,
+    -122.47408,
+    "05500"
+   ],
+   [
+    38.55688,
+    -122.45751,
+    "05500"
+   ],
+   [
+    38.60485,
+    -122.2787,
+    "05500"
+   ],
+   [
+    38.6078,
+    -122.54966,
+    "05500"
+   ],
+   [
+    38.58146,
+    -122.58272,
+    "05500"
+   ],
+   [
+    37.6845,
+    -122.40403,
+    "08102"
+   ],
+   [
+    37.70477,
+    -122.41482,
+    "08102"
+   ],
+   [
+    37.70567,
+    -122.43243,
+    "08102"
+   ],
+   [
+    37.7059,
+    -122.44464,
+    "08101"
+   ],
+   [
+    37.70518,
+    -122.45296,
+    "08101"
+   ],
+   [
+    37.69876,
+    -122.45973,
+    "08101"
+   ],
+   [
+    37.69275,
+    -122.45759,
+    "08101"
+   ],
+   [
+    37.69785,
+    -122.46586,
+    "08101"
+   ],
+   [
+    37.70631,
+    -122.46214,
+    "08101"
+   ],
+   [
+    37.70349,
+    -122.46663,
+    "08101"
+   ],
+   [
+    37.7005,
+    -122.48014,
+    "08101"
+   ],
+   [
+    37.70361,
+    -122.48675,
+    "08101"
+   ],
+   [
+    37.67612,
+    -122.49091,
+    "08101"
+   ],
+   [
+    37.69214,
+    -122.48931,
+    "08101"
+   ],
+   [
+    37.69167,
+    -122.47707,
+    "08101"
+   ],
+   [
+    37.69026,
+    -122.46623,
+    "08101"
+   ],
+   [
+    37.68622,
+    -122.46332,
+    "08101"
+   ],
+   [
+    37.68101,
+    -122.47933,
+    "08101"
+   ],
+   [
+    37.67484,
+    -122.48513,
+    "08101"
+   ],
+   [
+    37.66908,
+    -122.48033,
+    "08101"
+   ],
+   [
+    37.68013,
+    -122.45356,
+    "08101"
+   ],
+   [
+    37.65537,
+    -122.4613,
+    "08101"
+   ],
+   [
+    37.66976,
+    -122.46805,
+    "08101"
+   ],
+   [
+    37.65708,
+    -122.46979,
+    "08101"
+   ],
+   [
+    37.66348,
+    -122.45648,
+    "08102"
+   ],
+   [
+    37.65479,
+    -122.44612,
+    "08102"
+   ],
+   [
+    37.6662,
+    -122.43372,
+    "08102"
+   ],
+   [
+    37.66138,
+    -122.43831,
+    "08102"
+   ],
+   [
+    37.66002,
+    -122.41879,
+    "08102"
+   ],
+   [
+    37.66794,
+    -122.41341,
+    "08102"
+   ],
+   [
+    37.66094,
+    -122.40698,
+    "08102"
+   ],
+   [
+    37.65759,
+    -122.42365,
+    "08102"
+   ],
+   [
+    37.6553,
+    -122.41097,
+    "08102"
+   ],
+   [
+    37.65019,
+    -122.40994,
+    "08102"
+   ],
+   [
+    37.6429,
+    -122.43346,
+    "08102"
+   ],
+   [
+    37.63987,
+    -122.45209,
+    "08102"
+   ],
+   [
+    37.64692,
+    -122.45588,
+    "08102"
+   ],
+   [
+    37.64539,
+    -122.46562,
+    "08102"
+   ],
+   [
+    37.65034,
+    -122.4749,
+    "08101"
+   ],
+   [
+    37.65982,
+    -122.48471,
+    "08101"
+   ],
+   [
+    37.65071,
+    -122.48824,
+    "08101"
+   ],
+   [
+    37.63426,
+    -122.48968,
+    "08101"
+   ],
+   [
+    37.61677,
+    -122.48483,
+    "08101"
+   ],
+   [
+    37.59278,
+    -122.50225,
+    "08101"
+   ],
+   [
+    37.58695,
+    -122.48764,
+    "08101"
+   ],
+   [
+    37.58966,
+    -122.46625,
+    "08101"
+   ],
+   [
+    37.63279,
+    -122.44884,
+    "08102"
+   ],
+   [
+    37.62003,
+    -122.42738,
+    "08102"
+   ],
+   [
+    37.61953,
+    -122.43585,
+    "08102"
+   ],
+   [
+    37.6166,
+    -122.41449,
+    "08102"
+   ],
+   [
+    37.62421,
+    -122.41991,
+    "08102"
+   ],
+   [
+    37.63269,
+    -122.42443,
+    "08102"
+   ],
+   [
+    37.61841,
+    -122.40632,
+    "08102"
+   ],
+   [
+    37.62883,
+    -122.41357,
+    "08102"
+   ],
+   [
+    37.63193,
+    -122.4091,
+    "08102"
+   ],
+   [
+    37.60487,
+    -122.39242,
+    "08103"
+   ],
+   [
+    37.60889,
+    -122.40946,
+    "08103"
+   ],
+   [
+    37.60055,
+    -122.41885,
+    "08103"
+   ],
+   [
+    37.59336,
+    -122.40792,
+    "08103"
+   ],
+   [
+    37.59915,
+    -122.39721,
+    "08103"
+   ],
+   [
+    37.58879,
+    -122.39835,
+    "08103"
+   ],
+   [
+    37.58244,
+    -122.38926,
+    "08103"
+   ],
+   [
+    37.59122,
+    -122.36901,
+    "08103"
+   ],
+   [
+    37.58305,
+    -122.37676,
+    "08103"
+   ],
+   [
+    37.58212,
+    -122.36224,
+    "08103"
+   ],
+   [
+    37.58441,
+    -122.34421,
+    "08103"
+   ],
+   [
+    37.57955,
+    -122.34977,
+    "08103"
+   ],
+   [
+    37.57575,
+    -122.34664,
+    "08103"
+   ],
+   [
+    37.56494,
+    -122.36791,
+    "08103"
+   ],
+   [
+    37.5519,
+    -122.34612,
+    "08103"
+   ],
+   [
+    37.56806,
+    -122.34516,
+    "08103"
+   ],
+   [
+    37.57364,
+    -122.33654,
+    "08103"
+   ],
+   [
+    37.57033,
+    -122.33004,
+    "08103"
+   ],
+   [
+    37.5809,
+    -122.33106,
+    "08103"
+   ],
+   [
+    37.57752,
+    -122.31603,
+    "08103"
+   ],
+   [
+    37.5748,
+    -122.32469,
+    "08103"
+   ],
+   [
+    37.56959,
+    -122.31883,
+    "08103"
+   ],
+   [
+    37.56548,
+    -122.31884,
+    "08103"
+   ],
+   [
+    37.56143,
+    -122.32588,
+    "08103"
+   ],
+   [
+    37.55406,
+    -122.33048,
+    "08103"
+   ],
+   [
+    37.55376,
+    -122.31679,
+    "08104"
+   ],
+   [
+    37.54149,
+    -122.32175,
+    "08104"
+   ],
+   [
+    37.52738,
+    -122.33742,
+    "08104"
+   ],
+   [
+    37.52248,
+    -122.34779,
+    "08104"
+   ],
+   [
+    37.5241,
+    -122.3281,
+    "08104"
+   ],
+   [
+    37.52742,
+    -122.30454,
+    "08104"
+   ],
+   [
+    37.53186,
+    -122.2956,
+    "08104"
+   ],
+   [
+    37.53493,
+    -122.31182,
+    "08104"
+   ],
+   [
+    37.54343,
+    -122.31098,
+    "08104"
+   ],
+   [
+    37.54703,
+    -122.30039,
+    "08104"
+   ],
+   [
+    37.55909,
+    -122.30813,
+    "08104"
+   ],
+   [
+    37.57034,
+    -122.30521,
+    "08103"
+   ],
+   [
+    37.56471,
+    -122.30241,
+    "08104"
+   ],
+   [
+    37.56022,
+    -122.29483,
+    "08104"
+   ],
+   [
+    37.56054,
+    -122.28625,
+    "08104"
+   ],
+   [
+    37.55188,
+    -122.25848,
+    "08104"
+   ],
+   [
+    37.54791,
+    -122.26611,
+    "08104"
+   ],
+   [
+    37.53921,
+    -122.26355,
+    "08104"
+   ],
+   [
+    37.54121,
+    -122.26917,
+    "08104"
+   ],
+   [
+    37.54995,
+    -122.27861,
+    "08104"
+   ],
+   [
+    37.5605,
+    -122.27235,
+    "08104"
+   ],
+   [
+    37.56056,
+    -122.26181,
+    "08104"
+   ],
+   [
+    37.56692,
+    -122.25937,
+    "08104"
+   ],
+   [
+    37.55813,
+    -122.25113,
+    "08104"
+   ],
+   [
+    37.54645,
+    -122.28614,
+    "08104"
+   ],
+   [
+    37.53667,
+    -122.28925,
+    "08104"
+   ],
+   [
+    37.53145,
+    -122.2822,
+    "08104"
+   ],
+   [
+    37.52583,
+    -122.27419,
+    "08105"
+   ],
+   [
+    37.52102,
+    -122.28763,
+    "08105"
+   ],
+   [
+    37.51704,
+    -122.30921,
+    "08105"
+   ],
+   [
+    37.50632,
+    -122.31074,
+    "08105"
+   ],
+   [
+    37.51389,
+    -122.27705,
+    "08105"
+   ],
+   [
+    37.50803,
+    -122.25477,
+    "08105"
+   ],
+   [
+    37.49927,
+    -122.25596,
+    "08105"
+   ],
+   [
+    37.50814,
+    -122.2655,
+    "08105"
+   ],
+   [
+    37.49151,
+    -122.25129,
+    "08105"
+   ],
+   [
+    37.49442,
+    -122.26268,
+    "08105"
+   ],
+   [
+    37.5047,
+    -122.27646,
+    "08105"
+   ],
+   [
+    37.49777,
+    -122.2841,
+    "08105"
+   ],
+   [
+    37.49043,
+    -122.27093,
+    "08105"
+   ],
+   [
+    37.48248,
+    -122.27278,
+    "08105"
+   ],
+   [
+    37.46476,
+    -122.2674,
+    "08106"
+   ],
+   [
+    37.4715,
+    -122.25098,
+    "08105"
+   ],
+   [
+    37.47958,
+    -122.24791,
+    "08105"
+   ],
+   [
+    37.48433,
+    -122.24142,
+    "08105"
+   ],
+   [
+    37.49246,
+    -122.23782,
+    "08105"
+   ],
+   [
+    37.48423,
+    -122.21748,
+    "08105"
+   ],
+   [
+    37.48768,
+    -122.2299,
+    "08105"
+   ],
+   [
+    37.48012,
+    -122.22421,
+    "08105"
+   ],
+   [
+    37.501,
+    -122.21029,
+    "08105"
+   ],
+   [
+    37.53918,
+    -122.23991,
+    "08105"
+   ],
+   [
+    37.52863,
+    -122.25428,
+    "08105"
+   ],
+   [
+    37.48268,
+    -122.19225,
+    "08106"
+   ],
+   [
+    37.4799,
+    -122.20467,
+    "08106"
+   ],
+   [
+    37.47133,
+    -122.20971,
+    "08106"
+   ],
+   [
+    37.47489,
+    -122.1987,
+    "08106"
+   ],
+   [
+    37.47058,
+    -122.21997,
+    "08105"
+   ],
+   [
+    37.47026,
+    -122.22616,
+    "08105"
+   ],
+   [
+    37.47919,
+    -122.2339,
+    "08105"
+   ],
+   [
+    37.47469,
+    -122.23026,
+    "08105"
+   ],
+   [
+    37.46707,
+    -122.23495,
+    "08105"
+   ],
+   [
+    37.45972,
+    -122.24916,
+    "08105"
+   ],
+   [
+    37.45634,
+    -122.23416,
+    "08105"
+   ],
+   [
+    37.45497,
+    -122.22501,
+    "08106"
+   ],
+   [
+    37.45075,
+    -122.20887,
+    "08106"
+   ],
+   [
+    37.46698,
+    -122.19005,
+    "08106"
+   ],
+   [
+    37.47373,
+    -122.16821,
+    "08106"
+   ],
+   [
+    37.47988,
+    -122.16369,
+    "08106"
+   ],
+   [
+    37.47721,
+    -122.13852,
+    "08106"
+   ],
+   [
+    37.46648,
+    -122.135,
+    "08106"
+   ],
+   [
+    37.45897,
+    -122.12835,
+    "08106"
+   ],
+   [
+    37.47001,
+    -122.151,
+    "08106"
+   ],
+   [
+    37.46657,
+    -122.14341,
+    "08106"
+   ],
+   [
+    37.46151,
+    -122.14718,
+    "08106"
+   ],
+   [
+    37.45654,
+    -122.13719,
+    "08106"
+   ],
+   [
+    37.45594,
+    -122.18002,
+    "08106"
+   ],
+   [
+    37.44976,
+    -122.18166,
+    "08106"
+   ],
+   [
+    37.44362,
+    -122.18673,
+    "08106"
+   ],
+   [
+    37.4361,
+    -122.1934,
+    "08106"
+   ],
+   [
+    37.43275,
+    -122.20338,
+    "08106"
+   ],
+   [
+    37.42251,
+    -122.20517,
+    "08106"
+   ],
+   [
+    37.38047,
+    -122.20974,
+    "08106"
+   ],
+   [
+    37.44495,
+    -122.25643,
+    "08106"
+   ],
+   [
+    37.40589,
+    -122.26653,
+    "08106"
+   ],
+   [
+    37.52196,
+    -122.41966,
+    "08104"
+   ],
+   [
+    37.50478,
+    -122.46965,
+    "08104"
+   ],
+   [
+    37.53182,
+    -122.50783,
+    "08104"
+   ],
+   [
+    37.44722,
+    -122.43576,
+    "08104"
+   ],
+   [
+    37.45606,
+    -122.3996,
+    "08104"
+   ],
+   [
+    37.27627,
+    -122.29489,
+    "08104"
+   ],
+   [
+    37.46179,
+    -122.16004,
+    "08106"
+   ],
+   [
+    37.63008,
+    -122.45989,
+    "08102"
+   ],
+   [
+    37.62438,
+    -122.39272,
+    "08102"
+   ],
+   [
+    37.56298,
+    -122.29666,
+    "08104"
+   ],
+   [
+    37.35799,
+    -121.89143,
+    "08519"
+   ],
+   [
+    37.34759,
+    -121.90054,
+    "08519"
+   ],
+   [
+    37.33857,
+    -121.90783,
+    "08519"
+   ],
+   [
+    37.33966,
+    -121.92186,
+    "08519"
+   ],
+   [
+    37.32972,
+    -121.92829,
+    "08519"
+   ],
+   [
+    37.33284,
+    -121.91476,
+    "08519"
+   ],
+   [
+    37.33091,
+    -121.89545,
+    "08519"
+   ],
+   [
+    37.33529,
+    -121.88475,
+    "08519"
+   ],
+   [
+    37.33304,
+    -121.8792,
+    "08519"
+   ],
+   [
+    37.3414,
+    -121.888,
+    "08519"
+   ],
+   [
+    37.34786,
+    -121.89215,
+    "08519"
+   ],
+   [
+    37.35325,
+    -121.88249,
+    "08519"
+   ],
+   [
+    37.34643,
+    -121.87896,
+    "08519"
+   ],
+   [
+    37.33858,
+    -121.87456,
+    "08519"
+   ],
+   [
+    37.35085,
+    -121.86861,
+    "08519"
+   ],
+   [
+    37.3455,
+    -121.86592,
+    "08519"
+   ],
+   [
+    37.34238,
+    -121.85844,
+    "08519"
+   ],
+   [
+    37.33864,
+    -121.86465,
+    "08519"
+   ],
+   [
+    37.32839,
+    -121.87508,
+    "08519"
+   ],
+   [
+    37.32895,
+    -121.87886,
+    "08519"
+   ],
+   [
+    37.32303,
+    -121.88602,
+    "08519"
+   ],
+   [
+    37.31692,
+    -121.89585,
+    "08519"
+   ],
+   [
+    37.32434,
+    -121.90647,
+    "08519"
+   ],
+   [
+    37.31536,
+    -121.91022,
+    "08519"
+   ],
+   [
+    37.32281,
+    -121.93189,
+    "08519"
+   ],
+   [
+    37.31889,
+    -121.92267,
+    "08519"
+   ],
+   [
+    37.30637,
+    -121.93618,
+    "08519"
+   ],
+   [
+    37.31365,
+    -121.92289,
+    "08519"
+   ],
+   [
+    37.30672,
+    -121.92838,
+    "08519"
+   ],
+   [
+    37.29812,
+    -121.92007,
+    "08510"
+   ],
+   [
+    37.30548,
+    -121.91873,
+    "08510"
+   ],
+   [
+    37.3023,
+    -121.92575,
+    "08510"
+   ],
+   [
+    37.30137,
+    -121.90712,
+    "08510"
+   ],
+   [
+    37.30769,
+    -121.90855,
+    "08510"
+   ],
+   [
+    37.30414,
+    -121.89242,
+    "08510"
+   ],
+   [
+    37.29388,
+    -121.89232,
+    "08510"
+   ],
+   [
+    37.29025,
+    -121.91498,
+    "08510"
+   ],
+   [
+    37.28687,
+    -121.92722,
+    "08508"
+   ],
+   [
+    37.28454,
+    -121.93685,
+    "08508"
+   ],
+   [
+    37.27069,
+    -121.938,
+    "08510"
+   ],
+   [
+    37.26164,
+    -121.94437,
+    "08511"
+   ],
+   [
+    37.25514,
+    -121.94056,
+    "08511"
+   ],
+   [
+    37.25587,
+    -121.9225,
+    "08511"
+   ],
+   [
+    37.27085,
+    -121.92691,
+    "08510"
+   ],
+   [
+    37.27381,
+    -121.91523,
+    "08510"
+   ],
+   [
+    37.27722,
+    -121.90474,
+    "08510"
+   ],
+   [
+    37.24701,
+    -121.90135,
+    "08511"
+   ],
+   [
+    37.26352,
+    -121.89758,
+    "08511"
+   ],
+   [
+    37.25955,
+    -121.90922,
+    "08511"
+   ],
+   [
+    37.25612,
+    -121.88868,
+    "08511"
+   ],
+   [
+    37.2499,
+    -121.88689,
+    "08511"
+   ],
+   [
+    37.28407,
+    -121.8911,
+    "08510"
+   ],
+   [
+    37.27701,
+    -121.88656,
+    "08510"
+   ],
+   [
+    37.26787,
+    -121.88485,
+    "08511"
+   ],
+   [
+    37.32414,
+    -121.85646,
+    "08510"
+   ],
+   [
+    37.33217,
+    -121.84828,
+    "08510"
+   ],
+   [
+    37.32243,
+    -121.83964,
+    "08510"
+   ],
+   [
+    37.323,
+    -121.87179,
+    "08510"
+   ],
+   [
+    37.31611,
+    -121.88055,
+    "08510"
+   ],
+   [
+    37.27721,
+    -121.85449,
+    "08510"
+   ],
+   [
+    37.32732,
+    -121.85154,
+    "08510"
+   ],
+   [
+    37.31944,
+    -121.84343,
+    "08510"
+   ],
+   [
+    37.30775,
+    -121.87463,
+    "08510"
+   ],
+   [
+    37.311,
+    -121.85791,
+    "08510"
+   ],
+   [
+    37.2961,
+    -121.87762,
+    "08510"
+   ],
+   [
+    37.28467,
+    -121.87183,
+    "08510"
+   ],
+   [
+    37.28257,
+    -121.87748,
+    "08510"
+   ],
+   [
+    37.29289,
+    -121.85636,
+    "08510"
+   ],
+   [
+    37.28623,
+    -121.86074,
+    "08510"
+   ],
+   [
+    37.29419,
+    -121.81557,
+    "08520"
+   ],
+   [
+    37.28021,
+    -121.81653,
+    "08520"
+   ],
+   [
+    37.28885,
+    -121.82212,
+    "08520"
+   ],
+   [
+    37.31127,
+    -121.83307,
+    "08510"
+   ],
+   [
+    37.30437,
+    -121.82581,
+    "08510"
+   ],
+   [
+    37.3017,
+    -121.83817,
+    "08510"
+   ],
+   [
+    37.28691,
+    -121.83011,
+    "08520"
+   ],
+   [
+    37.28021,
+    -121.82965,
+    "08520"
+   ],
+   [
+    37.29333,
+    -121.84056,
+    "08510"
+   ],
+   [
+    37.28741,
+    -121.83821,
+    "08510"
+   ],
+   [
+    37.30196,
+    -121.84872,
+    "08510"
+   ],
+   [
+    37.2964,
+    -121.84425,
+    "08510"
+   ],
+   [
+    37.31169,
+    -121.82043,
+    "08521"
+   ],
+   [
+    37.31908,
+    -121.81497,
+    "08521"
+   ],
+   [
+    37.32962,
+    -121.82285,
+    "08521"
+   ],
+   [
+    37.34852,
+    -121.77861,
+    "08505"
+   ],
+   [
+    37.33074,
+    -121.77572,
+    "08505"
+   ],
+   [
+    37.31824,
+    -121.80211,
+    "08520"
+   ],
+   [
+    37.33088,
+    -121.80583,
+    "08505"
+   ],
+   [
+    37.34224,
+    -121.79721,
+    "08505"
+   ],
+   [
+    37.33376,
+    -121.79177,
+    "08505"
+   ],
+   [
+    37.32768,
+    -121.78925,
+    "08505"
+   ],
+   [
+    37.32072,
+    -121.78944,
+    "08520"
+   ],
+   [
+    37.32316,
+    -121.76974,
+    "08520"
+   ],
+   [
+    37.30868,
+    -121.79046,
+    "08520"
+   ],
+   [
+    37.31187,
+    -121.77818,
+    "08520"
+   ],
+   [
+    37.31099,
+    -121.76283,
+    "08520"
+   ],
+   [
+    37.29509,
+    -121.76101,
+    "08520"
+   ],
+   [
+    37.28274,
+    -121.74549,
+    "08520"
+   ],
+   [
+    37.30126,
+    -121.79089,
+    "08520"
+   ],
+   [
+    37.30703,
+    -121.80407,
+    "08520"
+   ],
+   [
+    37.30159,
+    -121.8106,
+    "08520"
+   ],
+   [
+    37.28094,
+    -121.78118,
+    "08520"
+   ],
+   [
+    37.28442,
+    -121.76708,
+    "08520"
+   ],
+   [
+    37.33293,
+    -121.84089,
+    "08521"
+   ],
+   [
+    37.32451,
+    -121.83274,
+    "08521"
+   ],
+   [
+    37.33616,
+    -121.83429,
+    "08521"
+   ],
+   [
+    37.34369,
+    -121.827,
+    "08521"
+   ],
+   [
+    37.34069,
+    -121.83258,
+    "08521"
+   ],
+   [
+    37.35441,
+    -121.81193,
+    "08505"
+   ],
+   [
+    37.34941,
+    -121.80078,
+    "08505"
+   ],
+   [
+    37.34883,
+    -121.82002,
+    "08505"
+   ],
+   [
+    37.34308,
+    -121.81448,
+    "08505"
+   ],
+   [
+    37.35578,
+    -121.86398,
+    "08521"
+   ],
+   [
+    37.34637,
+    -121.85505,
+    "08521"
+   ],
+   [
+    37.34546,
+    -121.83896,
+    "08521"
+   ],
+   [
+    37.35696,
+    -121.85379,
+    "08521"
+   ],
+   [
+    37.37076,
+    -121.85434,
+    "08521"
+   ],
+   [
+    37.36566,
+    -121.86305,
+    "08521"
+   ],
+   [
+    37.35479,
+    -121.84641,
+    "08521"
+   ],
+   [
+    37.35018,
+    -121.84453,
+    "08521"
+   ],
+   [
+    37.36213,
+    -121.84574,
+    "08521"
+   ],
+   [
+    37.36417,
+    -121.84063,
+    "08521"
+   ],
+   [
+    37.38392,
+    -121.83601,
+    "08505"
+   ],
+   [
+    37.38334,
+    -121.84928,
+    "08505"
+   ],
+   [
+    37.37717,
+    -121.84545,
+    "08505"
+   ],
+   [
+    37.37329,
+    -121.82813,
+    "08505"
+   ],
+   [
+    37.36786,
+    -121.83567,
+    "08505"
+   ],
+   [
+    37.3585,
+    -121.82736,
+    "08505"
+   ],
+   [
+    37.35443,
+    -121.83307,
+    "08521"
+   ],
+   [
+    37.36871,
+    -121.82147,
+    "08505"
+   ],
+   [
+    37.36378,
+    -121.81577,
+    "08505"
+   ],
+   [
+    37.38417,
+    -121.82275,
+    "08505"
+   ],
+   [
+    37.37464,
+    -121.80189,
+    "08505"
+   ],
+   [
+    37.391,
+    -121.85401,
+    "08505"
+   ],
+   [
+    37.40548,
+    -121.82711,
+    "08505"
+   ],
+   [
+    37.37784,
+    -121.88359,
+    "08521"
+   ],
+   [
+    37.40192,
+    -121.85476,
+    "08518"
+   ],
+   [
+    37.40912,
+    -121.85974,
+    "08518"
+   ],
+   [
+    37.38721,
+    -121.87174,
+    "08521"
+   ],
+   [
+    37.38328,
+    -121.87668,
+    "08521"
+   ],
+   [
+    37.38024,
+    -121.89681,
+    "08521"
+   ],
+   [
+    37.37506,
+    -121.86571,
+    "08521"
+   ],
+   [
+    37.4034,
+    -121.87128,
+    "08518"
+   ],
+   [
+    37.39396,
+    -121.8652,
+    "08518"
+   ],
+   [
+    37.39198,
+    -121.89271,
+    "08521"
+   ],
+   [
+    37.39951,
+    -121.88121,
+    "08521"
+   ],
+   [
+    37.40955,
+    -121.87896,
+    "08518"
+   ],
+   [
+    37.41628,
+    -121.86488,
+    "08518"
+   ],
+   [
+    37.43927,
+    -121.87979,
+    "08518"
+   ],
+   [
+    37.43854,
+    -121.9049,
+    "08518"
+   ],
+   [
+    37.44097,
+    -121.89777,
+    "08518"
+   ],
+   [
+    37.42489,
+    -121.86772,
+    "08518"
+   ],
+   [
+    37.4206,
+    -121.87726,
+    "08518"
+   ],
+   [
+    37.43272,
+    -121.88079,
+    "08518"
+   ],
+   [
+    37.45044,
+    -121.90131,
+    "08518"
+   ],
+   [
+    37.4585,
+    -121.9068,
+    "08518"
+   ],
+   [
+    37.43371,
+    -121.87162,
+    "08518"
+   ],
+   [
+    37.4471,
+    -121.87238,
+    "08518"
+   ],
+   [
+    37.40952,
+    -121.90278,
+    "08518"
+   ],
+   [
+    37.45235,
+    -121.91551,
+    "08518"
+   ],
+   [
+    37.43581,
+    -121.91289,
+    "08518"
+   ],
+   [
+    37.42412,
+    -121.90976,
+    "08518"
+   ],
+   [
+    37.4234,
+    -121.89036,
+    "08518"
+   ],
+   [
+    37.42125,
+    -121.90197,
+    "08518"
+   ],
+   [
+    37.43177,
+    -122.08838,
+    "08522"
+   ],
+   [
+    37.42155,
+    -121.9975,
+    "08519"
+   ],
+   [
+    37.41128,
+    -122.0576,
+    "08522"
+   ],
+   [
+    37.40128,
+    -121.99122,
+    "08516"
+   ],
+   [
+    37.40253,
+    -122.00346,
+    "08516"
+   ],
+   [
+    37.39578,
+    -122.00069,
+    "08516"
+   ],
+   [
+    37.40179,
+    -122.01371,
+    "08516"
+   ],
+   [
+    37.4014,
+    -122.02558,
+    "08516"
+   ],
+   [
+    37.39671,
+    -121.95385,
+    "08517"
+   ],
+   [
+    37.39742,
+    -121.94796,
+    "08517"
+   ],
+   [
+    37.39199,
+    -121.92114,
+    "08519"
+   ],
+   [
+    37.38577,
+    -121.9484,
+    "08517"
+   ],
+   [
+    37.39896,
+    -121.97099,
+    "08517"
+   ],
+   [
+    37.40318,
+    -121.9588,
+    "08517"
+   ],
+   [
+    37.4035,
+    -121.94376,
+    "08519"
+   ],
+   [
+    37.40804,
+    -121.9392,
+    "08519"
+   ],
+   [
+    37.41532,
+    -121.96028,
+    "08519"
+   ],
+   [
+    37.41569,
+    -121.94376,
+    "08519"
+   ],
+   [
+    37.36402,
+    -121.91997,
+    "08519"
+   ],
+   [
+    37.36785,
+    -121.95941,
+    "08517"
+   ],
+   [
+    37.34591,
+    -121.93154,
+    "08517"
+   ],
+   [
+    37.36788,
+    -121.9846,
+    "08517"
+   ],
+   [
+    37.35939,
+    -121.97263,
+    "08517"
+   ],
+   [
+    37.35736,
+    -121.96429,
+    "08517"
+   ],
+   [
+    37.35838,
+    -121.98089,
+    "08517"
+   ],
+   [
+    37.35887,
+    -121.98978,
+    "08517"
+   ],
+   [
+    37.34983,
+    -121.98661,
+    "08517"
+   ],
+   [
+    37.34752,
+    -121.97264,
+    "08517"
+   ],
+   [
+    37.34159,
+    -121.98718,
+    "08517"
+   ],
+   [
+    37.34694,
+    -121.96273,
+    "08517"
+   ],
+   [
+    37.35113,
+    -121.94568,
+    "08517"
+   ],
+   [
+    37.3436,
+    -121.94387,
+    "08517"
+   ],
+   [
+    37.33218,
+    -121.94367,
+    "08517"
+   ],
+   [
+    37.32714,
+    -121.95955,
+    "08517"
+   ],
+   [
+    37.33374,
+    -121.95372,
+    "08517"
+   ],
+   [
+    37.33896,
+    -121.96179,
+    "08517"
+   ],
+   [
+    37.33435,
+    -121.98466,
+    "08517"
+   ],
+   [
+    37.33097,
+    -121.97178,
+    "08517"
+   ],
+   [
+    37.32693,
+    -121.98645,
+    "08517"
+   ],
+   [
+    37.30122,
+    -121.98963,
+    "08508"
+   ],
+   [
+    37.32054,
+    -121.98442,
+    "08508"
+   ],
+   [
+    37.31326,
+    -121.98546,
+    "08508"
+   ],
+   [
+    37.31905,
+    -121.96089,
+    "08508"
+   ],
+   [
+    37.30902,
+    -121.95685,
+    "08508"
+   ],
+   [
+    37.31191,
+    -121.97139,
+    "08508"
+   ],
+   [
+    37.30479,
+    -121.97191,
+    "08508"
+   ],
+   [
+    37.31696,
+    -121.94501,
+    "08508"
+   ],
+   [
+    37.30183,
+    -121.94468,
+    "08508"
+   ],
+   [
+    37.28315,
+    -121.94622,
+    "08508"
+   ],
+   [
+    37.28765,
+    -121.95542,
+    "08508"
+   ],
+   [
+    37.29875,
+    -121.95206,
+    "08508"
+   ],
+   [
+    37.29767,
+    -121.95782,
+    "08508"
+   ],
+   [
+    37.29334,
+    -121.98175,
+    "08508"
+   ],
+   [
+    37.28225,
+    -121.96922,
+    "08508"
+   ],
+   [
+    37.28075,
+    -121.98661,
+    "08508"
+   ],
+   [
+    37.29753,
+    -121.96866,
+    "08508"
+   ],
+   [
+    37.29028,
+    -121.96916,
+    "08508"
+   ],
+   [
+    37.26997,
+    -121.97933,
+    "08508"
+   ],
+   [
+    37.27426,
+    -121.9629,
+    "08508"
+   ],
+   [
+    37.26403,
+    -121.96629,
+    "08508"
+   ],
+   [
+    37.24114,
+    -121.95492,
+    "08507"
+   ],
+   [
+    37.24738,
+    -121.93675,
+    "08511"
+   ],
+   [
+    37.24342,
+    -121.91403,
+    "08511"
+   ],
+   [
+    37.23987,
+    -121.93365,
+    "08507"
+   ],
+   [
+    37.2297,
+    -121.928,
+    "08507"
+   ],
+   [
+    37.21576,
+    -121.95965,
+    "08507"
+   ],
+   [
+    37.22593,
+    -121.99328,
+    "08507"
+   ],
+   [
+    37.22607,
+    -121.97968,
+    "08507"
+   ],
+   [
+    37.23325,
+    -121.97752,
+    "08507"
+   ],
+   [
+    37.24986,
+    -121.96491,
+    "08507"
+   ],
+   [
+    37.25825,
+    -121.98137,
+    "08507"
+   ],
+   [
+    37.24344,
+    -121.98617,
+    "08507"
+   ],
+   [
+    37.2605,
+    -122.00645,
+    "08507"
+   ],
+   [
+    37.24437,
+    -122.02541,
+    "08507"
+   ],
+   [
+    37.28785,
+    -122.01726,
+    "08507"
+   ],
+   [
+    37.28084,
+    -122.00023,
+    "08507"
+   ],
+   [
+    37.27529,
+    -122.02443,
+    "08507"
+   ],
+   [
+    37.27473,
+    -122.04694,
+    "08507"
+   ],
+   [
+    37.31983,
+    -122.04782,
+    "08507"
+   ],
+   [
+    37.30328,
+    -122.05352,
+    "08507"
+   ],
+   [
+    37.32886,
+    -122.06715,
+    "08507"
+   ],
+   [
+    37.31329,
+    -122.07239,
+    "08507"
+   ],
+   [
+    37.33342,
+    -122.05422,
+    "08507"
+   ],
+   [
+    37.32835,
+    -122.04116,
+    "08507"
+   ],
+   [
+    37.31284,
+    -122.03972,
+    "08507"
+   ],
+   [
+    37.30222,
+    -122.03767,
+    "08507"
+   ],
+   [
+    37.3023,
+    -122.01043,
+    "08508"
+   ],
+   [
+    37.30152,
+    -122.00217,
+    "08508"
+   ],
+   [
+    37.30209,
+    -122.02812,
+    "08508"
+   ],
+   [
+    37.30196,
+    -122.01895,
+    "08508"
+   ],
+   [
+    37.31571,
+    -122.0107,
+    "08507"
+   ],
+   [
+    37.31589,
+    -122.00112,
+    "08507"
+   ],
+   [
+    37.31718,
+    -122.02809,
+    "08507"
+   ],
+   [
+    37.31627,
+    -122.01868,
+    "08507"
+   ],
+   [
+    37.33133,
+    -122.02344,
+    "08507"
+   ],
+   [
+    37.33026,
+    -122.00277,
+    "08507"
+   ],
+   [
+    37.34522,
+    -122.02784,
+    "08516"
+   ],
+   [
+    37.34366,
+    -122.01835,
+    "08516"
+   ],
+   [
+    37.34933,
+    -122.0051,
+    "08516"
+   ],
+   [
+    37.34135,
+    -122.00398,
+    "08516"
+   ],
+   [
+    37.34471,
+    -122.05631,
+    "08516"
+   ],
+   [
+    37.34419,
+    -122.04582,
+    "08516"
+   ],
+   [
+    37.33963,
+    -122.03792,
+    "08516"
+   ],
+   [
+    37.34755,
+    -122.03676,
+    "08516"
+   ],
+   [
+    37.3623,
+    -122.05669,
+    "08516"
+   ],
+   [
+    37.35563,
+    -122.04364,
+    "08516"
+   ],
+   [
+    37.36462,
+    -122.04224,
+    "08516"
+   ],
+   [
+    37.35729,
+    -122.02719,
+    "08516"
+   ],
+   [
+    37.35824,
+    -122.00993,
+    "08516"
+   ],
+   [
+    37.35534,
+    -121.99898,
+    "08516"
+   ],
+   [
+    37.35979,
+    -122.00164,
+    "08516"
+   ],
+   [
+    37.36604,
+    -122.02435,
+    "08516"
+   ],
+   [
+    37.36052,
+    -122.01826,
+    "08516"
+   ],
+   [
+    37.37557,
+    -122.04094,
+    "08516"
+   ],
+   [
+    37.37344,
+    -122.02996,
+    "08516"
+   ],
+   [
+    37.37097,
+    -122.01704,
+    "08516"
+   ],
+   [
+    37.36882,
+    -122.00452,
+    "08516"
+   ],
+   [
+    37.38092,
+    -122.02241,
+    "08516"
+   ],
+   [
+    37.38038,
+    -122.00057,
+    "08516"
+   ],
+   [
+    37.38464,
+    -122.02398,
+    "08516"
+   ],
+   [
+    37.3911,
+    -122.00595,
+    "08516"
+   ],
+   [
+    37.39333,
+    -122.02506,
+    "08516"
+   ],
+   [
+    37.39025,
+    -122.01789,
+    "08516"
+   ],
+   [
+    37.38828,
+    -122.0402,
+    "08516"
+   ],
+   [
+    37.37807,
+    -122.05069,
+    "08516"
+   ],
+   [
+    37.37843,
+    -122.05687,
+    "08516"
+   ],
+   [
+    37.40101,
+    -122.05951,
+    "08522"
+   ],
+   [
+    37.39116,
+    -122.06118,
+    "08522"
+   ],
+   [
+    37.37242,
+    -122.06293,
+    "08522"
+   ],
+   [
+    37.38316,
+    -122.06048,
+    "08522"
+   ],
+   [
+    37.40117,
+    -122.07616,
+    "08522"
+   ],
+   [
+    37.4052,
+    -122.08446,
+    "08522"
+   ],
+   [
+    37.40955,
+    -122.10135,
+    "08522"
+   ],
+   [
+    37.40568,
+    -122.09153,
+    "08522"
+   ],
+   [
+    37.41665,
+    -122.09412,
+    "08522"
+   ],
+   [
+    37.40652,
+    -122.11481,
+    "08522"
+   ],
+   [
+    37.39711,
+    -122.098,
+    "08522"
+   ],
+   [
+    37.40257,
+    -122.10541,
+    "08522"
+   ],
+   [
+    37.39378,
+    -122.08973,
+    "08522"
+   ],
+   [
+    37.39103,
+    -122.08045,
+    "08522"
+   ],
+   [
+    37.38519,
+    -122.07416,
+    "08522"
+   ],
+   [
+    37.38401,
+    -122.09352,
+    "08522"
+   ],
+   [
+    37.37779,
+    -122.08233,
+    "08522"
+   ],
+   [
+    37.36874,
+    -122.0875,
+    "08522"
+   ],
+   [
+    37.36966,
+    -122.07256,
+    "08522"
+   ],
+   [
+    37.35782,
+    -122.07973,
+    "08522"
+   ],
+   [
+    37.34665,
+    -122.0728,
+    "08522"
+   ],
+   [
+    37.34052,
+    -122.08064,
+    "08522"
+   ],
+   [
+    37.37283,
+    -122.10097,
+    "08522"
+   ],
+   [
+    37.37716,
+    -122.11347,
+    "08522"
+   ],
+   [
+    37.39312,
+    -122.10857,
+    "08522"
+   ],
+   [
+    37.39226,
+    -122.11881,
+    "08522"
+   ],
+   [
+    37.41014,
+    -122.13052,
+    "08515"
+   ],
+   [
+    37.41771,
+    -122.12958,
+    "08515"
+   ],
+   [
+    37.4272,
+    -122.10967,
+    "08515"
+   ],
+   [
+    37.41346,
+    -122.11019,
+    "08515"
+   ],
+   [
+    37.41995,
+    -122.11991,
+    "08515"
+   ],
+   [
+    37.42706,
+    -122.13057,
+    "08515"
+   ],
+   [
+    37.43783,
+    -122.12133,
+    "08515"
+   ],
+   [
+    37.44584,
+    -122.13322,
+    "08515"
+   ],
+   [
+    37.45045,
+    -122.14796,
+    "08515"
+   ],
+   [
+    37.44248,
+    -122.15397,
+    "08515"
+   ],
+   [
+    37.44783,
+    -122.1622,
+    "08515"
+   ],
+   [
+    37.43524,
+    -122.1432,
+    "08515"
+   ],
+   [
+    37.42693,
+    -122.1486,
+    "08515"
+   ],
+   [
+    37.41686,
+    -122.16309,
+    "08515"
+   ],
+   [
+    37.43075,
+    -122.17494,
+    "08515"
+   ],
+   [
+    37.43924,
+    -122.17341,
+    "08515"
+   ],
+   [
+    37.37906,
+    -122.13236,
+    "08515"
+   ],
+   [
+    37.35322,
+    -122.09601,
+    "08515"
+   ],
+   [
+    37.36063,
+    -122.13566,
+    "08515"
+   ],
+   [
+    37.40434,
+    -122.15434,
+    "08515"
+   ],
+   [
+    37.3055,
+    -122.11196,
+    "08515"
+   ],
+   [
+    37.16029,
+    -121.9596,
+    "08507"
+   ],
+   [
+    37.21439,
+    -121.85799,
+    "08512"
+   ],
+   [
+    37.22135,
+    -121.85744,
+    "08512"
+   ],
+   [
+    37.21399,
+    -121.86911,
+    "08512"
+   ],
+   [
+    37.20507,
+    -121.82264,
+    "08512"
+   ],
+   [
+    37.20521,
+    -121.83433,
+    "08512"
+   ],
+   [
+    37.22763,
+    -121.89204,
+    "08512"
+   ],
+   [
+    37.22884,
+    -121.87637,
+    "08512"
+   ],
+   [
+    37.2445,
+    -121.88334,
+    "08512"
+   ],
+   [
+    37.23801,
+    -121.89626,
+    "08512"
+   ],
+   [
+    37.20258,
+    -121.84855,
+    "08512"
+   ],
+   [
+    37.20911,
+    -121.88143,
+    "08512"
+   ],
+   [
+    37.25939,
+    -121.78145,
+    "08520"
+   ],
+   [
+    37.26964,
+    -121.86465,
+    "08511"
+   ],
+   [
+    37.27093,
+    -121.8452,
+    "08511"
+   ],
+   [
+    37.26334,
+    -121.82229,
+    "08511"
+   ],
+   [
+    37.25499,
+    -121.8101,
+    "08511"
+   ],
+   [
+    37.25583,
+    -121.82526,
+    "08511"
+   ],
+   [
+    37.26099,
+    -121.86595,
+    "08511"
+   ],
+   [
+    37.26142,
+    -121.85125,
+    "08511"
+   ],
+   [
+    37.25614,
+    -121.83684,
+    "08511"
+   ],
+   [
+    37.2532,
+    -121.8576,
+    "08511"
+   ],
+   [
+    37.24775,
+    -121.81585,
+    "08512"
+   ],
+   [
+    37.23265,
+    -121.82359,
+    "08512"
+   ],
+   [
+    37.23166,
+    -121.80945,
+    "08512"
+   ],
+   [
+    37.23066,
+    -121.78302,
+    "08512"
+   ],
+   [
+    37.2295,
+    -121.77268,
+    "08512"
+   ],
+   [
+    37.22245,
+    -121.76382,
+    "08512"
+   ],
+   [
+    37.23991,
+    -121.81042,
+    "08512"
+   ],
+   [
+    37.24123,
+    -121.82534,
+    "08512"
+   ],
+   [
+    37.23724,
+    -121.7667,
+    "08520"
+   ],
+   [
+    37.24929,
+    -121.78765,
+    "08520"
+   ],
+   [
+    37.26557,
+    -121.81455,
+    "08520"
+   ],
+   [
+    37.26197,
+    -121.80492,
+    "08520"
+   ],
+   [
+    37.23881,
+    -121.83533,
+    "08512"
+   ],
+   [
+    37.24069,
+    -121.8444,
+    "08512"
+   ],
+   [
+    37.24551,
+    -121.86572,
+    "08512"
+   ],
+   [
+    37.2437,
+    -121.8534,
+    "08512"
+   ],
+   [
+    37.27623,
+    -121.83603,
+    "08511"
+   ],
+   [
+    37.26945,
+    -121.83582,
+    "08511"
+   ],
+   [
+    37.27247,
+    -121.80872,
+    "08520"
+   ],
+   [
+    37.27381,
+    -121.8223,
+    "08520"
+   ],
+   [
+    37.24504,
+    -121.79771,
+    "08512"
+   ],
+   [
+    37.23364,
+    -121.79735,
+    "08512"
+   ],
+   [
+    37.18637,
+    -121.71726,
+    "08506"
+   ],
+   [
+    37.05598,
+    -121.69154,
+    "08506"
+   ],
+   [
+    37.13124,
+    -121.67381,
+    "08506"
+   ],
+   [
+    37.10136,
+    -121.64058,
+    "08506"
+   ],
+   [
+    37.14905,
+    -121.62764,
+    "08506"
+   ],
+   [
+    37.13233,
+    -121.61495,
+    "08506"
+   ],
+   [
+    37.11802,
+    -121.6347,
+    "08506"
+   ],
+   [
+    37.14717,
+    -121.66047,
+    "08506"
+   ],
+   [
+    37.13252,
+    -121.64385,
+    "08506"
+   ],
+   [
+    37.11935,
+    -121.6503,
+    "08506"
+   ],
+   [
+    37.13036,
+    -121.66041,
+    "08506"
+   ],
+   [
+    37.06547,
+    -121.60364,
+    "08506"
+   ],
+   [
+    37.09328,
+    -121.58576,
+    "08506"
+   ],
+   [
+    37.02325,
+    -121.59268,
+    "08506"
+   ],
+   [
+    36.99075,
+    -121.57224,
+    "08506"
+   ],
+   [
+    36.99817,
+    -121.59151,
+    "08506"
+   ],
+   [
+    37.00797,
+    -121.57989,
+    "08506"
+   ],
+   [
+    37.00131,
+    -121.5742,
+    "08506"
+   ],
+   [
+    37.02055,
+    -121.58042,
+    "08506"
+   ],
+   [
+    37.02425,
+    -121.58421,
+    "08506"
+   ],
+   [
+    37.03069,
+    -121.61095,
+    "08506"
+   ],
+   [
+    37.02144,
+    -121.60687,
+    "08506"
+   ],
+   [
+    37.00816,
+    -121.54379,
+    "08506"
+   ],
+   [
+    37.00421,
+    -121.5648,
+    "08506"
+   ],
+   [
+    37.01641,
+    -121.57019,
+    "08506"
+   ],
+   [
+    37.42854,
+    -122.16201,
+    "08515"
+   ],
+   [
+    37.26793,
+    -121.59213,
+    "08506"
+   ],
+   [
+    38.11483,
+    -122.22305,
+    "09501"
+   ],
+   [
+    38.11345,
+    -122.20875,
+    "09501"
+   ],
+   [
+    38.1282,
+    -122.21442,
+    "09501"
+   ],
+   [
+    38.13014,
+    -122.19222,
+    "09501"
+   ],
+   [
+    38.1045,
+    -122.21128,
+    "09501"
+   ],
+   [
+    38.10497,
+    -122.22414,
+    "09501"
+   ],
+   [
+    38.09514,
+    -122.22463,
+    "09501"
+   ],
+   [
+    38.09513,
+    -122.21341,
+    "09501"
+   ],
+   [
+    38.09215,
+    -122.20207,
+    "09501"
+   ],
+   [
+    38.08484,
+    -122.22377,
+    "09501"
+   ],
+   [
+    38.07362,
+    -122.21742,
+    "09501"
+   ],
+   [
+    38.07429,
+    -122.20409,
+    "09501"
+   ],
+   [
+    38.08942,
+    -122.24115,
+    "09501"
+   ],
+   [
+    38.10057,
+    -122.27748,
+    "09501"
+   ],
+   [
+    38.10172,
+    -122.25713,
+    "09501"
+   ],
+   [
+    38.10099,
+    -122.24925,
+    "09501"
+   ],
+   [
+    38.09709,
+    -122.2364,
+    "09501"
+   ],
+   [
+    38.10527,
+    -122.23649,
+    "09501"
+   ],
+   [
+    38.11418,
+    -122.23581,
+    "09501"
+   ],
+   [
+    38.12381,
+    -122.23925,
+    "09501"
+   ],
+   [
+    38.11,
+    -122.24996,
+    "09501"
+   ],
+   [
+    38.10849,
+    -122.25959,
+    "09501"
+   ],
+   [
+    38.11574,
+    -122.2642,
+    "09501"
+   ],
+   [
+    38.12247,
+    -122.26852,
+    "09501"
+   ],
+   [
+    38.13051,
+    -122.25467,
+    "09501"
+   ],
+   [
+    38.14568,
+    -122.2604,
+    "09501"
+   ],
+   [
+    38.15158,
+    -122.2717,
+    "09501"
+   ],
+   [
+    38.13535,
+    -122.2413,
+    "09501"
+   ],
+   [
+    38.1483,
+    -122.24469,
+    "09501"
+   ],
+   [
+    38.1465,
+    -122.22873,
+    "09501"
+   ],
+   [
+    38.05528,
+    -122.16594,
+    "09501"
+   ],
+   [
+    38.0695,
+    -122.12772,
+    "09501"
+   ],
+   [
+    38.10474,
+    -122.195,
+    "09501"
+   ],
+   [
+    38.09086,
+    -122.16873,
+    "09501"
+   ],
+   [
+    38.0809,
+    -122.17849,
+    "09501"
+   ],
+   [
+    38.07515,
+    -122.16846,
+    "09501"
+   ],
+   [
+    38.06913,
+    -122.15719,
+    "09501"
+   ],
+   [
+    38.06118,
+    -122.16317,
+    "09501"
+   ],
+   [
+    38.2431,
+    -122.13728,
+    "09502"
+   ],
+   [
+    38.22623,
+    -122.1626,
+    "09502"
+   ],
+   [
+    38.1739,
+    -122.13311,
+    "09502"
+   ],
+   [
+    38.18498,
+    -122.15668,
+    "09502"
+   ],
+   [
+    38.22994,
+    -122.09948,
+    "09502"
+   ],
+   [
+    38.2661,
+    -122.06413,
+    "09502"
+   ],
+   [
+    38.28569,
+    -122.08446,
+    "09502"
+   ],
+   [
+    38.28997,
+    -122.04705,
+    "09502"
+   ],
+   [
+    38.27577,
+    -122.05513,
+    "09502"
+   ],
+   [
+    38.29451,
+    -122.02903,
+    "09502"
+   ],
+   [
+    38.27715,
+    -122.0355,
+    "09502"
+   ],
+   [
+    38.28472,
+    -122.01529,
+    "09502"
+   ],
+   [
+    38.27629,
+    -122.01587,
+    "09502"
+   ],
+   [
+    38.2911,
+    -121.98215,
+    "09502"
+   ],
+   [
+    38.25372,
+    -122.05685,
+    "09502"
+   ],
+   [
+    38.238,
+    -122.06383,
+    "09502"
+   ],
+   [
+    38.25534,
+    -122.04201,
+    "09502"
+   ],
+   [
+    38.24772,
+    -122.04484,
+    "09502"
+   ],
+   [
+    38.26436,
+    -122.05073,
+    "09502"
+   ],
+   [
+    38.26699,
+    -122.03909,
+    "09502"
+   ],
+   [
+    38.26395,
+    -122.02876,
+    "09502"
+   ],
+   [
+    38.25451,
+    -122.02968,
+    "09502"
+   ],
+   [
+    38.26647,
+    -122.02173,
+    "09502"
+   ],
+   [
+    38.26983,
+    -122.01013,
+    "09502"
+   ],
+   [
+    38.26344,
+    -122.01481,
+    "09502"
+   ],
+   [
+    38.18802,
+    -121.99798,
+    "09502"
+   ],
+   [
+    38.24873,
+    -122.02652,
+    "09502"
+   ],
+   [
+    38.24926,
+    -122.01399,
+    "09502"
+   ],
+   [
+    38.24802,
+    -121.99731,
+    "09502"
+   ],
+   [
+    38.25573,
+    -121.98407,
+    "09502"
+   ],
+   [
+    38.26102,
+    -122.00236,
+    "09502"
+   ],
+   [
+    38.27822,
+    -121.94687,
+    "09502"
+   ],
+   [
+    38.27201,
+    -121.942,
+    "09502"
+   ],
+   [
+    38.43921,
+    -122.01383,
+    "09503"
+   ],
+   [
+    38.40354,
+    -121.93384,
+    "09503"
+   ],
+   [
+    38.34386,
+    -121.95643,
+    "09503"
+   ],
+   [
+    38.34777,
+    -121.93129,
+    "09503"
+   ],
+   [
+    38.34019,
+    -121.94371,
+    "09503"
+   ],
+   [
+    38.36961,
+    -121.94786,
+    "09503"
+   ],
+   [
+    38.35684,
+    -121.94564,
+    "09503"
+   ],
+   [
+    38.32637,
+    -121.96509,
+    "09503"
+   ],
+   [
+    38.33238,
+    -121.94838,
+    "09503"
+   ],
+   [
+    38.3228,
+    -121.94535,
+    "09503"
+   ],
+   [
+    38.32719,
+    -121.97915,
+    "09503"
+   ],
+   [
+    38.3531,
+    -121.99507,
+    "09503"
+   ],
+   [
+    38.35377,
+    -121.96714,
+    "09503"
+   ],
+   [
+    38.34139,
+    -121.96593,
+    "09503"
+   ],
+   [
+    38.3409,
+    -121.97738,
+    "09503"
+   ],
+   [
+    38.33816,
+    -121.99284,
+    "09503"
+   ],
+   [
+    38.36621,
+    -122.00869,
+    "09503"
+   ],
+   [
+    38.3619,
+    -121.99629,
+    "09503"
+   ],
+   [
+    38.37634,
+    -121.9739,
+    "09503"
+   ],
+   [
+    38.39588,
+    -121.97468,
+    "09503"
+   ],
+   [
+    38.37657,
+    -121.98642,
+    "09503"
+   ],
+   [
+    38.37664,
+    -121.98055,
+    "09503"
+   ],
+   [
+    38.42921,
+    -121.81186,
+    "09503"
+   ],
+   [
+    38.44498,
+    -121.82241,
+    "09503"
+   ],
+   [
+    38.44554,
+    -121.84121,
+    "09503"
+   ],
+   [
+    38.45846,
+    -121.83076,
+    "09503"
+   ],
+   [
+    38.22101,
+    -121.72451,
+    "09503"
+   ],
+   [
+    38.14722,
+    -121.74752,
+    "09503"
+   ],
+   [
+    38.25873,
+    -121.94794,
+    "09502"
+   ],
+   [
+    38.22694,
+    -122.42671,
+    "09706"
+   ],
+   [
+    38.28117,
+    -122.46136,
+    "09706"
+   ],
+   [
+    38.2873,
+    -122.45405,
+    "09706"
+   ],
+   [
+    38.30096,
+    -122.46904,
+    "09706"
+   ],
+   [
+    38.30013,
+    -122.44254,
+    "09706"
+   ],
+   [
+    38.29585,
+    -122.51149,
+    "09706"
+   ],
+   [
+    38.30373,
+    -122.4887,
+    "09706"
+   ],
+   [
+    38.31989,
+    -122.48802,
+    "09706"
+   ],
+   [
+    38.31927,
+    -122.47938,
+    "09706"
+   ],
+   [
+    38.38497,
+    -122.55513,
+    "09706"
+   ],
+   [
+    38.37653,
+    -122.51394,
+    "09706"
+   ],
+   [
+    38.23769,
+    -122.61371,
+    "09702"
+   ],
+   [
+    38.2444,
+    -122.60851,
+    "09702"
+   ],
+   [
+    38.25155,
+    -122.61937,
+    "09702"
+   ],
+   [
+    38.27023,
+    -122.641,
+    "09702"
+   ],
+   [
+    38.26087,
+    -122.64455,
+    "09702"
+   ],
+   [
+    38.26563,
+    -122.64031,
+    "09702"
+   ],
+   [
+    38.23834,
+    -122.59319,
+    "09702"
+   ],
+   [
+    38.21304,
+    -122.56146,
+    "09702"
+   ],
+   [
+    38.23293,
+    -122.63361,
+    "09702"
+   ],
+   [
+    38.21486,
+    -122.62754,
+    "09702"
+   ],
+   [
+    38.22615,
+    -122.65058,
+    "09702"
+   ],
+   [
+    38.24291,
+    -122.64177,
+    "09702"
+   ],
+   [
+    38.24192,
+    -122.65126,
+    "09702"
+   ],
+   [
+    38.25486,
+    -122.67014,
+    "09702"
+   ],
+   [
+    38.26444,
+    -122.7642,
+    "09704"
+   ],
+   [
+    38.32391,
+    -122.69601,
+    "09702"
+   ],
+   [
+    38.32348,
+    -122.70829,
+    "09702"
+   ],
+   [
+    38.2947,
+    -122.67651,
+    "09702"
+   ],
+   [
+    38.34028,
+    -122.72335,
+    "09702"
+   ],
+   [
+    38.33347,
+    -122.6998,
+    "09702"
+   ],
+   [
+    38.34307,
+    -122.70707,
+    "09702"
+   ],
+   [
+    38.34727,
+    -122.69334,
+    "09702"
+   ],
+   [
+    38.36698,
+    -122.69798,
+    "09702"
+   ],
+   [
+    38.35559,
+    -122.69678,
+    "09702"
+   ],
+   [
+    38.34925,
+    -122.65993,
+    "09702"
+   ],
+   [
+    38.33897,
+    -122.68448,
+    "09702"
+   ],
+   [
+    38.32885,
+    -122.67897,
+    "09702"
+   ],
+   [
+    38.4216,
+    -122.6953,
+    "09706"
+   ],
+   [
+    38.4271,
+    -122.70591,
+    "09706"
+   ],
+   [
+    38.39528,
+    -122.70957,
+    "09706"
+   ],
+   [
+    38.4178,
+    -122.70994,
+    "09706"
+   ],
+   [
+    38.43046,
+    -122.64423,
+    "09706"
+   ],
+   [
+    38.43625,
+    -122.6678,
+    "09706"
+   ],
+   [
+    38.39162,
+    -122.65577,
+    "09706"
+   ],
+   [
+    38.4294,
+    -122.6743,
+    "09706"
+   ],
+   [
+    38.44508,
+    -122.58373,
+    "09706"
+   ],
+   [
+    38.42653,
+    -122.59485,
+    "09706"
+   ],
+   [
+    38.44351,
+    -122.67432,
+    "09706"
+   ],
+   [
+    38.45466,
+    -122.66594,
+    "09706"
+   ],
+   [
+    38.44326,
+    -122.69049,
+    "09706"
+   ],
+   [
+    38.43452,
+    -122.7088,
+    "09706"
+   ],
+   [
+    38.4419,
+    -122.7146,
+    "09706"
+   ],
+   [
+    38.46066,
+    -122.72369,
+    "09706"
+   ],
+   [
+    38.45695,
+    -122.71293,
+    "09706"
+   ],
+   [
+    38.44843,
+    -122.70716,
+    "09706"
+   ],
+   [
+    38.46193,
+    -122.67561,
+    "09706"
+   ],
+   [
+    38.47517,
+    -122.67496,
+    "09706"
+   ],
+   [
+    38.45872,
+    -122.69812,
+    "09706"
+   ],
+   [
+    38.47622,
+    -122.69186,
+    "09706"
+   ],
+   [
+    38.48143,
+    -122.71968,
+    "09706"
+   ],
+   [
+    38.46522,
+    -122.6563,
+    "09706"
+   ],
+   [
+    38.47616,
+    -122.66476,
+    "09706"
+   ],
+   [
+    38.48709,
+    -122.65892,
+    "09706"
+   ],
+   [
+    38.53089,
+    -122.63096,
+    "09706"
+   ],
+   [
+    38.52023,
+    -122.7585,
+    "09704"
+   ],
+   [
+    38.50572,
+    -122.77463,
+    "09704"
+   ],
+   [
+    38.4791,
+    -122.74801,
+    "09705"
+   ],
+   [
+    38.46565,
+    -122.73773,
+    "09705"
+   ],
+   [
+    38.46278,
+    -122.73061,
+    "09705"
+   ],
+   [
+    38.45829,
+    -122.74738,
+    "09705"
+   ],
+   [
+    38.46136,
+    -122.75929,
+    "09705"
+   ],
+   [
+    38.47029,
+    -122.75842,
+    "09705"
+   ],
+   [
+    38.47514,
+    -122.77699,
+    "09705"
+   ],
+   [
+    38.45097,
+    -122.73722,
+    "09705"
+   ],
+   [
+    38.44052,
+    -122.72817,
+    "09705"
+   ],
+   [
+    38.43425,
+    -122.73918,
+    "09705"
+   ],
+   [
+    38.43327,
+    -122.78498,
+    "09705"
+   ],
+   [
+    38.44612,
+    -122.76038,
+    "09705"
+   ],
+   [
+    38.42018,
+    -122.72108,
+    "09705"
+   ],
+   [
+    38.42034,
+    -122.73418,
+    "09705"
+   ],
+   [
+    38.43002,
+    -122.72226,
+    "09705"
+   ],
+   [
+    38.40851,
+    -122.73162,
+    "09705"
+   ],
+   [
+    38.38296,
+    -122.72293,
+    "09705"
+   ],
+   [
+    38.40725,
+    -122.76533,
+    "09705"
+   ],
+   [
+    38.41473,
+    -122.74992,
+    "09705"
+   ],
+   [
+    38.38783,
+    -122.81006,
+    "09704"
+   ],
+   [
+    38.38613,
+    -122.827,
+    "09704"
+   ],
+   [
+    38.41013,
+    -122.84338,
+    "09704"
+   ],
+   [
+    38.40343,
+    -122.82701,
+    "09704"
+   ],
+   [
+    38.33889,
+    -122.79072,
+    "09704"
+   ],
+   [
+    38.33944,
+    -122.87116,
+    "09704"
+   ],
+   [
+    38.43543,
+    -122.86575,
+    "09704"
+   ],
+   [
+    38.41591,
+    -122.89489,
+    "09704"
+   ],
+   [
+    38.50187,
+    -122.90692,
+    "09704"
+   ],
+   [
+    38.48396,
+    -123.02257,
+    "09704"
+   ],
+   [
+    38.47027,
+    -123.00482,
+    "09704"
+   ],
+   [
+    38.51401,
+    -123.01111,
+    "09704"
+   ],
+   [
+    38.51232,
+    -122.98287,
+    "09704"
+   ],
+   [
+    38.49313,
+    -122.92649,
+    "09704"
+   ],
+   [
+    38.45928,
+    -122.86751,
+    "09704"
+   ],
+   [
+    38.55659,
+    -122.81247,
+    "09704"
+   ],
+   [
+    38.55278,
+    -122.80363,
+    "09704"
+   ],
+   [
+    38.55566,
+    -122.77337,
+    "09704"
+   ],
+   [
+    38.54415,
+    -122.80989,
+    "09704"
+   ],
+   [
+    38.53289,
+    -122.78553,
+    "09704"
+   ],
+   [
+    38.53709,
+    -122.84362,
+    "09704"
+   ],
+   [
+    38.53477,
+    -122.81493,
+    "09704"
+   ],
+   [
+    38.61147,
+    -122.86651,
+    "09704"
+   ],
+   [
+    38.61885,
+    -122.86167,
+    "09704"
+   ],
+   [
+    38.58661,
+    -122.83983,
+    "09704"
+   ],
+   [
+    38.6317,
+    -122.85053,
+    "09704"
+   ],
+   [
+    38.61317,
+    -122.92724,
+    "09704"
+   ],
+   [
+    38.72368,
+    -122.84625,
+    "09704"
+   ],
+   [
+    38.80121,
+    -123.01207,
+    "09704"
+   ],
+   [
+    38.78747,
+    -123.04375,
+    "09704"
+   ],
+   [
+    38.56286,
+    -123.16994,
+    "09704"
+   ],
+   [
+    38.3341,
+    -123.00365,
+    "09704"
+   ],
+   [
+    38.40886,
+    -122.95278,
+    "09704"
+   ],
+   [
+    38.58589,
+    -123.3189,
+    "09704"
+   ],
+   [
+    38.73998,
+    -123.49398,
+    "09704"
+   ],
+   [
+    38.50417,
+    -123.26441,
+    "09704"
+   ]
+  ]
+ },
+ "muni2017TransfersBeforeByOperator": {
+  "derived": true,
+  "muni": 0.0797,
+  "bart": 0.0308,
+  "caltrain": 0.0046,
+  "other": 0.0078,
+  "shareOfChanges": {
+   "muni": 0.648,
+   "bart": 0.251,
+   "caltrain": 0.038,
+   "other": 0.063
+  },
+  "note": "Derived: the system share (muni2017TransfersBefore.system) split by the operator of the vehicle ridden just before the Muni boarding, in proportion to the expanded linked trips with that 'first before' leg in MTC's route-level decomposition of the 2017 Muni survey (mtc-tps-route-decomposition, weekday, SF Muni survey rows; legs with no operator left out). Compare: 704,412 expanded Muni boardings; 40,026 linked trips with a vehicle just before."
+ },
+ "muni2017CrossSurveyLegs": {
+  "derived": true,
+  "muniSurveyTripsWithBart": 20768,
+  "bartSurveyTripsWithMuni": 14300,
+  "muniSurveyTripsWithCaltrain": 3108,
+  "caltrainSurveyTripsWithMuni": 3286,
+  "note": "Derived from MTC's route-level decomposition (weekday): expanded linked trips (each survey's linked-trip weights) with a leg on the other operator before or after the intercepted vehicle, as reported in each operator's own survey (Muni 2017, BART 2015, Caltrain 2014). A linked trip using both operators is split between the two surveys' weights, so the two halves should agree when neither survey under-reports the connection; the surveys are two to three years apart."
+ }
+}

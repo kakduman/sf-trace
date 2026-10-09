@@ -1,0 +1,1959 @@
+{
+ "source": "NHTS 2017 public microdata (FHWA), weekday person-days of residents of the San Francisco\u2013Oakland\u2013Hayward CBSA (41860) in tracts of 17,000+ persons per square mile; server/beta3/pipeline/nhts_tripmode.py",
+ "url": "https://nhts.ornl.gov/",
+ "definition": "tour mode = mode of the linked trip into the primary destination; linked trip mode = highest of its segments: transit > tnc > sr > da > bike > walk",
+ "skipped_tours": {
+  "otherMode": 16,
+  "noActivity": 104
+ },
+ "byTourMode": {
+  "transit": {
+   "tours_sample": 179,
+   "returnLeg": {
+    "da": 0.0242,
+    "sr": 0.0292,
+    "tnc": 0.0058,
+    "transit": 0.811,
+    "walk": 0.1287,
+    "bike": 0.0012
+   },
+   "returnLeg_sample": {
+    "da": 3,
+    "sr": 6,
+    "tnc": 3,
+    "transit": 143,
+    "walk": 23,
+    "bike": 1
+   },
+   "stopLegs": {
+    "da": 0.0205,
+    "sr": 0.1246,
+    "tnc": 0.0868,
+    "transit": 0.2837,
+    "walk": 0.4391,
+    "bike": 0.0452
+   },
+   "stopLegs_sample": 141,
+   "stopLegsByLength": {
+    "upTo0.5mi": {
+     "sample": 56,
+     "weight": 0.4212,
+     "tnc": 0.0092,
+     "transit": 0.0399,
+     "walk": 0.8973,
+     "bike": 0.0536
+    },
+    "0.5to1.5mi": {
+     "sample": 20,
+     "weight": 0.1145,
+     "sr": 0.2328,
+     "tnc": 0.069,
+     "transit": 0.222,
+     "walk": 0.4761
+    },
+    "over1.5mi": {
+     "sample": 65,
+     "weight": 0.4643,
+     "da": 0.0441,
+     "sr": 0.211,
+     "tnc": 0.1616,
+     "transit": 0.5202,
+     "walk": 0.0143,
+     "bike": 0.0488
+    }
+   },
+   "stopLegsOut": {
+    "da": 0.0109,
+    "sr": 0.31,
+    "tnc": 0.0386,
+    "transit": 0.2258,
+    "walk": 0.3316,
+    "bike": 0.0832
+   },
+   "stopLegsBack": {
+    "da": 0.023,
+    "sr": 0.0756,
+    "tnc": 0.0996,
+    "transit": 0.2991,
+    "walk": 0.4676,
+    "bike": 0.0352
+   },
+   "allTrips": {
+    "da": 0.0144,
+    "sr": 0.0444,
+    "tnc": 0.0256,
+    "transit": 0.7374,
+    "walk": 0.1657,
+    "bike": 0.0127
+   },
+   "toursWithATripBy": {
+    "da": 0.0309,
+    "sr": 0.0929,
+    "tnc": 0.0674,
+    "walk": 0.2371,
+    "bike": 0.0218
+   },
+   "toursWithAnotherMode": 0.3655,
+   "otherTrips": {
+    "da": 0.0226,
+    "sr": 0.0698,
+    "tnc": 0.0403,
+    "transit": 0.5866,
+    "walk": 0.2608,
+    "bike": 0.0199
+   },
+   "otherTripsUnder3mi": {
+    "da": 0.0229,
+    "sr": 0.0891,
+    "tnc": 0.0491,
+    "transit": 0.3225,
+    "walk": 0.4805,
+    "bike": 0.0358
+   },
+   "returnLegByPeriod": {
+    "MD": {
+     "sample": 43,
+     "da": 0.0138,
+     "tnc": 0.0049,
+     "transit": 0.7744,
+     "walk": 0.2069
+    },
+    "PM": {
+     "sample": 93,
+     "da": 0.0064,
+     "sr": 0.0125,
+     "tnc": 0.01,
+     "transit": 0.8408,
+     "walk": 0.1277,
+     "bike": 0.0026
+    },
+    "NT": {
+     "sample": 37,
+     "da": 0.0772,
+     "sr": 0.0503,
+     "transit": 0.7937,
+     "walk": 0.0788
+    }
+   }
+  },
+  "walk": {
+   "tours_sample": 418,
+   "returnLeg": {
+    "da": 0.0497,
+    "sr": 0.027,
+    "tnc": 0.0351,
+    "transit": 0.1017,
+    "walk": 0.7855,
+    "bike": 0.0011
+   },
+   "returnLeg_sample": {
+    "da": 22,
+    "sr": 15,
+    "tnc": 11,
+    "transit": 43,
+    "walk": 326,
+    "bike": 1
+   },
+   "stopLegs": {
+    "da": 0.1354,
+    "sr": 0.0589,
+    "tnc": 0.0305,
+    "transit": 0.1885,
+    "walk": 0.5835,
+    "bike": 0.0032
+   },
+   "stopLegs_sample": 437,
+   "stopLegsByLength": {
+    "upTo0.5mi": {
+     "sample": 194,
+     "weight": 0.4595,
+     "da": 0.025,
+     "sr": 0.0124,
+     "walk": 0.9626
+    },
+    "0.5to1.5mi": {
+     "sample": 89,
+     "weight": 0.2106,
+     "da": 0.2078,
+     "sr": 0.0583,
+     "tnc": 0.0058,
+     "transit": 0.0848,
+     "walk": 0.6432
+    },
+    "over1.5mi": {
+     "sample": 154,
+     "weight": 0.33,
+     "da": 0.2428,
+     "sr": 0.1242,
+     "tnc": 0.0887,
+     "transit": 0.5171,
+     "walk": 0.0176,
+     "bike": 0.0096
+    }
+   },
+   "stopLegsOut": {
+    "da": 0.0994,
+    "sr": 0.0407,
+    "tnc": 0.0241,
+    "transit": 0.2309,
+    "walk": 0.6014,
+    "bike": 0.0034
+   },
+   "stopLegsBack": {
+    "da": 0.1926,
+    "sr": 0.088,
+    "tnc": 0.0407,
+    "transit": 0.121,
+    "walk": 0.555,
+    "bike": 0.0027
+   },
+   "allTrips": {
+    "da": 0.0618,
+    "sr": 0.0287,
+    "tnc": 0.0219,
+    "transit": 0.0969,
+    "walk": 0.7894,
+    "bike": 0.0014
+   },
+   "toursWithATripBy": {
+    "da": 0.0801,
+    "sr": 0.0521,
+    "tnc": 0.0509,
+    "transit": 0.1637,
+    "bike": 0.0021
+   },
+   "toursWithAnotherMode": 0.2884,
+   "otherTrips": {
+    "da": 0.0926,
+    "sr": 0.043,
+    "tnc": 0.0328,
+    "transit": 0.1452,
+    "walk": 0.6843,
+    "bike": 0.0021
+   },
+   "otherTripsUnder3mi": {
+    "da": 0.0606,
+    "sr": 0.0357,
+    "tnc": 0.0217,
+    "transit": 0.0563,
+    "walk": 0.8238,
+    "bike": 0.0019
+   },
+   "returnLegByPeriod": {
+    "AM": {
+     "sample": 43,
+     "da": 0.0077,
+     "walk": 0.9923
+    },
+    "MD": {
+     "sample": 118,
+     "da": 0.0306,
+     "sr": 0.021,
+     "tnc": 0.0108,
+     "transit": 0.0223,
+     "walk": 0.9152
+    },
+    "PM": {
+     "sample": 163,
+     "da": 0.0919,
+     "sr": 0.0338,
+     "tnc": 0.0389,
+     "transit": 0.2421,
+     "walk": 0.5933
+    },
+    "NT": {
+     "sample": 94,
+     "da": 0.0276,
+     "sr": 0.0358,
+     "tnc": 0.079,
+     "transit": 0.0364,
+     "walk": 0.8165,
+     "bike": 0.0047
+    }
+   }
+  },
+  "bike": {
+   "tours_sample": 53,
+   "returnLeg": {
+    "transit": 0.0155,
+    "walk": 0.0705,
+    "bike": 0.914
+   },
+   "returnLeg_sample": {
+    "transit": 2,
+    "walk": 5,
+    "bike": 46
+   },
+   "stopLegs": {
+    "sr": 0.0674,
+    "transit": 0.0411,
+    "walk": 0.1938,
+    "bike": 0.6977
+   },
+   "stopLegs_sample": 36,
+   "stopLegsByLength": {
+    "upTo0.5mi": {
+     "sample": 9,
+     "weight": 0.2668,
+     "walk": 0.636,
+     "bike": 0.364
+    },
+    "0.5to1.5mi": {
+     "sample": 13,
+     "weight": 0.3268,
+     "walk": 0.0738,
+     "bike": 0.9262
+    },
+    "over1.5mi": {
+     "sample": 14,
+     "weight": 0.4065,
+     "sr": 0.1658,
+     "transit": 0.1011,
+     "bike": 0.733
+    }
+   },
+   "stopLegsOut": {
+    "sr": 0.1674,
+    "bike": 0.8326
+   },
+   "stopLegsBack": {
+    "sr": 0.0422,
+    "transit": 0.0515,
+    "walk": 0.2426,
+    "bike": 0.6637
+   },
+   "allTrips": {
+    "sr": 0.013,
+    "transit": 0.0142,
+    "walk": 0.0658,
+    "bike": 0.9069
+   },
+   "toursWithATripBy": {
+    "sr": 0.0161,
+    "transit": 0.0251,
+    "walk": 0.0916
+   },
+   "toursWithAnotherMode": 0.1071,
+   "otherTrips": {
+    "sr": 0.0218,
+    "transit": 0.0238,
+    "walk": 0.1104,
+    "bike": 0.844
+   },
+   "otherTripsUnder3mi": {
+    "transit": 0.0079,
+    "walk": 0.1345,
+    "bike": 0.8576
+   },
+   "returnLegByPeriod": {}
+  },
+  "sr": {
+   "tours_sample": 312,
+   "returnLeg": {
+    "da": 0.1381,
+    "sr": 0.76,
+    "tnc": 0.0037,
+    "transit": 0.0132,
+    "walk": 0.0849
+   },
+   "returnLeg_sample": {
+    "da": 35,
+    "sr": 245,
+    "tnc": 1,
+    "transit": 8,
+    "walk": 23
+   },
+   "stopLegs": {
+    "da": 0.1877,
+    "sr": 0.7324,
+    "transit": 0.0103,
+    "walk": 0.0696
+   },
+   "stopLegs_sample": 307,
+   "stopLegsByLength": {
+    "upTo0.5mi": {
+     "sample": 42,
+     "weight": 0.1379,
+     "da": 0.1023,
+     "sr": 0.4932,
+     "walk": 0.4045
+    },
+    "0.5to1.5mi": {
+     "sample": 45,
+     "weight": 0.126,
+     "da": 0.1826,
+     "sr": 0.7981,
+     "walk": 0.0193
+    },
+    "over1.5mi": {
+     "sample": 220,
+     "weight": 0.7361,
+     "da": 0.2045,
+     "sr": 0.766,
+     "transit": 0.0141,
+     "walk": 0.0154
+    }
+   },
+   "stopLegsOut": {
+    "da": 0.244,
+    "sr": 0.6778,
+    "transit": 0.0147,
+    "walk": 0.0634
+   },
+   "stopLegsBack": {
+    "da": 0.1382,
+    "sr": 0.7804,
+    "transit": 0.0065,
+    "walk": 0.0749
+   },
+   "allTrips": {
+    "da": 0.106,
+    "sr": 0.834,
+    "tnc": 0.0013,
+    "transit": 0.0078,
+    "walk": 0.0509
+   },
+   "toursWithATripBy": {
+    "da": 0.215,
+    "tnc": 0.0037,
+    "transit": 0.0215,
+    "walk": 0.1385
+   },
+   "toursWithAnotherMode": 0.344,
+   "otherTrips": {
+    "da": 0.1616,
+    "sr": 0.7469,
+    "tnc": 0.002,
+    "transit": 0.0119,
+    "walk": 0.0776
+   },
+   "otherTripsUnder3mi": {
+    "da": 0.1743,
+    "sr": 0.6692,
+    "tnc": 0.0037,
+    "transit": 0.0041,
+    "walk": 0.1487
+   },
+   "returnLegByPeriod": {
+    "MD": {
+     "sample": 92,
+     "da": 0.0661,
+     "sr": 0.8155,
+     "transit": 0.0043,
+     "walk": 0.1142
+    },
+    "PM": {
+     "sample": 125,
+     "da": 0.0654,
+     "sr": 0.8082,
+     "tnc": 0.0096,
+     "transit": 0.0244,
+     "walk": 0.0924
+    },
+    "NT": {
+     "sample": 66,
+     "da": 0.1121,
+     "sr": 0.8668,
+     "transit": 0.0119,
+     "walk": 0.0092
+    }
+   }
+  },
+  "tnc": {
+   "tours_sample": 17,
+   "returnLeg": {
+    "da": 0.0988,
+    "sr": 0.2832,
+    "tnc": 0.5519,
+    "transit": 0.0661
+   },
+   "returnLeg_sample": {
+    "da": 1,
+    "sr": 2,
+    "tnc": 11,
+    "transit": 3
+   },
+   "stopLegs": {
+    "da": 0.2228,
+    "sr": 0.194,
+    "tnc": 0.15,
+    "transit": 0.2228,
+    "walk": 0.2105
+   },
+   "stopLegs_sample": 11,
+   "stopLegsByLength": {
+    "upTo0.5mi": {
+     "sample": 1,
+     "weight": 0.1703,
+     "walk": 1.0
+    },
+    "0.5to1.5mi": {
+     "sample": 5,
+     "weight": 0.5466,
+     "da": 0.3554,
+     "sr": 0.3549,
+     "tnc": 0.2162,
+     "walk": 0.0735
+    },
+    "over1.5mi": {
+     "sample": 5,
+     "weight": 0.2831,
+     "da": 0.1007,
+     "tnc": 0.1123,
+     "transit": 0.7869
+    }
+   },
+   "stopLegsOut": {
+    "da": 0.3008,
+    "tnc": 0.0904,
+    "transit": 0.345,
+    "walk": 0.2637
+   },
+   "stopLegsBack": {
+    "da": 0.0805,
+    "sr": 0.5476,
+    "tnc": 0.2585,
+    "walk": 0.1134
+   },
+   "allTrips": {
+    "da": 0.0957,
+    "sr": 0.1556,
+    "tnc": 0.6086,
+    "transit": 0.0837,
+    "walk": 0.0562
+   },
+   "toursWithATripBy": {
+    "da": 0.2613,
+    "sr": 0.2832,
+    "transit": 0.2078,
+    "walk": 0.1535
+   },
+   "toursWithAnotherMode": 0.5724,
+   "otherTrips": {
+    "da": 0.1511,
+    "sr": 0.2456,
+    "tnc": 0.3824,
+    "transit": 0.1322,
+    "walk": 0.0888
+   },
+   "otherTripsUnder3mi": {
+    "da": 0.2103,
+    "sr": 0.2475,
+    "tnc": 0.4079,
+    "walk": 0.1342
+   },
+   "returnLegByPeriod": {}
+  },
+  "da": {
+   "tours_sample": 412,
+   "returnLeg": {
+    "da": 0.8591,
+    "sr": 0.0989,
+    "transit": 0.0017,
+    "walk": 0.0399,
+    "bike": 0.0005
+   },
+   "returnLeg_sample": {
+    "da": 350,
+    "sr": 34,
+    "transit": 1,
+    "walk": 26,
+    "bike": 1
+   },
+   "stopLegs": {
+    "da": 0.5923,
+    "sr": 0.2669,
+    "tnc": 0.0104,
+    "transit": 0.0093,
+    "walk": 0.1211
+   },
+   "stopLegs_sample": 432,
+   "stopLegsByLength": {
+    "upTo0.5mi": {
+     "sample": 66,
+     "weight": 0.1341,
+     "da": 0.3373,
+     "sr": 0.0792,
+     "walk": 0.5835
+    },
+    "0.5to1.5mi": {
+     "sample": 99,
+     "weight": 0.179,
+     "da": 0.6117,
+     "sr": 0.2441,
+     "tnc": 0.0131,
+     "walk": 0.1311
+    },
+    "over1.5mi": {
+     "sample": 267,
+     "weight": 0.6869,
+     "da": 0.6369,
+     "sr": 0.3094,
+     "tnc": 0.0118,
+     "transit": 0.0136,
+     "walk": 0.0283
+    }
+   },
+   "stopLegsOut": {
+    "da": 0.5167,
+    "sr": 0.4037,
+    "transit": 0.0059,
+    "walk": 0.0737
+   },
+   "stopLegsBack": {
+    "da": 0.6402,
+    "sr": 0.1801,
+    "tnc": 0.0171,
+    "transit": 0.0115,
+    "walk": 0.1512
+   },
+   "allTrips": {
+    "da": 0.8175,
+    "sr": 0.1217,
+    "tnc": 0.0035,
+    "transit": 0.0036,
+    "walk": 0.0535,
+    "bike": 0.0002
+   },
+   "toursWithATripBy": {
+    "sr": 0.2267,
+    "tnc": 0.0063,
+    "transit": 0.0086,
+    "walk": 0.0979,
+    "bike": 0.0005
+   },
+   "toursWithAnotherMode": 0.3028,
+   "otherTrips": {
+    "da": 0.7261,
+    "sr": 0.1827,
+    "tnc": 0.0052,
+    "transit": 0.0055,
+    "walk": 0.0804,
+    "bike": 0.0002
+   },
+   "otherTripsUnder3mi": {
+    "da": 0.6623,
+    "sr": 0.1653,
+    "tnc": 0.0113,
+    "walk": 0.1605,
+    "bike": 0.0005
+   },
+   "returnLegByPeriod": {
+    "MD": {
+     "sample": 132,
+     "da": 0.8384,
+     "sr": 0.0479,
+     "walk": 0.1122,
+     "bike": 0.0016
+    },
+    "PM": {
+     "sample": 184,
+     "da": 0.8825,
+     "sr": 0.1085,
+     "transit": 0.0034,
+     "walk": 0.0056
+    },
+    "NT": {
+     "sample": 74,
+     "da": 0.8306,
+     "sr": 0.1625,
+     "walk": 0.0069
+    }
+   }
+  }
+ },
+ "byPurposeGroup": {
+  "mandatory": {
+   "transit": {
+    "tours_sample": 121,
+    "returnLeg": {
+     "da": 0.0374,
+     "sr": 0.0248,
+     "tnc": 0.0089,
+     "transit": 0.787,
+     "walk": 0.1402,
+     "bike": 0.0018
+    },
+    "returnLeg_sample": {
+     "da": 3,
+     "sr": 4,
+     "tnc": 3,
+     "transit": 94,
+     "walk": 16,
+     "bike": 1
+    },
+    "stopLegs": {
+     "da": 0.0291,
+     "sr": 0.1678,
+     "tnc": 0.0432,
+     "transit": 0.2614,
+     "walk": 0.4662,
+     "bike": 0.0323
+    },
+    "stopLegs_sample": 106,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 45,
+      "weight": 0.4445,
+      "tnc": 0.0125,
+      "transit": 0.0348,
+      "walk": 0.9527
+     },
+     "0.5to1.5mi": {
+      "sample": 11,
+      "weight": 0.0908,
+      "sr": 0.4181,
+      "tnc": 0.124,
+      "transit": 0.0911,
+      "walk": 0.3669
+     },
+     "over1.5mi": {
+      "sample": 50,
+      "weight": 0.4647,
+      "da": 0.0627,
+      "sr": 0.2794,
+      "tnc": 0.0567,
+      "transit": 0.5115,
+      "walk": 0.0203,
+      "bike": 0.0695
+     }
+    },
+    "stopLegsOut": {
+     "da": 0.0149,
+     "sr": 0.3799,
+     "tnc": 0.0528,
+     "transit": 0.2157,
+     "walk": 0.2967,
+     "bike": 0.04
+    },
+    "stopLegsBack": {
+     "da": 0.0331,
+     "sr": 0.1087,
+     "tnc": 0.0405,
+     "transit": 0.2742,
+     "walk": 0.5134,
+     "bike": 0.0301
+    },
+    "allTrips": {
+     "da": 0.0217,
+     "sr": 0.0569,
+     "tnc": 0.0156,
+     "transit": 0.7123,
+     "walk": 0.1836,
+     "bike": 0.0099
+    },
+    "toursWithATripBy": {
+     "da": 0.0478,
+     "sr": 0.1153,
+     "tnc": 0.0393,
+     "walk": 0.2175,
+     "bike": 0.0207
+    },
+    "toursWithAnotherMode": 0.3876,
+    "otherTrips": {
+     "da": 0.0337,
+     "sr": 0.0885,
+     "tnc": 0.0242,
+     "transit": 0.5528,
+     "walk": 0.2854,
+     "bike": 0.0154
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.0373,
+     "sr": 0.1339,
+     "tnc": 0.021,
+     "transit": 0.2074,
+     "walk": 0.5713,
+     "bike": 0.0291
+    },
+    "returnLegByPeriod": {
+     "PM": {
+      "sample": 83,
+      "da": 0.0071,
+      "sr": 0.014,
+      "tnc": 0.0112,
+      "transit": 0.8405,
+      "walk": 0.1242,
+      "bike": 0.0029
+     }
+    }
+   },
+   "walk": {
+    "tours_sample": 132,
+    "returnLeg": {
+     "da": 0.0913,
+     "sr": 0.0634,
+     "tnc": 0.0262,
+     "transit": 0.2647,
+     "walk": 0.5513,
+     "bike": 0.0031
+    },
+    "returnLeg_sample": {
+     "da": 14,
+     "sr": 8,
+     "tnc": 2,
+     "transit": 38,
+     "walk": 69,
+     "bike": 1
+    },
+    "stopLegs": {
+     "da": 0.1759,
+     "sr": 0.0589,
+     "tnc": 0.0233,
+     "transit": 0.2387,
+     "walk": 0.4983,
+     "bike": 0.0048
+    },
+    "stopLegs_sample": 305,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 128,
+      "weight": 0.4284,
+      "da": 0.029,
+      "sr": 0.02,
+      "walk": 0.951
+     },
+     "0.5to1.5mi": {
+      "sample": 51,
+      "weight": 0.1628,
+      "da": 0.3007,
+      "sr": 0.0541,
+      "transit": 0.1323,
+      "walk": 0.5129
+     },
+     "over1.5mi": {
+      "sample": 126,
+      "weight": 0.4088,
+      "da": 0.2803,
+      "sr": 0.1017,
+      "tnc": 0.057,
+      "transit": 0.5312,
+      "walk": 0.0181,
+      "bike": 0.0116
+     }
+    },
+    "stopLegsOut": {
+     "da": 0.1308,
+     "sr": 0.0282,
+     "tnc": 0.0218,
+     "transit": 0.2698,
+     "walk": 0.5446,
+     "bike": 0.0048
+    },
+    "stopLegsBack": {
+     "da": 0.2637,
+     "sr": 0.1186,
+     "tnc": 0.0262,
+     "transit": 0.1784,
+     "walk": 0.4085,
+     "bike": 0.0047
+    },
+    "allTrips": {
+     "da": 0.1101,
+     "sr": 0.0452,
+     "tnc": 0.0182,
+     "transit": 0.185,
+     "walk": 0.6384,
+     "bike": 0.0031
+    },
+    "toursWithATripBy": {
+     "da": 0.1778,
+     "sr": 0.0982,
+     "tnc": 0.0457,
+     "transit": 0.3829,
+     "bike": 0.0062
+    },
+    "toursWithAnotherMode": 0.5942,
+    "otherTrips": {
+     "da": 0.1473,
+     "sr": 0.0604,
+     "tnc": 0.0243,
+     "transit": 0.2475,
+     "walk": 0.5163,
+     "bike": 0.0042
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.0947,
+     "sr": 0.0581,
+     "tnc": 0.0103,
+     "transit": 0.1003,
+     "walk": 0.7322,
+     "bike": 0.0045
+    },
+    "returnLegByPeriod": {
+     "PM": {
+      "sample": 87,
+      "da": 0.1066,
+      "sr": 0.0362,
+      "tnc": 0.042,
+      "transit": 0.4043,
+      "walk": 0.411
+     }
+    }
+   },
+   "da": {
+    "tours_sample": 212,
+    "returnLeg": {
+     "da": 0.9305,
+     "sr": 0.0164,
+     "transit": 0.0027,
+     "walk": 0.0505
+    },
+    "returnLeg_sample": {
+     "da": 189,
+     "sr": 4,
+     "transit": 1,
+     "walk": 18
+    },
+    "stopLegs": {
+     "da": 0.5965,
+     "sr": 0.2526,
+     "tnc": 0.0142,
+     "transit": 0.0127,
+     "walk": 0.124
+    },
+    "stopLegs_sample": 265,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 40,
+      "weight": 0.1413,
+      "da": 0.3511,
+      "sr": 0.0536,
+      "walk": 0.5953
+     },
+     "0.5to1.5mi": {
+      "sample": 45,
+      "weight": 0.1397,
+      "da": 0.5087,
+      "sr": 0.2695,
+      "tnc": 0.0228,
+      "walk": 0.199
+     },
+     "over1.5mi": {
+      "sample": 180,
+      "weight": 0.7191,
+      "da": 0.6618,
+      "sr": 0.2884,
+      "tnc": 0.0153,
+      "transit": 0.0176,
+      "walk": 0.0169
+     }
+    },
+    "stopLegsOut": {
+     "da": 0.4593,
+     "sr": 0.4483,
+     "transit": 0.008,
+     "walk": 0.0844
+    },
+    "stopLegsBack": {
+     "da": 0.6838,
+     "sr": 0.128,
+     "tnc": 0.0232,
+     "transit": 0.0157,
+     "walk": 0.1492
+    },
+    "allTrips": {
+     "da": 0.8276,
+     "sr": 0.0994,
+     "tnc": 0.0053,
+     "transit": 0.0056,
+     "walk": 0.0621
+    },
+    "toursWithATripBy": {
+     "sr": 0.1697,
+     "tnc": 0.0103,
+     "transit": 0.0141,
+     "walk": 0.1193
+    },
+    "toursWithAnotherMode": 0.2628,
+    "otherTrips": {
+     "da": 0.749,
+     "sr": 0.1448,
+     "tnc": 0.0077,
+     "transit": 0.0081,
+     "walk": 0.0904
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.6415,
+     "sr": 0.1317,
+     "tnc": 0.0191,
+     "walk": 0.2077
+    },
+    "returnLegByPeriod": {
+     "MD": {
+      "sample": 57,
+      "da": 0.8084,
+      "sr": 0.0142,
+      "walk": 0.1774
+     },
+     "PM": {
+      "sample": 123,
+      "da": 0.971,
+      "sr": 0.0217,
+      "transit": 0.0047,
+      "walk": 0.0026
+     },
+     "NT": {
+      "sample": 31,
+      "da": 1.0
+     }
+    }
+   },
+   "sr": {
+    "tours_sample": 100,
+    "returnLeg": {
+     "da": 0.1576,
+     "sr": 0.6586,
+     "tnc": 0.0098,
+     "transit": 0.0301,
+     "walk": 0.1439
+    },
+    "returnLeg_sample": {
+     "da": 13,
+     "sr": 69,
+     "tnc": 1,
+     "transit": 6,
+     "walk": 11
+    },
+    "stopLegs": {
+     "da": 0.0988,
+     "sr": 0.7902,
+     "transit": 0.0222,
+     "walk": 0.0887
+    },
+    "stopLegs_sample": 100,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 10,
+      "weight": 0.1039,
+      "sr": 0.4122,
+      "walk": 0.5878
+     },
+     "0.5to1.5mi": {
+      "sample": 13,
+      "weight": 0.1011,
+      "da": 0.016,
+      "sr": 0.984
+     },
+     "over1.5mi": {
+      "sample": 77,
+      "weight": 0.795,
+      "da": 0.1223,
+      "sr": 0.815,
+      "transit": 0.028,
+      "walk": 0.0348
+     }
+    },
+    "stopLegsOut": {
+     "da": 0.0772,
+     "sr": 0.7486,
+     "transit": 0.0455,
+     "walk": 0.1287
+    },
+    "stopLegsBack": {
+     "da": 0.1083,
+     "sr": 0.8084,
+     "transit": 0.0121,
+     "walk": 0.0712
+    },
+    "allTrips": {
+     "da": 0.0854,
+     "sr": 0.8164,
+     "tnc": 0.0033,
+     "transit": 0.0174,
+     "walk": 0.0775
+    },
+    "toursWithATripBy": {
+     "da": 0.196,
+     "tnc": 0.0098,
+     "transit": 0.0519,
+     "walk": 0.2173
+    },
+    "toursWithAnotherMode": 0.408,
+    "otherTrips": {
+     "da": 0.1285,
+     "sr": 0.7238,
+     "tnc": 0.005,
+     "transit": 0.0262,
+     "walk": 0.1166
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.0916,
+     "sr": 0.6635,
+     "tnc": 0.0097,
+     "transit": 0.0086,
+     "walk": 0.2266
+    },
+    "returnLegByPeriod": {
+     "PM": {
+      "sample": 63,
+      "da": 0.1102,
+      "sr": 0.6835,
+      "tnc": 0.0174,
+      "transit": 0.0411,
+      "walk": 0.1477
+     }
+    }
+   },
+   "bike": {
+    "tours_sample": 31,
+    "returnLeg": {
+     "transit": 0.0164,
+     "walk": 0.0984,
+     "bike": 0.8853
+    },
+    "returnLeg_sample": {
+     "transit": 1,
+     "walk": 4,
+     "bike": 26
+    },
+    "stopLegs": {
+     "sr": 0.0772,
+     "transit": 0.0471,
+     "walk": 0.222,
+     "bike": 0.6537
+    },
+    "stopLegs_sample": 30,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 8,
+      "weight": 0.2873,
+      "walk": 0.6766,
+      "bike": 0.3234
+     },
+     "0.5to1.5mi": {
+      "sample": 9,
+      "weight": 0.266,
+      "walk": 0.1039,
+      "bike": 0.8961
+     },
+     "over1.5mi": {
+      "sample": 13,
+      "weight": 0.4467,
+      "sr": 0.1729,
+      "transit": 0.1054,
+      "bike": 0.7217
+     }
+    },
+    "stopLegsOut": {
+     "sr": 0.26,
+     "bike": 0.74
+    },
+    "stopLegsBack": {
+     "sr": 0.0453,
+     "transit": 0.0553,
+     "walk": 0.2607,
+     "bike": 0.6386
+    },
+    "allTrips": {
+     "sr": 0.0195,
+     "transit": 0.018,
+     "walk": 0.0929,
+     "bike": 0.8696
+    },
+    "toursWithATripBy": {
+     "sr": 0.0261,
+     "transit": 0.0318,
+     "walk": 0.1325
+    },
+    "toursWithAnotherMode": 0.1489,
+    "otherTrips": {
+     "sr": 0.0312,
+     "transit": 0.0288,
+     "walk": 0.1483,
+     "bike": 0.7918
+    },
+    "otherTripsUnder3mi": {
+     "transit": 0.011,
+     "walk": 0.1773,
+     "bike": 0.8117
+    },
+    "returnLegByPeriod": {}
+   },
+   "tnc": {
+    "tours_sample": 8,
+    "returnLeg": {
+     "sr": 0.2945,
+     "tnc": 0.6115,
+     "transit": 0.0941
+    },
+    "returnLeg_sample": {
+     "sr": 1,
+     "tnc": 5,
+     "transit": 2
+    },
+    "stopLegs": {
+     "da": 0.2629,
+     "tnc": 0.1895,
+     "transit": 0.2629,
+     "walk": 0.2848
+    },
+    "stopLegs_sample": 7,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 1,
+      "weight": 0.2304,
+      "walk": 1.0
+     },
+     "0.5to1.5mi": {
+      "sample": 4,
+      "weight": 0.4771,
+      "da": 0.551,
+      "tnc": 0.3351,
+      "walk": 0.1139
+     },
+     "over1.5mi": {
+      "sample": 2,
+      "weight": 0.2925,
+      "tnc": 0.1014,
+      "transit": 0.8986
+     }
+    },
+    "stopLegsOut": {
+     "da": 0.3147,
+     "tnc": 0.0946,
+     "transit": 0.3147,
+     "walk": 0.2759
+    },
+    "stopLegsBack": {
+     "tnc": 0.6704,
+     "walk": 0.3296
+    },
+    "allTrips": {
+     "da": 0.0944,
+     "sr": 0.0944,
+     "tnc": 0.5845,
+     "transit": 0.1245,
+     "walk": 0.1022
+    },
+    "toursWithATripBy": {
+     "da": 0.2945,
+     "sr": 0.2945,
+     "transit": 0.3885,
+     "walk": 0.319
+    },
+    "toursWithAnotherMode": 0.6467,
+    "otherTrips": {
+     "da": 0.1389,
+     "sr": 0.1389,
+     "tnc": 0.3885,
+     "transit": 0.1833,
+     "walk": 0.1505
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.2473,
+     "tnc": 0.4849,
+     "walk": 0.2679
+    },
+    "returnLegByPeriod": {}
+   }
+  },
+  "nonMandatory": {
+   "bike": {
+    "tours_sample": 22,
+    "returnLeg": {
+     "transit": 0.0142,
+     "walk": 0.0254,
+     "bike": 0.9603
+    },
+    "returnLeg_sample": {
+     "transit": 1,
+     "walk": 1,
+     "bike": 20
+    },
+    "stopLegs": {
+     "bike": 1.0
+    },
+    "stopLegs_sample": 6,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 1,
+      "weight": 0.1259,
+      "bike": 1.0
+     },
+     "0.5to1.5mi": {
+      "sample": 4,
+      "weight": 0.7439,
+      "bike": 1.0
+     },
+     "over1.5mi": {
+      "sample": 1,
+      "weight": 0.1302,
+      "bike": 1.0
+     }
+    },
+    "stopLegsOut": {
+     "bike": 1.0
+    },
+    "stopLegsBack": {
+     "bike": 1.0
+    },
+    "allTrips": {
+     "transit": 0.0066,
+     "walk": 0.0118,
+     "bike": 0.9816
+    },
+    "toursWithATripBy": {
+     "transit": 0.0142,
+     "walk": 0.0254
+    },
+    "toursWithAnotherMode": 0.0397,
+    "otherTrips": {
+     "transit": 0.0123,
+     "walk": 0.022,
+     "bike": 0.9658
+    },
+    "otherTripsUnder3mi": {
+     "walk": 0.028,
+     "bike": 0.972
+    },
+    "returnLegByPeriod": {}
+   },
+   "sr": {
+    "tours_sample": 212,
+    "returnLeg": {
+     "da": 0.1262,
+     "sr": 0.8219,
+     "transit": 0.003,
+     "walk": 0.049
+    },
+    "returnLeg_sample": {
+     "da": 22,
+     "sr": 176,
+     "transit": 2,
+     "walk": 12
+    },
+    "stopLegs": {
+     "da": 0.2495,
+     "sr": 0.6922,
+     "transit": 0.0021,
+     "walk": 0.0562
+    },
+    "stopLegs_sample": 207,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 32,
+      "weight": 0.1616,
+      "da": 0.1481,
+      "sr": 0.5294,
+      "walk": 0.3225
+     },
+     "0.5to1.5mi": {
+      "sample": 32,
+      "weight": 0.1434,
+      "da": 0.2645,
+      "sr": 0.7068,
+      "walk": 0.0287
+     },
+     "over1.5mi": {
+      "sample": 143,
+      "weight": 0.695,
+      "da": 0.27,
+      "sr": 0.727,
+      "transit": 0.003
+     }
+    },
+    "stopLegsOut": {
+     "da": 0.3047,
+     "sr": 0.652,
+     "transit": 0.0035,
+     "walk": 0.0397
+    },
+    "stopLegsBack": {
+     "da": 0.1728,
+     "sr": 0.748,
+     "walk": 0.0792
+    },
+    "allTrips": {
+     "da": 0.1191,
+     "sr": 0.8452,
+     "transit": 0.0017,
+     "walk": 0.034
+    },
+    "toursWithATripBy": {
+     "da": 0.2266,
+     "transit": 0.003,
+     "walk": 0.0903
+    },
+    "toursWithAnotherMode": 0.3049,
+    "otherTrips": {
+     "da": 0.1832,
+     "sr": 0.7619,
+     "transit": 0.0025,
+     "walk": 0.0523
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.2268,
+     "sr": 0.6728,
+     "transit": 0.0012,
+     "walk": 0.0993
+    },
+    "returnLegByPeriod": {
+     "MD": {
+      "sample": 69,
+      "sr": 0.9447,
+      "walk": 0.0553
+     },
+     "PM": {
+      "sample": 62,
+      "da": 0.0113,
+      "sr": 0.9589,
+      "transit": 0.0042,
+      "walk": 0.0256
+     },
+     "NT": {
+      "sample": 56,
+      "da": 0.0611,
+      "sr": 0.9186,
+      "transit": 0.0075,
+      "walk": 0.0128
+     }
+    }
+   },
+   "walk": {
+    "tours_sample": 286,
+    "returnLeg": {
+     "da": 0.0283,
+     "sr": 0.0082,
+     "tnc": 0.0397,
+     "transit": 0.0178,
+     "walk": 0.906
+    },
+    "returnLeg_sample": {
+     "da": 8,
+     "sr": 7,
+     "tnc": 9,
+     "transit": 5,
+     "walk": 257
+    },
+    "stopLegs": {
+     "da": 0.0554,
+     "sr": 0.059,
+     "tnc": 0.0447,
+     "transit": 0.0895,
+     "walk": 0.7514
+    },
+    "stopLegs_sample": 132,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 66,
+      "weight": 0.5206,
+      "da": 0.0186,
+      "walk": 0.9814
+     },
+     "0.5to1.5mi": {
+      "sample": 38,
+      "weight": 0.3048,
+      "da": 0.1099,
+      "sr": 0.0628,
+      "tnc": 0.012,
+      "transit": 0.0349,
+      "walk": 0.7804
+     },
+     "over1.5mi": {
+      "sample": 28,
+      "weight": 0.1746,
+      "da": 0.07,
+      "sr": 0.2281,
+      "tnc": 0.235,
+      "transit": 0.4519,
+      "walk": 0.015
+     }
+    },
+    "stopLegsOut": {
+     "da": 0.0215,
+     "sr": 0.0717,
+     "tnc": 0.0297,
+     "transit": 0.1343,
+     "walk": 0.7428
+    },
+    "stopLegsBack": {
+     "da": 0.0927,
+     "sr": 0.045,
+     "tnc": 0.0611,
+     "transit": 0.0404,
+     "walk": 0.7609
+    },
+    "allTrips": {
+     "da": 0.0225,
+     "sr": 0.0153,
+     "tnc": 0.0249,
+     "transit": 0.0253,
+     "walk": 0.9119
+    },
+    "toursWithATripBy": {
+     "da": 0.0299,
+     "sr": 0.0284,
+     "tnc": 0.0536,
+     "transit": 0.0508
+    },
+    "toursWithAnotherMode": 0.131,
+    "otherTrips": {
+     "da": 0.0375,
+     "sr": 0.0254,
+     "tnc": 0.0414,
+     "transit": 0.0421,
+     "walk": 0.8537
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.0352,
+     "sr": 0.019,
+     "tnc": 0.0301,
+     "transit": 0.0236,
+     "walk": 0.892
+    },
+    "returnLegByPeriod": {
+     "AM": {
+      "sample": 42,
+      "da": 0.0077,
+      "walk": 0.9923
+     },
+     "MD": {
+      "sample": 89,
+      "da": 0.032,
+      "sr": 0.0016,
+      "tnc": 0.0145,
+      "transit": 0.0234,
+      "walk": 0.9285
+     },
+     "PM": {
+      "sample": 76,
+      "da": 0.0703,
+      "sr": 0.0303,
+      "tnc": 0.0343,
+      "transit": 0.0032,
+      "walk": 0.8619
+     },
+     "NT": {
+      "sample": 79,
+      "sr": 0.0037,
+      "tnc": 0.0982,
+      "transit": 0.0309,
+      "walk": 0.8671
+     }
+    }
+   },
+   "tnc": {
+    "tours_sample": 9,
+    "returnLeg": {
+     "da": 0.1905,
+     "sr": 0.2728,
+     "tnc": 0.4966,
+     "transit": 0.0401
+    },
+    "returnLeg_sample": {
+     "da": 1,
+     "sr": 1,
+     "tnc": 6,
+     "transit": 1
+    },
+    "stopLegs": {
+     "da": 0.1093,
+     "sr": 0.7435,
+     "tnc": 0.0379,
+     "transit": 0.1093
+    },
+    "stopLegs_sample": 4,
+    "stopLegsByLength": {
+     "0.5to1.5mi": {
+      "sample": 1,
+      "weight": 0.7435,
+      "sr": 1.0
+     },
+     "over1.5mi": {
+      "sample": 3,
+      "weight": 0.2565,
+      "da": 0.4261,
+      "tnc": 0.1478,
+      "transit": 0.4261
+     }
+    },
+    "stopLegsOut": {
+     "transit": 1.0
+    },
+    "stopLegsBack": {
+     "da": 0.1227,
+     "sr": 0.8347,
+     "tnc": 0.0426
+    },
+    "allTrips": {
+     "da": 0.0974,
+     "sr": 0.2305,
+     "tnc": 0.6382,
+     "transit": 0.0339
+    },
+    "toursWithATripBy": {
+     "da": 0.2306,
+     "sr": 0.2728,
+     "transit": 0.0401
+    },
+    "toursWithAnotherMode": 0.5034,
+    "otherTrips": {
+     "da": 0.1687,
+     "sr": 0.3991,
+     "tnc": 0.3735,
+     "transit": 0.0587
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.1732,
+     "sr": 0.4961,
+     "tnc": 0.3307
+    },
+    "returnLegByPeriod": {}
+   },
+   "transit": {
+    "tours_sample": 58,
+    "returnLeg": {
+     "sr": 0.0374,
+     "transit": 0.8551,
+     "walk": 0.1075
+    },
+    "returnLeg_sample": {
+     "sr": 2,
+     "transit": 49,
+     "walk": 7
+    },
+    "stopLegs": {
+     "sr": 0.0228,
+     "tnc": 0.1899,
+     "transit": 0.3363,
+     "walk": 0.3751,
+     "bike": 0.0758
+    },
+    "stopLegs_sample": 35,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 11,
+      "weight": 0.3663,
+      "transit": 0.0543,
+      "walk": 0.7387,
+      "bike": 0.207
+     },
+     "0.5to1.5mi": {
+      "sample": 9,
+      "weight": 0.1705,
+      "transit": 0.3866,
+      "walk": 0.6134
+     },
+     "over1.5mi": {
+      "sample": 15,
+      "weight": 0.4633,
+      "sr": 0.0492,
+      "tnc": 0.4099,
+      "transit": 0.5409
+     }
+    },
+    "stopLegsOut": {
+     "sr": 0.1204,
+     "transit": 0.253,
+     "walk": 0.4265,
+     "bike": 0.2001
+    },
+    "stopLegsBack": {
+     "tnc": 0.2343,
+     "transit": 0.3558,
+     "walk": 0.3632,
+     "bike": 0.0468
+    },
+    "allTrips": {
+     "sr": 0.0197,
+     "tnc": 0.0453,
+     "transit": 0.7866,
+     "walk": 0.1304,
+     "bike": 0.0181
+    },
+    "toursWithATripBy": {
+     "sr": 0.0517,
+     "tnc": 0.1189,
+     "walk": 0.273,
+     "bike": 0.0237
+    },
+    "toursWithAnotherMode": 0.3247,
+    "otherTrips": {
+     "sr": 0.0318,
+     "tnc": 0.0731,
+     "transit": 0.6554,
+     "walk": 0.2105,
+     "bike": 0.0292
+    },
+    "otherTripsUnder3mi": {
+     "sr": 0.0172,
+     "tnc": 0.0942,
+     "transit": 0.5072,
+     "walk": 0.335,
+     "bike": 0.0464
+    },
+    "returnLegByPeriod": {}
+   },
+   "da": {
+    "tours_sample": 200,
+    "returnLeg": {
+     "da": 0.7457,
+     "sr": 0.2301,
+     "walk": 0.023,
+     "bike": 0.0012
+    },
+    "returnLeg_sample": {
+     "da": 161,
+     "sr": 30,
+     "walk": 8,
+     "bike": 1
+    },
+    "stopLegs": {
+     "da": 0.5804,
+     "sr": 0.3065,
+     "walk": 0.1131
+    },
+    "stopLegs_sample": 167,
+    "stopLegsByLength": {
+     "upTo0.5mi": {
+      "sample": 26,
+      "weight": 0.114,
+      "da": 0.29,
+      "sr": 0.1673,
+      "walk": 0.5427
+     },
+     "0.5to1.5mi": {
+      "sample": 54,
+      "weight": 0.2883,
+      "da": 0.7501,
+      "sr": 0.21,
+      "walk": 0.0399
+     },
+     "over1.5mi": {
+      "sample": 87,
+      "weight": 0.5978,
+      "da": 0.554,
+      "sr": 0.3796,
+      "walk": 0.0664
+     }
+    },
+    "stopLegsOut": {
+     "da": 0.677,
+     "sr": 0.2793,
+     "walk": 0.0437
+    },
+    "stopLegsBack": {
+     "da": 0.5198,
+     "sr": 0.3236,
+     "walk": 0.1566
+    },
+    "allTrips": {
+     "da": 0.7985,
+     "sr": 0.1637,
+     "walk": 0.0373,
+     "bike": 0.0005
+    },
+    "toursWithATripBy": {
+     "sr": 0.3171,
+     "walk": 0.0638,
+     "bike": 0.0012
+    },
+    "toursWithAnotherMode": 0.3664,
+    "otherTrips": {
+     "da": 0.6787,
+     "sr": 0.2611,
+     "walk": 0.0595,
+     "bike": 0.0007
+    },
+    "otherTripsUnder3mi": {
+     "da": 0.6923,
+     "sr": 0.2135,
+     "walk": 0.0929,
+     "bike": 0.0013
+    },
+    "returnLegByPeriod": {
+     "MD": {
+      "sample": 75,
+      "da": 0.876,
+      "sr": 0.09,
+      "walk": 0.0304,
+      "bike": 0.0035
+     },
+     "PM": {
+      "sample": 61,
+      "da": 0.6384,
+      "sr": 0.3477,
+      "walk": 0.0139
+     },
+     "NT": {
+      "sample": 43,
+      "da": 0.6656,
+      "sr": 0.3208,
+      "walk": 0.0137
+     }
+    }
+   }
+  }
+ },
+ "byHighestMode": {
+  "transit": {
+   "tours_sample": 272,
+   "allTrips": {
+    "da": 0.0242,
+    "sr": 0.0497,
+    "tnc": 0.0324,
+    "transit": 0.5828,
+    "walk": 0.3012,
+    "bike": 0.0097
+   }
+  },
+  "bike": {
+   "tours_sample": 51,
+   "allTrips": {
+    "walk": 0.0682,
+    "bike": 0.9318
+   }
+  },
+  "sr": {
+   "tours_sample": 400,
+   "allTrips": {
+    "da": 0.2117,
+    "sr": 0.7212,
+    "walk": 0.0659,
+    "bike": 0.0011
+   }
+  },
+  "walk": {
+   "tours_sample": 292,
+   "allTrips": {
+    "walk": 1.0
+   }
+  },
+  "tnc": {
+   "tours_sample": 24,
+   "allTrips": {
+    "da": 0.1726,
+    "sr": 0.0956,
+    "tnc": 0.5663,
+    "walk": 0.1655
+   }
+  },
+  "da": {
+   "tours_sample": 352,
+   "allTrips": {
+    "da": 0.906,
+    "walk": 0.0938,
+    "bike": 0.0002
+   }
+  }
+ },
+ "primaryLegs": {
+  "da>da": {
+   "share": 0.23501,
+   "sample": 350
+  },
+  "walk>walk": {
+   "share": 0.23082,
+   "sample": 326
+  },
+  "sr>sr": {
+   "share": 0.18586,
+   "sample": 245
+  },
+  "transit>transit": {
+   "share": 0.11073,
+   "sample": 143
+  },
+  "sr>da": {
+   "share": 0.03377,
+   "sample": 35
+  },
+  "bike>bike": {
+   "share": 0.03138,
+   "sample": 46
+  },
+  "walk>transit": {
+   "share": 0.02989,
+   "sample": 43
+  },
+  "da>sr": {
+   "share": 0.02706,
+   "sample": 34
+  },
+  "sr>walk": {
+   "share": 0.02078,
+   "sample": 23
+  },
+  "transit>walk": {
+   "share": 0.01757,
+   "sample": 23
+  },
+  "walk>da": {
+   "share": 0.0146,
+   "sample": 22
+  },
+  "da>walk": {
+   "share": 0.0109,
+   "sample": 26
+  },
+  "walk>tnc": {
+   "share": 0.01032,
+   "sample": 11
+  },
+  "tnc>tnc": {
+   "share": 0.00946,
+   "sample": 11
+  },
+  "walk>sr": {
+   "share": 0.00793,
+   "sample": 15
+  },
+  "tnc>sr": {
+   "share": 0.00486,
+   "sample": 2
+  },
+  "transit>sr": {
+   "share": 0.00399,
+   "sample": 6
+  },
+  "transit>da": {
+   "share": 0.0033,
+   "sample": 3
+  },
+  "sr>transit": {
+   "share": 0.00324,
+   "sample": 8
+  },
+  "bike>walk": {
+   "share": 0.00242,
+   "sample": 5
+  },
+  "tnc>da": {
+   "share": 0.00169,
+   "sample": 1
+  },
+  "tnc>transit": {
+   "share": 0.00113,
+   "sample": 3
+  },
+  "sr>tnc": {
+   "share": 0.00091,
+   "sample": 1
+  },
+  "transit>tnc": {
+   "share": 0.00079,
+   "sample": 3
+  },
+  "bike>transit": {
+   "share": 0.00053,
+   "sample": 2
+  },
+  "da>transit": {
+   "share": 0.00045,
+   "sample": 1
+  },
+  "walk>bike": {
+   "share": 0.00031,
+   "sample": 1
+  },
+  "transit>bike": {
+   "share": 0.00016,
+   "sample": 1
+  },
+  "da>bike": {
+   "share": 0.00013,
+   "sample": 1
+  }
+ }
+}

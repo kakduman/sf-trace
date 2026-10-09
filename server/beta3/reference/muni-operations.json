@@ -1,0 +1,7377 @@
+{
+ "title": "Muni (and regional rail) operations as run: running time against the schedule, trips not operated, day-to-day variability of running time, and arrival-prediction error",
+ "accessed": "2026-10-05",
+ "purpose": "Inputs for observed running times, effective frequency net of trips not run, a travel-time reliability term in path cost, and tempered informed line choice (shared/beta3/net.ts, strategy.ts; build.ts).",
+ "rawDir": "data/beta3/raw/ops/ (gitignored); scripts in data/beta3/raw/ops/scripts/",
+ "sources": [
+  {
+   "id": "calitp_stop_time_metrics_2026-06-10",
+   "publisher": "Cal-ITP (Caltrans), public bucket calitp-publish-data-analysis",
+   "url": "https://storage.googleapis.com/calitp-publish-data-analysis/ucd_transit_priority_2026/fct_stop_time_metrics_2026-06-10/",
+   "dataPeriod": "Wednesday 2026-06-10 service day (SFUSD out of school)",
+   "rawFile": "reliability/calitp/muni_stop_time_actuals_2026-06-10.csv; ops/muni_ac_samtrans_ggt_prediction_errors_2026-06-10.csv",
+   "method": "Actual arrival per trip and stop from the 511 GTFS-RT TripUpdates feed; prediction error (actual minus predicted arrival, s) for the prediction in force each minute in the 30 minutes before arrival. Cal-ITP stores the error array in ascending minutes against a descending minutes array: the pairing was checked against n_tu_accurate_minutes with Cal-ITP's accuracy band (-60 ln(m+1.3) < e < 60 ln(m+1.5)), 20000 of 20000 rows agree only with the reversed pairing."
+  },
+  {
+   "id": "calitp_mtc_speeds_2025",
+   "publisher": "Cal-ITP for MTC (mtc_collab_2025/speeds), public bucket calitp-publish-data-analysis",
+   "url": "https://storage.googleapis.com/calitp-publish-data-analysis/mtc_collab_2025/speeds/",
+   "dataPeriod": "15 weekdays, 2025-09-16 to 2025-10-16 (Tue-Thu)",
+   "rawFile": "ops/muni_segment_arrivals_2025-09-16_2025-10-16.csv (Muni rows; parquet deleted after extraction)",
+   "method": "Stop arrival times interpolated from GTFS-RT vehicle positions, per trip and day."
+  },
+  {
+   "id": "calitp_gtfs_digest_vp",
+   "publisher": "Cal-ITP GTFS Digest, schedule_vp_metrics",
+   "url": "https://storage.googleapis.com/calitp-publish-data-analysis/gtfs_digest/schedule_vp_metrics.csv",
+   "dataPeriod": "one weekday a month, 2024-12 to 2025-11",
+   "rawFile": "ops/schedule_vp_metrics.csv",
+   "method": "Scheduled trips and trips with vehicle positions by route. Used only to check that the route pattern of trips missing from realtime is stable (correlation 0.92 with 2026-06-10 across routes with 40+ trips). Its rt_sched_journey_ratio (1.9 for Muni all day, 1.7 for Caltrain express) counts positions before departure and after arrival and is not a running-time ratio; not used."
+  },
+  {
+   "id": "datasf_scorecard_441",
+   "publisher": "SF Controller / SFMTA via DataSF (Scorecard Measures kc49-udxn, measure 441 \"Percentage of scheduled service hours delivered\")",
+   "url": "https://data.sf.gov/resource/kc49-udxn.json?measure_code=441",
+   "dataPeriod": "monthly; mean of Jul 2025 - Jun 2026 = 98.66% (June 2026: 97.4%)",
+   "rawFile": "ops/scorecard_441_service_delivered.json",
+   "method": "Filled service hours / scheduled hours, systemwide (operators and vehicles available); \"does not take into account missed service due to delays\" (SFMTA)."
+  },
+  {
+   "id": "sfmta_ngcis_2018",
+   "publisher": "SFMTA",
+   "title": "Next Generation Customer Information System, Stakeholder Engagement Report (September 2018), survey of 5,810 riders",
+   "url": "https://www.sfmta.com/media/24551/download",
+   "rawFile": "ops/refs/sfmta_ngcis_engagement.pdf",
+   "method": "87% check predicted arrivals before walking to the stop, 79% while walking, 94% while waiting (at least \"sometimes\"); riders rated prediction accuracy 2.5 of 5; focus groups define a late vehicle as one that does not arrive as predicted."
+  },
+  {
+   "id": "tag_a1_3",
+   "publisher": "UK Department for Transport",
+   "title": "TAG Unit A1.3 User and Provider Impacts (May 2026), section 6",
+   "url": "https://www.gov.uk/government/publications/tag-unit-a1-3-user-and-provider-impacts",
+   "rawFile": "ops/refs/tag-a1-3.pdf",
+   "method": "Unreliability = variation travellers cannot predict (day-to-day variability and incidents), excluding predictable variation by time of day (6.1.1). Car reliability ratio 0.4 on the SD of travel time (6.3.4). Public transport: lateness against the timetable, valued at 2.5 x in-vehicle time (PDFH; 2.4 for non-rail schemes), with reliability ratio 1.4 on the SD of lateness relative to average lateness (6.5.3-6.5.5); cancellations count the service interval x 1.5 (6.5.7)."
+  },
+  {
+   "id": "batley_2019",
+   "publisher": "Transportation 46(3):583-621",
+   "title": "Batley et al., New appraisal values of travel time saving and reliability in Great Britain",
+   "url": "https://doi.org/10.1007/s11116-017-9798-7",
+   "rawFile": "ops/refs/batley2019.pdf",
+   "method": "Table 12: bus late arrival 2.88 (commute) and 2.52 (other) x VTT; other PT 1.75-2.24; rail 2.76-3.21; car reliability ratio on SD 0.33-0.42."
+  },
+  {
+   "id": "shrp2_l17",
+   "publisher": "TRB, SHRP 2 Reliability Project L17, Gap-Filling Project 5: Guidebook: Placing a Value on Travel Time Reliability (2014)",
+   "url": "https://onlinepubs.trb.org/onlinepubs/shrp2/SHRP2_L17_Gap-Filling_Project_5_GuidebookPlacingAValueOnTimeReliability.pdf",
+   "rawFile": "ops/refs/shrp2_l17_guidebook.pdf",
+   "method": "RR = value of SD / value of mean time. Reports: RAND Europe 2004 expert workshop (Netherlands, UK, Sweden) provisional RR 0.8 car, 1.2 bus and train; Swedish ASEK urban transit 1.1; Carrion & Levinson (2012) meta-analysis of studies, averages 0.1 to 1.5 (most 0.7-1.5)."
+  },
+  {
+   "id": "bart_otp_2026",
+   "publisher": "BART",
+   "title": "Quarterly Service Performance Review; news releases 2026-05-18 and 2026-09-16",
+   "url": "https://www.bart.gov/news/articles/2026/news20260916",
+   "method": "Customer on-time: share of riders reaching their destination within 5 minutes of the timetable. FY26 Q3 94.4%, FY26 Q4 95%."
+  },
+  {
+   "id": "caltrain_edr_2026",
+   "publisher": "Caltrain, Executive Director's Monthly Reports (May and August 2026)",
+   "url": "https://www.caltrain.com/media/37677",
+   "method": "On time = arriving less than 6 minutes late at end-line stations: April 2026 96.1%, July 2026 96.5%; within 10 minutes 98.5% and 98.9%."
+  },
+  {
+   "id": "sfbf_otp_2025",
+   "publisher": "San Francisco Bay Ferry",
+   "title": "San Francisco Bay Ferry Releases Reliability and On-Time Performance Data (2025)",
+   "url": "https://www.sfbayferry.com/san-francisco-bay-ferry-releases-reliability-and-on-time-performance-data-commits-to-improvements/",
+   "method": "January 2025: 94.1% of trips on time; 99.8% of trips operated."
+  },
+  {
+   "id": "gentile_2005",
+   "publisher": "Transportation Science 39(3)",
+   "title": "Gentile, Nguyen & Pallottino, Route choice on transit networks with online information at stops",
+   "method": "Informed line choice; its full-information limit is what strategy.ts combineInformed computes."
+  }
+ ],
+ "runTime": {
+  "definition": "Sum over a route-period of actual stop-to-stop times / scheduled times for the same consecutive observed stops (first and last stop of each trip excluded; hops > 30 min scheduled or > 4x + 10 min actual dropped). Period by the scheduled time at the trip's first observed stop. 16:30-19:30 records hold two copies of many trips (the UTC-midnight seam: the same trip on two service days); they are split into two chains by following each copy's times against the scheduled increments, and both kept as weekday observations. Route-period ratio shrunk toward its group's by scheduled hours observed (k = 4 h), clamped to 0.85-1.2.",
+  "source": "calitp_stop_time_metrics_2026-06-10",
+  "groupMeans": {
+   "T|AM": 1.03,
+   "T|MD": 1.045,
+   "T|NT": 1.022,
+   "T|PM": 0.993,
+   "all|AM": 1.011,
+   "all|MD": 1.02,
+   "all|NT": 1.01,
+   "all|PM": 1.002,
+   "bus|AM": 1.008,
+   "bus|MD": 1.019,
+   "bus|NT": 1.015,
+   "bus|PM": 1.011,
+   "cable|AM": 1.126,
+   "cable|MD": 0.965,
+   "cable|NT": 0.924,
+   "cable|PM": 0.927,
+   "express|AM": 1.015,
+   "express|PM": 0.897,
+   "metro|AM": 1.021,
+   "metro|MD": 1.044,
+   "metro|NT": 1.008,
+   "metro|PM": 1.019,
+   "rapid|AM": 1.012,
+   "rapid|MD": 1.005,
+   "rapid|NT": 0.947,
+   "rapid|PM": 0.987,
+   "streetcar|AM": 1.007,
+   "streetcar|MD": 1.045,
+   "streetcar|NT": 1.013,
+   "streetcar|PM": 0.962
+  },
+  "byRoute": {
+   "1": {
+    "AM": {
+     "ratio": 1.03,
+     "observedRatio": 1.032,
+     "schedHoursObserved": 46.9,
+     "tripRatioSD": 0.109,
+     "nTrips": 82
+    },
+    "NT": {
+     "ratio": 1.085,
+     "observedRatio": 1.095,
+     "schedHoursObserved": 26.7,
+     "tripRatioSD": 0.378,
+     "nTrips": 52
+    },
+    "MD": {
+     "ratio": 0.983,
+     "observedRatio": 0.981,
+     "schedHoursObserved": 71.4,
+     "tripRatioSD": 0.092,
+     "nTrips": 120
+    },
+    "PM": {
+     "ratio": 1.019,
+     "observedRatio": 1.019,
+     "schedHoursObserved": 82.6,
+     "tripRatioSD": 0.136,
+     "nTrips": 143
+    }
+   },
+   "12": {
+    "AM": {
+     "ratio": 1.055,
+     "observedRatio": 1.063,
+     "schedHoursObserved": 25.1,
+     "tripRatioSD": 0.103,
+     "nTrips": 41
+    },
+    "NT": {
+     "ratio": 1.033,
+     "observedRatio": 1.038,
+     "schedHoursObserved": 15.1,
+     "tripRatioSD": 0.142,
+     "nTrips": 20
+    },
+    "MD": {
+     "ratio": 1.057,
+     "observedRatio": 1.061,
+     "schedHoursObserved": 35.6,
+     "tripRatioSD": 0.387,
+     "nTrips": 60
+    },
+    "PM": {
+     "ratio": 1.075,
+     "observedRatio": 1.081,
+     "schedHoursObserved": 41.7,
+     "tripRatioSD": 0.167,
+     "nTrips": 63
+    }
+   },
+   "14": {
+    "AM": {
+     "ratio": 1.045,
+     "observedRatio": 1.048,
+     "schedHoursObserved": 42.1,
+     "tripRatioSD": 0.078,
+     "nTrips": 48
+    },
+    "NT": {
+     "ratio": 1.059,
+     "observedRatio": 1.062,
+     "schedHoursObserved": 63.3,
+     "tripRatioSD": 0.128,
+     "nTrips": 81
+    },
+    "MD": {
+     "ratio": 1.026,
+     "observedRatio": 1.027,
+     "schedHoursObserved": 55.4,
+     "tripRatioSD": 0.125,
+     "nTrips": 58
+    },
+    "PM": {
+     "ratio": 1.026,
+     "observedRatio": 1.027,
+     "schedHoursObserved": 66.4,
+     "tripRatioSD": 0.099,
+     "nTrips": 66
+    }
+   },
+   "14R": {
+    "AM": {
+     "ratio": 1.031,
+     "observedRatio": 1.032,
+     "schedHoursObserved": 52.3,
+     "tripRatioSD": 0.092,
+     "nTrips": 73
+    },
+    "NT": {
+     "ratio": 0.953,
+     "observedRatio": 0.954,
+     "schedHoursObserved": 22.1,
+     "tripRatioSD": 0.078,
+     "nTrips": 28
+    },
+    "MD": {
+     "ratio": 1.051,
+     "observedRatio": 1.054,
+     "schedHoursObserved": 59.9,
+     "tripRatioSD": 0.08,
+     "nTrips": 76
+    },
+    "PM": {
+     "ratio": 1.034,
+     "observedRatio": 1.036,
+     "schedHoursObserved": 77.9,
+     "tripRatioSD": 0.094,
+     "nTrips": 95
+    }
+   },
+   "15": {
+    "AM": {
+     "ratio": 1.039,
+     "observedRatio": 1.045,
+     "schedHoursObserved": 19.8,
+     "tripRatioSD": 0.098,
+     "nTrips": 35
+    },
+    "NT": {
+     "ratio": 0.988,
+     "observedRatio": 0.98,
+     "schedHoursObserved": 12.8,
+     "tripRatioSD": 0.181,
+     "nTrips": 24
+    },
+    "MD": {
+     "ratio": 1.069,
+     "observedRatio": 1.076,
+     "schedHoursObserved": 30.0,
+     "tripRatioSD": 0.203,
+     "nTrips": 50
+    },
+    "PM": {
+     "ratio": 1.105,
+     "observedRatio": 1.115,
+     "schedHoursObserved": 36.3,
+     "tripRatioSD": 0.546,
+     "nTrips": 58
+    }
+   },
+   "18": {
+    "AM": {
+     "ratio": 0.946,
+     "observedRatio": 0.928,
+     "schedHoursObserved": 13.7,
+     "tripRatioSD": 0.126,
+     "nTrips": 25
+    },
+    "NT": {
+     "ratio": 0.992,
+     "observedRatio": 0.981,
+     "schedHoursObserved": 8.1,
+     "tripRatioSD": 0.074,
+     "nTrips": 17
+    },
+    "MD": {
+     "ratio": 1.042,
+     "observedRatio": 1.048,
+     "schedHoursObserved": 16.2,
+     "tripRatioSD": 0.068,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 0.966,
+     "observedRatio": 0.957,
+     "schedHoursObserved": 21.0,
+     "tripRatioSD": 0.04,
+     "nTrips": 36
+    }
+   },
+   "19": {
+    "AM": {
+     "ratio": 1.033,
+     "observedRatio": 1.036,
+     "schedHoursObserved": 28.2,
+     "tripRatioSD": 0.093,
+     "nTrips": 32
+    },
+    "NT": {
+     "ratio": 1.006,
+     "observedRatio": 1.004,
+     "schedHoursObserved": 19.2,
+     "tripRatioSD": 0.097,
+     "nTrips": 24
+    },
+    "MD": {
+     "ratio": 0.997,
+     "observedRatio": 0.995,
+     "schedHoursObserved": 37.9,
+     "tripRatioSD": 0.079,
+     "nTrips": 40
+    },
+    "PM": {
+     "ratio": 0.999,
+     "observedRatio": 0.998,
+     "schedHoursObserved": 42.4,
+     "tripRatioSD": 0.098,
+     "nTrips": 43
+    }
+   },
+   "1X": {
+    "AM": {
+     "ratio": 1.018,
+     "observedRatio": 1.021,
+     "schedHoursObserved": 2.9,
+     "tripRatioSD": 0.034,
+     "nTrips": 4
+    },
+    "PM": {
+     "ratio": 0.893,
+     "observedRatio": 0.887,
+     "schedHoursObserved": 3.1,
+     "tripRatioSD": 0.053,
+     "nTrips": 4
+    }
+   },
+   "2": {
+    "AM": {
+     "ratio": 1.012,
+     "observedRatio": 1.014,
+     "schedHoursObserved": 9.5,
+     "tripRatioSD": 0.473,
+     "nTrips": 20
+    },
+    "NT": {
+     "ratio": 1.059,
+     "observedRatio": 1.257,
+     "schedHoursObserved": 0.9,
+     "tripRatioSD": null,
+     "nTrips": null
+    },
+    "MD": {
+     "ratio": 1.003,
+     "observedRatio": 0.999,
+     "schedHoursObserved": 15.7,
+     "tripRatioSD": 0.105,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 1.004,
+     "observedRatio": 1.002,
+     "schedHoursObserved": 18.1,
+     "tripRatioSD": 0.092,
+     "nTrips": 34
+    }
+   },
+   "22": {
+    "AM": {
+     "ratio": 1.063,
+     "observedRatio": 1.067,
+     "schedHoursObserved": 54.3,
+     "tripRatioSD": 0.152,
+     "nTrips": 76
+    },
+    "NT": {
+     "ratio": 1.031,
+     "observedRatio": 1.032,
+     "schedHoursObserved": 43.2,
+     "tripRatioSD": 0.19,
+     "nTrips": 69
+    },
+    "MD": {
+     "ratio": 1.05,
+     "observedRatio": 1.052,
+     "schedHoursObserved": 76.4,
+     "tripRatioSD": 0.089,
+     "nTrips": 89
+    },
+    "PM": {
+     "ratio": 1.053,
+     "observedRatio": 1.055,
+     "schedHoursObserved": 87.4,
+     "tripRatioSD": 0.096,
+     "nTrips": 95
+    }
+   },
+   "23": {
+    "AM": {
+     "ratio": 1.012,
+     "observedRatio": 1.013,
+     "schedHoursObserved": 14.5,
+     "tripRatioSD": 0.161,
+     "nTrips": 23
+    },
+    "NT": {
+     "ratio": 0.985,
+     "observedRatio": 0.972,
+     "schedHoursObserved": 8.9,
+     "tripRatioSD": 0.057,
+     "nTrips": 14
+    },
+    "MD": {
+     "ratio": 1.017,
+     "observedRatio": 1.017,
+     "schedHoursObserved": 21.7,
+     "tripRatioSD": 0.072,
+     "nTrips": 32
+    },
+    "PM": {
+     "ratio": 1.015,
+     "observedRatio": 1.016,
+     "schedHoursObserved": 24.1,
+     "tripRatioSD": 0.057,
+     "nTrips": 32
+    }
+   },
+   "24": {
+    "AM": {
+     "ratio": 1.012,
+     "observedRatio": 1.012,
+     "schedHoursObserved": 40.9,
+     "tripRatioSD": 0.076,
+     "nTrips": 49
+    },
+    "NT": {
+     "ratio": 0.979,
+     "observedRatio": 0.974,
+     "schedHoursObserved": 31.7,
+     "tripRatioSD": 0.101,
+     "nTrips": 46
+    },
+    "MD": {
+     "ratio": 0.988,
+     "observedRatio": 0.985,
+     "schedHoursObserved": 48.2,
+     "tripRatioSD": 0.079,
+     "nTrips": 55
+    },
+    "PM": {
+     "ratio": 1.016,
+     "observedRatio": 1.016,
+     "schedHoursObserved": 61.6,
+     "tripRatioSD": 0.086,
+     "nTrips": 69
+    }
+   },
+   "25": {
+    "AM": {
+     "ratio": 0.968,
+     "observedRatio": 0.933,
+     "schedHoursObserved": 4.7,
+     "tripRatioSD": 0.078,
+     "nTrips": 12
+    },
+    "NT": {
+     "ratio": 0.971,
+     "observedRatio": 0.943,
+     "schedHoursObserved": 6.3,
+     "tripRatioSD": 0.07,
+     "nTrips": 18
+    },
+    "MD": {
+     "ratio": 0.971,
+     "observedRatio": 0.939,
+     "schedHoursObserved": 5.9,
+     "tripRatioSD": 0.062,
+     "nTrips": 15
+    },
+    "PM": {
+     "ratio": 1.025,
+     "observedRatio": 1.033,
+     "schedHoursObserved": 7.4,
+     "tripRatioSD": 0.099,
+     "nTrips": 18
+    }
+   },
+   "27": {
+    "AM": {
+     "ratio": 0.989,
+     "observedRatio": 0.986,
+     "schedHoursObserved": 21.5,
+     "tripRatioSD": 0.133,
+     "nTrips": 30
+    },
+    "NT": {
+     "ratio": 0.987,
+     "observedRatio": 0.98,
+     "schedHoursObserved": 14.7,
+     "tripRatioSD": 0.088,
+     "nTrips": 22
+    },
+    "MD": {
+     "ratio": 0.999,
+     "observedRatio": 0.996,
+     "schedHoursObserved": 26.4,
+     "tripRatioSD": 0.098,
+     "nTrips": 34
+    },
+    "PM": {
+     "ratio": 0.964,
+     "observedRatio": 0.959,
+     "schedHoursObserved": 34.8,
+     "tripRatioSD": 0.091,
+     "nTrips": 43
+    }
+   },
+   "28": {
+    "AM": {
+     "ratio": 0.983,
+     "observedRatio": 0.98,
+     "schedHoursObserved": 35.6,
+     "tripRatioSD": 0.079,
+     "nTrips": 40
+    },
+    "NT": {
+     "ratio": 1.008,
+     "observedRatio": 1.007,
+     "schedHoursObserved": 27.3,
+     "tripRatioSD": 0.096,
+     "nTrips": 34
+    },
+    "MD": {
+     "ratio": 1.02,
+     "observedRatio": 1.02,
+     "schedHoursObserved": 47.5,
+     "tripRatioSD": 0.071,
+     "nTrips": 50
+    },
+    "PM": {
+     "ratio": 0.975,
+     "observedRatio": 0.973,
+     "schedHoursObserved": 60.9,
+     "tripRatioSD": 0.072,
+     "nTrips": 55
+    }
+   },
+   "28R": {
+    "AM": {
+     "ratio": 1.016,
+     "observedRatio": 1.017,
+     "schedHoursObserved": 14.3,
+     "tripRatioSD": 0.136,
+     "nTrips": 31
+    },
+    "NT": {
+     "ratio": 0.935,
+     "observedRatio": 0.878,
+     "schedHoursObserved": 0.9,
+     "tripRatioSD": null,
+     "nTrips": null
+    },
+    "MD": {
+     "ratio": 0.988,
+     "observedRatio": 0.985,
+     "schedHoursObserved": 23.7,
+     "tripRatioSD": 0.129,
+     "nTrips": 49
+    },
+    "PM": {
+     "ratio": 1.009,
+     "observedRatio": 1.012,
+     "schedHoursObserved": 30.1,
+     "tripRatioSD": 0.126,
+     "nTrips": 54
+    }
+   },
+   "29": {
+    "AM": {
+     "ratio": 0.98,
+     "observedRatio": 0.978,
+     "schedHoursObserved": 64.8,
+     "tripRatioSD": 0.168,
+     "nTrips": 56
+    },
+    "NT": {
+     "ratio": 0.994,
+     "observedRatio": 0.991,
+     "schedHoursObserved": 31.5,
+     "tripRatioSD": 0.093,
+     "nTrips": 31
+    },
+    "MD": {
+     "ratio": 1.026,
+     "observedRatio": 1.026,
+     "schedHoursObserved": 81.4,
+     "tripRatioSD": 0.076,
+     "nTrips": 69
+    },
+    "PM": {
+     "ratio": 0.962,
+     "observedRatio": 0.96,
+     "schedHoursObserved": 88.8,
+     "tripRatioSD": 0.075,
+     "nTrips": 66
+    }
+   },
+   "30": {
+    "AM": {
+     "ratio": 1.009,
+     "observedRatio": 1.009,
+     "schedHoursObserved": 32.6,
+     "tripRatioSD": 0.078,
+     "nTrips": 54
+    },
+    "NT": {
+     "ratio": 1.014,
+     "observedRatio": 1.014,
+     "schedHoursObserved": 18.8,
+     "tripRatioSD": 0.095,
+     "nTrips": 30
+    },
+    "MD": {
+     "ratio": 1.001,
+     "observedRatio": 1.0,
+     "schedHoursObserved": 52.9,
+     "tripRatioSD": 0.12,
+     "nTrips": 86
+    },
+    "PM": {
+     "ratio": 0.971,
+     "observedRatio": 0.968,
+     "schedHoursObserved": 48.7,
+     "tripRatioSD": 0.099,
+     "nTrips": 65
+    }
+   },
+   "30X": {
+    "AM": {
+     "ratio": 1.001,
+     "observedRatio": 0.97,
+     "schedHoursObserved": 1.8,
+     "tripRatioSD": null,
+     "nTrips": null
+    }
+   },
+   "31": {
+    "AM": {
+     "ratio": 1.025,
+     "observedRatio": 1.029,
+     "schedHoursObserved": 15.5,
+     "tripRatioSD": 0.083,
+     "nTrips": 24
+    },
+    "NT": {
+     "ratio": 1.018,
+     "observedRatio": 1.019,
+     "schedHoursObserved": 11.7,
+     "tripRatioSD": 0.095,
+     "nTrips": 22
+    },
+    "MD": {
+     "ratio": 1.057,
+     "observedRatio": 1.064,
+     "schedHoursObserved": 21.2,
+     "tripRatioSD": 0.157,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 1.014,
+     "observedRatio": 1.014,
+     "schedHoursObserved": 24.4,
+     "tripRatioSD": 0.054,
+     "nTrips": 35
+    }
+   },
+   "33": {
+    "AM": {
+     "ratio": 1.031,
+     "observedRatio": 1.036,
+     "schedHoursObserved": 18.7,
+     "tripRatioSD": 0.115,
+     "nTrips": 25
+    },
+    "NT": {
+     "ratio": 1.037,
+     "observedRatio": 1.043,
+     "schedHoursObserved": 14.9,
+     "tripRatioSD": 0.129,
+     "nTrips": 22
+    },
+    "MD": {
+     "ratio": 1.03,
+     "observedRatio": 1.032,
+     "schedHoursObserved": 23.3,
+     "tripRatioSD": 0.096,
+     "nTrips": 29
+    },
+    "PM": {
+     "ratio": 1.085,
+     "observedRatio": 1.095,
+     "schedHoursObserved": 29.0,
+     "tripRatioSD": 0.135,
+     "nTrips": 31
+    }
+   },
+   "35": {
+    "AM": {
+     "ratio": 0.963,
+     "observedRatio": 0.917,
+     "schedHoursObserved": 3.9,
+     "tripRatioSD": 0.518,
+     "nTrips": 12
+    },
+    "NT": {
+     "ratio": 0.908,
+     "observedRatio": 0.779,
+     "schedHoursObserved": 3.3,
+     "tripRatioSD": 0.098,
+     "nTrips": 10
+    },
+    "MD": {
+     "ratio": 0.943,
+     "observedRatio": 0.897,
+     "schedHoursObserved": 6.6,
+     "tripRatioSD": 0.149,
+     "nTrips": 20
+    },
+    "PM": {
+     "ratio": 0.956,
+     "observedRatio": 0.929,
+     "schedHoursObserved": 8.0,
+     "tripRatioSD": 0.141,
+     "nTrips": 24
+    }
+   },
+   "36": {
+    "AM": {
+     "ratio": 0.961,
+     "observedRatio": 0.94,
+     "schedHoursObserved": 8.8,
+     "tripRatioSD": 0.116,
+     "nTrips": 16
+    },
+    "NT": {
+     "ratio": 0.977,
+     "observedRatio": 0.953,
+     "schedHoursObserved": 6.3,
+     "tripRatioSD": 0.134,
+     "nTrips": 14
+    },
+    "MD": {
+     "ratio": 0.967,
+     "observedRatio": 0.948,
+     "schedHoursObserved": 11.0,
+     "tripRatioSD": 0.148,
+     "nTrips": 20
+    },
+    "PM": {
+     "ratio": 1.019,
+     "observedRatio": 1.022,
+     "schedHoursObserved": 12.5,
+     "tripRatioSD": 0.079,
+     "nTrips": 22
+    }
+   },
+   "37": {
+    "AM": {
+     "ratio": 1.01,
+     "observedRatio": 1.011,
+     "schedHoursObserved": 8.9,
+     "tripRatioSD": 0.119,
+     "nTrips": 20
+    },
+    "NT": {
+     "ratio": 1.017,
+     "observedRatio": 1.018,
+     "schedHoursObserved": 6.1,
+     "tripRatioSD": 0.098,
+     "nTrips": 14
+    },
+    "MD": {
+     "ratio": 1.102,
+     "observedRatio": 1.127,
+     "schedHoursObserved": 13.1,
+     "tripRatioSD": 0.1,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 1.083,
+     "observedRatio": 1.102,
+     "schedHoursObserved": 15.3,
+     "tripRatioSD": 0.09,
+     "nTrips": 30
+    }
+   },
+   "38": {
+    "AM": {
+     "ratio": 0.973,
+     "observedRatio": 0.969,
+     "schedHoursObserved": 39.4,
+     "tripRatioSD": 0.162,
+     "nTrips": 53
+    },
+    "NT": {
+     "ratio": 1.004,
+     "observedRatio": 1.003,
+     "schedHoursObserved": 34.0,
+     "tripRatioSD": 0.11,
+     "nTrips": 46
+    },
+    "MD": {
+     "ratio": 0.995,
+     "observedRatio": 0.993,
+     "schedHoursObserved": 49.8,
+     "tripRatioSD": 0.062,
+     "nTrips": 63
+    },
+    "PM": {
+     "ratio": 0.978,
+     "observedRatio": 0.976,
+     "schedHoursObserved": 67.7,
+     "tripRatioSD": 0.082,
+     "nTrips": 86
+    }
+   },
+   "38R": {
+    "AM": {
+     "ratio": 0.993,
+     "observedRatio": 0.991,
+     "schedHoursObserved": 48.7,
+     "tripRatioSD": 0.071,
+     "nTrips": 75
+    },
+    "NT": {
+     "ratio": 0.947,
+     "observedRatio": 0.947,
+     "schedHoursObserved": 25.7,
+     "tripRatioSD": 0.06,
+     "nTrips": 40
+    },
+    "MD": {
+     "ratio": 0.964,
+     "observedRatio": 0.962,
+     "schedHoursObserved": 67.4,
+     "tripRatioSD": 0.099,
+     "nTrips": 98
+    },
+    "PM": {
+     "ratio": 0.946,
+     "observedRatio": 0.944,
+     "schedHoursObserved": 80.0,
+     "tripRatioSD": 0.078,
+     "nTrips": 112
+    }
+   },
+   "39": {
+    "AM": {
+     "ratio": 0.957,
+     "observedRatio": 0.755,
+     "schedHoursObserved": 1.0,
+     "tripRatioSD": 0.125,
+     "nTrips": 5
+    },
+    "NT": {
+     "ratio": 0.974,
+     "observedRatio": 0.74,
+     "schedHoursObserved": 0.7,
+     "tripRatioSD": null,
+     "nTrips": null
+    },
+    "MD": {
+     "ratio": 0.898,
+     "observedRatio": 0.821,
+     "schedHoursObserved": 6.3,
+     "tripRatioSD": 0.172,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 0.952,
+     "observedRatio": 0.92,
+     "schedHoursObserved": 7.4,
+     "tripRatioSD": 0.201,
+     "nTrips": 35
+    }
+   },
+   "43": {
+    "AM": {
+     "ratio": 0.968,
+     "observedRatio": 0.964,
+     "schedHoursObserved": 44.8,
+     "tripRatioSD": 0.046,
+     "nTrips": 37
+    },
+    "NT": {
+     "ratio": 0.981,
+     "observedRatio": 0.977,
+     "schedHoursObserved": 34.1,
+     "tripRatioSD": 0.077,
+     "nTrips": 31
+    },
+    "MD": {
+     "ratio": 1.006,
+     "observedRatio": 1.005,
+     "schedHoursObserved": 56.3,
+     "tripRatioSD": 0.062,
+     "nTrips": 44
+    },
+    "PM": {
+     "ratio": 0.992,
+     "observedRatio": 0.991,
+     "schedHoursObserved": 71.4,
+     "tripRatioSD": 0.069,
+     "nTrips": 53
+    }
+   },
+   "44": {
+    "AM": {
+     "ratio": 0.954,
+     "observedRatio": 0.949,
+     "schedHoursObserved": 43.7,
+     "tripRatioSD": 0.066,
+     "nTrips": 45
+    },
+    "NT": {
+     "ratio": 0.995,
+     "observedRatio": 0.992,
+     "schedHoursObserved": 27.9,
+     "tripRatioSD": 0.132,
+     "nTrips": 39
+    },
+    "MD": {
+     "ratio": 0.993,
+     "observedRatio": 0.991,
+     "schedHoursObserved": 56.9,
+     "tripRatioSD": 0.109,
+     "nTrips": 61
+    },
+    "PM": {
+     "ratio": 0.967,
+     "observedRatio": 0.964,
+     "schedHoursObserved": 65.1,
+     "tripRatioSD": 0.06,
+     "nTrips": 62
+    }
+   },
+   "45": {
+    "AM": {
+     "ratio": 1.01,
+     "observedRatio": 1.01,
+     "schedHoursObserved": 24.5,
+     "tripRatioSD": 0.153,
+     "nTrips": 41
+    },
+    "NT": {
+     "ratio": 1.041,
+     "observedRatio": 1.049,
+     "schedHoursObserved": 12.8,
+     "tripRatioSD": 0.091,
+     "nTrips": 23
+    },
+    "MD": {
+     "ratio": 1.046,
+     "observedRatio": 1.049,
+     "schedHoursObserved": 38.1,
+     "tripRatioSD": 0.093,
+     "nTrips": 60
+    },
+    "PM": {
+     "ratio": 1.008,
+     "observedRatio": 1.008,
+     "schedHoursObserved": 43.5,
+     "tripRatioSD": 0.24,
+     "nTrips": 67
+    }
+   },
+   "48": {
+    "AM": {
+     "ratio": 0.997,
+     "observedRatio": 0.996,
+     "schedHoursObserved": 32.7,
+     "tripRatioSD": 0.094,
+     "nTrips": 39
+    },
+    "NT": {
+     "ratio": 1.043,
+     "observedRatio": 1.048,
+     "schedHoursObserved": 23.2,
+     "tripRatioSD": 0.089,
+     "nTrips": 36
+    },
+    "MD": {
+     "ratio": 1.023,
+     "observedRatio": 1.023,
+     "schedHoursObserved": 37.3,
+     "tripRatioSD": 0.091,
+     "nTrips": 42
+    },
+    "PM": {
+     "ratio": 1.02,
+     "observedRatio": 1.021,
+     "schedHoursObserved": 43.7,
+     "tripRatioSD": 0.073,
+     "nTrips": 44
+    }
+   },
+   "49": {
+    "AM": {
+     "ratio": 0.998,
+     "observedRatio": 0.997,
+     "schedHoursObserved": 59.7,
+     "tripRatioSD": 0.216,
+     "nTrips": 80
+    },
+    "NT": {
+     "ratio": 1.028,
+     "observedRatio": 1.029,
+     "schedHoursObserved": 34.3,
+     "tripRatioSD": 0.121,
+     "nTrips": 46
+    },
+    "MD": {
+     "ratio": 0.974,
+     "observedRatio": 0.972,
+     "schedHoursObserved": 86.0,
+     "tripRatioSD": 0.093,
+     "nTrips": 100
+    },
+    "PM": {
+     "ratio": 0.964,
+     "observedRatio": 0.962,
+     "schedHoursObserved": 100.1,
+     "tripRatioSD": 0.144,
+     "nTrips": 116
+    }
+   },
+   "5": {
+    "AM": {
+     "ratio": 0.957,
+     "observedRatio": 0.946,
+     "schedHoursObserved": 19.2,
+     "tripRatioSD": 0.117,
+     "nTrips": 45
+    },
+    "NT": {
+     "ratio": 1.054,
+     "observedRatio": 1.058,
+     "schedHoursObserved": 34.8,
+     "tripRatioSD": 0.135,
+     "nTrips": 63
+    },
+    "MD": {
+     "ratio": 1.002,
+     "observedRatio": 0.998,
+     "schedHoursObserved": 19.3,
+     "tripRatioSD": 0.11,
+     "nTrips": 55
+    },
+    "PM": {
+     "ratio": 0.965,
+     "observedRatio": 0.957,
+     "schedHoursObserved": 23.4,
+     "tripRatioSD": 0.118,
+     "nTrips": 63
+    }
+   },
+   "52": {
+    "AM": {
+     "ratio": 0.98,
+     "observedRatio": 0.968,
+     "schedHoursObserved": 9.9,
+     "tripRatioSD": 0.162,
+     "nTrips": 24
+    },
+    "NT": {
+     "ratio": 0.966,
+     "observedRatio": 0.93,
+     "schedHoursObserved": 5.5,
+     "tripRatioSD": 0.075,
+     "nTrips": 16
+    },
+    "MD": {
+     "ratio": 1.038,
+     "observedRatio": 1.045,
+     "schedHoursObserved": 11.2,
+     "tripRatioSD": 0.144,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 0.927,
+     "observedRatio": 0.907,
+     "schedHoursObserved": 16.7,
+     "tripRatioSD": 0.09,
+     "nTrips": 36
+    }
+   },
+   "54": {
+    "AM": {
+     "ratio": 1.029,
+     "observedRatio": 1.033,
+     "schedHoursObserved": 23.3,
+     "tripRatioSD": 0.083,
+     "nTrips": 24
+    },
+    "NT": {
+     "ratio": 1.047,
+     "observedRatio": 1.059,
+     "schedHoursObserved": 10.7,
+     "tripRatioSD": 0.095,
+     "nTrips": 12
+    },
+    "MD": {
+     "ratio": 1.022,
+     "observedRatio": 1.023,
+     "schedHoursObserved": 29.3,
+     "tripRatioSD": 0.139,
+     "nTrips": 29
+    },
+    "PM": {
+     "ratio": 0.981,
+     "observedRatio": 0.977,
+     "schedHoursObserved": 33.8,
+     "tripRatioSD": 0.075,
+     "nTrips": 30
+    }
+   },
+   "55": {
+    "AM": {
+     "ratio": 1.013,
+     "observedRatio": 1.017,
+     "schedHoursObserved": 5.1,
+     "tripRatioSD": 0.149,
+     "nTrips": 23
+    },
+    "NT": {
+     "ratio": 1.06,
+     "observedRatio": 1.103,
+     "schedHoursObserved": 4.2,
+     "tripRatioSD": 0.098,
+     "nTrips": 20
+    },
+    "MD": {
+     "ratio": 1.032,
+     "observedRatio": 1.039,
+     "schedHoursObserved": 7.0,
+     "tripRatioSD": 0.158,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 1.087,
+     "observedRatio": 1.123,
+     "schedHoursObserved": 8.5,
+     "tripRatioSD": 0.094,
+     "nTrips": 36
+    }
+   },
+   "56": {
+    "AM": {
+     "ratio": 1.023,
+     "observedRatio": 1.037,
+     "schedHoursObserved": 4.1,
+     "tripRatioSD": 0.082,
+     "nTrips": 18
+    },
+    "NT": {
+     "ratio": 0.949,
+     "observedRatio": 0.854,
+     "schedHoursObserved": 2.8,
+     "tripRatioSD": 0.211,
+     "nTrips": 13
+    },
+    "MD": {
+     "ratio": 1.043,
+     "observedRatio": 1.057,
+     "schedHoursObserved": 6.8,
+     "tripRatioSD": 0.148,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 0.99,
+     "observedRatio": 0.979,
+     "schedHoursObserved": 7.6,
+     "tripRatioSD": 0.16,
+     "nTrips": 31
+    }
+   },
+   "57": {
+    "AM": {
+     "ratio": 1.047,
+     "observedRatio": 1.068,
+     "schedHoursObserved": 7.4,
+     "tripRatioSD": 0.087,
+     "nTrips": 24
+    },
+    "NT": {
+     "ratio": 1.091,
+     "observedRatio": 1.143,
+     "schedHoursObserved": 5.8,
+     "tripRatioSD": 0.255,
+     "nTrips": 19
+    },
+    "MD": {
+     "ratio": 1.053,
+     "observedRatio": 1.066,
+     "schedHoursObserved": 10.3,
+     "tripRatioSD": 0.143,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 1.038,
+     "observedRatio": 1.046,
+     "schedHoursObserved": 13.2,
+     "tripRatioSD": 0.132,
+     "nTrips": 34
+    }
+   },
+   "58": {
+    "AM": {
+     "ratio": 0.971,
+     "observedRatio": 0.951,
+     "schedHoursObserved": 7.2,
+     "tripRatioSD": 0.093,
+     "nTrips": 16
+    },
+    "NT": {
+     "ratio": 0.92,
+     "observedRatio": 0.863,
+     "schedHoursObserved": 6.7,
+     "tripRatioSD": 0.126,
+     "nTrips": 15
+    },
+    "MD": {
+     "ratio": 0.954,
+     "observedRatio": 0.925,
+     "schedHoursObserved": 9.0,
+     "tripRatioSD": 0.093,
+     "nTrips": 20
+    },
+    "PM": {
+     "ratio": 0.933,
+     "observedRatio": 0.904,
+     "schedHoursObserved": 10.6,
+     "tripRatioSD": 0.084,
+     "nTrips": 23
+    }
+   },
+   "5R": {
+    "AM": {
+     "ratio": 1.002,
+     "observedRatio": 1.001,
+     "schedHoursObserved": 35.5,
+     "tripRatioSD": 0.073,
+     "nTrips": 46
+    },
+    "NT": {
+     "ratio": 0.962,
+     "observedRatio": 1.033,
+     "schedHoursObserved": 0.8,
+     "tripRatioSD": null,
+     "nTrips": null
+    },
+    "MD": {
+     "ratio": 1.0,
+     "observedRatio": 1.0,
+     "schedHoursObserved": 41.6,
+     "tripRatioSD": 0.098,
+     "nTrips": 56
+    },
+    "PM": {
+     "ratio": 0.958,
+     "observedRatio": 0.956,
+     "schedHoursObserved": 71.3,
+     "tripRatioSD": 0.084,
+     "nTrips": 87
+    }
+   },
+   "6": {
+    "AM": {
+     "ratio": 1.103,
+     "observedRatio": 1.134,
+     "schedHoursObserved": 12.2,
+     "tripRatioSD": 0.163,
+     "nTrips": 23
+    },
+    "NT": {
+     "ratio": 0.996,
+     "observedRatio": 0.99,
+     "schedHoursObserved": 12.4,
+     "tripRatioSD": 0.216,
+     "nTrips": 27
+    },
+    "MD": {
+     "ratio": 1.114,
+     "observedRatio": 1.137,
+     "schedHoursObserved": 16.5,
+     "tripRatioSD": 0.121,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 1.027,
+     "observedRatio": 1.03,
+     "schedHoursObserved": 21.6,
+     "tripRatioSD": 0.089,
+     "nTrips": 37
+    }
+   },
+   "66": {
+    "AM": {
+     "ratio": 0.997,
+     "observedRatio": 0.988,
+     "schedHoursObserved": 5.4,
+     "tripRatioSD": 0.118,
+     "nTrips": 24
+    },
+    "NT": {
+     "ratio": 0.987,
+     "observedRatio": 0.96,
+     "schedHoursObserved": 4.2,
+     "tripRatioSD": 0.095,
+     "nTrips": 19
+    },
+    "MD": {
+     "ratio": 1.035,
+     "observedRatio": 1.046,
+     "schedHoursObserved": 6.4,
+     "tripRatioSD": 0.109,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 1.006,
+     "observedRatio": 1.003,
+     "schedHoursObserved": 7.4,
+     "tripRatioSD": 0.125,
+     "nTrips": 33
+    }
+   },
+   "67": {
+    "AM": {
+     "ratio": 1.052,
+     "observedRatio": 1.093,
+     "schedHoursObserved": 4.3,
+     "tripRatioSD": 0.246,
+     "nTrips": 24
+    },
+    "NT": {
+     "ratio": 0.931,
+     "observedRatio": 0.843,
+     "schedHoursObserved": 3.8,
+     "tripRatioSD": 0.134,
+     "nTrips": 20
+    },
+    "MD": {
+     "ratio": 1.019,
+     "observedRatio": 1.02,
+     "schedHoursObserved": 5.6,
+     "tripRatioSD": 0.2,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 1.008,
+     "observedRatio": 1.006,
+     "schedHoursObserved": 6.9,
+     "tripRatioSD": 0.158,
+     "nTrips": 32
+    }
+   },
+   "7": {
+    "AM": {
+     "ratio": 1.035,
+     "observedRatio": 1.038,
+     "schedHoursObserved": 32.8,
+     "tripRatioSD": 0.06,
+     "nTrips": 39
+    },
+    "NT": {
+     "ratio": 1.053,
+     "observedRatio": 1.06,
+     "schedHoursObserved": 22.7,
+     "tripRatioSD": 0.128,
+     "nTrips": 29
+    },
+    "MD": {
+     "ratio": 1.025,
+     "observedRatio": 1.026,
+     "schedHoursObserved": 47.2,
+     "tripRatioSD": 0.164,
+     "nTrips": 51
+    },
+    "PM": {
+     "ratio": 1.016,
+     "observedRatio": 1.016,
+     "schedHoursObserved": 56.1,
+     "tripRatioSD": 0.098,
+     "nTrips": 59
+    }
+   },
+   "8": {
+    "AM": {
+     "ratio": 1.06,
+     "observedRatio": 1.066,
+     "schedHoursObserved": 37.4,
+     "tripRatioSD": 0.081,
+     "nTrips": 37
+    },
+    "NT": {
+     "ratio": 1.05,
+     "observedRatio": 1.054,
+     "schedHoursObserved": 33.0,
+     "tripRatioSD": 0.239,
+     "nTrips": 36
+    },
+    "MD": {
+     "ratio": 1.066,
+     "observedRatio": 1.068,
+     "schedHoursObserved": 83.9,
+     "tripRatioSD": 0.101,
+     "nTrips": 76
+    },
+    "PM": {
+     "ratio": 1.183,
+     "observedRatio": 1.196,
+     "schedHoursObserved": 53.3,
+     "tripRatioSD": 0.175,
+     "nTrips": 44
+    }
+   },
+   "8AX": {
+    "AM": {
+     "ratio": 1.013,
+     "observedRatio": 1.012,
+     "schedHoursObserved": 15.1,
+     "tripRatioSD": 0.103,
+     "nTrips": 23
+    },
+    "PM": {
+     "ratio": 0.85,
+     "observedRatio": 0.83,
+     "schedHoursObserved": 24.7,
+     "tripRatioSD": 0.073,
+     "nTrips": 36
+    }
+   },
+   "8BX": {
+    "AM": {
+     "ratio": 1.02,
+     "observedRatio": 1.021,
+     "schedHoursObserved": 21.6,
+     "tripRatioSD": 0.098,
+     "nTrips": 20
+    },
+    "PM": {
+     "ratio": 0.939,
+     "observedRatio": 0.944,
+     "schedHoursObserved": 36.2,
+     "tripRatioSD": 0.174,
+     "nTrips": 31
+    }
+   },
+   "9": {
+    "AM": {
+     "ratio": 0.966,
+     "observedRatio": 0.958,
+     "schedHoursObserved": 21.2,
+     "tripRatioSD": 0.674,
+     "nTrips": 34
+    },
+    "NT": {
+     "ratio": 0.93,
+     "observedRatio": 0.918,
+     "schedHoursObserved": 27.5,
+     "tripRatioSD": 0.102,
+     "nTrips": 30
+    },
+    "MD": {
+     "ratio": 1.015,
+     "observedRatio": 1.015,
+     "schedHoursObserved": 26.6,
+     "tripRatioSD": 0.142,
+     "nTrips": 49
+    },
+    "PM": {
+     "ratio": 1.05,
+     "observedRatio": 1.055,
+     "schedHoursObserved": 33.3,
+     "tripRatioSD": 0.278,
+     "nTrips": 54
+    }
+   },
+   "90": {
+    "NT": {
+     "ratio": 0.994,
+     "observedRatio": 0.981,
+     "schedHoursObserved": 6.5,
+     "tripRatioSD": 0.071,
+     "nTrips": 12
+    }
+   },
+   "91": {
+    "NT": {
+     "ratio": 1.002,
+     "observedRatio": 1.0,
+     "schedHoursObserved": 21.7,
+     "tripRatioSD": 0.202,
+     "nTrips": 15
+    }
+   },
+   "9R": {
+    "AM": {
+     "ratio": 1.021,
+     "observedRatio": 1.022,
+     "schedHoursObserved": 28.4,
+     "tripRatioSD": 0.067,
+     "nTrips": 30
+    },
+    "NT": {
+     "ratio": 0.917,
+     "observedRatio": 0.78,
+     "schedHoursObserved": 0.9,
+     "tripRatioSD": null,
+     "nTrips": null
+    },
+    "MD": {
+     "ratio": 1.016,
+     "observedRatio": 1.017,
+     "schedHoursObserved": 44.5,
+     "tripRatioSD": 0.078,
+     "nTrips": 46
+    },
+    "PM": {
+     "ratio": 1.006,
+     "observedRatio": 1.008,
+     "schedHoursObserved": 46.5,
+     "tripRatioSD": 0.076,
+     "nTrips": 44
+    }
+   },
+   "CA": {
+    "AM": {
+     "ratio": 1.088,
+     "observedRatio": 1.014,
+     "schedHoursObserved": 2.0,
+     "tripRatioSD": 0.231,
+     "nTrips": 9
+    },
+    "NT": {
+     "ratio": 0.893,
+     "observedRatio": 0.866,
+     "schedHoursObserved": 4.6,
+     "tripRatioSD": 0.341,
+     "nTrips": 19
+    },
+    "MD": {
+     "ratio": 0.908,
+     "observedRatio": 0.883,
+     "schedHoursObserved": 9.4,
+     "tripRatioSD": 0.616,
+     "nTrips": 37
+    },
+    "PM": {
+     "ratio": 0.899,
+     "observedRatio": 0.89,
+     "schedHoursObserved": 13.4,
+     "tripRatioSD": 0.573,
+     "nTrips": 55
+    }
+   },
+   "F": {
+    "AM": {
+     "ratio": 1.007,
+     "observedRatio": 1.007,
+     "schedHoursObserved": 19.6,
+     "tripRatioSD": 0.09,
+     "nTrips": 26
+    },
+    "NT": {
+     "ratio": 1.013,
+     "observedRatio": 1.013,
+     "schedHoursObserved": 17.5,
+     "tripRatioSD": 0.1,
+     "nTrips": 27
+    },
+    "MD": {
+     "ratio": 1.045,
+     "observedRatio": 1.045,
+     "schedHoursObserved": 39.4,
+     "tripRatioSD": 0.151,
+     "nTrips": 50
+    },
+    "PM": {
+     "ratio": 0.962,
+     "observedRatio": 0.962,
+     "schedHoursObserved": 42.5,
+     "tripRatioSD": 0.095,
+     "nTrips": 51
+    }
+   },
+   "FBUS": {
+    "NT": {
+     "ratio": 1.011,
+     "observedRatio": 1.001,
+     "schedHoursObserved": 1.8,
+     "tripRatioSD": 0.025,
+     "nTrips": 4
+    }
+   },
+   "J": {
+    "AM": {
+     "ratio": 1.019,
+     "observedRatio": 1.019,
+     "schedHoursObserved": 18.3,
+     "tripRatioSD": 0.06,
+     "nTrips": 32
+    },
+    "NT": {
+     "ratio": 1.026,
+     "observedRatio": 1.03,
+     "schedHoursObserved": 17.9,
+     "tripRatioSD": 0.056,
+     "nTrips": 36
+    },
+    "MD": {
+     "ratio": 1.059,
+     "observedRatio": 1.062,
+     "schedHoursObserved": 23.2,
+     "tripRatioSD": 0.099,
+     "nTrips": 40
+    },
+    "PM": {
+     "ratio": 1.031,
+     "observedRatio": 1.033,
+     "schedHoursObserved": 27.8,
+     "tripRatioSD": 0.08,
+     "nTrips": 44
+    }
+   },
+   "K": {
+    "AM": {
+     "ratio": 1.044,
+     "observedRatio": 1.048,
+     "schedHoursObserved": 22.8,
+     "tripRatioSD": 0.117,
+     "nTrips": 45
+    },
+    "NT": {
+     "ratio": 1.022,
+     "observedRatio": 1.025,
+     "schedHoursObserved": 16.1,
+     "tripRatioSD": 0.077,
+     "nTrips": 32
+    },
+    "MD": {
+     "ratio": 1.053,
+     "observedRatio": 1.054,
+     "schedHoursObserved": 31.6,
+     "tripRatioSD": 0.093,
+     "nTrips": 60
+    },
+    "PM": {
+     "ratio": 1.028,
+     "observedRatio": 1.029,
+     "schedHoursObserved": 39.4,
+     "tripRatioSD": 0.12,
+     "nTrips": 72
+    }
+   },
+   "KBUS": {
+    "NT": {
+     "ratio": 0.993,
+     "observedRatio": 0.885,
+     "schedHoursObserved": 0.8,
+     "tripRatioSD": null,
+     "nTrips": null
+    }
+   },
+   "L": {
+    "AM": {
+     "ratio": 1.012,
+     "observedRatio": 1.011,
+     "schedHoursObserved": 26.6,
+     "tripRatioSD": 0.448,
+     "nTrips": 49
+    },
+    "NT": {
+     "ratio": 1.049,
+     "observedRatio": 1.058,
+     "schedHoursObserved": 19.1,
+     "tripRatioSD": 0.08,
+     "nTrips": 39
+    },
+    "MD": {
+     "ratio": 1.041,
+     "observedRatio": 1.041,
+     "schedHoursObserved": 33.7,
+     "tripRatioSD": 0.071,
+     "nTrips": 60
+    },
+    "PM": {
+     "ratio": 1.065,
+     "observedRatio": 1.069,
+     "schedHoursObserved": 40.8,
+     "tripRatioSD": 0.097,
+     "nTrips": 74
+    }
+   },
+   "LOWL": {
+    "AM": {
+     "ratio": 1.015,
+     "observedRatio": 1.147,
+     "schedHoursObserved": 0.2,
+     "tripRatioSD": null,
+     "nTrips": null
+    },
+    "NT": {
+     "ratio": 1.029,
+     "observedRatio": 1.034,
+     "schedHoursObserved": 12.4,
+     "tripRatioSD": 0.072,
+     "nTrips": 15
+    }
+   },
+   "M": {
+    "AM": {
+     "ratio": 1.011,
+     "observedRatio": 1.01,
+     "schedHoursObserved": 29.5,
+     "tripRatioSD": 0.079,
+     "nTrips": 44
+    },
+    "NT": {
+     "ratio": 0.952,
+     "observedRatio": 0.943,
+     "schedHoursObserved": 25.1,
+     "tripRatioSD": 0.121,
+     "nTrips": 39
+    },
+    "MD": {
+     "ratio": 1.023,
+     "observedRatio": 1.021,
+     "schedHoursObserved": 37.4,
+     "tripRatioSD": 0.075,
+     "nTrips": 54
+    },
+    "PM": {
+     "ratio": 0.965,
+     "observedRatio": 0.96,
+     "schedHoursObserved": 48.2,
+     "tripRatioSD": 0.08,
+     "nTrips": 67
+    }
+   },
+   "N": {
+    "AM": {
+     "ratio": 1.02,
+     "observedRatio": 1.02,
+     "schedHoursObserved": 40.0,
+     "tripRatioSD": 0.059,
+     "nTrips": 50
+    },
+    "NT": {
+     "ratio": 1.009,
+     "observedRatio": 1.009,
+     "schedHoursObserved": 30.0,
+     "tripRatioSD": 0.085,
+     "nTrips": 38
+    },
+    "MD": {
+     "ratio": 1.05,
+     "observedRatio": 1.05,
+     "schedHoursObserved": 49.6,
+     "tripRatioSD": 0.055,
+     "nTrips": 60
+    },
+    "PM": {
+     "ratio": 1.021,
+     "observedRatio": 1.021,
+     "schedHoursObserved": 61.3,
+     "tripRatioSD": 0.15,
+     "nTrips": 73
+    }
+   },
+   "NBUS": {
+    "NT": {
+     "ratio": 1.047,
+     "observedRatio": 1.231,
+     "schedHoursObserved": 0.7,
+     "tripRatioSD": null,
+     "nTrips": null
+    }
+   },
+   "NOWL": {
+    "NT": {
+     "ratio": 1.05,
+     "observedRatio": 1.065,
+     "schedHoursObserved": 9.1,
+     "tripRatioSD": 0.05,
+     "nTrips": 12
+    }
+   },
+   "PH": {
+    "AM": {
+     "ratio": 1.122,
+     "observedRatio": 1.118,
+     "schedHoursObserved": 2.7,
+     "tripRatioSD": 0.203,
+     "nTrips": 11
+    },
+    "NT": {
+     "ratio": 0.948,
+     "observedRatio": 0.959,
+     "schedHoursObserved": 9.0,
+     "tripRatioSD": 0.538,
+     "nTrips": 31
+    },
+    "MD": {
+     "ratio": 0.983,
+     "observedRatio": 0.99,
+     "schedHoursObserved": 11.1,
+     "tripRatioSD": 0.643,
+     "nTrips": 34
+    },
+    "PM": {
+     "ratio": 0.943,
+     "observedRatio": 0.947,
+     "schedHoursObserved": 18.1,
+     "tripRatioSD": 0.491,
+     "nTrips": 54
+    }
+   },
+   "PM": {
+    "AM": {
+     "ratio": 1.151,
+     "observedRatio": 1.169,
+     "schedHoursObserved": 5.6,
+     "tripRatioSD": 0.256,
+     "nTrips": 26
+    },
+    "NT": {
+     "ratio": 0.912,
+     "observedRatio": 0.837,
+     "schedHoursObserved": 0.6,
+     "tripRatioSD": null,
+     "nTrips": null
+    },
+    "MD": {
+     "ratio": 1.007,
+     "observedRatio": 1.029,
+     "schedHoursObserved": 7.8,
+     "tripRatioSD": 0.578,
+     "nTrips": 30
+    },
+    "PM": {
+     "ratio": 0.944,
+     "observedRatio": 0.96,
+     "schedHoursObserved": 4.2,
+     "tripRatioSD": 0.686,
+     "nTrips": 17
+    }
+   },
+   "T": {
+    "AM": {
+     "ratio": 1.03,
+     "observedRatio": 1.03,
+     "schedHoursObserved": 33.7,
+     "tripRatioSD": 0.129,
+     "nTrips": 53
+    },
+    "NT": {
+     "ratio": 1.022,
+     "observedRatio": 1.022,
+     "schedHoursObserved": 32.1,
+     "tripRatioSD": 0.15,
+     "nTrips": 58
+    },
+    "MD": {
+     "ratio": 1.045,
+     "observedRatio": 1.045,
+     "schedHoursObserved": 41.9,
+     "tripRatioSD": 0.232,
+     "nTrips": 58
+    },
+    "PM": {
+     "ratio": 0.993,
+     "observedRatio": 0.993,
+     "schedHoursObserved": 50.5,
+     "tripRatioSD": 0.099,
+     "nTrips": 70
+    }
+   },
+   "TBUS": {
+    "NT": {
+     "ratio": 0.998,
+     "observedRatio": 0.904,
+     "schedHoursObserved": 0.7,
+     "tripRatioSD": null,
+     "nTrips": null
+    }
+   }
+  }
+ },
+ "tripsNotOperated": {
+  "definition": "Scheduled weekday trips (GTFS service M11) with no record in the realtime feed, by period of scheduled departure; shrunk toward the period's systemwide share (k = 60 trips) and scaled so the systemwide share equals SFMTA's 12-month 1.34% of scheduled hours not delivered (2026-06-10 itself: 1.02% of trips missing, cable cars excluded). Cut-short trips (nothing observed in the last quarter of the trip) were 0.4-0.5% of daytime trips and are not added separately.",
+  "source": [
+   "calitp_stop_time_metrics_2026-06-10",
+   "datasf_scorecard_441",
+   "calitp_gtfs_digest_vp"
+  ],
+  "systemwideNotSeenShare2026-06-10": {
+   "AM": 0.0054,
+   "MD": 0.0046,
+   "PM": 0.0177,
+   "NT": 0.0141
+  },
+  "scaleToSFMTA": 1.312,
+  "byRoute": {
+   "1": {
+    "AM": {
+     "delivered": 0.997,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 84
+    },
+    "MD": {
+     "delivered": 0.998,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 120
+    },
+    "PM": {
+     "delivered": 0.9911,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 96
+    },
+    "NT": {
+     "delivered": 0.9735,
+     "notSeenPct": 2.47,
+     "scheduledTrips": 81
+    }
+   },
+   "12": {
+    "AM": {
+     "delivered": 0.9958,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 41
+    },
+    "MD": {
+     "delivered": 0.997,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 60
+    },
+    "PM": {
+     "delivered": 0.9872,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 49
+    },
+    "NT": {
+     "delivered": 0.9861,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 20
+    }
+   },
+   "14": {
+    "AM": {
+     "delivered": 0.996,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 48
+    },
+    "MD": {
+     "delivered": 0.9751,
+     "notSeenPct": 3.33,
+     "scheduledTrips": 60
+    },
+    "PM": {
+     "delivered": 0.9871,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 48
+    },
+    "NT": {
+     "delivered": 0.987,
+     "notSeenPct": 0.79,
+     "scheduledTrips": 126
+    }
+   },
+   "14R": {
+    "AM": {
+     "delivered": 0.9968,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 72
+    },
+    "MD": {
+     "delivered": 0.9879,
+     "notSeenPct": 1.27,
+     "scheduledTrips": 79
+    },
+    "PM": {
+     "delivered": 0.9889,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 66
+    },
+    "NT": {
+     "delivered": 0.9887,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 38
+    }
+   },
+   "15": {
+    "AM": {
+     "delivered": 0.9955,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 36
+    },
+    "MD": {
+     "delivered": 0.9967,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 50
+    },
+    "PM": {
+     "delivered": 0.986,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 40
+    },
+    "NT": {
+     "delivered": 0.9879,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 32
+    }
+   },
+   "18": {
+    "AM": {
+     "delivered": 0.995,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 25
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9856,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 17
+    }
+   },
+   "19": {
+    "AM": {
+     "delivered": 0.9954,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 32
+    },
+    "MD": {
+     "delivered": 0.9963,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 40
+    },
+    "PM": {
+     "delivered": 0.9706,
+     "notSeenPct": 3.12,
+     "scheduledTrips": 32
+    },
+    "NT": {
+     "delivered": 0.9877,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    }
+   },
+   "1X": {
+    "AM": {
+     "delivered": 0.9934,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 5
+    },
+    "PM": {
+     "delivered": 0.9778,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 3
+    }
+   },
+   "2": {
+    "AM": {
+     "delivered": 0.9947,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 21
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9832,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 23
+    },
+    "NT": {
+     "delivered": 0.9821,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 2
+    }
+   },
+   "22": {
+    "AM": {
+     "delivered": 0.969,
+     "notSeenPct": 3.7,
+     "scheduledTrips": 81
+    },
+    "MD": {
+     "delivered": 0.989,
+     "notSeenPct": 1.08,
+     "scheduledTrips": 93
+    },
+    "PM": {
+     "delivered": 0.9799,
+     "notSeenPct": 1.33,
+     "scheduledTrips": 75
+    },
+    "NT": {
+     "delivered": 0.9701,
+     "notSeenPct": 2.75,
+     "scheduledTrips": 109
+    }
+   },
+   "23": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 23
+    },
+    "MD": {
+     "delivered": 0.996,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 32
+    },
+    "PM": {
+     "delivered": 0.9674,
+     "notSeenPct": 4.35,
+     "scheduledTrips": 23
+    },
+    "NT": {
+     "delivered": 0.9854,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 16
+    }
+   },
+   "24": {
+    "AM": {
+     "delivered": 0.9961,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 49
+    },
+    "MD": {
+     "delivered": 0.9968,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 55
+    },
+    "PM": {
+     "delivered": 0.9871,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 48
+    },
+    "NT": {
+     "delivered": 0.9816,
+     "notSeenPct": 1.39,
+     "scheduledTrips": 72
+    }
+   },
+   "25": {
+    "AM": {
+     "delivered": 0.995,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 26
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 29
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9669,
+     "notSeenPct": 3.77,
+     "scheduledTrips": 53
+    }
+   },
+   "27": {
+    "AM": {
+     "delivered": 0.9953,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "MD": {
+     "delivered": 0.9961,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 34
+    },
+    "PM": {
+     "delivered": 0.9841,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 28
+    },
+    "NT": {
+     "delivered": 0.9874,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 28
+    }
+   },
+   "28": {
+    "AM": {
+     "delivered": 0.9957,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 40
+    },
+    "MD": {
+     "delivered": 0.9967,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 51
+    },
+    "PM": {
+     "delivered": 0.9729,
+     "notSeenPct": 2.5,
+     "scheduledTrips": 40
+    },
+    "NT": {
+     "delivered": 0.9897,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 48
+    }
+   },
+   "28R": {
+    "AM": {
+     "delivered": 0.9953,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 31
+    },
+    "MD": {
+     "delivered": 0.9967,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 50
+    },
+    "PM": {
+     "delivered": 0.9859,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 39
+    },
+    "NT": {
+     "delivered": 0.9821,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 2
+    }
+   },
+   "29": {
+    "AM": {
+     "delivered": 0.9963,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 57
+    },
+    "MD": {
+     "delivered": 0.9972,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 69
+    },
+    "PM": {
+     "delivered": 0.9524,
+     "notSeenPct": 5.77,
+     "scheduledTrips": 52
+    },
+    "NT": {
+     "delivered": 0.9897,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 48
+    }
+   },
+   "30": {
+    "AM": {
+     "delivered": 0.9963,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 54
+    },
+    "MD": {
+     "delivered": 0.9975,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 86
+    },
+    "PM": {
+     "delivered": 0.9752,
+     "notSeenPct": 2.04,
+     "scheduledTrips": 49
+    },
+    "NT": {
+     "delivered": 0.9648,
+     "notSeenPct": 4.35,
+     "scheduledTrips": 46
+    }
+   },
+   "30X": {
+    "AM": {
+     "delivered": 0.9932,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 3
+    }
+   },
+   "31": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9879,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 32
+    }
+   },
+   "33": {
+    "AM": {
+     "delivered": 0.995,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 25
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9721,
+     "notSeenPct": 3.7,
+     "scheduledTrips": 27
+    }
+   },
+   "35": {
+    "AM": {
+     "delivered": 0.9941,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 12
+    },
+    "MD": {
+     "delivered": 0.9954,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 20
+    },
+    "PM": {
+     "delivered": 0.9816,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 16
+    },
+    "NT": {
+     "delivered": 0.9841,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 10
+    }
+   },
+   "36": {
+    "AM": {
+     "delivered": 0.9944,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 16
+    },
+    "MD": {
+     "delivered": 0.9954,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 20
+    },
+    "PM": {
+     "delivered": 0.9816,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 16
+    },
+    "NT": {
+     "delivered": 0.9852,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 15
+    }
+   },
+   "37": {
+    "AM": {
+     "delivered": 0.9947,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 20
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9678,
+     "notSeenPct": 4.17,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.985,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 14
+    }
+   },
+   "38": {
+    "AM": {
+     "delivered": 0.9963,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 54
+    },
+    "MD": {
+     "delivered": 0.9866,
+     "notSeenPct": 1.54,
+     "scheduledTrips": 65
+    },
+    "PM": {
+     "delivered": 0.988,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 56
+    },
+    "NT": {
+     "delivered": 0.9915,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 70
+    }
+   },
+   "38R": {
+    "AM": {
+     "delivered": 0.9968,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 74
+    },
+    "MD": {
+     "delivered": 0.9813,
+     "notSeenPct": 2.0,
+     "scheduledTrips": 100
+    },
+    "PM": {
+     "delivered": 0.9525,
+     "notSeenPct": 5.0,
+     "scheduledTrips": 80
+    },
+    "NT": {
+     "delivered": 0.9899,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 50
+    }
+   },
+   "39": {
+    "AM": {
+     "delivered": 0.9934,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 5
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9824,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 3
+    }
+   },
+   "43": {
+    "AM": {
+     "delivered": 0.9956,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 37
+    },
+    "MD": {
+     "delivered": 0.9965,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 44
+    },
+    "PM": {
+     "delivered": 0.9729,
+     "notSeenPct": 2.5,
+     "scheduledTrips": 40
+    },
+    "NT": {
+     "delivered": 0.9893,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 44
+    }
+   },
+   "44": {
+    "AM": {
+     "delivered": 0.996,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 47
+    },
+    "MD": {
+     "delivered": 0.997,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 62
+    },
+    "PM": {
+     "delivered": 0.9617,
+     "notSeenPct": 4.44,
+     "scheduledTrips": 45
+    },
+    "NT": {
+     "delivered": 0.9909,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 62
+    }
+   },
+   "45": {
+    "AM": {
+     "delivered": 0.972,
+     "notSeenPct": 4.08,
+     "scheduledTrips": 49
+    },
+    "MD": {
+     "delivered": 0.997,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 60
+    },
+    "PM": {
+     "delivered": 0.987,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 47
+    },
+    "NT": {
+     "delivered": 0.9895,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 46
+    }
+   },
+   "48": {
+    "AM": {
+     "delivered": 0.9957,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 39
+    },
+    "MD": {
+     "delivered": 0.9965,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 44
+    },
+    "PM": {
+     "delivered": 0.9456,
+     "notSeenPct": 7.89,
+     "scheduledTrips": 38
+    },
+    "NT": {
+     "delivered": 0.9904,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 56
+    }
+   },
+   "49": {
+    "AM": {
+     "delivered": 0.9969,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 80
+    },
+    "MD": {
+     "delivered": 0.9977,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 100
+    },
+    "PM": {
+     "delivered": 0.99,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 79
+    },
+    "NT": {
+     "delivered": 0.991,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 64
+    }
+   },
+   "5": {
+    "AM": {
+     "delivered": 0.996,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 46
+    },
+    "MD": {
+     "delivered": 0.9969,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 56
+    },
+    "PM": {
+     "delivered": 0.9734,
+     "notSeenPct": 2.38,
+     "scheduledTrips": 42
+    },
+    "NT": {
+     "delivered": 0.9844,
+     "notSeenPct": 1.05,
+     "scheduledTrips": 95
+    }
+   },
+   "52": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9854,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 16
+    }
+   },
+   "54": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9678,
+     "notSeenPct": 4.17,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9685,
+     "notSeenPct": 5.88,
+     "scheduledTrips": 17
+    }
+   },
+   "55": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 23
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9874,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 28
+    }
+   },
+   "56": {
+    "AM": {
+     "delivered": 0.9945,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 18
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9848,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 13
+    }
+   },
+   "57": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9871,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 26
+    }
+   },
+   "58": {
+    "AM": {
+     "delivered": 0.9944,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 16
+    },
+    "MD": {
+     "delivered": 0.9954,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 20
+    },
+    "PM": {
+     "delivered": 0.9816,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 16
+    },
+    "NT": {
+     "delivered": 0.9858,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 18
+    }
+   },
+   "5R": {
+    "AM": {
+     "delivered": 0.9839,
+     "notSeenPct": 2.08,
+     "scheduledTrips": 48
+    },
+    "MD": {
+     "delivered": 0.9858,
+     "notSeenPct": 1.72,
+     "scheduledTrips": 58
+    },
+    "PM": {
+     "delivered": 0.9885,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 61
+    },
+    "NT": {
+     "delivered": 0.9818,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 1
+    }
+   },
+   "6": {
+    "AM": {
+     "delivered": 0.9795,
+     "notSeenPct": 4.0,
+     "scheduledTrips": 25
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9394,
+     "notSeenPct": 8.89,
+     "scheduledTrips": 45
+    }
+   },
+   "66": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9678,
+     "notSeenPct": 4.17,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9701,
+     "notSeenPct": 4.76,
+     "scheduledTrips": 21
+    }
+   },
+   "67": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "MD": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 30
+    },
+    "PM": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 24
+    },
+    "NT": {
+     "delivered": 0.9861,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 20
+    }
+   },
+   "7": {
+    "AM": {
+     "delivered": 0.9957,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 40
+    },
+    "MD": {
+     "delivered": 0.9967,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 50
+    },
+    "PM": {
+     "delivered": 0.986,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 40
+    },
+    "NT": {
+     "delivered": 0.9762,
+     "notSeenPct": 2.38,
+     "scheduledTrips": 42
+    }
+   },
+   "714": {
+    "NT": {
+     "delivered": 0.9824,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 3
+    }
+   },
+   "8": {
+    "AM": {
+     "delivered": 0.9956,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 37
+    },
+    "MD": {
+     "delivered": 0.9973,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 76
+    },
+    "PM": {
+     "delivered": 0.9585,
+     "notSeenPct": 5.41,
+     "scheduledTrips": 37
+    },
+    "NT": {
+     "delivered": 0.9791,
+     "notSeenPct": 1.79,
+     "scheduledTrips": 56
+    }
+   },
+   "8AX": {
+    "AM": {
+     "delivered": 0.9949,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 23
+    },
+    "PM": {
+     "delivered": 0.9075,
+     "notSeenPct": 19.23,
+     "scheduledTrips": 26
+    }
+   },
+   "8BX": {
+    "AM": {
+     "delivered": 0.9947,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 20
+    },
+    "PM": {
+     "delivered": 0.9832,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 23
+    }
+   },
+   "9": {
+    "AM": {
+     "delivered": 0.9819,
+     "notSeenPct": 2.78,
+     "scheduledTrips": 36
+    },
+    "MD": {
+     "delivered": 0.9967,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 50
+    },
+    "PM": {
+     "delivered": 0.9858,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 38
+    },
+    "NT": {
+     "delivered": 0.9892,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 43
+    }
+   },
+   "90": {
+    "NT": {
+     "delivered": 0.9863,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 21
+    }
+   },
+   "91": {
+    "NT": {
+     "delivered": 0.9869,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 25
+    }
+   },
+   "9R": {
+    "AM": {
+     "delivered": 0.9672,
+     "notSeenPct": 6.06,
+     "scheduledTrips": 33
+    },
+    "MD": {
+     "delivered": 0.949,
+     "notSeenPct": 8.0,
+     "scheduledTrips": 50
+    },
+    "PM": {
+     "delivered": 0.9439,
+     "notSeenPct": 8.57,
+     "scheduledTrips": 35
+    },
+    "NT": {
+     "delivered": 0.9818,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 1
+    }
+   },
+   "F": {
+    "AM": {
+     "delivered": 0.995,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 26
+    },
+    "MD": {
+     "delivered": 0.9967,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 50
+    },
+    "PM": {
+     "delivered": 0.9461,
+     "notSeenPct": 7.69,
+     "scheduledTrips": 39
+    },
+    "NT": {
+     "delivered": 0.9872,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 27
+    }
+   },
+   "FBUS": {
+    "NT": {
+     "delivered": 0.9832,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 6
+    }
+   },
+   "J": {
+    "AM": {
+     "delivered": 0.9954,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 32
+    },
+    "MD": {
+     "delivered": 0.9963,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 40
+    },
+    "PM": {
+     "delivered": 0.9848,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 32
+    },
+    "NT": {
+     "delivered": 0.9663,
+     "notSeenPct": 3.92,
+     "scheduledTrips": 51
+    }
+   },
+   "K": {
+    "AM": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 45
+    },
+    "MD": {
+     "delivered": 0.997,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 60
+    },
+    "PM": {
+     "delivered": 0.987,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 47
+    },
+    "NT": {
+     "delivered": 0.963,
+     "notSeenPct": 4.88,
+     "scheduledTrips": 41
+    }
+   },
+   "KBUS": {
+    "NT": {
+     "delivered": 0.9837,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 8
+    }
+   },
+   "L": {
+    "AM": {
+     "delivered": 0.9842,
+     "notSeenPct": 2.0,
+     "scheduledTrips": 50
+    },
+    "MD": {
+     "delivered": 0.997,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 60
+    },
+    "PM": {
+     "delivered": 0.9871,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 48
+    },
+    "NT": {
+     "delivered": 0.966,
+     "notSeenPct": 4.0,
+     "scheduledTrips": 50
+    }
+   },
+   "LOWL": {
+    "AM": {
+     "delivered": 0.9931,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 2
+    },
+    "NT": {
+     "delivered": 0.9734,
+     "notSeenPct": 3.23,
+     "scheduledTrips": 31
+    }
+   },
+   "M": {
+    "AM": {
+     "delivered": 0.9959,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 43
+    },
+    "MD": {
+     "delivered": 0.9968,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 55
+    },
+    "PM": {
+     "delivered": 0.9864,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 43
+    },
+    "NT": {
+     "delivered": 0.9902,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 53
+    }
+   },
+   "N": {
+    "AM": {
+     "delivered": 0.9962,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 51
+    },
+    "MD": {
+     "delivered": 0.997,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 60
+    },
+    "PM": {
+     "delivered": 0.9747,
+     "notSeenPct": 2.13,
+     "scheduledTrips": 47
+    },
+    "NT": {
+     "delivered": 0.9915,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 71
+    }
+   },
+   "NBUS": {
+    "NT": {
+     "delivered": 0.9824,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 3
+    }
+   },
+   "NOWL": {
+    "NT": {
+     "delivered": 0.9866,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 23
+    }
+   },
+   "T": {
+    "AM": {
+     "delivered": 0.9962,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 53
+    },
+    "MD": {
+     "delivered": 0.997,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 60
+    },
+    "PM": {
+     "delivered": 0.9752,
+     "notSeenPct": 2.04,
+     "scheduledTrips": 49
+    },
+    "NT": {
+     "delivered": 0.9623,
+     "notSeenPct": 4.05,
+     "scheduledTrips": 74
+    }
+   },
+   "TBUS": {
+    "NT": {
+     "delivered": 0.9834,
+     "notSeenPct": 0.0,
+     "scheduledTrips": 7
+    }
+   }
+  }
+ },
+ "runTimeVariability": {
+  "definition": "Day-to-day SD of the running time of the same scheduled trip between the same two stops, over 15 weekdays (TAG A1.3 6.1.1: excludes predictable variation by time of day). For each trip seen on 6+ days, from every third stop, the run to the first stop at least 5, 10, 20, 40 minutes on (median over days); variance across days, pooled by route and period. Fitted sd = a + b * minutes by group (weighted least squares over the four lengths). Includes incidents and any error in the position-based arrival times (a short run's SD may be inflated by a few tenths of a minute). The model uses each group's all-day fit times a route-and-period multiplier (the route's SDs over the fit's, weighted by runs, shrunk toward 1 with k = 300 runs); the group-and-period fits are shown for reference (some rest on few long runs).",
+  "source": "calitp_mtc_speeds_2025",
+  "groups": {
+   "bus": {
+    "AM": {
+     "a": 0.89,
+     "b": 0.0717,
+     "points": [
+      {
+       "min": 5.7,
+       "sd": 1.13,
+       "nRuns": 11941
+      },
+      {
+       "min": 10.9,
+       "sd": 1.79,
+       "nRuns": 10774
+      },
+      {
+       "min": 21.0,
+       "sd": 2.6,
+       "nRuns": 8031
+      },
+      {
+       "min": 41.0,
+       "sd": 3.57,
+       "nRuns": 3549
+      }
+     ]
+    },
+    "ALL": {
+     "a": 0.827,
+     "b": 0.0831,
+     "points": [
+      {
+       "min": 5.7,
+       "sd": 1.15,
+       "nRuns": 69540
+      },
+      {
+       "min": 10.9,
+       "sd": 1.85,
+       "nRuns": 62357
+      },
+      {
+       "min": 21.0,
+       "sd": 2.75,
+       "nRuns": 45522
+      },
+      {
+       "min": 41.1,
+       "sd": 4.0,
+       "nRuns": 18426
+      }
+     ]
+    },
+    "MD": {
+     "a": 0.843,
+     "b": 0.0745,
+     "points": [
+      {
+       "min": 5.8,
+       "sd": 1.13,
+       "nRuns": 20283
+      },
+      {
+       "min": 10.9,
+       "sd": 1.74,
+       "nRuns": 18253
+      },
+      {
+       "min": 21.0,
+       "sd": 2.6,
+       "nRuns": 13611
+      },
+      {
+       "min": 41.1,
+       "sd": 3.67,
+       "nRuns": 6035
+      }
+     ]
+    },
+    "NT": {
+     "a": 0.81,
+     "b": 0.0864,
+     "points": [
+      {
+       "min": 5.6,
+       "sd": 1.15,
+       "nRuns": 18359
+      },
+      {
+       "min": 10.8,
+       "sd": 1.88,
+       "nRuns": 16109
+      },
+      {
+       "min": 20.9,
+       "sd": 2.75,
+       "nRuns": 10851
+      },
+      {
+       "min": 41.0,
+       "sd": 4.03,
+       "nRuns": 2984
+      }
+     ]
+    },
+    "PM": {
+     "a": 0.79,
+     "b": 0.0956,
+     "points": [
+      {
+       "min": 5.8,
+       "sd": 1.17,
+       "nRuns": 18957
+      },
+      {
+       "min": 10.9,
+       "sd": 1.96,
+       "nRuns": 17221
+      },
+      {
+       "min": 21.1,
+       "sd": 2.98,
+       "nRuns": 13029
+      },
+      {
+       "min": 41.2,
+       "sd": 4.51,
+       "nRuns": 5858
+      }
+     ]
+    }
+   },
+   "rapid": {
+    "AM": {
+     "a": 0.903,
+     "b": 0.1086,
+     "points": [
+      {
+       "min": 6.2,
+       "sd": 1.36,
+       "nRuns": 1049
+      },
+      {
+       "min": 11.5,
+       "sd": 2.29,
+       "nRuns": 1010
+      },
+      {
+       "min": 21.8,
+       "sd": 3.5,
+       "nRuns": 827
+      },
+      {
+       "min": 41.7,
+       "sd": 5.15,
+       "nRuns": 365
+      }
+     ]
+    },
+    "ALL": {
+     "a": 1.086,
+     "b": 0.0837,
+     "points": [
+      {
+       "min": 6.2,
+       "sd": 1.35,
+       "nRuns": 4896
+      },
+      {
+       "min": 11.5,
+       "sd": 2.23,
+       "nRuns": 4700
+      },
+      {
+       "min": 21.8,
+       "sd": 3.14,
+       "nRuns": 3773
+      },
+      {
+       "min": 41.5,
+       "sd": 4.22,
+       "nRuns": 1543
+      }
+     ]
+    },
+    "MD": {
+     "a": 1.219,
+     "b": 0.063,
+     "points": [
+      {
+       "min": 6.1,
+       "sd": 1.38,
+       "nRuns": 1827
+      },
+      {
+       "min": 11.6,
+       "sd": 2.1,
+       "nRuns": 1746
+      },
+      {
+       "min": 21.7,
+       "sd": 2.84,
+       "nRuns": 1383
+      },
+      {
+       "min": 41.3,
+       "sd": 3.51,
+       "nRuns": 609
+      }
+     ]
+    },
+    "NT": {
+     "a": 0.927,
+     "b": 0.1198,
+     "points": [
+      {
+       "min": 6.2,
+       "sd": 1.28,
+       "nRuns": 481
+      },
+      {
+       "min": 11.5,
+       "sd": 2.7,
+       "nRuns": 447
+      },
+      {
+       "min": 21.7,
+       "sd": 3.72,
+       "nRuns": 372
+      },
+      {
+       "min": 41.5,
+       "sd": 4.94,
+       "nRuns": 60
+      }
+     ]
+    },
+    "PM": {
+     "a": 1.069,
+     "b": 0.0813,
+     "points": [
+      {
+       "min": 6.2,
+       "sd": 1.34,
+       "nRuns": 1539
+      },
+      {
+       "min": 11.5,
+       "sd": 2.19,
+       "nRuns": 1497
+      },
+      {
+       "min": 21.8,
+       "sd": 3.02,
+       "nRuns": 1191
+      },
+      {
+       "min": 41.4,
+       "sd": 4.16,
+       "nRuns": 509
+      }
+     ]
+    }
+   },
+   "express": {
+    "AM": {
+     "a": 1.329,
+     "b": 0.1219,
+     "points": [
+      {
+       "min": 5.9,
+       "sd": 1.49,
+       "nRuns": 172
+      },
+      {
+       "min": 11.3,
+       "sd": 3.02,
+       "nRuns": 165
+      },
+      {
+       "min": 23.5,
+       "sd": 4.83,
+       "nRuns": 163
+      },
+      {
+       "min": 41.8,
+       "sd": 6.03,
+       "nRuns": 150
+      }
+     ]
+    },
+    "ALL": {
+     "a": 1.276,
+     "b": 0.1389,
+     "points": [
+      {
+       "min": 5.9,
+       "sd": 1.5,
+       "nRuns": 477
+      },
+      {
+       "min": 11.5,
+       "sd": 3.15,
+       "nRuns": 466
+      },
+      {
+       "min": 23.3,
+       "sd": 5.31,
+       "nRuns": 434
+      },
+      {
+       "min": 42.1,
+       "sd": 6.48,
+       "nRuns": 287
+      }
+     ]
+    },
+    "PM": {
+     "a": 1.147,
+     "b": 0.1612,
+     "points": [
+      {
+       "min": 5.9,
+       "sd": 1.54,
+       "nRuns": 273
+      },
+      {
+       "min": 11.7,
+       "sd": 3.3,
+       "nRuns": 252
+      },
+      {
+       "min": 23.2,
+       "sd": 5.7,
+       "nRuns": 223
+      },
+      {
+       "min": 42.9,
+       "sd": 7.22,
+       "nRuns": 114
+      }
+     ]
+    },
+    "NT": {
+     "a": 0.116,
+     "b": 0.2128,
+     "points": [
+      {
+       "min": 5.9,
+       "sd": 1.2,
+       "nRuns": 32
+      },
+      {
+       "min": 11.6,
+       "sd": 2.76,
+       "nRuns": 49
+      },
+      {
+       "min": 23.0,
+       "sd": 4.95,
+       "nRuns": 48
+      }
+     ]
+    }
+   },
+   "streetcar": {
+    "AM": {
+     "a": 0.525,
+     "b": 0.1257,
+     "points": [
+      {
+       "min": 6.1,
+       "sd": 1.25,
+       "nRuns": 142
+      },
+      {
+       "min": 11.5,
+       "sd": 2.03,
+       "nRuns": 142
+      },
+      {
+       "min": 21.6,
+       "sd": 3.21,
+       "nRuns": 110
+      }
+     ]
+    },
+    "ALL": {
+     "a": 1.007,
+     "b": 0.0853,
+     "points": [
+      {
+       "min": 6.1,
+       "sd": 1.33,
+       "nRuns": 918
+      },
+      {
+       "min": 11.3,
+       "sd": 2.09,
+       "nRuns": 880
+      },
+      {
+       "min": 21.5,
+       "sd": 3.08,
+       "nRuns": 681
+      },
+      {
+       "min": 41.6,
+       "sd": 4.01,
+       "nRuns": 158
+      }
+     ]
+    },
+    "MD": {
+     "a": 1.05,
+     "b": 0.0828,
+     "points": [
+      {
+       "min": 6.1,
+       "sd": 1.36,
+       "nRuns": 318
+      },
+      {
+       "min": 11.4,
+       "sd": 2.14,
+       "nRuns": 314
+      },
+      {
+       "min": 21.5,
+       "sd": 3.0,
+       "nRuns": 243
+      },
+      {
+       "min": 41.4,
+       "sd": 4.14,
+       "nRuns": 73
+      }
+     ]
+    },
+    "NT": {
+     "a": 0.261,
+     "b": 0.1628,
+     "points": [
+      {
+       "min": 6.0,
+       "sd": 1.31,
+       "nRuns": 145
+      },
+      {
+       "min": 11.1,
+       "sd": 1.93,
+       "nRuns": 126
+      },
+      {
+       "min": 21.2,
+       "sd": 3.77,
+       "nRuns": 91
+      }
+     ]
+    },
+    "PM": {
+     "a": 1.026,
+     "b": 0.0803,
+     "points": [
+      {
+       "min": 6.1,
+       "sd": 1.34,
+       "nRuns": 313
+      },
+      {
+       "min": 11.4,
+       "sd": 2.14,
+       "nRuns": 298
+      },
+      {
+       "min": 21.6,
+       "sd": 2.79,
+       "nRuns": 237
+      },
+      {
+       "min": 42.0,
+       "sd": 4.19,
+       "nRuns": 58
+      }
+     ]
+    }
+   },
+   "metro": {
+    "AM": {
+     "a": 0.707,
+     "b": 0.0904,
+     "points": [
+      {
+       "min": 6.1,
+       "sd": 1.09,
+       "nRuns": 1014
+      },
+      {
+       "min": 11.3,
+       "sd": 1.86,
+       "nRuns": 924
+      },
+      {
+       "min": 21.3,
+       "sd": 2.82,
+       "nRuns": 685
+      },
+      {
+       "min": 41.2,
+       "sd": 3.97,
+       "nRuns": 153
+      }
+     ]
+    },
+    "ALL": {
+     "a": 0.675,
+     "b": 0.1081,
+     "points": [
+      {
+       "min": 6.0,
+       "sd": 1.21,
+       "nRuns": 5627
+      },
+      {
+       "min": 11.4,
+       "sd": 2.05,
+       "nRuns": 5121
+      },
+      {
+       "min": 21.4,
+       "sd": 2.99,
+       "nRuns": 3636
+      },
+      {
+       "min": 41.4,
+       "sd": 4.98,
+       "nRuns": 713
+      }
+     ]
+    },
+    "MD": {
+     "a": 0.747,
+     "b": 0.0974,
+     "points": [
+      {
+       "min": 6.0,
+       "sd": 1.22,
+       "nRuns": 1647
+      },
+      {
+       "min": 11.4,
+       "sd": 2.02,
+       "nRuns": 1520
+      },
+      {
+       "min": 21.4,
+       "sd": 2.77,
+       "nRuns": 1096
+      },
+      {
+       "min": 41.4,
+       "sd": 4.73,
+       "nRuns": 219
+      }
+     ]
+    },
+    "NT": {
+     "a": 0.465,
+     "b": 0.1349,
+     "points": [
+      {
+       "min": 5.9,
+       "sd": 1.19,
+       "nRuns": 1393
+      },
+      {
+       "min": 11.3,
+       "sd": 2.17,
+       "nRuns": 1202
+      },
+      {
+       "min": 21.2,
+       "sd": 3.13,
+       "nRuns": 781
+      },
+      {
+       "min": 41.5,
+       "sd": 6.36,
+       "nRuns": 109
+      }
+     ]
+    },
+    "PM": {
+     "a": 0.72,
+     "b": 0.1114,
+     "points": [
+      {
+       "min": 6.1,
+       "sd": 1.29,
+       "nRuns": 1573
+      },
+      {
+       "min": 11.4,
+       "sd": 2.08,
+       "nRuns": 1475
+      },
+      {
+       "min": 21.5,
+       "sd": 3.2,
+       "nRuns": 1074
+      },
+      {
+       "min": 41.3,
+       "sd": 5.06,
+       "nRuns": 232
+      }
+     ]
+    }
+   },
+   "T": {
+    "AM": {
+     "a": 0.569,
+     "b": 0.1168,
+     "points": [
+      {
+       "min": 6.3,
+       "sd": 1.06,
+       "nRuns": 178
+      },
+      {
+       "min": 11.7,
+       "sd": 2.2,
+       "nRuns": 186
+      },
+      {
+       "min": 21.4,
+       "sd": 3.09,
+       "nRuns": 134
+      },
+      {
+       "min": 41.6,
+       "sd": 5.17,
+       "nRuns": 34
+      }
+     ]
+    },
+    "ALL": {
+     "a": 0.699,
+     "b": 0.1215,
+     "points": [
+      {
+       "min": 6.3,
+       "sd": 1.2,
+       "nRuns": 925
+      },
+      {
+       "min": 11.6,
+       "sd": 2.34,
+       "nRuns": 970
+      },
+      {
+       "min": 21.8,
+       "sd": 3.5,
+       "nRuns": 722
+      },
+      {
+       "min": 42.2,
+       "sd": 5.43,
+       "nRuns": 205
+      }
+     ]
+    },
+    "MD": {
+     "a": 0.461,
+     "b": 0.1094,
+     "points": [
+      {
+       "min": 6.3,
+       "sd": 0.95,
+       "nRuns": 279
+      },
+      {
+       "min": 11.6,
+       "sd": 1.93,
+       "nRuns": 301
+      },
+      {
+       "min": 21.8,
+       "sd": 2.88,
+       "nRuns": 234
+      },
+      {
+       "min": 42.3,
+       "sd": 4.89,
+       "nRuns": 64
+      }
+     ]
+    },
+    "NT": {
+     "a": 1.003,
+     "b": 0.1282,
+     "points": [
+      {
+       "min": 6.3,
+       "sd": 1.46,
+       "nRuns": 220
+      },
+      {
+       "min": 11.7,
+       "sd": 2.78,
+       "nRuns": 218
+      },
+      {
+       "min": 22.0,
+       "sd": 4.14,
+       "nRuns": 146
+      },
+      {
+       "min": 41.9,
+       "sd": 5.59,
+       "nRuns": 38
+      }
+     ]
+    },
+    "PM": {
+     "a": 0.733,
+     "b": 0.1322,
+     "points": [
+      {
+       "min": 6.4,
+       "sd": 1.28,
+       "nRuns": 248
+      },
+      {
+       "min": 11.6,
+       "sd": 2.45,
+       "nRuns": 265
+      },
+      {
+       "min": 21.8,
+       "sd": 3.88,
+       "nRuns": 208
+      },
+      {
+       "min": 42.6,
+       "sd": 5.93,
+       "nRuns": 69
+      }
+     ]
+    }
+   }
+  },
+  "routeMultipliers": {
+   "1": {
+    "AM": {
+     "multiplier": 0.798,
+     "nRuns": 1847
+    },
+    "MD": {
+     "multiplier": 0.85,
+     "nRuns": 3032
+    },
+    "NT": {
+     "multiplier": 0.859,
+     "nRuns": 1844
+    },
+    "PM": {
+     "multiplier": 0.838,
+     "nRuns": 2891
+    }
+   },
+   "12": {
+    "AM": {
+     "multiplier": 0.991,
+     "nRuns": 792
+    },
+    "MD": {
+     "multiplier": 1.021,
+     "nRuns": 1321
+    },
+    "NT": {
+     "multiplier": 0.966,
+     "nRuns": 579
+    },
+    "PM": {
+     "multiplier": 1.114,
+     "nRuns": 1282
+    }
+   },
+   "14": {
+    "AM": {
+     "multiplier": 0.824,
+     "nRuns": 1418
+    },
+    "MD": {
+     "multiplier": 0.908,
+     "nRuns": 2407
+    },
+    "NT": {
+     "multiplier": 1.03,
+     "nRuns": 3431
+    },
+    "PM": {
+     "multiplier": 1.133,
+     "nRuns": 2373
+    }
+   },
+   "14R": {
+    "AM": {
+     "multiplier": 1.125,
+     "nRuns": 747
+    },
+    "MD": {
+     "multiplier": 1.119,
+     "nRuns": 1311
+    },
+    "NT": {
+     "multiplier": 1.185,
+     "nRuns": 663
+    },
+    "PM": {
+     "multiplier": 1.162,
+     "nRuns": 1168
+    }
+   },
+   "15": {
+    "AM": {
+     "multiplier": 1.436,
+     "nRuns": 360
+    },
+    "MD": {
+     "multiplier": 1.631,
+     "nRuns": 619
+    },
+    "NT": {
+     "multiplier": 1.526,
+     "nRuns": 343
+    },
+    "PM": {
+     "multiplier": 1.642,
+     "nRuns": 608
+    }
+   },
+   "18": {
+    "AM": {
+     "multiplier": 0.788,
+     "nRuns": 488
+    },
+    "MD": {
+     "multiplier": 0.76,
+     "nRuns": 787
+    },
+    "NT": {
+     "multiplier": 1.022,
+     "nRuns": 433
+    },
+    "PM": {
+     "multiplier": 0.841,
+     "nRuns": 735
+    }
+   },
+   "19": {
+    "AM": {
+     "multiplier": 0.998,
+     "nRuns": 1371
+    },
+    "MD": {
+     "multiplier": 1.069,
+     "nRuns": 2269
+    },
+    "NT": {
+     "multiplier": 1.024,
+     "nRuns": 1496
+    },
+    "PM": {
+     "multiplier": 1.244,
+     "nRuns": 2198
+    }
+   },
+   "1X": {
+    "AM": {
+     "multiplier": 1.02,
+     "nRuns": 32
+    }
+   },
+   "2": {
+    "AM": {
+     "multiplier": 1.052,
+     "nRuns": 280
+    },
+    "MD": {
+     "multiplier": 0.956,
+     "nRuns": 482
+    },
+    "NT": {
+     "multiplier": 1.056,
+     "nRuns": 33
+    },
+    "PM": {
+     "multiplier": 1.25,
+     "nRuns": 386
+    }
+   },
+   "22": {
+    "AM": {
+     "multiplier": 0.953,
+     "nRuns": 2088
+    },
+    "MD": {
+     "multiplier": 0.893,
+     "nRuns": 3341
+    },
+    "NT": {
+     "multiplier": 0.957,
+     "nRuns": 2338
+    },
+    "PM": {
+     "multiplier": 0.933,
+     "nRuns": 3220
+    }
+   },
+   "23": {
+    "AM": {
+     "multiplier": 1.009,
+     "nRuns": 643
+    },
+    "MD": {
+     "multiplier": 0.924,
+     "nRuns": 1239
+    },
+    "NT": {
+     "multiplier": 1.106,
+     "nRuns": 528
+    },
+    "PM": {
+     "multiplier": 1.01,
+     "nRuns": 1092
+    }
+   },
+   "24": {
+    "AM": {
+     "multiplier": 0.999,
+     "nRuns": 1772
+    },
+    "MD": {
+     "multiplier": 0.886,
+     "nRuns": 2599
+    },
+    "NT": {
+     "multiplier": 0.967,
+     "nRuns": 2656
+    },
+    "PM": {
+     "multiplier": 0.88,
+     "nRuns": 2679
+    }
+   },
+   "27": {
+    "AM": {
+     "multiplier": 0.921,
+     "nRuns": 732
+    },
+    "MD": {
+     "multiplier": 1.016,
+     "nRuns": 1171
+    },
+    "NT": {
+     "multiplier": 1.067,
+     "nRuns": 687
+    },
+    "PM": {
+     "multiplier": 1.135,
+     "nRuns": 1214
+    }
+   },
+   "28": {
+    "AM": {
+     "multiplier": 1.133,
+     "nRuns": 900
+    },
+    "MD": {
+     "multiplier": 0.899,
+     "nRuns": 1575
+    },
+    "NT": {
+     "multiplier": 0.988,
+     "nRuns": 1080
+    },
+    "PM": {
+     "multiplier": 1.019,
+     "nRuns": 1564
+    }
+   },
+   "28R": {
+    "AM": {
+     "multiplier": 1.139,
+     "nRuns": 162
+    },
+    "MD": {
+     "multiplier": 1.137,
+     "nRuns": 242
+    },
+    "PM": {
+     "multiplier": 1.127,
+     "nRuns": 215
+    }
+   },
+   "29": {
+    "AM": {
+     "multiplier": 0.929,
+     "nRuns": 3070
+    },
+    "MD": {
+     "multiplier": 0.889,
+     "nRuns": 5108
+    },
+    "NT": {
+     "multiplier": 1.176,
+     "nRuns": 3252
+    },
+    "PM": {
+     "multiplier": 1.011,
+     "nRuns": 4565
+    }
+   },
+   "30": {
+    "AM": {
+     "multiplier": 0.993,
+     "nRuns": 906
+    },
+    "MD": {
+     "multiplier": 1.127,
+     "nRuns": 1643
+    },
+    "NT": {
+     "multiplier": 1.002,
+     "nRuns": 879
+    },
+    "PM": {
+     "multiplier": 1.095,
+     "nRuns": 1410
+    }
+   },
+   "31": {
+    "AM": {
+     "multiplier": 0.9,
+     "nRuns": 604
+    },
+    "MD": {
+     "multiplier": 0.984,
+     "nRuns": 1055
+    },
+    "NT": {
+     "multiplier": 0.844,
+     "nRuns": 746
+    },
+    "PM": {
+     "multiplier": 1.023,
+     "nRuns": 996
+    }
+   },
+   "33": {
+    "AM": {
+     "multiplier": 0.959,
+     "nRuns": 596
+    },
+    "MD": {
+     "multiplier": 0.949,
+     "nRuns": 1023
+    },
+    "NT": {
+     "multiplier": 1.055,
+     "nRuns": 730
+    },
+    "PM": {
+     "multiplier": 0.908,
+     "nRuns": 997
+    }
+   },
+   "35": {
+    "AM": {
+     "multiplier": 0.908,
+     "nRuns": 152
+    },
+    "MD": {
+     "multiplier": 0.883,
+     "nRuns": 241
+    },
+    "NT": {
+     "multiplier": 0.965,
+     "nRuns": 67
+    },
+    "PM": {
+     "multiplier": 0.882,
+     "nRuns": 248
+    }
+   },
+   "36": {
+    "AM": {
+     "multiplier": 1.163,
+     "nRuns": 289
+    },
+    "MD": {
+     "multiplier": 1.185,
+     "nRuns": 493
+    },
+    "NT": {
+     "multiplier": 1.256,
+     "nRuns": 318
+    },
+    "PM": {
+     "multiplier": 1.412,
+     "nRuns": 445
+    }
+   },
+   "37": {
+    "AM": {
+     "multiplier": 0.972,
+     "nRuns": 395
+    },
+    "MD": {
+     "multiplier": 0.931,
+     "nRuns": 741
+    },
+    "NT": {
+     "multiplier": 1.012,
+     "nRuns": 299
+    },
+    "PM": {
+     "multiplier": 0.878,
+     "nRuns": 755
+    }
+   },
+   "38": {
+    "AM": {
+     "multiplier": 1.015,
+     "nRuns": 1225
+    },
+    "MD": {
+     "multiplier": 1.038,
+     "nRuns": 1897
+    },
+    "NT": {
+     "multiplier": 0.96,
+     "nRuns": 1816
+    },
+    "PM": {
+     "multiplier": 1.0,
+     "nRuns": 1949
+    }
+   },
+   "38R": {
+    "AM": {
+     "multiplier": 0.89,
+     "nRuns": 886
+    },
+    "MD": {
+     "multiplier": 0.828,
+     "nRuns": 1465
+    },
+    "NT": {
+     "multiplier": 0.946,
+     "nRuns": 632
+    },
+    "PM": {
+     "multiplier": 0.876,
+     "nRuns": 1374
+    }
+   },
+   "39": {
+    "MD": {
+     "multiplier": 0.978,
+     "nRuns": 96
+    },
+    "PM": {
+     "multiplier": 0.991,
+     "nRuns": 85
+    }
+   },
+   "43": {
+    "AM": {
+     "multiplier": 0.782,
+     "nRuns": 2203
+    },
+    "MD": {
+     "multiplier": 0.836,
+     "nRuns": 3584
+    },
+    "NT": {
+     "multiplier": 0.827,
+     "nRuns": 3147
+    },
+    "PM": {
+     "multiplier": 0.907,
+     "nRuns": 3877
+    }
+   },
+   "44": {
+    "AM": {
+     "multiplier": 0.957,
+     "nRuns": 1969
+    },
+    "MD": {
+     "multiplier": 0.928,
+     "nRuns": 3448
+    },
+    "NT": {
+     "multiplier": 0.925,
+     "nRuns": 2357
+    },
+    "PM": {
+     "multiplier": 1.089,
+     "nRuns": 2938
+    }
+   },
+   "45": {
+    "AM": {
+     "multiplier": 0.895,
+     "nRuns": 718
+    },
+    "MD": {
+     "multiplier": 0.972,
+     "nRuns": 1200
+    },
+    "NT": {
+     "multiplier": 0.899,
+     "nRuns": 607
+    },
+    "PM": {
+     "multiplier": 1.092,
+     "nRuns": 1037
+    }
+   },
+   "48": {
+    "AM": {
+     "multiplier": 0.823,
+     "nRuns": 1628
+    },
+    "MD": {
+     "multiplier": 0.94,
+     "nRuns": 2409
+    },
+    "NT": {
+     "multiplier": 0.87,
+     "nRuns": 1977
+    },
+    "PM": {
+     "multiplier": 0.945,
+     "nRuns": 2412
+    }
+   },
+   "49": {
+    "AM": {
+     "multiplier": 0.924,
+     "nRuns": 1839
+    },
+    "MD": {
+     "multiplier": 0.822,
+     "nRuns": 3061
+    },
+    "NT": {
+     "multiplier": 0.956,
+     "nRuns": 1721
+    },
+    "PM": {
+     "multiplier": 0.98,
+     "nRuns": 2709
+    }
+   },
+   "5": {
+    "AM": {
+     "multiplier": 1.12,
+     "nRuns": 215
+    },
+    "MD": {
+     "multiplier": 1.034,
+     "nRuns": 363
+    },
+    "NT": {
+     "multiplier": 0.816,
+     "nRuns": 1834
+    },
+    "PM": {
+     "multiplier": 1.011,
+     "nRuns": 585
+    }
+   },
+   "52": {
+    "AM": {
+     "multiplier": 0.978,
+     "nRuns": 326
+    },
+    "MD": {
+     "multiplier": 0.872,
+     "nRuns": 515
+    },
+    "NT": {
+     "multiplier": 1.036,
+     "nRuns": 234
+    },
+    "PM": {
+     "multiplier": 1.082,
+     "nRuns": 511
+    }
+   },
+   "54": {
+    "AM": {
+     "multiplier": 0.942,
+     "nRuns": 1169
+    },
+    "MD": {
+     "multiplier": 0.987,
+     "nRuns": 1987
+    },
+    "NT": {
+     "multiplier": 1.073,
+     "nRuns": 1072
+    },
+    "PM": {
+     "multiplier": 1.048,
+     "nRuns": 1927
+    }
+   },
+   "55": {
+    "AM": {
+     "multiplier": 0.992,
+     "nRuns": 70
+    },
+    "MD": {
+     "multiplier": 1.048,
+     "nRuns": 119
+    },
+    "NT": {
+     "multiplier": 1.052,
+     "nRuns": 79
+    },
+    "PM": {
+     "multiplier": 0.958,
+     "nRuns": 127
+    }
+   },
+   "56": {
+    "AM": {
+     "multiplier": 1.035,
+     "nRuns": 136
+    },
+    "MD": {
+     "multiplier": 0.97,
+     "nRuns": 223
+    },
+    "PM": {
+     "multiplier": 1.096,
+     "nRuns": 174
+    }
+   },
+   "57": {
+    "AM": {
+     "multiplier": 0.937,
+     "nRuns": 207
+    },
+    "MD": {
+     "multiplier": 1.023,
+     "nRuns": 348
+    },
+    "NT": {
+     "multiplier": 0.887,
+     "nRuns": 269
+    },
+    "PM": {
+     "multiplier": 0.994,
+     "nRuns": 410
+    }
+   },
+   "58": {
+    "AM": {
+     "multiplier": 0.995,
+     "nRuns": 127
+    },
+    "MD": {
+     "multiplier": 1.018,
+     "nRuns": 197
+    },
+    "NT": {
+     "multiplier": 1.081,
+     "nRuns": 179
+    },
+    "PM": {
+     "multiplier": 1.025,
+     "nRuns": 211
+    }
+   },
+   "5R": {
+    "AM": {
+     "multiplier": 0.946,
+     "nRuns": 674
+    },
+    "MD": {
+     "multiplier": 0.868,
+     "nRuns": 1055
+    },
+    "PM": {
+     "multiplier": 0.798,
+     "nRuns": 958
+    }
+   },
+   "6": {
+    "AM": {
+     "multiplier": 0.938,
+     "nRuns": 507
+    },
+    "MD": {
+     "multiplier": 0.911,
+     "nRuns": 815
+    },
+    "NT": {
+     "multiplier": 0.901,
+     "nRuns": 895
+    },
+    "PM": {
+     "multiplier": 0.916,
+     "nRuns": 821
+    }
+   },
+   "66": {
+    "AM": {
+     "multiplier": 0.876,
+     "nRuns": 162
+    },
+    "MD": {
+     "multiplier": 0.9,
+     "nRuns": 260
+    },
+    "NT": {
+     "multiplier": 1.02,
+     "nRuns": 161
+    },
+    "PM": {
+     "multiplier": 0.869,
+     "nRuns": 271
+    }
+   },
+   "67": {
+    "AM": {
+     "multiplier": 0.991,
+     "nRuns": 105
+    },
+    "MD": {
+     "multiplier": 1.077,
+     "nRuns": 157
+    },
+    "NT": {
+     "multiplier": 0.964,
+     "nRuns": 99
+    },
+    "PM": {
+     "multiplier": 0.921,
+     "nRuns": 191
+    }
+   },
+   "7": {
+    "AM": {
+     "multiplier": 1.002,
+     "nRuns": 1272
+    },
+    "MD": {
+     "multiplier": 0.818,
+     "nRuns": 2173
+    },
+    "NT": {
+     "multiplier": 0.81,
+     "nRuns": 1596
+    },
+    "PM": {
+     "multiplier": 0.909,
+     "nRuns": 2080
+    }
+   },
+   "8": {
+    "AM": {
+     "multiplier": 0.963,
+     "nRuns": 1156
+    },
+    "MD": {
+     "multiplier": 0.974,
+     "nRuns": 3237
+    },
+    "NT": {
+     "multiplier": 1.021,
+     "nRuns": 1906
+    },
+    "PM": {
+     "multiplier": 1.286,
+     "nRuns": 1937
+    }
+   },
+   "8AX": {
+    "AM": {
+     "multiplier": 1.088,
+     "nRuns": 149
+    },
+    "NT": {
+     "multiplier": 1.038,
+     "nRuns": 30
+    },
+    "PM": {
+     "multiplier": 1.126,
+     "nRuns": 138
+    }
+   },
+   "8BX": {
+    "AM": {
+     "multiplier": 0.833,
+     "nRuns": 469
+    },
+    "NT": {
+     "multiplier": 0.92,
+     "nRuns": 122
+    },
+    "PM": {
+     "multiplier": 0.958,
+     "nRuns": 710
+    }
+   },
+   "9": {
+    "AM": {
+     "multiplier": 1.198,
+     "nRuns": 548
+    },
+    "MD": {
+     "multiplier": 0.948,
+     "nRuns": 947
+    },
+    "NT": {
+     "multiplier": 1.206,
+     "nRuns": 1501
+    },
+    "PM": {
+     "multiplier": 1.11,
+     "nRuns": 1155
+    }
+   },
+   "90": {
+    "NT": {
+     "multiplier": 0.883,
+     "nRuns": 478
+    }
+   },
+   "91": {
+    "NT": {
+     "multiplier": 0.965,
+     "nRuns": 2188
+    }
+   },
+   "9R": {
+    "AM": {
+     "multiplier": 1.093,
+     "nRuns": 782
+    },
+    "MD": {
+     "multiplier": 0.844,
+     "nRuns": 1492
+    },
+    "NT": {
+     "multiplier": 0.994,
+     "nRuns": 65
+    },
+    "PM": {
+     "multiplier": 0.927,
+     "nRuns": 1021
+    }
+   },
+   "F": {
+    "AM": {
+     "multiplier": 0.977,
+     "nRuns": 421
+    },
+    "MD": {
+     "multiplier": 0.998,
+     "nRuns": 948
+    },
+    "NT": {
+     "multiplier": 1.015,
+     "nRuns": 362
+    },
+    "PM": {
+     "multiplier": 0.98,
+     "nRuns": 906
+    }
+   },
+   "FBUS": {
+    "NT": {
+     "multiplier": 1.045,
+     "nRuns": 51
+    }
+   },
+   "J": {
+    "AM": {
+     "multiplier": 0.961,
+     "nRuns": 401
+    },
+    "MD": {
+     "multiplier": 0.992,
+     "nRuns": 607
+    },
+    "NT": {
+     "multiplier": 1.039,
+     "nRuns": 605
+    },
+    "PM": {
+     "multiplier": 0.973,
+     "nRuns": 620
+    }
+   },
+   "K": {
+    "AM": {
+     "multiplier": 0.915,
+     "nRuns": 410
+    },
+    "MD": {
+     "multiplier": 0.939,
+     "nRuns": 681
+    },
+    "NT": {
+     "multiplier": 1.058,
+     "nRuns": 379
+    },
+    "PM": {
+     "multiplier": 1.002,
+     "nRuns": 593
+    }
+   },
+   "KBUS": {
+    "NT": {
+     "multiplier": 1.122,
+     "nRuns": 181
+    }
+   },
+   "L": {
+    "AM": {
+     "multiplier": 0.866,
+     "nRuns": 508
+    },
+    "MD": {
+     "multiplier": 0.942,
+     "nRuns": 813
+    },
+    "NT": {
+     "multiplier": 0.976,
+     "nRuns": 652
+    },
+    "PM": {
+     "multiplier": 1.044,
+     "nRuns": 826
+    }
+   },
+   "LOWL": {
+    "NT": {
+     "multiplier": 1.035,
+     "nRuns": 1158
+    }
+   },
+   "M": {
+    "AM": {
+     "multiplier": 1.075,
+     "nRuns": 531
+    },
+    "MD": {
+     "multiplier": 1.099,
+     "nRuns": 911
+    },
+    "NT": {
+     "multiplier": 1.091,
+     "nRuns": 694
+    },
+    "PM": {
+     "multiplier": 1.146,
+     "nRuns": 843
+    }
+   },
+   "N": {
+    "AM": {
+     "multiplier": 0.841,
+     "nRuns": 926
+    },
+    "MD": {
+     "multiplier": 0.912,
+     "nRuns": 1470
+    },
+    "NT": {
+     "multiplier": 0.965,
+     "nRuns": 1155
+    },
+    "PM": {
+     "multiplier": 0.959,
+     "nRuns": 1472
+    }
+   },
+   "NBUS": {
+    "NT": {
+     "multiplier": 0.991,
+     "nRuns": 96
+    }
+   },
+   "NOWL": {
+    "NT": {
+     "multiplier": 1.005,
+     "nRuns": 874
+    }
+   },
+   "T": {
+    "AM": {
+     "multiplier": 0.935,
+     "nRuns": 532
+    },
+    "MD": {
+     "multiplier": 0.858,
+     "nRuns": 878
+    },
+    "NT": {
+     "multiplier": 1.107,
+     "nRuns": 622
+    },
+    "PM": {
+     "multiplier": 1.041,
+     "nRuns": 790
+    }
+   },
+   "TBUS": {
+    "NT": {
+     "multiplier": 1.186,
+     "nRuns": 56
+    }
+   }
+  },
+  "withinDayCheck": "On 2026-06-10 the SD across trips within a period, at fixed scheduled lengths, was similar: about 1.0 min at 5, 1.4 at 10, 2.1 at 20, 3.3 at 40 minutes for most routes (runtime.json, runSD)."
+ },
+ "predictions": {
+  "definition": "Error = actual minus predicted arrival (s), for the prediction in force m minutes before the actual arrival; Muni, 2026-06-10, records 16:30-19:30 excluded (seam). bus/metro: every stop but a trip's first; terminal: a trip's first stop. robustSD = 1.4826 MAD.",
+  "source": "calitp_stop_time_metrics_2026-06-10",
+  "byGroup": {
+   "bus": {
+    "ALL": {
+     "1": {
+      "n": 218862,
+      "mean": 1.0,
+      "median": 0.0,
+      "p10": -23.0,
+      "p90": 27.0,
+      "sd": 29.0,
+      "robustSD": 14.8,
+      "meanAbs": 16.0,
+      "pctWithin60": 97.4,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.6
+     },
+     "2": {
+      "n": 219856,
+      "mean": 2.9,
+      "median": 2.0,
+      "p10": -35.0,
+      "p90": 43.0,
+      "sd": 43.8,
+      "robustSD": 26.7,
+      "meanAbs": 25.7,
+      "pctWithin60": 92.0,
+      "pctLaterThanPredictedBy2min": 0.4,
+      "pctEarlierThanPredictedBy1min": 3.6
+     },
+     "3": {
+      "n": 220411,
+      "mean": 4.8,
+      "median": 5.0,
+      "p10": -44.0,
+      "p90": 56.0,
+      "sd": 54.3,
+      "robustSD": 35.6,
+      "meanAbs": 33.4,
+      "pctWithin60": 85.9,
+      "pctLaterThanPredictedBy2min": 1.3,
+      "pctEarlierThanPredictedBy1min": 5.8
+     },
+     "5": {
+      "n": 220880,
+      "mean": 9.1,
+      "median": 9.0,
+      "p10": -60.0,
+      "p90": 80.0,
+      "sd": 76.2,
+      "robustSD": 48.9,
+      "meanAbs": 47.0,
+      "pctWithin60": 73.7,
+      "pctLaterThanPredictedBy2min": 3.5,
+      "pctEarlierThanPredictedBy1min": 9.8
+     },
+     "7": {
+      "n": 221042,
+      "mean": 13.7,
+      "median": 12.0,
+      "p10": -72.0,
+      "p90": 101.0,
+      "sd": 93.9,
+      "robustSD": 62.3,
+      "meanAbs": 58.8,
+      "pctWithin60": 64.0,
+      "pctLaterThanPredictedBy2min": 6.6,
+      "pctEarlierThanPredictedBy1min": 12.9
+     },
+     "10": {
+      "n": 221238,
+      "mean": 20.2,
+      "median": 17.0,
+      "p10": -87.0,
+      "p90": 130.0,
+      "sd": 116.0,
+      "robustSD": 77.1,
+      "meanAbs": 74.0,
+      "pctWithin60": 54.4,
+      "pctLaterThanPredictedBy2min": 11.8,
+      "pctEarlierThanPredictedBy1min": 15.8
+     },
+     "15": {
+      "n": 221049,
+      "mean": 31.2,
+      "median": 25.0,
+      "p10": -104.0,
+      "p90": 174.0,
+      "sd": 147.5,
+      "robustSD": 99.3,
+      "meanAbs": 95.2,
+      "pctWithin60": 45.0,
+      "pctLaterThanPredictedBy2min": 19.3,
+      "pctEarlierThanPredictedBy1min": 18.3
+     },
+     "20": {
+      "n": 220900,
+      "mean": 42.3,
+      "median": 31.0,
+      "p10": -115.0,
+      "p90": 212.0,
+      "sd": 173.0,
+      "robustSD": 115.6,
+      "meanAbs": 112.5,
+      "pctWithin60": 40.2,
+      "pctLaterThanPredictedBy2min": 24.6,
+      "pctEarlierThanPredictedBy1min": 19.2
+     },
+     "30": {
+      "n": 219193,
+      "mean": 63.7,
+      "median": 41.0,
+      "p10": -123.0,
+      "p90": 279.0,
+      "sd": 208.7,
+      "robustSD": 139.4,
+      "meanAbs": 139.1,
+      "pctWithin60": 35.4,
+      "pctLaterThanPredictedBy2min": 31.2,
+      "pctEarlierThanPredictedBy1min": 19.8
+     }
+    },
+    "MD": {
+     "1": {
+      "n": 73727,
+      "mean": 1.2,
+      "median": 0.0,
+      "p10": -23.0,
+      "p90": 28.0,
+      "sd": 27.0,
+      "robustSD": 16.3,
+      "meanAbs": 16.0,
+      "pctWithin60": 97.4,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.5
+     },
+     "2": {
+      "n": 74245,
+      "mean": 3.4,
+      "median": 2.0,
+      "p10": -34.0,
+      "p90": 44.0,
+      "sd": 42.5,
+      "robustSD": 26.7,
+      "meanAbs": 25.6,
+      "pctWithin60": 91.9,
+      "pctLaterThanPredictedBy2min": 0.5,
+      "pctEarlierThanPredictedBy1min": 3.5
+     },
+     "3": {
+      "n": 74676,
+      "mean": 5.4,
+      "median": 4.0,
+      "p10": -43.0,
+      "p90": 56.0,
+      "sd": 52.8,
+      "robustSD": 35.6,
+      "meanAbs": 33.0,
+      "pctWithin60": 86.1,
+      "pctLaterThanPredictedBy2min": 1.5,
+      "pctEarlierThanPredictedBy1min": 5.4
+     },
+     "5": {
+      "n": 75406,
+      "mean": 10.1,
+      "median": 8.0,
+      "p10": -57.0,
+      "p90": 80.0,
+      "sd": 71.3,
+      "robustSD": 48.9,
+      "meanAbs": 45.9,
+      "pctWithin60": 74.6,
+      "pctLaterThanPredictedBy2min": 3.7,
+      "pctEarlierThanPredictedBy1min": 9.2
+     },
+     "7": {
+      "n": 76025,
+      "mean": 14.6,
+      "median": 12.0,
+      "p10": -69.0,
+      "p90": 100.0,
+      "sd": 87.1,
+      "robustSD": 60.8,
+      "meanAbs": 56.8,
+      "pctWithin60": 65.4,
+      "pctLaterThanPredictedBy2min": 6.5,
+      "pctEarlierThanPredictedBy1min": 12.2
+     },
+     "10": {
+      "n": 76389,
+      "mean": 21.0,
+      "median": 16.0,
+      "p10": -83.0,
+      "p90": 128.0,
+      "sd": 108.6,
+      "robustSD": 74.1,
+      "meanAbs": 70.6,
+      "pctWithin60": 56.3,
+      "pctLaterThanPredictedBy2min": 11.3,
+      "pctEarlierThanPredictedBy1min": 15.0
+     },
+     "15": {
+      "n": 76856,
+      "mean": 31.4,
+      "median": 23.0,
+      "p10": -99.0,
+      "p90": 169.0,
+      "sd": 139.9,
+      "robustSD": 94.9,
+      "meanAbs": 90.3,
+      "pctWithin60": 47.1,
+      "pctLaterThanPredictedBy2min": 18.2,
+      "pctEarlierThanPredictedBy1min": 17.6
+     },
+     "20": {
+      "n": 76832,
+      "mean": 41.4,
+      "median": 29.0,
+      "p10": -110.0,
+      "p90": 203.0,
+      "sd": 161.1,
+      "robustSD": 109.7,
+      "meanAbs": 105.8,
+      "pctWithin60": 42.2,
+      "pctLaterThanPredictedBy2min": 23.2,
+      "pctEarlierThanPredictedBy1min": 18.5
+     },
+     "30": {
+      "n": 76883,
+      "mean": 60.3,
+      "median": 39.0,
+      "p10": -121.0,
+      "p90": 264.0,
+      "sd": 189.2,
+      "robustSD": 132.0,
+      "meanAbs": 130.0,
+      "pctWithin60": 36.9,
+      "pctLaterThanPredictedBy2min": 29.7,
+      "pctEarlierThanPredictedBy1min": 19.3
+     }
+    },
+    "PM": {
+     "1": {
+      "n": 24889,
+      "mean": 3.1,
+      "median": 2.0,
+      "p10": -21.0,
+      "p90": 31.0,
+      "sd": 25.5,
+      "robustSD": 16.3,
+      "meanAbs": 16.5,
+      "pctWithin60": 97.3,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.4
+     },
+     "2": {
+      "n": 24748,
+      "mean": 7.1,
+      "median": 6.0,
+      "p10": -32.0,
+      "p90": 49.0,
+      "sd": 39.1,
+      "robustSD": 28.2,
+      "meanAbs": 26.7,
+      "pctWithin60": 90.9,
+      "pctLaterThanPredictedBy2min": 0.5,
+      "pctEarlierThanPredictedBy1min": 3.0
+     },
+     "3": {
+      "n": 24508,
+      "mean": 10.9,
+      "median": 9.0,
+      "p10": -39.0,
+      "p90": 64.0,
+      "sd": 49.6,
+      "robustSD": 37.1,
+      "meanAbs": 34.7,
+      "pctWithin60": 84.1,
+      "pctLaterThanPredictedBy2min": 1.7,
+      "pctEarlierThanPredictedBy1min": 4.5
+     },
+     "5": {
+      "n": 23947,
+      "mean": 18.8,
+      "median": 16.0,
+      "p10": -51.0,
+      "p90": 93.0,
+      "sd": 69.4,
+      "robustSD": 50.4,
+      "meanAbs": 49.5,
+      "pctWithin60": 70.7,
+      "pctLaterThanPredictedBy2min": 5.3,
+      "pctEarlierThanPredictedBy1min": 7.8
+     },
+     "7": {
+      "n": 23367,
+      "mean": 27.7,
+      "median": 24.0,
+      "p10": -61.0,
+      "p90": 120.0,
+      "sd": 86.6,
+      "robustSD": 65.2,
+      "meanAbs": 62.8,
+      "pctWithin60": 60.4,
+      "pctLaterThanPredictedBy2min": 9.9,
+      "pctEarlierThanPredictedBy1min": 10.0
+     },
+     "10": {
+      "n": 22514,
+      "mean": 40.4,
+      "median": 34.0,
+      "p10": -69.0,
+      "p90": 160.0,
+      "sd": 110.8,
+      "robustSD": 83.0,
+      "meanAbs": 81.2,
+      "pctWithin60": 50.3,
+      "pctLaterThanPredictedBy2min": 17.6,
+      "pctEarlierThanPredictedBy1min": 11.8
+     },
+     "15": {
+      "n": 21907,
+      "mean": 61.2,
+      "median": 50.0,
+      "p10": -78.0,
+      "p90": 219.0,
+      "sd": 142.2,
+      "robustSD": 106.7,
+      "meanAbs": 107.5,
+      "pctWithin60": 40.5,
+      "pctLaterThanPredictedBy2min": 27.1,
+      "pctEarlierThanPredictedBy1min": 13.3
+     },
+     "20": {
+      "n": 21983,
+      "mean": 80.5,
+      "median": 63.0,
+      "p10": -82.0,
+      "p90": 272.0,
+      "sd": 165.8,
+      "robustSD": 127.5,
+      "meanAbs": 129.0,
+      "pctWithin60": 35.7,
+      "pctLaterThanPredictedBy2min": 34.3,
+      "pctEarlierThanPredictedBy1min": 13.6
+     },
+     "30": {
+      "n": 21939,
+      "mean": 114.7,
+      "median": 83.0,
+      "p10": -80.0,
+      "p90": 367.0,
+      "sd": 207.9,
+      "robustSD": 154.2,
+      "meanAbs": 163.8,
+      "pctWithin60": 32.0,
+      "pctLaterThanPredictedBy2min": 42.1,
+      "pctEarlierThanPredictedBy1min": 13.1
+     }
+    },
+    "AM": {
+     "1": {
+      "n": 61190,
+      "mean": 1.2,
+      "median": 0.0,
+      "p10": -22.0,
+      "p90": 28.0,
+      "sd": 31.1,
+      "robustSD": 16.3,
+      "meanAbs": 16.2,
+      "pctWithin60": 97.4,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.6
+     },
+     "2": {
+      "n": 61440,
+      "mean": 3.0,
+      "median": 3.0,
+      "p10": -34.0,
+      "p90": 43.0,
+      "sd": 45.7,
+      "robustSD": 26.7,
+      "meanAbs": 25.8,
+      "pctWithin60": 92.1,
+      "pctLaterThanPredictedBy2min": 0.4,
+      "pctEarlierThanPredictedBy1min": 3.6
+     },
+     "3": {
+      "n": 61539,
+      "mean": 5.1,
+      "median": 5.0,
+      "p10": -44.0,
+      "p90": 56.0,
+      "sd": 55.1,
+      "robustSD": 35.6,
+      "meanAbs": 33.4,
+      "pctWithin60": 85.8,
+      "pctLaterThanPredictedBy2min": 1.2,
+      "pctEarlierThanPredictedBy1min": 5.9
+     },
+     "5": {
+      "n": 61619,
+      "mean": 9.2,
+      "median": 10.0,
+      "p10": -60.0,
+      "p90": 79.0,
+      "sd": 79.4,
+      "robustSD": 50.4,
+      "meanAbs": 46.9,
+      "pctWithin60": 73.8,
+      "pctLaterThanPredictedBy2min": 3.2,
+      "pctEarlierThanPredictedBy1min": 9.8
+     },
+     "7": {
+      "n": 61615,
+      "mean": 13.6,
+      "median": 13.0,
+      "p10": -72.0,
+      "p90": 99.0,
+      "sd": 95.8,
+      "robustSD": 62.3,
+      "meanAbs": 58.2,
+      "pctWithin60": 64.2,
+      "pctLaterThanPredictedBy2min": 6.1,
+      "pctEarlierThanPredictedBy1min": 12.7
+     },
+     "10": {
+      "n": 62148,
+      "mean": 20.0,
+      "median": 19.0,
+      "p10": -86.0,
+      "p90": 127.0,
+      "sd": 116.4,
+      "robustSD": 77.1,
+      "meanAbs": 73.0,
+      "pctWithin60": 54.6,
+      "pctLaterThanPredictedBy2min": 11.2,
+      "pctEarlierThanPredictedBy1min": 15.5
+     },
+     "15": {
+      "n": 62011,
+      "mean": 30.1,
+      "median": 25.0,
+      "p10": -102.0,
+      "p90": 169.0,
+      "sd": 145.8,
+      "robustSD": 96.4,
+      "meanAbs": 93.1,
+      "pctWithin60": 45.5,
+      "pctLaterThanPredictedBy2min": 18.6,
+      "pctEarlierThanPredictedBy1min": 17.9
+     },
+     "20": {
+      "n": 61773,
+      "mean": 38.9,
+      "median": 31.0,
+      "p10": -112.0,
+      "p90": 205.0,
+      "sd": 171.8,
+      "robustSD": 111.2,
+      "meanAbs": 109.1,
+      "pctWithin60": 40.8,
+      "pctLaterThanPredictedBy2min": 23.7,
+      "pctEarlierThanPredictedBy1min": 18.9
+     },
+     "30": {
+      "n": 60545,
+      "mean": 56.5,
+      "median": 39.0,
+      "p10": -121.0,
+      "p90": 261.0,
+      "sd": 201.4,
+      "robustSD": 133.4,
+      "meanAbs": 132.7,
+      "pctWithin60": 36.4,
+      "pctLaterThanPredictedBy2min": 30.1,
+      "pctEarlierThanPredictedBy1min": 19.6
+     }
+    },
+    "NT": {
+     "1": {
+      "n": 59056,
+      "mean": -0.2,
+      "median": 0.0,
+      "p10": -23.0,
+      "p90": 25.0,
+      "sd": 30.4,
+      "robustSD": 14.8,
+      "meanAbs": 15.5,
+      "pctWithin60": 97.5,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.8
+     },
+     "2": {
+      "n": 59423,
+      "mean": 0.4,
+      "median": 1.0,
+      "p10": -36.0,
+      "p90": 40.0,
+      "sd": 45.0,
+      "robustSD": 25.2,
+      "meanAbs": 25.3,
+      "pctWithin60": 92.4,
+      "pctLaterThanPredictedBy2min": 0.3,
+      "pctEarlierThanPredictedBy1min": 4.1
+     },
+     "3": {
+      "n": 59688,
+      "mean": 1.2,
+      "median": 2.0,
+      "p10": -48.0,
+      "p90": 52.0,
+      "sd": 56.9,
+      "robustSD": 34.1,
+      "meanAbs": 33.4,
+      "pctWithin60": 86.3,
+      "pctLaterThanPredictedBy2min": 1.1,
+      "pctEarlierThanPredictedBy1min": 6.7
+     },
+     "5": {
+      "n": 59908,
+      "mean": 3.9,
+      "median": 5.0,
+      "p10": -66.0,
+      "p90": 75.0,
+      "sd": 80.7,
+      "robustSD": 50.4,
+      "meanAbs": 47.7,
+      "pctWithin60": 73.7,
+      "pctLaterThanPredictedBy2min": 3.0,
+      "pctEarlierThanPredictedBy1min": 11.4
+     },
+     "7": {
+      "n": 60035,
+      "mean": 7.1,
+      "median": 8.0,
+      "p10": -81.0,
+      "p90": 96.0,
+      "sd": 101.9,
+      "robustSD": 63.8,
+      "meanAbs": 60.3,
+      "pctWithin60": 63.6,
+      "pctLaterThanPredictedBy2min": 5.9,
+      "pctEarlierThanPredictedBy1min": 15.0
+     },
+     "10": {
+      "n": 60187,
+      "mean": 12.0,
+      "median": 12.0,
+      "p10": -99.0,
+      "p90": 125.0,
+      "sd": 125.5,
+      "robustSD": 81.5,
+      "meanAbs": 76.5,
+      "pctWithin60": 53.1,
+      "pctLaterThanPredictedBy2min": 10.8,
+      "pctEarlierThanPredictedBy1min": 18.5
+     },
+     "15": {
+      "n": 60275,
+      "mean": 21.2,
+      "median": 18.0,
+      "p10": -121.0,
+      "p90": 169.0,
+      "sd": 158.6,
+      "robustSD": 103.8,
+      "meanAbs": 98.9,
+      "pctWithin60": 43.5,
+      "pctLaterThanPredictedBy2min": 18.4,
+      "pctEarlierThanPredictedBy1min": 21.6
+     },
+     "20": {
+      "n": 60312,
+      "mean": 33.1,
+      "median": 24.0,
+      "p10": -133.0,
+      "p90": 208.0,
+      "sd": 189.0,
+      "robustSD": 121.6,
+      "meanAbs": 118.2,
+      "pctWithin60": 38.6,
+      "pctLaterThanPredictedBy2min": 23.7,
+      "pctEarlierThanPredictedBy1min": 22.6
+     },
+     "30": {
+      "n": 59826,
+      "mean": 56.7,
+      "median": 32.0,
+      "p10": -145.0,
+      "p90": 280.0,
+      "sd": 235.8,
+      "robustSD": 146.8,
+      "meanAbs": 148.1,
+      "pctWithin60": 33.9,
+      "pctLaterThanPredictedBy2min": 30.3,
+      "pctEarlierThanPredictedBy1min": 23.1
+     }
+    }
+   },
+   "metro": {
+    "ALL": {
+     "1": {
+      "n": 20159,
+      "mean": 1.3,
+      "median": 0.0,
+      "p10": -19.0,
+      "p90": 25.0,
+      "sd": 32.6,
+      "robustSD": 13.3,
+      "meanAbs": 14.2,
+      "pctWithin60": 98.0,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 0.8
+     },
+     "2": {
+      "n": 20215,
+      "mean": 5.6,
+      "median": 4.0,
+      "p10": -25.0,
+      "p90": 42.0,
+      "sd": 48.7,
+      "robustSD": 22.2,
+      "meanAbs": 22.4,
+      "pctWithin60": 94.1,
+      "pctLaterThanPredictedBy2min": 0.3,
+      "pctEarlierThanPredictedBy1min": 1.7
+     },
+     "3": {
+      "n": 20243,
+      "mean": 9.6,
+      "median": 9.0,
+      "p10": -31.0,
+      "p90": 55.0,
+      "sd": 59.9,
+      "robustSD": 28.2,
+      "meanAbs": 29.7,
+      "pctWithin60": 88.8,
+      "pctLaterThanPredictedBy2min": 1.2,
+      "pctEarlierThanPredictedBy1min": 2.9
+     },
+     "5": {
+      "n": 20244,
+      "mean": 17.9,
+      "median": 17.0,
+      "p10": -39.0,
+      "p90": 80.0,
+      "sd": 77.5,
+      "robustSD": 40.0,
+      "meanAbs": 42.8,
+      "pctWithin60": 78.0,
+      "pctLaterThanPredictedBy2min": 3.6,
+      "pctEarlierThanPredictedBy1min": 5.0
+     },
+     "7": {
+      "n": 20269,
+      "mean": 25.4,
+      "median": 24.0,
+      "p10": -47.0,
+      "p90": 104.0,
+      "sd": 102.3,
+      "robustSD": 51.9,
+      "meanAbs": 55.4,
+      "pctWithin60": 67.4,
+      "pctLaterThanPredictedBy2min": 6.9,
+      "pctEarlierThanPredictedBy1min": 6.9
+     },
+     "10": {
+      "n": 20309,
+      "mean": 36.8,
+      "median": 35.0,
+      "p10": -52.0,
+      "p90": 135.0,
+      "sd": 123.3,
+      "robustSD": 65.2,
+      "meanAbs": 71.1,
+      "pctWithin60": 56.4,
+      "pctLaterThanPredictedBy2min": 13.1,
+      "pctEarlierThanPredictedBy1min": 8.4
+     },
+     "15": {
+      "n": 20271,
+      "mean": 55.2,
+      "median": 54.0,
+      "p10": -57.0,
+      "p90": 183.0,
+      "sd": 159.1,
+      "robustSD": 83.0,
+      "meanAbs": 95.1,
+      "pctWithin60": 43.8,
+      "pctLaterThanPredictedBy2min": 23.3,
+      "pctEarlierThanPredictedBy1min": 9.5
+     },
+     "20": {
+      "n": 20153,
+      "mean": 74.9,
+      "median": 72.0,
+      "p10": -57.0,
+      "p90": 225.0,
+      "sd": 169.6,
+      "robustSD": 103.8,
+      "meanAbs": 114.9,
+      "pctWithin60": 36.1,
+      "pctLaterThanPredictedBy2min": 32.4,
+      "pctEarlierThanPredictedBy1min": 9.5
+     },
+     "30": {
+      "n": 20121,
+      "mean": 114.4,
+      "median": 102.0,
+      "p10": -45.0,
+      "p90": 300.0,
+      "sd": 170.1,
+      "robustSD": 132.0,
+      "meanAbs": 147.3,
+      "pctWithin60": 28.7,
+      "pctLaterThanPredictedBy2min": 44.7,
+      "pctEarlierThanPredictedBy1min": 8.2
+     }
+    },
+    "MD": {
+     "1": {
+      "n": 6918,
+      "mean": 2.3,
+      "median": 0.0,
+      "p10": -19.0,
+      "p90": 27.0,
+      "sd": 21.4,
+      "robustSD": 13.3,
+      "meanAbs": 13.9,
+      "pctWithin60": 98.1,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 0.6
+     },
+     "2": {
+      "n": 6972,
+      "mean": 7.1,
+      "median": 4.0,
+      "p10": -23.0,
+      "p90": 43.0,
+      "sd": 45.4,
+      "robustSD": 22.2,
+      "meanAbs": 21.9,
+      "pctWithin60": 94.3,
+      "pctLaterThanPredictedBy2min": 0.3,
+      "pctEarlierThanPredictedBy1min": 1.3
+     },
+     "3": {
+      "n": 7008,
+      "mean": 11.8,
+      "median": 9.0,
+      "p10": -28.0,
+      "p90": 56.0,
+      "sd": 61.3,
+      "robustSD": 28.2,
+      "meanAbs": 29.1,
+      "pctWithin60": 88.8,
+      "pctLaterThanPredictedBy2min": 1.3,
+      "pctEarlierThanPredictedBy1min": 2.4
+     },
+     "5": {
+      "n": 7027,
+      "mean": 21.3,
+      "median": 18.0,
+      "p10": -35.0,
+      "p90": 83.0,
+      "sd": 78.8,
+      "robustSD": 40.0,
+      "meanAbs": 42.2,
+      "pctWithin60": 78.3,
+      "pctLaterThanPredictedBy2min": 4.3,
+      "pctEarlierThanPredictedBy1min": 4.0
+     },
+     "7": {
+      "n": 7109,
+      "mean": 29.9,
+      "median": 27.0,
+      "p10": -39.0,
+      "p90": 107.0,
+      "sd": 110.8,
+      "robustSD": 50.4,
+      "meanAbs": 54.6,
+      "pctWithin60": 68.0,
+      "pctLaterThanPredictedBy2min": 7.7,
+      "pctEarlierThanPredictedBy1min": 5.2
+     },
+     "10": {
+      "n": 7148,
+      "mean": 42.4,
+      "median": 39.0,
+      "p10": -41.0,
+      "p90": 140.0,
+      "sd": 137.2,
+      "robustSD": 62.3,
+      "meanAbs": 70.7,
+      "pctWithin60": 56.4,
+      "pctLaterThanPredictedBy2min": 14.0,
+      "pctEarlierThanPredictedBy1min": 6.3
+     },
+     "15": {
+      "n": 7179,
+      "mean": 61.0,
+      "median": 59.0,
+      "p10": -39.0,
+      "p90": 189.0,
+      "sd": 187.6,
+      "robustSD": 84.5,
+      "meanAbs": 96.5,
+      "pctWithin60": 44.0,
+      "pctLaterThanPredictedBy2min": 25.4,
+      "pctEarlierThanPredictedBy1min": 7.0
+     },
+     "20": {
+      "n": 7087,
+      "mean": 83.3,
+      "median": 81.0,
+      "p10": -35.0,
+      "p90": 230.0,
+      "sd": 189.5,
+      "robustSD": 103.8,
+      "meanAbs": 116.6,
+      "pctWithin60": 35.4,
+      "pctLaterThanPredictedBy2min": 35.2,
+      "pctEarlierThanPredictedBy1min": 6.6
+     },
+     "30": {
+      "n": 7085,
+      "mean": 132.2,
+      "median": 121.0,
+      "p10": -20.0,
+      "p90": 306.0,
+      "sd": 146.6,
+      "robustSD": 132.0,
+      "meanAbs": 150.6,
+      "pctWithin60": 26.5,
+      "pctLaterThanPredictedBy2min": 50.2,
+      "pctEarlierThanPredictedBy1min": 5.5
+     }
+    },
+    "AM": {
+     "1": {
+      "n": 5793,
+      "mean": 1.2,
+      "median": 0.0,
+      "p10": -20.0,
+      "p90": 25.0,
+      "sd": 28.6,
+      "robustSD": 13.3,
+      "meanAbs": 14.6,
+      "pctWithin60": 97.9,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 0.8
+     },
+     "2": {
+      "n": 5794,
+      "mean": 6.2,
+      "median": 4.0,
+      "p10": -25.0,
+      "p90": 42.0,
+      "sd": 36.4,
+      "robustSD": 22.2,
+      "meanAbs": 22.2,
+      "pctWithin60": 94.0,
+      "pctLaterThanPredictedBy2min": 0.3,
+      "pctEarlierThanPredictedBy1min": 1.6
+     },
+     "3": {
+      "n": 5794,
+      "mean": 10.6,
+      "median": 9.0,
+      "p10": -31.0,
+      "p90": 55.0,
+      "sd": 47.8,
+      "robustSD": 29.7,
+      "meanAbs": 29.8,
+      "pctWithin60": 89.0,
+      "pctLaterThanPredictedBy2min": 1.3,
+      "pctEarlierThanPredictedBy1min": 2.5
+     },
+     "5": {
+      "n": 5803,
+      "mean": 19.6,
+      "median": 18.0,
+      "p10": -38.0,
+      "p90": 80.0,
+      "sd": 62.3,
+      "robustSD": 41.5,
+      "meanAbs": 42.5,
+      "pctWithin60": 78.2,
+      "pctLaterThanPredictedBy2min": 3.4,
+      "pctEarlierThanPredictedBy1min": 4.5
+     },
+     "7": {
+      "n": 5790,
+      "mean": 27.8,
+      "median": 26.0,
+      "p10": -44.0,
+      "p90": 102.0,
+      "sd": 77.2,
+      "robustSD": 51.9,
+      "meanAbs": 54.1,
+      "pctWithin60": 67.2,
+      "pctLaterThanPredictedBy2min": 6.5,
+      "pctEarlierThanPredictedBy1min": 6.4
+     },
+     "10": {
+      "n": 5841,
+      "mean": 39.6,
+      "median": 37.0,
+      "p10": -51.0,
+      "p90": 132.0,
+      "sd": 92.9,
+      "robustSD": 66.7,
+      "meanAbs": 69.2,
+      "pctWithin60": 56.0,
+      "pctLaterThanPredictedBy2min": 12.8,
+      "pctEarlierThanPredictedBy1min": 7.9
+     },
+     "15": {
+      "n": 5823,
+      "mean": 60.7,
+      "median": 56.0,
+      "p10": -54.0,
+      "p90": 180.0,
+      "sd": 117.1,
+      "robustSD": 84.5,
+      "meanAbs": 92.6,
+      "pctWithin60": 42.7,
+      "pctLaterThanPredictedBy2min": 23.6,
+      "pctEarlierThanPredictedBy1min": 9.1
+     },
+     "20": {
+      "n": 5803,
+      "mean": 80.6,
+      "median": 75.0,
+      "p10": -52.0,
+      "p90": 222.0,
+      "sd": 133.3,
+      "robustSD": 99.3,
+      "meanAbs": 112.1,
+      "pctWithin60": 35.2,
+      "pctLaterThanPredictedBy2min": 33.5,
+      "pctEarlierThanPredictedBy1min": 8.9
+     },
+     "30": {
+      "n": 5761,
+      "mean": 117.8,
+      "median": 106.0,
+      "p10": -38.0,
+      "p90": 291.0,
+      "sd": 161.7,
+      "robustSD": 126.0,
+      "meanAbs": 146.4,
+      "pctWithin60": 28.5,
+      "pctLaterThanPredictedBy2min": 45.3,
+      "pctEarlierThanPredictedBy1min": 7.0
+     }
+    },
+    "PM": {
+     "1": {
+      "n": 2269,
+      "mean": 1.3,
+      "median": 1.0,
+      "p10": -18.0,
+      "p90": 25.0,
+      "sd": 62.0,
+      "robustSD": 13.3,
+      "meanAbs": 14.9,
+      "pctWithin60": 98.0,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 0.8
+     },
+     "2": {
+      "n": 2254,
+      "mean": 5.1,
+      "median": 5.0,
+      "p10": -23.0,
+      "p90": 44.0,
+      "sd": 88.8,
+      "robustSD": 20.8,
+      "meanAbs": 24.3,
+      "pctWithin60": 93.9,
+      "pctLaterThanPredictedBy2min": 0.3,
+      "pctEarlierThanPredictedBy1min": 1.7
+     },
+     "3": {
+      "n": 2233,
+      "mean": 9.8,
+      "median": 11.0,
+      "p10": -27.0,
+      "p90": 58.0,
+      "sd": 93.1,
+      "robustSD": 28.2,
+      "meanAbs": 31.9,
+      "pctWithin60": 88.4,
+      "pctLaterThanPredictedBy2min": 1.0,
+      "pctEarlierThanPredictedBy1min": 2.4
+     },
+     "5": {
+      "n": 2177,
+      "mean": 19.4,
+      "median": 19.0,
+      "p10": -35.0,
+      "p90": 87.0,
+      "sd": 116.6,
+      "robustSD": 40.0,
+      "meanAbs": 45.8,
+      "pctWithin60": 76.4,
+      "pctLaterThanPredictedBy2min": 3.8,
+      "pctEarlierThanPredictedBy1min": 3.9
+     },
+     "7": {
+      "n": 2129,
+      "mean": 28.1,
+      "median": 30.0,
+      "p10": -42.0,
+      "p90": 113.0,
+      "sd": 150.4,
+      "robustSD": 53.4,
+      "meanAbs": 62.3,
+      "pctWithin60": 64.9,
+      "pctLaterThanPredictedBy2min": 8.0,
+      "pctEarlierThanPredictedBy1min": 5.6
+     },
+     "10": {
+      "n": 2064,
+      "mean": 41.6,
+      "median": 44.0,
+      "p10": -48.0,
+      "p90": 148.0,
+      "sd": 170.5,
+      "robustSD": 66.7,
+      "meanAbs": 81.7,
+      "pctWithin60": 52.1,
+      "pctLaterThanPredictedBy2min": 15.8,
+      "pctEarlierThanPredictedBy1min": 7.6
+     },
+     "15": {
+      "n": 1987,
+      "mean": 63.4,
+      "median": 67.0,
+      "p10": -48.0,
+      "p90": 201.0,
+      "sd": 197.5,
+      "robustSD": 94.9,
+      "meanAbs": 109.6,
+      "pctWithin60": 39.0,
+      "pctLaterThanPredictedBy2min": 28.9,
+      "pctEarlierThanPredictedBy1min": 8.1
+     },
+     "20": {
+      "n": 1987,
+      "mean": 85.8,
+      "median": 89.0,
+      "p10": -49.0,
+      "p90": 249.0,
+      "sd": 208.4,
+      "robustSD": 112.7,
+      "meanAbs": 133.5,
+      "pctWithin60": 32.5,
+      "pctLaterThanPredictedBy2min": 39.2,
+      "pctEarlierThanPredictedBy1min": 8.6
+     },
+     "30": {
+      "n": 1982,
+      "mean": 135.4,
+      "median": 122.0,
+      "p10": -35.0,
+      "p90": 334.0,
+      "sd": 206.9,
+      "robustSD": 149.7,
+      "meanAbs": 172.2,
+      "pctWithin60": 26.3,
+      "pctLaterThanPredictedBy2min": 50.4,
+      "pctEarlierThanPredictedBy1min": 7.4
+     }
+    },
+    "NT": {
+     "1": {
+      "n": 5179,
+      "mean": 0.1,
+      "median": 0.0,
+      "p10": -20.0,
+      "p90": 22.0,
+      "sd": 30.3,
+      "robustSD": 13.3,
+      "meanAbs": 13.8,
+      "pctWithin60": 97.8,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.2
+     },
+     "2": {
+      "n": 5195,
+      "mean": 2.9,
+      "median": 3.0,
+      "p10": -29.0,
+      "p90": 38.0,
+      "sd": 39.6,
+      "robustSD": 20.8,
+      "meanAbs": 22.3,
+      "pctWithin60": 94.0,
+      "pctLaterThanPredictedBy2min": 0.3,
+      "pctEarlierThanPredictedBy1min": 2.6
+     },
+     "3": {
+      "n": 5208,
+      "mean": 5.5,
+      "median": 7.0,
+      "p10": -37.0,
+      "p90": 50.0,
+      "sd": 51.3,
+      "robustSD": 28.2,
+      "meanAbs": 29.6,
+      "pctWithin60": 88.9,
+      "pctLaterThanPredictedBy2min": 1.2,
+      "pctEarlierThanPredictedBy1min": 4.3
+     },
+     "5": {
+      "n": 5237,
+      "mean": 10.8,
+      "median": 12.0,
+      "p10": -50.0,
+      "p90": 73.0,
+      "sd": 69.9,
+      "robustSD": 41.5,
+      "meanAbs": 42.6,
+      "pctWithin60": 78.1,
+      "pctLaterThanPredictedBy2min": 3.0,
+      "pctEarlierThanPredictedBy1min": 7.5
+     },
+     "7": {
+      "n": 5241,
+      "mean": 15.6,
+      "median": 16.0,
+      "p10": -62.0,
+      "p90": 95.0,
+      "sd": 89.1,
+      "robustSD": 53.4,
+      "meanAbs": 55.0,
+      "pctWithin60": 68.1,
+      "pctLaterThanPredictedBy2min": 5.8,
+      "pctEarlierThanPredictedBy1min": 10.3
+     },
+     "10": {
+      "n": 5256,
+      "mean": 24.2,
+      "median": 24.0,
+      "p10": -72.0,
+      "p90": 125.0,
+      "sd": 109.0,
+      "robustSD": 66.7,
+      "meanAbs": 69.7,
+      "pctWithin60": 58.4,
+      "pctLaterThanPredictedBy2min": 11.0,
+      "pctEarlierThanPredictedBy1min": 12.0
+     },
+     "15": {
+      "n": 5282,
+      "mean": 38.1,
+      "median": 36.0,
+      "p10": -87.0,
+      "p90": 167.0,
+      "sd": 138.0,
+      "robustSD": 84.5,
+      "meanAbs": 90.7,
+      "pctWithin60": 46.4,
+      "pctLaterThanPredictedBy2min": 18.0,
+      "pctEarlierThanPredictedBy1min": 14.0
+     },
+     "20": {
+      "n": 5276,
+      "mean": 53.5,
+      "median": 50.0,
+      "p10": -92.0,
+      "p90": 205.0,
+      "sd": 158.4,
+      "robustSD": 94.9,
+      "meanAbs": 108.6,
+      "pctWithin60": 39.6,
+      "pctLaterThanPredictedBy2min": 24.9,
+      "pctEarlierThanPredictedBy1min": 14.5
+     },
+     "30": {
+      "n": 5293,
+      "mean": 79.1,
+      "median": 73.0,
+      "p10": -88.0,
+      "p90": 269.0,
+      "sd": 186.6,
+      "robustSD": 112.7,
+      "meanAbs": 134.7,
+      "pctWithin60": 32.6,
+      "pctLaterThanPredictedBy2min": 34.4,
+      "pctEarlierThanPredictedBy1min": 13.5
+     }
+    }
+   },
+   "terminal": {
+    "ALL": {
+     "1": {
+      "n": 6209,
+      "mean": 20.8,
+      "median": 11.0,
+      "p10": 0.0,
+      "p90": 63.0,
+      "sd": 33.8,
+      "robustSD": 16.3,
+      "meanAbs": 24.5,
+      "pctWithin60": 88.0,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 0.5
+     },
+     "2": {
+      "n": 6588,
+      "mean": 32.9,
+      "median": 20.0,
+      "p10": 0.0,
+      "p90": 109.0,
+      "sd": 51.2,
+      "robustSD": 29.7,
+      "meanAbs": 36.4,
+      "pctWithin60": 77.7,
+      "pctLaterThanPredictedBy2min": 6.0,
+      "pctEarlierThanPredictedBy1min": 0.3
+     },
+     "3": {
+      "n": 6646,
+      "mean": 44.0,
+      "median": 24.0,
+      "p10": 0.0,
+      "p90": 131.0,
+      "sd": 64.8,
+      "robustSD": 35.6,
+      "meanAbs": 48.0,
+      "pctWithin60": 68.6,
+      "pctLaterThanPredictedBy2min": 11.5,
+      "pctEarlierThanPredictedBy1min": 0.5
+     },
+     "5": {
+      "n": 6690,
+      "mean": 56.3,
+      "median": 25.0,
+      "p10": 0.0,
+      "p90": 179.0,
+      "sd": 99.4,
+      "robustSD": 37.1,
+      "meanAbs": 62.3,
+      "pctWithin60": 66.1,
+      "pctLaterThanPredictedBy2min": 19.2,
+      "pctEarlierThanPredictedBy1min": 0.6
+     },
+     "7": {
+      "n": 6744,
+      "mean": 63.1,
+      "median": 26.0,
+      "p10": 0.0,
+      "p90": 192.0,
+      "sd": 99.7,
+      "robustSD": 38.5,
+      "meanAbs": 68.4,
+      "pctWithin60": 64.9,
+      "pctLaterThanPredictedBy2min": 19.4,
+      "pctEarlierThanPredictedBy1min": 1.0
+     },
+     "10": {
+      "n": 6747,
+      "mean": 69.5,
+      "median": 27.0,
+      "p10": 0.0,
+      "p90": 198.0,
+      "sd": 127.8,
+      "robustSD": 40.0,
+      "meanAbs": 76.0,
+      "pctWithin60": 63.6,
+      "pctLaterThanPredictedBy2min": 20.5,
+      "pctEarlierThanPredictedBy1min": 1.3
+     },
+     "15": {
+      "n": 6735,
+      "mean": 77.4,
+      "median": 27.0,
+      "p10": 0.0,
+      "p90": 210.0,
+      "sd": 150.3,
+      "robustSD": 40.0,
+      "meanAbs": 83.8,
+      "pctWithin60": 62.3,
+      "pctLaterThanPredictedBy2min": 21.8,
+      "pctEarlierThanPredictedBy1min": 1.2
+     },
+     "20": {
+      "n": 6707,
+      "mean": 82.9,
+      "median": 28.0,
+      "p10": 0.0,
+      "p90": 226.0,
+      "sd": 166.2,
+      "robustSD": 41.5,
+      "meanAbs": 90.1,
+      "pctWithin60": 61.7,
+      "pctLaterThanPredictedBy2min": 22.7,
+      "pctEarlierThanPredictedBy1min": 1.4
+     },
+     "30": {
+      "n": 6531,
+      "mean": 91.6,
+      "median": 29.0,
+      "p10": 0.0,
+      "p90": 250.0,
+      "sd": 201.1,
+      "robustSD": 43.0,
+      "meanAbs": 102.7,
+      "pctWithin60": 60.2,
+      "pctLaterThanPredictedBy2min": 24.6,
+      "pctEarlierThanPredictedBy1min": 1.7
+     }
+    },
+    "MD": {
+     "1": {
+      "n": 2156,
+      "mean": 21.9,
+      "median": 13.0,
+      "p10": 0.0,
+      "p90": 66.0,
+      "sd": 32.2,
+      "robustSD": 19.3,
+      "meanAbs": 25.6,
+      "pctWithin60": 86.9,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 0.5
+     },
+     "2": {
+      "n": 2266,
+      "mean": 34.2,
+      "median": 20.0,
+      "p10": 0.0,
+      "p90": 110.0,
+      "sd": 53.6,
+      "robustSD": 29.7,
+      "meanAbs": 37.5,
+      "pctWithin60": 77.0,
+      "pctLaterThanPredictedBy2min": 6.5,
+      "pctEarlierThanPredictedBy1min": 0.2
+     },
+     "3": {
+      "n": 2294,
+      "mean": 45.3,
+      "median": 26.0,
+      "p10": 0.0,
+      "p90": 132.0,
+      "sd": 58.9,
+      "robustSD": 38.5,
+      "meanAbs": 47.9,
+      "pctWithin60": 68.4,
+      "pctLaterThanPredictedBy2min": 11.6,
+      "pctEarlierThanPredictedBy1min": 0.3
+     },
+     "5": {
+      "n": 2332,
+      "mean": 55.3,
+      "median": 27.0,
+      "p10": 0.0,
+      "p90": 178.0,
+      "sd": 117.0,
+      "robustSD": 40.0,
+      "meanAbs": 61.8,
+      "pctWithin60": 66.3,
+      "pctLaterThanPredictedBy2min": 18.6,
+      "pctEarlierThanPredictedBy1min": 0.3
+     },
+     "7": {
+      "n": 2374,
+      "mean": 63.2,
+      "median": 27.0,
+      "p10": 0.0,
+      "p90": 187.0,
+      "sd": 94.0,
+      "robustSD": 40.0,
+      "meanAbs": 66.0,
+      "pctWithin60": 65.5,
+      "pctLaterThanPredictedBy2min": 18.5,
+      "pctEarlierThanPredictedBy1min": 0.5
+     },
+     "10": {
+      "n": 2373,
+      "mean": 67.0,
+      "median": 27.0,
+      "p10": 0.0,
+      "p90": 192.0,
+      "sd": 139.3,
+      "robustSD": 40.0,
+      "meanAbs": 73.0,
+      "pctWithin60": 65.0,
+      "pctLaterThanPredictedBy2min": 19.5,
+      "pctEarlierThanPredictedBy1min": 0.8
+     },
+     "15": {
+      "n": 2387,
+      "mean": 72.4,
+      "median": 26.0,
+      "p10": 0.0,
+      "p90": 200.0,
+      "sd": 160.4,
+      "robustSD": 38.5,
+      "meanAbs": 79.9,
+      "pctWithin60": 64.3,
+      "pctLaterThanPredictedBy2min": 20.4,
+      "pctEarlierThanPredictedBy1min": 1.0
+     },
+     "20": {
+      "n": 2391,
+      "mean": 76.5,
+      "median": 26.0,
+      "p10": 0.0,
+      "p90": 210.0,
+      "sd": 169.7,
+      "robustSD": 38.5,
+      "meanAbs": 84.4,
+      "pctWithin60": 63.7,
+      "pctLaterThanPredictedBy2min": 21.5,
+      "pctEarlierThanPredictedBy1min": 1.2
+     },
+     "30": {
+      "n": 2383,
+      "mean": 83.7,
+      "median": 27.0,
+      "p10": 0.0,
+      "p90": 238.0,
+      "sd": 173.7,
+      "robustSD": 40.0,
+      "meanAbs": 92.3,
+      "pctWithin60": 62.3,
+      "pctLaterThanPredictedBy2min": 23.2,
+      "pctEarlierThanPredictedBy1min": 1.5
+     }
+    },
+    "AM": {
+     "1": {
+      "n": 1830,
+      "mean": 21.2,
+      "median": 12.0,
+      "p10": 0.0,
+      "p90": 63.0,
+      "sd": 32.4,
+      "robustSD": 17.8,
+      "meanAbs": 24.3,
+      "pctWithin60": 88.3,
+      "pctLaterThanPredictedBy2min": 0.1,
+      "pctEarlierThanPredictedBy1min": 0.4
+     },
+     "2": {
+      "n": 1932,
+      "mean": 32.8,
+      "median": 19.0,
+      "p10": 0.0,
+      "p90": 109.0,
+      "sd": 49.8,
+      "robustSD": 28.2,
+      "meanAbs": 36.2,
+      "pctWithin60": 77.0,
+      "pctLaterThanPredictedBy2min": 5.8,
+      "pctEarlierThanPredictedBy1min": 0.5
+     },
+     "3": {
+      "n": 1944,
+      "mean": 42.9,
+      "median": 23.0,
+      "p10": 0.0,
+      "p90": 131.0,
+      "sd": 60.3,
+      "robustSD": 34.1,
+      "meanAbs": 45.8,
+      "pctWithin60": 70.3,
+      "pctLaterThanPredictedBy2min": 11.4,
+      "pctEarlierThanPredictedBy1min": 0.5
+     },
+     "5": {
+      "n": 1945,
+      "mean": 52.5,
+      "median": 24.0,
+      "p10": 0.0,
+      "p90": 162.0,
+      "sd": 81.6,
+      "robustSD": 35.6,
+      "meanAbs": 57.1,
+      "pctWithin60": 68.1,
+      "pctLaterThanPredictedBy2min": 16.9,
+      "pctEarlierThanPredictedBy1min": 0.6
+     },
+     "7": {
+      "n": 1962,
+      "mean": 56.6,
+      "median": 25.0,
+      "p10": 0.0,
+      "p90": 166.0,
+      "sd": 96.2,
+      "robustSD": 37.1,
+      "meanAbs": 63.2,
+      "pctWithin60": 66.9,
+      "pctLaterThanPredictedBy2min": 17.2,
+      "pctEarlierThanPredictedBy1min": 1.0
+     },
+     "10": {
+      "n": 1968,
+      "mean": 63.4,
+      "median": 26.0,
+      "p10": 0.0,
+      "p90": 176.0,
+      "sd": 108.2,
+      "robustSD": 38.5,
+      "meanAbs": 68.7,
+      "pctWithin60": 65.2,
+      "pctLaterThanPredictedBy2min": 18.3,
+      "pctEarlierThanPredictedBy1min": 1.2
+     },
+     "15": {
+      "n": 1953,
+      "mean": 71.9,
+      "median": 28.0,
+      "p10": 0.0,
+      "p90": 186.0,
+      "sd": 128.6,
+      "robustSD": 41.5,
+      "meanAbs": 75.9,
+      "pctWithin60": 63.7,
+      "pctLaterThanPredictedBy2min": 19.7,
+      "pctEarlierThanPredictedBy1min": 1.0
+     },
+     "20": {
+      "n": 1926,
+      "mean": 78.6,
+      "median": 28.0,
+      "p10": 0.0,
+      "p90": 201.0,
+      "sd": 147.0,
+      "robustSD": 41.5,
+      "meanAbs": 82.1,
+      "pctWithin60": 63.1,
+      "pctLaterThanPredictedBy2min": 20.8,
+      "pctEarlierThanPredictedBy1min": 1.0
+     },
+     "30": {
+      "n": 1839,
+      "mean": 87.6,
+      "median": 29.0,
+      "p10": 0.0,
+      "p90": 225.0,
+      "sd": 184.0,
+      "robustSD": 43.0,
+      "meanAbs": 93.2,
+      "pctWithin60": 61.9,
+      "pctLaterThanPredictedBy2min": 22.2,
+      "pctEarlierThanPredictedBy1min": 1.0
+     }
+    },
+    "NT": {
+     "1": {
+      "n": 1501,
+      "mean": 18.7,
+      "median": 0.0,
+      "p10": 0.0,
+      "p90": 61.0,
+      "sd": 38.8,
+      "robustSD": 17.8,
+      "meanAbs": 23.2,
+      "pctWithin60": 88.7,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 0.7
+     },
+     "2": {
+      "n": 1640,
+      "mean": 29.4,
+      "median": 17.0,
+      "p10": 0.0,
+      "p90": 101.0,
+      "sd": 52.3,
+      "robustSD": 25.2,
+      "meanAbs": 34.2,
+      "pctWithin60": 79.9,
+      "pctLaterThanPredictedBy2min": 4.8,
+      "pctEarlierThanPredictedBy1min": 0.4
+     },
+     "3": {
+      "n": 1671,
+      "mean": 40.8,
+      "median": 24.0,
+      "p10": 0.0,
+      "p90": 122.0,
+      "sd": 78.8,
+      "robustSD": 35.6,
+      "meanAbs": 49.4,
+      "pctWithin60": 67.9,
+      "pctLaterThanPredictedBy2min": 10.1,
+      "pctEarlierThanPredictedBy1min": 0.8
+     },
+     "5": {
+      "n": 1688,
+      "mean": 58.1,
+      "median": 25.0,
+      "p10": 0.0,
+      "p90": 192.0,
+      "sd": 95.0,
+      "robustSD": 37.1,
+      "meanAbs": 65.9,
+      "pctWithin60": 64.9,
+      "pctLaterThanPredictedBy2min": 21.5,
+      "pctEarlierThanPredictedBy1min": 1.1
+     },
+     "7": {
+      "n": 1694,
+      "mean": 65.5,
+      "median": 25.0,
+      "p10": 0.0,
+      "p90": 220.0,
+      "sd": 106.7,
+      "robustSD": 37.1,
+      "meanAbs": 73.4,
+      "pctWithin60": 63.7,
+      "pctLaterThanPredictedBy2min": 21.6,
+      "pctEarlierThanPredictedBy1min": 1.6
+     },
+     "10": {
+      "n": 1712,
+      "mean": 73.9,
+      "median": 26.0,
+      "p10": 0.0,
+      "p90": 223.0,
+      "sd": 125.6,
+      "robustSD": 38.5,
+      "meanAbs": 81.9,
+      "pctWithin60": 61.5,
+      "pctLaterThanPredictedBy2min": 22.5,
+      "pctEarlierThanPredictedBy1min": 2.0
+     },
+     "15": {
+      "n": 1697,
+      "mean": 84.3,
+      "median": 27.0,
+      "p10": 0.0,
+      "p90": 235.0,
+      "sd": 150.4,
+      "robustSD": 40.0,
+      "meanAbs": 91.7,
+      "pctWithin60": 59.8,
+      "pctLaterThanPredictedBy2min": 24.5,
+      "pctEarlierThanPredictedBy1min": 1.8
+     },
+     "20": {
+      "n": 1682,
+      "mean": 88.4,
+      "median": 27.0,
+      "p10": 0.0,
+      "p90": 251.0,
+      "sd": 172.2,
+      "robustSD": 40.0,
+      "meanAbs": 98.4,
+      "pctWithin60": 59.5,
+      "pctLaterThanPredictedBy2min": 24.6,
+      "pctEarlierThanPredictedBy1min": 2.3
+     },
+     "30": {
+      "n": 1622,
+      "mean": 95.2,
+      "median": 30.0,
+      "p10": 0.0,
+      "p90": 278.0,
+      "sd": 242.6,
+      "robustSD": 44.5,
+      "meanAbs": 118.9,
+      "pctWithin60": 56.7,
+      "pctLaterThanPredictedBy2min": 27.0,
+      "pctEarlierThanPredictedBy1min": 3.1
+     }
+    },
+    "PM": {
+     "1": {
+      "n": 722,
+      "mean": 21.2,
+      "median": 14.0,
+      "p10": 0.0,
+      "p90": 63.0,
+      "sd": 30.1,
+      "robustSD": 20.8,
+      "meanAbs": 24.4,
+      "pctWithin60": 88.9,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 0.0
+     },
+     "2": {
+      "n": 750,
+      "mean": 37.3,
+      "median": 22.0,
+      "p10": 0.0,
+      "p90": 116.0,
+      "sd": 44.4,
+      "robustSD": 32.6,
+      "meanAbs": 38.5,
+      "pctWithin60": 76.8,
+      "pctLaterThanPredictedBy2min": 7.9,
+      "pctEarlierThanPredictedBy1min": 0.0
+     },
+     "3": {
+      "n": 737,
+      "mean": 50.3,
+      "median": 28.0,
+      "p10": 0.0,
+      "p90": 145.0,
+      "sd": 57.8,
+      "robustSD": 41.5,
+      "meanAbs": 51.2,
+      "pctWithin60": 66.2,
+      "pctLaterThanPredictedBy2min": 14.7,
+      "pctEarlierThanPredictedBy1min": 0.1
+     },
+     "5": {
+      "n": 725,
+      "mean": 65.5,
+      "median": 33.0,
+      "p10": 0.0,
+      "p90": 187.0,
+      "sd": 89.9,
+      "robustSD": 48.9,
+      "meanAbs": 69.4,
+      "pctWithin60": 62.5,
+      "pctLaterThanPredictedBy2min": 22.1,
+      "pctEarlierThanPredictedBy1min": 0.4
+     },
+     "7": {
+      "n": 714,
+      "mean": 74.7,
+      "median": 33.0,
+      "p10": 0.0,
+      "p90": 215.0,
+      "sd": 108.9,
+      "robustSD": 48.9,
+      "meanAbs": 79.0,
+      "pctWithin60": 60.4,
+      "pctLaterThanPredictedBy2min": 23.1,
+      "pctEarlierThanPredictedBy1min": 0.8
+     },
+     "10": {
+      "n": 694,
+      "mean": 84.6,
+      "median": 35.0,
+      "p10": 0.0,
+      "p90": 235.0,
+      "sd": 141.5,
+      "robustSD": 51.9,
+      "meanAbs": 92.1,
+      "pctWithin60": 58.9,
+      "pctLaterThanPredictedBy2min": 24.8,
+      "pctEarlierThanPredictedBy1min": 1.0
+     },
+     "15": {
+      "n": 698,
+      "mean": 93.6,
+      "median": 34.0,
+      "p10": 0.0,
+      "p90": 248.0,
+      "sd": 167.8,
+      "robustSD": 50.4,
+      "meanAbs": 100.0,
+      "pctWithin60": 57.7,
+      "pctLaterThanPredictedBy2min": 25.4,
+      "pctEarlierThanPredictedBy1min": 1.0
+     },
+     "20": {
+      "n": 708,
+      "mean": 103.3,
+      "median": 37.0,
+      "p10": 0.0,
+      "p90": 297.0,
+      "sd": 186.0,
+      "robustSD": 54.9,
+      "meanAbs": 111.9,
+      "pctWithin60": 56.6,
+      "pctLaterThanPredictedBy2min": 28.0,
+      "pctEarlierThanPredictedBy1min": 1.3
+     },
+     "30": {
+      "n": 687,
+      "mean": 121.5,
+      "median": 45.0,
+      "p10": 0.0,
+      "p90": 336.0,
+      "sd": 221.5,
+      "robustSD": 66.7,
+      "meanAbs": 126.0,
+      "pctWithin60": 56.3,
+      "pctLaterThanPredictedBy2min": 30.1,
+      "pctEarlierThanPredictedBy1min": 0.6
+     }
+    }
+   },
+   "cable": {
+    "ALL": {
+     "1": {
+      "n": 2665,
+      "mean": -2.9,
+      "median": 0.0,
+      "p10": -13.0,
+      "p90": 28.0,
+      "sd": 80.5,
+      "robustSD": 7.4,
+      "meanAbs": 19.0,
+      "pctWithin60": 96.5,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.8
+     },
+     "2": {
+      "n": 2741,
+      "mean": -3.3,
+      "median": 0.0,
+      "p10": -21.0,
+      "p90": 51.0,
+      "sd": 119.9,
+      "robustSD": 13.3,
+      "meanAbs": 32.5,
+      "pctWithin60": 89.1,
+      "pctLaterThanPredictedBy2min": 0.8,
+      "pctEarlierThanPredictedBy1min": 3.1
+     },
+     "3": {
+      "n": 2784,
+      "mean": 0.2,
+      "median": 0.0,
+      "p10": -29.0,
+      "p90": 75.0,
+      "sd": 136.4,
+      "robustSD": 22.2,
+      "meanAbs": 44.9,
+      "pctWithin60": 82.1,
+      "pctLaterThanPredictedBy2min": 4.7,
+      "pctEarlierThanPredictedBy1min": 4.8
+     },
+     "5": {
+      "n": 2842,
+      "mean": 10.8,
+      "median": 3.0,
+      "p10": -48.0,
+      "p90": 143.0,
+      "sd": 190.2,
+      "robustSD": 41.5,
+      "meanAbs": 77.6,
+      "pctWithin60": 65.2,
+      "pctLaterThanPredictedBy2min": 12.8,
+      "pctEarlierThanPredictedBy1min": 8.4
+     },
+     "7": {
+      "n": 2909,
+      "mean": 32.1,
+      "median": 22.0,
+      "p10": -57.0,
+      "p90": 240.0,
+      "sd": 241.0,
+      "robustSD": 68.2,
+      "meanAbs": 118.0,
+      "pctWithin60": 52.1,
+      "pctLaterThanPredictedBy2min": 23.7,
+      "pctEarlierThanPredictedBy1min": 9.5
+     },
+     "10": {
+      "n": 3029,
+      "mean": 76.8,
+      "median": 50.0,
+      "p10": -69.0,
+      "p90": 390.0,
+      "sd": 294.5,
+      "robustSD": 111.2,
+      "meanAbs": 179.1,
+      "pctWithin60": 41.3,
+      "pctLaterThanPredictedBy2min": 37.1,
+      "pctEarlierThanPredictedBy1min": 10.5
+     },
+     "15": {
+      "n": 3218,
+      "mean": 167.8,
+      "median": 118.0,
+      "p10": -70.0,
+      "p90": 621.0,
+      "sd": 381.3,
+      "robustSD": 212.0,
+      "meanAbs": 284.8,
+      "pctWithin60": 32.4,
+      "pctLaterThanPredictedBy2min": 49.1,
+      "pctEarlierThanPredictedBy1min": 10.5
+     },
+     "20": {
+      "n": 3351,
+      "mean": 265.9,
+      "median": 273.0,
+      "p10": -62.0,
+      "p90": 854.0,
+      "sd": 456.4,
+      "robustSD": 404.7,
+      "meanAbs": 391.5,
+      "pctWithin60": 26.1,
+      "pctLaterThanPredictedBy2min": 58.6,
+      "pctEarlierThanPredictedBy1min": 10.1
+     },
+     "30": {
+      "n": 3615,
+      "mean": 439.6,
+      "median": 454.0,
+      "p10": -24.0,
+      "p90": 1217.0,
+      "sd": 607.3,
+      "robustSD": 642.0,
+      "meanAbs": 568.1,
+      "pctWithin60": 22.9,
+      "pctLaterThanPredictedBy2min": 64.5,
+      "pctEarlierThanPredictedBy1min": 8.9
+     }
+    },
+    "MD": {
+     "1": {
+      "n": 1195,
+      "mean": -5.1,
+      "median": 0.0,
+      "p10": -11.0,
+      "p90": 29.0,
+      "sd": 98.3,
+      "robustSD": 7.4,
+      "meanAbs": 21.9,
+      "pctWithin60": 96.4,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 2.2
+     },
+     "2": {
+      "n": 1240,
+      "mean": -6.5,
+      "median": 0.0,
+      "p10": -17.0,
+      "p90": 52.0,
+      "sd": 141.6,
+      "robustSD": 14.8,
+      "meanAbs": 37.0,
+      "pctWithin60": 88.2,
+      "pctLaterThanPredictedBy2min": 1.0,
+      "pctEarlierThanPredictedBy1min": 3.5
+     },
+     "3": {
+      "n": 1262,
+      "mean": -6.1,
+      "median": 0.0,
+      "p10": -21.0,
+      "p90": 78.0,
+      "sd": 171.7,
+      "robustSD": 22.2,
+      "meanAbs": 53.2,
+      "pctWithin60": 80.8,
+      "pctLaterThanPredictedBy2min": 4.8,
+      "pctEarlierThanPredictedBy1min": 5.0
+     },
+     "5": {
+      "n": 1304,
+      "mean": 1.9,
+      "median": 10.0,
+      "p10": -35.0,
+      "p90": 140.0,
+      "sd": 229.2,
+      "robustSD": 34.8,
+      "meanAbs": 89.1,
+      "pctWithin60": 64.0,
+      "pctLaterThanPredictedBy2min": 13.2,
+      "pctEarlierThanPredictedBy1min": 7.8
+     },
+     "7": {
+      "n": 1349,
+      "mean": 21.1,
+      "median": 29.0,
+      "p10": -40.0,
+      "p90": 250.0,
+      "sd": 289.3,
+      "robustSD": 69.7,
+      "meanAbs": 136.8,
+      "pctWithin60": 51.1,
+      "pctLaterThanPredictedBy2min": 25.8,
+      "pctEarlierThanPredictedBy1min": 8.5
+     },
+     "10": {
+      "n": 1415,
+      "mean": 65.2,
+      "median": 68.0,
+      "p10": -55.0,
+      "p90": 380.0,
+      "sd": 329.5,
+      "robustSD": 109.7,
+      "meanAbs": 195.8,
+      "pctWithin60": 39.7,
+      "pctLaterThanPredictedBy2min": 39.9,
+      "pctEarlierThanPredictedBy1min": 9.6
+     },
+     "15": {
+      "n": 1492,
+      "mean": 154.3,
+      "median": 137.0,
+      "p10": -135.0,
+      "p90": 611.0,
+      "sd": 415.0,
+      "robustSD": 213.5,
+      "meanAbs": 306.0,
+      "pctWithin60": 28.8,
+      "pctLaterThanPredictedBy2min": 51.5,
+      "pctEarlierThanPredictedBy1min": 11.2
+     },
+     "20": {
+      "n": 1516,
+      "mean": 258.4,
+      "median": 310.0,
+      "p10": -158.0,
+      "p90": 852.0,
+      "sd": 483.5,
+      "robustSD": 426.2,
+      "meanAbs": 418.5,
+      "pctWithin60": 21.7,
+      "pctLaterThanPredictedBy2min": 62.5,
+      "pctEarlierThanPredictedBy1min": 11.1
+     },
+     "30": {
+      "n": 1633,
+      "mean": 430.3,
+      "median": 480.0,
+      "p10": -135.0,
+      "p90": 1158.0,
+      "sd": 630.4,
+      "robustSD": 596.0,
+      "meanAbs": 599.9,
+      "pctWithin60": 17.6,
+      "pctLaterThanPredictedBy2min": 68.3,
+      "pctEarlierThanPredictedBy1min": 10.7
+     }
+    },
+    "AM": {
+     "1": {
+      "n": 403,
+      "mean": 2.0,
+      "median": 0.0,
+      "p10": -20.0,
+      "p90": 29.0,
+      "sd": 23.3,
+      "robustSD": 10.4,
+      "meanAbs": 13.9,
+      "pctWithin60": 96.8,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.2
+     },
+     "2": {
+      "n": 416,
+      "mean": 4.7,
+      "median": 0.0,
+      "p10": -34.0,
+      "p90": 52.0,
+      "sd": 36.9,
+      "robustSD": 19.3,
+      "meanAbs": 23.1,
+      "pctWithin60": 89.9,
+      "pctLaterThanPredictedBy2min": 0.5,
+      "pctEarlierThanPredictedBy1min": 2.2
+     },
+     "3": {
+      "n": 423,
+      "mean": 9.5,
+      "median": 0.0,
+      "p10": -43.0,
+      "p90": 70.0,
+      "sd": 50.9,
+      "robustSD": 34.1,
+      "meanAbs": 32.9,
+      "pctWithin60": 83.2,
+      "pctLaterThanPredictedBy2min": 4.3,
+      "pctEarlierThanPredictedBy1min": 4.7
+     },
+     "5": {
+      "n": 439,
+      "mean": 24.6,
+      "median": 0.0,
+      "p10": -65.0,
+      "p90": 136.0,
+      "sd": 81.2,
+      "robustSD": 62.3,
+      "meanAbs": 56.3,
+      "pctWithin60": 64.0,
+      "pctLaterThanPredictedBy2min": 11.6,
+      "pctEarlierThanPredictedBy1min": 12.1
+     },
+     "7": {
+      "n": 446,
+      "mean": 44.3,
+      "median": 9.0,
+      "p10": -78.0,
+      "p90": 210.0,
+      "sd": 110.4,
+      "robustSD": 89.7,
+      "meanAbs": 80.5,
+      "pctWithin60": 50.4,
+      "pctLaterThanPredictedBy2min": 18.8,
+      "pctEarlierThanPredictedBy1min": 14.3
+     },
+     "10": {
+      "n": 462,
+      "mean": 87.2,
+      "median": 29.0,
+      "p10": -93.0,
+      "p90": 358.0,
+      "sd": 169.1,
+      "robustSD": 119.3,
+      "meanAbs": 126.6,
+      "pctWithin60": 42.4,
+      "pctLaterThanPredictedBy2min": 31.0,
+      "pctEarlierThanPredictedBy1min": 14.5
+     },
+     "15": {
+      "n": 507,
+      "mean": 179.8,
+      "median": 79.0,
+      "p10": -69.0,
+      "p90": 605.0,
+      "sd": 267.1,
+      "robustSD": 148.3,
+      "meanAbs": 219.1,
+      "pctWithin60": 37.5,
+      "pctLaterThanPredictedBy2min": 43.0,
+      "pctEarlierThanPredictedBy1min": 10.8
+     },
+     "20": {
+      "n": 511,
+      "mean": 277.8,
+      "median": 210.0,
+      "p10": -53.0,
+      "p90": 715.0,
+      "sd": 328.1,
+      "robustSD": 311.3,
+      "meanAbs": 312.1,
+      "pctWithin60": 29.5,
+      "pctLaterThanPredictedBy2min": 55.4,
+      "pctEarlierThanPredictedBy1min": 9.4
+     },
+     "30": {
+      "n": 533,
+      "mean": 404.0,
+      "median": 404.0,
+      "p10": -42.0,
+      "p90": 1081.0,
+      "sd": 514.1,
+      "robustSD": 599.0,
+      "meanAbs": 472.3,
+      "pctWithin60": 28.0,
+      "pctLaterThanPredictedBy2min": 60.6,
+      "pctEarlierThanPredictedBy1min": 8.6
+     }
+    },
+    "PM": {
+     "1": {
+      "n": 470,
+      "mean": -1.5,
+      "median": 0.0,
+      "p10": -9.0,
+      "p90": 27.0,
+      "sd": 76.9,
+      "robustSD": 3.0,
+      "meanAbs": 16.6,
+      "pctWithin60": 97.0,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.3
+     },
+     "2": {
+      "n": 467,
+      "mean": -2.7,
+      "median": 0.0,
+      "p10": -11.0,
+      "p90": 52.0,
+      "sd": 132.1,
+      "robustSD": 10.4,
+      "meanAbs": 31.9,
+      "pctWithin60": 90.4,
+      "pctLaterThanPredictedBy2min": 1.1,
+      "pctEarlierThanPredictedBy1min": 1.7
+     },
+     "3": {
+      "n": 466,
+      "mean": 7.8,
+      "median": 0.0,
+      "p10": -12.0,
+      "p90": 80.0,
+      "sd": 115.9,
+      "robustSD": 12.6,
+      "meanAbs": 39.9,
+      "pctWithin60": 84.1,
+      "pctLaterThanPredictedBy2min": 5.8,
+      "pctEarlierThanPredictedBy1min": 2.4
+     },
+     "5": {
+      "n": 458,
+      "mean": 17.1,
+      "median": 0.0,
+      "p10": -13.0,
+      "p90": 162.0,
+      "sd": 208.8,
+      "robustSD": 28.2,
+      "meanAbs": 80.9,
+      "pctWithin60": 68.8,
+      "pctLaterThanPredictedBy2min": 14.8,
+      "pctEarlierThanPredictedBy1min": 3.7
+     },
+     "7": {
+      "n": 472,
+      "mean": 36.1,
+      "median": 19.0,
+      "p10": -6.0,
+      "p90": 290.0,
+      "sd": 274.1,
+      "robustSD": 51.1,
+      "meanAbs": 131.7,
+      "pctWithin60": 56.1,
+      "pctLaterThanPredictedBy2min": 26.7,
+      "pctEarlierThanPredictedBy1min": 4.7
+     },
+     "10": {
+      "n": 492,
+      "mean": 56.1,
+      "median": 33.0,
+      "p10": -22.0,
+      "p90": 418.0,
+      "sd": 361.9,
+      "robustSD": 85.2,
+      "meanAbs": 202.0,
+      "pctWithin60": 47.8,
+      "pctLaterThanPredictedBy2min": 35.6,
+      "pctEarlierThanPredictedBy1min": 6.9
+     },
+     "15": {
+      "n": 521,
+      "mean": 141.6,
+      "median": 81.0,
+      "p10": -236.0,
+      "p90": 692.0,
+      "sd": 472.0,
+      "robustSD": 204.6,
+      "meanAbs": 330.5,
+      "pctWithin60": 36.5,
+      "pctLaterThanPredictedBy2min": 46.4,
+      "pctEarlierThanPredictedBy1min": 10.4
+     },
+     "20": {
+      "n": 585,
+      "mean": 226.2,
+      "median": 195.0,
+      "p10": -358.0,
+      "p90": 889.0,
+      "sd": 571.4,
+      "robustSD": 375.1,
+      "meanAbs": 450.9,
+      "pctWithin60": 28.9,
+      "pctLaterThanPredictedBy2min": 52.3,
+      "pctEarlierThanPredictedBy1min": 12.5
+     },
+     "30": {
+      "n": 618,
+      "mean": 389.7,
+      "median": 350.0,
+      "p10": -336.0,
+      "p90": 1232.0,
+      "sd": 708.9,
+      "robustSD": 635.3,
+      "meanAbs": 606.6,
+      "pctWithin60": 27.5,
+      "pctLaterThanPredictedBy2min": 53.7,
+      "pctEarlierThanPredictedBy1min": 13.4
+     }
+    },
+    "NT": {
+     "1": {
+      "n": 597,
+      "mean": -3.0,
+      "median": 0.0,
+      "p10": -14.0,
+      "p90": 27.0,
+      "sd": 67.4,
+      "robustSD": 8.9,
+      "meanAbs": 18.3,
+      "pctWithin60": 96.3,
+      "pctLaterThanPredictedBy2min": 0.0,
+      "pctEarlierThanPredictedBy1min": 1.8
+     },
+     "2": {
+      "n": 618,
+      "mean": -2.6,
+      "median": 0.0,
+      "p10": -26.0,
+      "p90": 45.0,
+      "sd": 96.8,
+      "robustSD": 14.8,
+      "meanAbs": 30.0,
+      "pctWithin60": 89.5,
+      "pctLaterThanPredictedBy2min": 0.5,
+      "pctEarlierThanPredictedBy1min": 4.0
+     },
+     "3": {
+      "n": 633,
+      "mean": 1.1,
+      "median": 0.0,
+      "p10": -35.0,
+      "p90": 65.0,
+      "sd": 106.1,
+      "robustSD": 22.2,
+      "meanAbs": 40.2,
+      "pctWithin60": 82.5,
+      "pctLaterThanPredictedBy2min": 3.9,
+      "pctEarlierThanPredictedBy1min": 6.5
+     },
+     "5": {
+      "n": 641,
+      "mean": 14.9,
+      "median": 0.0,
+      "p10": -62.0,
+      "p90": 144.0,
+      "sd": 132.2,
+      "robustSD": 48.9,
+      "meanAbs": 66.4,
+      "pctWithin60": 65.8,
+      "pctLaterThanPredictedBy2min": 11.4,
+      "pctEarlierThanPredictedBy1min": 10.6
+     },
+     "7": {
+      "n": 642,
+      "mean": 43.9,
+      "median": 14.0,
+      "p10": -73.0,
+      "p90": 221.0,
+      "sd": 151.6,
+      "robustSD": 71.2,
+      "meanAbs": 94.2,
+      "pctWithin60": 52.6,
+      "pctLaterThanPredictedBy2min": 20.6,
+      "pctEarlierThanPredictedBy1min": 11.8
+     },
+     "10": {
+      "n": 660,
+      "mean": 109.8,
+      "median": 56.0,
+      "p10": -82.0,
+      "p90": 420.0,
+      "sd": 214.5,
+      "robustSD": 123.1,
+      "meanAbs": 162.7,
+      "pctWithin60": 38.9,
+      "pctLaterThanPredictedBy2min": 36.7,
+      "pctEarlierThanPredictedBy1min": 12.1
+     },
+     "15": {
+      "n": 698,
+      "mean": 207.4,
+      "median": 122.0,
+      "p10": -53.0,
+      "p90": 586.0,
+      "sd": 285.5,
+      "robustSD": 238.7,
+      "meanAbs": 253.0,
+      "pctWithin60": 33.5,
+      "pctLaterThanPredictedBy2min": 50.1,
+      "pctEarlierThanPredictedBy1min": 8.9
+     },
+     "20": {
+      "n": 739,
+      "mean": 304.6,
+      "median": 260.0,
+      "p10": -8.0,
+      "p90": 822.0,
+      "sd": 359.0,
+      "robustSD": 385.5,
+      "meanAbs": 343.9,
+      "pctWithin60": 30.4,
+      "pctLaterThanPredictedBy2min": 57.9,
+      "pctEarlierThanPredictedBy1min": 6.6
+     },
+     "30": {
+      "n": 831,
+      "mean": 517.7,
+      "median": 435.0,
+      "p10": 0.0,
+      "p90": 1264.0,
+      "sd": 520.6,
+      "robustSD": 644.9,
+      "meanAbs": 538.5,
+      "pctWithin60": 26.6,
+      "pctLaterThanPredictedBy2min": 67.4,
+      "pctEarlierThanPredictedBy1min": 2.0
+     }
+    }
+   }
+  },
+  "sdFitBus": "sd(m) ~ 29.5 s * m^0.59 (m minutes ahead; 29 s at 1, 76 s at 5, 115 s at 10, 173 s at 20)",
+  "informationRetained": {
+   "value": 0.774,
+   "method": "Monte Carlo (data/beta3/raw/ops/scripts/infosim2.py): two lines at a stop, headways 5-15 min, perceived cost gaps 1-12 min, waits exponential with mean half the headway (as in strategy.ts), waiting weighed 2. A rider who knows the waits exactly gains G over the frequency-split optimal strategy; one who sees the waits with Muni's measured prediction error (zero-mean normal, sd(m) above) gains 0.77 G. With half the error 0.94, with 1.5x 0.49, with 2x 0.12."
+  },
+  "shareConsulting": {
+   "value": 0.87,
+   "source": "sfmta_ngcis_2018",
+   "note": "share who check predictions before walking to the stop at least sometimes; an upper bound on any one trip"
+  },
+  "informedShare": 0.673
+ },
+ "rail": {
+  "method": "Delay D at the destination: 0 with probability 1-A, else exponential with scale s beyond the timetable; s from Caltrain's two published thresholds (P(D>=6 min), P(D>10 min)), applied to BART's and the ferry's single threshold. mean = A*s, sd = sqrt(2*A*s^2 - mean^2). Per ride, independent of its length (rail delays come from incidents more than from running).",
+  "caltrain": {
+   "pLate6": 0.037,
+   "pLate10": 0.013,
+   "scaleMin": 3.82,
+   "A": 0.178,
+   "meanLateMin": 0.68,
+   "sdMin": 2.18,
+   "source": "caltrain_edr_2026"
+  },
+  "bart": {
+   "pLate5": 0.053,
+   "scaleMin": 3.82,
+   "A": 0.196,
+   "meanLateMin": 0.75,
+   "sdMin": 2.27,
+   "source": "bart_otp_2026"
+  },
+  "ferry": {
+   "pLate5": 0.059,
+   "scaleMin": 3.82,
+   "A": 0.218,
+   "meanLateMin": 0.83,
+   "sdMin": 2.38,
+   "source": "sfbf_otp_2025",
+   "note": "one month (January 2025); threshold assumed 5 minutes as for BART"
+  }
+ },
+ "reliabilityRatio": {
+  "value": 1.2,
+  "appliesTo": "SD of a ride's running time (minutes), added to its perceived cost as RR x SD in in-vehicle minutes, for every mode",
+  "basis": "RAND Europe 2004 expert workshop provisional value for bus and train, 1.2 (SHRP 2 L17 guidebook); Swedish ASEK urban transit 1.1; inside Carrion & Levinson's (2012) meta-analytic range. UK TAG values lateness, not SD, for timetabled public transport (2.4-2.5 x IVT on mean lateness, RR 1.4 on its SD): for a ride whose delays are zero-mean normal that is about 2.4 x 0.40 sd + 1.4 x 2.4 x 0.58 sd = 2.9 sd, an upper bound for a frequent service whose riders do not hold to a timetable.",
+  "source": [
+   "shrp2_l17",
+   "tag_a1_3",
+   "batley_2019"
+  ]
+ }
+}

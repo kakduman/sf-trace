@@ -1,0 +1,75 @@
+{
+ "description": "Fit of the model with the person-level choices (abm) against the aggregate tour rates (aggregate), each recalibrated for 4 iterations (calibrate.ts; the person-level constants by abm-calibrate.ts), from experiment.ts runs (2 passes from the saved base run's crowding).",
+ "aggregate": {
+  "muni": {
+   "r": 0.9445620599668542,
+   "pctRmse": 34.87018175585236,
+   "within25": 0.5087719298245614,
+   "total": 0.8916403737805177
+  },
+  "subway": 0.9230489959051489,
+  "T": 0.4022185625584897,
+  "buses": 0.914987055392794,
+  "bartCityExits": {
+   "r": 0.929995118411635,
+   "pctRmse": 24.995270634126662,
+   "total": 0.9056488312777273
+  },
+  "bartOutsideEntries": {
+   "r": 0.4770383494882949,
+   "pctRmse": 49.072680939892315,
+   "total": 0.8712790583939225
+  },
+  "caltrain": 0.8902275740730662,
+  "ferry": {
+   "r": 0.6013233305323226,
+   "total": 0.9575070821529745
+  },
+  "milesPerBoarding": {
+   "bus": 1.895216786639345,
+   "metro": 2.9023396966417696
+  },
+  "residentTrips": 2714503.6471599136,
+  "residentTransitShare": 0.12469887359218002,
+  "demandSeconds": {
+   "whole": 12,
+   "part": 3.5
+  }
+ },
+ "abm": {
+  "muni": {
+   "r": 0.9423329439187375,
+   "pctRmse": 36.194160619385336,
+   "within25": 0.49122807017543857,
+   "total": 0.8795408275020149
+  },
+  "subway": 0.8973466159598537,
+  "T": 0.39875390405210526,
+  "buses": 0.9055997981654917,
+  "bartCityExits": {
+   "r": 0.9302484700259437,
+   "pctRmse": 26.164225106223093,
+   "total": 0.8788882888499518
+  },
+  "bartOutsideEntries": {
+   "r": 0.5056007448856145,
+   "pctRmse": 47.66824227002567,
+   "total": 0.8700401030289199
+  },
+  "caltrain": 0.9273842589673509,
+  "ferry": {
+   "r": 0.6172793479129063,
+   "total": 0.8958038243626062
+  },
+  "milesPerBoarding": {
+   "bus": 1.8673318007692603,
+   "metro": 2.8334340351307907
+  },
+  "residentTrips": 2713725.237668199,
+  "residentTransitShare": 0.12146830772087253,
+  "demandSeconds": {
+   "whole": 16.3,
+   "part": 4.9
+  }
+ }
+}

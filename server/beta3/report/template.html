@@ -1,0 +1,332 @@
+<title>%MODEL_NAME% %MODEL_VERSION% · validation report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,560&display=swap">
+<style>
+/* Layout: a single reading column (≈72ch) with wide figures; a scorecard up top, evidence below in the order a reviewer checks it. */
+:root {
+  --bg: #f6f7f5; --surface: #ffffff; --ink: #18211f; --muted: #5b6763; --rule: #dde3e0;
+  --accent: #0f6f7a; --accent-soft: #d7ecee; --model: #0f6f7a; --observed: #b5651d;
+  --pass: #1f7a4c; --pass-bg: #e2f2e8; --warn: #946200; --warn-bg: #fbf0d6; --fail: #a8352a; --fail-bg: #f7e1dd;
+  --display: 'Fraunces', Georgia, serif; --body: 'IBM Plex Sans', system-ui, sans-serif; --label: 'IBM Plex Sans Condensed', 'IBM Plex Sans', sans-serif; --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111816; --surface: #18211f; --ink: #e6ece9; --muted: #9aa8a3; --rule: #2b3633;
+  --accent: #5cc3cf; --accent-soft: #163b3f; --model: #5cc3cf; --observed: #e8a25e;
+  --pass: #6fd29b; --pass-bg: #163626; --warn: #e9c46a; --warn-bg: #3a3014; --fail: #f0897b; --fail-bg: #43201b; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111816; --surface: #18211f; --ink: #e6ece9; --muted: #9aa8a3; --rule: #2b3633;
+  --accent: #5cc3cf; --accent-soft: #163b3f; --model: #5cc3cf; --observed: #e8a25e;
+  --pass: #6fd29b; --pass-bg: #163626; --warn: #e9c46a; --warn-bg: #3a3014; --fail: #f0897b; --fail-bg: #43201b; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--body); }
+main { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; display: grid; gap: 44px; }
+.prose { max-width: 72ch; }
+h1 { font: 560 clamp(30px, 5vw, 44px)/1.1 var(--display); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h2 { font: 560 24px/1.2 var(--display); margin: 0 0 6px; text-wrap: balance; }
+h3 { font: 600 15px/1.3 var(--body); margin: 18px 0 6px; }
+p { margin: 0 0 10px; }
+.eyebrow { font: 600 12px/1 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.lede { font-size: 17px; color: var(--ink); max-width: 68ch; }
+.muted, .note { color: var(--muted); }
+.note { font-size: 13px; }
+section { display: grid; gap: 12px; min-width: 0; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 18px; min-width: 0; }
+.num, td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.score { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.check { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: start; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; }
+.check .what { font-weight: 600; font-size: 14px; line-height: 1.35; }
+.check .val { grid-column: 2; font-family: var(--mono); font-size: 13px; }
+.check .std { grid-column: 2; font-size: 12px; color: var(--muted); }
+.pill { font: 600 11px/1 var(--label); letter-spacing: .06em; text-transform: uppercase; padding: 5px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.pass { color: var(--pass); background: var(--pass-bg); }
+.pill.warn { color: var(--warn); background: var(--warn-bg); }
+.pill.fail { color: var(--fail); background: var(--fail-bg); }
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.tier { border-top: 3px solid var(--accent); background: var(--surface); border-radius: 0 0 10px 10px; padding: 14px; border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.tier b { display: block; font: 600 13px/1.2 var(--label); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 6px; }
+.tier p { font-size: 14px; margin: 0; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tabs button { font: 500 13px var(--body); border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.tabs button[aria-pressed="true"] { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.tabs button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.stat { border-left: 2px solid var(--rule); padding-left: 10px; }
+.stat .k { font: 500 12px/1.2 var(--label); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.stat .v { font: 500 22px/1.3 var(--mono); font-variant-numeric: tabular-nums; }
+.stat .s { font-size: 12px; color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th { text-align: left; font: 600 12px/1.2 var(--label); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 1px solid var(--rule); padding: 8px 10px 6px; white-space: nowrap; }
+td { border-bottom: 1px solid var(--rule); padding: 7px 10px; white-space: nowrap; }
+td.n, th.n { text-align: right; }
+svg text { fill: var(--muted); font: 11px var(--body); }
+svg .lbl { fill: var(--ink); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font: 12px/1.4 var(--body); padding: 6px 8px; border-radius: 6px; z-index: 5; }
+footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; }
+footer li { margin-bottom: 4px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<main>
+  <header class="prose" style="display:grid;gap:12px">
+    <span class="eyebrow"><abbr title="%MODEL_LONG_NAME%">%MODEL_NAME%</abbr> %MODEL_VERSION% · validation report</span>
+    <h1>How well does the model reproduce San Francisco?</h1>
+    <p class="lede" id="lede"></p>
+    <p class="note" id="built"></p>
+  </header>
+
+  <section>
+    <h2>Scorecard against published standards</h2>
+    <p class="prose muted">Each check names the standard it comes from. A pass means the model meets the threshold agencies use for the same kind of model; a caution means it is inside a looser band; a miss is reported as such.</p>
+    <div class="score" id="score"></div>
+  </section>
+
+  <section>
+    <h2>How the model was tested</h2>
+    <p class="prose">Data used to fit a model cannot also prove it. Following FHWA's validation manual, the evidence is kept in three tiers, and the strongest claims rest on data the model never saw.</p>
+    <div class="tiers" id="tiers"></div>
+  </section>
+
+  <section>
+    <h2>Muni ridership, route by route</h2>
+    <p class="prose" id="muniIntro"></p>
+    <div class="tabs" id="dayTabs" role="group" aria-label="Day"></div>
+    <div class="grid2">
+      <div class="card"><svg id="scatter" viewBox="0 0 420 400" role="img" aria-label="Modeled against observed boardings by route"></svg>
+        <div class="legend"><span><i style="background:var(--model)"></i>Route</span><span><i style="background:var(--rule)"></i>±25% band</span></div></div>
+      <div class="card" style="display:grid;gap:14px;align-content:start">
+        <div class="stats" id="muniStats"></div>
+        <p class="note" id="muniNote"></p>
+      </div>
+    </div>
+    <h3>By SFMTA service category</h3>
+    <div class="scroll card"><table id="groups"></table></div>
+    <h3>Every route</h3>
+    <div class="scroll card" style="max-height:420px;overflow:auto"><table id="routes"></table></div>
+  </section>
+
+  <section>
+    <h2>Backcast: predicting a change the model never saw</h2>
+    <p class="prose" id="bcIntro"></p>
+    <div class="grid2">
+      <div class="card"><svg id="bc" viewBox="0 0 420 400" role="img" aria-label="Predicted against observed change by route"></svg></div>
+      <div class="card" style="display:grid;gap:14px;align-content:start"><div class="stats" id="bcStats"></div><div class="scroll"><table id="bcTable"></table></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>BART</h2>
+    <p class="prose">Exits at San Francisco stations were used to set one number, the volume of regional visitors. Everything else here, the split between stations, the load on each segment through the city and under the Bay, and where riders bound for the city board in the East Bay and Peninsula, is an independent check.</p>
+    <div class="grid2">
+      <div class="card"><h3 style="margin-top:0">Exits at city stations, weekday</h3><svg id="bartExits" viewBox="0 0 420 300"></svg></div>
+      <div class="card"><h3 style="margin-top:0">Riders on each segment, weekday</h3><svg id="bartSegs" viewBox="0 0 420 300"></svg></div>
+    </div>
+    <div class="legend"><span><i style="background:var(--observed)"></i>Observed (BART)</span><span><i style="background:var(--model)"></i>Model</span></div>
+    <div class="stats" id="bartStats"></div>
+  </section>
+
+  <section>
+    <h2>Behavior: does it respond the way riders do?</h2>
+    <p class="prose">A planning tool is used to compare futures, so its responses matter more than its fit to today. Each test changes one thing and measures the response as an elasticity, set against the range found in practice (TCRP Report 95; UK DfT TAG M2.1 realism tests).</p>
+    <div class="card"><svg id="sens" viewBox="0 0 760 260" role="img" aria-label="Elasticities against published ranges"></svg>
+      <div class="legend"><span><i style="background:var(--accent-soft);border:1px solid var(--accent)"></i>Published range</span><span><i style="background:var(--model);border-radius:50%"></i>Model</span></div></div>
+  </section>
+
+  <section>
+    <h2>Other independent checks</h2>
+    <div class="grid2">
+      <div class="card"><h3 style="margin-top:0">Average trip length per boarding</h3><table id="tripLen"></table><p class="note" id="tripLenNote"></p></div>
+      <div class="card"><h3 style="margin-top:0">When riders arrive downtown (BART city exits)</h3><table id="tod"></table><p class="note" id="todNote"></p></div>
+    </div>
+    <div class="card"><h3 style="margin-top:0">Reasonableness</h3><div class="scroll"><table id="reason"></table></div></div>
+  </section>
+
+  <section>
+    <h2>Against the models agencies use</h2>
+    <p class="prose">The like-for-like comparison is MTC's Travel Model One, the Bay Area's regional model, which published a Muni route-by-route validation. SF-CHAMP's current validation results are not public.</p>
+    <div class="scroll card"><table id="bench"></table></div>
+  </section>
+
+  <section class="prose">
+    <h2>Where it falls short</h2>
+    <ul id="limits"></ul>
+  </section>
+
+  <footer><b>Sources</b><ul id="sources"></ul></footer>
+</main>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const D = /*DATA*/null;
+const $ = (id) => document.getElementById(id);
+const pct = (v, d = 0) => (v >= 0 ? '+' : '−') + Math.abs(100 * v).toFixed(d) + '%';
+const fmt = (v) => Math.round(v).toLocaleString('en-US');
+const ns = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(ns, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (parent) parent.appendChild(e); return e; };
+const tip = $('tip');
+const showTip = (e, html) => { tip.innerHTML = html; tip.hidden = false; tip.style.left = Math.min(e.clientX + 12, innerWidth - 220) + 'px'; tip.style.top = e.clientY + 12 + 'px'; };
+const hideTip = () => (tip.hidden = true);
+
+const V = D.validation, B = D.backcast;
+$('lede').textContent = D.lede;
+$('built').textContent = `Model built ${D.built.slice(0, 10)} · report generated ${V.generated.slice(0, 10)}. Weekday unless marked.`;
+
+// ---- scorecard ----
+for (const c of D.checks) {
+  const d = document.createElement('div');
+  d.className = 'check';
+  d.innerHTML = `<span class="pill ${c.status}">${{ pass: 'Pass', warn: 'Caution', fail: 'Miss' }[c.status]}</span><span class="what">${c.what}</span><span class="val">${c.value}</span><span class="std">${c.standard}</span>`;
+  $('score').appendChild(d);
+}
+for (const t of D.tiers) {
+  const d = document.createElement('div');
+  d.className = 'tier';
+  d.innerHTML = `<b>${t.name}</b><p>${t.text}</p>`;
+  $('tiers').appendChild(d);
+}
+
+// ---- scatter helper (equal axes, 1:1 line, ±band) ----
+function scatter(svg, pts, { band = 0.25, xLabel, yLabel, signed = false } = {}) {
+  svg.innerHTML = '';
+  const W = 420, H = 400, L = 56, R = 14, T = 12, Bm = 44;
+  let lo, hi;
+  if (signed) { const m = Math.max(...pts.flatMap((p) => [Math.abs(p.x), Math.abs(p.y)])) * 1.1; lo = -m; hi = m; } else { lo = 0; hi = Math.max(...pts.flatMap((p) => [p.x, p.y])) * 1.05; }
+  const sx = (v) => L + ((v - lo) / (hi - lo)) * (W - L - R), sy = (v) => H - Bm - ((v - lo) / (hi - lo)) * (H - T - Bm);
+  const ticks = 5;
+  for (let i = 0; i <= ticks; i++) {
+    const v = lo + ((hi - lo) * i) / ticks;
+    el('line', { x1: L, x2: W - R, y1: sy(v), y2: sy(v), stroke: 'var(--rule)', 'stroke-width': 1 }, svg);
+    const lab = signed ? (v >= 0 ? '+' : '−') + Math.abs(100 * v).toFixed(0) + '%' : v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v.toFixed(0);
+    el('text', { x: L - 6, y: sy(v) + 4, 'text-anchor': 'end' }, svg).textContent = lab;
+    el('text', { x: sx(v), y: H - Bm + 16, 'text-anchor': 'middle' }, svg).textContent = lab;
+  }
+  if (!signed) {
+    const poly = [[lo, lo], [hi, hi * (1 + band)], [hi, hi * (1 - band)]];
+    el('path', { d: `M${sx(0)},${sy(0)} L${sx(hi / (1 + band))},${sy(hi)} L${sx(hi)},${sy(hi)} L${sx(hi)},${sy(hi * (1 - band))} Z`, fill: 'var(--accent-soft)', opacity: 0.7 }, svg);
+    void poly;
+  }
+  el('line', { x1: sx(lo), y1: sy(lo), x2: sx(hi), y2: sy(hi), stroke: 'var(--muted)', 'stroke-dasharray': '4 3' }, svg);
+  el('text', { x: W - R, y: H - 6, 'text-anchor': 'end' }, svg).textContent = xLabel;
+  const yl = el('text', { x: 14, y: T + 8, transform: `rotate(-90 14 ${T + (H - T - Bm) / 2})`, 'text-anchor': 'middle' }, svg);
+  yl.setAttribute('y', T + (H - T - Bm) / 2); yl.textContent = yLabel;
+  for (const p of pts) {
+    const c = el('circle', { cx: sx(p.x), cy: sy(p.y), r: p.r ?? 4.5, fill: 'var(--model)', 'fill-opacity': 0.8, stroke: 'var(--surface)', 'stroke-width': 1 }, svg);
+    c.addEventListener('mousemove', (e) => showTip(e, p.tip));
+    c.addEventListener('mouseleave', hideTip);
+    if (p.label) el('text', { x: sx(p.x) + 6, y: sy(p.y) - 6, class: 'lbl' }, svg).textContent = p.label;
+  }
+}
+
+function statsBlock(target, items) {
+  $(target).innerHTML = items.map((i) => `<div class="stat"><div class="k">${i.k}</div><div class="v">${i.v}</div><div class="s">${i.s ?? ''}</div></div>`).join('');
+}
+
+// ---- Muni by day ----
+const DAYS = { wkd: 'Weekday', sat: 'Saturday', sun: 'Sunday' };
+function showDay(day) {
+  for (const b of $('dayTabs').children) b.setAttribute('aria-pressed', b.dataset.day === day);
+  const m = V.muni[day];
+  scatter($('scatter'), m.routes.map((r) => ({ x: r.observed, y: r.model, label: Math.abs(r.pct) > 40 && r.observed > 8000 ? r.route : '', tip: `<b>${r.route}</b> · ${r.category}<br>observed ${fmt(r.observed)} · model ${fmt(r.model)} (${r.pct > 0 ? '+' : ''}${r.pct.toFixed(0)}%)` })), { xLabel: 'Observed boardings (SFMTA)', yLabel: 'Modeled boardings' });
+  statsBlock('muniStats', [
+    { k: 'Correlation r', v: m.r.toFixed(3), s: 'CTC: ≥ 0.88' },
+    { k: '%RMSE', v: m.pctRmse.toFixed(0) + '%', s: 'CTC: < 40%' },
+    { k: 'System total', v: pct(m.totalRatio - 1, 1), s: 'FHWA: ±9% acceptable' },
+    { k: 'Routes in FHWA bands', v: (100 * m.fhwaLineBands.acceptableShare).toFixed(0) + '%', s: 'acceptable band by size' },
+    { k: 'Within ±25%', v: (100 * m.within25).toFixed(0) + '%', s: 'UK TAG asks 95%' },
+    { k: 'Median error', v: m.medianApe.toFixed(0) + '%', s: `${m.n} routes` },
+  ]);
+  $('muniNote').textContent = `${m.period}. ${day === 'wkd' ? 'Weekday route counts guided structural fixes during development (no route was fitted); the weekend comparisons were fitted only to their system totals.' : 'Only the system total for this day was fitted (one transit constant); the split across routes is an independent test.'}`;
+  $('groups').innerHTML = `<thead><tr><th>Category</th><th class="n">Observed</th><th class="n">Model</th><th class="n">Difference</th><th>CTC ±20%</th></tr></thead><tbody>${m.groups.sort((a, b) => b.observed - a.observed).map((g) => `<tr><td>${g.name}</td><td class="n">${fmt(g.observed)}</td><td class="n">${fmt(g.model)}</td><td class="n">${g.pct > 0 ? '+' : ''}${g.pct.toFixed(0)}%</td><td><span class="pill ${Math.abs(g.pct) <= 20 ? 'pass' : 'fail'}">${Math.abs(g.pct) <= 20 ? 'Pass' : 'Miss'}</span></td></tr>`).join('')}</tbody>`;
+  $('routes').innerHTML = `<thead><tr><th>Route</th><th>Category</th><th class="n">Observed</th><th class="n">Model</th><th class="n">Difference</th><th>FHWA band</th></tr></thead><tbody>${m.routes.slice().sort((a, b) => b.observed - a.observed).map((r) => `<tr><td><b>${r.route}</b></td><td>${r.category}</td><td class="n">${fmt(r.observed)}</td><td class="n">${fmt(r.model)}</td><td class="n">${r.pct > 0 ? '+' : ''}${r.pct.toFixed(0)}%</td><td><span class="pill ${r.preferable ? 'pass' : r.acceptable ? 'warn' : 'fail'}">${r.preferable ? 'Preferable' : r.acceptable ? 'Acceptable' : 'Outside'}</span></td></tr>`).join('')}</tbody>`;
+}
+for (const [d, label] of Object.entries(DAYS)) {
+  const b = document.createElement('button');
+  b.textContent = label; b.dataset.day = d; b.type = 'button';
+  b.onclick = () => showDay(d);
+  $('dayTabs').appendChild(b);
+}
+$('muniIntro').textContent = D.muniIntro;
+showDay('wkd');
+
+// ---- backcast ----
+$('bcIntro').textContent = D.backcastIntro;
+if (B) {
+  scatter($('bc'), B.rows.map((r) => ({ x: r.obsRelChange, y: r.modelRelChange, r: 3 + Math.sqrt(r.observed2026) / 40, label: Math.abs(r.obsRelChange) > 0.25 || Math.abs(r.modelRelChange) > 0.25 ? r.route : '', tip: `<b>${r.route}</b><br>scheduled runs ${r.runs2024} → ${r.runs2026}<br>observed ${pct(r.obsRelChange)} · model ${pct(r.modelRelChange)} (relative to the system)` })), { signed: true, xLabel: 'Observed change, 2024→2026 (relative)', yLabel: 'Predicted change' });
+  statsBlock('bcStats', [
+    { k: 'Weighted r', v: B.weightedCorrelationOfChange.toFixed(2), s: 'predicted vs observed change' },
+    { k: 'Direction right', v: B.directionCorrectShare == null ? '–' : (100 * B.directionCorrectShare).toFixed(0) + '%', s: `${B.serviceChangedRoutes} routes whose service changed >10%` },
+    { k: 'Error vs no-change', v: (100 * B.meanAbsErrorOfChange.model).toFixed(1) + '%', s: `a “no change” forecast: ${(100 * B.meanAbsErrorOfChange.noChangeForecast).toFixed(1)}%` },
+  ]);
+  const ch = B.rows.filter((r) => r.runs2024 && Math.abs(r.runs2026 / r.runs2024 - 1) > 0.1);
+  $('bcTable').innerHTML = `<thead><tr><th>Route</th><th class="n">Runs/day</th><th class="n">Observed</th><th class="n">Model</th></tr></thead><tbody>${ch.map((r) => `<tr><td><b>${r.route}</b></td><td class="n">${r.runs2024}→${r.runs2026}</td><td class="n">${pct(r.obsRelChange)}</td><td class="n">${pct(r.modelRelChange)}</td></tr>`).join('')}</tbody>`;
+}
+
+// ---- BART bars ----
+function pairedBars(svg, rows, labelKey) {
+  svg.innerHTML = '';
+  const W = 420, H = 300, L = 92, R = 40, T = 6;
+  const max = Math.max(...rows.flatMap((r) => [r.observed, r.model])) * 1.05;
+  const bh = (H - T - 20) / rows.length;
+  const sx = (v) => L + (v / max) * (W - L - R);
+  rows.forEach((r, i) => {
+    const y = T + i * bh;
+    el('text', { x: L - 8, y: y + bh / 2 + 4, 'text-anchor': 'end', class: 'lbl' }, svg).textContent = r[labelKey];
+    for (const [k, c, off] of [['observed', 'var(--observed)', 0.12], ['model', 'var(--model)', 0.5]]) {
+      const rect = el('rect', { x: L, y: y + bh * off, width: Math.max(1, sx(r[k]) - L), height: bh * 0.34, fill: c, rx: 2 }, svg);
+      rect.addEventListener('mousemove', (e) => showTip(e, `<b>${r[labelKey]}</b><br>observed ${fmt(r.observed)} · model ${fmt(r.model)}`));
+      rect.addEventListener('mouseleave', hideTip);
+    }
+    el('text', { x: sx(Math.max(r.observed, r.model)) + 4, y: y + bh / 2 + 4 }, svg).textContent = pct(r.model / r.observed - 1);
+  });
+}
+pairedBars($('bartExits'), V.bart.wkd.exits.map((x) => ({ ...x, label: x.name.replace(/ St\.?$/, '').replace('Street', 'St') })), 'label');
+pairedBars($('bartSegs'), V.bart.segments.loads.map((s) => ({ observed: s.observed, model: s.model, label: `${s.a}–${s.b}` })), 'label');
+statsBlock('bartStats', [
+  { k: 'City station exits', v: pct(V.bart.wkd.totalRatio - 1, 1), s: `r ${V.bart.wkd.r.toFixed(2)} across 9 stations (calibrated total)` },
+  { k: 'Segment loads', v: V.bart.segments.pctRmse.toFixed(0) + '% RMSE', s: `r ${V.bart.segments.r.toFixed(2)}, Transbay Tube ${pct(V.bart.segments.loads[0].model / V.bart.segments.loads[0].observed - 1)}` },
+  { k: 'Outside boardings', v: 'r ' + V.bart.outsideEntries.r.toFixed(2), s: `${V.bart.outsideEntries.n} East Bay and Peninsula stations` },
+  { k: 'Saturday exits', v: pct(V.bart.sat.totalRatio - 1, 1), s: `r ${V.bart.sat.r.toFixed(2)}` },
+  { k: 'Sunday exits', v: pct(V.bart.sun.totalRatio - 1, 1), s: `r ${V.bart.sun.r.toFixed(2)}` },
+]);
+
+// ---- sensitivity: range bars ----
+(function () {
+  const svg = $('sens');
+  const rows = V.sensitivity;
+  const W = 760, L = 210, R = 30, T = 18, rh = (260 - T - 26) / rows.length;
+  const lo = -1, hi = 1.2;
+  const sx = (v) => L + ((v - lo) / (hi - lo)) * (W - L - R);
+  for (let v = -1; v <= 1.2001; v += 0.2) {
+    el('line', { x1: sx(v), x2: sx(v), y1: T - 6, y2: 260 - 22, stroke: Math.abs(v) < 1e-9 ? 'var(--muted)' : 'var(--rule)' }, svg);
+    el('text', { x: sx(v), y: 256, 'text-anchor': 'middle' }, svg).textContent = v.toFixed(1);
+  }
+  rows.forEach((r, i) => {
+    const y = T + i * rh + rh / 2;
+    el('text', { x: L - 10, y: y + 4, 'text-anchor': 'end', class: 'lbl' }, svg).textContent = r.test;
+    el('rect', { x: sx(r.range[0]), y: y - 7, width: sx(r.range[1]) - sx(r.range[0]), height: 14, fill: 'var(--accent-soft)', stroke: 'var(--accent)', 'stroke-width': 1, rx: 3 }, svg);
+    const inside = r.elasticity >= r.range[0] && r.elasticity <= r.range[1];
+    const c = el('circle', { cx: sx(Math.max(lo, Math.min(hi, r.elasticity))), cy: y, r: 6, fill: inside ? 'var(--model)' : 'var(--fail)', stroke: 'var(--surface)', 'stroke-width': 1.5 }, svg);
+    c.addEventListener('mousemove', (e) => showTip(e, `<b>${r.test}</b><br>${r.measure}: elasticity ${r.elasticity.toFixed(2)}<br>range ${r.range[0]} to ${r.range[1]}<br><span style="opacity:.8">${r.source}</span>`));
+    c.addEventListener('mouseleave', hideTip);
+    el('text', { x: sx(Math.max(lo, Math.min(hi, r.elasticity))) + 10, y: y - 9 }, svg).textContent = r.elasticity.toFixed(2);
+  });
+})();
+
+// ---- tables ----
+$('tripLen').innerHTML = `<thead><tr><th>Mode</th><th class="n">NTD 2024</th><th class="n">Model</th><th class="n">Diff.</th></tr></thead><tbody>${V.tripLength.rows.map((r) => `<tr><td>${r.mode}</td><td class="n">${r.observed.toFixed(2)} mi</td><td class="n">${r.model.toFixed(2)} mi</td><td class="n">${pct(r.model / r.observed - 1)}</td></tr>`).join('')}</tbody>`;
+$('tripLenNote').textContent = 'Passenger miles per boarding (FTA National Transit Database, report year 2024). FHWA asks average trip lengths within ±5% of observed for trip distribution.';
+$('tod').innerHTML = `<thead><tr><th>Period</th><th class="n">Observed</th><th class="n">Model</th></tr></thead><tbody>${V.timeOfDay.rows.map((r) => `<tr><td>${{ AM: '6–10am', MD: '10am–3pm', PM: '3–7pm', NT: '7pm–6am' }[r.period]}</td><td class="n">${(100 * r.observed).toFixed(0)}%</td><td class="n">${(100 * r.model).toFixed(0)}%</td></tr>`).join('')}</tbody>`;
+$('todNote').textContent = V.timeOfDay.source + '.';
+const RZ = V.reasonableness;
+$('reason').innerHTML = `<thead><tr><th>Measure</th><th class="n">Model</th><th class="n">Accepted range</th><th>Source</th></tr></thead><tbody>
+<tr><td>Boardings per linked transit trip</td><td class="n">${RZ.boardingsPerLinkedTrip.model.toFixed(2)}</td><td class="n">1.2–1.6</td><td>${RZ.boardingsPerLinkedTrip.source}</td></tr>
+<tr><td>Average door-to-door transit trip</td><td class="n">${RZ.avgTransitTripMin.model.toFixed(0)} min</td><td class="n">≈ 48 min</td><td>NCHRP 716, rail cities over 1M</td></tr>
+<tr><td>In-vehicle time coefficient (per min)</td><td class="n">−0.022 to −0.028</td><td class="n">−0.02 to −0.03</td><td>${RZ.ivtCoefficient.source}</td></tr>
+<tr><td>Waiting weighed against riding</td><td class="n">2.0×</td><td class="n">1.5–2.6×</td><td>${RZ.waitToIvtRatio.source}</td></tr>
+<tr><td>Nesting coefficients</td><td class="n">0.35–0.72</td><td class="n">0–1</td><td>${RZ.nestCoefficients.source}</td></tr></tbody>`;
+$('bench').innerHTML = `<thead><tr><th>Model</th><th>Measure</th><th class="n">Published</th><th class="n">This model</th></tr></thead><tbody>${V.benchmarks.map((b) => `<tr><td>${b.model}</td><td>${b.measure}</td><td class="n">${b.measure.includes('RMSE') ? b.value + '%' : (b.value > 0 ? '+' : '') + b.value + '%'}</td><td class="n">${b.ours == null ? '–' : b.measure.includes('RMSE') ? b.ours.toFixed(0) + '%' : pct(b.ours / 100, 0)}</td></tr>`).join('')}</tbody>`;
+$('limits').innerHTML = D.limits.map((l) => `<li>${l}</li>`).join('');
+$('sources').innerHTML = D.sources.map((s) => `<li>${s}</li>`).join('');
+</script>

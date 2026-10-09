@@ -1,0 +1,121 @@
+{
+ "name": "The Portal: Caltrain to the Salesforce Transit Center",
+ "edits": [
+  {
+   "kind": "extend",
+   "id": "portal-Local Weekday",
+   "route": "Local Weekday",
+   "feed": "caltrain",
+   "from": 3309,
+   "stops": [
+    {
+     "lat": 37.7770727,
+     "lon": -122.3950705,
+     "name": "4th & Townsend (underground)"
+    },
+    {
+     "lat": 37.7891641,
+     "lon": -122.3967838,
+     "name": "Salesforce Transit Center"
+    }
+   ],
+   "hops": [
+    60,
+    180
+   ]
+  },
+  {
+   "kind": "extend",
+   "id": "portal-Local Weekend",
+   "route": "Local Weekend",
+   "feed": "caltrain",
+   "from": 3309,
+   "stops": [
+    {
+     "lat": 37.7770727,
+     "lon": -122.3950705,
+     "name": "4th & Townsend (underground)"
+    },
+    {
+     "lat": 37.7891641,
+     "lon": -122.3967838,
+     "name": "Salesforce Transit Center"
+    }
+   ],
+   "hops": [
+    60,
+    180
+   ]
+  },
+  {
+   "kind": "extend",
+   "id": "portal-Limited",
+   "route": "Limited",
+   "feed": "caltrain",
+   "from": 3309,
+   "stops": [
+    {
+     "lat": 37.7770727,
+     "lon": -122.3950705,
+     "name": "4th & Townsend (underground)"
+    },
+    {
+     "lat": 37.7891641,
+     "lon": -122.3967838,
+     "name": "Salesforce Transit Center"
+    }
+   ],
+   "hops": [
+    60,
+    180
+   ]
+  },
+  {
+   "kind": "extend",
+   "id": "portal-Express",
+   "route": "Express",
+   "feed": "caltrain",
+   "from": 3309,
+   "stops": [
+    {
+     "lat": 37.7770727,
+     "lon": -122.3950705,
+     "name": "4th & Townsend (underground)"
+    },
+    {
+     "lat": 37.7891641,
+     "lon": -122.3967838,
+     "name": "Salesforce Transit Center"
+    }
+   ],
+   "hops": [
+    60,
+    180
+   ]
+  },
+  {
+   "kind": "removeStop",
+   "route": "Local Weekday",
+   "feed": "caltrain",
+   "stop": 3309
+  },
+  {
+   "kind": "removeStop",
+   "route": "Local Weekend",
+   "feed": "caltrain",
+   "stop": 3309
+  },
+  {
+   "kind": "removeStop",
+   "route": "Limited",
+   "feed": "caltrain",
+   "stop": 3309
+  },
+  {
+   "kind": "removeStop",
+   "route": "Express",
+   "feed": "caltrain",
+   "stop": 3309
+  }
+ ]
+}

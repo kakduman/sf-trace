@@ -1,0 +1,18 @@
+{
+ "source": "U.S. Census Bureau, County-to-County Commuting Flows, 5-year ACS 2016-2020, Table 1 (data/beta3/raw/commute-county/ccflows2020_table1.xlsx); workers in both directions",
+ "accessed": "2026-10-06",
+ "flows": {
+  "northBay_SF": 41845,
+  "northBay_Peninsula": 8680,
+  "eastBay_SF": 205364,
+  "eastBay_SanMateo": 72838,
+  "eastBay_SantaClara": 138629,
+  "northBay_eastBay": 55947
+ },
+ "counties": { "northBay": ["Marin", "Sonoma", "Napa", "Mendocino", "Lake"], "eastBay": ["Alameda", "Contra Costa", "Solano"], "Peninsula": ["San Mateo", "Santa Clara", "Santa Cruz"] },
+ "throughShare": {
+  "Golden Gate Bridge": 0.172,
+  "Bay Bridge": 0.068
+ },
+ "method": "Golden Gate: North Bay-Peninsula commuters, who cross San Francisco, over all North Bay commuters to San Francisco or the Peninsula (8,680 / 50,525). Bay Bridge: East Bay-San Mateo County commuters crossing San Francisco over East Bay commuters to San Francisco plus them; the share of East Bay-San Mateo commuters who use the Bay Bridge rather than the San Mateo or Dumbarton bridges is assumed to be one fifth (north county), giving 14,568 / (205,364 + 14,568). Santa Clara County commuters are assumed to use the southern bridges. Applied as the through share of each bridge's counted traffic; the through trips leave by US-101 and I-280 in proportion to their counts."
+}

@@ -1,0 +1,2992 @@
+{
+ "description": "Crowds at San Francisco's big venues on an average weekday, October 2025 to September 2026 (the twelve months Muni's route counts average), as a special generator (built by server/beta3/pipeline/events.ts; bundled as header.events; used by shared/beta3/demand.ts). Each attendee makes a trip to the venue and one back. An average weekday is each month's weekday event attendance over its weekdays (holidays included, as SFMTA and BART average), then the mean of the twelve months; August 2026, the month of the BART counts, is given separately.",
+ "accessed": "2026-10-05",
+ "period": {
+  "from": "2025-10-01",
+  "to": "2026-09-30",
+  "weekdays": 261
+ },
+ "averageWeekday": {
+  "giants": 7092,
+  "warriors": 2347,
+  "valkyries": 1115,
+  "chaseOther": 1360,
+  "oracleOther": 151,
+  "billGraham": 963,
+  "moscone": 2345,
+  "all": 15372,
+  "allAug2026": 21696
+ },
+ "venues": [
+  {
+   "name": "Oracle Park",
+   "slots": [
+    {
+     "kind": "evening",
+     "weekdayEvents": 40,
+     "weekdayAttendance": 1393875,
+     "year": 5318,
+     "aug2026": 12197,
+     "sep2026": 8560
+    },
+    {
+     "kind": "concert",
+     "weekdayEvents": 1,
+     "weekdayAttendance": 38000,
+     "year": 151,
+     "aug2026": 1810,
+     "sep2026": 0
+    },
+    {
+     "kind": "day",
+     "weekdayEvents": 14,
+     "weekdayAttendance": 463641,
+     "year": 1773,
+     "aug2026": 2487,
+     "sep2026": 2528
+    }
+   ]
+  },
+  {
+   "name": "Chase Center",
+   "slots": [
+    {
+     "kind": "evening",
+     "weekdayEvents": 50,
+     "weekdayAttendance": 901072,
+     "year": 3461,
+     "aug2026": 3441,
+     "sep2026": 821
+    },
+    {
+     "kind": "concert",
+     "weekdayEvents": 26,
+     "weekdayAttendance": 354000,
+     "year": 1360,
+     "aug2026": 1429,
+     "sep2026": 1364
+    }
+   ]
+  },
+  {
+   "name": "Bill Graham Civic Auditorium",
+   "slots": [
+    {
+     "kind": "concert",
+     "weekdayEvents": 36,
+     "weekdayAttendance": 252000,
+     "year": 963,
+     "aug2026": 333,
+     "sep2026": 1273
+    }
+   ]
+  },
+  {
+   "name": "Moscone Center",
+   "slots": [
+    {
+     "kind": "convention",
+     "weekdayEvents": 30,
+     "weekdayAttendance": 618000,
+     "year": 2345,
+     "aug2026": 0,
+     "sep2026": 4091
+    }
+   ]
+  }
+ ],
+ "model": {
+  "origins": {
+   "arena": {
+    "hotel": 4,
+    "sd": [
+     11.1,
+     3.4,
+     4.2,
+     3.3
+    ],
+    "east": 33,
+    "north": 13,
+    "south": 28
+   },
+   "convention": {
+    "hotel": 65,
+    "sd": [
+     0,
+     5,
+     5,
+     5
+    ],
+    "east": 7.5,
+    "north": 2.5,
+    "south": 10
+   }
+  },
+  "fromWork": {
+   "evening": {
+    "sf": 0.231,
+    "region": 0.09864864864864864
+   },
+   "concert": {
+    "sf": 0.231,
+    "region": 0.09864864864864864
+   },
+   "day": {
+    "sf": 0.264,
+    "region": 0.11274131274131273
+   },
+   "convention": {
+    "sf": 0,
+    "region": 0
+   }
+  },
+  "venues": [
+   {
+    "name": "Oracle Park",
+    "lat": 37.7786,
+    "lon": -122.3893,
+    "origins": "arena",
+    "transitShare": 0.45,
+    "slots": [
+     {
+      "kind": "evening",
+      "year": 5318,
+      "aug2026": 12197
+     },
+     {
+      "kind": "concert",
+      "year": 151,
+      "aug2026": 1810
+     },
+     {
+      "kind": "day",
+      "year": 1773,
+      "aug2026": 2487
+     }
+    ]
+   },
+   {
+    "name": "Chase Center",
+    "lat": 37.768,
+    "lon": -122.3877,
+    "origins": "arena",
+    "transitShare": 0.35,
+    "slots": [
+     {
+      "kind": "evening",
+      "year": 3461,
+      "aug2026": 3441
+     },
+     {
+      "kind": "concert",
+      "year": 1360,
+      "aug2026": 1429
+     }
+    ]
+   },
+   {
+    "name": "Bill Graham Civic Auditorium",
+    "lat": 37.7782,
+    "lon": -122.4174,
+    "origins": "arena",
+    "transitShare": null,
+    "slots": [
+     {
+      "kind": "concert",
+      "year": 963,
+      "aug2026": 333
+     }
+    ]
+   },
+   {
+    "name": "Moscone Center",
+    "lat": 37.7842,
+    "lon": -122.4016,
+    "origins": "convention",
+    "transitShare": null,
+    "slots": [
+     {
+      "kind": "convention",
+      "year": 2345,
+      "aug2026": 0
+     }
+    ]
+   }
+  ]
+ },
+ "byMonth": {
+  "2025-10": {
+   "weekdays": 23,
+   "attendeesPerWeekday": 13726,
+   "giants": 0,
+   "chase": 5791
+  },
+  "2025-11": {
+   "weekdays": 20,
+   "attendeesPerWeekday": 9413,
+   "giants": 0,
+   "chase": 4663
+  },
+  "2025-12": {
+   "weekdays": 23,
+   "attendeesPerWeekday": 4663,
+   "giants": 0,
+   "chase": 4055
+  },
+  "2026-01": {
+   "weekdays": 22,
+   "attendeesPerWeekday": 6841,
+   "giants": 0,
+   "chase": 6841
+  },
+  "2026-02": {
+   "weekdays": 20,
+   "attendeesPerWeekday": 6563,
+   "giants": 0,
+   "chase": 5863
+  },
+  "2026-03": {
+   "weekdays": 22,
+   "attendeesPerWeekday": 19452,
+   "giants": 3688,
+   "chase": 5469
+  },
+  "2026-04": {
+   "weekdays": 22,
+   "attendeesPerWeekday": 19892,
+   "giants": 14971,
+   "chase": 3966
+  },
+  "2026-05": {
+   "weekdays": 21,
+   "attendeesPerWeekday": 19441,
+   "giants": 13718,
+   "chase": 4723
+  },
+  "2026-06": {
+   "weekdays": 22,
+   "attendeesPerWeekday": 27121,
+   "giants": 13237,
+   "chase": 6429
+  },
+  "2026-07": {
+   "weekdays": 23,
+   "attendeesPerWeekday": 17022,
+   "giants": 13715,
+   "chase": 3003
+  },
+  "2026-08": {
+   "weekdays": 21,
+   "attendeesPerWeekday": 21696,
+   "giants": 14684,
+   "chase": 4869
+  },
+  "2026-09": {
+   "weekdays": 22,
+   "attendeesPerWeekday": 18637,
+   "giants": 11088,
+   "chase": 2185
+  }
+ },
+ "assumedAttendance": {
+  "arenaConcert": 15000,
+  "arenaSmall": 6000,
+  "stadiumConcert": 38000,
+  "bgcaShow": 7000,
+  "warriorsPreseason": 17000,
+  "valkyries": 18064
+ },
+ "conventionDailyShare": 0.75,
+ "conventions": [
+  {
+   "name": "Dreamforce 2025",
+   "days": [
+    "2025-10-14",
+    "2025-10-15",
+    "2025-10-16"
+   ],
+   "attendees": 40000,
+   "source": "Salesforce via KTVU/Hoodline, Oct. 2025: nearly 50,000 attendees, over 40,000 in person"
+  },
+  {
+   "name": "TechCrunch Disrupt 2025",
+   "days": [
+    "2025-10-27",
+    "2025-10-28",
+    "2025-10-29"
+   ],
+   "attendees": 10000,
+   "source": "TechCrunch, Oct. 2025: 10,000 attendees at Moscone West"
+  },
+  {
+   "name": "Microsoft Ignite 2025",
+   "days": [
+    "2025-11-18",
+    "2025-11-19",
+    "2025-11-20",
+    "2025-11-21"
+   ],
+   "attendees": 20000,
+   "source": "Microsoft, Nov. 2025: more than 20,000 in person"
+  },
+  {
+   "name": "GDC Festival of Gaming 2026",
+   "days": [
+    "2026-03-09",
+    "2026-03-10",
+    "2026-03-11",
+    "2026-03-12",
+    "2026-03-13"
+   ],
+   "attendees": 20000,
+   "source": "Informa/GDC, Mar. 13, 2026: more than 20,000 attendees"
+  },
+  {
+   "name": "RSAC 2026 Conference",
+   "days": [
+    "2026-03-23",
+    "2026-03-24",
+    "2026-03-25",
+    "2026-03-26"
+   ],
+   "attendees": 43500,
+   "source": "RSAC closing release, Mar. 27, 2026: 43,500+ attendees"
+  },
+  {
+   "name": "Snowflake Summit 2026",
+   "days": [
+    "2026-06-01",
+    "2026-06-02",
+    "2026-06-03",
+    "2026-06-04"
+   ],
+   "attendees": 20000,
+   "source": "Snowflake, June 2026: more than 20,000 in person"
+  },
+  {
+   "name": "Data + AI Summit 2026",
+   "days": [
+    "2026-06-15",
+    "2026-06-16",
+    "2026-06-17",
+    "2026-06-18"
+   ],
+   "attendees": 30000,
+   "source": "Databricks, June 2026: about 30,000 in person"
+  },
+  {
+   "name": "Dreamforce 2026",
+   "days": [
+    "2026-09-15",
+    "2026-09-16",
+    "2026-09-17"
+   ],
+   "attendees": 40000,
+   "source": "Salesforce, Sept. 2026: over 40,000 in person"
+  }
+ ],
+ "sources": [
+  {
+   "id": "giants",
+   "title": "Baseball-Reference, 2026 San Francisco Giants schedule and results",
+   "url": "https://www.baseball-reference.com/teams/SFG/2026-schedule-scores.shtml",
+   "raw": "data/beta3/raw/events/giants-2026-schedule.html"
+  },
+  {
+   "id": "warriors",
+   "title": "Basketball-Reference, 2025-26 Golden State Warriors schedule and results",
+   "url": "https://www.basketball-reference.com/teams/GSW/2026_games.html",
+   "raw": "data/beta3/raw/events/warriors-2025-26-games.html"
+  },
+  {
+   "id": "valkyries",
+   "title": "Basketball-Reference, 2026 Golden State Valkyries schedule and results; Valkyries/WNBA, Sept. 2026: every home game sold out (22, 397,408; 18,064 a game)",
+   "url": "https://www.basketball-reference.com/wnba/teams/GSV/2026_games.html",
+   "raw": "data/beta3/raw/events/valkyries-2026-games.html"
+  },
+  {
+   "id": "dothebay",
+   "title": "DoTheBay, past events at Chase Center, Oracle Park, and Bill Graham Civic Auditorium",
+   "url": "https://dothebay.com/venues/chase-center/past_events",
+   "raw": "data/beta3/raw/events/dothebay/"
+  },
+  {
+   "id": "setlistfm",
+   "title": "setlist.fm, Chase Center concert listings",
+   "url": "https://www.setlist.fm/venue/chase-center-san-francisco-ca-usa-4bd3f3f2.html",
+   "raw": "data/beta3/raw/events/setlistfm/"
+  },
+  {
+   "id": "gswSeir",
+   "title": "OCII and San Francisco Planning, Event Center and Mixed-Use Development at Mission Bay Blocks 29-32, Draft SEIR, June 2015, Section 5.2 (Tables 5.2-23 to 5.2-26 and footnote 39: the Giants 2012 survey)",
+   "url": "https://sfocii.org/sites/default/files/inline-files/Vol%201_GSW_MB_DSEIR.pdf",
+   "raw": "data/beta3/raw/events/gsw-dseir-vol1.pdf"
+  },
+  {
+   "id": "gswTmp",
+   "title": "Golden State Warriors, Final Transportation Management Plan for the San Francisco Event Center, December 2015 (Table 5-2 origins; 53% weekday auto ceiling; 35% transit service plan)",
+   "url": "https://www.sfmta.com/sites/default/files/reports-and-documents/2019/03/transportation_mgt_plan_12_2015_002_5118.pdf",
+   "raw": "data/beta3/raw/events/chase-center-tmp-2015.pdf"
+  },
+  {
+   "id": "sfmtaChase",
+   "title": "SFMTA, Chase Center Transportation Overview (Port MCAC presentation), July 2019: special T Third service, 16th Street BART and Van Ness shuttles",
+   "url": "https://www.sfport.com/sites/default/files/Maritime/Maritime%20Commerce%20Advisory%20Committee/Documents/Chase%20Center%20Transportation%20Plan%20071819.pdf",
+   "raw": "data/beta3/raw/events/chase-center-transportation-overview-2019.pdf"
+  },
+  {
+   "id": "fhwaPacBell",
+   "title": "FHWA, Mitigating Traffic Congestion: The Role of Demand-Side Strategies, case study: Pacific Bell Park (50% non-auto in the first season; 28% of weeknight and 32% of weekday fans came from work)",
+   "url": "https://ops.fhwa.dot.gov/publications/mitig_traf_cong/pac_bell_case.htm"
+  }
+ ],
+ "calendar": [
+  {
+   "date": "2025-10-01",
+   "venue": "Chase Center",
+   "event": "Benson Boone",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-02",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "RuPaul’s Drag Race Werq The World Tour 2025",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-03",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Chase & Status",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-04",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "GIVĒON",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-10-05",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Turnstile",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-10-05",
+   "venue": "Chase Center",
+   "event": "Warriors preseason: Golden State Warriors vs. Los Angeles Lakers",
+   "kind": "evening",
+   "attendance": 17000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-10-07",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "HAIM",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-08",
+   "venue": "Chase Center",
+   "event": "Warriors preseason: Golden State Warriors vs. Portland Trail Blazers",
+   "kind": "evening",
+   "attendance": 17000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-10",
+   "venue": "Chase Center",
+   "event": "Playboi Carti: Antagonist Tour",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-11",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Crankdat",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-10-11",
+   "venue": "Chase Center",
+   "event": "Dua Lipa",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-10-12",
+   "venue": "Chase Center",
+   "event": "Dua Lipa",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-10-14",
+   "venue": "Moscone Center",
+   "event": "Dreamforce 2025",
+   "kind": "convention",
+   "attendance": 30000,
+   "source": "Salesforce via KTVU/Hoodline, Oct. 2025: nearly 50,000 attendees, over 40,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-15",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Reneé Rapp",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-15",
+   "venue": "Chase Center",
+   "event": "Metallica",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-15",
+   "venue": "Moscone Center",
+   "event": "Dreamforce 2025",
+   "kind": "convention",
+   "attendance": 30000,
+   "source": "Salesforce via KTVU/Hoodline, Oct. 2025: nearly 50,000 attendees, over 40,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-16",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Addison Rae",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-16",
+   "venue": "Moscone Center",
+   "event": "Dreamforce 2025",
+   "kind": "convention",
+   "attendance": 30000,
+   "source": "Salesforce via KTVU/Hoodline, Oct. 2025: nearly 50,000 attendees, over 40,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-17",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "SG Lewis, Sofia Kourtesis",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-17",
+   "venue": "Chase Center",
+   "event": "Warriors preseason: Golden State Warriors vs. LA Clippers",
+   "kind": "evening",
+   "attendance": 17000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-18",
+   "venue": "Chase Center",
+   "event": "Maroon 5: LOVE IS LIKE Tour",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-10-22",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Ludovico Einaudi",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-23",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Subtronics",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-23",
+   "venue": "Chase Center",
+   "event": "Warriors v Denver Nuggets",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-24",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Subtronics",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-25",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Subtronics",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-10-27",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "sombr",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-27",
+   "venue": "Chase Center",
+   "event": "Warriors v Memphis Grizzlies",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-27",
+   "venue": "Moscone Center",
+   "event": "TechCrunch Disrupt 2025",
+   "kind": "convention",
+   "attendance": 7500,
+   "source": "TechCrunch, Oct. 2025: 10,000 attendees at Moscone West",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-28",
+   "venue": "Chase Center",
+   "event": "Warriors v Los Angeles Clippers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-28",
+   "venue": "Moscone Center",
+   "event": "TechCrunch Disrupt 2025",
+   "kind": "convention",
+   "attendance": 7500,
+   "source": "TechCrunch, Oct. 2025: 10,000 attendees at Moscone West",
+   "weekday": true
+  },
+  {
+   "date": "2025-10-29",
+   "venue": "Moscone Center",
+   "event": "TechCrunch Disrupt 2025",
+   "kind": "convention",
+   "attendance": 7500,
+   "source": "TechCrunch, Oct. 2025: 10,000 attendees at Moscone West",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-04",
+   "venue": "Chase Center",
+   "event": "Warriors v Phoenix Suns",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-05",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Nas with Symphony",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-07",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Doechii",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-07",
+   "venue": "Chase Center",
+   "event": "Shane Gillis Live",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-09",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Riize",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-11-09",
+   "venue": "Chase Center",
+   "event": "Warriors v Indiana Pacers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2025-11-14",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Chris Lake",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-15",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Chris Lake",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-11-16",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "An Evening with David Byrne",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-11-17",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "An Evening with David Byrne",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-18",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "David Byrne",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-18",
+   "venue": "Moscone Center",
+   "event": "Microsoft Ignite 2025",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Microsoft, Nov. 2025: more than 20,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-19",
+   "venue": "Moscone Center",
+   "event": "Microsoft Ignite 2025",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Microsoft, Nov. 2025: more than 20,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-20",
+   "venue": "Moscone Center",
+   "event": "Microsoft Ignite 2025",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Microsoft, Nov. 2025: more than 20,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-21",
+   "venue": "Chase Center",
+   "event": "Warriors v Portland Trail Blazers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-21",
+   "venue": "Moscone Center",
+   "event": "Microsoft Ignite 2025",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Microsoft, Nov. 2025: more than 20,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-22",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Disco Lines",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-11-22",
+   "venue": "Chase Center",
+   "event": "Billie Eilish: Hit Me Hard And Soft: The Tour",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-11-23",
+   "venue": "Chase Center",
+   "event": "Billie Eilish: Hit Me Hard And Soft: The Tour",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-11-24",
+   "venue": "Chase Center",
+   "event": "Warriors v Utah Jazz",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-25",
+   "venue": "Chase Center",
+   "event": "Empire Classic: Cal v UCLA",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-26",
+   "venue": "Chase Center",
+   "event": "Warriors v Houston Rockets",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-11-29",
+   "venue": "Chase Center",
+   "event": "Warriors v New Orleans Pelicans",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2025-12-02",
+   "venue": "Chase Center",
+   "event": "Warriors v Oklahoma City Thunder",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-12-05",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "KATSEYE",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-12-06",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "KATSEYE",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-12-12",
+   "venue": "Chase Center",
+   "event": "Warriors v Minnesota Timberwolves",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-12-17",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Gunna",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-12-17",
+   "venue": "Chase Center",
+   "event": "USF Legacy: USF Dons Women v Sac State & Men v Loyola",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-12-19",
+   "venue": "Chase Center",
+   "event": "Kelly Chen: Season 2 Live 2025",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2025-12-20",
+   "venue": "Chase Center",
+   "event": "Warriors v Phoenix Suns",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2025-12-21",
+   "venue": "Chase Center",
+   "event": "Bay Area Women'S Classic: Stanford V Oregon & Cal V USC",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2025-12-22",
+   "venue": "Chase Center",
+   "event": "Warriors v Orlando Magic",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2025-12-25",
+   "venue": "Chase Center",
+   "event": "Warriors v Dallas Mavericks",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-02",
+   "venue": "Chase Center",
+   "event": "Warriors v Oklahoma City Thunder",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-03",
+   "venue": "Chase Center",
+   "event": "Warriors v Utah Jazz",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-01-07",
+   "venue": "Chase Center",
+   "event": "Warriors v Milwaukee Bucks",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-09",
+   "venue": "Chase Center",
+   "event": "Warriors v Sacramento Kings",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-11",
+   "venue": "Chase Center",
+   "event": "Warriors v Atlanta Hawks",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-01-13",
+   "venue": "Chase Center",
+   "event": "Warriors v Portland Trail Blazers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-15",
+   "venue": "Chase Center",
+   "event": "Warriors v New York Knicks",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-16",
+   "venue": "Chase Center",
+   "event": "2026 Bruce-Mahoney Basketball",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-17",
+   "venue": "Chase Center",
+   "event": "Warriors v Charlotte Hornets",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-01-18",
+   "venue": "Chase Center",
+   "event": "The Harlem Globetrotters 100 Year Tour",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-01-19",
+   "venue": "Chase Center",
+   "event": "Warriors v Miami Heat",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-20",
+   "venue": "Chase Center",
+   "event": "Warriors v Toronto Raptors",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-01-24",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Ray Volpe",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-01-30",
+   "venue": "Chase Center",
+   "event": "Warriors v Detroit Pistons",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-03",
+   "venue": "Chase Center",
+   "event": "Warriors v Philadelphia 76ers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-05",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Benson Boone",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-06",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Martin Garrix w/ Lost Frequencies",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-06",
+   "venue": "Chase Center",
+   "event": "Zach Bryan, Gavin Adcock, LaRussell, Teddy Swims, Stephen Wilson Jr",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-07",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Chris Stapleton + Sierra Ferrell",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-02-07",
+   "venue": "Chase Center",
+   "event": "Dave Chappelle",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-02-09",
+   "venue": "Chase Center",
+   "event": "Warriors v Memphis Grizzlies",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-11",
+   "venue": "Chase Center",
+   "event": "Warriors v San Antonio Spurs",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-19",
+   "venue": "Chase Center",
+   "event": "Warriors v Boston Celtics",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-20",
+   "venue": "Chase Center",
+   "event": "Los Tigres del Norte",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-22",
+   "venue": "Chase Center",
+   "event": "Warriors v Denver Nuggets",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-02-27",
+   "venue": "Chase Center",
+   "event": "Cardi B",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-02-28",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "ARMNHMR",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-02-28",
+   "venue": "Chase Center",
+   "event": "Warriors v Los Angeles Lakers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-03-01",
+   "venue": "Chase Center",
+   "event": "Santa Cruz Warriors V San Diego Clippers",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-03-02",
+   "venue": "Chase Center",
+   "event": "Warriors v Los Angeles Clippers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-03",
+   "venue": "Chase Center",
+   "event": "Dinastia Tour by Peso Pluma & Friends",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-06",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Dreamstate",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-06",
+   "venue": "Chase Center",
+   "event": "Brandi Carlile",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-07",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Dreamstate",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-03-09",
+   "venue": "Moscone Center",
+   "event": "GDC Festival of Gaming 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Informa/GDC, Mar. 13, 2026: more than 20,000 attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-10",
+   "venue": "Chase Center",
+   "event": "Warriors v Chicago Bulls",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-10",
+   "venue": "Moscone Center",
+   "event": "GDC Festival of Gaming 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Informa/GDC, Mar. 13, 2026: more than 20,000 attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-11",
+   "venue": "Moscone Center",
+   "event": "GDC Festival of Gaming 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Informa/GDC, Mar. 13, 2026: more than 20,000 attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-12",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Miguel",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-12",
+   "venue": "Moscone Center",
+   "event": "GDC Festival of Gaming 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Informa/GDC, Mar. 13, 2026: more than 20,000 attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-13",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Excision",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-13",
+   "venue": "Chase Center",
+   "event": "Warriors v Minnesota Timberwolves",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-13",
+   "venue": "Moscone Center",
+   "event": "GDC Festival of Gaming 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Informa/GDC, Mar. 13, 2026: more than 20,000 attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-14",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Excision",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-03-14",
+   "venue": "Chase Center",
+   "event": "Ricardo Arjona  - LO QUE EL SECO NO DIJO TOUR",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-03-15",
+   "venue": "Chase Center",
+   "event": "Nine Inch Nails",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-03-23",
+   "venue": "Moscone Center",
+   "event": "RSAC 2026 Conference",
+   "kind": "convention",
+   "attendance": 32625,
+   "source": "RSAC closing release, Mar. 27, 2026: 43,500+ attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-24",
+   "venue": "Moscone Center",
+   "event": "RSAC 2026 Conference",
+   "kind": "convention",
+   "attendance": 32625,
+   "source": "RSAC closing release, Mar. 27, 2026: 43,500+ attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-25",
+   "venue": "Chase Center",
+   "event": "Warriors v Brooklyn Nets",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-25",
+   "venue": "Moscone Center",
+   "event": "RSAC 2026 Conference",
+   "kind": "convention",
+   "attendance": 32625,
+   "source": "RSAC closing release, Mar. 27, 2026: 43,500+ attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-25",
+   "venue": "Oracle Park",
+   "event": "Giants v NYY",
+   "kind": "evening",
+   "attendance": 40856,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-26",
+   "venue": "Moscone Center",
+   "event": "RSAC 2026 Conference",
+   "kind": "convention",
+   "attendance": 32625,
+   "source": "RSAC closing release, Mar. 27, 2026: 43,500+ attendees",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-27",
+   "venue": "Chase Center",
+   "event": "Warriors v Washington Wizards",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-27",
+   "venue": "Oracle Park",
+   "event": "Giants v NYY",
+   "kind": "day",
+   "attendance": 40273,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-03-28",
+   "venue": "Oracle Park",
+   "event": "Giants v NYY",
+   "kind": "day",
+   "attendance": 40634,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-04-01",
+   "venue": "Chase Center",
+   "event": "Warriors v San Antonio Spurs",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-02",
+   "venue": "Chase Center",
+   "event": "Warriors v Cleveland Cavaliers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-02",
+   "venue": "Oracle Park",
+   "event": "Giants v NYM",
+   "kind": "evening",
+   "attendance": 32073,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-03",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "LANY",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-03",
+   "venue": "Oracle Park",
+   "event": "Giants v NYM",
+   "kind": "evening",
+   "attendance": 38613,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-04",
+   "venue": "Oracle Park",
+   "event": "Giants v NYM",
+   "kind": "evening",
+   "attendance": 36553,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-04-05",
+   "venue": "Chase Center",
+   "event": "Warriors v Houston Rockets",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-04-05",
+   "venue": "Oracle Park",
+   "event": "Giants v NYM",
+   "kind": "day",
+   "attendance": 37079,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-04-06",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "The Strokes",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-06",
+   "venue": "Oracle Park",
+   "event": "Giants v PHI",
+   "kind": "evening",
+   "attendance": 32898,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-07",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "FKA twigs",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-07",
+   "venue": "Chase Center",
+   "event": "Warriors v Sacramento Kings",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-07",
+   "venue": "Oracle Park",
+   "event": "Giants v PHI",
+   "kind": "evening",
+   "attendance": 32403,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-08",
+   "venue": "Oracle Park",
+   "event": "Giants v PHI",
+   "kind": "day",
+   "attendance": 36106,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-09",
+   "venue": "Chase Center",
+   "event": "Warriors v Los Angeles Lakers",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-13",
+   "venue": "Chase Center",
+   "event": "SPRINGSTEEN & E STREET",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-21",
+   "venue": "Oracle Park",
+   "event": "Giants v LAD",
+   "kind": "evening",
+   "attendance": 40066,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-22",
+   "venue": "Oracle Park",
+   "event": "Giants v LAD",
+   "kind": "evening",
+   "attendance": 40277,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-23",
+   "venue": "Oracle Park",
+   "event": "Giants v LAD",
+   "kind": "day",
+   "attendance": 38619,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-24",
+   "venue": "Oracle Park",
+   "event": "Giants v MIA",
+   "kind": "evening",
+   "attendance": 38317,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-04-25",
+   "venue": "Oracle Park",
+   "event": "Giants v MIA",
+   "kind": "day",
+   "attendance": 38589,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-04-26",
+   "venue": "Oracle Park",
+   "event": "Giants v MIA",
+   "kind": "day",
+   "attendance": 40445,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-01",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Charlie Puth",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-04",
+   "venue": "Oracle Park",
+   "event": "Giants v SDP",
+   "kind": "evening",
+   "attendance": 33097,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-05",
+   "venue": "Oracle Park",
+   "event": "Giants v SDP",
+   "kind": "evening",
+   "attendance": 38275,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-06",
+   "venue": "Oracle Park",
+   "event": "Giants v SDP",
+   "kind": "day",
+   "attendance": 34181,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-08",
+   "venue": "Oracle Park",
+   "event": "Giants v PIT",
+   "kind": "evening",
+   "attendance": 41024,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-09",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Levity",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-09",
+   "venue": "Oracle Park",
+   "event": "Giants v PIT",
+   "kind": "evening",
+   "attendance": 40417,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-10",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "RAYE",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-10",
+   "venue": "Chase Center",
+   "event": "Valkyries v Phoenix Mercury",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-10",
+   "venue": "Oracle Park",
+   "event": "Giants v PIT",
+   "kind": "day",
+   "attendance": 41085,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-11",
+   "venue": "Chase Center",
+   "event": "Demi Lovato",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-13",
+   "venue": "Chase Center",
+   "event": "Valkyries v Chicago Sky",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-14",
+   "venue": "Chase Center",
+   "event": "Romeo Santos & Prince Royce",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-15",
+   "venue": "Chase Center",
+   "event": "Florence + The Machine - Everybody Scream Tour",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-22",
+   "venue": "Oracle Park",
+   "event": "Giants v CHW",
+   "kind": "evening",
+   "attendance": 37524,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-23",
+   "venue": "Oracle Park",
+   "event": "Giants v CHW",
+   "kind": "day",
+   "attendance": 40172,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-24",
+   "venue": "Oracle Park",
+   "event": "Giants v CHW",
+   "kind": "day",
+   "attendance": 40220,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-25",
+   "venue": "Chase Center",
+   "event": "Valkyries v Connecticut Sun",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-25",
+   "venue": "Oracle Park",
+   "event": "Giants v ARI",
+   "kind": "day",
+   "attendance": 38380,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-26",
+   "venue": "Oracle Park",
+   "event": "Giants v ARI",
+   "kind": "evening",
+   "attendance": 32336,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-27",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Yellowcard",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-27",
+   "venue": "Oracle Park",
+   "event": "Giants v ARI",
+   "kind": "day",
+   "attendance": 33258,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-28",
+   "venue": "Chase Center",
+   "event": "Valkyries v Indiana Fever",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-29",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Seven Lions",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-05-30",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Seven Lions",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-05-31",
+   "venue": "Chase Center",
+   "event": "Valkyries v Las Vegas Aces",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-01",
+   "venue": "Moscone Center",
+   "event": "Snowflake Summit 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Snowflake, June 2026: more than 20,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-02",
+   "venue": "Chase Center",
+   "event": "Valkyries v Portland Fire",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-02",
+   "venue": "Moscone Center",
+   "event": "Snowflake Summit 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Snowflake, June 2026: more than 20,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-03",
+   "venue": "Moscone Center",
+   "event": "Snowflake Summit 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Snowflake, June 2026: more than 20,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-04",
+   "venue": "Moscone Center",
+   "event": "Snowflake Summit 2026",
+   "kind": "convention",
+   "attendance": 15000,
+   "source": "Snowflake, June 2026: more than 20,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-05",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Alesso",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-06",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Louis Tomlinson",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-08",
+   "venue": "Oracle Park",
+   "event": "Giants v WSN",
+   "kind": "evening",
+   "attendance": 35432,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-09",
+   "venue": "Chase Center",
+   "event": "Valkyries v Phoenix Mercury",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-09",
+   "venue": "Oracle Park",
+   "event": "Giants v WSN",
+   "kind": "evening",
+   "attendance": 35493,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-10",
+   "venue": "Oracle Park",
+   "event": "Giants v WSN",
+   "kind": "day",
+   "attendance": 32459,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-12",
+   "venue": "Oracle Park",
+   "event": "Giants v CHC",
+   "kind": "evening",
+   "attendance": 38115,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-13",
+   "venue": "Oracle Park",
+   "event": "Giants v CHC",
+   "kind": "evening",
+   "attendance": 35142,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-14",
+   "venue": "Oracle Park",
+   "event": "Giants v CHC",
+   "kind": "day",
+   "attendance": 40093,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-15",
+   "venue": "Chase Center",
+   "event": "Valkyries v Los Angeles Sparks",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-15",
+   "venue": "Moscone Center",
+   "event": "Data + AI Summit 2026",
+   "kind": "convention",
+   "attendance": 22500,
+   "source": "Databricks, June 2026: about 30,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-16",
+   "venue": "Moscone Center",
+   "event": "Data + AI Summit 2026",
+   "kind": "convention",
+   "attendance": 22500,
+   "source": "Databricks, June 2026: about 30,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-17",
+   "venue": "Chase Center",
+   "event": "Valkyries v Dallas Wings",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-17",
+   "venue": "Moscone Center",
+   "event": "Data + AI Summit 2026",
+   "kind": "convention",
+   "attendance": 22500,
+   "source": "Databricks, June 2026: about 30,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-18",
+   "venue": "Moscone Center",
+   "event": "Data + AI Summit 2026",
+   "kind": "convention",
+   "attendance": 22500,
+   "source": "Databricks, June 2026: about 30,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-19",
+   "venue": "Chase Center",
+   "event": "Valkyries v Minnesota Lynx",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-20",
+   "venue": "Chase Center",
+   "event": "Diljit Dosanjh",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-20",
+   "venue": "Oracle Park",
+   "event": "Fuerza Regida",
+   "kind": "concert",
+   "attendance": 38000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-21",
+   "venue": "Chase Center",
+   "event": "Diljit Dosanjh",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-23",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Madison Beer",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-23",
+   "venue": "Oracle Park",
+   "event": "Giants v ATH",
+   "kind": "evening",
+   "attendance": 40043,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-24",
+   "venue": "Chase Center",
+   "event": "Valkyries v Atlanta Dream",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-24",
+   "venue": "Oracle Park",
+   "event": "Giants v ATH",
+   "kind": "evening",
+   "attendance": 37526,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-25",
+   "venue": "Chase Center",
+   "event": "A$AP Rocky",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-25",
+   "venue": "Oracle Park",
+   "event": "Giants v ATH",
+   "kind": "day",
+   "attendance": 33089,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-26",
+   "venue": "Chase Center",
+   "event": "Valkyries v Atlanta Dream",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-26",
+   "venue": "Oracle Park",
+   "event": "Giants v ATL",
+   "kind": "evening",
+   "attendance": 39051,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-06-27",
+   "venue": "Oracle Park",
+   "event": "Giants v ATL",
+   "kind": "evening",
+   "attendance": 35140,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-28",
+   "venue": "Chase Center",
+   "event": "Valkyries v New York Liberty",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": false
+  },
+  {
+   "date": "2026-06-28",
+   "venue": "Oracle Park",
+   "event": "Giants v ATL",
+   "kind": "day",
+   "attendance": 33138,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-01",
+   "venue": "Chase Center",
+   "event": "Heart",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-03",
+   "venue": "Chase Center",
+   "event": "California Classic   Day 1",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-05",
+   "venue": "Chase Center",
+   "event": "California Classic   Day 2",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-06",
+   "venue": "Oracle Park",
+   "event": "Giants v TOR",
+   "kind": "evening",
+   "attendance": 32740,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-07",
+   "venue": "Oracle Park",
+   "event": "Giants v TOR",
+   "kind": "evening",
+   "attendance": 32140,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-08",
+   "venue": "Oracle Park",
+   "event": "Giants v TOR",
+   "kind": "day",
+   "attendance": 34023,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-09",
+   "venue": "Oracle Park",
+   "event": "Giants v COL",
+   "kind": "evening",
+   "attendance": 32301,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-10",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "SLANDER",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-10",
+   "venue": "Chase Center",
+   "event": "Olivia Dean: The Art Of Loving Live",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-10",
+   "venue": "Oracle Park",
+   "event": "Giants v COL",
+   "kind": "evening",
+   "attendance": 34144,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-11",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "SLANDER",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-11",
+   "venue": "Chase Center",
+   "event": "Olivia Dean: The Art Of Loving Live",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-11",
+   "venue": "Oracle Park",
+   "event": "Giants v COL",
+   "kind": "day",
+   "attendance": 35190,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-12",
+   "venue": "Oracle Park",
+   "event": "Giants v COL",
+   "kind": "day",
+   "attendance": 33354,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-14",
+   "venue": "Chase Center",
+   "event": "Joji: Solaris",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-18",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Ella Mai",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-18",
+   "venue": "Chase Center",
+   "event": "Valkyries v Washington Mystics",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-20",
+   "venue": "Chase Center",
+   "event": "Valkyries v Washington Mystics",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-24",
+   "venue": "Oracle Park",
+   "event": "Giants v LAA",
+   "kind": "evening",
+   "attendance": 41559,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-25",
+   "venue": "Oracle Park",
+   "event": "Giants v LAA",
+   "kind": "day",
+   "attendance": 39102,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-26",
+   "venue": "Oracle Park",
+   "event": "Giants v LAA",
+   "kind": "day",
+   "attendance": 34111,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-07-27",
+   "venue": "Oracle Park",
+   "event": "Giants v MIL",
+   "kind": "evening",
+   "attendance": 35107,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-28",
+   "venue": "Oracle Park",
+   "event": "Giants v MIL",
+   "kind": "evening",
+   "attendance": 38021,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-07-29",
+   "venue": "Oracle Park",
+   "event": "Giants v MIL",
+   "kind": "day",
+   "attendance": 35399,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-02",
+   "venue": "Chase Center",
+   "event": "Valkyries v Toronto Tempo",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-04",
+   "venue": "Chase Center",
+   "event": "Valkyries v Toronto Tempo",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-07",
+   "venue": "Oracle Park",
+   "event": "Giants v DET",
+   "kind": "evening",
+   "attendance": 34104,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-08",
+   "venue": "Oracle Park",
+   "event": "Giants v DET",
+   "kind": "day",
+   "attendance": 35506,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-09",
+   "venue": "Oracle Park",
+   "event": "Giants v DET",
+   "kind": "day",
+   "attendance": 32200,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-10",
+   "venue": "Oracle Park",
+   "event": "Giants v HOU",
+   "kind": "evening",
+   "attendance": 28070,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-11",
+   "venue": "Oracle Park",
+   "event": "Giants v HOU",
+   "kind": "evening",
+   "attendance": 30093,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-12",
+   "venue": "Chase Center",
+   "event": "Valkyries v Chicago Sky",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-12",
+   "venue": "Oracle Park",
+   "event": "Giants v HOU",
+   "kind": "day",
+   "attendance": 28101,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-13",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Yeat",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-14",
+   "venue": "Oracle Park",
+   "event": "Giants v COL",
+   "kind": "evening",
+   "attendance": 38258,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-15",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "CORTIS",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-15",
+   "venue": "Chase Center",
+   "event": "Hot Wheels Monster Trucks Live™: Glow-N-Fire",
+   "kind": "concert",
+   "attendance": 6000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-15",
+   "venue": "Oracle Park",
+   "event": "Giants v COL",
+   "kind": "day",
+   "attendance": 35069,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-16",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "CORTIS",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-16",
+   "venue": "Oracle Park",
+   "event": "Giants v COL",
+   "kind": "day",
+   "attendance": 32063,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-17",
+   "venue": "Chase Center",
+   "event": "Valkyries v Dallas Wings",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-19",
+   "venue": "Chase Center",
+   "event": "Valkyries v Minnesota Lynx",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-20",
+   "venue": "Chase Center",
+   "event": "Daniel Caesar",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-21",
+   "venue": "Chase Center",
+   "event": "Daniel Caesar",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-21",
+   "venue": "Oracle Park",
+   "event": "Noah Kahan",
+   "kind": "concert",
+   "attendance": 38000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-24",
+   "venue": "Oracle Park",
+   "event": "Giants v CIN",
+   "kind": "evening",
+   "attendance": 31123,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-25",
+   "venue": "Oracle Park",
+   "event": "Giants v CIN",
+   "kind": "evening",
+   "attendance": 27207,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-26",
+   "venue": "Oracle Park",
+   "event": "Giants v CIN",
+   "kind": "day",
+   "attendance": 24130,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-27",
+   "venue": "Oracle Park",
+   "event": "Giants v ARI",
+   "kind": "evening",
+   "attendance": 40120,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-28",
+   "venue": "Oracle Park",
+   "event": "Giants v ARI",
+   "kind": "evening",
+   "attendance": 27153,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-08-29",
+   "venue": "Oracle Park",
+   "event": "Giants v ARI",
+   "kind": "day",
+   "attendance": 39190,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-29",
+   "venue": "Oracle Park",
+   "event": "Giants v ARI",
+   "kind": "evening",
+   "attendance": 29272,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-08-30",
+   "venue": "Chase Center",
+   "event": "Loren Allred, Ed Sheeran",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-09-02",
+   "venue": "Chase Center",
+   "event": "ZAYN",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-07",
+   "venue": "Oracle Park",
+   "event": "Giants v STL",
+   "kind": "evening",
+   "attendance": 25833,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-08",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "wave to earth",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-08",
+   "venue": "Oracle Park",
+   "event": "Giants v STL",
+   "kind": "evening",
+   "attendance": 27787,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-09",
+   "venue": "Chase Center",
+   "event": "WEEZER: The Gathering",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-09",
+   "venue": "Oracle Park",
+   "event": "Giants v STL",
+   "kind": "day",
+   "attendance": 27487,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-11",
+   "venue": "Oracle Park",
+   "event": "Giants v SDP",
+   "kind": "evening",
+   "attendance": 38381,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-12",
+   "venue": "Oracle Park",
+   "event": "Giants v SDP",
+   "kind": "day",
+   "attendance": 40146,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-09-13",
+   "venue": "Oracle Park",
+   "event": "Giants v SDP",
+   "kind": "day",
+   "attendance": 35115,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-09-15",
+   "venue": "Moscone Center",
+   "event": "Dreamforce 2026",
+   "kind": "convention",
+   "attendance": 30000,
+   "source": "Salesforce, Sept. 2026: over 40,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-16",
+   "venue": "Moscone Center",
+   "event": "Dreamforce 2026",
+   "kind": "convention",
+   "attendance": 30000,
+   "source": "Salesforce, Sept. 2026: over 40,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-17",
+   "venue": "Moscone Center",
+   "event": "Dreamforce 2026",
+   "kind": "convention",
+   "attendance": 30000,
+   "source": "Salesforce, Sept. 2026: over 40,000 in person",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-18",
+   "venue": "Chase Center",
+   "event": "Valkyries v Portland Fire",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-19",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Steve Aoki",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-09-19",
+   "venue": "Chase Center",
+   "event": "Valkyries v Seattle Storm",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": false
+  },
+  {
+   "date": "2026-09-21",
+   "venue": "Oracle Park",
+   "event": "Giants v MIN",
+   "kind": "evening",
+   "attendance": 27466,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-22",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Jay Park with special guest LNGSHOT",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-22",
+   "venue": "Oracle Park",
+   "event": "Giants v MIN",
+   "kind": "evening",
+   "attendance": 28079,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-23",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Ken Carson",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-23",
+   "venue": "Oracle Park",
+   "event": "Giants v MIN",
+   "kind": "day",
+   "attendance": 28136,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-24",
+   "venue": "Bill Graham Civic Auditorium",
+   "event": "Jack White",
+   "kind": "concert",
+   "attendance": 7000,
+   "source": "DoTheBay listing; attendance assumed",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-25",
+   "venue": "Oracle Park",
+   "event": "Giants v LAD",
+   "kind": "evening",
+   "attendance": 40770,
+   "source": "Baseball-Reference",
+   "weekday": true
+  },
+  {
+   "date": "2026-09-26",
+   "venue": "Chase Center",
+   "event": "Lionel Richie and Earth, Wind & Fire",
+   "kind": "concert",
+   "attendance": 15000,
+   "source": "DoTheBay/setlist.fm listing; attendance assumed",
+   "weekday": false
+  },
+  {
+   "date": "2026-09-26",
+   "venue": "Oracle Park",
+   "event": "Giants v LAD",
+   "kind": "day",
+   "attendance": 40124,
+   "source": "Baseball-Reference",
+   "weekday": false
+  },
+  {
+   "date": "2026-09-27",
+   "venue": "Chase Center",
+   "event": "Valkyries v Dallas Wings (playoffs)",
+   "kind": "evening",
+   "attendance": 18064,
+   "source": "Basketball-Reference; sold out (WNBA)",
+   "weekday": false
+  },
+  {
+   "date": "2026-09-27",
+   "venue": "Oracle Park",
+   "event": "Giants v LAD",
+   "kind": "day",
+   "attendance": 40145,
+   "source": "Baseball-Reference",
+   "weekday": false
+  }
+ ]
+}
