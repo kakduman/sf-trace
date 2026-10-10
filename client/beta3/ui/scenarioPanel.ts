@@ -311,8 +311,7 @@ export const RUN_MODE_TEXT: Record<RunMode, { label: string; time: string; note:
 /** the run-mode switch and its line of explanation */
 function runModeControl(): string {
   const m = state.runMode;
-  const line = RUN_MODE_LIST.map((k) => `${RUN_MODE_TEXT[k].label}: ${RUN_MODE_TEXT[k].time}; ${RUN_MODE_TEXT[k].note}.`).join(' ');
-  return `<div class="rb-mode"><span class="seg sm" role="radiogroup" aria-label="Run mode">${RUN_MODE_LIST.map((k) => `<button role="radio" aria-checked="${k === m}" data-act="mode" data-mode="${k}">${RUN_MODE_TEXT[k].label}</button>`).join('')}</span><span class="muted">${esc(line)}</span></div>`;
+  return `<div class="rb-mode"><span class="seg sm" role="radiogroup" aria-label="Run mode">${RUN_MODE_LIST.map((k) => `<button role="radio" aria-checked="${k === m}" data-act="mode" data-mode="${k}">${RUN_MODE_TEXT[k].label}</button>`).join('')}</span></div>`;
 }
 
 /** a run's time so far: 42s, 1:05 */
@@ -353,7 +352,7 @@ export function renderRunBox(ctx: Ctx, el: HTMLElement): void {
   } else {
     const otherDay = state.result && (state.resultScenario?.day ?? 'wkd') !== state.day;
     const title = !state.result ? 'Ready to run' : otherDay ? `Not run for ${DAY_LABEL[state.day]} yet` : resultOtherMode() ? `Not run in ${mode.label} mode yet` : 'Scenario changed since the last run';
-    h = `<div class="rb-row"><div class="rb-t"><b>${title}</b><span class="muted">${run.status === 'error' ? `<span class="warn">Last run failed: ${esc(run.error ?? '')}</span>` : `Runs for ${DAY_PHRASE[state.day]} (change the day at the top), using several CPU cores`}</span></div><button class="btn primary" data-act="run">Run model</button></div>${runModeControl()}`;
+    h = `<div class="rb-row"><div class="rb-t"><b>${title}</b><span class="muted">${run.status === 'error' ? `<span class="warn">Last run failed: ${esc(run.error ?? '')}</span>` : `Runs for ${DAY_PHRASE[state.day]} (change the day at the top)`}</span></div><button class="btn primary" data-act="run">Run model</button></div>${runModeControl()}`;
   }
   el.innerHTML = h;
   tickElapsed(el, run.status === 'running' ? run.started : undefined);
