@@ -18,7 +18,7 @@ import { demandContextOf } from '../../shared/beta3/micromobility';
 
 export type WorkerRequest =
   /** `wasm`: false runs the strategy search in TypeScript only; `search`: false keeps only its access split in WebAssembly (timing, testing) */
-  | { kind: 'init'; id: number; gz: ArrayBuffer; wasm?: boolean; search?: boolean }
+  | { kind: 'init'; id: number; gz: ArrayBuffer; wasm?: boolean; search?: boolean; lowMem?: boolean }
   | { kind: 'scenario'; id: number; scenario: Scenario; calib: Calibration }
   /** `out`: the skims in shared memory (Z × Z, origin rows), written in place (else the columns are sent back) */
   | { kind: 'skim'; id: number; period: TPeriod; crowd: Float32Array[] | null; lot?: Float32Array | null; dests: number[]; out?: SkimArrays }
@@ -37,6 +37,8 @@ let prep: Prep | null = null;
 let scenario: Scenario = { name: 'Today', edits: [] };
 let calib: Calibration | null = null;
 const nets = new Map<string, { net: TransitNet; solver: StrategySolver }>();
+/** on a phone, keep one network and one set of skims at a time */
+let lowMem = false;
 /** the trips of the road assignment in progress (see the 'aon' request) */
 let aonOD: { id: number; od: Float32Array } | null = null;
 /** the transit skims of the demand in progress (see the 'demandPart' request) */
@@ -91,7 +93,7 @@ function netFor(period: TPeriod, crowd: Float32Array[] | null, lot?: Float32Arra
   lastFp = fp;
   let e = nets.get(key);
   if (!e) {
-    if (nets.size > 4) nets.clear();
+    if (nets.size > (lowMem ? 0 : 4)) nets.clear();
     const net = buildNet(bundle!, scenario, period, calib, crowd ?? undefined, lot ?? undefined);
     e = { net, solver: new StrategySolver(net) };
     nets.set(key, e);
@@ -122,6 +124,7 @@ self.onmessage = (ev: MessageEvent<WorkerRequest>) => {
   try {
     switch (m.kind) {
       case 'init': {
+        lowMem = !!m.lowMem;
         const bytes = new Uint8Array(m.gz);
         bundle = decodeBundle(bytes[0] === 0x1f && bytes[1] === 0x8b ? gunzipSync(bytes) : bytes);
         prep = prepare(bundle);
@@ -175,7 +178,7 @@ self.onmessage = (ev: MessageEvent<WorkerRequest>) => {
           }
         });
         // kept for a later run with the same network (the last few periods' worth)
-        if (skimCache.size >= 8) skimCache.delete(skimCache.keys().next().value!);
+        if (skimCache.size >= (lowMem ? 1 : 8)) skimCache.delete(skimCache.keys().next().value!);
         if (m.out) {
           // (the columns kept as they are: nothing else holds them)
           skimCache.set(ckey, { g, boards, fare, cost, time });

@@ -1,3 +1,4 @@
+import { lowMemory } from '../engine';
 /** Scenario: build a scenario from edits, draw new lines, run the model, share the link. */
 import { TODAY_FIRST } from '../engine';
 import type { TPeriod } from '../../../shared/beta3/types';
@@ -352,7 +353,7 @@ export function renderRunBox(ctx: Ctx, el: HTMLElement): void {
   } else {
     const otherDay = state.result && (state.resultScenario?.day ?? 'wkd') !== state.day;
     const title = !state.result ? 'Ready to run' : otherDay ? `Not run for ${DAY_LABEL[state.day]} yet` : resultOtherMode() ? `Not run in ${mode.label} mode yet` : 'Scenario changed since the last run';
-    h = `<div class="rb-row"><div class="rb-t"><b>${title}</b><span class="muted">${run.status === 'error' ? `<span class="warn">Last run failed: ${esc(run.error ?? '')}</span>` : `Runs for ${DAY_PHRASE[state.day]} (change the day at the top)`}</span></div><button class="btn primary" data-act="run">Run model</button></div>${runModeControl()}`;
+    h = `<div class="rb-row"><div class="rb-t"><b>${title}</b><span class="muted">${run.status === 'error' ? `<span class="warn">Last run failed: ${esc(run.error ?? '')}</span>` : `Runs for ${DAY_PHRASE[state.day]} (change the day at the top)${lowMemory() ? '. Runs take longer on phones.' : ''}`}</span></div><button class="btn primary" data-act="run">Run model</button></div>${runModeControl()}`;
   }
   el.innerHTML = h;
   tickElapsed(el, run.status === 'running' ? run.started : undefined);

@@ -36,6 +36,15 @@ export const modeOf = (s: { runMode?: RunMode }): RunMode => s.runMode ?? 'preci
 const runKey = (s: Scenario) => JSON.stringify([s.day ?? 'wkd', s.edits, s.autoCostFactor ?? 1, s.context ?? null, !!s.traffic, modeOf(s)]);
 
 /** thrown by Engine.run when the run is cancelled */
+/** a phone or tablet, or a device that says it has little memory: iOS and Android close tabs that use much more than a gigabyte */
+export function lowMemory(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent;
+  const ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  const mem = (navigator as unknown as { deviceMemory?: number }).deviceMemory;
+  return ios || /Android/.test(ua) || (mem !== undefined && mem <= 4);
+}
+
 export class CancelledError extends Error {
   constructor() {
     super('cancelled');
@@ -434,6 +443,8 @@ export class Engine {
   private workerCount() {
     const hc = typeof navigator !== 'undefined' ? navigator.hardwareConcurrency || 4 : 4;
     const mem = typeof navigator !== 'undefined' ? ((navigator as unknown as { deviceMemory?: number }).deviceMemory ?? 8) : 8;
+    // phones close a tab that uses more than about a gigabyte, and each worker holds its own copy of the model
+    if (lowMemory()) return pageWorkers() || 1;
     return pageWorkers() || Math.max(1, Math.min(mem >= 8 ? Infinity : 4, Math.floor(hc * 0.75)));
   }
 
@@ -441,7 +452,7 @@ export class Engine {
     if (!this.ready) {
       this.pool = new Pool(this.workerCount());
       const pool = this.pool;
-      this.ready = Promise.all(pool.workers.map((_, i) => pool.call(i, { kind: 'init', gz: this.gz!.slice(0), wasm: !pageFlag('nowasm') && testOpts().wasm !== false, search: !pageFlag('nosearch') && testOpts().search !== false }))).then(() => undefined);
+      this.ready = Promise.all(pool.workers.map((_, i) => pool.call(i, { kind: 'init', gz: this.gz!.slice(0), lowMem: lowMemory(), wasm: !pageFlag('nowasm') && testOpts().wasm !== false, search: !pageFlag('nosearch') && testOpts().search !== false }))).then(() => undefined);
     }
     return this.ready;
   }
