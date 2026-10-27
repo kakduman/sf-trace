@@ -33,6 +33,7 @@ import { CONDITIONS, cleanContext, contextValue, type ConditionKey, type Conditi
 import backcastDrivers from '../../../server/beta3/reference/backcast-drivers.json';
 import type { DemandContext, Scenario } from '../../../shared/beta3/types';
 import { onActs, section, type Ctx } from './common';
+import { renderSavedRuns } from './savedRuns';
 
 let lastDraft: string | null = null;
 
@@ -55,7 +56,7 @@ export function renderScenario(ctx: Ctx, el: HTMLElement): void {
         .join('')}</ul><div class="row-actions"><button class="btn sm ghost" data-act="undo"${ctx.canUndo() ? '' : ' disabled'}>Undo</button><button class="btn sm ghost" data-act="clear">Clear all</button><button class="btn sm ghost" data-act="share">Copy share link</button></div>`
     : `<div class="empty-state"><p>No changes yet. Load an example below, draw a line, or open a route.</p>${ctx.canUndo() ? '<button class="btn sm ghost" data-act="undo">Undo</button>' : ''}</div>`;
   h += section(`Your changes${groups.length ? ` (${groups.length})` : ''}`, list);
-  h += `<div id="runbox" class="runbox"></div>`;
+  h += `<div id="runbox" class="runbox"></div><div id="saved-runs"></div>`;
 
   // add a change
   h += section(
@@ -100,6 +101,7 @@ export function renderScenario(ctx: Ctx, el: HTMLElement): void {
   );
   el.innerHTML = h;
   renderRunBox(ctx, el.querySelector('#runbox')!);
+  renderSavedRuns(ctx, el.querySelector('#saved-runs')!);
 
   const longRun = el.querySelector<HTMLInputElement>('#sc-longrun')!;
   longRun.onchange = () => {
@@ -184,6 +186,10 @@ export function updateScenario(ctx: Ctx, el: HTMLElement, changed: Set<string>):
   if (changed.has('run') || changed.has('runMode')) {
     const rb = el.querySelector<HTMLElement>('#runbox');
     if (rb) renderRunBox(ctx, rb);
+  }
+  if (changed.has('saved')) {
+    const sr = el.querySelector<HTMLElement>('#saved-runs');
+    if (sr) renderSavedRuns(ctx, sr);
   }
 }
 

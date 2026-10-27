@@ -47,7 +47,7 @@ export function renderResults(ctx: Ctx, el: HTMLElement): void {
   const condList = conds ? CONDITIONS.filter((c) => conds[c.key] !== undefined).map((c) => c.label.replace(/^(?!Muni|SFO|Clipper)./, (x) => x.toLowerCase())) : [];
   const what = [nChanges ? `${nChanges} network change${nChanges > 1 ? 's' : ''}.` : 'No network changes.', condList.length ? `Changed conditions: ${condList.join(', ')}.` : ''].filter(Boolean).join(' ');
   const quick = res.runMode === 'quick';
-  let h = `<div class="panel-head"><h2>${esc(sc.name)}</h2><p class="lede">Compared with today on <b>${DAY_PHRASE[rday]}</b>. ${esc(what)}</p></div>`;
+  let h = `<div class="panel-head"><h2>${esc(sc.name)}</h2><p class="lede">Compared with today on <b>${DAY_PHRASE[rday]}</b>. ${esc(what)}</p><div class="row-actions"><button class="btn sm ghost" data-act="download" title="Save these results and their scenario to a file you can open here later">Download results</button></div></div>`;
   const otherMode = !resultCurrent() && resultOtherMode();
   if (rday !== state.day)
     h += `<div class="banner">These results are for ${DAY_PHRASE[rday]}. The map and other tabs show ${DAY_PHRASE[state.day]}. <button class="link" data-act="showday">Show ${DAY_LABEL[rday]}</button> or <button class="link" data-act="scenario">run it for ${DAY_LABEL[state.day]}</button>.</div>`;
@@ -213,6 +213,7 @@ ${S.carOwn && S.carOwn.carsBase > 0 && B.carOwn ? `      <tr><td>Cars owned by r
   onActs(el, {
     scenario: () => set({ tab: 'scenario' }),
     precise: () => ctx.run('precise'),
+    download: () => ctx.downloadResult(),
     showday: () => ctx.setDay(rday),
     // the map shows a result only on its own day
     vchange: () => (ctx.setDay(rday), set({ view: 'change' })),

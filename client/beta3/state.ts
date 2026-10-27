@@ -5,6 +5,7 @@
 import type { DayType, RunResult, Scenario, TPeriod } from '../../shared/beta3/types';
 import { cleanContext } from '../../shared/beta3/context';
 import type { Draft } from './scenario';
+import type { SavedRunMeta } from './savedRuns';
 import { DEFAULT_RUN_MODE, RUN_MODE_LIST, type RunMode } from '../../shared/beta3/runmode';
 
 export type PeriodSel = 'day' | TPeriod;
@@ -60,6 +61,8 @@ export interface AppState {
   showSpeeds: boolean;
   /** bumped when the road network has loaded */
   roads: number;
+  /** runs saved in this browser (savedRuns.ts), most recently used first; `error` when it keeps none */
+  saved: { runs: SavedRunMeta[]; error?: string };
 }
 
 export const state: AppState = {
@@ -85,6 +88,7 @@ export const state: AppState = {
   runMode: savedRunMode(),
   showSpeeds: false,
   roads: 0,
+  saved: { runs: [] },
 };
 
 const WEEKENDS_KEY = 'beta3.weekends';

@@ -5,11 +5,13 @@
  */
 import './tokens.css';
 import './style.css';
-import type { DayType, Edit, Scenario } from '../../shared/beta3/types';
-import { buildModel, DAY_LABEL, DAY_PHRASE, DAY_TYPES, PERIOD_SHORT, PERIOD_HOURS_TEXT, groupKey } from './derive';
+import type { DayType, Edit, RunResult, Scenario } from '../../shared/beta3/types';
+import { bundleId } from '../../shared/beta3/bundle';
+import { buildModel, DAY_LABEL, DAY_PHRASE, DAY_TYPES, PERIOD_SHORT, PERIOD_HOURS_TEXT, groupKey, newLines } from './derive';
 import { CancelledError, Engine } from './engine';
 import { TransitMap } from './map';
-import { addressFor, addStopEdits, dayFromHash, editGroups, draftRemoveStop, hasChanges, navFromHash, scenarioFromHash, writeHash } from './scenario';
+import { addressFor, addStopEdits, dayFromHash, decodeScenario, editGroups, draftRemoveStop, encodeScenario, hasChanges, navFromHash, scenarioFromHash, writeHash } from './scenario';
+import { decodeRunFile, deleteRun, downloadFile, encodeRunFile, findRun, isQuotaError, listRuns, prune, readRun, resultFits, runFileName, saveRun, setKept, type SavedRun } from './savedRuns';
 import { bases, editsKey, quickBases, resultCurrent, resultDay, saveRunMode, saveWeekends, set, state, subscribe, touch, type AppState, type PeriodSel, type Tab } from './state';
 import type { RunMode } from '../../shared/beta3/runmode';
 import type { Ctx } from './ui/common';
@@ -220,6 +222,7 @@ function start(engine: Engine) {
           const onScenario = state.tab === 'scenario' || state.tab === 'results';
           set({ result: r, resultKey: editsKey(scenario), resultScenario: scenario, run: { status: 'done', stage: '', frac: 1 }, view: 'change', tab: onScenario ? 'results' : state.tab });
           if (!onScenario) ctx.toast('Scenario results are ready.', { label: 'View results', fn: () => set({ tab: 'results' }) });
+          storeRun({ scenario, result: r, savedAt: Date.now() }, r.summary.transitTrips - fresh.summary.transitTrips);
           $('panel-results').scrollTop = 0;
         })
         .catch((e) => {
@@ -255,7 +258,115 @@ function start(engine: Engine) {
       clearTimeout(toastTimer);
       toastTimer = window.setTimeout(() => (t.hidden = true), 4500);
     },
+    openRun(id) {
+      if (state.run.status === 'running') return ctx.toast('Wait for the run to finish, or cancel it.');
+      readRun(id)
+        .then(async (got) => {
+          if (!got) return ctx.toast('That run is no longer saved.');
+          await showRun(decodeRunFile(got.bytes));
+        })
+        .catch((e) => ctx.toast(`The saved run could not be opened (${errText(e)}).`))
+        .finally(refreshSaved);
+    },
+    keepRun(id, kept) {
+      setKept(id, kept)
+        .then(() => ctx.toast(kept ? 'Kept: this run stays in this browser until you remove it.' : 'This run is back with the recent runs.'))
+        .catch((e) => ctx.toast(`The saved runs could not be changed (${errText(e)}).`))
+        .finally(refreshSaved);
+    },
+    removeRun(id) {
+      deleteRun(id)
+        .then(() => ctx.toast('Saved run removed.'))
+        .catch((e) => ctx.toast(`The saved run could not be removed (${errText(e)}).`))
+        .finally(refreshSaved);
+    },
+    downloadRun(id) {
+      readRun(id)
+        .then((got) => {
+          if (!got) return ctx.toast('That run is no longer saved.');
+          const { name, day, runMode } = got.meta;
+          downloadFile(got.bytes, runFileName({ name, edits: [], day, runMode }));
+        })
+        .catch((e) => ctx.toast(`The saved run could not be read (${errText(e)}).`));
+    },
+    downloadResult() {
+      const r = state.result, s = state.resultScenario;
+      if (r && s) downloadFile(encodeRunFile({ scenario: s, result: r, savedAt: Date.now() }), runFileName(s));
+    },
+    importRun(file) {
+      if (state.run.status === 'running') return ctx.toast('Wait for the run to finish, or cancel it.');
+      if (file.size > 64 * 2 ** 20) return ctx.toast('That file is too large to be a saved run.');
+      file
+        .arrayBuffer()
+        .then(async (buf) => {
+          const run = decodeRunFile(new Uint8Array(buf));
+          const shown = await showRun(run, `Opened “${run.scenario.name}” from ${file.name}. It is saved in this browser too.`);
+          if (shown) storeRun({ ...run, scenario: shown.scenario }, run.result.summary.transitTrips - shown.base.summary.transitTrips);
+        })
+        .catch((e) => ctx.toast(errText(e)));
+    },
   };
+
+  // ---------- saved runs (savedRuns.ts) ----------
+  const errText = (e: unknown) => String((e as Error)?.message ?? e);
+  function refreshSaved() {
+    return listRuns()
+      .then((runs) => set({ saved: { runs } }))
+      .catch((e) => set({ saved: { runs: [], error: errText(e) } }));
+  }
+  /** keep a finished run in this browser (dTrips: its change in transit trips, for the list) */
+  function storeRun(run: SavedRun, dTrips: number) {
+    const key = editsKey(run.scenario);
+    saveRun(run, { key, dTrips })
+      .catch((e) => {
+        console.warn('saving the run', e);
+        if (isQuotaError(e)) ctx.toast('The browser’s storage is full, so this run was not saved here. Download it from Results to keep it.');
+      })
+      .finally(refreshSaved);
+  }
+  /**
+   * Show a saved run: its scenario in the editor and its result, compared with today's network made
+   * in the same run mode. A run from another model bundle can't be compared with this one's today:
+   * its scenario is loaded to be run again. Returns the scenario and the comparison when shown.
+   */
+  async function showRun(run: SavedRun, note?: string): Promise<{ scenario: Scenario; base: RunResult } | null> {
+    // the same checks as a shared link's
+    const s = decodeScenario(m, encodeScenario(run.scenario));
+    if (!s || s.edits.length !== (run.scenario.edits ?? []).length) {
+      ctx.toast('This run’s scenario does not fit this version of the model.');
+      return null;
+    }
+    const r = run.result, day = s.day ?? 'wkd', mode: RunMode = r.runMode ?? 'precise';
+    const scenario: Scenario = { ...s, day, runMode: mode };
+    const precise = await engine.baseFor(day, 'precise');
+    const base = mode === 'quick' ? await engine.baseFor(day, 'quick') : precise;
+    if (!engine.isStale(r) && !engine.isStale(base) && !resultFits(r, base, { lines: m.bundle.header.lines.length, newLines: newLines(scenario).length })) {
+      ctx.toast('This saved run is damaged, so it can’t be shown.');
+      return null;
+    }
+    if (engine.isStale(r) || engine.isStale(base)) {
+      ctx.loadScenario(scenario);
+      if (day !== state.day) ctx.setDay(day);
+      set({ tab: 'scenario' });
+      ctx.toast(`“${s.name}” was run with an earlier version of the model, so its results can’t be compared with today’s network. Its scenario is loaded.`, { label: 'Run it again', fn: () => ctx.run(mode) });
+      return null;
+    }
+    bases[day] = precise;
+    if (mode === 'quick') quickBases[day] = base;
+    undoStack.push(state.scenario);
+    // (a saved run's mode is shown, not remembered, as a link's is)
+    if (state.runMode !== mode) ctx.setRunMode(mode, false);
+    const { runMode: _m, ...edited } = scenario;
+    void _m;
+    set({ scenario: { ...edited, day: state.day }, draft: null, result: r, resultKey: editsKey(scenario), resultScenario: scenario, view: 'change', tab: 'results', ...(day === state.day ? { base } : {}) });
+    if (day !== state.day) ctx.setDay(day);
+    $('panel-results').scrollTop = 0;
+    if (note) ctx.toast(note);
+    return { scenario, base };
+  }
+  prune()
+    .then((runs) => set({ saved: { runs } }))
+    .catch((e) => set({ saved: { runs: [], error: errText(e) } }));
 
   // ---------- rendering ----------
   const renderers: Record<Tab, (el: HTMLElement) => void> = {
@@ -269,7 +380,7 @@ function start(engine: Engine) {
   const deps: Record<Tab, (keyof AppState)[]> = {
     overview: ['base', 'weekends', 'roads', 'day'],
     routes: ['route', 'period', 'scenario', 'result', 'base', 'addStop'],
-    scenario: ['scenario', 'draft', 'run', 'result', 'day', 'runMode'],
+    scenario: ['scenario', 'draft', 'run', 'result', 'day', 'runMode', 'saved'],
     results: ['result', 'scenario', 'view', 'zoneLayer', 'base', 'roads', 'runMode', 'run'],
     method: ['weekends'],
   };
@@ -453,6 +564,17 @@ function start(engine: Engine) {
       ctx.toast(`Loaded the shared scenario “${s.name}”${day !== 'wkd' ? ` (${DAY_LABEL[day]})` : ''}. Run the model to see its results.`, { label: 'Run now', fn: () => ctx.run() });
       const e = engine.cached({ ...s, runMode: state.runMode });
       if (e) set({ result: e, resultKey: editsKey(s), resultScenario: { ...s, runMode: state.runMode } });
+      // else a run of it saved in this browser
+      else {
+        const want = JSON.stringify(s.edits), shown = state.result;
+        findRun(editsKey(s), bundleId(engine.bundle.header))
+          .then((meta) => meta && readRun(meta.id))
+          .then((got) => {
+            // (unless the scenario was changed, or a result shown, meanwhile)
+            if (got && JSON.stringify(state.scenario.edits) === want && state.result === shown && state.run.status !== 'running') return showRun(decodeRunFile(got.bytes), `Opened your saved run of “${s.name}”.`);
+          })
+          .catch(() => {});
+      }
     }
     if (day !== state.day) ctx.setDay(day);
   };

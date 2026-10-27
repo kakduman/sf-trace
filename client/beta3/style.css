@@ -1738,6 +1738,7 @@ ul.plain li {
 /* ---------- scenario ---------- */
 .edits-list,
 .examples,
+.saved-list,
 .stops-list {
   list-style: none;
   margin: 0;
@@ -1899,6 +1900,24 @@ ul.plain li {
 }
 .examples {
   border-top: 1.5px solid var(--ink);
+}
+.saved-list {
+  border-top: 1.5px solid var(--ink);
+}
+.saved-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--grid);
+}
+.saved-list li > div:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.saved-list .ed-acts {
+  align-items: center;
 }
 .ex-t {
   font-weight: 700;

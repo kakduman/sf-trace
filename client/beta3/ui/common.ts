@@ -26,6 +26,15 @@ export interface Ctx {
   setRunMode(mode: RunMode, remember?: boolean): void;
   cancel(): void;
   toast(msg: string, action?: { label: string; fn: () => void }): void;
+  /** saved runs (savedRuns.ts): show one, keep it or let it go, remove it, or save it to a file */
+  openRun(id: string): void;
+  keepRun(id: string, kept: boolean): void;
+  removeRun(id: string): void;
+  downloadRun(id: string): void;
+  /** save the result on show, with its scenario, to a file */
+  downloadResult(): void;
+  /** open a run saved to a file (and save it in this browser) */
+  importRun(file: File): void;
 }
 
 /** a figure with its label; `help` (plain text) adds an ⓘ that explains it on hover or focus */
